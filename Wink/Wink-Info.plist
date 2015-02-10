@@ -34,6 +34,17 @@
 				<key>KitName</key>
 				<string>Crashlytics</string>
 			</dict>
+			<dict>
+				<key>KitInfo</key>
+				<dict>
+					<key>consumerKey</key>
+					<string>kppEE1CdNkaUZQPhGLUjOM2aV</string>
+					<key>consumerSecret</key>
+					<string>mk80xs3zboAIqcrbstKCbydvSjPS4BXQUUVJZEF7BB6QS4QEUg</string>
+				</dict>
+				<key>KitName</key>
+				<string>Twitter</string>
+			</dict>
 		</array>
 	</dict>
 	<key>LSRequiresIPhoneOS</key>

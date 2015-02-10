@@ -12,9 +12,11 @@
 #import "WKCameraViewController.h"
 #import "WKUser.h"
 #import "WKWinkConnect.h"
+#import "GAI.h"
+
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-#import "GAI.h"
+#import <TwitterKit/TwitterKit.h>
 
 @implementation WKAppDelegate
 
@@ -28,7 +30,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authorizationDenied) name:kWinkConnectAuthorizationDenied object:nil];
 
     // Setup crashlytics
-    [Fabric with:@[ CrashlyticsKit ]];
+    [Fabric with:@[ CrashlyticsKit, TwitterKit ]];
 
     // Setup Google Analytics
     /*
