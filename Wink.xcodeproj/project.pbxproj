@@ -146,6 +146,7 @@
 		27DF7EB519AFB52800F970AF /* WKCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */; };
 		7B964EB11A8A780800E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EAF1A8A780800E181C2 /* TwitterKit.framework */; };
 		7B964EB21A8A780800E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB01A8A780800E181C2 /* TwitterKitResources.bundle */; };
+		CB0B89031A8A8F52005E6869 /* FacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B89021A8A8F52005E6869 /* FacebookHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -325,6 +326,8 @@
 		7B964EAF1A8A780800E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = Wink/TwitterKit.framework; sourceTree = "<group>"; };
 		7B964EB01A8A780800E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = Wink/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB0B89011A8A8F52005E6869 /* FacebookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookHelper.h; path = Wink/Helpers/FacebookHelper.h; sourceTree = "<group>"; };
+		CB0B89021A8A8F52005E6869 /* FacebookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookHelper.m; path = Wink/Helpers/FacebookHelper.m; sourceTree = "<group>"; };
 		EAE311565BE99D01341CE159 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -428,6 +431,7 @@
 				2743316919B64858003334BB /* Custom UI */,
 				27DF7E4719AF801100F970AF /* User */,
 				270DFB2319AE71F600067072 /* Controllers */,
+				CB0B89001A8A8ED2005E6869 /* Helpers */,
 				270DFB0319AE71BE00067072 /* WKAppDelegate.h */,
 				270DFB0419AE71BE00067072 /* WKAppDelegate.m */,
 				270DFB0619AE71BE00067072 /* Images.xcassets */,
@@ -775,6 +779,16 @@
 			name = User;
 			sourceTree = "<group>";
 		};
+		CB0B89001A8A8ED2005E6869 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CB0B89011A8A8F52005E6869 /* FacebookHelper.h */,
+				CB0B89021A8A8F52005E6869 /* FacebookHelper.m */,
+			);
+			name = Helpers;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		ED65896723BCE61EECA4D660 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1033,6 +1047,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB0B89031A8A8F52005E6869 /* FacebookHelper.m in Sources */,
 				270DFB2B19AE724500067072 /* WKLoginViewController.m in Sources */,
 				2716CB1019C880B900FC226A /* WKImagePickerController.m in Sources */,
 				27DF7E4E19AF860E00F970AF /* WKCameraOverlayViewController.m in Sources */,
