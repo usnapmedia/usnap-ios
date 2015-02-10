@@ -146,6 +146,7 @@
 		27DF7EB519AFB52800F970AF /* WKCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */; };
 		7B964EB11A8A780800E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EAF1A8A780800E181C2 /* TwitterKit.framework */; };
 		7B964EB21A8A780800E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB01A8A780800E181C2 /* TwitterKitResources.bundle */; };
+		CB0B89061A8A8FA9005E6869 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B89051A8A8FA9005E6869 /* Constants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -325,6 +326,8 @@
 		7B964EAF1A8A780800E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = Wink/TwitterKit.framework; sourceTree = "<group>"; };
 		7B964EB01A8A780800E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = Wink/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB0B89041A8A8FA9005E6869 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		CB0B89051A8A8FA9005E6869 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		EAE311565BE99D01341CE159 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -445,6 +448,8 @@
 				270DFAFD19AE71BE00067072 /* InfoPlist.strings */,
 				270DFB0019AE71BE00067072 /* main.m */,
 				270DFB0219AE71BE00067072 /* Wink-Prefix.pch */,
+				CB0B89041A8A8FA9005E6869 /* Constants.h */,
+				CB0B89051A8A8FA9005E6869 /* Constants.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1038,6 +1043,7 @@
 				27DF7E4E19AF860E00F970AF /* WKCameraOverlayViewController.m in Sources */,
 				270DFB2719AE721100067072 /* WKViewController.m in Sources */,
 				270DFB0519AE71BE00067072 /* WKAppDelegate.m in Sources */,
+				CB0B89061A8A8FA9005E6869 /* Constants.m in Sources */,
 				27AA325E19B8CCAE00558D7E /* UIView+WKAdditions.m in Sources */,
 				27017DC719DDEFDA0011ECCC /* AVAssetTrack+WKAdditions.m in Sources */,
 				27AA328719BDF21B00558D7E /* WKShareViewController.m in Sources */,
