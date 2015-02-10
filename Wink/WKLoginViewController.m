@@ -9,6 +9,8 @@
 #import "WKLoginViewController.h"
 #import "WKWinkConnect.h"
 #import "WKUser.h"
+#import <TwitterKit/TwitterKit.h>
+
 
 @implementation WKLoginViewController
 
@@ -16,6 +18,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    TWTRLogInButton *logInButton = [TWTRLogInButton buttonWithLogInCompletion:^(TWTRSession *session, NSError *error) {
+        // play with Twitter session
+    }];
+    logInButton.center = self.view.center;
+    [self.view addSubview:logInButton];
+
+    
     
     // Register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
