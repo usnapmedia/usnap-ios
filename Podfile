@@ -10,6 +10,7 @@ pod 'YKImageCropper'
 pod 'ACEDrawingView'
 pod 'GCPlaceholderTextView'
 pod 'CWStatusBarNotification'
+pod 'Facebook-iOS-SDK'
 
 target 'WinkTests' do
 

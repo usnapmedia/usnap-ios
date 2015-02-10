@@ -10,4 +10,8 @@
 
 @implementation Constants
 
+#pragma mark - Facebook Constants
+
+NSString *const kFacebookAppID = @"662652300511592";
+
 @end

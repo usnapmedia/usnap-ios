@@ -146,8 +146,9 @@
 		27DF7EB519AFB52800F970AF /* WKCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */; };
 		7B964EB11A8A780800E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EAF1A8A780800E181C2 /* TwitterKit.framework */; };
 		7B964EB21A8A780800E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB01A8A780800E181C2 /* TwitterKitResources.bundle */; };
-		CB0B89031A8A8F52005E6869 /* FacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B89021A8A8F52005E6869 /* FacebookHelper.m */; };
+		CB0B89031A8A8F52005E6869 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CB0B89061A8A8FA9005E6869 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B89051A8A8FA9005E6869 /* Constants.m */; };
+		CB0B89091A8A9993005E6869 /* FacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B89081A8A9993005E6869 /* FacebookHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -329,6 +330,8 @@
 		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB0B89041A8A8FA9005E6869 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		CB0B89051A8A8FA9005E6869 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		CB0B89071A8A9993005E6869 /* FacebookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookHelper.h; path = Wink/Helpers/FacebookHelper.h; sourceTree = "<group>"; };
+		CB0B89081A8A9993005E6869 /* FacebookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookHelper.m; path = Wink/Helpers/FacebookHelper.m; sourceTree = "<group>"; };
 		EAE311565BE99D01341CE159 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -785,8 +788,8 @@
 		CB0B89001A8A8ED2005E6869 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				CB0B89011A8A8F52005E6869 /* FacebookHelper.h */,
-				CB0B89021A8A8F52005E6869 /* FacebookHelper.m */,
+				CB0B89071A8A9993005E6869 /* FacebookHelper.h */,
+				CB0B89081A8A9993005E6869 /* FacebookHelper.m */,
 			);
 			name = Helpers;
 			path = ..;
@@ -1050,7 +1053,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB0B89031A8A8F52005E6869 /* FacebookHelper.m in Sources */,
+				CB0B89031A8A8F52005E6869 /* (null) in Sources */,
 				270DFB2B19AE724500067072 /* WKLoginViewController.m in Sources */,
 				2716CB1019C880B900FC226A /* WKImagePickerController.m in Sources */,
 				27DF7E4E19AF860E00F970AF /* WKCameraOverlayViewController.m in Sources */,
@@ -1070,6 +1073,7 @@
 				2743316519B6413F003334BB /* WKEditMediaViewController.m in Sources */,
 				2743315E19B63205003334BB /* WKSettingsViewController.m in Sources */,
 				27AA32B519BE3B7800558D7E /* WKColorPickerView.m in Sources */,
+				CB0B89091A8A9993005E6869 /* FacebookHelper.m in Sources */,
 				27AA325819B8AF8B00558D7E /* UIFont+WKAdditions.m in Sources */,
 				27DF7E4A19AF802300F970AF /* WKUser.m in Sources */,
 				270DFB2F19AE72AD00067072 /* WKNavigationController.m in Sources */,

@@ -19,4 +19,5 @@
     #import "UIColor+WKAdditions.h"
     #import "UIView+WKAdditions.h"
     #import "AVAssetTrack+WKAdditions.h"
+    #import "Constants.h"
 #endif
