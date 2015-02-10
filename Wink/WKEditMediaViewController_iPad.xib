@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+    <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKEditMediaViewController">
+            <connections>
+                <outlet property="backButton" destination="raQ-1h-V24" id="QOX-rk-pIC"/>
+                <outlet property="brightnessButton" destination="Ixh-va-Iv6" id="ANo-9f-fAF"/>
+                <outlet property="brightnessContainerView" destination="8ro-Ju-vBZ" id="eK9-xQ-n5S"/>
+                <outlet property="brightnessLabel" destination="bBw-zU-y71" id="S4n-ZV-kNd"/>
+                <outlet property="brightnessSlider" destination="6O0-k2-6vC" id="1y9-co-Tkt"/>
+                <outlet property="cancelCropButton" destination="cHk-nX-OWl" id="ixI-je-69G"/>
+                <outlet property="colorPickerView" destination="OyP-2C-zfM" id="tbh-3f-w0q"/>
+                <outlet property="confirmCropButton" destination="zGi-UR-Ohs" id="Am6-Vp-HEd"/>
+                <outlet property="contrastLabel" destination="un9-Ly-RKh" id="EDz-tW-xH4"/>
+                <outlet property="contrastSlider" destination="OaO-QQ-6fR" id="kl0-tu-I6X"/>
+                <outlet property="cropButton" destination="TVq-Tu-3s2" id="HZt-F6-exQ"/>
+                <outlet property="cropContainerView" destination="T0P-qm-R8R" id="O7b-An-kdh"/>
+                <outlet property="drawButton" destination="cbD-xo-oRt" id="5uF-GT-znX"/>
+                <outlet property="drawContainerView" destination="jTQ-TT-ckl" id="eZb-V4-05N"/>
+                <outlet property="drawIconBorderImageView" destination="dD6-xF-b2p" id="J2c-Da-64e"/>
+                <outlet property="drawUndoButton" destination="7tV-2I-HYS" id="5Tr-gW-btO"/>
+                <outlet property="overlayView" destination="e78-nA-LbI" id="I9g-qL-Tqv"/>
+                <outlet property="postButton" destination="HUm-NK-elK" id="VZd-7Q-t79"/>
+                <outlet property="textButton" destination="efR-ub-I2r" id="kRI-Ev-fcn"/>
+                <outlet property="view" destination="tp1-7S-7s6" id="gSD-l0-zNZ"/>
+                <outlet property="watermarkImageView" destination="UD0-Gn-2Co" id="SNe-41-kld"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="tp1-7S-7s6">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="e78-nA-LbI">
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wink_watermark.png" id="UD0-Gn-2Co">
+                            <rect key="frame" x="652" y="930" width="96" height="74"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="8ro-Ju-vBZ">
+                    <rect key="frame" x="0.0" y="815" width="768" height="120"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="brightness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bBw-zU-y71">
+                            <rect key="frame" x="29" y="12" width="188" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contrast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="un9-Ly-RKh">
+                            <rect key="frame" x="29" y="67" width="188" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" id="6O0-k2-6vC">
+                            <rect key="frame" x="27" y="29" width="723" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <connections>
+                                <action selector="brightnessValueChanged:" destination="-1" eventType="valueChanged" id="FFT-Z2-LTI"/>
+                            </connections>
+                        </slider>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" id="OaO-QQ-6fR">
+                            <rect key="frame" x="27" y="82" width="723" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <connections>
+                                <action selector="contrastValueChanged:" destination="-1" eventType="valueChanged" id="Ylb-0j-lpX"/>
+                            </connections>
+                        </slider>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="T0P-qm-R8R">
+                    <rect key="frame" x="0.0" y="885" width="768" height="50"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cHk-nX-OWl">
+                            <rect key="frame" x="264" y="10" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="22"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" red="0.98475721009999995" green="1" blue="0.95357538539999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelCropButtonTouched:" destination="-1" eventType="touchUpInside" id="1LY-9W-HTf"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zGi-UR-Ohs">
+                            <rect key="frame" x="404" y="10" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="22"/>
+                            <state key="normal" title="Crop">
+                                <color key="titleColor" red="0.98475721009999995" green="1" blue="0.95357538539999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="confirmCropButtonTouched:" destination="-1" eventType="touchUpInside" id="jX9-ES-U1W"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="jTQ-TT-ckl">
+                    <rect key="frame" x="0.0" y="865" width="768" height="70"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="OyP-2C-zfM" customClass="WKColorPickerView">
+                            <rect key="frame" x="166" y="25" width="534" height="20"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="selectedColorChanged:" destination="-1" eventType="valueChanged" id="oOa-vf-d4U"/>
+                            </connections>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7tV-2I-HYS">
+                            <rect key="frame" x="62" y="1" width="67" height="67"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" red="0.98823529409999999" green="0.97512383319999996" blue="0.94017371859999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" image="undoButtonIcon_iPad.png"/>
+                            <connections>
+                                <action selector="undoButtonTouched:" destination="-1" eventType="touchUpInside" id="P5o-gS-cvm"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drawButtonIconBorder_iPad.png" id="dD6-xF-b2p">
+                    <rect key="frame" x="62" y="947" width="67" height="67"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cbD-xo-oRt">
+                    <rect key="frame" x="62" y="947" width="67" height="67"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.98823529409999999" green="0.97512383319999996" blue="0.94017371859999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" image="drawButtonIcon_iPad.png"/>
+                    <connections>
+                        <action selector="drawButtonTouched:" destination="-1" eventType="touchUpInside" id="rD9-wz-eF4"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HUm-NK-elK">
+                    <rect key="frame" x="638" y="11" width="67" height="66"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="forwardsButtonIcon_iPad.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="postButtonTouched:" destination="-1" eventType="touchUpInside" id="j6C-f0-kmg"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ixh-va-Iv6">
+                    <rect key="frame" x="346" y="947" width="70" height="70"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="brightnessButtonIcon_iPad.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="brightnessButtonTouched:" destination="-1" eventType="touchUpInside" id="ht5-T4-xYG"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TVq-Tu-3s2">
+                    <rect key="frame" x="498" y="948" width="67" height="67"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="cropButtonIcon_iPad.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cropButtonTouched:" destination="-1" eventType="touchUpInside" id="Hae-69-WaB"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="efR-ub-I2r">
+                    <rect key="frame" x="203" y="950" width="61" height="64"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="textButtonIcon_iPad.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="textButtonTouched:" destination="-1" eventType="touchUpInside" id="oRm-ur-de9"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="raQ-1h-V24">
+                    <rect key="frame" x="62" y="10" width="67" height="67"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="closeButtonIcon_iPad.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="backButtonTouched:" destination="-1" eventType="touchUpInside" id="R8S-Ln-H25"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="brightnessButtonIcon_iPad.png" width="57" height="57"/>
+        <image name="closeButtonIcon_iPad.png" width="49" height="49"/>
+        <image name="cropButtonIcon_iPad.png" width="49" height="49"/>
+        <image name="drawButtonIconBorder_iPad.png" width="54" height="54"/>
+        <image name="drawButtonIcon_iPad.png" width="52" height="52"/>
+        <image name="forwardsButtonIcon_iPad.png" width="42" height="24"/>
+        <image name="textButtonIcon_iPad.png" width="39" height="45"/>
+        <image name="undoButtonIcon_iPad.png" width="50" height="50"/>
+        <image name="wink_watermark.png" width="101" height="78"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

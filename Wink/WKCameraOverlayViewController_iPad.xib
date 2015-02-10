@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKCameraOverlayViewController">
+            <connections>
+                <outlet property="cameraDeviceButton" destination="og1-tp-l6s" id="xT5-pG-Rbs"/>
+                <outlet property="captureButton" destination="3XV-t5-ZlQ" id="uLG-WO-HMY"/>
+                <outlet property="flashButton" destination="QbC-I4-IVe" id="Hnb-bX-h8s"/>
+                <outlet property="mediaButton" destination="5qe-5f-8GP" id="ISi-oQ-4p1"/>
+                <outlet property="photoButton" destination="0jP-ok-s6J" id="yAZ-YO-tN2"/>
+                <outlet property="recordingLabel" destination="nof-tc-Zit" id="j2J-XW-0xU"/>
+                <outlet property="settingsButton" destination="Bgl-eD-dHt" id="CcB-Lx-cGM"/>
+                <outlet property="videoButton" destination="CnH-3x-klB" id="XS8-2j-WT4"/>
+                <outlet property="view" destination="cLH-vk-88C" id="CJD-xw-F3C"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="cLH-vk-88C">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0jP-ok-s6J">
+                    <rect key="frame" x="334" y="955" width="100" height="52"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
+                    <state key="normal" title="PHOTO">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="photoButtonTouched:" destination="-1" eventType="touchUpInside" id="nbL-vV-6RG"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CnH-3x-klB">
+                    <rect key="frame" x="481" y="956" width="100" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
+                    <state key="normal" title="VIDEO">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="videoButtonTouched:" destination="-1" eventType="touchUpInside" id="8y0-x2-1Gl"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QbC-I4-IVe">
+                    <rect key="frame" x="10" y="10" width="70" height="81"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="cameraFlashButtonAUTO_iPad.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="flashButtonTouched:" destination="-1" eventType="touchUpInside" id="Do6-hi-uYY"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="og1-tp-l6s">
+                    <rect key="frame" x="689" y="10" width="69" height="75"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="cameraDeviceButton_iPad.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cameraDeviceButtonTouched:" destination="-1" eventType="touchUpInside" id="QaI-dU-fvP"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5qe-5f-8GP">
+                    <rect key="frame" x="10" y="948" width="69" height="69"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="mediaButton_iPad.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="mediaButtonTouched:" destination="-1" eventType="touchUpInside" id="ouL-Dp-FQf"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3XV-t5-ZlQ">
+                    <rect key="frame" x="314" y="768" width="141" height="141"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                    <state key="normal" image="captureButton_iPad.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="captureButtonTouched:" destination="-1" eventType="touchUpInside" id="Q3K-de-VGC"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Bgl-eD-dHt">
+                    <rect key="frame" x="686" y="945" width="72" height="72"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="settingsButton_iPad.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="settingsButtonTouched:" destination="-1" eventType="touchUpInside" id="NmJ-xR-XCo"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nof-tc-Zit">
+                    <rect key="frame" x="226" y="21" width="316" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cameraDeviceButton_iPad.png" width="50" height="61"/>
+        <image name="cameraFlashButtonAUTO_iPad.png" width="50" height="61"/>
+        <image name="captureButton_iPad.png" width="121" height="121"/>
+        <image name="mediaButton_iPad.png" width="49" height="49"/>
+        <image name="settingsButton_iPad.png" width="55" height="55"/>
+    </resources>
+</document>

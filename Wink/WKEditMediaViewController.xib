@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKEditMediaViewController">
+            <connections>
+                <outlet property="backButton" destination="5Fh-sC-V9Y" id="5H8-bH-qG6"/>
+                <outlet property="brightnessButton" destination="IFT-LT-JLd" id="0AD-jq-6Rq"/>
+                <outlet property="brightnessContainerView" destination="wTZ-7I-Ufn" id="ALZ-qu-Kag"/>
+                <outlet property="brightnessLabel" destination="tdD-lB-fkv" id="gV4-iM-bBh"/>
+                <outlet property="brightnessSlider" destination="0uy-q4-9yj" id="mHv-9Z-hgD"/>
+                <outlet property="cancelCropButton" destination="5hu-1w-qpl" id="eSG-k3-o1X"/>
+                <outlet property="colorPickerView" destination="e9K-nI-T9t" id="o8a-JT-pN1"/>
+                <outlet property="confirmCropButton" destination="xU6-J8-55n" id="wZD-hL-qBe"/>
+                <outlet property="contrastLabel" destination="wH1-Gh-qbG" id="K1I-mT-GTC"/>
+                <outlet property="contrastSlider" destination="sJB-1L-yJA" id="5tu-xr-be0"/>
+                <outlet property="cropButton" destination="bCo-Ii-L8U" id="yMC-tL-bY2"/>
+                <outlet property="cropContainerView" destination="hI2-gw-wb3" id="fss-vF-Y2z"/>
+                <outlet property="drawButton" destination="ij0-qJ-bSo" id="g7m-i0-ykf"/>
+                <outlet property="drawContainerView" destination="eiy-Br-IVE" id="K8e-gd-uCt"/>
+                <outlet property="drawIconBorderImageView" destination="LpT-bU-UBC" id="qtk-d9-RSj"/>
+                <outlet property="drawUndoButton" destination="Ung-dH-4w7" id="zyV-ZK-CaS"/>
+                <outlet property="overlayView" destination="gDS-Th-jEq" id="Xaw-YF-bgr"/>
+                <outlet property="postButton" destination="ATe-3P-Slw" id="1Ud-Ed-QQ2"/>
+                <outlet property="textButton" destination="l7B-e2-vee" id="oNa-4Q-inb"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="watermarkImageView" destination="6nm-lF-IF7" id="x4f-mn-cNk"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="gDS-Th-jEq">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wink_watermark.png" id="6nm-lF-IF7">
+                            <rect key="frame" x="260" y="517" width="40" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="wTZ-7I-Ufn">
+                    <rect key="frame" x="0.0" y="387" width="320" height="120"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="brightness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tdD-lB-fkv">
+                            <rect key="frame" x="29" y="12" width="188" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contrast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wH1-Gh-qbG">
+                            <rect key="frame" x="29" y="67" width="188" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" id="0uy-q4-9yj">
+                            <rect key="frame" x="27" y="29" width="266" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </slider>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" id="sJB-1L-yJA">
+                            <rect key="frame" x="27" y="82" width="266" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </slider>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="hI2-gw-wb3">
+                    <rect key="frame" x="0.0" y="457" width="320" height="50"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5hu-1w-qpl">
+                            <rect key="frame" x="40" y="10" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" red="0.98475721010692041" green="1" blue="0.95357538537549591" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelCropButtonTouched:" destination="-1" eventType="touchUpInside" id="Rgt-aZ-C2m"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xU6-J8-55n">
+                            <rect key="frame" x="180" y="10" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                            <state key="normal" title="Crop">
+                                <color key="titleColor" red="0.98475721009999995" green="1" blue="0.95357538539999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="confirmCropButtonTouched:" destination="-1" eventType="touchUpInside" id="RGd-oB-xhL"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="eiy-Br-IVE">
+                    <rect key="frame" x="0.0" y="451" width="320" height="56"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="e9K-nI-T9t" customClass="WKColorPickerView">
+                            <rect key="frame" x="71" y="18" width="225" height="20"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="selectedColorChanged:" destination="-1" eventType="valueChanged" id="PmV-sV-QIv"/>
+                            </connections>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ung-dH-4w7">
+                            <rect key="frame" x="16" y="4" width="47" height="47"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" red="0.98823529409999999" green="0.97512383319999996" blue="0.94017371859999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" image="undoButtonIcon.png"/>
+                            <connections>
+                                <action selector="undoButtonTouched:" destination="-1" eventType="touchUpInside" id="gnM-MT-g49"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5Fh-sC-V9Y">
+                    <rect key="frame" x="16" y="15" width="47" height="47"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="backButtonWhite.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="backButtonTouched:" destination="-1" eventType="touchUpInside" id="zMF-K3-Oua"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ATe-3P-Slw">
+                    <rect key="frame" x="253" y="16" width="47" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="forwardButtonWhite.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="postButtonTouched:" destination="-1" eventType="touchUpInside" id="IzQ-RH-7cR"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drawIconBorder.png" id="LpT-bU-UBC">
+                    <rect key="frame" x="16" y="511" width="47" height="47"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ij0-qJ-bSo">
+                    <rect key="frame" x="16" y="511" width="47" height="47"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.98823529409999999" green="0.97512383320636153" blue="0.94017371864964594" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" image="drawIcon.png"/>
+                    <connections>
+                        <action selector="drawButtonTouched:" destination="-1" eventType="touchUpInside" id="7FO-tF-msd"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="l7B-e2-vee">
+                    <rect key="frame" x="74" y="513" width="41" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="textIcon.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="textButtonTouched:" destination="-1" eventType="touchUpInside" id="uBy-Nr-q7x"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IFT-LT-JLd">
+                    <rect key="frame" x="129" y="510" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="brightnessIcon.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="brightnessButtonTouched:" destination="-1" eventType="touchUpInside" id="P3y-yF-42a"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bCo-Ii-L8U">
+                    <rect key="frame" x="190" y="511" width="47" height="47"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <state key="normal" image="cropIcon.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cropButtonTouched:" destination="-1" eventType="touchUpInside" id="2yt-ei-Naa"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="backButtonWhite.png" width="27" height="27"/>
+        <image name="brightnessIcon.png" width="30" height="30"/>
+        <image name="cropIcon.png" width="27" height="27"/>
+        <image name="drawIcon.png" width="26" height="26"/>
+        <image name="drawIconBorder.png" width="27" height="27"/>
+        <image name="forwardButtonWhite.png" width="23" height="13"/>
+        <image name="textIcon.png" width="21" height="24"/>
+        <image name="undoButtonIcon.png" width="27" height="28"/>
+        <image name="wink_watermark.png" width="101" height="78"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
