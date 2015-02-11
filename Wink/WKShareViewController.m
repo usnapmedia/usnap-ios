@@ -297,25 +297,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)savePostToCameraRoll {
     if (self.image) {
-        UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
-        view.backgroundColor = [UIColor blackColor];
 
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.bounds];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.image = (self.modifiedImage) ? self.modifiedImage : self.image;
-        [view addSubview:imageView];
-
-        UIImageView *overlayImageView = [[UIImageView alloc] initWithFrame:view.bounds];
-        overlayImageView.contentMode = UIViewContentModeScaleAspectFill;
-        overlayImageView.image = self.overlayImage;
-        [view addSubview:overlayImageView];
-
-        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
-        [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-
-        UIImageWriteToSavedPhotosAlbum(snapshot, nil, nil, nil);
+        UIImageWriteToSavedPhotosAlbum([self editedImage], nil, nil, nil);
 
         CWStatusBarNotification *notification = [[CWStatusBarNotification alloc] init];
         [notification displayNotificationWithMessage:NSLocalizedString(@"Saved to your camera roll!", @"").uppercaseString forDuration:2.0f];
@@ -344,6 +327,32 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     }
 }
 
+// Return the image with the modifs made
+- (UIImage *)editedImage {
+
+    if (self.image) {
+        UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
+        view.backgroundColor = [UIColor blackColor];
+
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.bounds];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.image = (self.modifiedImage) ? self.modifiedImage : self.image;
+        [view addSubview:imageView];
+
+        UIImageView *overlayImageView = [[UIImageView alloc] initWithFrame:view.bounds];
+        overlayImageView.contentMode = UIViewContentModeScaleAspectFill;
+        overlayImageView.image = self.overlayImage;
+        [view addSubview:overlayImageView];
+
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
+        [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return snapshot;
+    }
+    return nil;
+}
+
 #pragma mark - Post
 
 - (void)post {
@@ -351,18 +360,21 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     [self savePostToCameraRoll];
 
+    // Use Account Framework
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    NSString *message = @"where is my image?";
-    // hear before posting u can allow user to select the account
+    //  Before posting we could allow user to select the account he wants to use
     NSArray *arrayOfAccons = [account accountsWithAccountType:accountType];
     for (ACAccount *acc in arrayOfAccons) {
         NSLog(@"%@", acc.username); // in this u can get all accounts user names provide some UI for user to select,such as UITableview
     }
 
+    // Get the message to post from the textView
+    NSString *message = self.placeholderTextView.text;
+
     // Encode the image in Jpeg
-    UIImage *imageToPost = self.image;
-    NSData *imageData = UIImageJPEGRepresentation(imageToPost, 0.5f); // set the compression quality
+    UIImage *imageToPost = [self editedImage];
+    NSData *imageData = UIImageJPEGRepresentation(imageToPost, 1.0f); // set the compression quality
 
     [account
         requestAccessToAccountsWithType:accountType
@@ -375,43 +387,47 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                                    if ([arrayOfAccounts count] > 0) {
                                        // use the first account available
                                        ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
-
-                                       // create this request to post the image 1st
-                                       SLRequest *postRequest =
-                                           [SLRequest requestForServiceType:SLServiceTypeTwitter
-                                                              requestMethod:SLRequestMethodPOST
-                                                                        URL:[NSURL URLWithString:@"https://upload.twitter.com/1.1/media/upload.json"]
-                                                                 parameters:nil];
+                                       
+                                       // create this request to post the image 1st, using Social Framework
+                                       SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                                                   requestMethod:SLRequestMethodPOST
+                                                                                             URL:[NSURL URLWithString:TWITTER_MEDIA_UPLOAD_URL]
+                                                                                      parameters:nil];
+                                       // Set the account to use for the request
                                        [postRequest setAccount:acct];
+                                       // Divide the request into multipart to upload the image
                                        [postRequest addMultipartData:imageData withName:@"media" type:@"image/jpeg" filename:@"image.jpg"];
+                                       // Request handler
                                        [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-
-                                           // Make a dic from the response
+                                         // Make a dic from the response
                                          NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
 
-                                           // Get the media_id number from the dic and transform it into a string
-                                           NSString *media_id_str = [[dic valueForKey:@"media_id"] stringValue];
-                                           
-                                           // Check if the response is good, then if it is send
+                                         // Get the media_id number from the dic and transform it into a string
+                                         NSString *media_id_str = [[dic valueForKey:@"media_id"] stringValue];
+
+                                         // Check if the response is good, then if it is send
                                          if ([urlResponse statusCode] == 200) {
                                              // Make a dic to pass parameters to the request
-                                             NSDictionary *dicTweet = [[NSDictionary alloc]
-                                                 initWithObjectsAndKeys:self.placeholderTextView.text, @"status", media_id_str, @"media_ids", nil];
-
-                                             SLRequest *postRequest =
-                                                 [SLRequest requestForServiceType:SLServiceTypeTwitter
-                                                                    requestMethod:SLRequestMethodPOST
-                                                                              URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update.json"]
-                                                                       parameters:dicTweet];
+                                             NSDictionary *dicTweet =
+                                                 [[NSDictionary alloc] initWithObjectsAndKeys:message, @"status", media_id_str, @"media_ids", nil];
+                                             // Init the request to upload the tweet with it's picture and text
+                                             SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                                                         requestMethod:SLRequestMethodPOST
+                                                                                                   URL:[NSURL URLWithString:TWITTER_TWEET_UPLOAD_URL]
+                                                                                            parameters:dicTweet];
+                                             // Set the account to use for the request
                                              [postRequest setAccount:acct];
-
+                                             // Request handler
                                              [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
                                                if ([urlResponse statusCode] == 200) {
                                                    // Tweet has been uploaded
                                                } else {
-                                                   NSLog(@"Error uplaoding tweet with error : %@", error);
+                                                   NSLog(@"Error uploading tweet with error : %@", error);
                                                }
                                              }];
+                                         } else {
+
+                                             NSLog(@"Error uploading photo to Twitter with error : %@", error);
                                          }
                                        }];
                                    }

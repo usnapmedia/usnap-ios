@@ -144,6 +144,9 @@
 		27DF7E4F19AF860E00F970AF /* WKCameraOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DF7E4D19AF860E00F970AF /* WKCameraOverlayViewController.xib */; };
 		27DF7EB419AFB52800F970AF /* WKCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DF7EB219AFB52800F970AF /* WKCameraViewController.m */; };
 		27DF7EB519AFB52800F970AF /* WKCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */; };
+		7B650E781A8BDD360060458E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B89051A8A8FA9005E6869 /* Constants.m */; };
+		7B650E7D1A8C0E7A0060458E /* SettingSocialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B650E7C1A8C0E7A0060458E /* SettingSocialCell.xib */; };
+		7B650E811A8C0FE10060458E /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B650E801A8C0FE10060458E /* WKSettingSocialTableViewCell.m */; };
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
@@ -323,6 +326,9 @@
 		27DF7EB219AFB52800F970AF /* WKCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCameraViewController.m; sourceTree = "<group>"; };
 		27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKCameraViewController.xib; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		7B650E7C1A8C0E7A0060458E /* SettingSocialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingSocialCell.xib; sourceTree = "<group>"; };
+		7B650E7F1A8C0FE10060458E /* WKSettingSocialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKSettingSocialTableViewCell.h; sourceTree = "<group>"; };
+		7B650E801A8C0FE10060458E /* WKSettingSocialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSettingSocialTableViewCell.m; sourceTree = "<group>"; };
 		7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		7B964EB71A8ABC3C00E181C2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -434,6 +440,8 @@
 				2743316919B64858003334BB /* Custom UI */,
 				27DF7E4719AF801100F970AF /* User */,
 				270DFB2319AE71F600067072 /* Controllers */,
+				7B650E7E1A8C0F980060458E /* Views */,
+				7B650E7A1A8C0DB30060458E /* XIB */,
 				270DFB0319AE71BE00067072 /* WKAppDelegate.h */,
 				270DFB0419AE71BE00067072 /* WKAppDelegate.m */,
 				270DFB0619AE71BE00067072 /* Images.xcassets */,
@@ -783,6 +791,31 @@
 			name = User;
 			sourceTree = "<group>";
 		};
+		7B650E7A1A8C0DB30060458E /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				7B650E7B1A8C0DC70060458E /* Cell */,
+			);
+			name = XIB;
+			sourceTree = "<group>";
+		};
+		7B650E7B1A8C0DC70060458E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7B650E7C1A8C0E7A0060458E /* SettingSocialCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		7B650E7E1A8C0F980060458E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7B650E7F1A8C0FE10060458E /* WKSettingSocialTableViewCell.h */,
+				7B650E801A8C0FE10060458E /* WKSettingSocialTableViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		ED65896723BCE61EECA4D660 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -884,6 +917,7 @@
 				2716CAE119C75D2B00FC226A /* drawButtonIcon_iPad@2x.png in Resources */,
 				274CD89F19D9A0CA00E14713 /* undoButtonIcon_iPad.png in Resources */,
 				2716CA9419C0AC0B00FC226A /* flashButtonIconON@2x.png in Resources */,
+				7B650E7D1A8C0E7A0060458E /* SettingSocialCell.xib in Resources */,
 				2716CADA19C75D2B00FC226A /* brightnessButtonIcon_iPad.png in Resources */,
 				2716CA8B19C0AC0B00FC226A /* cameraDeviceIcon.png in Resources */,
 				2716CAFD19C75D4B00FC226A /* cameraFlashButtonAUTO_iPad.png in Resources */,
@@ -1041,13 +1075,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B650E781A8BDD360060458E /* Constants.m in Sources */,
 				270DFB2B19AE724500067072 /* WKLoginViewController.m in Sources */,
 				2716CB1019C880B900FC226A /* WKImagePickerController.m in Sources */,
 				27DF7E4E19AF860E00F970AF /* WKCameraOverlayViewController.m in Sources */,
 				270DFB2719AE721100067072 /* WKViewController.m in Sources */,
 				270DFB0519AE71BE00067072 /* WKAppDelegate.m in Sources */,
-				CB0B89061A8A8FA9005E6869 /* Constants.m in Sources */,
 				27AA325E19B8CCAE00558D7E /* UIView+WKAdditions.m in Sources */,
+				7B650E811A8C0FE10060458E /* WKSettingSocialTableViewCell.m in Sources */,
 				27017DC719DDEFDA0011ECCC /* AVAssetTrack+WKAdditions.m in Sources */,
 				27AA328719BDF21B00558D7E /* WKShareViewController.m in Sources */,
 				27AA325B19B8B06A00558D7E /* UIColor+WKAdditions.m in Sources */,

@@ -6,8 +6,7 @@
 //  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#pragma mark - API constants
 
-@interface Constants : NSObject
-
-@end
+extern NSString *const TWITTER_MEDIA_UPLOAD_URL;
+extern NSString *const TWITTER_TWEET_UPLOAD_URL;

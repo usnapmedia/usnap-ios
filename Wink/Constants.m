@@ -6,8 +6,7 @@
 //  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
-#import "Constants.h"
+#pragma mark - API constants
 
-@implementation Constants
-
-@end
+NSString *const TWITTER_MEDIA_UPLOAD_URL = @"https://upload.twitter.com/1.1/media/upload.json";
+NSString *const TWITTER_TWEET_UPLOAD_URL = @"https://api.twitter.com/1.1/statuses/update.json";
