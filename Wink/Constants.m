@@ -6,12 +6,7 @@
 //  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
-#import "Constants.h"
+#pragma mark - API constants
 
-@implementation Constants
-
-#pragma mark - Facebook Constants
-
-NSString *const kFacebookAppID = @"662652300511592";
-
-@end
+NSString *const TWITTER_MEDIA_UPLOAD_URL = @"https://upload.twitter.com/1.1/media/upload.json";
+NSString *const TWITTER_TWEET_UPLOAD_URL = @"https://api.twitter.com/1.1/statuses/update.json";

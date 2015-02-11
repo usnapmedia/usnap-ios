@@ -17,6 +17,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <TwitterKit/TwitterKit.h>
+#import <PonyDebugger/PonyDebugger.h>
 
 @implementation WKAppDelegate
 
@@ -29,8 +30,19 @@
     // Register for API authorization denied notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authorizationDenied) name:kWinkConnectAuthorizationDenied object:nil];
 
-    // Setup crashlytics
+    [[Twitter sharedInstance] startWithConsumerKey:@"iig0OuJF0qucK8EXENTg4DPCF" consumerSecret:@"lrkVewgFN0Rnw1GGx6yMxWvhktQxfujJBRHGpkqw7Nd5XKcu7q"];
+    //     Setup crashlytics
     [Fabric with:@[ CrashlyticsKit, TwitterKit ]];
+
+#ifdef DEBUG
+    // Initialize PonyDebugger
+    PDDebugger *debugger = [PDDebugger defaultInstance];
+    [debugger connectToURL:[NSURL URLWithString:@"ws://192.168.1.143:9000/device"]];
+
+    [debugger enableNetworkTrafficDebugging];
+    [debugger forwardAllNetworkTraffic];
+    [debugger enableCoreDataDebugging];
+#endif
 
     // Setup Google Analytics
     /*
@@ -84,18 +96,18 @@
 
     // Logged In
     // if ([WKUser currentUser]) {
-    WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
-    WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:cameraController];
-    self.window.rootViewController = navController;
-    /*}
+    //   WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" //bundle:nil];
+    //  WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:cameraController];
+    //   self.window.rootViewController = navController;
+    // /*}
     // Logged Out
-    else {
-        WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
-        WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginController];
-        navController.navigationBarHidden = YES;
-        self.window.rootViewController = navController;
-    }
-     */
+    // else {
+    WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
+    WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginController];
+    navController.navigationBarHidden = YES;
+    self.window.rootViewController = navController;
+    //   }
+    //   */
 }
 
 #pragma mark - Current User Changed

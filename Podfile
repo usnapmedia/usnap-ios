@@ -11,6 +11,7 @@ pod 'ACEDrawingView'
 pod 'GCPlaceholderTextView'
 pod 'CWStatusBarNotification'
 pod 'Facebook-iOS-SDK'
+pod 'PonyDebugger'
 
 target 'WinkTests' do
 
