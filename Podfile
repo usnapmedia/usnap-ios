@@ -10,6 +10,7 @@ pod 'YKImageCropper'
 pod 'ACEDrawingView'
 pod 'GCPlaceholderTextView'
 pod 'CWStatusBarNotification'
+pod 'PonyDebugger'
 
 target 'WinkTests' do
 

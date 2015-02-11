@@ -144,8 +144,9 @@
 		27DF7E4F19AF860E00F970AF /* WKCameraOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DF7E4D19AF860E00F970AF /* WKCameraOverlayViewController.xib */; };
 		27DF7EB419AFB52800F970AF /* WKCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DF7EB219AFB52800F970AF /* WKCameraViewController.m */; };
 		27DF7EB519AFB52800F970AF /* WKCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */; };
-		7B964EB11A8A780800E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EAF1A8A780800E181C2 /* TwitterKit.framework */; };
-		7B964EB21A8A780800E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB01A8A780800E181C2 /* TwitterKitResources.bundle */; };
+		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
+		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
+		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -322,8 +323,9 @@
 		27DF7EB219AFB52800F970AF /* WKCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCameraViewController.m; sourceTree = "<group>"; };
 		27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKCameraViewController.xib; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		7B964EAF1A8A780800E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = Wink/TwitterKit.framework; sourceTree = "<group>"; };
-		7B964EB01A8A780800E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = Wink/TwitterKitResources.bundle; sourceTree = "<group>"; };
+		7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
+		7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
+		7B964EB71A8ABC3C00E181C2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE311565BE99D01341CE159 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -333,6 +335,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */,
 				2747B0A119E5DE9A00C3D779 /* libz.dylib in Frameworks */,
 				2747B09F19E5DE9500C3D779 /* SystemConfiguration.framework in Frameworks */,
 				2747B09D19E5DE8F00C3D779 /* CoreData.framework in Frameworks */,
@@ -344,7 +347,7 @@
 				2743318F19B760B2003334BB /* Accelerate.framework in Frameworks */,
 				2743316819B64257003334BB /* MobileCoreServices.framework in Frameworks */,
 				270DFAF719AE71BE00067072 /* CoreGraphics.framework in Frameworks */,
-				7B964EB11A8A780800E181C2 /* TwitterKit.framework in Frameworks */,
+				7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */,
 				1F7F85AC1A8A743900BBC5D5 /* Fabric.framework in Frameworks */,
 				270DFAF919AE71BE00067072 /* UIKit.framework in Frameworks */,
 				270DFAF519AE71BE00067072 /* Foundation.framework in Frameworks */,
@@ -397,8 +400,9 @@
 		270DFAF319AE71BE00067072 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7B964EB01A8A780800E181C2 /* TwitterKitResources.bundle */,
-				7B964EAF1A8A780800E181C2 /* TwitterKit.framework */,
+				7B964EB71A8ABC3C00E181C2 /* Accounts.framework */,
+				7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */,
+				7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */,
 				2747B0A019E5DE9A00C3D779 /* libz.dylib */,
 				1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */,
 				1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */,
@@ -960,7 +964,7 @@
 				2716CAB519C1ECB400FC226A /* loginBackground.png in Resources */,
 				2716CADB19C75D2B00FC226A /* brightnessButtonIcon_iPad@2x.png in Resources */,
 				274CD8A019D9A0CA00E14713 /* undoButtonIcon_iPad@2x.png in Resources */,
-				7B964EB21A8A780800E181C2 /* TwitterKitResources.bundle in Resources */,
+				7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */,
 				2716CA9219C0AC0B00FC226A /* flashButtonIconOFF@2x.png in Resources */,
 				2716CA9519C0AC0B00FC226A /* mediaButtonIcon.png in Resources */,
 				2716CA9319C0AC0B00FC226A /* flashButtonIconON.png in Resources */,
