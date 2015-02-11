@@ -327,6 +327,8 @@
 		7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		7B964EB71A8ABC3C00E181C2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB0B89041A8A8FA9005E6869 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		CB0B89051A8A8FA9005E6869 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		EAE311565BE99D01341CE159 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -449,6 +451,8 @@
 				270DFAFD19AE71BE00067072 /* InfoPlist.strings */,
 				270DFB0019AE71BE00067072 /* main.m */,
 				270DFB0219AE71BE00067072 /* Wink-Prefix.pch */,
+				CB0B89041A8A8FA9005E6869 /* Constants.h */,
+				CB0B89051A8A8FA9005E6869 /* Constants.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1042,6 +1046,7 @@
 				27DF7E4E19AF860E00F970AF /* WKCameraOverlayViewController.m in Sources */,
 				270DFB2719AE721100067072 /* WKViewController.m in Sources */,
 				270DFB0519AE71BE00067072 /* WKAppDelegate.m in Sources */,
+				CB0B89061A8A8FA9005E6869 /* Constants.m in Sources */,
 				27AA325E19B8CCAE00558D7E /* UIView+WKAdditions.m in Sources */,
 				27017DC719DDEFDA0011ECCC /* AVAssetTrack+WKAdditions.m in Sources */,
 				27AA328719BDF21B00558D7E /* WKShareViewController.m in Sources */,
