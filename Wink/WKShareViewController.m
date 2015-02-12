@@ -302,6 +302,12 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 }
 
 - (void)postVideoToFacebookWithMessage:(NSString *)message andVideo:(NSData *)videoToPost {
+    NSMutableDictionary *paramsVideo = [NSMutableDictionary dictionaryWithObjectsAndKeys:videoToPost, @"video.mov", message, @"description", nil];
+    [SSFacebookHelper postVideoWithPath:paramsVideo
+        onSuccess:^() { NSLog(@"SUCCESS"); }
+        failure:^(NSError *error) { // showing an alert for failure
+            NSLog(@"error: %@", error);
+        }];
 }
 
 #pragma mark - Movie View Methods
@@ -337,7 +343,15 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                             completed:^(BOOL success) {
                                 NSString *title = @"";
                                 if (success) {
+                                    // Share video here
                                     title = NSLocalizedString(@"Saved to your camera roll!", @"").uppercaseString;
+
+                                    // Share video
+                                    NSString *message = self.placeholderTextView.text;
+                                    NSData *videoData = [NSData dataWithContentsOfURL:self.videoEditor.urlOfVideoInCameraRoll];
+
+                                    [self postVideoToFacebookWithMessage:message andVideo:videoData];
+
                                 } else {
                                     title = NSLocalizedString(@"Error saving the video to your camera roll", @"").uppercaseString;
                                 }
@@ -472,20 +486,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     } else {
         // Post movie to Facebook
         if (self.isFacebookConnected) {
-            NSString *message = self.placeholderTextView.text;
 
-            NSLog(@"[self.mediaURL absoluteString]: %@", [self.mediaURL absoluteString]);
-
-            NSString *filePath = [self.mediaURL absoluteString]; //[[NSBundle mainBundle] pathForResource:[self.mediaURL absoluteString] ofType:@"mov"];
-            NSData *videoData = [NSData dataWithContentsOfFile:filePath];
-
-            NSMutableDictionary *paramsVideo =
-                [NSMutableDictionary dictionaryWithObjectsAndKeys:videoData, @"video.mov", @"video/quicktime", @"contentType", message, @"message", nil];
-            [SSFacebookHelper postVideoWithPath:paramsVideo
-                onSuccess:^() { NSLog(@"SUCCESS"); }
-                failure:^(NSError *error) { // showing an alert for failure
-                    NSLog(@"error: %@", error);
-                }];
+            [self savePostToCameraRoll];
         }
     }
 }

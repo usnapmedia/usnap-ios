@@ -11,9 +11,9 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface WKVideoEditor : NSObject {
-    
-}
+@interface WKVideoEditor : NSObject
+
+@property(nonatomic, strong) NSURL *urlOfVideoInCameraRoll;
 
 // Export video with overlay
 - (void)exportVideo:(AVAsset *)videoAsset overlay:(UIImage *)overlayImage completed:(void (^)(BOOL success))completionBlock;
