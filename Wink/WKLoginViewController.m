@@ -26,6 +26,7 @@
         // play with Twitter session
         if (session) {
             NSLog(@"signed in as %@", [session userName]);
+            
 
             WKAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 
@@ -36,12 +37,13 @@
             NSLog(@"error: %@", [error localizedDescription]);
         }
     }];
+    
     logInButton.center = self.view.center;
     [self.view addSubview:logInButton];
 
     self.facebookLoginButton.frame =
-        CGRectMake(self.facebookLoginButton.frame.origin.x, self.view.center.y + self.facebookLoginButton.frame.size.height + 20.0f,
-                   self.facebookLoginButton.frame.size.width, self.facebookLoginButton.frame.size.height);
+        CGRectMake(logInButton.frame.origin.x, self.view.center.y + logInButton.frame.size.height + 20,
+                   logInButton.frame.size.width, logInButton.frame.size.height);
 
     // Register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];

@@ -56,25 +56,27 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
-    // Setup state
-    [self setupAnimated:NO];
-
     [FBSession class];
 
     // Set permissions for Facebook
     [SSFacebookHelper sharedInstance].facebookPermissions = @[ @"publish_actions" ];
 
     // Do silent login if the user has logged on to Facebook before to validate the Facebook token, so they can post an image and video
-    self.isFacebookConnected = [[NSUserDefaults standardUserDefaults] boolForKey:kIsFacebookLoggedIn];
-
-    if (self.isFacebookConnected) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:FACEBOOK_SWITCH_VALUE]) {
         [SSFacebookHelper silentLogin:^() {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsFacebookLoggedIn];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FACEBOOK_SWITCH_VALUE];
+          [[NSUserDefaults standardUserDefaults] synchronize];
+          // Setup state
+          [self setupAnimated:NO];
         } onFailure:^(NSError *error) {
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kIsFacebookLoggedIn];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+          [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACEBOOK_SWITCH_VALUE];
+          [[NSUserDefaults standardUserDefaults] synchronize];
+          // Setup state
+          [self setupAnimated:NO];
         }];
+    } else {
+        // Setup state
+        [self setupAnimated:NO];
     }
 
     return YES;
@@ -97,24 +99,7 @@
 #pragma mark - Setup State
 
 - (void)setupAnimated:(BOOL)animated {
-
-    //    // Logged In
-    //    if ([WKUser currentUser]) {
-    //       WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
-    //      WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:cameraController];
-    //       self.window.rootViewController = navController;
-    //    }
-    //    // Logged Out
-    //    else {
-    //        WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
-    //        WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginController];
-    //        navController.navigationBarHidden = YES;
-    //        self.window.rootViewController = navController;
-    //    }
-
-    self.isFacebookConnected = [[NSUserDefaults standardUserDefaults] boolForKey:kIsFacebookLoggedIn];
-
-    if (self.isFacebookConnected) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:FACEBOOK_SWITCH_VALUE] || [[NSUserDefaults standardUserDefaults] boolForKey:TWITTER_SWITCH_VALUE]) {
         WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
         WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:cameraController];
         self.window.rootViewController = navController;

@@ -13,12 +13,8 @@
 
 @implementation WKSocialNetworkHelper
 
-/**
- *  Connect the user to social networks by changing the value of the switchers in settings
- *
- *  @param socialNetwork the social network to connect
- *  @param theSwitch     the switch changed
- */
+#pragma mark - Utilities
+
 + (void)manageConnectionToSocialNetwork:(NSString *)socialNetwork withSwitch:(UISwitch *)theSwitch {
 
     // Twitter
@@ -45,69 +41,94 @@
     }
 }
 
-/**
- *  General method for Twitter. Will post the image
- *
- *  @param message the message to post
- *  @param image   the image to post
- */
-+ (void)postTweetWithMessage:(NSString *)message andImage:(UIImage *)image {
+#pragma mark - Facebook
 
-    // If the user did not activate twitter in the app, it won't post anything on it
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:TWITTER_SWITCH_VALUE]) {
++ (void)postImageToFacebookWithMessage:(NSString *)message andImage:(UIImage *)imageToPost {
 
-        ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-        ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-        //  Before posting we could allow user to select the account he wants to use
-        NSArray *arrayOfAccons = [accountStore accountsWithAccountType:accountType];
-        ACAccount *account = [[ACAccount alloc] initWithAccountType:accountType];
-        for (ACAccount *acc in arrayOfAccons) {
-            if ([acc.username isEqualToString:[[NSUserDefaults standardUserDefaults] valueForKey:TWITTER_ACCOUNT_NAME]]) {
-                account = acc;
-            }
-            [accountStore
-                requestAccessToAccountsWithType:accountType
-                                        options:nil
-                                     completion:^(BOOL granted, NSError *error) {
+    // If there is no image we should not be there so return
+    if (!imageToPost) {
+        return;
+    }
+    // Post to facebook
+    // Post image to facebook
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:message forKey:@"message"];
+    [params setObject:UIImagePNGRepresentation(imageToPost) forKey:@"picture"];
 
-                                       if (granted == YES) {
-                                           // Check if there is an image to upload (even if there should always be one...)
-                                           if (image) {
-                                               NSData *imageData = UIImageJPEGRepresentation(image, 1.0f);
-
-                                               // 1st step is to send the image on Twitter servers
-                                               [self postImageToTwitter:imageData
-                                                             withAccount:account
-                                                   withCompletionHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                                                     // Make a dic from the response
-                                                     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
-                                                     // Get the media_id number from the dic and transform it into a string
-                                                     NSString *media_id_str = [[dic valueForKey:@"media_id"] stringValue];
-                                                     // Check if the response is good, then if it is send
-                                                     if ([urlResponse statusCode] == 200) {
-                                                         // If we got a success for the image we can then post the tweet
-                                                         [self postTweetWithMessage:message
-                                                                          onAccount:account
-                                                                         andIdImage:media_id_str
-                                                              withCompletionHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                                                                // Handle the errors
-                                                                if ([urlResponse statusCode] == 200) {
-                                                                    // Tweet has been uploaded
-                                                                } else {
-                                                                    NSLog(@"Error uploading tweet with error : %@", error);
-                                                                }
-
-                                                              }];
-
-                                                     } else {
-                                                         NSLog(@"Error uploading photo to Twitter with error : %@", error);
-                                                     }
-
-                                                   }];
-                                           }
-                                       }
-                                     }];
+    [SSFacebookHelper postImageWithParameters:params
+        onSuccess:^() {
+          NSLog(@"SUCCESS");
         }
+        failure:^(NSError *error) { // showing an alert for failure
+          NSLog(@"error: %@", error);
+        }];
+}
+
++ (void)postVideoToFacebookWithMessage:(NSString *)message andVideo:(NSData *)videoToPost {
+    NSMutableDictionary *paramsVideo = [NSMutableDictionary dictionaryWithObjectsAndKeys:videoToPost, @"video.mov", message, @"description", nil];
+    [SSFacebookHelper postVideoWithPath:paramsVideo
+        onSuccess:^() {
+          NSLog(@"SUCCESS");
+        }
+        failure:^(NSError *error) { // showing an alert for failure
+          NSLog(@"error: %@", error);
+        }];
+}
+
+#pragma mark - Twitter
+
++ (void)postTweetWithMessage:(NSString *)message andImage:(UIImage *)image {
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    //  Before posting we could allow user to select the account he wants to use
+    NSArray *arrayOfAccons = [accountStore accountsWithAccountType:accountType];
+    ACAccount *account = [[ACAccount alloc] initWithAccountType:accountType];
+    for (ACAccount *acc in arrayOfAccons) {
+        if ([acc.username isEqualToString:[[NSUserDefaults standardUserDefaults] valueForKey:TWITTER_ACCOUNT_NAME]]) {
+            account = acc;
+        }
+        [accountStore
+            requestAccessToAccountsWithType:accountType
+                                    options:nil
+                                 completion:^(BOOL granted, NSError *error) {
+
+                                   if (granted == YES) {
+                                       // Check if there is an image to upload (even if there should always be one...)
+                                       if (image) {
+                                           NSData *imageData = UIImageJPEGRepresentation(image, 1.0f);
+
+                                           // 1st step is to send the image on Twitter servers
+                                           [self postImageToTwitter:imageData
+                                                         withAccount:account
+                                               withCompletionHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                                                 // Make a dic from the response
+                                                 NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+                                                 // Get the media_id number from the dic and transform it into a string
+                                                 NSString *media_id_str = [[dic valueForKey:@"media_id"] stringValue];
+                                                 // Check if the response is good, then if it is send
+                                                 if ([urlResponse statusCode] == 200) {
+                                                     // If we got a success for the image we can then post the tweet
+                                                     [self postTweetWithMessage:message
+                                                                      onAccount:account
+                                                                     andIdImage:media_id_str
+                                                          withCompletionHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                                                            // Handle the errors
+                                                            if ([urlResponse statusCode] == 200) {
+                                                                // Tweet has been uploaded
+                                                            } else {
+                                                                NSLog(@"Error uploading tweet with error : %@", error);
+                                                            }
+
+                                                          }];
+
+                                                 } else {
+                                                     NSLog(@"Error uploading photo to Twitter with error : %@", error);
+                                                 }
+
+                                               }];
+                                       }
+                                   }
+                                 }];
     }
 }
 
