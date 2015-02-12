@@ -16,3 +16,5 @@ extern NSString *const TWITTER_TWEET_UPLOAD_URL;
 extern NSString *const SOCIAL_NETWORK_CELL_SWITCH_NOTIFICATION;
 extern NSString *const FACEBOOK_SWITCH_VALUE;
 extern NSString *const TWITTER_SWITCH_VALUE;
+extern NSString *const TWITTER_TWEET_UPLOAD_URL;
+extern NSString *const kIsFacebookLoggedIn;

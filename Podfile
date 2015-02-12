@@ -1,4 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
+source 'git@gitlab.samsaodev.com:ios-development/private-pods.git'
 
 platform :ios, '7.0'
 
@@ -10,9 +11,10 @@ pod 'YKImageCropper'
 pod 'ACEDrawingView'
 pod 'GCPlaceholderTextView'
 pod 'CWStatusBarNotification'
+pod 'Facebook-iOS-SDK'
 pod 'PonyDebugger'
+pod 'SSFacebookHelper'
 
-target 'WinkTests' do
+# Samsao libraries
 
-end
 
