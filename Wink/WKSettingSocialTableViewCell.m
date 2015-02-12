@@ -39,7 +39,7 @@
     self.switchNetwork.on = [[data objectForKey:@"switchValue"] boolValue];
 }
 - (IBAction)switchValueChanged:(UISwitch *)sender {
-    [self.delegate switchValueHasChanged:self withSwitchValue:[sender isOn]];
+    [self.delegate switchValueHasChanged:self withSwitch:sender];
 }
 
 @end

@@ -147,6 +147,7 @@
 		7B650E781A8BDD360060458E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B89051A8A8FA9005E6869 /* Constants.m */; };
 		7B650E7D1A8C0E7A0060458E /* SettingSocialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B650E7C1A8C0E7A0060458E /* SettingSocialCell.xib */; };
 		7B650E811A8C0FE10060458E /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B650E801A8C0FE10060458E /* WKSettingSocialTableViewCell.m */; };
+		7B650E841A8D3E690060458E /* WKSocialNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B650E831A8D3E690060458E /* WKSocialNetworkHelper.m */; };
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
@@ -329,6 +330,8 @@
 		7B650E7C1A8C0E7A0060458E /* SettingSocialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingSocialCell.xib; sourceTree = "<group>"; };
 		7B650E7F1A8C0FE10060458E /* WKSettingSocialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKSettingSocialTableViewCell.h; sourceTree = "<group>"; };
 		7B650E801A8C0FE10060458E /* WKSettingSocialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSettingSocialTableViewCell.m; sourceTree = "<group>"; };
+		7B650E821A8D3E690060458E /* WKSocialNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKSocialNetworkHelper.h; sourceTree = "<group>"; };
+		7B650E831A8D3E690060458E /* WKSocialNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSocialNetworkHelper.m; sourceTree = "<group>"; };
 		7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		7B964EB71A8ABC3C00E181C2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -688,6 +691,8 @@
 			isa = PBXGroup;
 			children = (
 				27AA323519B7739000558D7E /* Wink API */,
+				7B650E821A8D3E690060458E /* WKSocialNetworkHelper.h */,
+				7B650E831A8D3E690060458E /* WKSocialNetworkHelper.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -1090,6 +1095,7 @@
 				27DF7EB419AFB52800F970AF /* WKCameraViewController.m in Sources */,
 				27017DC019DCA4460011ECCC /* WKVideoEditor.m in Sources */,
 				27AA323F19B78F8300558D7E /* NSDictionary+WKAdditions.m in Sources */,
+				7B650E841A8D3E690060458E /* WKSocialNetworkHelper.m in Sources */,
 				2743319E19B76843003334BB /* WKMoviePlayerView.m in Sources */,
 				27AA323819B773A700558D7E /* WKWinkConnect.m in Sources */,
 				2743316519B6413F003334BB /* WKEditMediaViewController.m in Sources */,

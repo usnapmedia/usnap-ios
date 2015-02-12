@@ -9,6 +9,8 @@
 #import "WKSettingsViewController.h"
 #import "WKUser.h"
 #import "WKSettingSocialTableViewCell.h"
+#import "WKSocialNetworkHelper.h"
+
 
 @interface WKSettingsViewController () <WKSettingsSocialCellDelegate>
 
@@ -80,15 +82,12 @@
 - (NSArray *)arraySocialNetworks {
 
     NSArray *socialNetworks = [[NSArray alloc]
-        initWithObjects:@{
-            @"name" : @"Facebook",
-            @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:FACEBOOK_SWITCH_VALUE]]
-        },
-                        @{
-                            @"name" : @"Twitter",
-                            @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:TWITTER_SWITCH_VALUE]]
-                        },
-                        nil];
+        initWithObjects:
+            @{ @"name" : @"Facebook",
+               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:FACEBOOK_SWITCH_VALUE]] },
+            @{ @"name" : @"Twitter",
+               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:TWITTER_SWITCH_VALUE]] },
+            nil];
     return socialNetworks;
 }
 
@@ -99,17 +98,20 @@
  *
  *  @param notification the notification from the cell
  */
-- (void)switchValueHasChanged:(WKSettingSocialTableViewCell *)cell withSwitchValue:(BOOL)switchValue {
+- (void)switchValueHasChanged:(WKSettingSocialTableViewCell *)cell withSwitch:(UISwitch *)theSwitch {
     // The object is the cell
     NSAssert([cell isKindOfClass:[UITableViewCell class]], @"Object has to be of UITableViewCell");
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     NSString *socialNetwork = [[[self arraySocialNetworks] objectAtIndex:indexPath.row] valueForKey:@"name"];
 
     socialNetwork = [socialNetwork stringByAppendingString:@"SwitchValue"];
+    
+    [WKSocialNetworkHelper manageConnectionToSocialNetwork:socialNetwork withSwitch:theSwitch];
 
-    NSLog(@"socialNetwork : %@", socialNetwork);
+  
 
-    [[NSUserDefaults standardUserDefaults] setBool:switchValue forKey:socialNetwork];
+    // Save the social network login status
+    [[NSUserDefaults standardUserDefaults] setBool:theSwitch.on forKey:socialNetwork];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

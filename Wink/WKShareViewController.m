@@ -17,6 +17,7 @@
 #import "CWStatusBarNotification.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
+#import <TwitterKit/TwitterKit.h>
 
 typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing, WKShareViewControllerModeShared } WKShareViewControllerMode;
 
@@ -360,6 +361,10 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     [self savePostToCameraRoll];
 
+    [self postTweet];
+}
+
+- (void)postTweet {
     // Use Account Framework
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
@@ -371,9 +376,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     // Get the message to post from the textView
     NSString *message = self.placeholderTextView.text;
-
-    // Encode the image in Jpeg
     UIImage *imageToPost = [self editedImage];
+
     NSData *imageData = UIImageJPEGRepresentation(imageToPost, 1.0f); // set the compression quality
 
     [account
@@ -387,7 +391,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                                    if ([arrayOfAccounts count] > 0) {
                                        // use the first account available
                                        ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
-                                       
+
                                        // create this request to post the image 1st, using Social Framework
                                        SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
                                                                                    requestMethod:SLRequestMethodPOST
@@ -431,6 +435,16 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                                          }
                                        }];
                                    }
+                               } else {
+
+                                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error permissions"
+                                                                                   message:@"Check what to do"
+                                                                                  delegate:self
+                                                                         cancelButtonTitle:@"ok"
+                                                                         otherButtonTitles:nil];
+                                   [alert show];
+
+                                   NSLog(@"Twitters permissions not allowed");
                                }
                              }];
 }

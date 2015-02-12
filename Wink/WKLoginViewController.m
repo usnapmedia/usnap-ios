@@ -26,19 +26,7 @@
         if (session) {
             NSLog(@"signed in as %@", [session userName]);
             
-//            TWTRComposer *composer = [[TWTRComposer alloc] init];
-//            
-//            [composer setText:@"just setting up my Fabric"];
-//            [composer setImage:[UIImage imageNamed:@"fabric"]];
-//            
-//            [composer showWithCompletion:^(TWTRComposerResult result) {
-//                if (result == TWTRComposerResultCancelled) {
-//                    NSLog(@"Tweet composition cancelled");
-//                }
-//                else {
-//                    NSLog(@"Sending Tweet!");
-//                }
-//            }];
+            
             WKAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
             
                WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];

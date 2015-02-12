@@ -28,6 +28,6 @@
  *  @param cell        the cell
  *  @param switchValue BOOL
  */
-- (void)switchValueHasChanged:(WKSettingSocialTableViewCell *)cell withSwitchValue:(BOOL)switchValue;
+- (void)switchValueHasChanged:(WKSettingSocialTableViewCell *)cell withSwitch:(UISwitch *)theSwitch;
 
 @end
