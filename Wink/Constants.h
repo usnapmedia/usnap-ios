@@ -10,3 +10,4 @@
 
 extern NSString *const TWITTER_MEDIA_UPLOAD_URL;
 extern NSString *const TWITTER_TWEET_UPLOAD_URL;
+extern NSString *const kIsFacebookLoggedIn;

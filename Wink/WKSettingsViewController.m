@@ -141,12 +141,12 @@
              cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
              otherButtonTitles:@[ NSLocalizedString(@"Call", @"") ]
                       tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                        if (buttonIndex > 0) {
-                            NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [WKUser currentUser].manager.phone]];
-                            if ([[UIApplication sharedApplication] canOpenURL:phoneURL]) {
-                                [[UIApplication sharedApplication] openURL:phoneURL];
-                            }
-                        }
+                          if (buttonIndex > 0) {
+                              NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [WKUser currentUser].manager.phone]];
+                              if ([[UIApplication sharedApplication] canOpenURL:phoneURL]) {
+                                  [[UIApplication sharedApplication] openURL:phoneURL];
+                              }
+                          }
                       }];
 }
 
@@ -156,9 +156,9 @@
              cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
              otherButtonTitles:@[ NSLocalizedString(@"Sign Out", @"") ]
                       tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                        if (buttonIndex > 0) {
-                            [WKUser logoutCurrentUser];
-                        }
+                          if (buttonIndex > 0) {
+                              [WKUser logoutCurrentUser];
+                          }
                       }];
 }
 

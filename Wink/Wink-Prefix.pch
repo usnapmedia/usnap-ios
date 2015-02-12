@@ -20,4 +20,5 @@
     #import "UIView+WKAdditions.h"
     #import "AVAssetTrack+WKAdditions.h"
     #import "Constants.h"
+    #import "SSFacebookHelper.h"
 #endif

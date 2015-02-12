@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKLoginViewController">
             <connections>
+                <outlet property="facebookLoginButton" destination="VdQ-Jm-g3Q" id="Sju-c9-lJ6"/>
                 <outlet property="imageView" destination="toC-s3-bh6" id="a9q-Hj-xDp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -27,7 +28,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="facebookLoginButtonTapped:" destination="-1" eventType="touchUpInside" id="VrQ-AZ-nHJ"/>
+                        <action selector="loginWithFacebookButtonTapped:" destination="-1" eventType="touchUpInside" id="dnB-wO-Ayv"/>
                     </connections>
                 </button>
             </subviews>

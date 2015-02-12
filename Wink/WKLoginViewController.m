@@ -13,6 +13,7 @@
 #import "WKCameraViewController.h"
 #import "WKNavigationController.h"
 #import "WKAppDelegate.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @implementation WKLoginViewController
 
@@ -22,34 +23,25 @@
     [super viewDidLoad];
 
     TWTRLogInButton *logInButton = [TWTRLogInButton buttonWithLogInCompletion:^(TWTRSession *session, NSError *error) {
-      // play with Twitter session
+        // play with Twitter session
         if (session) {
             NSLog(@"signed in as %@", [session userName]);
-            
-//            TWTRComposer *composer = [[TWTRComposer alloc] init];
-//            
-//            [composer setText:@"just setting up my Fabric"];
-//            [composer setImage:[UIImage imageNamed:@"fabric"]];
-//            
-//            [composer showWithCompletion:^(TWTRComposerResult result) {
-//                if (result == TWTRComposerResultCancelled) {
-//                    NSLog(@"Tweet composition cancelled");
-//                }
-//                else {
-//                    NSLog(@"Sending Tweet!");
-//                }
-//            }];
+
             WKAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-            
-               WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
-              WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:cameraController];
-               appDelegate.window.rootViewController = navController;
+
+            WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
+            WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:cameraController];
+            appDelegate.window.rootViewController = navController;
         } else {
             NSLog(@"error: %@", [error localizedDescription]);
         }
     }];
     logInButton.center = self.view.center;
     [self.view addSubview:logInButton];
+
+    self.facebookLoginButton.frame =
+        CGRectMake(self.facebookLoginButton.frame.origin.x, self.view.center.y + self.facebookLoginButton.frame.size.height + 20.0f,
+                   self.facebookLoginButton.frame.size.width, self.facebookLoginButton.frame.size.height);
 
     // Register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -97,44 +89,44 @@
     [super viewDidAppear:animated];
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-      CGFloat duration = 0.5f;
-      CGFloat delay = 0.2f;
+        CGFloat duration = 0.5f;
+        CGFloat delay = 0.2f;
 
-      CGFloat damping = 0.55f;
-      CGFloat velocity = 0.75f;
+        CGFloat damping = 0.55f;
+        CGFloat velocity = 0.75f;
 
-      [UIView animateWithDuration:duration
-                            delay:(delay * 0.0f)
-           usingSpringWithDamping:damping
-            initialSpringVelocity:velocity
-                          options:UIViewAnimationOptionCurveLinear
-                       animations:^{
-                         self.usernameTextfield.transform = CGAffineTransformIdentity;
-                         self.usernameTextfield.alpha = 1.0f;
-                       }
-                       completion:nil];
+        [UIView animateWithDuration:duration
+                              delay:(delay * 0.0f)
+             usingSpringWithDamping:damping
+              initialSpringVelocity:velocity
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.usernameTextfield.transform = CGAffineTransformIdentity;
+                             self.usernameTextfield.alpha = 1.0f;
+                         }
+                         completion:nil];
 
-      [UIView animateWithDuration:duration
-                            delay:(delay * 1.0f)
-           usingSpringWithDamping:damping
-            initialSpringVelocity:velocity
-                          options:UIViewAnimationOptionCurveLinear
-                       animations:^{
-                         self.passwordTextfield.transform = CGAffineTransformIdentity;
-                         self.passwordTextfield.alpha = 1.0f;
-                       }
-                       completion:nil];
+        [UIView animateWithDuration:duration
+                              delay:(delay * 1.0f)
+             usingSpringWithDamping:damping
+              initialSpringVelocity:velocity
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.passwordTextfield.transform = CGAffineTransformIdentity;
+                             self.passwordTextfield.alpha = 1.0f;
+                         }
+                         completion:nil];
 
-      [UIView animateWithDuration:duration
-                            delay:(delay * 2.0f)
-           usingSpringWithDamping:damping
-            initialSpringVelocity:velocity
-                          options:UIViewAnimationOptionCurveLinear
-                       animations:^{
-                         self.loginButton.transform = CGAffineTransformIdentity;
-                         self.loginButton.alpha = 1.0f;
-                       }
-                       completion:nil];
+        [UIView animateWithDuration:duration
+                              delay:(delay * 2.0f)
+             usingSpringWithDamping:damping
+              initialSpringVelocity:velocity
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.loginButton.transform = CGAffineTransformIdentity;
+                             self.loginButton.alpha = 1.0f;
+                         }
+                         completion:nil];
     });
 }
 
@@ -148,9 +140,7 @@
     [UIView animateWithDuration:animationDuration
                           delay:0.0f
                         options:animationCurve
-                     animations:^{
-                       self.view.transform = CGAffineTransformMakeTranslation(0.0f, -size.height);
-                     }
+                     animations:^{ self.view.transform = CGAffineTransformMakeTranslation(0.0f, -size.height); }
                      completion:nil];
 }
 
@@ -161,9 +151,7 @@
     [UIView animateWithDuration:animationDuration
                           delay:0.0f
                         options:animationCurve
-                     animations:^{
-                       self.view.transform = CGAffineTransformIdentity;
-                     }
+                     animations:^{ self.view.transform = CGAffineTransformIdentity; }
                      completion:nil];
 }
 
@@ -203,23 +191,23 @@
             password:self.passwordTextfield.text
             success:^(id response) {
 
-              [alert dismissWithClickedButtonIndex:0 animated:YES];
+                [alert dismissWithClickedButtonIndex:0 animated:YES];
 
-              NSDictionary *responseDict = (NSDictionary *)response;
-              WKUser *user = [[WKUser alloc] initWithDictionary:responseDict];
-              [WKUser loginUser:user];
+                NSDictionary *responseDict = (NSDictionary *)response;
+                WKUser *user = [[WKUser alloc] initWithDictionary:responseDict];
+                [WKUser loginUser:user];
 
             }
             failure:^(NSError *error, id response) {
-              NSLog(@"%@", error.description);
+                NSLog(@"%@", error.description);
 
-              [alert dismissWithClickedButtonIndex:0 animated:YES];
+                [alert dismissWithClickedButtonIndex:0 animated:YES];
 
-              [UIAlertView showWithTitle:NSLocalizedString(@"Error", @"")
-                                 message:NSLocalizedString(@"Please verify your username and password are correct and try again!", @"")
-                       cancelButtonTitle:NSLocalizedString(@"ok", @"")
-                       otherButtonTitles:nil
-                                tapBlock:nil];
+                [UIAlertView showWithTitle:NSLocalizedString(@"Error", @"")
+                                   message:NSLocalizedString(@"Please verify your username and password are correct and try again!", @"")
+                         cancelButtonTitle:NSLocalizedString(@"ok", @"")
+                         otherButtonTitles:nil
+                                  tapBlock:nil];
             }];
     } else {
         [UIAlertView showWithTitle:NSLocalizedString(@"Missing Information", @"")
@@ -228,6 +216,26 @@
                  otherButtonTitles:nil
                           tapBlock:nil];
     }
+}
+
+- (IBAction)loginWithFacebookButtonTapped:(id)sender {
+
+    [SSFacebookHelper login:^() {
+        // Push to camera view
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsFacebookLoggedIn];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCurrentUserStatusChanged object:nil];
+    } onFailure:^(NSError *error) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kIsFacebookLoggedIn];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+        [UIAlertView showWithTitle:NSLocalizedString(@"Error", @"")
+                           message:NSLocalizedString(@"There was a problem connecting to Facebook. Please try again later.", @"")
+                 cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                 otherButtonTitles:nil
+                          tapBlock:nil];
+    }];
 }
 
 @end
