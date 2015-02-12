@@ -457,8 +457,8 @@
 				27AA324019B8AD4900558D7E /* Images */,
 				270DFAFC19AE71BE00067072 /* Wink-Info.plist */,
 				270DFAFD19AE71BE00067072 /* InfoPlist.strings */,
-				270DFB0019AE71BE00067072 /* main.m */,
 				270DFB0219AE71BE00067072 /* Wink-Prefix.pch */,
+				270DFB0019AE71BE00067072 /* main.m */,
 				CB0B89041A8A8FA9005E6869 /* Constants.h */,
 				CB0B89051A8A8FA9005E6869 /* Constants.m */,
 			);

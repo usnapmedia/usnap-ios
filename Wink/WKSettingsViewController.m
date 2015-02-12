@@ -10,16 +10,20 @@
 #import "WKUser.h"
 #import "WKSettingSocialTableViewCell.h"
 
-@interface WKSettingsViewController ()
+@interface WKSettingsViewController () <WKSettingsSocialCellDelegate>
 
 @end
 
 @implementation WKSettingsViewController
 
+#define FacebookSwitchValue [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] valueForKey:@"FacebookSwitchValue"]]
+
 #pragma mark - View Methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [self.tableView registerNib:[UINib nibWithNibName:@"SettingSocialCell" bundle:nil] forCellReuseIdentifier:@"SETTINGS_SOCIAL_CELL"];
 
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     NSString *version = [info objectForKey:@"CFBundleShortVersionString"];
@@ -75,8 +79,43 @@
 
 - (NSArray *)arraySocialNetworks {
 
-    NSArray *socialNetworks = [[NSArray alloc] initWithObjects:@"Facebook", @"Twitter", nil];
+    NSArray *socialNetworks = [[NSArray alloc]
+        initWithObjects:@{
+            @"name" : @"Facebook",
+            @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:FACEBOOK_SWITCH_VALUE]]
+        },
+                        @{
+                            @"name" : @"Twitter",
+                            @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:TWITTER_SWITCH_VALUE]]
+                        },
+                        nil];
     return socialNetworks;
+}
+
+#pragma mark - WKSettingsSocialCellDelegate
+
+/**
+ *  Called when the switch for a cell has changed.
+ *
+ *  @param notification the notification from the cell
+ */
+- (void)switchValueHasChanged:(WKSettingSocialTableViewCell *)cell withSwitchValue:(BOOL)switchValue {
+    // The object is the cell
+    NSAssert([cell isKindOfClass:[UITableViewCell class]], @"Object has to be of UITableViewCell");
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSString *socialNetwork = [[[self arraySocialNetworks] objectAtIndex:indexPath.row] valueForKey:@"name"];
+
+    socialNetwork = [socialNetwork stringByAppendingString:@"SwitchValue"];
+
+    NSLog(@"socialNetwork : %@", socialNetwork);
+
+    [[NSUserDefaults standardUserDefaults] setBool:switchValue forKey:socialNetwork];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark - Social network
+
+- (void)setSocialNetworkUserDefaults:(NSDictionary *)socialNetwork {
 }
 
 #pragma mark - TableView Methods
@@ -92,17 +131,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = @"SETTINGS_SOCIAL_CELL";
 
-    WKSettingSocialTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    WKSettingSocialTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell.delegate = self;
 
-    if (cell == nil) {
-
-        [tableView registerNib:[UINib nibWithNibName:@"SettingSocialCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
-
-        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    }
-
-    //    // Clear the cell
-    //    [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [cell configureCell:[[self arraySocialNetworks] objectAtIndex:indexPath.row]];
 
     return cell;
 }
@@ -111,7 +143,6 @@
 
     if ([cell isKindOfClass:[WKSettingSocialTableViewCell class]]) {
         WKSettingSocialTableViewCell *myCell = (WKSettingSocialTableViewCell *)cell;
-        myCell.labelNameNetwork.text = [[self arraySocialNetworks] objectAtIndex:indexPath.row];
     } else {
         NSDictionary *networkDict = [[WKUser currentUser].socialNetworks objectAtIndex:indexPath.row];
         NSString *key = networkDict.allKeys.lastObject;

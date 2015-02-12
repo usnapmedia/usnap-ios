@@ -8,10 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol WKSettingsSocialCellDelegate;
+
 @interface WKSettingSocialTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *labelNameNetwork;
-@property (weak, nonatomic) IBOutlet UISwitch *switchNetwork;
+- (void)configureCell:(id)data;
 
+@property(weak, nonatomic) id<WKSettingsSocialCellDelegate> delegate;
+
+@end
+
+@protocol WKSettingsSocialCellDelegate <NSObject>
+
+@required
+
+/**
+ *  Send the switchValue to the settingsVC and store it into userDefaults
+ *
+ *  @param cell        the cell
+ *  @param switchValue BOOL
+ */
+- (void)switchValueHasChanged:(WKSettingSocialTableViewCell *)cell withSwitchValue:(BOOL)switchValue;
 
 @end
