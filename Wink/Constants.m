@@ -15,5 +15,5 @@ NSString *const TWITTER_TWEET_UPLOAD_URL = @"https://api.twitter.com/1.1/statuse
 
 NSString *const SOCIAL_NETWORK_CELL_SWITCH_NOTIFICATION = @"SOCIAL_NETWORK_CELL_SWITCH_NOTIFICATION";
 NSString *const FACEBOOK_SWITCH_VALUE = @"FacebookSwitchValue";
-NSString *const TWITTER_SWITCH_VALUE = @"TwitterSwitchValue";
+NSString *const TWITTER_SWITCH_VALUE = @"TwitterSwitchValue";NSString *const kIsFacebookLoggedIn = @"kIsFacebookLoggedIn";
 NSString *const TWITTER_ACCOUNT_NAME = @"kTwitterAccountName";

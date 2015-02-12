@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "image003.jpg"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "fb_login_button_cut-70c78daab9acd0a8e01cdedfff6e6991.png"
     },
     {
       "idiom" : "universal",

@@ -17,6 +17,7 @@
 #import "CWStatusBarNotification.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
+#import <FacebookSDK/FacebookSDK.h>
 #import <TwitterKit/TwitterKit.h>
 
 typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing, WKShareViewControllerModeShared } WKShareViewControllerMode;
@@ -27,6 +28,9 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 @property(strong, nonatomic) UIImageView *overlayImageView;
 @property(strong, nonatomic) WKVideoEditor *videoEditor;
 @property(nonatomic) WKShareViewControllerMode mode;
+@property(nonatomic) BOOL isFacebookConnected;
+@property(nonatomic) BOOL isTwitterConnected;
+
 @end
 
 @implementation WKShareViewController
@@ -35,6 +39,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.isFacebookConnected = [[NSUserDefaults standardUserDefaults] boolForKey:kIsFacebookLoggedIn];
 
     // Register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -141,9 +147,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [UIView animateWithDuration:animationDuration
                           delay:0.0f
                         options:animationCurve
-                     animations:^{
-                       self.view.transform = CGAffineTransformMakeTranslation(0.0f, -size.height);
-                     }
+                     animations:^{ self.view.transform = CGAffineTransformMakeTranslation(0.0f, -size.height); }
                      completion:nil];
 }
 
@@ -154,9 +158,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [UIView animateWithDuration:animationDuration
                           delay:0.0f
                         options:animationCurve
-                     animations:^{
-                       self.view.transform = CGAffineTransformIdentity;
-                     }
+                     animations:^{ self.view.transform = CGAffineTransformIdentity; }
                      completion:nil];
 }
 
@@ -175,29 +177,29 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
 
-                           self.backButton.transform = CGAffineTransformIdentity;
-                           self.backButton.alpha = 1.0f;
-                           self.placeholderTextView.backgroundColor = [UIColor whiteColor];
-                           self.placeholderTextView.userInteractionEnabled = YES;
-                           self.placeholderTextView.hidden = NO;
-                           self.socialMediaContainerView.transform = CGAffineTransformIdentity;
-                           self.socialMediaContainerView.alpha = 1.0f;
+                             self.backButton.transform = CGAffineTransformIdentity;
+                             self.backButton.alpha = 1.0f;
+                             self.placeholderTextView.backgroundColor = [UIColor whiteColor];
+                             self.placeholderTextView.userInteractionEnabled = YES;
+                             self.placeholderTextView.hidden = NO;
+                             self.socialMediaContainerView.transform = CGAffineTransformIdentity;
+                             self.socialMediaContainerView.alpha = 1.0f;
 
-                           self.shareButton.layer.borderColor = [UIColor clearColor].CGColor;
-                           self.shareButton.layer.borderWidth = 0.0f;
-                           self.shareButton.backgroundColor = [UIColor purpleColorWithAlpha:1.0f];
+                             self.shareButton.layer.borderColor = [UIColor clearColor].CGColor;
+                             self.shareButton.layer.borderWidth = 0.0f;
+                             self.shareButton.backgroundColor = [UIColor purpleColorWithAlpha:1.0f];
 
-                           NSMutableAttributedString *shareButtonAttrString =
-                               [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Share your wink", @"").uppercaseString];
-                           [shareButtonAttrString addAttribute:NSKernAttributeName
-                                                         value:[NSNumber numberWithInteger:2]
-                                                         range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
-                           [shareButtonAttrString addAttribute:NSForegroundColorAttributeName
-                                                         value:[UIColor whiteColor]
-                                                         range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
-                           [self.shareButton setAttributedTitle:shareButtonAttrString forState:UIControlStateNormal];
+                             NSMutableAttributedString *shareButtonAttrString =
+                                 [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Share your wink", @"").uppercaseString];
+                             [shareButtonAttrString addAttribute:NSKernAttributeName
+                                                           value:[NSNumber numberWithInteger:2]
+                                                           range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
+                             [shareButtonAttrString addAttribute:NSForegroundColorAttributeName
+                                                           value:[UIColor whiteColor]
+                                                           range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
+                             [self.shareButton setAttributedTitle:shareButtonAttrString forState:UIControlStateNormal];
 
-                           self.shareButton.userInteractionEnabled = YES;
+                             self.shareButton.userInteractionEnabled = YES;
 
                          }
                          completion:nil];
@@ -211,30 +213,30 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
 
-                           self.backButton.transform =
-                               CGAffineTransformMakeTranslation(-self.backButton.center.x - roundf(self.backButton.frame.size.width / 2.0f), 0.0f);
-                           self.backButton.alpha = 0.0f;
-                           self.placeholderTextView.backgroundColor = [UIColor clearColor];
-                           self.placeholderTextView.userInteractionEnabled = NO;
-                           self.placeholderTextView.hidden = !(self.placeholderTextView.text.length > 0);
-                           self.socialMediaContainerView.transform = CGAffineTransformMakeTranslation(0.0f, self.socialMediaContainerView.frame.size.height);
-                           self.socialMediaContainerView.alpha = 0.0f;
+                             self.backButton.transform =
+                                 CGAffineTransformMakeTranslation(-self.backButton.center.x - roundf(self.backButton.frame.size.width / 2.0f), 0.0f);
+                             self.backButton.alpha = 0.0f;
+                             self.placeholderTextView.backgroundColor = [UIColor clearColor];
+                             self.placeholderTextView.userInteractionEnabled = NO;
+                             self.placeholderTextView.hidden = !(self.placeholderTextView.text.length > 0);
+                             self.socialMediaContainerView.transform = CGAffineTransformMakeTranslation(0.0f, self.socialMediaContainerView.frame.size.height);
+                             self.socialMediaContainerView.alpha = 0.0f;
 
-                           self.shareButton.layer.borderColor = [UIColor purpleColorWithAlpha:1.0f].CGColor;
-                           self.shareButton.layer.borderWidth = 2.0f;
-                           self.shareButton.backgroundColor = [UIColor clearColor];
+                             self.shareButton.layer.borderColor = [UIColor purpleColorWithAlpha:1.0f].CGColor;
+                             self.shareButton.layer.borderWidth = 2.0f;
+                             self.shareButton.backgroundColor = [UIColor clearColor];
 
-                           NSMutableAttributedString *shareButtonAttrString =
-                               [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Sharing...", @"").uppercaseString];
-                           [shareButtonAttrString addAttribute:NSKernAttributeName
-                                                         value:[NSNumber numberWithInteger:2]
-                                                         range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
-                           [shareButtonAttrString addAttribute:NSForegroundColorAttributeName
-                                                         value:[UIColor purpleColorWithAlpha:1.0f]
-                                                         range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
-                           [self.shareButton setAttributedTitle:shareButtonAttrString forState:UIControlStateNormal];
+                             NSMutableAttributedString *shareButtonAttrString =
+                                 [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Sharing...", @"").uppercaseString];
+                             [shareButtonAttrString addAttribute:NSKernAttributeName
+                                                           value:[NSNumber numberWithInteger:2]
+                                                           range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
+                             [shareButtonAttrString addAttribute:NSForegroundColorAttributeName
+                                                           value:[UIColor purpleColorWithAlpha:1.0f]
+                                                           range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
+                             [self.shareButton setAttributedTitle:shareButtonAttrString forState:UIControlStateNormal];
 
-                           self.shareButton.userInteractionEnabled = NO;
+                             self.shareButton.userInteractionEnabled = NO;
 
                          }
                          completion:nil];
@@ -248,30 +250,30 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
 
-                           self.backButton.transform =
-                               CGAffineTransformMakeTranslation(-self.backButton.center.x - roundf(self.backButton.frame.size.width / 2.0f), 0.0f);
-                           self.backButton.alpha = 0.0f;
-                           self.placeholderTextView.backgroundColor = [UIColor clearColor];
-                           self.placeholderTextView.userInteractionEnabled = NO;
-                           self.placeholderTextView.hidden = !(self.placeholderTextView.text.length > 0);
-                           self.socialMediaContainerView.transform = CGAffineTransformMakeTranslation(0.0f, self.socialMediaContainerView.frame.size.height);
-                           self.socialMediaContainerView.alpha = 0.0f;
+                             self.backButton.transform =
+                                 CGAffineTransformMakeTranslation(-self.backButton.center.x - roundf(self.backButton.frame.size.width / 2.0f), 0.0f);
+                             self.backButton.alpha = 0.0f;
+                             self.placeholderTextView.backgroundColor = [UIColor clearColor];
+                             self.placeholderTextView.userInteractionEnabled = NO;
+                             self.placeholderTextView.hidden = !(self.placeholderTextView.text.length > 0);
+                             self.socialMediaContainerView.transform = CGAffineTransformMakeTranslation(0.0f, self.socialMediaContainerView.frame.size.height);
+                             self.socialMediaContainerView.alpha = 0.0f;
 
-                           self.shareButton.layer.borderColor = [UIColor clearColor].CGColor;
-                           self.shareButton.layer.borderWidth = 0.0f;
-                           self.shareButton.backgroundColor = [UIColor greenColorWithAlpha:1.0f];
+                             self.shareButton.layer.borderColor = [UIColor clearColor].CGColor;
+                             self.shareButton.layer.borderWidth = 0.0f;
+                             self.shareButton.backgroundColor = [UIColor greenColorWithAlpha:1.0f];
 
-                           NSMutableAttributedString *shareButtonAttrString =
-                               [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"D-D-DONE!", @"").uppercaseString];
-                           [shareButtonAttrString addAttribute:NSKernAttributeName
-                                                         value:[NSNumber numberWithInteger:2]
-                                                         range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
-                           [shareButtonAttrString addAttribute:NSForegroundColorAttributeName
-                                                         value:[UIColor whiteColor]
-                                                         range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
-                           [self.shareButton setAttributedTitle:shareButtonAttrString forState:UIControlStateNormal];
+                             NSMutableAttributedString *shareButtonAttrString =
+                                 [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"D-D-DONE!", @"").uppercaseString];
+                             [shareButtonAttrString addAttribute:NSKernAttributeName
+                                                           value:[NSNumber numberWithInteger:2]
+                                                           range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
+                             [shareButtonAttrString addAttribute:NSForegroundColorAttributeName
+                                                           value:[UIColor whiteColor]
+                                                           range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
+                             [self.shareButton setAttributedTitle:shareButtonAttrString forState:UIControlStateNormal];
 
-                           self.shareButton.userInteractionEnabled = YES;
+                             self.shareButton.userInteractionEnabled = YES;
 
                          }
                          completion:nil];
@@ -280,6 +282,32 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     default:
         break;
     }
+}
+
+#pragma mark - Utitilies
+
+- (void)postImageToFacebookWithMessage:(NSString *)message andImage:(UIImage *)imageToPost {
+
+    // Post to facebook
+    // Post image to facebook
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:message forKey:@"message"];
+    [params setObject:UIImagePNGRepresentation(imageToPost) forKey:@"picture"];
+
+    [SSFacebookHelper postImageWithParameters:params
+        onSuccess:^() { NSLog(@"SUCCESS"); }
+        failure:^(NSError *error) { // showing an alert for failure
+            NSLog(@"error: %@", error);
+        }];
+}
+
+- (void)postVideoToFacebookWithMessage:(NSString *)message andVideo:(NSData *)videoToPost {
+    NSMutableDictionary *paramsVideo = [NSMutableDictionary dictionaryWithObjectsAndKeys:videoToPost, @"video.mov", message, @"description", nil];
+    [SSFacebookHelper postVideoWithPath:paramsVideo
+        onSuccess:^() { NSLog(@"SUCCESS"); }
+        failure:^(NSError *error) { // showing an alert for failure
+            NSLog(@"error: %@", error);
+        }];
 }
 
 #pragma mark - Movie View Methods
@@ -313,17 +341,24 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         [self.videoEditor exportVideo:asset
                               overlay:self.overlayImage
                             completed:^(BOOL success) {
-                              NSString *title = @"";
-                              if (success) {
-                                  title = NSLocalizedString(@"Saved to your camera roll!", @"").uppercaseString;
-                              } else {
-                                  title = NSLocalizedString(@"Error saving the video to your camera roll", @"").uppercaseString;
-                              }
+                                NSString *title = @"";
+                                if (success) {
+                                    // Share video here
+                                    title = NSLocalizedString(@"Saved to your camera roll!", @"").uppercaseString;
 
-                              notification.notificationLabel.text = title;
-                              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                [notification dismissNotification];
-                              });
+                                    // Share video
+                                    NSString *message = self.placeholderTextView.text;
+                                    NSData *videoData = [NSData dataWithContentsOfURL:self.videoEditor.urlOfVideoInCameraRoll];
+
+                                    [self postVideoToFacebookWithMessage:message andVideo:videoData];
+
+                                } else {
+                                    title = NSLocalizedString(@"Error saving the video to your camera roll", @"").uppercaseString;
+                                }
+
+                                notification.notificationLabel.text = title;
+                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(),
+                                               ^{ [notification dismissNotification]; });
                             }];
     }
 }
@@ -359,13 +394,19 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 - (void)post {
     [self.placeholderTextView resignFirstResponder];
 
-    [self savePostToCameraRoll];
+    // Check to see if it's image first
+    if (self.image || self.modifiedImage) {
+
+        [self savePostToCameraRoll];
+
+        // Get the message to post from the textView
+        NSString *message = self.placeholderTextView.text;
 
     [self postTweet];
 }
 
 - (void)postTweet {
-    // Use Account Framework
+        if (self.isTwitterConnected) {
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     //  Before posting we could allow user to select the account he wants to use
@@ -374,75 +415,88 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         NSLog(@"%@", acc.username); // in this u can get all accounts user names provide some UI for user to select,such as UITableview
     }
 
-    // Get the message to post from the textView
-    NSString *message = self.placeholderTextView.text;
+            // Use Account Framework
+            ACAccountStore *account = [[ACAccountStore alloc] init];
+            ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+            //  Before posting we could allow user to select the account he wants to use
     UIImage *imageToPost = [self editedImage];
+            for (ACAccount *acc in arrayOfAccons) {
+                NSLog(@"%@", acc.username); // in this u can get all accounts user names provide some UI for user to select,such as UITableview
+            }
 
-    NSData *imageData = UIImageJPEGRepresentation(imageToPost, 1.0f); // set the compression quality
+            NSData *imageData = UIImageJPEGRepresentation(imageToPost, 1.0f); // set the compression quality
 
-    [account
+            [account requestAccessToAccountsWithType:accountType
         requestAccessToAccountsWithType:accountType
-                                options:nil
-                             completion:^(BOOL granted, NSError *error) {
+                                             options:nil
+                                          completion:^(BOOL granted, NSError *error) {
 
-                               if (granted == YES) {
-                                   // Populate array with all available Twitter accounts
-                                   NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
-                                   if ([arrayOfAccounts count] > 0) {
-                                       // use the first account available
-                                       ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
+                                              if (granted == YES) {
+                                                  // Populate array with all available Twitter accounts
+                                                  NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
+                                                  if ([arrayOfAccounts count] > 0) {
+                                                      // use the first account available
+                                                      ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
 
-                                       // create this request to post the image 1st, using Social Framework
-                                       SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
-                                                                                   requestMethod:SLRequestMethodPOST
-                                                                                             URL:[NSURL URLWithString:TWITTER_MEDIA_UPLOAD_URL]
-                                                                                      parameters:nil];
-                                       // Set the account to use for the request
-                                       [postRequest setAccount:acct];
-                                       // Divide the request into multipart to upload the image
-                                       [postRequest addMultipartData:imageData withName:@"media" type:@"image/jpeg" filename:@"image.jpg"];
-                                       // Request handler
-                                       [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                                         // Make a dic from the response
-                                         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+                                                      // create this request to post the image 1st, using Social Framework
+                                                      SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                                                                  requestMethod:SLRequestMethodPOST
+                                                                                                            URL:[NSURL URLWithString:TWITTER_MEDIA_UPLOAD_URL]
+                                                                                                     parameters:nil];
+                                                      // Set the account to use for the request
+                                                      [postRequest setAccount:acct];
+                                                      // Divide the request into multipart to upload the image
+                                                      [postRequest addMultipartData:imageData withName:@"media" type:@"image/jpeg" filename:@"image.jpg"];
+                                                      // Request handler
+                                                      [postRequest
+                                                          performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                                                              // Make a dic from the response
+                                                              NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
 
-                                         // Get the media_id number from the dic and transform it into a string
-                                         NSString *media_id_str = [[dic valueForKey:@"media_id"] stringValue];
+                                                              // Get the media_id number from the dic and transform it into a string
+                                                              NSString *media_id_str = [[dic valueForKey:@"media_id"] stringValue];
 
-                                         // Check if the response is good, then if it is send
-                                         if ([urlResponse statusCode] == 200) {
-                                             // Make a dic to pass parameters to the request
-                                             NSDictionary *dicTweet =
-                                                 [[NSDictionary alloc] initWithObjectsAndKeys:message, @"status", media_id_str, @"media_ids", nil];
-                                             // Init the request to upload the tweet with it's picture and text
-                                             SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                              // Check if the response is good, then if it is send
+                                                              if ([urlResponse statusCode] == 200) {
+                                                                  // Make a dic to pass parameters to the request
+                                                                  NSDictionary *dicTweet = [[NSDictionary alloc]
+                                                                      initWithObjectsAndKeys:message, @"status", media_id_str, @"media_ids", nil];
+                                                                  // Init the request to upload the tweet with it's picture and text
+                                                                  SLRequest *postRequest =
+                                                                      [SLRequest requestForServiceType:SLServiceTypeTwitter
                                                                                          requestMethod:SLRequestMethodPOST
                                                                                                    URL:[NSURL URLWithString:TWITTER_TWEET_UPLOAD_URL]
                                                                                             parameters:dicTweet];
-                                             // Set the account to use for the request
-                                             [postRequest setAccount:acct];
-                                             // Request handler
-                                             [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                                               if ([urlResponse statusCode] == 200) {
-                                                   // Tweet has been uploaded
-                                               } else {
-                                                   NSLog(@"Error uploading tweet with error : %@", error);
-                                               }
-                                             }];
-                                         } else {
+                                                                  // Set the account to use for the request
+                                                                  [postRequest setAccount:acct];
+                                                                  // Request handler
+                                                                  [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse,
+                                                                                                           NSError *error) {
+                                                                      if ([urlResponse statusCode] == 200) {
+                                                                          // Tweet has been uploaded
+                                                                      } else {
+                                                                          NSLog(@"Error uploading tweet with error : %@", error);
+                                                                      }
+                                                                  }];
+                                                              } else {
 
                                              NSLog(@"Error uploading photo to Twitter with error : %@", error);
                                          }
                                        }];
                                    }
                                } else {
+                                          }];
+        }
 
                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error permissions"
                                                                                    message:@"Check what to do"
-                                                                                  delegate:self
-                                                                         cancelButtonTitle:@"ok"
+        if (self.isFacebookConnected) {
+            [self postImageToFacebookWithMessage:message andImage:imageToPost];
                                                                          otherButtonTitles:nil];
                                    [alert show];
+    } else {
+        // Post movie to Facebook
+        if (self.isFacebookConnected) {
 
                                    NSLog(@"Twitters permissions not allowed");
                                }

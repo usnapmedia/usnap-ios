@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
 
 // Button Actions
 - (IBAction)loginButtonTouched:(id)sender;
