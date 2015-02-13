@@ -10,6 +10,7 @@
 #import <TwitterKit/TwitterKit.h>
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
+#import <Crashlytics/Crashlytics.h>
 
 @implementation WKSocialNetworkHelper
 
@@ -18,26 +19,37 @@
 + (void)manageConnectionToSocialNetwork:(NSString *)socialNetwork withSwitch:(UISwitch *)theSwitch {
 
     // Twitter
-    if ([socialNetwork isEqualToString:TWITTER_SWITCH_VALUE]) {
+    if ([socialNetwork isEqualToString:kTwitterSwitchValue]) {
         if (theSwitch.on) {
             dispatch_async(dispatch_get_main_queue(), ^{
-              [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
+                [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
 
-                if (session) {
-                    [[NSUserDefaults standardUserDefaults] setObject:[session userName] forKey:TWITTER_ACCOUNT_NAME];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                } else {
-                    [theSwitch setOn:theSwitch.on animated:YES];
-                    NSLog(@"error is : %@", error);
-                }
-              }];
+                    if (session) {
+                        [[NSUserDefaults standardUserDefaults] setObject:[session userName] forKey:kTwitterAccountName];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                    } else {
+                        // Set the switch back to no
+                        [theSwitch setOn:NO animated:YES];
+                        NSLog(@"error is : %@", error);
+                    }
+                }];
             });
         } else {
             [[Twitter sharedInstance] logOut];
         }
-    } else if ([socialNetwork isEqualToString:FACEBOOK_SWITCH_VALUE]) {
-
-        // TODO: FACEBOOK
+    } else if ([socialNetwork isEqualToString:kFacebookSwitchValue]) {
+        // Log the user in
+        if (theSwitch.on) {
+            [SSFacebookHelper login:^{ CLS_LOG(@"Facebook connected"); }
+                onFailure:^(NSError *error) {
+                    // Set the switch back to no
+                    [theSwitch setOn:NO animated:YES];
+                    CLS_LOG(@"Facebook connection error: %@", error.description);
+                }];
+        } else {
+            // Logout
+            [SSFacebookHelper logout];
+        }
     }
 }
 
@@ -56,22 +68,18 @@
     [params setObject:UIImagePNGRepresentation(imageToPost) forKey:@"picture"];
 
     [SSFacebookHelper postImageWithParameters:params
-        onSuccess:^() {
-          NSLog(@"SUCCESS");
-        }
+        onSuccess:^() { NSLog(@"SUCCESS"); }
         failure:^(NSError *error) { // showing an alert for failure
-          NSLog(@"error: %@", error);
+            NSLog(@"error: %@", error);
         }];
 }
 
 + (void)postVideoToFacebookWithMessage:(NSString *)message andVideo:(NSData *)videoToPost {
     NSMutableDictionary *paramsVideo = [NSMutableDictionary dictionaryWithObjectsAndKeys:videoToPost, @"video.mov", message, @"description", nil];
     [SSFacebookHelper postVideoWithPath:paramsVideo
-        onSuccess:^() {
-          NSLog(@"SUCCESS");
-        }
+        onSuccess:^() { NSLog(@"SUCCESS"); }
         failure:^(NSError *error) { // showing an alert for failure
-          NSLog(@"error: %@", error);
+            NSLog(@"error: %@", error);
         }];
 }
 
@@ -84,40 +92,41 @@
     NSArray *arrayOfAccons = [accountStore accountsWithAccountType:accountType];
     ACAccount *account = [[ACAccount alloc] initWithAccountType:accountType];
     for (ACAccount *acc in arrayOfAccons) {
-        if ([acc.username isEqualToString:[[NSUserDefaults standardUserDefaults] valueForKey:TWITTER_ACCOUNT_NAME]]) {
+        if ([acc.username isEqualToString:[[NSUserDefaults standardUserDefaults] valueForKey:kTwitterAccountName]]) {
             account = acc;
         }
-        [accountStore
-            requestAccessToAccountsWithType:accountType
-                                    options:nil
-                                 completion:^(BOOL granted, NSError *error) {
+    }
+    [accountStore
+        requestAccessToAccountsWithType:accountType
+                                options:nil
+                             completion:^(BOOL granted, NSError *error) {
 
-                                   if (granted == YES) {
-                                       // Check if there is an image to upload (even if there should always be one...)
-                                       if (image) {
-                                           NSData *imageData = UIImageJPEGRepresentation(image, 1.0f);
+                                 if (granted == YES) {
+                                     // Check if there is an image to upload (even if there should always be one...)
+                                     if (image) {
+                                         NSData *imageData = UIImageJPEGRepresentation(image, 1.0f);
 
-                                           // 1st step is to send the image on Twitter servers
-                                           [self postImageToTwitter:imageData
-                                                         withAccount:account
-                                               withCompletionHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                                                 // Make a dic from the response
-                                                 NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
-                                                 // Get the media_id number from the dic and transform it into a string
-                                                 NSString *media_id_str = [[dic valueForKey:@"media_id"] stringValue];
+                                         // 1st step is to send the image on Twitter servers
+                                         [self postImageToTwitter:imageData
+                                                       withAccount:account
+                                             withCompletionHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
                                                  // Check if the response is good, then if it is send
                                                  if ([urlResponse statusCode] == 200) {
+                                                     // Make a dic from the response
+                                                     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+                                                     // Get the media_id number from the dic and transform it into a string
+                                                     NSString *media_id_str = [[dic valueForKey:@"media_id"] stringValue];
                                                      // If we got a success for the image we can then post the tweet
                                                      [self postTweetWithMessage:message
                                                                       onAccount:account
                                                                      andIdImage:media_id_str
                                                           withCompletionHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                                                            // Handle the errors
-                                                            if ([urlResponse statusCode] == 200) {
-                                                                // Tweet has been uploaded
-                                                            } else {
-                                                                NSLog(@"Error uploading tweet with error : %@", error);
-                                                            }
+                                                              // Handle the errors
+                                                              if ([urlResponse statusCode] == 200) {
+                                                                  // Tweet has been uploaded
+                                                              } else {
+                                                                  NSLog(@"Error uploading tweet with error : %@", error);
+                                                              }
 
                                                           }];
 
@@ -125,11 +134,10 @@
                                                      NSLog(@"Error uploading photo to Twitter with error : %@", error);
                                                  }
 
-                                               }];
-                                       }
-                                   }
-                                 }];
-    }
+                                             }];
+                                     }
+                                 }
+                             }];
 }
 
 /**
@@ -150,7 +158,7 @@
     // Init the request to upload the tweet with it's picture and text
     SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
                                                 requestMethod:SLRequestMethodPOST
-                                                          URL:[NSURL URLWithString:TWITTER_TWEET_UPLOAD_URL]
+                                                          URL:[NSURL URLWithString:kTwitterTweetUploadURL]
                                                    parameters:dicTweet];
     // Set the account to use for the request
     [postRequest setAccount:account];
@@ -168,7 +176,7 @@
 + (void)postImageToTwitter:(NSData *)imageData withAccount:(ACAccount *)account withCompletionHandler:(SLRequestHandler)handler {
     SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
                                                 requestMethod:SLRequestMethodPOST
-                                                          URL:[NSURL URLWithString:TWITTER_MEDIA_UPLOAD_URL]
+                                                          URL:[NSURL URLWithString:kTwitterMediaUploadURL]
                                                    parameters:nil];
     // Set the account to use for the request
     [postRequest setAccount:account];
