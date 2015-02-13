@@ -15,6 +15,17 @@
 #import "WKAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 
+@interface WKLoginViewController()
+
+// UI
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UITextField *usernameTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
+
+@end
+
 @implementation WKLoginViewController
 
 #pragma mark - View Methods
@@ -26,7 +37,6 @@
         // play with Twitter session
         if (session) {
             NSLog(@"signed in as %@", [session userName]);
-            
 
             WKAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 
@@ -37,13 +47,13 @@
             NSLog(@"error: %@", [error localizedDescription]);
         }
     }];
-    
+
     logInButton.center = self.view.center;
     [self.view addSubview:logInButton];
 
-    self.facebookLoginButton.frame =
-        CGRectMake(logInButton.frame.origin.x, self.view.center.y + logInButton.frame.size.height + 20,
-                   logInButton.frame.size.width, logInButton.frame.size.height);
+    // Set the facebook login frame
+    self.facebookLoginButton.frame = CGRectMake(logInButton.frame.origin.x, self.view.center.y + logInButton.frame.size.height + 20,
+                                                logInButton.frame.size.width, logInButton.frame.size.height);
 
     // Register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];

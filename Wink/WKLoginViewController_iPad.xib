@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKLoginViewController">
             <connections>
+                <outlet property="facebookLoginButton" destination="4dw-q5-cAc" id="DyQ-cg-XgZ"/>
                 <outlet property="imageView" destination="FZf-kW-F6s" id="z2U-xB-kGl"/>
-                <outlet property="loginButton" destination="sOl-CQ-o1n" id="aNl-Vc-sgP"/>
-                <outlet property="passwordTextfield" destination="hsI-Ej-og8" id="PJ0-6B-l14"/>
-                <outlet property="usernameTextfield" destination="L5E-F4-DwI" id="bnZ-RL-K67"/>
                 <outlet property="view" destination="04F-my-Yif" id="IXV-dm-fvV"/>
             </connections>
         </placeholder>
@@ -23,37 +21,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" background="textfieldBackground.png" id="L5E-F4-DwI">
-                    <rect key="frame" x="27" y="726" width="266" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="textColor" red="0.50196078430000002" green="0.53725490200000003" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="vnU-n0-Tvz"/>
-                    </connections>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" background="textfieldBackground.png" id="hsI-Ej-og8">
-                    <rect key="frame" x="27" y="776" width="266" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="textColor" red="0.50196078430000002" green="0.53725490200000003" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="7nC-9Y-cCN"/>
-                    </connections>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sOl-CQ-o1n">
-                    <rect key="frame" x="27" y="827" width="100" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <state key="normal" title="SIGN IN" backgroundImage="loginButton.png">
-                        <color key="titleColor" red="0.96954415299999996" green="1" blue="0.97215795979999997" alpha="1" colorSpace="calibratedRGB"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4dw-q5-cAc" customClass="SSOFacebookLoginButton">
+                    <rect key="frame" x="181" y="489" width="405" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Log in with Facebook">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="loginButtonSelected.png"/>
-                    <connections>
-                        <action selector="loginButtonTouched:" destination="-1" eventType="touchUpInside" id="3AH-1J-wwN"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -62,9 +35,6 @@
     </objects>
     <resources>
         <image name="loginBackground_iPad.png" width="768" height="1024"/>
-        <image name="loginButton.png" width="100" height="40"/>
-        <image name="loginButtonSelected.png" width="100" height="40"/>
-        <image name="textfieldBackground.png" width="266" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
