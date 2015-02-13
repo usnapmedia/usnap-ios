@@ -9,8 +9,8 @@
 #import "WKSettingsViewController.h"
 #import "WKUser.h"
 #import "WKSettingSocialTableViewCell.h"
+#import "SSOSettingsSocialFakeTableViewCell.h"
 #import "WKSocialNetworkHelper.h"
-
 
 @interface WKSettingsViewController () <WKSettingsSocialCellDelegate>
 
@@ -25,7 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.tableView registerNib:[UINib nibWithNibName:@"SettingSocialCell" bundle:nil] forCellReuseIdentifier:@"SETTINGS_SOCIAL_CELL"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"SettingsSocialCell" bundle:nil] forCellReuseIdentifier:@"SETTINGS_SOCIAL_CELL"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"SettingsSocialFakeCell" bundle:nil] forCellReuseIdentifier:@"SETTINGS_SOCIAL_FAKE_CELL"];
 
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     NSString *version = [info objectForKey:@"CFBundleShortVersionString"];
@@ -79,16 +80,40 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 }
 
+#pragma mark - Getters
+
+/**
+ *  Returns the array of social netowkr to connect for
+ *
+ *  @return the array
+ */
 - (NSArray *)arraySocialNetworks {
 
     NSArray *socialNetworks = [[NSArray alloc]
         initWithObjects:
             @{ @"name" : @"Facebook",
-               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:FACEBOOK_SWITCH_VALUE]] },
+               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]] },
             @{ @"name" : @"Twitter",
-               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:TWITTER_SWITCH_VALUE]] },
+               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]] },
+            @{ @"name" : @"Google+",
+               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kGooglePlusSwitchValue]] },
+            @{ @"name" : @"Tumblr",
+               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kTumblrSwitchValue]] },
+            @{ @"name" : @"Instagram",
+               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kInstagramSwitchValue]] },
+
             nil];
     return socialNetworks;
+}
+
+/**
+ *  Returns the array of fake social network
+ *
+ *  @return the array
+ */
+- (NSArray *)arrayFakeSocialNetworks {
+
+    return @[ @"TAG Facebook", @"TAG Twitter", @"TAG Google+", @"TAG Tumblr", @"TAG Instagram", @"TAG Website", @"TAG Social Page" ];
 }
 
 #pragma mark - WKSettingsSocialCellDelegate
@@ -105,10 +130,8 @@
     NSString *socialNetwork = [[[self arraySocialNetworks] objectAtIndex:indexPath.row] valueForKey:@"name"];
 
     socialNetwork = [socialNetwork stringByAppendingString:@"SwitchValue"];
-    
-    [WKSocialNetworkHelper manageConnectionToSocialNetwork:socialNetwork withSwitch:theSwitch];
 
-  
+    [WKSocialNetworkHelper manageConnectionToSocialNetwork:socialNetwork withSwitch:theSwitch];
 
     // Save the social network login status
     [[NSUserDefaults standardUserDefaults] setBool:theSwitch.on forKey:socialNetwork];
@@ -123,43 +146,37 @@
 #pragma mark - TableView Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self arraySocialNetworks].count;
+    if (section == 0) {
+        return [self arraySocialNetworks].count;
+    } else if (section == 1) {
+        return [self arrayFakeSocialNetworks].count;
+    }
+    // SHOULD NOT HAPPEN
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = @"SETTINGS_SOCIAL_CELL";
+    //@FIXME should not be like this
+    if (indexPath.section == 0) {
+        NSString *cellIdentifier = @"SETTINGS_SOCIAL_CELL";
 
-    WKSettingSocialTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.delegate = self;
+        WKSettingSocialTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+        cell.delegate = self;
 
-    [cell configureCell:[[self arraySocialNetworks] objectAtIndex:indexPath.row]];
+        [cell configureCell:[[self arraySocialNetworks] objectAtIndex:indexPath.row]];
+        return cell;
+    } else if (indexPath.section == 1) {
+        NSString *cellIdentifier = @"SETTINGS_SOCIAL_FAKE_CELL";
 
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if ([cell isKindOfClass:[WKSettingSocialTableViewCell class]]) {
-        WKSettingSocialTableViewCell *myCell = (WKSettingSocialTableViewCell *)cell;
-    } else {
-        NSDictionary *networkDict = [[WKUser currentUser].socialNetworks objectAtIndex:indexPath.row];
-        NSString *key = networkDict.allKeys.lastObject;
-        BOOL enabled = [[networkDict objectForKey:key] boolValue];
-
-        UIColor *textColor = (enabled) ? [UIColor purpleTextColorWithAlpha:1.0f] : [UIColor lightGreyTextColorWithAlpha:1.0f];
-
-        cell.textLabel.font = [UIFont winkFontAvenirWithSize:19.0f];
-        cell.textLabel.textColor = textColor;
-        cell.textLabel.text = key.capitalizedString;
-
-        cell.detailTextLabel.font = [UIFont winkFontAvenirWithSize:19.0f];
-        cell.detailTextLabel.textColor = textColor;
-        cell.detailTextLabel.text = (enabled) ? NSLocalizedString(@"On", @"").uppercaseString : NSLocalizedString(@"Off", @"").uppercaseString;
+        SSOSettingsSocialFakeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+        [cell configureCell:[[self arrayFakeSocialNetworks] objectAtIndex:indexPath.row]];
+        return cell;
     }
+    return nil;
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {

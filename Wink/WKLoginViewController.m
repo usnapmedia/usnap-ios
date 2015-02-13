@@ -15,14 +15,14 @@
 #import "WKAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface WKLoginViewController()
+@interface WKLoginViewController ()
 
 // UI
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UITextField *usernameTextfield;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
+@property(weak, nonatomic) IBOutlet UIImageView *imageView;
+@property(weak, nonatomic) IBOutlet UITextField *usernameTextfield;
+@property(weak, nonatomic) IBOutlet UITextField *passwordTextfield;
+@property(weak, nonatomic) IBOutlet UIButton *loginButton;
+@property(weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
 
 @end
 
@@ -37,14 +37,18 @@
         // play with Twitter session
         if (session) {
             NSLog(@"signed in as %@", [session userName]);
+            // Save the account value
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kTwitterSwitchValue];
+            [[NSUserDefaults standardUserDefaults] synchronize];
 
-            WKAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+            // Push to camera view
+            [self pushToCameraViewController];
 
-            WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
-            WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:cameraController];
-            appDelegate.window.rootViewController = navController;
         } else {
             NSLog(@"error: %@", [error localizedDescription]);
+            // Save the account value
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kTwitterSwitchValue];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }];
 
@@ -142,6 +146,16 @@
     });
 }
 
+#pragma mark - View utilities
+
+/**
+ *  Pushes the user to the camera view controller
+ */
+- (void)pushToCameraViewController {
+    // Send notification for the app delegate to handle the switch of controller
+    [[NSNotificationCenter defaultCenter] postNotificationName:kCurrentUserStatusChanged object:nil];
+}
+
 #pragma mark - Keyboard Methods
 
 - (void)keyboardWillShow:(NSNotification *)notification {
@@ -234,12 +248,14 @@
 
     [SSFacebookHelper login:^() {
         // Push to camera view
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsFacebookLoggedIn];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
-        [[NSNotificationCenter defaultCenter] postNotificationName:kCurrentUserStatusChanged object:nil];
+        // Push the camera view controller
+        [self pushToCameraViewController];
+
     } onFailure:^(NSError *error) {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kIsFacebookLoggedIn];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
         [UIAlertView showWithTitle:NSLocalizedString(@"Error", @"")

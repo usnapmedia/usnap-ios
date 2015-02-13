@@ -11,6 +11,8 @@
 		1F2C62981A8E501F0038868F /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C62971A8E501F0038868F /* WKSettingSocialTableViewCell.m */; };
 		1F2C629F1A8E508A0038868F /* SSOFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C629E1A8E508A0038868F /* SSOFacebookLoginButton.m */; };
 		1F2C62A31A8E52320038868F /* UIImage+Resizing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C62A21A8E52320038868F /* UIImage+Resizing.m */; };
+		1F2C62A51A8E880B0038868F /* SettingsSocialFakeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2C62A41A8E880B0038868F /* SettingsSocialFakeCell.xib */; };
+		1F2C62A81A8E8AD60038868F /* SSOSettingsSocialFakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C62A71A8E8AD60038868F /* SSOSettingsSocialFakeTableViewCell.m */; };
 		1F7F85AB1A8A743900BBC5D5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */; };
 		1F7F85AC1A8A743900BBC5D5 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */; };
 		27017DC019DCA4460011ECCC /* WKVideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 27017DBF19DCA4460011ECCC /* WKVideoEditor.m */; };
@@ -148,7 +150,7 @@
 		27DF7EB419AFB52800F970AF /* WKCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DF7EB219AFB52800F970AF /* WKCameraViewController.m */; };
 		27DF7EB519AFB52800F970AF /* WKCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */; };
 		7B650E781A8BDD360060458E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B89051A8A8FA9005E6869 /* Constants.m */; };
-		7B650E7D1A8C0E7A0060458E /* SettingSocialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B650E7C1A8C0E7A0060458E /* SettingSocialCell.xib */; };
+		7B650E7D1A8C0E7A0060458E /* SettingsSocialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B650E7C1A8C0E7A0060458E /* SettingsSocialCell.xib */; };
 		7B650E841A8D3E690060458E /* WKSocialNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B650E831A8D3E690060458E /* WKSocialNetworkHelper.m */; };
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
@@ -172,6 +174,9 @@
 		1F2C629E1A8E508A0038868F /* SSOFacebookLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFacebookLoginButton.m; sourceTree = "<group>"; };
 		1F2C62A11A8E52320038868F /* UIImage+Resizing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resizing.h"; sourceTree = "<group>"; };
 		1F2C62A21A8E52320038868F /* UIImage+Resizing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resizing.m"; sourceTree = "<group>"; };
+		1F2C62A41A8E880B0038868F /* SettingsSocialFakeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsSocialFakeCell.xib; sourceTree = "<group>"; };
+		1F2C62A61A8E8AD60038868F /* SSOSettingsSocialFakeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSettingsSocialFakeTableViewCell.h; sourceTree = "<group>"; };
+		1F2C62A71A8E8AD60038868F /* SSOSettingsSocialFakeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSettingsSocialFakeTableViewCell.m; sourceTree = "<group>"; };
 		1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		27017DBE19DCA4460011ECCC /* WKVideoEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKVideoEditor.h; sourceTree = "<group>"; };
@@ -335,7 +340,7 @@
 		27DF7EB219AFB52800F970AF /* WKCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCameraViewController.m; sourceTree = "<group>"; };
 		27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKCameraViewController.xib; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		7B650E7C1A8C0E7A0060458E /* SettingSocialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingSocialCell.xib; sourceTree = "<group>"; };
+		7B650E7C1A8C0E7A0060458E /* SettingsSocialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsSocialCell.xib; sourceTree = "<group>"; };
 		7B650E821A8D3E690060458E /* WKSocialNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKSocialNetworkHelper.h; sourceTree = "<group>"; };
 		7B650E831A8D3E690060458E /* WKSocialNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSocialNetworkHelper.m; sourceTree = "<group>"; };
 		7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
@@ -399,6 +404,8 @@
 			children = (
 				1F2C62961A8E501F0038868F /* WKSettingSocialTableViewCell.h */,
 				1F2C62971A8E501F0038868F /* WKSettingSocialTableViewCell.m */,
+				1F2C62A61A8E8AD60038868F /* SSOSettingsSocialFakeTableViewCell.h */,
+				1F2C62A71A8E8AD60038868F /* SSOSettingsSocialFakeTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -850,7 +857,8 @@
 		7B650E7B1A8C0DC70060458E /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				7B650E7C1A8C0E7A0060458E /* SettingSocialCell.xib */,
+				7B650E7C1A8C0E7A0060458E /* SettingsSocialCell.xib */,
+				1F2C62A41A8E880B0038868F /* SettingsSocialFakeCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -916,7 +924,7 @@
 				ORGANIZATIONNAME = Samsao;
 				TargetAttributes = {
 					270DFAF019AE71BE00067072 = {
-						DevelopmentTeam = 8UQUNTB23H;
+						DevelopmentTeam = QFTKNWRJGJ;
 					};
 					270DFB0B19AE71BE00067072 = {
 						DevelopmentTeam = 8UQUNTB23H;
@@ -956,7 +964,7 @@
 				2716CAE119C75D2B00FC226A /* drawButtonIcon_iPad@2x.png in Resources */,
 				274CD89F19D9A0CA00E14713 /* undoButtonIcon_iPad.png in Resources */,
 				2716CA9419C0AC0B00FC226A /* flashButtonIconON@2x.png in Resources */,
-				7B650E7D1A8C0E7A0060458E /* SettingSocialCell.xib in Resources */,
+				7B650E7D1A8C0E7A0060458E /* SettingsSocialCell.xib in Resources */,
 				2716CADA19C75D2B00FC226A /* brightnessButtonIcon_iPad.png in Resources */,
 				2716CA8B19C0AC0B00FC226A /* cameraDeviceIcon.png in Resources */,
 				2716CAFD19C75D4B00FC226A /* cameraFlashButtonAUTO_iPad.png in Resources */,
@@ -1036,6 +1044,7 @@
 				274CD89B19D9A0C000E14713 /* undoButtonIcon.png in Resources */,
 				27AA32B219BE35B500558D7E /* textIcon@2x.png in Resources */,
 				2716CACA19C75CED00FC226A /* loginBackground_iPad.png in Resources */,
+				1F2C62A51A8E880B0038868F /* SettingsSocialFakeCell.xib in Resources */,
 				2716CACB19C75CED00FC226A /* loginBackground_iPad@2x.png in Resources */,
 				2716CA8D19C0AC0B00FC226A /* captureButtonIcon.png in Resources */,
 				2716CAB519C1ECB400FC226A /* loginBackground.png in Resources */,
@@ -1136,6 +1145,7 @@
 				27AA323819B773A700558D7E /* WKWinkConnect.m in Sources */,
 				2743316519B6413F003334BB /* WKEditMediaViewController.m in Sources */,
 				2743315E19B63205003334BB /* WKSettingsViewController.m in Sources */,
+				1F2C62A81A8E8AD60038868F /* SSOSettingsSocialFakeTableViewCell.m in Sources */,
 				27AA32B519BE3B7800558D7E /* WKColorPickerView.m in Sources */,
 				27AA325819B8AF8B00558D7E /* UIFont+WKAdditions.m in Sources */,
 				27DF7E4A19AF802300F970AF /* WKUser.m in Sources */,

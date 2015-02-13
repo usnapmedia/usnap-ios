@@ -8,13 +8,19 @@
 
 #pragma mark - API constants
 
-extern NSString *const TWITTER_MEDIA_UPLOAD_URL;
-extern NSString *const TWITTER_TWEET_UPLOAD_URL;
+extern NSString *const kTwitterMediaUploadURL;
+extern NSString *const kTwitterTweetUploadURL;
 
 #pragma mark - Notifications
 
-extern NSString *const SOCIAL_NETWORK_CELL_SWITCH_NOTIFICATION;
-extern NSString *const FACEBOOK_SWITCH_VALUE;
-extern NSString *const TWITTER_SWITCH_VALUE;
-extern NSString *const TWITTER_ACCOUNT_NAME;
+extern NSString *const kSocialNetworkCellSwitchNotification;
+
+#pragma mark - Soocial network
+
+extern NSString *const kFacebookSwitchValue;
+extern NSString *const kTwitterSwitchValue;
+extern NSString *const kGooglePlusSwitchValue;
+extern NSString *const kTumblrSwitchValue;
+extern NSString *const kInstagramSwitchValue;
+extern NSString *const kTwitterAccountName;
 extern NSString *const kIsFacebookLoggedIn;

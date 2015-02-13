@@ -62,14 +62,14 @@
     [SSFacebookHelper sharedInstance].facebookPermissions = @[ @"publish_actions" ];
 
     // Do silent login if the user has logged on to Facebook before to validate the Facebook token, so they can post an image and video
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:FACEBOOK_SWITCH_VALUE]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
         [SSFacebookHelper silentLogin:^() {
-          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FACEBOOK_SWITCH_VALUE];
+          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
           [[NSUserDefaults standardUserDefaults] synchronize];
           // Setup state
           [self setupAnimated:NO];
         } onFailure:^(NSError *error) {
-          [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FACEBOOK_SWITCH_VALUE];
+          [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
           [[NSUserDefaults standardUserDefaults] synchronize];
           // Setup state
           [self setupAnimated:NO];
@@ -99,7 +99,7 @@
 #pragma mark - Setup State
 
 - (void)setupAnimated:(BOOL)animated {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:FACEBOOK_SWITCH_VALUE] || [[NSUserDefaults standardUserDefaults] boolForKey:TWITTER_SWITCH_VALUE]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
         WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
         WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:cameraController];
         self.window.rootViewController = navController;

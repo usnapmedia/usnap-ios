@@ -33,11 +33,16 @@
     // Configure the view for the selected state
 }
 
+#pragma mark - Utilities
+
 - (void)configureCell:(id)data {
     // We pass a dictionnary with the name of the socialNetwork and the value of the switch
     self.labelNameNetwork.text = [data valueForKey:@"name"];
     self.switchNetwork.on = [[data objectForKey:@"switchValue"] boolValue];
 }
+
+#pragma mark - IBActions
+
 - (IBAction)switchValueChanged:(UISwitch *)sender {
     [self.delegate switchValueHasChanged:self withSwitch:sender];
 }

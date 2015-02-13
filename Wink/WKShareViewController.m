@@ -88,8 +88,6 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     // Setup the share button
     self.shareButton.layer.cornerRadius = 2.0f;
 
-   
-
     // Setup the scrollview content size
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
 
@@ -111,11 +109,10 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [self.moviePlayerView.player play];
 }
 
--(void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    [self.moviePlayerView.player pause];
 
+    [self.moviePlayerView.player pause];
 }
 
 #pragma mark - Set Share Mode
@@ -138,15 +135,33 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     int numberNetworks = 0;
 
     if ([self editedImage]) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:TWITTER_SWITCH_VALUE]) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
             numberNetworks++;
         }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:FACEBOOK_SWITCH_VALUE]) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
+            numberNetworks++;
+        }
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kGooglePlusSwitchValue]) {
+            numberNetworks++;
+        }
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kTumblrSwitchValue]) {
+            numberNetworks++;
+        }
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kInstagramSwitchValue]) {
             numberNetworks++;
         }
         // Else it's a video, only calculate the number of social networks supporting hosting videos
     } else if (self.mediaURL) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:FACEBOOK_SWITCH_VALUE]) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
+            numberNetworks++;
+        }
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kGooglePlusSwitchValue]) {
+            numberNetworks++;
+        }
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kTumblrSwitchValue]) {
+            numberNetworks++;
+        }
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kInstagramSwitchValue]) {
             numberNetworks++;
         }
     }
@@ -168,9 +183,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [UIView animateWithDuration:animationDuration
                           delay:0.0f
                         options:animationCurve
-                     animations:^{
-                       self.view.transform = CGAffineTransformMakeTranslation(0.0f, -size.height);
-                     }
+                     animations:^{ self.view.transform = CGAffineTransformMakeTranslation(0.0f, -size.height); }
                      completion:nil];
 }
 
@@ -181,19 +194,17 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [UIView animateWithDuration:animationDuration
                           delay:0.0f
                         options:animationCurve
-                     animations:^{
-                       self.view.transform = CGAffineTransformIdentity;
-                     }
+                     animations:^{ self.view.transform = CGAffineTransformIdentity; }
                      completion:nil];
 }
 
 #pragma mark - Update UI
 
 - (void)updateUI {
-    
+
     // Setup the social media button
     [self.socialMediaButton setTitle:[NSString stringWithFormat:@"%@ %@ %@", NSLocalizedString(@"Sharing to", @""), [self numberSocialNetworkConnected],
-                                      NSLocalizedString(@"social networks", @"")]
+                                                                NSLocalizedString(@"social networks", @"")]
                             forState:UIControlStateNormal];
 
     CGFloat animationDuration = 0.3f;
@@ -207,29 +218,29 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
 
-                           self.backButton.transform = CGAffineTransformIdentity;
-                           self.backButton.alpha = 1.0f;
-                           self.placeholderTextView.backgroundColor = [UIColor whiteColor];
-                           self.placeholderTextView.userInteractionEnabled = YES;
-                           self.placeholderTextView.hidden = NO;
-                           self.socialMediaContainerView.transform = CGAffineTransformIdentity;
-                           self.socialMediaContainerView.alpha = 1.0f;
+                             self.backButton.transform = CGAffineTransformIdentity;
+                             self.backButton.alpha = 1.0f;
+                             self.placeholderTextView.backgroundColor = [UIColor whiteColor];
+                             self.placeholderTextView.userInteractionEnabled = YES;
+                             self.placeholderTextView.hidden = NO;
+                             self.socialMediaContainerView.transform = CGAffineTransformIdentity;
+                             self.socialMediaContainerView.alpha = 1.0f;
 
-                           self.shareButton.layer.borderColor = [UIColor clearColor].CGColor;
-                           self.shareButton.layer.borderWidth = 0.0f;
-                           self.shareButton.backgroundColor = [UIColor purpleColorWithAlpha:1.0f];
+                             self.shareButton.layer.borderColor = [UIColor clearColor].CGColor;
+                             self.shareButton.layer.borderWidth = 0.0f;
+                             self.shareButton.backgroundColor = [UIColor purpleColorWithAlpha:1.0f];
 
-                           NSMutableAttributedString *shareButtonAttrString =
-                               [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Share your wink", @"").uppercaseString];
-                           [shareButtonAttrString addAttribute:NSKernAttributeName
-                                                         value:[NSNumber numberWithInteger:2]
-                                                         range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
-                           [shareButtonAttrString addAttribute:NSForegroundColorAttributeName
-                                                         value:[UIColor whiteColor]
-                                                         range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
-                           [self.shareButton setAttributedTitle:shareButtonAttrString forState:UIControlStateNormal];
+                             NSMutableAttributedString *shareButtonAttrString =
+                                 [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Share your wink", @"").uppercaseString];
+                             [shareButtonAttrString addAttribute:NSKernAttributeName
+                                                           value:[NSNumber numberWithInteger:2]
+                                                           range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
+                             [shareButtonAttrString addAttribute:NSForegroundColorAttributeName
+                                                           value:[UIColor whiteColor]
+                                                           range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
+                             [self.shareButton setAttributedTitle:shareButtonAttrString forState:UIControlStateNormal];
 
-                           self.shareButton.userInteractionEnabled = YES;
+                             self.shareButton.userInteractionEnabled = YES;
 
                          }
                          completion:nil];
@@ -243,30 +254,30 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
 
-                           self.backButton.transform =
-                               CGAffineTransformMakeTranslation(-self.backButton.center.x - roundf(self.backButton.frame.size.width / 2.0f), 0.0f);
-                           self.backButton.alpha = 0.0f;
-                           self.placeholderTextView.backgroundColor = [UIColor clearColor];
-                           self.placeholderTextView.userInteractionEnabled = NO;
-                           self.placeholderTextView.hidden = !(self.placeholderTextView.text.length > 0);
-                           self.socialMediaContainerView.transform = CGAffineTransformMakeTranslation(0.0f, self.socialMediaContainerView.frame.size.height);
-                           self.socialMediaContainerView.alpha = 0.0f;
+                             self.backButton.transform =
+                                 CGAffineTransformMakeTranslation(-self.backButton.center.x - roundf(self.backButton.frame.size.width / 2.0f), 0.0f);
+                             self.backButton.alpha = 0.0f;
+                             self.placeholderTextView.backgroundColor = [UIColor clearColor];
+                             self.placeholderTextView.userInteractionEnabled = NO;
+                             self.placeholderTextView.hidden = !(self.placeholderTextView.text.length > 0);
+                             self.socialMediaContainerView.transform = CGAffineTransformMakeTranslation(0.0f, self.socialMediaContainerView.frame.size.height);
+                             self.socialMediaContainerView.alpha = 0.0f;
 
-                           self.shareButton.layer.borderColor = [UIColor purpleColorWithAlpha:1.0f].CGColor;
-                           self.shareButton.layer.borderWidth = 2.0f;
-                           self.shareButton.backgroundColor = [UIColor clearColor];
+                             self.shareButton.layer.borderColor = [UIColor purpleColorWithAlpha:1.0f].CGColor;
+                             self.shareButton.layer.borderWidth = 2.0f;
+                             self.shareButton.backgroundColor = [UIColor clearColor];
 
-                           NSMutableAttributedString *shareButtonAttrString =
-                               [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Sharing...", @"").uppercaseString];
-                           [shareButtonAttrString addAttribute:NSKernAttributeName
-                                                         value:[NSNumber numberWithInteger:2]
-                                                         range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
-                           [shareButtonAttrString addAttribute:NSForegroundColorAttributeName
-                                                         value:[UIColor purpleColorWithAlpha:1.0f]
-                                                         range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
-                           [self.shareButton setAttributedTitle:shareButtonAttrString forState:UIControlStateNormal];
+                             NSMutableAttributedString *shareButtonAttrString =
+                                 [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Sharing...", @"").uppercaseString];
+                             [shareButtonAttrString addAttribute:NSKernAttributeName
+                                                           value:[NSNumber numberWithInteger:2]
+                                                           range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
+                             [shareButtonAttrString addAttribute:NSForegroundColorAttributeName
+                                                           value:[UIColor purpleColorWithAlpha:1.0f]
+                                                           range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
+                             [self.shareButton setAttributedTitle:shareButtonAttrString forState:UIControlStateNormal];
 
-                           self.shareButton.userInteractionEnabled = NO;
+                             self.shareButton.userInteractionEnabled = NO;
 
                          }
                          completion:nil];
@@ -280,30 +291,30 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
 
-                           self.backButton.transform =
-                               CGAffineTransformMakeTranslation(-self.backButton.center.x - roundf(self.backButton.frame.size.width / 2.0f), 0.0f);
-                           self.backButton.alpha = 0.0f;
-                           self.placeholderTextView.backgroundColor = [UIColor clearColor];
-                           self.placeholderTextView.userInteractionEnabled = NO;
-                           self.placeholderTextView.hidden = !(self.placeholderTextView.text.length > 0);
-                           self.socialMediaContainerView.transform = CGAffineTransformMakeTranslation(0.0f, self.socialMediaContainerView.frame.size.height);
-                           self.socialMediaContainerView.alpha = 0.0f;
+                             self.backButton.transform =
+                                 CGAffineTransformMakeTranslation(-self.backButton.center.x - roundf(self.backButton.frame.size.width / 2.0f), 0.0f);
+                             self.backButton.alpha = 0.0f;
+                             self.placeholderTextView.backgroundColor = [UIColor clearColor];
+                             self.placeholderTextView.userInteractionEnabled = NO;
+                             self.placeholderTextView.hidden = !(self.placeholderTextView.text.length > 0);
+                             self.socialMediaContainerView.transform = CGAffineTransformMakeTranslation(0.0f, self.socialMediaContainerView.frame.size.height);
+                             self.socialMediaContainerView.alpha = 0.0f;
 
-                           self.shareButton.layer.borderColor = [UIColor clearColor].CGColor;
-                           self.shareButton.layer.borderWidth = 0.0f;
-                           self.shareButton.backgroundColor = [UIColor greenColorWithAlpha:1.0f];
+                             self.shareButton.layer.borderColor = [UIColor clearColor].CGColor;
+                             self.shareButton.layer.borderWidth = 0.0f;
+                             self.shareButton.backgroundColor = [UIColor greenColorWithAlpha:1.0f];
 
-                           NSMutableAttributedString *shareButtonAttrString =
-                               [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"D-D-DONE!", @"").uppercaseString];
-                           [shareButtonAttrString addAttribute:NSKernAttributeName
-                                                         value:[NSNumber numberWithInteger:2]
-                                                         range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
-                           [shareButtonAttrString addAttribute:NSForegroundColorAttributeName
-                                                         value:[UIColor whiteColor]
-                                                         range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
-                           [self.shareButton setAttributedTitle:shareButtonAttrString forState:UIControlStateNormal];
+                             NSMutableAttributedString *shareButtonAttrString =
+                                 [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"D-D-DONE!", @"").uppercaseString];
+                             [shareButtonAttrString addAttribute:NSKernAttributeName
+                                                           value:[NSNumber numberWithInteger:2]
+                                                           range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
+                             [shareButtonAttrString addAttribute:NSForegroundColorAttributeName
+                                                           value:[UIColor whiteColor]
+                                                           range:[shareButtonAttrString.string rangeOfString:shareButtonAttrString.string]];
+                             [self.shareButton setAttributedTitle:shareButtonAttrString forState:UIControlStateNormal];
 
-                           self.shareButton.userInteractionEnabled = YES;
+                             self.shareButton.userInteractionEnabled = YES;
 
                          }
                          completion:nil];
@@ -349,25 +360,24 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         [self.videoEditor exportVideo:asset
                               overlay:self.overlayImage
                             completed:^(BOOL success) {
-                              NSString *title = @"";
-                              if (success) {
-                                  // Share video here
-                                  title = NSLocalizedString(@"Saved to your camera roll!", @"").uppercaseString;
+                                NSString *title = @"";
+                                if (success) {
+                                    // Share video here
+                                    title = NSLocalizedString(@"Saved to your camera roll!", @"").uppercaseString;
 
-                                  // The video with the overlay on
-                                  NSData *videoData = [NSData dataWithContentsOfURL:self.videoEditor.urlOfVideoInCameraRoll];
-                                  // Post the video on the social networks selected
-                                  // @TODO We could make this a bit cleaner
-                                  [self postVideoOnSelectedSocialNetworks:videoData];
+                                    // The video with the overlay on
+                                    NSData *videoData = [NSData dataWithContentsOfURL:self.videoEditor.urlOfVideoInCameraRoll];
+                                    // Post the video on the social networks selected
+                                    // @TODO We could make this a bit cleaner
+                                    [self postVideoOnSelectedSocialNetworks:videoData];
 
-                              } else {
-                                  title = NSLocalizedString(@"Error saving the video to your camera roll", @"").uppercaseString;
-                              }
-                              // Display the notification for 2 seconds
-                              notification.notificationLabel.text = title;
-                              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                [notification dismissNotification];
-                              });
+                                } else {
+                                    title = NSLocalizedString(@"Error saving the video to your camera roll", @"").uppercaseString;
+                                }
+                                // Display the notification for 2 seconds
+                                notification.notificationLabel.text = title;
+                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(),
+                                               ^{ [notification dismissNotification]; });
                             }];
     }
 }
@@ -421,11 +431,11 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
  */
 - (void)postImageOnSelectedSocialNetworks {
     // If the user activated Twitter, post it
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:TWITTER_SWITCH_VALUE]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
         [WKSocialNetworkHelper postTweetWithMessage:self.placeholderTextView.text andImage:[self editedImage]];
     }
     // If the user activated Facebook, post it
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:FACEBOOK_SWITCH_VALUE]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
         [WKSocialNetworkHelper postImageToFacebookWithMessage:self.placeholderTextView.text andImage:[self editedImage]];
     }
 }
@@ -435,7 +445,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
  */
 - (void)postVideoOnSelectedSocialNetworks:(NSData *)videoData {
     // If the user activated Facebook, post it
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:FACEBOOK_SWITCH_VALUE]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
         [WKSocialNetworkHelper postVideoToFacebookWithMessage:self.placeholderTextView.text andVideo:videoData];
     }
 }
