@@ -64,19 +64,21 @@
     // Do silent login if the user has logged on to Facebook before to validate the Facebook token, so they can post an image and video
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
         [SSFacebookHelper silentLogin:^() {
-          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
-          [[NSUserDefaults standardUserDefaults] synchronize];
-          // Setup state
-          [self setupAnimated:NO];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            // Setup state
+            [self setupRootViewController];
+
         } onFailure:^(NSError *error) {
-          [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
-          [[NSUserDefaults standardUserDefaults] synchronize];
-          // Setup state
-          [self setupAnimated:NO];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            // Setup state
+            [self setupRootViewController];
+
         }];
     } else {
         // Setup state
-        [self setupAnimated:NO];
+        [self setupRootViewController];
     }
 
     return YES;
@@ -98,7 +100,7 @@
 
 #pragma mark - Setup State
 
-- (void)setupAnimated:(BOOL)animated {
+- (void)setupRootViewController {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
         WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
         WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:cameraController];
@@ -114,7 +116,7 @@
 #pragma mark - Current User Changed
 
 - (void)currentUserChanged {
-    [self setupAnimated:YES];
+    [self setupRootViewController];
 }
 
 #pragma mark - Authorization Denied

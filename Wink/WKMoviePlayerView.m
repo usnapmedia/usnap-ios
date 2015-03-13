@@ -31,11 +31,11 @@
         self.player = [AVPlayer playerWithPlayerItem:playerItem];
         self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
         self.playerLayer.frame = self.bounds;
-        self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+//        self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         [self.layer addSublayer:self.playerLayer];
         
-        // Set the video's size
-        _videoSize = [((AVAssetTrack *)[asset.tracks filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"mediaType == %@", AVMediaTypeVideo]].lastObject) realSize];
+//        // Set the video's size
+//        _videoSize = [((AVAssetTrack *)[asset.tracks filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"mediaType == %@", AVMediaTypeVideo]].lastObject) realSize];
         
         // Notification for when player finishes playing
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];

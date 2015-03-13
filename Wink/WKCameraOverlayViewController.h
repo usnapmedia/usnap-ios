@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *captureButton;
 @property (weak, nonatomic) IBOutlet UIButton *flashButton;
 @property (weak, nonatomic) IBOutlet UIButton *cameraDeviceButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewHeightConstraint;
 
 // Button Actions
 - (IBAction)mediaButtonTouched:(id)sender;
