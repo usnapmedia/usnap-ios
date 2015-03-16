@@ -30,10 +30,6 @@
 
     [self setLabels];
     [self setSliders];
-
-    // [self.brightnessSlider addTarget:self action:@selector(brightnessValueChanged:) forControlEvents:UIControlEventValueChanged];
-
-    // [self.contrastSlider addTarget:self action:@selector(contrastValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)setLabels {

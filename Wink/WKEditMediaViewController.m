@@ -49,7 +49,6 @@ typedef enum {
 @property(nonatomic) BOOL movingTextView;
 
 // Brightness & Contrast
-@property(strong, nonatomic) CIContext *filterContext;
 @property(weak, nonatomic) IBOutlet UIView *brightnessContainerView;
 @property(weak, nonatomic) IBOutlet UILabel *brightnessLabel;
 @property(weak, nonatomic) IBOutlet UILabel *contrastLabel;
@@ -132,9 +131,6 @@ typedef enum {
     self.textView = [[SSOEditMediaMovableTextView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.overlayView.frame.size.width, 70.0f)];
     self.textView.delegate = self;
     [self.overlayView insertSubview:self.textView belowSubview:self.watermarkImageView];
-
-    // Setup the brightness and contrast view
-    self.filterContext = [CIContext contextWithOptions:nil];
   
     self.brightnessContrastHelper = [[SSOBrightnessContrastHelper alloc] init];
     self.brightnessContrastHelper.imageViewToEdit = self.imageView;
@@ -398,28 +394,9 @@ typedef enum {
     }
 }
 
-#pragma mark - Filters Adjustments
-
-- (void)adjustFilters {
-    CGFloat brightnessValue = self.brightnessSlider.value / self.brightnessSlider.maximumValue;
-    CGFloat contrastValue = self.contrastSlider.value / 40.0f;
-
-    CIImage *filteredImage = [[CIImage alloc] initWithCGImage:self.image.CGImage options:nil];
-    CIFilter *filter = [CIFilter filterWithName:@"CIColorControls"];
-    [filter setValue:filteredImage forKey:@"inputImage"];
-    [filter setValue:[NSNumber numberWithFloat:brightnessValue] forKey:kCIInputBrightnessKey];
-    [filter setValue:[NSNumber numberWithFloat:contrastValue] forKey:kCIInputContrastKey];
-    CIImage *outputImage = filter.outputImage;
-    CGImageRef imageRef = [self.filterContext createCGImage:outputImage fromRect:outputImage.extent];
-    UIImage *newImage = [UIImage imageWithCGImage:imageRef scale:self.image.scale orientation:self.image.imageOrientation];
-    self.modifiedImageView.image = newImage;
-    CGImageRelease(imageRef);
-}
-
 #pragma mark - Crop Image
 
 - (void)cropImage {
-    // self.modifiedImageView.image = [self.imageCropperView editedImage];
     self.modifiedImageView.image = self.imageCropperView.croppedImage;
 }
 
@@ -433,14 +410,6 @@ typedef enum {
     [self.drawView undoLatestStep];
 
     [self updateUI];
-}
-
-- (IBAction)brightnessValueChanged:(id)sender {
-    [self adjustFilters];
-}
-
-- (IBAction)contrastValueChanged:(id)sender {
-    [self adjustFilters];
 }
 
 - (IBAction)confirmCropButtonTouched:(id)sender {
