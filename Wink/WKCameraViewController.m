@@ -14,18 +14,27 @@
 #import "WKEditMediaViewController.h"
 
 @interface WKCameraViewController ()
+
 @property(nonatomic, strong) WKCameraOverlayViewController *cameraOverlayController;
 @property(nonatomic) CGSize screenSize;
+
 @end
 
 @implementation WKCameraViewController
 
 #pragma mark - View Methods
 
+- (void)takePhoto:(id)sender {
+    [self.photoCamera takePicture];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.screenSize = [[UIScreen mainScreen] bounds].size;
+
+    // Initialize photo camera
+    [self initializeFastCamera];
 
     // Setup the camera view
     self.cameraImagePickerController = [[WKImagePickerController alloc] init];
@@ -55,42 +64,23 @@
     [self presentViewController:self.cameraImagePickerController animated:NO completion:nil];
 }
 
-#pragma mark - Image Picker Methods
+#pragma mark - Utilities
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    UIImage *image = nil;
-    NSURL *mediaURL = nil;
+- (void)initializeFastCamera {
+    self.photoCamera = [FastttCamera new];
+    self.photoCamera.delegate = self;
 
-    // Image
-    if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeImage)) {
-        image = [info objectForKey:UIImagePickerControllerEditedImage];
-        if (image == nil) {
-            image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        }
+    self.photoCamera.maxScaledDimension = 600.f;
 
-        // Edit the selected media
-        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
-        controller.image = image;
-        controller.mediaURL = mediaURL;
-        [self.cameraImagePickerController pushViewController:controller animated:YES];
-    }
-    // Video
-    else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
-        mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
-        if (mediaURL == nil) {
-            mediaURL = [info objectForKey:UIImagePickerControllerReferenceURL];
-        }
-
-        [self cropVideo:mediaURL];
-    }
-
-    // Dismiss the media picker
-    if (picker != self.cameraImagePickerController) {
-        [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
+    [self fastttAddChildViewController:self.photoCamera];
+    self.photoCamera.view.frame = self.view.frame;
 }
 
+/**
+ *  Crop video into a square
+ *
+ *  @param mediaURL file location for video
+ */
 - (void)cropVideo:(NSURL *)mediaURL {
     AVAssetExportSession *exporter;
 
@@ -108,7 +98,7 @@
 
     // create a video instruction
     AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30));
+    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(30, 30));
 
     AVMutableVideoCompositionLayerInstruction *transformer =
         [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:clipVideoTrack];
@@ -120,7 +110,7 @@
 
     float offset = (self.cameraOverlayController.topViewHeightConstraint.constant * self.screenSize.height * 3) / 568;
 
-    // Use this code if you want the viewing square to be in the middle of the video
+    // Use this code if you want the viewing square to be below the black top bar
     CGAffineTransform t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height, -offset);
 
     // Make sure the square is portrait
@@ -141,7 +131,7 @@
     // Remove any prevouis videos at that path
     [[NSFileManager defaultManager] removeItemAtURL:exportUrl error:nil];
 
-    // Export
+    // Export square video
     exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
     exporter.videoComposition = videoComposition;
     exporter.outputURL = exportUrl;
@@ -158,12 +148,49 @@
     }];
 }
 
+#pragma mark - Image Picker Methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    NSURL *mediaURL = nil;
+
+    if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
+        mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
+        if (mediaURL == nil) {
+            mediaURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+        }
+
+        [self cropVideo:mediaURL];
+    }
+
+    // Dismiss the media picker
+    if (picker != self.cameraImagePickerController) {
+        [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 
     // Dismis the media picker
     if (picker != self.cameraImagePickerController) {
         [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+#pragma mark - IFTTTFastttCameraDelegate
+
+- (void)cameraController:(FastttCamera *)cameraController didFinishCapturingImage:(FastttCapturedImage *)capturedImage {
+    // Edit the selected media
+    WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+    controller.image = capturedImage.fullImage;
+    [self.cameraImagePickerController pushViewController:controller animated:YES];
+}
+
+- (void)cameraController:(id<FastttCameraInterface>)cameraController didFinishNormalizingCapturedImage:(FastttCapturedImage *)capturedImage {
+    // Edit the selected media
+    WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+    controller.image = capturedImage.fullImage;
+    [self.cameraImagePickerController pushViewController:controller animated:YES];
 }
 
 #pragma mark - Button Actions

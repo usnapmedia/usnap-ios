@@ -14,6 +14,7 @@ pod 'CWStatusBarNotification'
 pod 'Facebook-iOS-SDK'
 pod 'PonyDebugger'
 pod 'SSFacebookHelper'
+pod "FastttCamera"
 
 # Samsao libraries
 

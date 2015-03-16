@@ -17,8 +17,9 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+
     [super viewWillDisappear:animated];
-    
+
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 }
 
@@ -29,5 +30,10 @@
 - (BOOL)shouldAutorotate {
     return NO;
 }
+
+-(void)dismiss {
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
 
 @end

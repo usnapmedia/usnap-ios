@@ -155,6 +155,13 @@
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
+		CB7E40161AB77CFC00CAACFA /* UIStoryboard+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E40151AB77CFC00CAACFA /* UIStoryboard+USnap.m */; };
+		CB7E40191AB7806F00CAACFA /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB7E40181AB7806F00CAACFA /* Camera.storyboard */; };
+		CB7E401C1AB782CF00CAACFA /* SSOContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E401B1AB782CF00CAACFA /* SSOContainerViewController.m */; };
+		CB7E401F1AB7844800CAACFA /* SSOPhotoContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E401E1AB7844800CAACFA /* SSOPhotoContainerViewController.m */; };
+		CB7E40221AB7845E00CAACFA /* SSOVideoContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E40211AB7845E00CAACFA /* SSOVideoContainerViewController.m */; };
+		CBBEB8A61AB7870E00FEDAC9 /* SSStoryboardConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBEB8A51AB7870E00FEDAC9 /* SSStoryboardConstants.m */; };
+		CBBEB8A91AB7895B00FEDAC9 /* SSOCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBEB8A81AB7895B00FEDAC9 /* SSOCameraViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -349,6 +356,19 @@
 		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB0B89041A8A8FA9005E6869 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		CB0B89051A8A8FA9005E6869 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		CB7E40141AB77CFC00CAACFA /* UIStoryboard+USnap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+USnap.h"; sourceTree = "<group>"; };
+		CB7E40151AB77CFC00CAACFA /* UIStoryboard+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+USnap.m"; sourceTree = "<group>"; };
+		CB7E40181AB7806F00CAACFA /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Camera.storyboard; path = Controllers/Camera/Camera.storyboard; sourceTree = "<group>"; };
+		CB7E401A1AB782CF00CAACFA /* SSOContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOContainerViewController.h; path = Controllers/Camera/SSOContainerViewController.h; sourceTree = "<group>"; };
+		CB7E401B1AB782CF00CAACFA /* SSOContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOContainerViewController.m; path = Controllers/Camera/SSOContainerViewController.m; sourceTree = "<group>"; };
+		CB7E401D1AB7844800CAACFA /* SSOPhotoContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOPhotoContainerViewController.h; path = Controllers/Camera/SSOPhotoContainerViewController.h; sourceTree = "<group>"; };
+		CB7E401E1AB7844800CAACFA /* SSOPhotoContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOPhotoContainerViewController.m; path = Controllers/Camera/SSOPhotoContainerViewController.m; sourceTree = "<group>"; };
+		CB7E40201AB7845E00CAACFA /* SSOVideoContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOVideoContainerViewController.h; path = Controllers/Camera/SSOVideoContainerViewController.h; sourceTree = "<group>"; };
+		CB7E40211AB7845E00CAACFA /* SSOVideoContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOVideoContainerViewController.m; path = Controllers/Camera/SSOVideoContainerViewController.m; sourceTree = "<group>"; };
+		CBBEB8A41AB7870E00FEDAC9 /* SSStoryboardConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSStoryboardConstants.h; path = "Supporting Files/SSStoryboardConstants.h"; sourceTree = "<group>"; };
+		CBBEB8A51AB7870E00FEDAC9 /* SSStoryboardConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSStoryboardConstants.m; path = "Supporting Files/SSStoryboardConstants.m"; sourceTree = "<group>"; };
+		CBBEB8A71AB7895B00FEDAC9 /* SSOCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOCameraViewController.h; path = Controllers/Camera/SSOCameraViewController.h; sourceTree = "<group>"; };
+		CBBEB8A81AB7895B00FEDAC9 /* SSOCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOCameraViewController.m; path = Controllers/Camera/SSOCameraViewController.m; sourceTree = "<group>"; };
 		EAE311565BE99D01341CE159 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -424,6 +444,8 @@
 			children = (
 				1F2C62A11A8E52320038868F /* UIImage+Resizing.h */,
 				1F2C62A21A8E52320038868F /* UIImage+Resizing.m */,
+				CB7E40141AB77CFC00CAACFA /* UIStoryboard+USnap.h */,
+				CB7E40151AB77CFC00CAACFA /* UIStoryboard+USnap.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -514,6 +536,8 @@
 				270DFB0019AE71BE00067072 /* main.m */,
 				CB0B89041A8A8FA9005E6869 /* Constants.h */,
 				CB0B89051A8A8FA9005E6869 /* Constants.m */,
+				CBBEB8A41AB7870E00FEDAC9 /* SSStoryboardConstants.h */,
+				CBBEB8A51AB7870E00FEDAC9 /* SSStoryboardConstants.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -733,6 +757,15 @@
 				27DF7E4C19AF860E00F970AF /* WKCameraOverlayViewController.m */,
 				27DF7E4D19AF860E00F970AF /* WKCameraOverlayViewController.xib */,
 				2716CB0819C75DBE00FC226A /* WKCameraOverlayViewController_iPad.xib */,
+				CBBEB8A71AB7895B00FEDAC9 /* SSOCameraViewController.h */,
+				CBBEB8A81AB7895B00FEDAC9 /* SSOCameraViewController.m */,
+				CB7E401A1AB782CF00CAACFA /* SSOContainerViewController.h */,
+				CB7E401B1AB782CF00CAACFA /* SSOContainerViewController.m */,
+				CB7E401D1AB7844800CAACFA /* SSOPhotoContainerViewController.h */,
+				CB7E401E1AB7844800CAACFA /* SSOPhotoContainerViewController.m */,
+				CB7E40201AB7845E00CAACFA /* SSOVideoContainerViewController.h */,
+				CB7E40211AB7845E00CAACFA /* SSOVideoContainerViewController.m */,
+				CB7E40181AB7806F00CAACFA /* Camera.storyboard */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -880,6 +913,7 @@
 			buildConfigurationList = 270DFB1D19AE71BE00067072 /* Build configuration list for PBXNativeTarget "Wink" */;
 			buildPhases = (
 				21D7DD86B8C55E58ECC8127E /* Check Pods Manifest.lock */,
+				CB7E40171AB77DF100CAACFA /* Generate Storyboard Identifiers */,
 				270DFAED19AE71BE00067072 /* Sources */,
 				270DFAEE19AE71BE00067072 /* Frameworks */,
 				270DFAEF19AE71BE00067072 /* Resources */,
@@ -989,6 +1023,7 @@
 				274CD89419D1C17A00E14713 /* drawIconBorder@2x.png in Resources */,
 				274CD89319D1C17A00E14713 /* drawIconBorder.png in Resources */,
 				2716CAE519C75D2B00FC226A /* textButtonIcon_iPad@2x.png in Resources */,
+				CB7E40191AB7806F00CAACFA /* Camera.storyboard in Resources */,
 				2716CAC719C74C6900FC226A /* WKLoginViewController_iPad.xib in Resources */,
 				2716CAF719C75D4B00FC226A /* cameraFlashButtonOFF_iPad.png in Resources */,
 				2716CA8E19C0AC0B00FC226A /* captureButtonIcon@2x.png in Resources */,
@@ -1116,6 +1151,23 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CB7E40171AB77DF100CAACFA /* Generate Storyboard Identifiers */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Wink/Controllers/Camera/Camera.storyboard",
+			);
+			name = "Generate Storyboard Identifiers";
+			outputPaths = (
+				"$(PROJECT_DIR)/Wink/Supporting Files/SSStoryboardConstants.h",
+				"$(PROJECT_DIR)/Wink/Supporting Files/SSStoryboardConstants.m",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "python \"${PROJECT_DIR}/scripts/generate_storyboard_constants.py\" \"${SCRIPT_OUTPUT_FILE_0}\" \"${SCRIPT_OUTPUT_FILE_1}\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1127,17 +1179,22 @@
 				270DFB2B19AE724500067072 /* WKLoginViewController.m in Sources */,
 				2716CB1019C880B900FC226A /* WKImagePickerController.m in Sources */,
 				1F2C629F1A8E508A0038868F /* SSOFacebookLoginButton.m in Sources */,
+				CB7E40161AB77CFC00CAACFA /* UIStoryboard+USnap.m in Sources */,
 				27DF7E4E19AF860E00F970AF /* WKCameraOverlayViewController.m in Sources */,
 				270DFB2719AE721100067072 /* WKViewController.m in Sources */,
 				1F2C62A31A8E52320038868F /* UIImage+Resizing.m in Sources */,
 				1F2C62981A8E501F0038868F /* WKSettingSocialTableViewCell.m in Sources */,
+				CBBEB8A91AB7895B00FEDAC9 /* SSOCameraViewController.m in Sources */,
 				270DFB0519AE71BE00067072 /* WKAppDelegate.m in Sources */,
 				27AA325E19B8CCAE00558D7E /* UIView+WKAdditions.m in Sources */,
 				27017DC719DDEFDA0011ECCC /* AVAssetTrack+WKAdditions.m in Sources */,
+				CB7E401F1AB7844800CAACFA /* SSOPhotoContainerViewController.m in Sources */,
 				27AA328719BDF21B00558D7E /* WKShareViewController.m in Sources */,
+				CBBEB8A61AB7870E00FEDAC9 /* SSStoryboardConstants.m in Sources */,
 				27AA325B19B8B06A00558D7E /* UIColor+WKAdditions.m in Sources */,
 				270DFB0119AE71BE00067072 /* main.m in Sources */,
 				27DF7EB419AFB52800F970AF /* WKCameraViewController.m in Sources */,
+				CB7E401C1AB782CF00CAACFA /* SSOContainerViewController.m in Sources */,
 				27017DC019DCA4460011ECCC /* WKVideoEditor.m in Sources */,
 				27AA323F19B78F8300558D7E /* NSDictionary+WKAdditions.m in Sources */,
 				7B650E841A8D3E690060458E /* WKSocialNetworkHelper.m in Sources */,
@@ -1150,6 +1207,7 @@
 				27AA325819B8AF8B00558D7E /* UIFont+WKAdditions.m in Sources */,
 				27DF7E4A19AF802300F970AF /* WKUser.m in Sources */,
 				270DFB2F19AE72AD00067072 /* WKNavigationController.m in Sources */,
+				CB7E40221AB7845E00CAACFA /* SSOVideoContainerViewController.m in Sources */,
 				27AA323C19B78CB700558D7E /* UIAlertView+Blocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,13 +8,14 @@
 
 #import "WKViewController.h"
 #import "WKImagePickerController.h"
+#import "FastttCamera.h"
 
-@interface WKCameraViewController : WKViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
-    
+@interface WKCameraViewController : WKViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, FastttCameraDelegate> {
 }
 
 // Camera controller
-@property (nonatomic, strong) WKImagePickerController *cameraImagePickerController;
+@property(nonatomic, strong) WKImagePickerController *cameraImagePickerController;
+@property(nonatomic, strong) FastttCamera *photoCamera;
 
 // Button Actions
 - (void)presentMediaPickerControllerAnimated:(BOOL)animated completed:(void (^)(void))completionBlock;

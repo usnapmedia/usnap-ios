@@ -24,3 +24,16 @@ NSString *const kTumblrSwitchValue = @"TumblSwitchValue";
 NSString *const kInstagramSwitchValue = @"InstagramSwitchValue";
 NSString *const kIsFacebookLoggedIn = @"kIsFacebookLoggedIn";
 NSString *const kTwitterAccountName = @"kTwitterAccountName";
+
+#pragma mark - NSUserDefaults
+
+NSString *const kIsCameraRearFacing = @"kIsCameraRearFacing";
+NSString *const kIsFlashOn = @"kIsFlashOn";
+
+#pragma mark - Storyboard
+
+NSString *const kCameraStoryboard = @"Camera";
+
+#pragma mark - Segue
+
+NSString *const kCameraContainerSegue = @"CAMERA_CONTAINER_SEGUE";

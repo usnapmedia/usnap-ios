@@ -24,3 +24,18 @@ extern NSString *const kTumblrSwitchValue;
 extern NSString *const kInstagramSwitchValue;
 extern NSString *const kTwitterAccountName;
 extern NSString *const kIsFacebookLoggedIn;
+
+#pragma mark - NSUserDefaults
+
+extern NSString *const kIsCameraRearFacing;
+extern NSString *const kIsFlashOn;
+
+#pragma mark - Storyboard
+
+extern NSString *const kCameraStoryboard;
+
+#pragma mark - Segue
+
+extern NSString *const kCameraContainerSegue;
+
+#define kScreenSize [UIScreen mainScreen].bounds.size
