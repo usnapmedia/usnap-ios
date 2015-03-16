@@ -12,7 +12,7 @@
 #import "WKShareViewController.h"
 #import "WKColorPickerView.h"
 #import "YKImageCropperView.h"
-#import <PECropView.h>
+#import <PECropViewController.h>
 #import <Masonry.h>
 #import "SSOEditMediaMovableTextView.h"
 
@@ -28,7 +28,7 @@ typedef enum {
     WKEditMediaViewControllerEditTypeCrop
 } WKEditMediaViewControllerEditType;
 
-@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, ACEDrawingViewDelegate>
+@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, ACEDrawingViewDelegate, PECropViewControllerDelegate>
 @property(nonatomic) WKEditMediaViewControllerEditType editType;
 
 // Media
@@ -61,8 +61,12 @@ typedef enum {
 @property(weak, nonatomic) IBOutlet UIButton *cancelCropButton;
 @property(strong, nonatomic) UIView *imageCropperContainerView;
 //@property(strong, nonatomic) YKImageCropperView *imageCropperView;
-@property(strong, nonatomic) PECropView *imageCropperView;
+@property(strong, nonatomic) PECropViewController *imageCropperView;
 @property(weak, nonatomic) IBOutlet UIView *cropViewFrameView;
+
+// Containers
+
+@property(strong, nonatomic) BrightnessContrastSlidersView *containerView;
 
 // Helper
 @property(strong, nonatomic) SSOBrightnessContrastHelper *brightnessContrastHelper;
@@ -88,12 +92,12 @@ typedef enum {
         self.imageView.image = self.image;
         [self.view insertSubview:self.imageView atIndex:0];
 
-        //        self.modifiedImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-        //        self.modifiedImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        //        self.modifiedImageView.contentMode = UIViewContentModeScaleAspectFill;
-        //        self.modifiedImageView.clipsToBounds = YES;
-        //        self.modifiedImageView.image = self.image;
-        //        [self.view insertSubview:self.modifiedImageView atIndex:1];
+        //                self.modifiedImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+        //                self.modifiedImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        //                self.modifiedImageView.contentMode = UIViewContentModeScaleAspectFill;
+        //                self.modifiedImageView.clipsToBounds = YES;
+        //                self.modifiedImageView.image = self.image;
+        //                [self.view insertSubview:self.modifiedImageView atIndex:1];
     }
     // Setup the movie player view
     else {
@@ -131,7 +135,22 @@ typedef enum {
     self.textView = [[SSOEditMediaMovableTextView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.overlayView.frame.size.width, 70.0f)];
     self.textView.delegate = self;
     [self.overlayView insertSubview:self.textView belowSubview:self.watermarkImageView];
-  
+
+    [self initBrightnessAndContrastUI];
+
+    // Setup the image cropper view
+    self.imageCropperContainerView = [[UIView alloc] initWithFrame:self.view.bounds];
+    self.imageCropperContainerView.backgroundColor = [UIColor blackColor];
+    self.imageCropperContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view insertSubview:self.imageCropperContainerView aboveSubview:self.overlayView];
+
+    self.cropContainerView.backgroundColor = [UIColor clearColor];
+
+    // Update the UI
+    [self updateUI];
+}
+
+- (void)initBrightnessAndContrastUI {
     self.brightnessContrastHelper = [[SSOBrightnessContrastHelper alloc] init];
     self.brightnessContrastHelper.imageViewToEdit = self.imageView;
     self.brightnessContrastHelper.imageToEdit = self.image;
@@ -146,34 +165,6 @@ typedef enum {
     [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
       make.edges.equalTo(self.brightnessContainerView);
     }];
-
-    // Setup the image cropper view
-    self.imageCropperContainerView = [[UIView alloc] initWithFrame:self.view.bounds];
-    self.imageCropperContainerView.backgroundColor = [UIColor blackColor];
-    self.imageCropperContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view insertSubview:self.imageCropperContainerView aboveSubview:self.overlayView];
-
-    //  self.imageCropperView = [[YKImageCropperView alloc] initWithFrame:CGRectMake(0.0f, self.isPhone ? 60.0f : 100.0f, self.view.frame.size.width,
-    //  self.view.frame.size.height - (self.isPhone ? 180.0f : 260.0f))];
-    self.imageCropperView = [[PECropView alloc] initWithFrame:self.cropViewFrameView.frame];
-    // self.imageCropperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.cropViewFrameView addSubview:self.imageCropperView];
-
-    self.cropContainerView.backgroundColor = [UIColor clearColor];
-    [self.confirmCropButton setTitle:NSLocalizedString(@"Crop", @"") forState:UIControlStateNormal];
-    self.confirmCropButton.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.confirmCropButton.layer.shadowOpacity = 0.75f;
-    self.confirmCropButton.layer.shadowRadius = 1.0f;
-    self.confirmCropButton.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-
-    [self.cancelCropButton setTitle:NSLocalizedString(@"Cancel", @"") forState:UIControlStateNormal];
-    self.cancelCropButton.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.cancelCropButton.layer.shadowOpacity = 0.75f;
-    self.cancelCropButton.layer.shadowRadius = 1.0f;
-    self.cancelCropButton.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-
-    // Update the UI
-    [self updateUI];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -397,7 +388,7 @@ typedef enum {
 #pragma mark - Crop Image
 
 - (void)cropImage {
-    self.modifiedImageView.image = self.imageCropperView.croppedImage;
+    // self.modifiedImageView.image = self.imageCropperView.croppedImage;
 }
 
 #pragma mark - Button Actions
@@ -450,6 +441,24 @@ typedef enum {
 }
 
 - (IBAction)cropButtonTouched:(id)sender {
+
+    self.imageCropperView = [[PECropViewController alloc] init];
+    self.imageCropperView.delegate = self;
+    self.imageCropperView.image = self.imageView.image;
+
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.imageCropperView];
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+
+    [self presentViewController:navigationController animated:YES completion:nil];
+    //
+    //    WKEditMediaViewControllerEditType type = WKEditMediaViewControllerEditTypeCrop;
+    //    if (self.editType == WKEditMediaViewControllerEditTypeCrop) {
+    //        type = WKEditMediaViewControllerEditTypeNone;
+    //    }
+    //    self.editType = type;
 }
 
 - (IBAction)postButtonTouched:(id)sender {
@@ -495,6 +504,15 @@ typedef enum {
 
 - (IBAction)backButtonTouched:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)cropViewControllerDidCancel:(PECropViewController *)controller {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage {
+
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
