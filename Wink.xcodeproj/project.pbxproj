@@ -139,8 +139,6 @@
 		27AA32AC19BE35B500558D7E /* drawIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27AA32A019BE35B500558D7E /* drawIcon@2x.png */; };
 		27AA32AD19BE35B500558D7E /* sliderBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 27AA32A119BE35B500558D7E /* sliderBar.png */; };
 		27AA32AE19BE35B500558D7E /* sliderBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27AA32A219BE35B500558D7E /* sliderBar@2x.png */; };
-		27AA32AF19BE35B500558D7E /* sliderCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 27AA32A319BE35B500558D7E /* sliderCircle.png */; };
-		27AA32B019BE35B500558D7E /* sliderCircle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27AA32A419BE35B500558D7E /* sliderCircle@2x.png */; };
 		27AA32B119BE35B500558D7E /* textIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 27AA32A519BE35B500558D7E /* textIcon.png */; };
 		27AA32B219BE35B500558D7E /* textIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27AA32A619BE35B500558D7E /* textIcon@2x.png */; };
 		27AA32B519BE3B7800558D7E /* WKColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AA32B419BE3B7800558D7E /* WKColorPickerView.m */; };
@@ -149,12 +147,18 @@
 		27DF7E4F19AF860E00F970AF /* WKCameraOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DF7E4D19AF860E00F970AF /* WKCameraOverlayViewController.xib */; };
 		27DF7EB419AFB52800F970AF /* WKCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DF7EB219AFB52800F970AF /* WKCameraViewController.m */; };
 		27DF7EB519AFB52800F970AF /* WKCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */; };
+		7B3F105E1AB73D5A00D0A6B2 /* BrightnessContrastSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F105D1AB73D5A00D0A6B2 /* BrightnessContrastSliderView.xib */; };
+		7B3F10611AB740FB00D0A6B2 /* BrightnessContrastSlidersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F10601AB740FB00D0A6B2 /* BrightnessContrastSlidersView.m */; };
+		7B3F10661AB7446800D0A6B2 /* SSOAccessoryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F10651AB7446800D0A6B2 /* SSOAccessoryHelper.m */; };
+		7B3F10691AB745DD00D0A6B2 /* SSOBrightnessContrastHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F10681AB745DD00D0A6B2 /* SSOBrightnessContrastHelper.m */; };
+		7B3F106C1AB749AD00D0A6B2 /* NSBundle+SSOHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F106B1AB749AD00D0A6B2 /* NSBundle+SSOHelper.m */; };
 		7B650E781A8BDD360060458E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B89051A8A8FA9005E6869 /* Constants.m */; };
 		7B650E7D1A8C0E7A0060458E /* SettingsSocialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B650E7C1A8C0E7A0060458E /* SettingsSocialCell.xib */; };
 		7B650E841A8D3E690060458E /* WKSocialNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B650E831A8D3E690060458E /* WKSocialNetworkHelper.m */; };
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
+		7BCD1C3F1AB7801800F962F5 /* SSOEditMediaMovableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD1C3E1AB7801800F962F5 /* SSOEditMediaMovableTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -325,8 +329,6 @@
 		27AA32A019BE35B500558D7E /* drawIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawIcon@2x.png"; sourceTree = "<group>"; };
 		27AA32A119BE35B500558D7E /* sliderBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderBar.png; sourceTree = "<group>"; };
 		27AA32A219BE35B500558D7E /* sliderBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderBar@2x.png"; sourceTree = "<group>"; };
-		27AA32A319BE35B500558D7E /* sliderCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderCircle.png; sourceTree = "<group>"; };
-		27AA32A419BE35B500558D7E /* sliderCircle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderCircle@2x.png"; sourceTree = "<group>"; };
 		27AA32A519BE35B500558D7E /* textIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textIcon.png; sourceTree = "<group>"; };
 		27AA32A619BE35B500558D7E /* textIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textIcon@2x.png"; sourceTree = "<group>"; };
 		27AA32B319BE3B7800558D7E /* WKColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKColorPickerView.h; sourceTree = "<group>"; };
@@ -340,12 +342,23 @@
 		27DF7EB219AFB52800F970AF /* WKCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCameraViewController.m; sourceTree = "<group>"; };
 		27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKCameraViewController.xib; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		7B3F105D1AB73D5A00D0A6B2 /* BrightnessContrastSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BrightnessContrastSliderView.xib; path = XIB/Views/BrightnessContrastSliderView.xib; sourceTree = "<group>"; };
+		7B3F105F1AB740FB00D0A6B2 /* BrightnessContrastSlidersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BrightnessContrastSlidersView.h; path = "Media Editing/Filters/BrightnessContrastSlidersView.h"; sourceTree = "<group>"; };
+		7B3F10601AB740FB00D0A6B2 /* BrightnessContrastSlidersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BrightnessContrastSlidersView.m; path = "Media Editing/Filters/BrightnessContrastSlidersView.m"; sourceTree = "<group>"; };
+		7B3F10641AB7446800D0A6B2 /* SSOAccessoryHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOAccessoryHelper.h; path = Helpers/Filters/SSOAccessoryHelper.h; sourceTree = "<group>"; };
+		7B3F10651AB7446800D0A6B2 /* SSOAccessoryHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOAccessoryHelper.m; path = Helpers/Filters/SSOAccessoryHelper.m; sourceTree = "<group>"; };
+		7B3F10671AB745DD00D0A6B2 /* SSOBrightnessContrastHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOBrightnessContrastHelper.h; path = Helpers/Filters/SSOBrightnessContrastHelper.h; sourceTree = "<group>"; };
+		7B3F10681AB745DD00D0A6B2 /* SSOBrightnessContrastHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOBrightnessContrastHelper.m; path = Helpers/Filters/SSOBrightnessContrastHelper.m; sourceTree = "<group>"; };
+		7B3F106A1AB749AD00D0A6B2 /* NSBundle+SSOHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSBundle+SSOHelper.h"; path = "../Helpers/NSBundle+SSOHelper.h"; sourceTree = "<group>"; };
+		7B3F106B1AB749AD00D0A6B2 /* NSBundle+SSOHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+SSOHelper.m"; path = "../Helpers/NSBundle+SSOHelper.m"; sourceTree = "<group>"; };
 		7B650E7C1A8C0E7A0060458E /* SettingsSocialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsSocialCell.xib; sourceTree = "<group>"; };
 		7B650E821A8D3E690060458E /* WKSocialNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKSocialNetworkHelper.h; sourceTree = "<group>"; };
 		7B650E831A8D3E690060458E /* WKSocialNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSocialNetworkHelper.m; sourceTree = "<group>"; };
 		7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		7B964EB71A8ABC3C00E181C2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		7BCD1C3D1AB7801800F962F5 /* SSOEditMediaMovableTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOEditMediaMovableTextView.h; path = TextView/SSOEditMediaMovableTextView.h; sourceTree = "<group>"; };
+		7BCD1C3E1AB7801800F962F5 /* SSOEditMediaMovableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOEditMediaMovableTextView.m; path = TextView/SSOEditMediaMovableTextView.m; sourceTree = "<group>"; };
 		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB0B89041A8A8FA9005E6869 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		CB0B89051A8A8FA9005E6869 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
@@ -393,6 +406,7 @@
 		1F2C62931A8E501F0038868F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7BCD1C3C1AB77FDA00F962F5 /* TextView */,
 				1F2C629C1A8E507F0038868F /* Button */,
 				1F2C62951A8E501F0038868F /* Cell */,
 			);
@@ -424,6 +438,8 @@
 			children = (
 				1F2C62A11A8E52320038868F /* UIImage+Resizing.h */,
 				1F2C62A21A8E52320038868F /* UIImage+Resizing.m */,
+				7B3F106A1AB749AD00D0A6B2 /* NSBundle+SSOHelper.h */,
+				7B3F106B1AB749AD00D0A6B2 /* NSBundle+SSOHelper.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -487,12 +503,13 @@
 			isa = PBXGroup;
 			children = (
 				1F2C62A01A8E52230038868F /* Categories */,
+				270DFB2319AE71F600067072 /* Controllers */,
+				7B3F10621AB7440300D0A6B2 /* Helpers */,
 				27017DBD19DCA41F0011ECCC /* Video Editing */,
 				27AA31FC19B772CE00558D7E /* Networking */,
 				2743316E19B76042003334BB /* Additions */,
 				2743316919B64858003334BB /* Custom UI */,
 				27DF7E4719AF801100F970AF /* User */,
-				270DFB2319AE71F600067072 /* Controllers */,
 				1F2C62931A8E501F0038868F /* Views */,
 				7B650E7A1A8C0DB30060458E /* XIB */,
 				270DFB0319AE71BE00067072 /* WKAppDelegate.h */,
@@ -666,6 +683,7 @@
 		2743316119B64128003334BB /* Media Editing */ = {
 			isa = PBXGroup;
 			children = (
+				7B3F105B1AB73C8200D0A6B2 /* Filters */,
 				2743316219B6413F003334BB /* WKEditMediaViewController.h */,
 				2743316319B6413F003334BB /* WKEditMediaViewController.m */,
 				2743316419B6413F003334BB /* WKEditMediaViewController.xib */,
@@ -829,8 +847,6 @@
 				274CD89219D1C17A00E14713 /* drawIconBorder@2x.png */,
 				27AA32A119BE35B500558D7E /* sliderBar.png */,
 				27AA32A219BE35B500558D7E /* sliderBar@2x.png */,
-				27AA32A319BE35B500558D7E /* sliderCircle.png */,
-				27AA32A419BE35B500558D7E /* sliderCircle@2x.png */,
 				27AA32A519BE35B500558D7E /* textIcon.png */,
 				27AA32A619BE35B500558D7E /* textIcon@2x.png */,
 			);
@@ -846,9 +862,46 @@
 			name = User;
 			sourceTree = "<group>";
 		};
+		7B3F105B1AB73C8200D0A6B2 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				7B3F105F1AB740FB00D0A6B2 /* BrightnessContrastSlidersView.h */,
+				7B3F10601AB740FB00D0A6B2 /* BrightnessContrastSlidersView.m */,
+			);
+			name = Filters;
+			sourceTree = "<group>";
+		};
+		7B3F105C1AB73D4600D0A6B2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7B3F105D1AB73D5A00D0A6B2 /* BrightnessContrastSliderView.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		7B3F10621AB7440300D0A6B2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7B3F10631AB7440F00D0A6B2 /* Filters */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		7B3F10631AB7440F00D0A6B2 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				7B3F10641AB7446800D0A6B2 /* SSOAccessoryHelper.h */,
+				7B3F10651AB7446800D0A6B2 /* SSOAccessoryHelper.m */,
+				7B3F10671AB745DD00D0A6B2 /* SSOBrightnessContrastHelper.h */,
+				7B3F10681AB745DD00D0A6B2 /* SSOBrightnessContrastHelper.m */,
+			);
+			name = Filters;
+			sourceTree = "<group>";
+		};
 		7B650E7A1A8C0DB30060458E /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				7B3F105C1AB73D4600D0A6B2 /* Views */,
 				7B650E7B1A8C0DC70060458E /* Cell */,
 			);
 			name = XIB;
@@ -861,6 +914,15 @@
 				1F2C62A41A8E880B0038868F /* SettingsSocialFakeCell.xib */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		7BCD1C3C1AB77FDA00F962F5 /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				7BCD1C3D1AB7801800F962F5 /* SSOEditMediaMovableTextView.h */,
+				7BCD1C3E1AB7801800F962F5 /* SSOEditMediaMovableTextView.m */,
+			);
+			name = TextView;
 			sourceTree = "<group>";
 		};
 		ED65896723BCE61EECA4D660 /* Pods */ = {
@@ -924,7 +986,7 @@
 				ORGANIZATIONNAME = Samsao;
 				TargetAttributes = {
 					270DFAF019AE71BE00067072 = {
-						DevelopmentTeam = QFTKNWRJGJ;
+						DevelopmentTeam = 8UQUNTB23H;
 					};
 					270DFB0B19AE71BE00067072 = {
 						DevelopmentTeam = 8UQUNTB23H;
@@ -987,6 +1049,7 @@
 				2716CAFA19C75D4B00FC226A /* cameraFlashButtonON_iPad@2x.png in Resources */,
 				27AA32AB19BE35B500558D7E /* drawIcon.png in Resources */,
 				274CD89419D1C17A00E14713 /* drawIconBorder@2x.png in Resources */,
+				7B3F105E1AB73D5A00D0A6B2 /* BrightnessContrastSliderView.xib in Resources */,
 				274CD89319D1C17A00E14713 /* drawIconBorder.png in Resources */,
 				2716CAE519C75D2B00FC226A /* textButtonIcon_iPad@2x.png in Resources */,
 				2716CAC719C74C6900FC226A /* WKLoginViewController_iPad.xib in Resources */,
@@ -997,7 +1060,6 @@
 				2716CAF619C75D4B00FC226A /* cameraDeviceButton_iPad@2x.png in Resources */,
 				2716CB0919C75DBE00FC226A /* WKCameraOverlayViewController_iPad.xib in Resources */,
 				2716CAE019C75D2B00FC226A /* drawButtonIcon_iPad.png in Resources */,
-				27AA32B019BE35B500558D7E /* sliderCircle@2x.png in Resources */,
 				2716CAFB19C75D4B00FC226A /* captureButton_iPad.png in Resources */,
 				2716CA8F19C0AC0B00FC226A /* flashButtonIconAUTO.png in Resources */,
 				2716CB0719C75D5E00FC226A /* backPurpleButtonIcon_iPad@2x.png in Resources */,
@@ -1056,7 +1118,6 @@
 				2716CA9319C0AC0B00FC226A /* flashButtonIconON.png in Resources */,
 				2716CA9819C0AC0B00FC226A /* settingsButtonIcon@2x.png in Resources */,
 				27AA328B19BDF30D00558D7E /* backArrowPurple.png in Resources */,
-				27AA32AF19BE35B500558D7E /* sliderCircle.png in Resources */,
 				270DFB0719AE71BE00067072 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1127,10 +1188,13 @@
 				270DFB2B19AE724500067072 /* WKLoginViewController.m in Sources */,
 				2716CB1019C880B900FC226A /* WKImagePickerController.m in Sources */,
 				1F2C629F1A8E508A0038868F /* SSOFacebookLoginButton.m in Sources */,
+				7B3F10611AB740FB00D0A6B2 /* BrightnessContrastSlidersView.m in Sources */,
 				27DF7E4E19AF860E00F970AF /* WKCameraOverlayViewController.m in Sources */,
 				270DFB2719AE721100067072 /* WKViewController.m in Sources */,
+				7B3F10691AB745DD00D0A6B2 /* SSOBrightnessContrastHelper.m in Sources */,
 				1F2C62A31A8E52320038868F /* UIImage+Resizing.m in Sources */,
 				1F2C62981A8E501F0038868F /* WKSettingSocialTableViewCell.m in Sources */,
+				7B3F106C1AB749AD00D0A6B2 /* NSBundle+SSOHelper.m in Sources */,
 				270DFB0519AE71BE00067072 /* WKAppDelegate.m in Sources */,
 				27AA325E19B8CCAE00558D7E /* UIView+WKAdditions.m in Sources */,
 				27017DC719DDEFDA0011ECCC /* AVAssetTrack+WKAdditions.m in Sources */,
@@ -1138,6 +1202,7 @@
 				27AA325B19B8B06A00558D7E /* UIColor+WKAdditions.m in Sources */,
 				270DFB0119AE71BE00067072 /* main.m in Sources */,
 				27DF7EB419AFB52800F970AF /* WKCameraViewController.m in Sources */,
+				7BCD1C3F1AB7801800F962F5 /* SSOEditMediaMovableTextView.m in Sources */,
 				27017DC019DCA4460011ECCC /* WKVideoEditor.m in Sources */,
 				27AA323F19B78F8300558D7E /* NSDictionary+WKAdditions.m in Sources */,
 				7B650E841A8D3E690060458E /* WKSocialNetworkHelper.m in Sources */,
@@ -1150,6 +1215,7 @@
 				27AA325819B8AF8B00558D7E /* UIFont+WKAdditions.m in Sources */,
 				27DF7E4A19AF802300F970AF /* WKUser.m in Sources */,
 				270DFB2F19AE72AD00067072 /* WKNavigationController.m in Sources */,
+				7B3F10661AB7446800D0A6B2 /* SSOAccessoryHelper.m in Sources */,
 				27AA323C19B78CB700558D7E /* UIAlertView+Blocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

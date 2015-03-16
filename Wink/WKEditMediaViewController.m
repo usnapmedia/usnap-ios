@@ -12,6 +12,12 @@
 #import "WKShareViewController.h"
 #import "WKColorPickerView.h"
 #import "YKImageCropperView.h"
+#import <PECropView.h>
+#import <Masonry.h>
+#import "SSOEditMediaMovableTextView.h"
+
+#import "BrightnessContrastSlidersView.h"
+#import "SSOBrightnessContrastHelper.h"
 
 typedef enum {
     WKEditMediaViewControllerEditTypeNone,
@@ -39,7 +45,7 @@ typedef enum {
 @property(nonatomic, strong) NSArray *colorPickerGrayscaleColors;
 
 // Text
-@property(nonatomic, strong) UITextView *textView;
+@property(nonatomic, strong) SSOEditMediaMovableTextView *textView;
 @property(nonatomic) BOOL movingTextView;
 
 // Brightness & Contrast
@@ -55,7 +61,13 @@ typedef enum {
 @property(weak, nonatomic) IBOutlet UIButton *confirmCropButton;
 @property(weak, nonatomic) IBOutlet UIButton *cancelCropButton;
 @property(strong, nonatomic) UIView *imageCropperContainerView;
-@property(strong, nonatomic) YKImageCropperView *imageCropperView;
+//@property(strong, nonatomic) YKImageCropperView *imageCropperView;
+@property(strong, nonatomic) PECropView *imageCropperView;
+@property(weak, nonatomic) IBOutlet UIView *cropViewFrameView;
+
+// Helper
+@property(strong, nonatomic) SSOBrightnessContrastHelper *brightnessContrastHelper;
+
 @end
 
 @implementation WKEditMediaViewController
@@ -77,12 +89,12 @@ typedef enum {
         self.imageView.image = self.image;
         [self.view insertSubview:self.imageView atIndex:0];
 
-        self.modifiedImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-        self.modifiedImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.modifiedImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.modifiedImageView.clipsToBounds = YES;
-        self.modifiedImageView.image = self.image;
-        [self.view insertSubview:self.modifiedImageView atIndex:1];
+        //        self.modifiedImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+        //        self.modifiedImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        //        self.modifiedImageView.contentMode = UIViewContentModeScaleAspectFill;
+        //        self.modifiedImageView.clipsToBounds = YES;
+        //        self.modifiedImageView.image = self.image;
+        //        [self.view insertSubview:self.modifiedImageView atIndex:1];
     }
     // Setup the movie player view
     else {
@@ -117,52 +129,27 @@ typedef enum {
     self.colorPickerGrayscaleColors = [NSArray arrayWithObjects:[UIColor whiteColor], [UIColor blackColor], nil];
 
     // Setup the text view
-    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.overlayView.frame.size.width, 70.0f)];
-    self.textView.center = CGPointMake(roundf([UIScreen mainScreen].bounds.size.width / 2.0f), roundf([UIScreen mainScreen].bounds.size.height / 2.0f));
+    self.textView = [[SSOEditMediaMovableTextView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.overlayView.frame.size.width, 70.0f)];
     self.textView.delegate = self;
-    self.textView.selectable = NO;
-    self.textView.scrollEnabled = NO;
-    self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.textView.backgroundColor = [UIColor clearColor];
-    self.textView.font = [UIFont winkFontAvenirWithSize:60.0f];
-    self.textView.textAlignment = NSTextAlignmentCenter;
-    self.textView.textColor = [UIColor whiteColor];
-    self.textView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.textView.layer.shadowOpacity = 0.75f;
-    self.textView.layer.shadowRadius = 1.0f;
-    self.textView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-    self.textView.returnKeyType = UIReturnKeyDone;
     [self.overlayView insertSubview:self.textView belowSubview:self.watermarkImageView];
 
     // Setup the brightness and contrast view
     self.filterContext = [CIContext contextWithOptions:nil];
-    self.brightnessLabel.text = NSLocalizedString(@"brightness", @"");
-    self.brightnessLabel.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.brightnessLabel.layer.shadowOpacity = 0.75f;
-    self.brightnessLabel.layer.shadowRadius = 1.0f;
-    self.brightnessLabel.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-
-    self.contrastLabel.text = NSLocalizedString(@"contrast", @"");
-    self.contrastLabel.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.contrastLabel.layer.shadowOpacity = 0.75f;
-    self.contrastLabel.layer.shadowRadius = 1.0f;
-    self.contrastLabel.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+  
+    self.brightnessContrastHelper = [[SSOBrightnessContrastHelper alloc] init];
+    self.brightnessContrastHelper.imageViewToEdit = self.imageView;
+    self.brightnessContrastHelper.imageToEdit = self.image;
 
     self.brightnessContainerView.backgroundColor = [UIColor clearColor];
-    [self.brightnessSlider setThumbImage:[UIImage imageNamed:@"sliderCircle.png"] forState:UIControlStateNormal];
-    [self.brightnessSlider setMinimumTrackImage:[UIImage imageNamed:@"sliderBar.png"] forState:UIControlStateNormal];
-    [self.brightnessSlider setMaximumTrackImage:[UIImage imageNamed:@"sliderBar.png"] forState:UIControlStateNormal];
-    self.brightnessSlider.minimumValue = -100; // -1
-    self.brightnessSlider.maximumValue = 100;  // +1
-    [self.brightnessSlider addTarget:self action:@selector(brightnessValueChanged:) forControlEvents:UIControlEventValueChanged];
+    BrightnessContrastSlidersView *containerView = [NSBundle loadBrightnessContrastSliderView];
+    // Set the view for the helper
+    [self.brightnessContrastHelper setView:containerView];
 
-    [self.contrastSlider setThumbImage:[UIImage imageNamed:@"sliderCircle.png"] forState:UIControlStateNormal];
-    [self.contrastSlider setMinimumTrackImage:[UIImage imageNamed:@"sliderBar.png"] forState:UIControlStateNormal];
-    [self.contrastSlider setMaximumTrackImage:[UIImage imageNamed:@"sliderBar.png"] forState:UIControlStateNormal];
-    self.contrastSlider.minimumValue = 10.0f; // 0.25f;
-    self.contrastSlider.maximumValue = 70.0f; // To get it to be in the middle we make it 1.75 (real = 4);
-    self.contrastSlider.value = 40.0f;
-    [self.contrastSlider addTarget:self action:@selector(contrastValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.brightnessContainerView addSubview:containerView];
+    // Set the container inside the view to have constraints on the edges
+    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.edges.equalTo(self.brightnessContainerView);
+    }];
 
     // Setup the image cropper view
     self.imageCropperContainerView = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -170,10 +157,11 @@ typedef enum {
     self.imageCropperContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view insertSubview:self.imageCropperContainerView aboveSubview:self.overlayView];
 
-    self.imageCropperView = [[YKImageCropperView alloc] initWithFrame:CGRectMake(0.0f, self.isPhone ? 60.0f : 100.0f, self.view.frame.size.width,
-                                                                                 self.view.frame.size.height - (self.isPhone ? 180.0f : 260.0f))];
-    self.imageCropperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.imageCropperContainerView addSubview:self.imageCropperView];
+    //  self.imageCropperView = [[YKImageCropperView alloc] initWithFrame:CGRectMake(0.0f, self.isPhone ? 60.0f : 100.0f, self.view.frame.size.width,
+    //  self.view.frame.size.height - (self.isPhone ? 180.0f : 260.0f))];
+    self.imageCropperView = [[PECropView alloc] initWithFrame:self.cropViewFrameView.frame];
+    // self.imageCropperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.cropViewFrameView addSubview:self.imageCropperView];
 
     self.cropContainerView.backgroundColor = [UIColor clearColor];
     [self.confirmCropButton setTitle:NSLocalizedString(@"Crop", @"") forState:UIControlStateNormal];
@@ -431,7 +419,8 @@ typedef enum {
 #pragma mark - Crop Image
 
 - (void)cropImage {
-    self.modifiedImageView.image = [self.imageCropperView editedImage];
+    // self.modifiedImageView.image = [self.imageCropperView editedImage];
+    self.modifiedImageView.image = self.imageCropperView.croppedImage;
 }
 
 #pragma mark - Button Actions
@@ -492,11 +481,6 @@ typedef enum {
 }
 
 - (IBAction)cropButtonTouched:(id)sender {
-    WKEditMediaViewControllerEditType type = WKEditMediaViewControllerEditTypeCrop;
-    if (self.editType == WKEditMediaViewControllerEditTypeCrop) {
-        type = WKEditMediaViewControllerEditTypeNone;
-    }
-    self.editType = type;
 }
 
 - (IBAction)postButtonTouched:(id)sender {
