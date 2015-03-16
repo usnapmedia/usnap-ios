@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="BUR-64-DkJ">
+            <objects>
+                <navigationController storyboardIdentifier="CAMERA_NAV_VC" navigationBarHidden="YES" id="RAe-oX-1kT" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fkB-TV-3ml">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="KDe-mF-eVw" kind="relationship" relationship="rootViewController" id="23J-an-6Hq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BoS-0d-v7w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="216" y="182"/>
+        </scene>
+        <!--Camera View Controller-->
+        <scene sceneID="x21-J0-5DV">
+            <objects>
+                <viewController storyboardIdentifier="CAMERA_VC" id="KDe-mF-eVw" customClass="SSOCameraViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Fbn-qC-7He"/>
+                        <viewControllerLayoutGuide type="bottom" id="doZ-ra-0Jc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ck7-Ge-pVp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kn7-pF-4cX">
+                                <rect key="frame" x="122" y="498" width="77" height="30"/>
+                                <state key="normal" title="Take Photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhK-sY-xII">
+                                <rect key="frame" x="0.0" y="320" width="320" height="170"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FNq-yd-BeJ">
+                                        <rect key="frame" x="138" y="70" width="45" height="30"/>
+                                        <state key="normal" title="VIDEO">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="videoContainerButtonPushed:" destination="KDe-mF-eVw" eventType="touchUpInside" id="qIS-7I-k3N"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BbK-mc-2zL">
+                                        <rect key="frame" x="54" y="70" width="53" height="30"/>
+                                        <state key="normal" title="PHOTO">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="photoContainerButtonPushed:" destination="KDe-mF-eVw" eventType="touchUpInside" id="FDU-fD-6Qc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="BbK-mc-2zL" secondAttribute="centerY" id="8Ur-Lb-2Ke"/>
+                                    <constraint firstAttribute="centerX" secondItem="BbK-mc-2zL" secondAttribute="centerX" constant="80" id="Qzp-5b-H1d"/>
+                                    <constraint firstAttribute="centerX" secondItem="FNq-yd-BeJ" secondAttribute="centerX" id="Rbt-Zh-j4S"/>
+                                    <constraint firstAttribute="centerY" secondItem="FNq-yd-BeJ" secondAttribute="centerY" id="g5z-R9-grB"/>
+                                </constraints>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wM-d9-iM7">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="5wM-d9-iM7" secondAttribute="height" multiplier="1:1" id="QgM-Q6-75y"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="p1H-PN-LOb" kind="embed" identifier="CAMERA_CONTAINER_SEGUE" id="x2m-Yj-GyQ"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="doZ-ra-0Jc" firstAttribute="top" secondItem="Kn7-pF-4cX" secondAttribute="bottom" constant="40" id="5pQ-LL-f2n"/>
+                            <constraint firstItem="5wM-d9-iM7" firstAttribute="top" secondItem="ck7-Ge-pVp" secondAttribute="top" id="629-vS-F4f"/>
+                            <constraint firstItem="hhK-sY-xII" firstAttribute="top" secondItem="5wM-d9-iM7" secondAttribute="bottom" id="7v0-IQ-yE4"/>
+                            <constraint firstItem="5wM-d9-iM7" firstAttribute="leading" secondItem="ck7-Ge-pVp" secondAttribute="leadingMargin" id="8YT-Lt-eT8"/>
+                            <constraint firstItem="5wM-d9-iM7" firstAttribute="width" secondItem="ck7-Ge-pVp" secondAttribute="width" id="EEP-bh-3WH"/>
+                            <constraint firstItem="Kn7-pF-4cX" firstAttribute="top" secondItem="hhK-sY-xII" secondAttribute="bottom" constant="8" symbolic="YES" id="JoH-Zg-l7m"/>
+                            <constraint firstAttribute="centerX" secondItem="Kn7-pF-4cX" secondAttribute="centerX" id="RPE-fd-wlI"/>
+                            <constraint firstAttribute="trailing" secondItem="hhK-sY-xII" secondAttribute="trailing" id="TwZ-Sy-HSh"/>
+                            <constraint firstItem="5wM-d9-iM7" firstAttribute="leading" secondItem="ck7-Ge-pVp" secondAttribute="leading" id="daK-7D-d17"/>
+                            <constraint firstItem="hhK-sY-xII" firstAttribute="leading" secondItem="ck7-Ge-pVp" secondAttribute="leading" id="fX6-Dy-FU4"/>
+                            <constraint firstItem="5wM-d9-iM7" firstAttribute="top" secondItem="Fbn-qC-7He" secondAttribute="bottom" id="nPA-oV-bn7"/>
+                            <constraint firstItem="5wM-d9-iM7" firstAttribute="top" secondItem="Fbn-qC-7He" secondAttribute="bottom" id="uQI-Pr-wTW"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="8YT-Lt-eT8"/>
+                                <exclude reference="nPA-oV-bn7"/>
+                                <exclude reference="uQI-Pr-wTW"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="BFZ-sQ-cdZ"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="containerView" destination="5wM-d9-iM7" id="9Ju-x3-zGo"/>
+                        <outlet property="containerViewController" destination="5wM-d9-iM7" id="zXo-rM-jUg"/>
+                        <outlet property="photoButton" destination="BbK-mc-2zL" id="g1S-lK-CkF"/>
+                        <outlet property="photoCenteringConstraint" destination="Qzp-5b-H1d" id="poV-BD-1aG"/>
+                        <outlet property="videoButton" destination="FNq-yd-BeJ" id="ppg-ws-RpH"/>
+                        <outlet property="videoCenteringConstraint" destination="Rbt-Zh-j4S" id="g7q-St-kvz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dg9-to-G3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="696" y="182"/>
+        </scene>
+        <!--Container View Controller-->
+        <scene sceneID="3vQ-Zp-KFc">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="p1H-PN-LOb" customClass="SSOContainerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s0Z-1g-T5q"/>
+                        <viewControllerLayoutGuide type="bottom" id="qfL-C8-xzR"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="kxz-Q6-7zD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XjG-50-gex" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1132" y="182"/>
+        </scene>
+        <!--Video Container View Controller-->
+        <scene sceneID="mbq-17-fik">
+            <objects>
+                <viewController storyboardIdentifier="VIDEO_CONTAINER_VC" id="W0T-QA-g8Z" customClass="SSOVideoContainerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jal-yA-8tz"/>
+                        <viewControllerLayoutGuide type="bottom" id="RYW-qs-cm5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SLb-L7-JWJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="VIDEO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THU-eW-7WV">
+                                <rect key="frame" x="130" y="44" width="60" height="31"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549026010000002" green="0.47058826679999999" blue="0.1411764771" alpha="1" colorSpace="deviceRGB"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NBI-On-q2S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1619" y="516"/>
+        </scene>
+        <!--Photo Container View Controller-->
+        <scene sceneID="VeZ-cO-aEt">
+            <objects>
+                <viewController storyboardIdentifier="PHOTO_CONTAINER_VC" id="ffZ-Od-wHk" customClass="SSOPhotoContainerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cPD-PW-tk3"/>
+                        <viewControllerLayoutGuide type="bottom" id="WUk-PW-8xg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EFT-cX-QEX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PHOTO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjY-gC-nEZ">
+                                <rect key="frame" x="113" y="68" width="60" height="31"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TdK-n8-qsE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1619" y="-162"/>
+        </scene>
+    </scenes>
+</document>
