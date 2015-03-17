@@ -8,6 +8,6 @@
 
 #import "SSOMediaEditState.h"
 
-@interface SSOMediaEditStateCrop : SSOMediaEditState
+@interface SSOMediaEditStateCrop : SSOMediaEditState <RSKImageCropViewControllerDelegate>
 
 @end

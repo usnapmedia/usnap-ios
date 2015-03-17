@@ -10,25 +10,61 @@
 
 @implementation SSOMediaEditStateCrop
 
--(void)cropButtonTouched {
-    
+#pragma mark - Initialization
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        // Set the current state
+        [self setState:SSOMediaEditStateEnumCrop];
+    }
+    return self;
+}
+
+#pragma mark - MediaEditStateProtocol
+
+- (void)cropButtonTouched {
+
     self.editMediaVC.drawView.userInteractionEnabled = NO;
     self.editMediaVC.drawContainerView.hidden = YES;
     self.editMediaVC.drawButton.tintColor = [UIColor whiteColor];
     self.editMediaVC.drawButton.alpha = 0.5f;
-    
+
     self.editMediaVC.textView.editable = NO;
     self.editMediaVC.textView.userInteractionEnabled = NO;
     [self.editMediaVC.textView resignFirstResponder];
     self.editMediaVC.textButton.alpha = 0.5f;
-    
+
     self.editMediaVC.brightnessContainerView.hidden = YES;
     self.editMediaVC.brightnessButton.alpha = 0.5f;
-    
+
     self.editMediaVC.cropContainerView.hidden = NO;
-    self.editMediaVC.imageCropperView.image = (self.editMediaVC.modifiedImageView.image) ? self.editMediaVC.modifiedImageView.image : self.editMediaVC.imageView.image;
     self.editMediaVC.imageCropperContainerView.hidden = NO;
     self.editMediaVC.cropButton.alpha = 1.0f;
+
+    self.editMediaVC.imageCropperView = [[RSKImageCropViewController alloc] initWithImage:self.editMediaVC.imageView.image];
+    self.editMediaVC.imageCropperView.delegate = self;
+    self.editMediaVC.imageCropperView.cropMode = RSKImageCropModeSquare;
+
+    // L4Z3r : I'll leave the navigationController commented for now as I don't know what should we do for iPad
+
+    //    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.editMediaVC.imageCropperView];
+    //
+    //    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    //        navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+    //    }
+    //     [self.editMediaVC presentViewController:navigationController animated:YES completion:nil];
+
+    [self.editMediaVC.navigationController pushViewController:self.editMediaVC.imageCropperView animated:YES];
+}
+
+- (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller {
+    [controller.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage usingCropRect:(CGRect)cropRect {
+    self.editMediaVC.imageView.image = croppedImage;
+    [controller.navigationController popViewControllerAnimated:YES];
 }
 
 @end
