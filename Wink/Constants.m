@@ -29,6 +29,7 @@ NSString *const kTwitterAccountName = @"kTwitterAccountName";
 
 NSString *const kIsCameraRearFacing = @"kIsCameraRearFacing";
 NSString *const kIsFlashOn = @"kIsFlashOn";
+NSString *const kIsVideoOn = @"kIsVideoOn";
 
 #pragma mark - Storyboard
 

@@ -10,6 +10,4 @@
 
 @interface WKImagePickerController : UIImagePickerController
 
-- (void)dismiss;
-
 @end

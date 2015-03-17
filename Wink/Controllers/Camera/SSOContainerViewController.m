@@ -17,9 +17,7 @@
  *  View controllers available inside the container
  */
 @property(strong, nonatomic) SSOPhotoContainerViewController *photoContainerVC;
-//@property(strong, nonatomic) SSOVideoContainerViewController *videoContainerVC;
-
-@property(nonatomic, strong) WKImagePickerController *videoContainerVC;
+@property(strong, nonatomic) SSOVideoContainerViewController *videoContainerVC;
 
 @property(strong, nonatomic) UIViewController *currentVC;
 
@@ -118,7 +116,7 @@
  */
 - (SSOPhotoContainerViewController *)photoContainerVC {
     if (!_photoContainerVC) {
-        _photoContainerVC = [[UIStoryboard cameraStoryboard] instantiateViewControllerWithIdentifier:PHOTO_CONTAINER_VC];
+        _photoContainerVC = [[SSOPhotoContainerViewController alloc] init];
     }
     return _photoContainerVC;
 }
@@ -128,22 +126,10 @@
  *
  *  @return the controller
  */
-- (WKImagePickerController *)videoContainerVC {
+- (SSOVideoContainerViewController *)videoContainerVC {
     if (!_videoContainerVC) {
 
-        _videoContainerVC = [[WKImagePickerController alloc] init];
-        //        _videoContainerVC.delegate = self;
-        _videoContainerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-        _videoContainerVC.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
-        _videoContainerVC.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-        //        self.cameraImagePickerController.videoQuality = UIImagePickerControllerQualityTypeHigh;
-        //        self.cameraImagePickerController.videoMaximumDuration = 30.0f;
-        _videoContainerVC.showsCameraControls = NO;
-        _videoContainerVC.navigationBarHidden = YES;
-        _videoContainerVC.toolbarHidden = YES;
-        //        self.cameraImagePickerController.edgesForExtendedLayout = UIRectEdgeAll;
-        //        self.cameraImagePickerController.extendedLayoutIncludesOpaqueBars = NO;
-        _videoContainerVC.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+        _videoContainerVC = [[SSOVideoContainerViewController alloc] init];
     }
     return _videoContainerVC;
 }

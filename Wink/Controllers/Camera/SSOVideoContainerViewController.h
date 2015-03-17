@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SSOVideoContainerViewController : UIViewController
+@interface SSOVideoContainerViewController : UIImagePickerController
 
 @end

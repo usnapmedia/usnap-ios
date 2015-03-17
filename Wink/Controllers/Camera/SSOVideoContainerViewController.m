@@ -12,9 +12,6 @@
 
 @interface SSOVideoContainerViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property(nonatomic, strong) WKImagePickerController *cameraImagePickerController;
-@property (nonatomic, strong) SSOCameraViewController *overlay;
-
 @end
 
 @implementation SSOVideoContainerViewController
@@ -26,34 +23,22 @@
     [self initializeVideoCamera];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-
-    [self presentViewController:self.cameraImagePickerController animated:NO completion:nil];
-}
-
 #pragma mark - Utilities
 
 - (void)initializeVideoCamera {
     // Setup the camera view
-    self.cameraImagePickerController = [[WKImagePickerController alloc] init];
-    self.cameraImagePickerController.delegate = self;
-    self.cameraImagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    self.cameraImagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
-    self.cameraImagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-    self.cameraImagePickerController.videoQuality = UIImagePickerControllerQualityTypeHigh;
-    self.cameraImagePickerController.videoMaximumDuration = 30.0f;
-    self.cameraImagePickerController.showsCameraControls = NO;
-    self.cameraImagePickerController.navigationBarHidden = YES;
-    self.cameraImagePickerController.toolbarHidden = YES;
-    self.cameraImagePickerController.edgesForExtendedLayout = UIRectEdgeAll;
-    self.cameraImagePickerController.extendedLayoutIncludesOpaqueBars = NO;
-    self.cameraImagePickerController.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
-
-//    self.overlay = [[UIStoryboard cameraStoryboard] instantiateViewControllerWithIdentifier:CAMERA_VC];
-//    self.cameraImagePickerController.cameraOverlayView = self.overlay.view;
-////    self.overlay.containerView.hidden = YES;
-
+    self.delegate = self;
+    self.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+    self.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+    self.videoQuality = UIImagePickerControllerQualityTypeHigh;
+    self.videoMaximumDuration = 30.0f;
+    self.showsCameraControls = NO;
+    self.navigationBarHidden = YES;
+    self.toolbarHidden = YES;
+    self.edgesForExtendedLayout = UIRectEdgeAll;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
 @end

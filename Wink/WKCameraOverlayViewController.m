@@ -258,7 +258,7 @@
 - (IBAction)photoButtonTouched:(id)sender {
     self.isPhotoOn = YES;
 
-    [self.cameraController.cameraImagePickerController dismiss];
+//    [self.cameraController.cameraImagePickerController dismiss];
 
     [self updateUI];
 }

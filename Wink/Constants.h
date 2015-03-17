@@ -29,6 +29,7 @@ extern NSString *const kIsFacebookLoggedIn;
 
 extern NSString *const kIsCameraRearFacing;
 extern NSString *const kIsFlashOn;
+extern NSString *const kIsVideoOn;
 
 #pragma mark - Storyboard
 
