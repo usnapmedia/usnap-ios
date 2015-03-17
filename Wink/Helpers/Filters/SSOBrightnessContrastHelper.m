@@ -12,6 +12,8 @@
 @interface SSOBrightnessContrastHelper ()
 
 @property(nonatomic, weak) BrightnessContrastSlidersView *view;
+@property (nonatomic) float lastBrightnessValue;
+@property (nonatomic) float lastContrastValue;
 
 @end
 
@@ -23,6 +25,11 @@
     _view = view;
     [_view.brightnessSlider addTarget:self action:@selector(brightnessValueChanged:) forControlEvents:UIControlEventValueChanged];
     [_view.contrastSlider addTarget:self action:@selector(contrastValueChanged:) forControlEvents:UIControlEventValueChanged];
+    if (self.lastBrightnessValue)
+    [_view.brightnessSlider setValue:self.lastBrightnessValue];
+    if (self.lastContrastValue)
+        [_view.contrastSlider setValue:self.lastContrastValue];
+
 }
 
 #pragma mark - Slider actions
@@ -34,6 +41,7 @@
  */
 - (void)brightnessValueChanged:(id)sender {
 
+    self.lastBrightnessValue = self.view.brightnessSlider.value;
     [self adjustImage];
 }
 
@@ -43,6 +51,8 @@
  *  @param sender the slider
  */
 - (void)contrastValueChanged:(id)sender {
+
+    self.lastContrastValue = self.view.contrastSlider.value;
 
     [self adjustImage];
 }
