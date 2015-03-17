@@ -58,6 +58,11 @@
     self.editMediaVC.cropContainerView.hidden = YES;
     self.editMediaVC.imageCropperContainerView.hidden = YES;
     self.editMediaVC.cropButton.alpha = 1.0f;
+    
+    // Remove all the subviews form the accessoriesContainerView
+    if (self.editMediaVC.editAccessoriesContainerView.subviews.count > 0)
+    [[self.editMediaVC.editAccessoriesContainerView subviews]
+                                                   makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
 @end
