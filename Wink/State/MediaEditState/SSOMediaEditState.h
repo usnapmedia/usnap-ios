@@ -13,13 +13,12 @@ typedef enum {
     SSOMediaEditStateEnumNone,
     SSOMediaEditStateEnumDrawColor,
     SSOMediaEditStateEnumDrawGray,
-    SSOMediaEditStateEnumDrawGrayscale,
     SSOMediaEditStateEnumText,
     SSOMediaEditStateEnumBrightness,
     SSOMediaEditStateEnumCrop
 } SSOMediaEditStateEnum;
 
-@protocol MediatEditStateProtocol <NSObject>
+@protocol MediaEditStateProtocol <NSObject>
 
 /**
  *  Action called when draw button is touched
@@ -43,7 +42,7 @@ typedef enum {
 
 @end
 
-@interface SSOMediaEditState : NSObject <MediatEditStateProtocol>
+@interface SSOMediaEditState : NSObject <MediaEditStateProtocol>
 
 @property(weak, nonatomic) WKEditMediaViewController *editMediaVC;
 

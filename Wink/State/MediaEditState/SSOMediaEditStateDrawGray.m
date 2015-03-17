@@ -6,9 +6,22 @@
 //  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
-#import "SSOMediaEditStateDrawGrey.h"
+#import "SSOMediaEditStateDrawGray.h"
 
-@implementation SSOMediaEditStateDrawGrey
+@implementation SSOMediaEditStateDrawGray
+
+#pragma mark - Initialization
+
+-(instancetype)init {
+    self = [super init];
+    if (self) {
+        // Set the current state
+        [self setState:SSOMediaEditStateEnumDrawGray];
+    }
+    return self;
+}
+
+#pragma mark - MediaEditStateProtocol
 
 -(void)drawButtonTouched {
     

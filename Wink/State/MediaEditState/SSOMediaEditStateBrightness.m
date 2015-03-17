@@ -10,25 +10,37 @@
 
 @implementation SSOMediaEditStateBrightness
 
--(void)brightnessButtonTouched {
-    
+#pragma mark - Initialization
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        // Set the current state
+        [self setState:SSOMediaEditStateEnumBrightness];
+    }
+    return self;
+}
+
+#pragma mark - MediaEditStateProtocol
+
+- (void)brightnessButtonTouched {
+
     self.editMediaVC.drawView.userInteractionEnabled = NO;
     self.editMediaVC.drawContainerView.hidden = YES;
     self.editMediaVC.drawButton.tintColor = [UIColor whiteColor];
     self.editMediaVC.drawButton.alpha = 0.5f;
-    
+
     self.editMediaVC.textView.editable = NO;
     self.editMediaVC.textView.userInteractionEnabled = NO;
     [self.editMediaVC.textView resignFirstResponder];
     self.editMediaVC.textButton.alpha = 0.5f;
-    
+
     self.editMediaVC.brightnessContainerView.hidden = NO;
     self.editMediaVC.brightnessButton.alpha = 1.0f;
-    
+
     self.editMediaVC.cropContainerView.hidden = YES;
     self.editMediaVC.imageCropperContainerView.hidden = YES;
     self.editMediaVC.cropButton.alpha = 0.5f;
-    
 }
 
 @end

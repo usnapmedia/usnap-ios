@@ -10,6 +10,19 @@
 
 @implementation SSOMediaEditStateText
 
+#pragma mark - Initialization
+
+-(instancetype)init {
+    self = [super init];
+    if (self) {
+        // Set the current state
+        [self setState:SSOMediaEditStateEnumText];
+    }
+    return self;
+}
+
+#pragma mark - MediaEditStateProtocol
+
 -(void)textButtonTouched {
     
     self.editMediaVC.drawView.userInteractionEnabled = NO;

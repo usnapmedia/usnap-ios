@@ -10,4 +10,9 @@
 
 @interface SSOMediaEditStateNone : SSOMediaEditState
 
+/**
+ *  Reset the buttons to their normal state
+ */
+- (void)resetButtonsState;
+
 @end

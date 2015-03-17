@@ -159,6 +159,13 @@
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
 		7BCD1C3F1AB7801800F962F5 /* SSOEditMediaMovableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD1C3E1AB7801800F962F5 /* SSOEditMediaMovableTextView.m */; };
+		7BE67C7E1AB8859B009DA9A7 /* SSOMediaEditState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C731AB8859B009DA9A7 /* SSOMediaEditState.m */; };
+		7BE67C7F1AB8859B009DA9A7 /* SSOMediaEditStateBrightness.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C751AB8859B009DA9A7 /* SSOMediaEditStateBrightness.m */; };
+		7BE67C801AB8859B009DA9A7 /* SSOMediaEditStateCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C771AB8859B009DA9A7 /* SSOMediaEditStateCrop.m */; };
+		7BE67C811AB8859B009DA9A7 /* SSOMediaEditStateDrawColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C791AB8859B009DA9A7 /* SSOMediaEditStateDrawColor.m */; };
+		7BE67C821AB8859B009DA9A7 /* SSOMediaEditStateDrawGray.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C7B1AB8859B009DA9A7 /* SSOMediaEditStateDrawGray.m */; };
+		7BE67C831AB8859B009DA9A7 /* SSOMediaEditStateText.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C7D1AB8859B009DA9A7 /* SSOMediaEditStateText.m */; };
+		7BE67C861AB885B2009DA9A7 /* SSOMediaEditStateNone.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE67C851AB885B2009DA9A7 /* SSOMediaEditStateNone.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -359,6 +366,20 @@
 		7B964EB71A8ABC3C00E181C2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		7BCD1C3D1AB7801800F962F5 /* SSOEditMediaMovableTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOEditMediaMovableTextView.h; path = TextView/SSOEditMediaMovableTextView.h; sourceTree = "<group>"; };
 		7BCD1C3E1AB7801800F962F5 /* SSOEditMediaMovableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOEditMediaMovableTextView.m; path = TextView/SSOEditMediaMovableTextView.m; sourceTree = "<group>"; };
+		7BE67C721AB8859B009DA9A7 /* SSOMediaEditState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOMediaEditState.h; path = State/MediaEditState/SSOMediaEditState.h; sourceTree = "<group>"; };
+		7BE67C731AB8859B009DA9A7 /* SSOMediaEditState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOMediaEditState.m; path = State/MediaEditState/SSOMediaEditState.m; sourceTree = "<group>"; };
+		7BE67C741AB8859B009DA9A7 /* SSOMediaEditStateBrightness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOMediaEditStateBrightness.h; path = State/MediaEditState/SSOMediaEditStateBrightness.h; sourceTree = "<group>"; };
+		7BE67C751AB8859B009DA9A7 /* SSOMediaEditStateBrightness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOMediaEditStateBrightness.m; path = State/MediaEditState/SSOMediaEditStateBrightness.m; sourceTree = "<group>"; };
+		7BE67C761AB8859B009DA9A7 /* SSOMediaEditStateCrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOMediaEditStateCrop.h; path = State/MediaEditState/SSOMediaEditStateCrop.h; sourceTree = "<group>"; };
+		7BE67C771AB8859B009DA9A7 /* SSOMediaEditStateCrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOMediaEditStateCrop.m; path = State/MediaEditState/SSOMediaEditStateCrop.m; sourceTree = "<group>"; };
+		7BE67C781AB8859B009DA9A7 /* SSOMediaEditStateDrawColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOMediaEditStateDrawColor.h; path = State/MediaEditState/SSOMediaEditStateDrawColor.h; sourceTree = "<group>"; };
+		7BE67C791AB8859B009DA9A7 /* SSOMediaEditStateDrawColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOMediaEditStateDrawColor.m; path = State/MediaEditState/SSOMediaEditStateDrawColor.m; sourceTree = "<group>"; };
+		7BE67C7A1AB8859B009DA9A7 /* SSOMediaEditStateDrawGray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOMediaEditStateDrawGray.h; path = State/MediaEditState/SSOMediaEditStateDrawGray.h; sourceTree = "<group>"; };
+		7BE67C7B1AB8859B009DA9A7 /* SSOMediaEditStateDrawGray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOMediaEditStateDrawGray.m; path = State/MediaEditState/SSOMediaEditStateDrawGray.m; sourceTree = "<group>"; };
+		7BE67C7C1AB8859B009DA9A7 /* SSOMediaEditStateText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOMediaEditStateText.h; path = State/MediaEditState/SSOMediaEditStateText.h; sourceTree = "<group>"; };
+		7BE67C7D1AB8859B009DA9A7 /* SSOMediaEditStateText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOMediaEditStateText.m; path = State/MediaEditState/SSOMediaEditStateText.m; sourceTree = "<group>"; };
+		7BE67C841AB885B2009DA9A7 /* SSOMediaEditStateNone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOMediaEditStateNone.h; path = State/MediaEditState/SSOMediaEditStateNone.h; sourceTree = "<group>"; };
+		7BE67C851AB885B2009DA9A7 /* SSOMediaEditStateNone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOMediaEditStateNone.m; path = State/MediaEditState/SSOMediaEditStateNone.m; sourceTree = "<group>"; };
 		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB0B89041A8A8FA9005E6869 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		CB0B89051A8A8FA9005E6869 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
@@ -502,6 +523,7 @@
 		270DFAFA19AE71BE00067072 /* Wink */ = {
 			isa = PBXGroup;
 			children = (
+				7BE67C5E1AB876BF009DA9A7 /* State */,
 				1F2C62A01A8E52230038868F /* Categories */,
 				270DFB2319AE71F600067072 /* Controllers */,
 				7B3F10621AB7440300D0A6B2 /* Helpers */,
@@ -925,6 +947,35 @@
 			name = TextView;
 			sourceTree = "<group>";
 		};
+		7BE67C5E1AB876BF009DA9A7 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				7BE67C711AB88543009DA9A7 /* MediaEditState */,
+			);
+			name = State;
+			sourceTree = "<group>";
+		};
+		7BE67C711AB88543009DA9A7 /* MediaEditState */ = {
+			isa = PBXGroup;
+			children = (
+				7BE67C721AB8859B009DA9A7 /* SSOMediaEditState.h */,
+				7BE67C731AB8859B009DA9A7 /* SSOMediaEditState.m */,
+				7BE67C841AB885B2009DA9A7 /* SSOMediaEditStateNone.h */,
+				7BE67C851AB885B2009DA9A7 /* SSOMediaEditStateNone.m */,
+				7BE67C741AB8859B009DA9A7 /* SSOMediaEditStateBrightness.h */,
+				7BE67C751AB8859B009DA9A7 /* SSOMediaEditStateBrightness.m */,
+				7BE67C761AB8859B009DA9A7 /* SSOMediaEditStateCrop.h */,
+				7BE67C771AB8859B009DA9A7 /* SSOMediaEditStateCrop.m */,
+				7BE67C781AB8859B009DA9A7 /* SSOMediaEditStateDrawColor.h */,
+				7BE67C791AB8859B009DA9A7 /* SSOMediaEditStateDrawColor.m */,
+				7BE67C7A1AB8859B009DA9A7 /* SSOMediaEditStateDrawGray.h */,
+				7BE67C7B1AB8859B009DA9A7 /* SSOMediaEditStateDrawGray.m */,
+				7BE67C7C1AB8859B009DA9A7 /* SSOMediaEditStateText.h */,
+				7BE67C7D1AB8859B009DA9A7 /* SSOMediaEditStateText.m */,
+			);
+			name = MediaEditState;
+			sourceTree = "<group>";
+		};
 		ED65896723BCE61EECA4D660 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1186,9 +1237,11 @@
 			files = (
 				7B650E781A8BDD360060458E /* Constants.m in Sources */,
 				270DFB2B19AE724500067072 /* WKLoginViewController.m in Sources */,
+				7BE67C811AB8859B009DA9A7 /* SSOMediaEditStateDrawColor.m in Sources */,
 				2716CB1019C880B900FC226A /* WKImagePickerController.m in Sources */,
 				1F2C629F1A8E508A0038868F /* SSOFacebookLoginButton.m in Sources */,
 				7B3F10611AB740FB00D0A6B2 /* BrightnessContrastSlidersView.m in Sources */,
+				7BE67C861AB885B2009DA9A7 /* SSOMediaEditStateNone.m in Sources */,
 				27DF7E4E19AF860E00F970AF /* WKCameraOverlayViewController.m in Sources */,
 				270DFB2719AE721100067072 /* WKViewController.m in Sources */,
 				7B3F10691AB745DD00D0A6B2 /* SSOBrightnessContrastHelper.m in Sources */,
@@ -1202,20 +1255,25 @@
 				27AA325B19B8B06A00558D7E /* UIColor+WKAdditions.m in Sources */,
 				270DFB0119AE71BE00067072 /* main.m in Sources */,
 				27DF7EB419AFB52800F970AF /* WKCameraViewController.m in Sources */,
+				7BE67C7E1AB8859B009DA9A7 /* SSOMediaEditState.m in Sources */,
 				7BCD1C3F1AB7801800F962F5 /* SSOEditMediaMovableTextView.m in Sources */,
 				27017DC019DCA4460011ECCC /* WKVideoEditor.m in Sources */,
 				27AA323F19B78F8300558D7E /* NSDictionary+WKAdditions.m in Sources */,
 				7B650E841A8D3E690060458E /* WKSocialNetworkHelper.m in Sources */,
 				2743319E19B76843003334BB /* WKMoviePlayerView.m in Sources */,
+				7BE67C831AB8859B009DA9A7 /* SSOMediaEditStateText.m in Sources */,
 				27AA323819B773A700558D7E /* WKWinkConnect.m in Sources */,
+				7BE67C7F1AB8859B009DA9A7 /* SSOMediaEditStateBrightness.m in Sources */,
 				2743316519B6413F003334BB /* WKEditMediaViewController.m in Sources */,
 				2743315E19B63205003334BB /* WKSettingsViewController.m in Sources */,
+				7BE67C821AB8859B009DA9A7 /* SSOMediaEditStateDrawGray.m in Sources */,
 				1F2C62A81A8E8AD60038868F /* SSOSettingsSocialFakeTableViewCell.m in Sources */,
 				27AA32B519BE3B7800558D7E /* WKColorPickerView.m in Sources */,
 				27AA325819B8AF8B00558D7E /* UIFont+WKAdditions.m in Sources */,
 				27DF7E4A19AF802300F970AF /* WKUser.m in Sources */,
 				270DFB2F19AE72AD00067072 /* WKNavigationController.m in Sources */,
 				7B3F10661AB7446800D0A6B2 /* SSOAccessoryHelper.m in Sources */,
+				7BE67C801AB8859B009DA9A7 /* SSOMediaEditStateCrop.m in Sources */,
 				27AA323C19B78CB700558D7E /* UIAlertView+Blocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

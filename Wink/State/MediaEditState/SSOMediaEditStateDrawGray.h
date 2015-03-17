@@ -8,6 +8,6 @@
 
 #import "SSOMediaEditState.h"
 
-@interface SSOMediaEditStateDrawGrey : SSOMediaEditState
+@interface SSOMediaEditStateDrawGray : SSOMediaEditState
 
 @end
