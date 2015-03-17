@@ -52,7 +52,7 @@
     [self.editMediaVC.textView resignFirstResponder];
     self.editMediaVC.textButton.alpha = 1.0f;
 
-    self.editMediaVC.brightnessContainerView.hidden = YES;
+    self.editMediaVC.editAccessoriesContainerView.hidden = YES;
     self.editMediaVC.brightnessButton.alpha = 1.0f;
 
     self.editMediaVC.cropContainerView.hidden = YES;

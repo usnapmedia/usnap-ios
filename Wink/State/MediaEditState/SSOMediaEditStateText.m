@@ -35,7 +35,7 @@
     [self.editMediaVC.textView becomeFirstResponder];
     self.editMediaVC.textButton.alpha = 1.0f;
     
-    self.editMediaVC.brightnessContainerView.hidden = YES;
+    self.editMediaVC.editAccessoriesContainerView.hidden = YES;
     self.editMediaVC.brightnessButton.alpha = 0.5f;
     
     self.editMediaVC.cropContainerView.hidden = YES;
