@@ -41,6 +41,28 @@
     self.editMediaVC.cropContainerView.hidden = YES;
     self.editMediaVC.imageCropperContainerView.hidden = YES;
     self.editMediaVC.cropButton.alpha = 0.5f;
+    
+    [self initBrightnessAndContrastUI];
 }
+
+- (void)initBrightnessAndContrastUI {
+    if (!self.editMediaVC.brightnessContrastHelper)
+    self.editMediaVC.brightnessContrastHelper = [[SSOBrightnessContrastHelper alloc] init];
+    
+    self.editMediaVC.brightnessContrastHelper.imageViewToEdit = self.editMediaVC.imageView;
+    self.editMediaVC.brightnessContrastHelper.imageToEdit = self.editMediaVC.image;
+    
+    self.editMediaVC.editAccessoriesContainerView.backgroundColor = [UIColor clearColor];
+    BrightnessContrastSlidersView *containerView = [NSBundle loadBrightnessContrastSliderView];
+    // Set the view for the helper
+    [self.editMediaVC.brightnessContrastHelper setView:containerView];
+    
+    [self.editMediaVC.editAccessoriesContainerView addSubview:containerView];
+    // Set the container inside the view to have constraints on the edges
+    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.editMediaVC.editAccessoriesContainerView);
+    }];
+}
+
 
 @end

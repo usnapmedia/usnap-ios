@@ -7,78 +7,28 @@
 //
 
 #import "WKEditMediaViewController.h"
-#import "ACEDrawingView.h"
-#import "WKMoviePlayerView.h"
-#import "WKShareViewController.h"
-#import "WKColorPickerView.h"
-#import "YKImageCropperView.h"
-#import <PECropViewController.h>
-#import <Masonry.h>
-#import "SSOEditMediaMovableTextView.h"
+#import "SSOMediaEditState.h"
+#import "SSOMediaEditStateCrop.h"
+#import "SSOMediaEditStateNone.h"
+#import "SSOMediaEditStateText.h"
+#import "SSOMediaEditStateDrawGray.h"
+#import "SSOMediaEditStateDrawColor.h"
+#import "SSOMediaEditStateBrightness.h"
 
-#import "BrightnessContrastSlidersView.h"
-#import "SSOBrightnessContrastHelper.h"
+@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, ACEDrawingViewDelegate>
 
-typedef enum {
-    WKEditMediaViewControllerEditTypeNone,
-    WKEditMediaViewControllerEditTypeDrawColor,
-    WKEditMediaViewControllerEditTypeDrawGrayscale,
-    WKEditMediaViewControllerEditTypeText,
-    WKEditMediaViewControllerEditTypeBrightness,
-    WKEditMediaViewControllerEditTypeCrop
-} WKEditMediaViewControllerEditType;
-
-@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, ACEDrawingViewDelegate, PECropViewControllerDelegate>
-@property(nonatomic) WKEditMediaViewControllerEditType editType;
-
-// Media
-@property(nonatomic, strong) UIImageView *imageView;
-@property(nonatomic, strong) UIImageView *modifiedImageView;
-@property(nonatomic, strong) WKMoviePlayerView *moviePlayerView;
-
-// Drawing
-@property(nonatomic, strong) ACEDrawingView *drawView;
-@property(weak, nonatomic) IBOutlet UIView *drawContainerView;
-@property(weak, nonatomic) IBOutlet UIButton *drawUndoButton;
-@property(nonatomic, strong) IBOutlet WKColorPickerView *colorPickerView;
-@property(nonatomic, strong) NSArray *colorPickerColors;
-@property(nonatomic, strong) NSArray *colorPickerGrayscaleColors;
-
-// Text
-@property(nonatomic, strong) SSOEditMediaMovableTextView *textView;
-@property(nonatomic) BOOL movingTextView;
-
-// Brightness & Contrast
-@property(weak, nonatomic) IBOutlet UIView *brightnessContainerView;
-@property(weak, nonatomic) IBOutlet UILabel *brightnessLabel;
-@property(weak, nonatomic) IBOutlet UILabel *contrastLabel;
-@property(weak, nonatomic) IBOutlet UISlider *brightnessSlider;
-@property(weak, nonatomic) IBOutlet UISlider *contrastSlider;
-
-// Crop
-@property(weak, nonatomic) IBOutlet UIView *cropContainerView;
-@property(weak, nonatomic) IBOutlet UIButton *confirmCropButton;
-@property(weak, nonatomic) IBOutlet UIButton *cancelCropButton;
-@property(strong, nonatomic) UIView *imageCropperContainerView;
-//@property(strong, nonatomic) YKImageCropperView *imageCropperView;
-@property(strong, nonatomic) PECropViewController *imageCropperView;
-@property(weak, nonatomic) IBOutlet UIView *cropViewFrameView;
-
-// Containers
-
-@property(strong, nonatomic) BrightnessContrastSlidersView *containerView;
-
-// Helper
-@property(strong, nonatomic) SSOBrightnessContrastHelper *brightnessContrastHelper;
+@property(nonatomic, strong) SSOMediaEditState *mediaEditState;
 
 @end
 
 @implementation WKEditMediaViewController
 
-#pragma mark - View Methods
+#pragma mark - View Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.mediaEditState = [SSOMediaEditStateNone new];
 
     // Register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
@@ -136,35 +86,17 @@ typedef enum {
     self.textView.delegate = self;
     [self.overlayView insertSubview:self.textView belowSubview:self.watermarkImageView];
 
-    [self initBrightnessAndContrastUI];
-
-    // Setup the image cropper view
-    self.imageCropperContainerView = [[UIView alloc] initWithFrame:self.view.bounds];
-    self.imageCropperContainerView.backgroundColor = [UIColor blackColor];
-    self.imageCropperContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view insertSubview:self.imageCropperContainerView aboveSubview:self.overlayView];
-
-    self.cropContainerView.backgroundColor = [UIColor clearColor];
-
-    // Update the UI
-    [self updateUI];
+   // [self initBrightnessAndContrastUI];
 }
 
-- (void)initBrightnessAndContrastUI {
-    self.brightnessContrastHelper = [[SSOBrightnessContrastHelper alloc] init];
-    self.brightnessContrastHelper.imageViewToEdit = self.imageView;
-    self.brightnessContrastHelper.imageToEdit = self.image;
 
-    self.brightnessContainerView.backgroundColor = [UIColor clearColor];
-    BrightnessContrastSlidersView *containerView = [NSBundle loadBrightnessContrastSliderView];
-    // Set the view for the helper
-    [self.brightnessContrastHelper setView:containerView];
-
-    [self.brightnessContainerView addSubview:containerView];
-    // Set the container inside the view to have constraints on the edges
-    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.edges.equalTo(self.brightnessContainerView);
-    }];
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // Reset the state to none
+    self.mediaEditState = [SSOMediaEditStateNone new];
+    [(SSOMediaEditStateNone *)self.mediaEditState resetButtonsState];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -181,148 +113,18 @@ typedef enum {
     [self.moviePlayerView.player pause];
 }
 
-#pragma mark - Set Edit Type
+#pragma mark - Setter
 
-- (void)setEditType:(WKEditMediaViewControllerEditType)editType {
-    _editType = editType;
-
-    [self updateUI];
+- (void)setMediaEditState:(SSOMediaEditState *)mediaEditState {
+    _mediaEditState = mediaEditState;
+    // Set the VC for the state object
+    [_mediaEditState setEditMediaVC:self];
 }
 
 #pragma mark - Keyboard Methods
 
 - (void)keyboardWillHide {
-    self.editType = WKEditMediaViewControllerEditTypeNone;
-}
-
-#pragma mark - Update UI
-
-- (void)updateUI {
-    switch (self.editType) {
-    case WKEditMediaViewControllerEditTypeNone:
-        self.drawView.userInteractionEnabled = NO;
-        self.drawContainerView.hidden = YES;
-        self.drawButton.tintColor = [UIColor whiteColor];
-        self.drawButton.alpha = 1.0f;
-
-        self.textView.editable = NO;
-        self.textView.userInteractionEnabled = NO;
-        [self.textView resignFirstResponder];
-        self.textButton.alpha = 1.0f;
-
-        self.brightnessContainerView.hidden = YES;
-        self.brightnessButton.alpha = 1.0f;
-
-        self.cropContainerView.hidden = YES;
-        self.imageCropperContainerView.hidden = YES;
-        self.cropButton.alpha = 1.0f;
-        break;
-
-    case WKEditMediaViewControllerEditTypeDrawColor:
-        self.drawContainerView.hidden = NO;
-        self.colorPickerView.colors = self.colorPickerColors;
-        self.drawView.userInteractionEnabled = YES;
-        self.drawUndoButton.enabled = ([self.drawView canUndo]);
-        self.drawView.lineColor = self.colorPickerView.color;
-        self.drawButton.tintColor = self.colorPickerView.color;
-        self.drawButton.alpha = 1.0f;
-
-        self.textView.editable = NO;
-        self.textView.userInteractionEnabled = NO;
-        [self.textView resignFirstResponder];
-        self.textButton.alpha = 0.5f;
-
-        self.brightnessContainerView.hidden = YES;
-        self.brightnessButton.alpha = 0.5f;
-
-        self.cropContainerView.hidden = YES;
-        self.imageCropperContainerView.hidden = YES;
-        self.cropButton.alpha = 0.5f;
-        break;
-
-    case WKEditMediaViewControllerEditTypeDrawGrayscale:
-        self.drawContainerView.hidden = NO;
-        self.colorPickerView.colors = self.colorPickerGrayscaleColors;
-        self.drawView.userInteractionEnabled = YES;
-        self.drawUndoButton.enabled = ([self.drawView canUndo]);
-        self.drawView.lineColor = self.colorPickerView.color;
-        self.drawButton.tintColor = self.colorPickerView.color;
-        self.drawButton.alpha = 1.0f;
-
-        self.textView.editable = NO;
-        self.textView.userInteractionEnabled = NO;
-        [self.textView resignFirstResponder];
-        self.textButton.alpha = 0.5f;
-
-        self.brightnessContainerView.hidden = YES;
-        self.brightnessButton.alpha = 0.5f;
-
-        self.cropContainerView.hidden = YES;
-        self.imageCropperContainerView.hidden = YES;
-        self.cropButton.alpha = 0.5f;
-        break;
-
-    case WKEditMediaViewControllerEditTypeText:
-        self.drawView.userInteractionEnabled = NO;
-        self.drawContainerView.hidden = YES;
-        self.drawButton.tintColor = [UIColor whiteColor];
-        self.drawButton.alpha = 0.5f;
-
-        self.textView.editable = YES;
-        self.textView.userInteractionEnabled = YES;
-        [self.textView becomeFirstResponder];
-        self.textButton.alpha = 1.0f;
-
-        self.brightnessContainerView.hidden = YES;
-        self.brightnessButton.alpha = 0.5f;
-
-        self.cropContainerView.hidden = YES;
-        self.imageCropperContainerView.hidden = YES;
-        self.cropButton.alpha = 0.5f;
-        break;
-
-    case WKEditMediaViewControllerEditTypeBrightness:
-        self.drawView.userInteractionEnabled = NO;
-        self.drawContainerView.hidden = YES;
-        self.drawButton.tintColor = [UIColor whiteColor];
-        self.drawButton.alpha = 0.5f;
-
-        self.textView.editable = NO;
-        self.textView.userInteractionEnabled = NO;
-        [self.textView resignFirstResponder];
-        self.textButton.alpha = 0.5f;
-
-        self.brightnessContainerView.hidden = NO;
-        self.brightnessButton.alpha = 1.0f;
-
-        self.cropContainerView.hidden = YES;
-        self.imageCropperContainerView.hidden = YES;
-        self.cropButton.alpha = 0.5f;
-        break;
-
-    case WKEditMediaViewControllerEditTypeCrop:
-        self.drawView.userInteractionEnabled = NO;
-        self.drawContainerView.hidden = YES;
-        self.drawButton.tintColor = [UIColor whiteColor];
-        self.drawButton.alpha = 0.5f;
-
-        self.textView.editable = NO;
-        self.textView.userInteractionEnabled = NO;
-        [self.textView resignFirstResponder];
-        self.textButton.alpha = 0.5f;
-
-        self.brightnessContainerView.hidden = YES;
-        self.brightnessButton.alpha = 0.5f;
-
-        self.cropContainerView.hidden = NO;
-        self.imageCropperView.image = (self.modifiedImageView.image) ? self.modifiedImageView.image : self.imageView.image;
-        self.imageCropperContainerView.hidden = NO;
-        self.cropButton.alpha = 1.0f;
-        break;
-
-    default:
-        break;
-    }
+    self.mediaEditState = [SSOMediaEditStateNone new];
 }
 
 #pragma mark - Touch Methods
@@ -360,7 +162,7 @@ typedef enum {
 #pragma mark - Draw View Methods
 
 - (void)drawingView:(ACEDrawingView *)view willBeginDrawUsingTool:(id<ACEDrawingTool>)tool {
-    [self updateUI];
+    //    [self updateUI];
 }
 
 #pragma mark - Movie View Methods
@@ -394,65 +196,58 @@ typedef enum {
 #pragma mark - Button Actions
 
 - (IBAction)selectedColorChanged:(id)sender {
-    [self updateUI];
+    //    [self updateUI];
 }
 
 - (IBAction)undoButtonTouched:(id)sender {
     [self.drawView undoLatestStep];
 
-    [self updateUI];
-}
-
-- (IBAction)confirmCropButtonTouched:(id)sender {
-    [self cropImage];
-    self.editType = WKEditMediaViewControllerEditTypeNone;
-}
-
-- (IBAction)cancelCropButtonTouched:(id)sender {
-    self.editType = WKEditMediaViewControllerEditTypeNone;
+    //    [self updateUI];
 }
 
 - (IBAction)drawButtonTouched:(id)sender {
-    WKEditMediaViewControllerEditType type = WKEditMediaViewControllerEditTypeDrawColor;
-    self.colorPickerView.color = [self.colorPickerColors objectAtIndex:0];
-    if (self.editType == WKEditMediaViewControllerEditTypeDrawColor) {
-        type = WKEditMediaViewControllerEditTypeDrawGrayscale;
-        self.colorPickerView.color = [self.colorPickerGrayscaleColors objectAtIndex:0];
-    } else if (self.editType == WKEditMediaViewControllerEditTypeDrawGrayscale) {
-        type = WKEditMediaViewControllerEditTypeNone;
+    // Set the next state for the media edit
+    if ([self.mediaEditState state] == SSOMediaEditStateEnumDrawGray) {
+        self.mediaEditState = [SSOMediaEditStateNone new];
+    } else if ([self.mediaEditState state] == SSOMediaEditStateEnumDrawColor) {
+        self.mediaEditState = [SSOMediaEditStateDrawGray new];
+    } else {
+        self.mediaEditState = [SSOMediaEditStateDrawColor new];
     }
-    self.editType = type;
+
+    [self.mediaEditState drawButtonTouched];
 }
 
 - (IBAction)textButtonTouched:(id)sender {
-    WKEditMediaViewControllerEditType type = WKEditMediaViewControllerEditTypeText;
-    if (self.editType == WKEditMediaViewControllerEditTypeText) {
-        type = WKEditMediaViewControllerEditTypeNone;
+    // Set the next state for the media edit
+    if ([self.mediaEditState state] == SSOMediaEditStateEnumText) {
+        self.mediaEditState = [SSOMediaEditStateNone new];
+    } else {
+        self.mediaEditState = [SSOMediaEditStateText new];
     }
-    self.editType = type;
+    [self.mediaEditState textButtonTouched];
 }
 
 - (IBAction)brightnessButtonTouched:(id)sender {
-    WKEditMediaViewControllerEditType type = WKEditMediaViewControllerEditTypeBrightness;
-    if (self.editType == WKEditMediaViewControllerEditTypeBrightness) {
-        type = WKEditMediaViewControllerEditTypeNone;
+    // Set the next state for the media edit
+    if ([self.mediaEditState state] == SSOMediaEditStateEnumBrightness) {
+        self.mediaEditState = [SSOMediaEditStateNone new];
+    } else {
+        self.mediaEditState = [SSOMediaEditStateBrightness new];
     }
-    self.editType = type;
+    [self.mediaEditState brightnessButtonTouched];
 }
 
 - (IBAction)cropButtonTouched:(id)sender {
-
-    self.imageCropperView = [[PECropViewController alloc] init];
-    self.imageCropperView.delegate = self;
-    self.imageCropperView.image = self.imageView.image;
-
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.imageCropperView];
-
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+    // Set the next state for the media edit
+    if ([self.mediaEditState state] == SSOMediaEditStateEnumCrop) {
+        self.mediaEditState = [SSOMediaEditStateNone new];
+    } else {
+        self.mediaEditState = [SSOMediaEditStateCrop new];
     }
+    [self.mediaEditState cropButtonTouched];
 
-    [self presentViewController:navigationController animated:YES completion:nil];
+
     //
     //    WKEditMediaViewControllerEditType type = WKEditMediaViewControllerEditTypeCrop;
     //    if (self.editType == WKEditMediaViewControllerEditTypeCrop) {
@@ -506,13 +301,6 @@ typedef enum {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)cropViewControllerDidCancel:(PECropViewController *)controller {
-    [controller dismissViewControllerAnimated:YES completion:nil];
-}
 
-- (void)cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage {
-
-    [controller dismissViewControllerAnimated:YES completion:nil];
-}
 
 @end
