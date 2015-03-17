@@ -46,6 +46,8 @@
     self.editMediaVC.imageCropperView.delegate = self;
     self.editMediaVC.imageCropperView.cropMode = RSKImageCropModeSquare;
 
+    [self.editMediaVC.navigationController pushViewController:self.editMediaVC.imageCropperView animated:YES];
+
     // L4Z3r : I'll leave the navigationController commented for now as I don't know what should we do for iPad
 
     //    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.editMediaVC.imageCropperView];
@@ -54,14 +56,25 @@
     //        navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
     //    }
     //     [self.editMediaVC presentViewController:navigationController animated:YES completion:nil];
-
-    [self.editMediaVC.navigationController pushViewController:self.editMediaVC.imageCropperView animated:YES];
 }
 
+#pragma mark - RSKImageCropViewControllerDelegate
+
+/**
+ *  RSKImageCropViewControllerDelegate action when pressing back button
+ *
+ *  @param controller the RSKImageCropViewController
+ */
 - (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller {
     [controller.navigationController popViewControllerAnimated:YES];
 }
 
+/**
+ *  RSKImageCropViewControllerDelegate action when pressing confirm button to crop the image
+ *
+ *  @param controller the RSKImageCropViewController
+ *  @param croppedImage the returned cropped image
+ */
 - (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage usingCropRect:(CGRect)cropRect {
     self.editMediaVC.imageView.image = croppedImage;
     [controller.navigationController popViewControllerAnimated:YES];
