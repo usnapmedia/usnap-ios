@@ -6,32 +6,29 @@
 //  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
-#import "BrightnessContrastSlidersView.h"
+#import "BrightnessContrastSlidersContainerView.h"
 
-@interface BrightnessContrastSlidersView ()
+@interface BrightnessContrastSlidersContainerView ()
 @property(weak, nonatomic) IBOutlet UILabel *brightnessLabel;
 @property(weak, nonatomic) IBOutlet UILabel *contrastLabel;
 
 @end
 
-@implementation BrightnessContrastSlidersView
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+@implementation BrightnessContrastSlidersContainerView
 
 - (void)awakeFromNib {
 
     [super awakeFromNib];
-
+    // Set the UI
     [self setLabels];
     [self setSliders];
 }
 
+#pragma mark - UI
+
+/**
+ *  Set the labels
+ */
 - (void)setLabels {
 
     self.brightnessLabel.text = NSLocalizedString(@"brightness", @"");
@@ -47,6 +44,9 @@
     self.contrastLabel.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
 }
 
+/**
+ *  Set the sliders
+ */
 - (void)setSliders {
     [self.brightnessSlider setThumbImage:[UIImage imageNamed:@"sliderCircle.png"] forState:UIControlStateNormal];
     [self.brightnessSlider setMinimumTrackImage:[UIImage imageNamed:@"sliderBar.png"] forState:UIControlStateNormal];

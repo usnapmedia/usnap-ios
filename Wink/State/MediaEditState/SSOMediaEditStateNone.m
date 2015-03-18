@@ -7,6 +7,7 @@
 //
 
 #import "SSOMediaEditStateNone.h"
+#import "SSOMediaEditState+MovingTextview.h"
 
 @implementation SSOMediaEditStateNone
 
@@ -43,7 +44,6 @@
 
 - (void)resetButtonsState {
     self.editMediaVC.drawView.userInteractionEnabled = NO;
-    self.editMediaVC.drawContainerView.hidden = YES;
     self.editMediaVC.drawButton.tintColor = [UIColor whiteColor];
     self.editMediaVC.drawButton.alpha = 1.0f;
 
@@ -51,18 +51,15 @@
     self.editMediaVC.textView.userInteractionEnabled = NO;
     [self.editMediaVC.textView resignFirstResponder];
     self.editMediaVC.textButton.alpha = 1.0f;
+    self.editMediaVC.textButton.tintColor = [UIColor whiteColor];
+
+    self.editMediaVC.brightnessButton.alpha = 1.0f;
+    self.editMediaVC.brightnessButton.tintColor = [UIColor whiteColor];
+
+    self.editMediaVC.cropButton.alpha = 1.0f;
+    self.editMediaVC.cropButton.tintColor = [UIColor whiteColor];
 
     self.editMediaVC.editAccessoriesContainerView.hidden = YES;
-    self.editMediaVC.brightnessButton.alpha = 1.0f;
-
-    self.editMediaVC.cropContainerView.hidden = YES;
-    self.editMediaVC.imageCropperContainerView.hidden = YES;
-    self.editMediaVC.cropButton.alpha = 1.0f;
-    
-    // Remove all the subviews form the accessoriesContainerView
-    if (self.editMediaVC.editAccessoriesContainerView.subviews.count > 0)
-    [[self.editMediaVC.editAccessoriesContainerView subviews]
-                                                   makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
 @end

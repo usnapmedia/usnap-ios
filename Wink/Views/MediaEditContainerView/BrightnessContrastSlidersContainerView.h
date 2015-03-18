@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BrightnessContrastSlidersView : UIView
+@interface BrightnessContrastSlidersContainerView : UIView
 
 @property(weak, nonatomic) IBOutlet UISlider *brightnessSlider;
 @property(weak, nonatomic) IBOutlet UISlider *contrastSlider;

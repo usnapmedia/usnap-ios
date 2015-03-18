@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
-#import "SSOMediaEditState.h"
+#import "SSOMediaEditStateDraw.h"
 
-@interface SSOMediaEditStateDrawGray : SSOMediaEditState
+@interface SSOMediaEditStateDrawGray : SSOMediaEditStateDraw 
 
 @end

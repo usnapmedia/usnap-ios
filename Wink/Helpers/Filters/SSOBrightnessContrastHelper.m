@@ -7,13 +7,13 @@
 //
 
 #import "SSOBrightnessContrastHelper.h"
-#import "BrightnessContrastSlidersView.h"
+#import "BrightnessContrastSlidersContainerView.h"
 
 @interface SSOBrightnessContrastHelper ()
 
-@property(nonatomic, weak) BrightnessContrastSlidersView *view;
-@property (nonatomic) float lastBrightnessValue;
-@property (nonatomic) float lastContrastValue;
+@property(nonatomic, weak) BrightnessContrastSlidersContainerView *view;
+@property(nonatomic) float lastBrightnessValue;
+@property(nonatomic) float lastContrastValue;
 
 @end
 
@@ -21,15 +21,16 @@
 
 #pragma mark - Setter
 
-- (void)setView:(BrightnessContrastSlidersView *)view {
+- (void)setView:(BrightnessContrastSlidersContainerView *)view {
     _view = view;
     [_view.brightnessSlider addTarget:self action:@selector(brightnessValueChanged:) forControlEvents:UIControlEventValueChanged];
     [_view.contrastSlider addTarget:self action:@selector(contrastValueChanged:) forControlEvents:UIControlEventValueChanged];
-    if (self.lastBrightnessValue)
-    [_view.brightnessSlider setValue:self.lastBrightnessValue];
-    if (self.lastContrastValue)
+    if (self.lastBrightnessValue) {
+        [_view.brightnessSlider setValue:self.lastBrightnessValue];
+    }
+    if (self.lastContrastValue) {
         [_view.contrastSlider setValue:self.lastContrastValue];
-
+    }
 }
 
 #pragma mark - Slider actions

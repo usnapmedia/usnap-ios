@@ -15,5 +15,5 @@
  *
  *  @param view the view
  */
-- (void)setView:(BrightnessContrastSlidersView *)view;
+- (void)setView:(BrightnessContrastSlidersContainerView *)view;
 @end

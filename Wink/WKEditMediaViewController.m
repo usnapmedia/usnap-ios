@@ -15,9 +15,21 @@
 #import "SSOMediaEditStateDrawColor.h"
 #import "SSOMediaEditStateBrightness.h"
 
-@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, ACEDrawingViewDelegate>
+#import <Masonry.h>
+
+@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate>
 
 @property(nonatomic, strong) SSOMediaEditState *mediaEditState;
+@property(weak, nonatomic) IBOutlet UIImageView *watermarkImageView;
+@property(weak, nonatomic) IBOutlet UIButton *postButton;
+@property(weak, nonatomic) IBOutlet UIButton *backButton;
+
+@property(nonatomic, strong, readwrite) ACEDrawingView *drawView;
+@property(strong, nonatomic, readwrite) BrightnessContrastSlidersContainerView *brightnessContrastContainerView;
+@property(strong, nonatomic, readwrite) SSOColorPickerContainerView *colorPickerContainerView;
+
+// Helper
+@property(strong, nonatomic, readwrite) SSOBrightnessContrastHelper *brightnessContrastHelper;
 
 @end
 
@@ -41,13 +53,6 @@
         self.imageView.clipsToBounds = YES;
         self.imageView.image = self.image;
         [self.view insertSubview:self.imageView atIndex:0];
-
-        //                self.modifiedImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-        //                self.modifiedImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        //                self.modifiedImageView.contentMode = UIViewContentModeScaleAspectFill;
-        //                self.modifiedImageView.clipsToBounds = YES;
-        //                self.modifiedImageView.image = self.image;
-        //                [self.view insertSubview:self.modifiedImageView atIndex:1];
     }
     // Setup the movie player view
     else {
@@ -65,38 +70,17 @@
         self.cropButton.hidden = YES;
     }
 
-    // Setup the draw view
-    self.drawView = [[ACEDrawingView alloc] initWithFrame:self.view.bounds];
-    self.drawView.delegate = self;
-    self.drawView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.drawView.backgroundColor = [UIColor clearColor];
-    self.drawView.lineWidth = 4.0f;
-    [self.overlayView insertSubview:self.drawView belowSubview:self.watermarkImageView];
-
-    // Setup the draw container view
-    self.drawContainerView.backgroundColor = [UIColor clearColor];
-
-    // Setup the colors for the color picker
-    self.colorPickerColors =
-        [NSArray arrayWithObjects:[UIColor redColor], [UIColor yellowColor], [UIColor greenColor], [UIColor blueColor], [UIColor redColor], nil];
-    self.colorPickerGrayscaleColors = [NSArray arrayWithObjects:[UIColor whiteColor], [UIColor blackColor], nil];
-
     // Setup the text view
     self.textView = [[SSOEditMediaMovableTextView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.overlayView.frame.size.width, 70.0f)];
-    self.textView.delegate = self;
     [self.overlayView insertSubview:self.textView belowSubview:self.watermarkImageView];
-
-   // [self initBrightnessAndContrastUI];
 }
 
-
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     // Reset the state to none
     self.mediaEditState = [SSOMediaEditStateNone new];
     [(SSOMediaEditStateNone *)self.mediaEditState resetButtonsState];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -113,6 +97,79 @@
     [self.moviePlayerView.player pause];
 }
 
+#pragma mark - Getter
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the helper
+ */
+- (SSOBrightnessContrastHelper *)brightnessContrastHelper {
+    if (!_brightnessContrastHelper) {
+        _brightnessContrastHelper = [[SSOBrightnessContrastHelper alloc] init];
+        self.brightnessContrastHelper.imageViewToEdit = self.imageView;
+        self.brightnessContrastHelper.imageToEdit = self.image;
+    }
+    return _brightnessContrastHelper;
+}
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the view
+ */
+- (ACEDrawingView *)drawView {
+    if (!_drawView) {
+        // Setup view
+        _drawView = [[ACEDrawingView alloc] initWithFrame:self.view.frame];
+        _drawView.backgroundColor = [UIColor clearColor];
+        _drawView.lineWidth = 4.0f;
+
+        // Insert view
+        [self.view insertSubview:_drawView aboveSubview:self.overlayView];
+
+        // Set constraints
+        [_drawView mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.edges.equalTo(self.view);
+        }];
+    }
+    return _drawView;
+}
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the view
+ */
+- (BrightnessContrastSlidersContainerView *)brightnessContrastContainerView {
+    if (!_brightnessContrastContainerView) {
+        _brightnessContrastContainerView = [NSBundle loadBrightnessContrastContainerView];
+        // Set the view for the helper
+        [self.brightnessContrastHelper setView:_brightnessContrastContainerView];
+
+        // Insert view
+        [self.editAccessoriesContainerView addSubview:_brightnessContrastContainerView];
+        // Set the container inside the view to have constraints on the edges
+        [_brightnessContrastContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.edges.equalTo(self.editAccessoriesContainerView);
+        }];
+    }
+    return _brightnessContrastContainerView;
+}
+
+- (SSOColorPickerContainerView *)colorPickerContainerView {
+    if (!_colorPickerContainerView) {
+        _colorPickerContainerView = [NSBundle loadColorPickerContainerView];
+        // Insert view
+        [self.editAccessoriesContainerView addSubview:_colorPickerContainerView];
+        // Set the container inside the view to have constraints on the edges
+        [_colorPickerContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.edges.equalTo(self.editAccessoriesContainerView);
+        }];
+    }
+    return _colorPickerContainerView;
+}
+
 #pragma mark - Setter
 
 - (void)setMediaEditState:(SSOMediaEditState *)mediaEditState {
@@ -124,45 +181,44 @@
 #pragma mark - Keyboard Methods
 
 - (void)keyboardWillHide {
+    // Set the type to none and reset the button
     self.mediaEditState = [SSOMediaEditStateNone new];
+    [(SSOMediaEditStateNone *)self.mediaEditState resetButtonsState];
 }
 
 #pragma mark - Touch Methods
 
+//@FIXME
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-
-    CGPoint point = [touches.anyObject locationInView:self.textView];
-    if (CGRectContainsPoint(self.textView.bounds, point) && self.textView.text.length > 0 && self.editType == WKEditMediaViewControllerEditTypeNone) {
-        self.movingTextView = YES;
+    // We have to check since the method is optional
+    if ([self.mediaEditState respondsToSelector:@selector(touchesBegan:withEvent:)]) {
+        [self.mediaEditState touchesBegan:touches withEvent:event];
     }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
-
-    if (self.movingTextView) {
-        CGPoint point = [touches.anyObject locationInView:self.overlayView];
-        self.textView.center = point;
+    // We have to check since the method is optional
+    if ([self.mediaEditState respondsToSelector:@selector(touchesMoved:withEvent:)]) {
+        [self.mediaEditState touchesMoved:touches withEvent:event];
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-
-    self.movingTextView = NO;
+    // We have to check since the method is optional
+    if ([self.mediaEditState respondsToSelector:@selector(touchesEnded:withEvent:)]) {
+        [self.mediaEditState touchesEnded:touches withEvent:event];
+    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesCancelled:touches withEvent:event];
-
-    self.movingTextView = NO;
-}
-
-#pragma mark - Draw View Methods
-
-- (void)drawingView:(ACEDrawingView *)view willBeginDrawUsingTool:(id<ACEDrawingTool>)tool {
-    //    [self updateUI];
+    // We have to check since the method is optional
+    if ([self.mediaEditState respondsToSelector:@selector(touchesCancelled:withEvent:)]) {
+        [self.mediaEditState touchesCancelled:touches withEvent:event];
+    }
 }
 
 #pragma mark - Movie View Methods
@@ -171,39 +227,7 @@
     [self.moviePlayerView.player play];
 }
 
-#pragma mark - Textview Methods
-
-- (void)textViewDidChange:(UITextView *)textView {
-
-    CGPoint center = textView.center;
-    CGSize size = [textView sizeThatFits:textView.superview.bounds.size];
-    textView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
-    textView.center = center;
-
-    NSRange range = [textView.text rangeOfString:@"\n"];
-    if (range.location != NSNotFound) {
-        textView.text = [textView.text stringByReplacingCharactersInRange:range withString:@""];
-        self.editType = WKEditMediaViewControllerEditTypeNone;
-    }
-}
-
-#pragma mark - Crop Image
-
-- (void)cropImage {
-    // self.modifiedImageView.image = self.imageCropperView.croppedImage;
-}
-
 #pragma mark - Button Actions
-
-- (IBAction)selectedColorChanged:(id)sender {
-    //    [self updateUI];
-}
-
-- (IBAction)undoButtonTouched:(id)sender {
-    [self.drawView undoLatestStep];
-
-    //    [self updateUI];
-}
 
 - (IBAction)drawButtonTouched:(id)sender {
     // Set the next state for the media edit
@@ -246,14 +270,6 @@
         self.mediaEditState = [SSOMediaEditStateCrop new];
     }
     [self.mediaEditState cropButtonTouched];
-
-
-    //
-    //    WKEditMediaViewControllerEditType type = WKEditMediaViewControllerEditTypeCrop;
-    //    if (self.editType == WKEditMediaViewControllerEditTypeCrop) {
-    //        type = WKEditMediaViewControllerEditTypeNone;
-    //    }
-    //    self.editType = type;
 }
 
 - (IBAction)postButtonTouched:(id)sender {
@@ -300,7 +316,5 @@
 - (IBAction)backButtonTouched:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
 
 @end

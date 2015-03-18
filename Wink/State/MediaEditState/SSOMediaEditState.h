@@ -20,6 +20,43 @@ typedef enum {
 
 @protocol MediaEditStateProtocol <NSObject>
 
+@optional
+#pragma mark - Touches
+
+/**
+ *  When touch begins
+ *
+ *  @param touches the touches
+ *  @param event   the event
+ */
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+
+/**
+ *  When touch moves
+ *
+ *  @param touches the touches
+ *  @param event   the event
+ */
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
+
+/**
+ *  When touch ends
+ *
+ *  @param touches the touches
+ *  @param event   the event
+ */
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
+
+/**
+ *  When touch cancels
+ *
+ *  @param touches the touches
+ *  @param event   the event
+ */
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
+
+#pragma mark - Actions
+
 /**
  *  Action called when draw button is touched
  */
@@ -45,6 +82,7 @@ typedef enum {
 @interface SSOMediaEditState : NSObject <MediaEditStateProtocol>
 
 @property(weak, nonatomic) WKEditMediaViewController *editMediaVC;
+@property BOOL isTextViewMoving;
 
 /**
  *  Get the current state
