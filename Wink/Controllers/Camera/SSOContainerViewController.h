@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SSOPhotoContainerViewController.h"
+#import "SSOVideoContainerViewController.h"
 
 @interface SSOContainerViewController : UIViewController
+
+/**
+ *  View controllers available inside the container
+ */
+@property(strong, nonatomic) SSOPhotoContainerViewController *photoContainerVC;
+@property(strong, nonatomic) SSOVideoContainerViewController *videoContainerVC;
 
 typedef NS_ENUM(NSInteger, ContainerViewControllerType) {
     /**

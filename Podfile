@@ -15,6 +15,8 @@ pod 'Facebook-iOS-SDK'
 pod 'PonyDebugger'
 pod 'SSFacebookHelper'
 pod "FastttCamera"
+pod 'Masonry', '0.6.1'
+
 
 # Samsao libraries
 

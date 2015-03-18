@@ -72,14 +72,14 @@ typedef enum {
     if (self.image) {
         self.imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
         self.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         self.imageView.clipsToBounds = YES;
         self.imageView.image = self.image;
         [self.view insertSubview:self.imageView atIndex:0];
 
         self.modifiedImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
         self.modifiedImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.modifiedImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.modifiedImageView.contentMode = UIViewContentModeScaleAspectFit;
         self.modifiedImageView.clipsToBounds = YES;
         self.modifiedImageView.image = self.image;
         [self.view insertSubview:self.modifiedImageView atIndex:1];

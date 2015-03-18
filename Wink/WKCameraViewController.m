@@ -177,21 +177,6 @@
     }
 }
 
-#pragma mark - IFTTTFastttCameraDelegate
-
-- (void)cameraController:(FastttCamera *)cameraController didFinishCapturingImage:(FastttCapturedImage *)capturedImage {
-    // Edit the selected media
-    WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
-    controller.image = capturedImage.fullImage;
-    [self.cameraImagePickerController pushViewController:controller animated:YES];
-}
-
-- (void)cameraController:(id<FastttCameraInterface>)cameraController didFinishNormalizingCapturedImage:(FastttCapturedImage *)capturedImage {
-    // Edit the selected media
-    WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
-    controller.image = capturedImage.fullImage;
-    [self.cameraImagePickerController pushViewController:controller animated:YES];
-}
 
 #pragma mark - Button Actions
 

@@ -10,4 +10,6 @@
 
 @interface SSOVideoContainerViewController : UIImagePickerController
 
+@property(nonatomic) CGFloat heightOfTopBlackBar;
+
 @end

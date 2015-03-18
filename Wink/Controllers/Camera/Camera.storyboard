@@ -264,6 +264,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="cameraRotationButton" destination="std-T3-Jlg" id="O5Z-RY-eAd"/>
+                        <outlet property="captureButton" destination="3Nh-k5-MSM" id="R0W-be-dw9"/>
                         <outlet property="containerView" destination="5wM-d9-iM7" id="9Ju-x3-zGo"/>
                         <outlet property="containerViewController" destination="5wM-d9-iM7" id="zXo-rM-jUg"/>
                         <outlet property="flashButton" destination="F1C-vy-mwx" id="ldB-Gt-3ea"/>
@@ -272,6 +273,7 @@
                         <outlet property="photoCenteringConstraint" destination="Qzp-5b-H1d" id="poV-BD-1aG"/>
                         <outlet property="recordingVideoLabel" destination="JrL-gd-Mf6" id="a6o-Vs-KOx"/>
                         <outlet property="settingsButton" destination="T7q-w7-ds4" id="b1W-jd-3g9"/>
+                        <outlet property="topBlackBar" destination="77y-R9-8Qn" id="Wfl-xT-pGz"/>
                         <outlet property="videoAndPhotoContainerView" destination="hhK-sY-xII" id="M9j-Pv-sTY"/>
                         <outlet property="videoButton" destination="FNq-yd-BeJ" id="ppg-ws-RpH"/>
                         <outlet property="videoCenteringConstraint" destination="Rbt-Zh-j4S" id="g7q-St-kvz"/>

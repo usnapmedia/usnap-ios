@@ -7,17 +7,9 @@
 //
 
 #import "SSOContainerViewController.h"
-#import "SSOPhotoContainerViewController.h"
-#import "SSOVideoContainerViewController.h"
 #import "WKImagePickerController.h"
 
 @interface SSOContainerViewController ()
-
-/**
- *  View controllers available inside the container
- */
-@property(strong, nonatomic) SSOPhotoContainerViewController *photoContainerVC;
-@property(strong, nonatomic) SSOVideoContainerViewController *videoContainerVC;
 
 @property(strong, nonatomic) UIViewController *currentVC;
 

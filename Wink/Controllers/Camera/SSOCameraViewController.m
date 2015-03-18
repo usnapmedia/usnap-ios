@@ -11,6 +11,7 @@
 #import "WKSettingsViewController.h"
 #import "WKImagePickerController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "WKNavigationController.h"
 
 #define kTotalVideoRecordingTime 30
 
@@ -27,6 +28,8 @@
 @property(weak, nonatomic) IBOutlet UILabel *recordingVideoLabel;
 @property(weak, nonatomic) IBOutlet UIButton *mediaButton;
 @property(weak, nonatomic) IBOutlet UIButton *settingsButton;
+@property(weak, nonatomic) IBOutlet UIView *topBlackBar;
+@property(weak, nonatomic) IBOutlet UIButton *captureButton;
 
 // View Controllers
 @property(weak, nonatomic) SSOContainerViewController *containerViewController;
@@ -73,7 +76,6 @@
  *  The state of the camera is if the flash is on or not, the video is on or not, is the camera rear facing
  */
 - (void)initializeStateOfCamera {
-    self.isVideoOn = [[NSUserDefaults standardUserDefaults] boolForKey:kIsVideoOn];
     self.isFlashOn = [[NSUserDefaults standardUserDefaults] boolForKey:kIsFlashOn];
     self.isCameraRearFacing = [[NSUserDefaults standardUserDefaults] boolForKey:kIsCameraRearFacing];
 }
@@ -115,8 +117,10 @@
     // Remove flash button
     if (self.isVideoOn) {
         self.flashButton.hidden = YES;
-    } else {
+    } else if (self.isFlashOn) {
         self.flashButton.hidden = NO;
+    } else {
+        self.flashButton.hidden = YES;
     }
 }
 
@@ -128,8 +132,11 @@
     if (self.isFlashOn) {
         [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconON.png"] forState:UIControlStateNormal];
 
+        [self.containerViewController.photoContainerVC flashTurnedOn];
     } else {
         [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconOFF.png"] forState:UIControlStateNormal];
+
+        [self.containerViewController.photoContainerVC flashTurnedOff];
     }
 }
 
@@ -142,8 +149,14 @@
     if (self.isCameraRearFacing) {
         self.flashButton.hidden = YES;
 
+        [self.containerViewController.photoContainerVC rearCameraTurnedOn];
+
     } else {
-        self.flashButton.hidden = NO;
+        if (!self.isVideoOn) {
+            self.flashButton.hidden = NO;
+        }
+
+        [self.containerViewController.photoContainerVC rearCameraTurnedOff];
     }
 }
 
@@ -288,6 +301,8 @@
     if ([segue.identifier isEqualToString:kCameraContainerSegue]) {
         SSOContainerViewController *containerViewController = (SSOContainerViewController *)segue.destinationViewController;
 
+        self.isVideoOn = [[NSUserDefaults standardUserDefaults] boolForKey:kIsVideoOn];
+
         if (self.isVideoOn) {
             [containerViewController setInitialViewController:VideoContainerCamera];
         } else {
@@ -319,6 +334,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     [self updateVideoUI];
+    [self updateFlashUI];
 }
 
 - (IBAction)videoContainerButtonPushed:(id)sender {
@@ -332,11 +348,13 @@
                                             animated:YES];
 
     self.isVideoOn = YES;
+    self.isFlashOn = NO;
 
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsVideoOn];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     [self updateVideoUI];
+    [self updateFlashUI];
 }
 
 #pragma mark Corner Icons
@@ -386,8 +404,50 @@
 }
 
 - (IBAction)settingsButtonTouched:(id)sender {
+
     WKSettingsViewController *controller = [[WKSettingsViewController alloc] initWithNibName:@"WKSettingsViewController" bundle:nil];
-    [self presentViewController:controller animated:YES completion:nil];
+    WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:controller];
+    [self.navigationController.visibleViewController presentViewController:navController animated:YES completion:nil];
+}
+
+#pragma mark Capture Button
+
+- (IBAction)captureButtonPushed:(id)sender {
+    // Send message to photo or video view controller to take photo or video
+    if (self.isVideoOn) {
+
+        // Disable user interaction so that the user doesn't record multiple videos
+
+        self.containerViewController.videoContainerVC.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
+        self.containerViewController.videoContainerVC.heightOfTopBlackBar = self.topBlackBar.frame.size.height;
+
+        if (self.isVideoRecording) {
+            [self.timer invalidate];
+
+            self.videoTimeRemaining = kTotalVideoRecordingTime;
+
+            self.isVideoRecording = NO;
+
+            // Stop recording
+            [self.containerViewController.videoContainerVC stopVideoCapture];
+
+        } else {
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateVideoRecordingLabel:) userInfo:nil repeats:YES];
+            [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+
+            [self.timer fire];
+            self.isVideoRecording = YES;
+
+            // Start recording
+            [self.containerViewController.videoContainerVC startVideoCapture];
+        }
+
+        [self updateVideoRecordingUI];
+
+    } else {
+        self.containerViewController.photoContainerVC.heightOfTopBlackBar = self.topBlackBar.frame.size.height;
+        [self.containerViewController.photoContainerVC takePhoto];
+    }
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -409,31 +469,6 @@
     controller.toolbarHidden = NO;
     controller.mediaTypes = mediaTypes;
     [self presentViewController:controller animated:YES completion:nil];
-}
-
-#pragma mark Capture Button
-
-- (IBAction)captureButtonPushed:(id)sender {
-    // Send message to photo or video view controller to take photo or video
-    if (self.isVideoOn) {
-
-        if (self.isVideoRecording) {
-            [self.timer invalidate];
-
-            self.videoTimeRemaining = kTotalVideoRecordingTime;
-
-            self.isVideoRecording = NO;
-
-        } else {
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateVideoRecordingLabel:) userInfo:nil repeats:YES];
-            [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-
-            [self.timer fire];
-            self.isVideoRecording = YES;
-        }
-
-        [self updateVideoRecordingUI];
-    }
 }
 
 @end
