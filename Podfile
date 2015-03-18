@@ -16,7 +16,7 @@ pod 'PonyDebugger'
 pod 'SSFacebookHelper'
 pod "FastttCamera"
 pod 'Masonry', '0.6.1'
-
+pod 'SVProgressHUD'
 
 # Samsao libraries
 

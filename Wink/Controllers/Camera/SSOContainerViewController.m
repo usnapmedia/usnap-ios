@@ -8,6 +8,7 @@
 
 #import "SSOContainerViewController.h"
 #import "WKImagePickerController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface SSOContainerViewController ()
 

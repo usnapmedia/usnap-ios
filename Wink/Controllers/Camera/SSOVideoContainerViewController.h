@@ -7,9 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VideoRecordingDelegate.h"
 
 @interface SSOVideoContainerViewController : UIImagePickerController
 
 @property(nonatomic) CGFloat heightOfTopBlackBar;
+@property(strong, nonatomic) id<VideoRecordingDelegate> videoDelegate;
+
+/**
+ *  Turn the rear camera off, i.e. turn the front facing camera on
+ */
+- (void)turnRearCameraOff;
+
+/**
+ *  Turn the rear camera on, i.e. turn the front facing camera on
+ */
+- (void)turnRearCameraOn;
 
 @end

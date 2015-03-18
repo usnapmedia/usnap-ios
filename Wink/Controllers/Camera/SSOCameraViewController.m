@@ -12,10 +12,13 @@
 #import "WKImagePickerController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "WKNavigationController.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+#import "VideoRecordingDelegate.h"
+#import "WKEditMediaViewController.h"
 
 #define kTotalVideoRecordingTime 30
 
-@interface SSOCameraViewController () <UIAlertViewDelegate>
+@interface SSOCameraViewController () <UIAlertViewDelegate, VideoRecordingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 // IBOutlets
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *videoCenteringConstraint;
@@ -30,6 +33,7 @@
 @property(weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property(weak, nonatomic) IBOutlet UIView *topBlackBar;
 @property(weak, nonatomic) IBOutlet UIButton *captureButton;
+@property(weak, nonatomic) IBOutlet UIView *bottomContainerView;
 
 // View Controllers
 @property(weak, nonatomic) SSOContainerViewController *containerViewController;
@@ -150,13 +154,16 @@
         self.flashButton.hidden = YES;
 
         [self.containerViewController.photoContainerVC rearCameraTurnedOn];
+        [self.containerViewController.videoContainerVC turnRearCameraOn];
 
     } else {
         if (!self.isVideoOn) {
             self.flashButton.hidden = NO;
+        } else {
+            self.flashButton.hidden = YES;
         }
-
         [self.containerViewController.photoContainerVC rearCameraTurnedOff];
+        [self.containerViewController.videoContainerVC turnRearCameraOff];
     }
 }
 
@@ -228,11 +235,11 @@
     // Add the swipe gestures
     UISwipeGestureRecognizer *swipeRightGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGestureAction:)];
     swipeRightGesture.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.videoAndPhotoContainerView addGestureRecognizer:swipeRightGesture];
+    [self.bottomContainerView addGestureRecognizer:swipeRightGesture];
 
     UISwipeGestureRecognizer *swipeLeftGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGestureAction:)];
     swipeLeftGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.videoAndPhotoContainerView addGestureRecognizer:swipeLeftGesture];
+    [self.bottomContainerView addGestureRecognizer:swipeLeftGesture];
 }
 
 /**
@@ -311,6 +318,9 @@
 
         // Store the container view controller in a property to be used to swap view controller
         self.containerViewController = containerViewController;
+
+        // Set delegate for video view controller to enable user interaction in this vc after the video is done recording
+        self.containerViewController.videoContainerVC.videoDelegate = self;
     }
 }
 
@@ -335,6 +345,7 @@
 
     [self updateVideoUI];
     [self updateFlashUI];
+    [self updateRearCameraFacingUI];
 }
 
 - (IBAction)videoContainerButtonPushed:(id)sender {
@@ -355,6 +366,7 @@
 
     [self updateVideoUI];
     [self updateFlashUI];
+    [self updateRearCameraFacingUI];
 }
 
 #pragma mark Corner Icons
@@ -417,8 +429,6 @@
     if (self.isVideoOn) {
 
         // Disable user interaction so that the user doesn't record multiple videos
-
-        self.containerViewController.videoContainerVC.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
         self.containerViewController.videoContainerVC.heightOfTopBlackBar = self.topBlackBar.frame.size.height;
 
         if (self.isVideoRecording) {
@@ -430,6 +440,12 @@
 
             // Stop recording
             [self.containerViewController.videoContainerVC stopVideoCapture];
+
+            // Loading HUD until the video is done uploading
+            [SVProgressHUD show];
+
+            // Disable user interaction
+            self.view.userInteractionEnabled = NO;
 
         } else {
             self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateVideoRecordingLabel:) userInfo:nil repeats:YES];
@@ -461,14 +477,46 @@
         mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, nil];
     }
 
-    WKImagePickerController *controller = [[WKImagePickerController alloc] init];
-    controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    controller.videoMaximumDuration = 30.0f;
-    controller.allowsEditing = allowsEditing;
+    UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+    controller.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     controller.navigationBarHidden = NO;
+    controller.delegate = self;
     controller.toolbarHidden = NO;
     controller.mediaTypes = mediaTypes;
     [self presentViewController:controller animated:YES completion:nil];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+
+    // If the user chose a video, push to the edit vc with the correct URL
+    if (CFStringCompare((__bridge CFStringRef)mediaType, kUTTypeMovie, 0) == kCFCompareEqualTo) {
+        NSURL *videoURL = (NSURL *)[info objectForKey:UIImagePickerControllerMediaURL];
+
+        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+        controller.mediaURL = videoURL;
+        [self.navigationController pushViewController:controller animated:YES];
+
+    } else if (CFStringCompare((__bridge CFStringRef)mediaType, kUTTypeImage, 0) == kCFCompareEqualTo) {
+        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+        controller.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - VideoRecordingDelegate
+
+- (void)enableUserInteraction {
+    self.view.userInteractionEnabled = YES;
 }
 
 @end

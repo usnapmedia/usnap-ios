@@ -10,8 +10,7 @@
 #import "WKImagePickerController.h"
 #import "FastttCamera.h"
 
-@interface WKCameraViewController : WKViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, FastttCameraDelegate> {
-}
+@interface WKCameraViewController : WKViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, FastttCameraDelegate>
 
 // Camera controller
 @property(nonatomic, strong) WKImagePickerController *cameraImagePickerController;

@@ -356,6 +356,7 @@
 		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB0B89041A8A8FA9005E6869 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		CB0B89051A8A8FA9005E6869 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		CB72FC4E1AB9D98400D0050E /* VideoRecordingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoRecordingDelegate.h; sourceTree = "<group>"; };
 		CB7E40141AB77CFC00CAACFA /* UIStoryboard+USnap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+USnap.h"; sourceTree = "<group>"; };
 		CB7E40151AB77CFC00CAACFA /* UIStoryboard+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+USnap.m"; sourceTree = "<group>"; };
 		CB7E40181AB7806F00CAACFA /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Camera.storyboard; path = Controllers/Camera/Camera.storyboard; sourceTree = "<group>"; };
@@ -508,6 +509,7 @@
 		270DFAFA19AE71BE00067072 /* Wink */ = {
 			isa = PBXGroup;
 			children = (
+				CB72FC4D1AB9D95400D0050E /* Protocol */,
 				1F2C62A01A8E52230038868F /* Categories */,
 				27017DBD19DCA41F0011ECCC /* Video Editing */,
 				27AA31FC19B772CE00558D7E /* Networking */,
@@ -894,6 +896,14 @@
 				1F2C62A41A8E880B0038868F /* SettingsSocialFakeCell.xib */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		CB72FC4D1AB9D95400D0050E /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				CB72FC4E1AB9D98400D0050E /* VideoRecordingDelegate.h */,
+			);
+			name = Protocol;
 			sourceTree = "<group>";
 		};
 		ED65896723BCE61EECA4D660 /* Pods */ = {

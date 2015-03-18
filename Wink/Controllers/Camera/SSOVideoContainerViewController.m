@@ -11,6 +11,9 @@
 #import "SSOCameraViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "WKEditMediaViewController.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+
+#define kMaximumVideoLength 30.0f
 
 @interface SSOVideoContainerViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -31,16 +34,15 @@
     // Setup the camera view
     self.delegate = self;
     self.sourceType = UIImagePickerControllerSourceTypeCamera;
-    self.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+    self.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
     self.cameraDevice = UIImagePickerControllerCameraDeviceRear;
     self.videoQuality = UIImagePickerControllerQualityTypeHigh;
-    self.videoMaximumDuration = 30.0f;
+    self.videoMaximumDuration = kMaximumVideoLength;
     self.showsCameraControls = NO;
     self.navigationBarHidden = YES;
     self.toolbarHidden = YES;
     self.edgesForExtendedLayout = UIRectEdgeAll;
     self.extendedLayoutIncludesOpaqueBars = NO;
-    self.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
 /**
@@ -82,19 +84,15 @@
     adjustedSize.height = ABS(adjustedSize.height);
     if (adjustedSize.width > adjustedSize.height) {
         newRenderSize = CGSizeMake(adjustedSize.height * desiredAspectRatio, adjustedSize.height);
-        //        t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height, -(adjustedSize.width - newRenderSize.width) / 2.0);
         t1 = CGAffineTransformMakeTranslation(-(adjustedSize.width - newRenderSize.width) / 2.0, 0);
 
     } else {
         newRenderSize = CGSizeMake(adjustedSize.width, adjustedSize.width / desiredAspectRatio);
-        //        t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height, -(adjustedSize.height - newRenderSize.height) / 2.0);
 
         t1 = CGAffineTransformMakeTranslation(0, -(adjustedSize.height - newRenderSize.height) / 2.0);
     }
 
     // Make sure the square is portrait
-    //    CGAffineTransform t2 = CGAffineTransformRotate(t1, M_PI_2);
-
     CGAffineTransform newTransform = CGAffineTransformConcat(clipVideoTrack.preferredTransform, t1);
 
     [transformer setTransform:newTransform atTime:kCMTimeZero];
@@ -103,14 +101,12 @@
     instruction.layerInstructions = [NSArray arrayWithObject:transformer];
     videoComposition.instructions = [NSArray arrayWithObject:instruction];
 
-    
-    
     // Create an Export Path to store the cropped video
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *exportPath = [documentsPath stringByAppendingFormat:@"/CroppedVideo.mp4"];
     NSURL *exportUrl = [NSURL fileURLWithPath:exportPath];
 
-    // Remove any prevouis videos at that path
+    // Remove any previous videos at that path
     [[NSFileManager defaultManager] removeItemAtURL:exportUrl error:nil];
 
     // Export square video
@@ -121,6 +117,11 @@
 
     [exporter exportAsynchronouslyWithCompletionHandler:^{
         dispatch_async(dispatch_get_main_queue(), ^{
+            // Dismiss HUD
+            [SVProgressHUD dismiss];
+
+            [self.videoDelegate enableUserInteraction];
+
             // Edit the selected media
             WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
             controller.mediaURL = exporter.outputURL;
@@ -157,6 +158,22 @@
     if (picker != self) {
         [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+#pragma mark - Utilities
+
+- (void)turnRearCameraOff {
+    // Make sure that the source type is UIImagePickerControllerSourceTypeCamera before setting the camera device. It'll crash otherwise
+    self.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+    self.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+}
+
+- (void)turnRearCameraOn {
+    // Make sure that the source type is UIImagePickerControllerSourceTypeCamera before setting the camera device. It'll crash otherwise
+    self.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+    self.cameraDevice = UIImagePickerControllerCameraDeviceFront;
 }
 
 @end
