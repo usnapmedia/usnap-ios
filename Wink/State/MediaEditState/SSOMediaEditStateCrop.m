@@ -42,6 +42,11 @@
 
     self.editMediaVC.editAccessoriesContainerView.hidden = YES;
 
+    [self initCropperVC];
+}
+#pragma mark - Utilities
+
+- (void)initCropperVC {
     RSKImageCropViewController *cropperVC = [[RSKImageCropViewController alloc] initWithImage:self.editMediaVC.imageView.image];
     cropperVC.delegate = self;
     [cropperVC.cancelButton setTitle:NSLocalizedString(@"crop_cancel_button", nil) forState:UIControlStateNormal];

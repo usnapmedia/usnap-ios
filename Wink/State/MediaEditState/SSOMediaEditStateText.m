@@ -32,7 +32,7 @@
 - (void)dealloc {
 
     // Remove the observer
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Utilities
@@ -77,7 +77,7 @@
 
     self.editMediaVC.textView.delegate = self;
     // Add an observer for when the keyboard shows to get it's size
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
 
     self.editMediaVC.textView.returnKeyType = UIReturnKeyDefault;
     self.editMediaVC.textView.editable = YES;
