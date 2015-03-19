@@ -55,7 +55,7 @@
     // Add an observer for when the keyboard shows to get it's size
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
 
-    self.editMediaVC.textView.returnKeyType = UIReturnKeyDone;
+    self.editMediaVC.textView.returnKeyType = UIReturnKeyDefault;
     self.editMediaVC.textView.editable = YES;
     self.editMediaVC.textView.userInteractionEnabled = YES;
     [self.editMediaVC.textView becomeFirstResponder];
