@@ -44,6 +44,9 @@
 
     RSKImageCropViewController *cropperVC = [[RSKImageCropViewController alloc] initWithImage:self.editMediaVC.imageView.image];
     cropperVC.delegate = self;
+    [cropperVC.cancelButton setTitle:NSLocalizedString(@"crop_cancel_button", nil) forState:UIControlStateNormal];
+    [cropperVC.chooseButton setTitle:NSLocalizedString(@"crop_done_button", nil) forState:UIControlStateNormal];
+    [cropperVC.moveAndScaleLabel setText:NSLocalizedString(@"crop_title", nil)];
     //@FIXME: should be based on the format of the image
     cropperVC.cropMode = RSKImageCropModeSquare;
     [self.editMediaVC presentViewController:cropperVC animated:YES completion:nil];
