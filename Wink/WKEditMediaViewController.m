@@ -126,7 +126,7 @@
         _drawView.lineWidth = 4.0f;
 
         // Insert view
-        [self.view insertSubview:_drawView aboveSubview:self.overlayView];
+        [self.overlayView insertSubview:_drawView belowSubview:self.textView];
 
         // Set constraints
         [_drawView mas_makeConstraints:^(MASConstraintMaker *make) {
