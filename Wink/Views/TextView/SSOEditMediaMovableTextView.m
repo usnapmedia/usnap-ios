@@ -8,6 +8,12 @@
 
 #import "SSOEditMediaMovableTextView.h"
 
+@interface SSOEditMediaMovableTextView () <UIGestureRecognizerDelegate>
+
+@property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
+
+@end
+
 @implementation SSOEditMediaMovableTextView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -27,8 +33,40 @@
     self.layer.shadowRadius = 1.0f;
     self.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
     self.returnKeyType = UIReturnKeyDone;
-
+    
+    
+    self.panGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(dragTextViewGesture)];
+    self.panGesture.delegate = self;
+    [self addGestureRecognizer:self.panGesture];
+    
+    UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doubleTapTextView)];
+    doubleTapGesture.numberOfTapsRequired = 2;
+    doubleTapGesture.delegate = self;
+    [self addGestureRecognizer:doubleTapGesture];
+ 
     return self;
+}
+
+-(void)doubleTapTextView {
+    
+    if (self.isFirstResponder) {
+        [self resignFirstResponder];
+    }
+}
+
+-(void)dragTextViewGesture {
+    
+    if (self.isFirstResponder) {
+        [self resignFirstResponder];
+    }
+    CGPoint translation = [self.panGesture translationInView:self.superview];
+    self.panGesture.view.center = CGPointMake(self.panGesture.view.center.x + translation.x,
+                                         self.panGesture.view.center.y + translation.y);
+    [self.panGesture setTranslation:CGPointMake(0, 0) inView:self.superview];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
 }
 
 @end

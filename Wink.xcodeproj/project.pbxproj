@@ -148,7 +148,6 @@
 		7B1F1F931AB90BEF0070B48D /* UIColor+PickerColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F1F921AB90BEF0070B48D /* UIColor+PickerColors.m */; };
 		7B1F1F961AB90C0B0070B48D /* NSBundle+SSOHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F1F951AB90C0B0070B48D /* NSBundle+SSOHelper.m */; };
 		7B1F1F991AB90CA40070B48D /* SSOMediaEditStateDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F1F981AB90CA30070B48D /* SSOMediaEditStateDraw.m */; };
-		7B1F1F9C1AB91AC50070B48D /* SSOMediaEditState+MovingTextview.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F1F9B1AB91AC50070B48D /* SSOMediaEditState+MovingTextview.m */; };
 		7B3F105E1AB73D5A00D0A6B2 /* BrightnessContrastContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F105D1AB73D5A00D0A6B2 /* BrightnessContrastContainerView.xib */; };
 		7B3F10661AB7446800D0A6B2 /* SSOAccessoryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F10651AB7446800D0A6B2 /* SSOAccessoryHelper.m */; };
 		7B3F10691AB745DD00D0A6B2 /* SSOBrightnessContrastHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F10681AB745DD00D0A6B2 /* SSOBrightnessContrastHelper.m */; };
@@ -356,8 +355,6 @@
 		7B1F1F951AB90C0B0070B48D /* NSBundle+SSOHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+SSOHelper.m"; sourceTree = "<group>"; };
 		7B1F1F971AB90CA30070B48D /* SSOMediaEditStateDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; name = SSOMediaEditStateDraw.h; path = State/MediaEditState/SSOMediaEditStateDraw.h; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 		7B1F1F981AB90CA30070B48D /* SSOMediaEditStateDraw.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; name = SSOMediaEditStateDraw.m; path = State/MediaEditState/SSOMediaEditStateDraw.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
-		7B1F1F9A1AB91AC50070B48D /* SSOMediaEditState+MovingTextview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SSOMediaEditState+MovingTextview.h"; sourceTree = "<group>"; };
-		7B1F1F9B1AB91AC50070B48D /* SSOMediaEditState+MovingTextview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SSOMediaEditState+MovingTextview.m"; sourceTree = "<group>"; };
 		7B3F105D1AB73D5A00D0A6B2 /* BrightnessContrastContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BrightnessContrastContainerView.xib; path = XIB/Views/BrightnessContrastContainerView.xib; sourceTree = "<group>"; };
 		7B3F10641AB7446800D0A6B2 /* SSOAccessoryHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOAccessoryHelper.h; path = Helpers/Filters/SSOAccessoryHelper.h; sourceTree = "<group>"; };
 		7B3F10651AB7446800D0A6B2 /* SSOAccessoryHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOAccessoryHelper.m; path = Helpers/Filters/SSOAccessoryHelper.m; sourceTree = "<group>"; };
@@ -471,8 +468,6 @@
 		1F2C62A01A8E52230038868F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				7B1F1F9A1AB91AC50070B48D /* SSOMediaEditState+MovingTextview.h */,
-				7B1F1F9B1AB91AC50070B48D /* SSOMediaEditState+MovingTextview.m */,
 				1F2C62A11A8E52320038868F /* UIImage+Resizing.h */,
 				1F2C62A21A8E52320038868F /* UIImage+Resizing.m */,
 				7B1F1F941AB90C0B0070B48D /* NSBundle+SSOHelper.h */,
@@ -1287,7 +1282,6 @@
 				270DFB0119AE71BE00067072 /* main.m in Sources */,
 				27DF7EB419AFB52800F970AF /* WKCameraViewController.m in Sources */,
 				7BE67C7E1AB8859B009DA9A7 /* SSOMediaEditState.m in Sources */,
-				7B1F1F9C1AB91AC50070B48D /* SSOMediaEditState+MovingTextview.m in Sources */,
 				7BCD1C3F1AB7801800F962F5 /* SSOEditMediaMovableTextView.m in Sources */,
 				27017DC019DCA4460011ECCC /* WKVideoEditor.m in Sources */,
 				27AA323F19B78F8300558D7E /* NSDictionary+WKAdditions.m in Sources */,

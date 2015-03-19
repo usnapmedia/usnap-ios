@@ -7,7 +7,6 @@
 //
 
 #import "SSOMediaEditStateNone.h"
-#import "SSOMediaEditState+MovingTextview.h"
 
 @implementation SSOMediaEditStateNone
 
@@ -47,9 +46,10 @@
     self.editMediaVC.drawButton.tintColor = [UIColor whiteColor];
     self.editMediaVC.drawButton.alpha = 1.0f;
 
-    self.editMediaVC.textView.editable = NO;
-    self.editMediaVC.textView.userInteractionEnabled = NO;
     [self.editMediaVC.textView resignFirstResponder];
+    self.editMediaVC.textView.editable = NO;
+    self.editMediaVC.textView.userInteractionEnabled = YES;
+    self.editMediaVC.textView.selectable = NO;
     self.editMediaVC.textButton.alpha = 1.0f;
     self.editMediaVC.textButton.tintColor = [UIColor whiteColor];
 

@@ -7,7 +7,6 @@
 //
 
 #import "SSOMediaEditStateBrightness.h"
-#import "SSOMediaEditState+MovingTextview.h"
 
 @implementation SSOMediaEditStateBrightness
 
