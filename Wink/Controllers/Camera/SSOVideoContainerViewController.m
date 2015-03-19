@@ -14,6 +14,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "UIImage+FastttCamera.h"
 #import "UIImage+FixOrientation.h"
+#import "AVAsset+VideoOrientation.h"
 
 #define kMaximumVideoLength 30.0f
 
@@ -36,17 +37,8 @@
     // Setup the camera view
     self.delegate = self;
     self.sourceType = UIImagePickerControllerSourceTypeCamera;
-    //    self.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeVideo];
     self.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
-
-    //    self.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-    //    self.videoQuality = UIImagePickerControllerQualityTypeHigh;
-    //    self.videoMaximumDuration = kMaximumVideoLength;
     self.showsCameraControls = NO;
-    //        self.navigationBarHidden = YES;
-    //        self.toolbarHidden = YES;
-    //    self.edgesForExtendedLayout = UIRectEdgeAll;
-    //    self.extendedLayoutIncludesOpaqueBars = NO;
 }
 
 /**
@@ -66,44 +58,28 @@
     // create a video composition and preset some settings
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
     videoComposition.frameDuration = CMTimeMake(1, 30);
-    // here we are setting its render size to its height x height (Square)
-    videoComposition.renderSize = CGSizeMake(fabsf(clipVideoTrack.naturalSize.height), fabsf(clipVideoTrack.naturalSize.height));
-
-    // create a video instruction
-    AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(30, 30));
-
-    AVMutableVideoCompositionLayerInstruction *transformer =
-        [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:clipVideoTrack];
-
-    CGSize newRenderSize;
-
-    CGAffineTransform t1;
 
     // Set your desired output aspect ratio here. 1.0 for square, 16/9.0 for widescreen, etc.
     CGFloat desiredAspectRatio = self.view.bounds.size.height / self.view.bounds.size.width;
+    // here we are setting its render size to its height x height (Square)
     CGSize naturalSize = CGSizeMake(clipVideoTrack.naturalSize.width, clipVideoTrack.naturalSize.height);
     CGSize adjustedSize = CGSizeApplyAffineTransform(naturalSize, clipVideoTrack.preferredTransform);
     adjustedSize.width = ABS(adjustedSize.width);
     adjustedSize.height = ABS(adjustedSize.height);
 
-    if (adjustedSize.width > adjustedSize.height) {
-        newRenderSize = CGSizeMake(adjustedSize.width, adjustedSize.width / desiredAspectRatio);
+    CGFloat newHeight = clipVideoTrack.naturalSize.height * desiredAspectRatio;
+    videoComposition.renderSize = CGSizeMake(clipVideoTrack.naturalSize.height, newHeight);
 
-        t1 = CGAffineTransformMakeTranslation(-(adjustedSize.width - newRenderSize.width) / 2.0, adjustedSize.width);
+    // create a video instruction
+    AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
 
-    } else {
-        newRenderSize = CGSizeMake(adjustedSize.height * desiredAspectRatio, adjustedSize.height);
+    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30));
 
-        t1 = CGAffineTransformMakeTranslation(adjustedSize.height, -(adjustedSize.height - newRenderSize.height) / 2.0);
-    }
+    AVMutableVideoCompositionLayerInstruction *transformer =
+        [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:clipVideoTrack];
 
-    videoComposition.renderSize = newRenderSize;
-
-    // Make sure the square is portrait
-    CGAffineTransform newTransform = CGAffineTransformConcat(clipVideoTrack.preferredTransform, t1);
-
-    [transformer setTransform:newTransform atTime:kCMTimeZero];
+    CGAffineTransform finalTransform = [self fixOrientationWithAsset:asset];
+    [transformer setTransform:finalTransform atTime:kCMTimeZero];
 
     // add the transformer layer instructions, then add to video composition
     instruction.layerInstructions = [NSArray arrayWithObject:transformer];
@@ -120,6 +96,7 @@
     // Export square video
     exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
     exporter.videoComposition = videoComposition;
+
     exporter.outputURL = exportUrl;
     exporter.outputFileType = AVFileTypeQuickTimeMovie;
 
@@ -137,6 +114,69 @@
 
         });
     }];
+}
+
+- (CGAffineTransform)fixOrientationWithAsset:(AVAsset *)asset {
+    CGAffineTransform finalTransform;
+
+    UIImageOrientation videoOrientation = [self getVideoOrientationFromAsset:asset];
+    AVAssetTrack *clipVideoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+
+    CGFloat desiredAspectRatio = self.view.bounds.size.height / self.view.bounds.size.width;
+
+    CGAffineTransform t1 = CGAffineTransformIdentity;
+    CGAffineTransform t2 = CGAffineTransformIdentity;
+    CGFloat newHeight = 0.0f;
+    CGFloat newWidth = 0.0f;
+
+    switch (videoOrientation) {
+    case UIImageOrientationUp: // Good
+        newHeight = clipVideoTrack.naturalSize.height * desiredAspectRatio;
+
+        t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height, -(clipVideoTrack.naturalSize.width - newHeight) / 2);
+        t2 = CGAffineTransformRotate(t1, M_PI_2);
+        break;
+    case UIImageOrientationDown:
+        newHeight = clipVideoTrack.naturalSize.height * desiredAspectRatio;
+
+        t1 = CGAffineTransformMakeTranslation(0, -(clipVideoTrack.naturalSize.width - newHeight) / 2);
+        t2 = CGAffineTransformRotate(t1, -M_PI_2);
+        break;
+    case UIImageOrientationRight: // Good
+        newWidth = clipVideoTrack.naturalSize.width / desiredAspectRatio;
+
+        t1 = CGAffineTransformMakeTranslation(0, -(clipVideoTrack.naturalSize.width - newWidth) / 2);
+        t2 = CGAffineTransformRotate(t1, 0);
+        break;
+    case UIImageOrientationLeft:
+        newHeight = clipVideoTrack.naturalSize.width / desiredAspectRatio;
+
+        t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height, clipVideoTrack.naturalSize.width);
+        t2 = CGAffineTransformRotate(t1, M_PI);
+        break;
+    default:
+        NSLog(@"no supported orientation has been found in this video");
+        break;
+    }
+
+    finalTransform = t2;
+
+    return finalTransform;
+}
+
+- (UIImageOrientation)getVideoOrientationFromAsset:(AVAsset *)asset {
+    AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+    CGSize size = [videoTrack naturalSize];
+    CGAffineTransform txf = [videoTrack preferredTransform];
+
+    if (size.width == txf.tx && size.height == txf.ty)
+        return UIImageOrientationLeft; // return UIInterfaceOrientationLandscapeLeft;
+    else if (txf.tx == 0 && txf.ty == 0)
+        return UIImageOrientationRight; // return UIInterfaceOrientationLandscapeRight;
+    else if (txf.tx == 0 && txf.ty == size.width)
+        return UIImageOrientationDown; // return UIInterfaceOrientationPortraitUpsideDown;
+    else
+        return UIImageOrientationUp; // return UIInterfaceOrientationPortrait;
 }
 
 - (UIImage *)cropImage:(UIImage *)image {

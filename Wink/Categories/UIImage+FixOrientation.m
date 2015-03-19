@@ -14,16 +14,6 @@
 
     UIImageOrientation orientation = self.imageOrientation;
 
-//    if (orientation == UIImageOrientationRight) {
-//        orientation = UIImageOrientationUp;
-//    } else if (orientation == UIImageOrientationDown) {
-//        orientation = UIImageOrientationRight;
-//    } else if (orientation == UIImageOrientationLeft) {
-//        orientation = UIImageOrientationDown;
-//    } else if (orientation == UIImageOrientationUp) {
-//        orientation = UIImageOrientationLeft;
-//    }
-
     if (orientation == UIImageOrientationUp)
         return self;
     CGAffineTransform transform = CGAffineTransformIdentity;
