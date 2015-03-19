@@ -67,6 +67,10 @@
     [self initializeGestures];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Utilities
 
 /**
@@ -74,6 +78,9 @@
  */
 - (void)initializeData {
     self.videoTimeRemaining = kTotalVideoRecordingTime;
+
+    // Register notification when is camera is ready to be swapped
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cameraIsReady:) name:AVCaptureSessionDidStartRunningNotification object:nil];
 }
 
 /**
@@ -235,11 +242,11 @@
     // Add the swipe gestures
     UISwipeGestureRecognizer *swipeRightGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGestureAction:)];
     swipeRightGesture.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.bottomContainerView addGestureRecognizer:swipeRightGesture];
+    [self.view addGestureRecognizer:swipeRightGesture];
 
     UISwipeGestureRecognizer *swipeLeftGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGestureAction:)];
     swipeLeftGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.bottomContainerView addGestureRecognizer:swipeLeftGesture];
+    [self.view addGestureRecognizer:swipeLeftGesture];
 }
 
 /**
@@ -248,7 +255,7 @@
 - (void)animatePhotoVideoSwitch {
     [UIView animateWithDuration:0.5f
                           delay:0.0f
-         usingSpringWithDamping:1.0f
+         usingSpringWithDamping:0.5f
           initialSpringVelocity:1.0f
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{ [self.view layoutIfNeeded]; }
@@ -313,7 +320,7 @@
         if (self.isVideoOn) {
             [containerViewController setInitialViewController:VideoContainerCamera];
         } else {
-            [containerViewController setInitialViewController:PhotoContainerCamera];
+            [containerViewController setInitialViewController:VideoContainerCamera];
         }
 
         // Store the container view controller in a property to be used to swap view controller
@@ -324,12 +331,18 @@
     }
 }
 
+#pragma mark - Notification
+
+- (void)cameraIsReady:(NSNotification *)notification {
+    self.view.userInteractionEnabled = YES;
+}
+
 #pragma mark - IBActions
 
 #pragma mark Video/Photo Buttons
 
 - (IBAction)photoContainerButtonPushed:(id)sender {
-    [self.containerViewController swapToViewControllerOfType:PhotoContainerCamera];
+//    self.view.userInteractionEnabled = NO;
 
     // Animate moving the photo and video buttons with constraints
     [self swapPhotoAndVideoButtonsWithButtonToCenter:self.photoButton
@@ -349,7 +362,7 @@
 }
 
 - (IBAction)videoContainerButtonPushed:(id)sender {
-    [self.containerViewController swapToViewControllerOfType:VideoContainerCamera];
+//    self.view.userInteractionEnabled = NO;
 
     // Animate moving the photo and video buttons with constraints
     [self swapPhotoAndVideoButtonsWithButtonToCenter:self.videoButton
@@ -430,6 +443,7 @@
 
         // Disable user interaction so that the user doesn't record multiple videos
         self.containerViewController.videoContainerVC.heightOfTopBlackBar = self.topBlackBar.frame.size.height;
+        self.containerViewController.videoContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
 
         if (self.isVideoRecording) {
             [self.timer invalidate];
@@ -446,7 +460,6 @@
 
             // Disable user interaction
             self.view.userInteractionEnabled = NO;
-
         } else {
             self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateVideoRecordingLabel:) userInfo:nil repeats:YES];
             [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
@@ -461,8 +474,10 @@
         [self updateVideoRecordingUI];
 
     } else {
+        self.containerViewController.videoContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+
         self.containerViewController.photoContainerVC.heightOfTopBlackBar = self.topBlackBar.frame.size.height;
-        [self.containerViewController.photoContainerVC takePhoto];
+        [self.containerViewController.videoContainerVC takePicture];
     }
 }
 
@@ -484,33 +499,6 @@
     controller.toolbarHidden = NO;
     controller.mediaTypes = mediaTypes;
     [self presentViewController:controller animated:YES completion:nil];
-}
-
-#pragma mark - UIImagePickerControllerDelegate
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-
-    // If the user chose a video, push to the edit vc with the correct URL
-    if (CFStringCompare((__bridge CFStringRef)mediaType, kUTTypeMovie, 0) == kCFCompareEqualTo) {
-        NSURL *videoURL = (NSURL *)[info objectForKey:UIImagePickerControllerMediaURL];
-
-        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
-        controller.mediaURL = videoURL;
-        [self.navigationController pushViewController:controller animated:YES];
-
-    } else if (CFStringCompare((__bridge CFStringRef)mediaType, kUTTypeImage, 0) == kCFCompareEqualTo) {
-        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
-        controller.image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        [self.navigationController pushViewController:controller animated:YES];
-    }
-
-    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - VideoRecordingDelegate

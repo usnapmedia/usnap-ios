@@ -12,6 +12,8 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "WKEditMediaViewController.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "UIImage+FastttCamera.h"
+#import "UIImage+FixOrientation.h"
 
 #define kMaximumVideoLength 30.0f
 
@@ -34,15 +36,17 @@
     // Setup the camera view
     self.delegate = self;
     self.sourceType = UIImagePickerControllerSourceTypeCamera;
+    //    self.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeVideo];
     self.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
-    self.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-    self.videoQuality = UIImagePickerControllerQualityTypeHigh;
-    self.videoMaximumDuration = kMaximumVideoLength;
+
+    //    self.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+    //    self.videoQuality = UIImagePickerControllerQualityTypeHigh;
+    //    self.videoMaximumDuration = kMaximumVideoLength;
     self.showsCameraControls = NO;
-    self.navigationBarHidden = YES;
-    self.toolbarHidden = YES;
-    self.edgesForExtendedLayout = UIRectEdgeAll;
-    self.extendedLayoutIncludesOpaqueBars = NO;
+    //        self.navigationBarHidden = YES;
+    //        self.toolbarHidden = YES;
+    //    self.edgesForExtendedLayout = UIRectEdgeAll;
+    //    self.extendedLayoutIncludesOpaqueBars = NO;
 }
 
 /**
@@ -82,15 +86,19 @@
     CGSize adjustedSize = CGSizeApplyAffineTransform(naturalSize, clipVideoTrack.preferredTransform);
     adjustedSize.width = ABS(adjustedSize.width);
     adjustedSize.height = ABS(adjustedSize.height);
-    if (adjustedSize.width > adjustedSize.height) {
-        newRenderSize = CGSizeMake(adjustedSize.height * desiredAspectRatio, adjustedSize.height);
-        t1 = CGAffineTransformMakeTranslation(-(adjustedSize.width - newRenderSize.width) / 2.0, 0);
 
-    } else {
+    if (adjustedSize.width > adjustedSize.height) {
         newRenderSize = CGSizeMake(adjustedSize.width, adjustedSize.width / desiredAspectRatio);
 
-        t1 = CGAffineTransformMakeTranslation(0, -(adjustedSize.height - newRenderSize.height) / 2.0);
+        t1 = CGAffineTransformMakeTranslation(-(adjustedSize.width - newRenderSize.width) / 2.0, adjustedSize.width);
+
+    } else {
+        newRenderSize = CGSizeMake(adjustedSize.height * desiredAspectRatio, adjustedSize.height);
+
+        t1 = CGAffineTransformMakeTranslation(adjustedSize.height, -(adjustedSize.height - newRenderSize.height) / 2.0);
     }
+
+    videoComposition.renderSize = newRenderSize;
 
     // Make sure the square is portrait
     CGAffineTransform newTransform = CGAffineTransformConcat(clipVideoTrack.preferredTransform, t1);
@@ -131,19 +139,64 @@
     }];
 }
 
+- (UIImage *)cropImage:(UIImage *)image {
+
+    CGSize newRenderSize;
+    CGAffineTransform t1;
+
+    CIImage *coreImage = [CIImage imageWithCGImage:image.CGImage];
+
+    // Set your desired output aspect ratio here. 1.0 for square, 16/9.0 for widescreen, etc.
+    CGFloat desiredAspectRatio = self.view.bounds.size.height / self.view.bounds.size.width;
+    CGSize naturalSize = CGSizeMake(image.size.width, image.size.height);
+    CGSize adjustedSize = naturalSize;
+
+    adjustedSize.width = ABS(naturalSize.height);
+    adjustedSize.height = ABS(naturalSize.width);
+    if (adjustedSize.width > adjustedSize.height) {
+        newRenderSize = CGSizeMake(adjustedSize.height * desiredAspectRatio, adjustedSize.height);
+        t1 = CGAffineTransformMakeTranslation(-(adjustedSize.width - newRenderSize.width) / 2.0, 0);
+
+    } else {
+        newRenderSize = CGSizeMake(adjustedSize.height, adjustedSize.width);
+        t1 = CGAffineTransformMakeTranslation(0, -(adjustedSize.height - newRenderSize.height) / 2.0);
+    }
+
+    coreImage = [coreImage imageByApplyingTransform:t1];
+
+    CGRect rect = CGRectMake(coreImage.extent.origin.x, coreImage.extent.origin.y, newRenderSize.width, newRenderSize.height);
+    UIImage *imageWithCorrectSize = [image fastttCroppedImageFromCropRect:rect];
+
+    return [imageWithCorrectSize fixOrientation];
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    NSURL *mediaURL = nil;
+    UIImage *imageFromCamera = nil;
+    NSURL *videoURL = nil;
 
-    if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
-        mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
-        if (mediaURL == nil) {
-            mediaURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+    //    if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
+    if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeImage)) {
+
+        imageFromCamera = [info objectForKey:UIImagePickerControllerOriginalImage];
+        if (imageFromCamera == nil) {
+            imageFromCamera = [info objectForKey:UIImagePickerControllerOriginalImage];
         }
 
-        [self cropVideo:mediaURL];
+        UIImage *newImage = [self cropImage:imageFromCamera];
+
+        // Edit the selected media
+        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+        controller.image = newImage;
+        [self.navigationController pushViewController:controller animated:YES];
+
+    } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
+
+        videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
+
+        [self cropVideo:videoURL];
     }
 
     // Dismiss the media picker

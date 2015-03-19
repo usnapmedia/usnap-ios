@@ -35,13 +35,15 @@
 
     [self fastttAddChildViewController:self.photoCamera];
 
-    [self.photoCamera.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
-        make.height. and.width.lessThanOrEqualTo(self.view.mas_width).with.priorityHigh();
-        make.height. and.width.lessThanOrEqualTo(self.view.mas_height).with.priorityHigh();
-        make.height. and.width.equalTo(self.view.mas_width).with.priorityLow();
-        make.height. and.width.equalTo(self.view.mas_height).with.priorityLow();
-    }];
+    self.photoCamera.view.frame = self.view.bounds;
+
+//    [self.photoCamera.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.center.equalTo(self.view);
+//        make.height. and.width.lessThanOrEqualTo(self.view.mas_width).with.priorityHigh();
+//        make.height. and.width.lessThanOrEqualTo(self.view.mas_height).with.priorityHigh();
+//        make.height. and.width.equalTo(self.view.mas_width).with.priorityLow();
+//        make.height. and.width.equalTo(self.view.mas_height).with.priorityLow();
+//    }];
 }
 
 - (void)flashTurnedOn {

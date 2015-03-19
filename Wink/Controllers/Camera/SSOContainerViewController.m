@@ -66,8 +66,9 @@
 - (void)swapFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController {
 
     // If the selected view is the same as the current, don't change
-    if (fromViewController == toViewController)
+    if (fromViewController == toViewController) {
         return;
+    }
 
     // Disable the user interaction while transitioning, else there may be errors in the view controllers stack
     [self.parentViewController.view setUserInteractionEnabled:NO];
@@ -91,8 +92,8 @@
         }
         completion:^(BOOL finished) {
             // Remove the other view controller
-            [toViewController didMoveToParentViewController:self];
             [fromViewController removeFromParentViewController];
+            [toViewController didMoveToParentViewController:self];
             // Set current view controller
             self.currentVC = toViewController;
             // Re-enable the user interaction

@@ -155,6 +155,7 @@
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
+		CB15221D1ABA42FC00BBE064 /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15221C1ABA42FC00BBE064 /* UIImage+FixOrientation.m */; };
 		CB7E40161AB77CFC00CAACFA /* UIStoryboard+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E40151AB77CFC00CAACFA /* UIStoryboard+USnap.m */; };
 		CB7E40191AB7806F00CAACFA /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB7E40181AB7806F00CAACFA /* Camera.storyboard */; };
 		CB7E401C1AB782CF00CAACFA /* SSOContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E401B1AB782CF00CAACFA /* SSOContainerViewController.m */; };
@@ -356,6 +357,8 @@
 		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB0B89041A8A8FA9005E6869 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		CB0B89051A8A8FA9005E6869 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		CB15221B1ABA42FC00BBE064 /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
+		CB15221C1ABA42FC00BBE064 /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
 		CB72FC4E1AB9D98400D0050E /* VideoRecordingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoRecordingDelegate.h; sourceTree = "<group>"; };
 		CB7E40141AB77CFC00CAACFA /* UIStoryboard+USnap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+USnap.h"; sourceTree = "<group>"; };
 		CB7E40151AB77CFC00CAACFA /* UIStoryboard+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+USnap.m"; sourceTree = "<group>"; };
@@ -447,6 +450,8 @@
 				1F2C62A21A8E52320038868F /* UIImage+Resizing.m */,
 				CB7E40141AB77CFC00CAACFA /* UIStoryboard+USnap.h */,
 				CB7E40151AB77CFC00CAACFA /* UIStoryboard+USnap.m */,
+				CB15221B1ABA42FC00BBE064 /* UIImage+FixOrientation.h */,
+				CB15221C1ABA42FC00BBE064 /* UIImage+FixOrientation.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1188,6 +1193,7 @@
 				7B650E781A8BDD360060458E /* Constants.m in Sources */,
 				270DFB2B19AE724500067072 /* WKLoginViewController.m in Sources */,
 				2716CB1019C880B900FC226A /* WKImagePickerController.m in Sources */,
+				CB15221D1ABA42FC00BBE064 /* UIImage+FixOrientation.m in Sources */,
 				1F2C629F1A8E508A0038868F /* SSOFacebookLoginButton.m in Sources */,
 				CB7E40161AB77CFC00CAACFA /* UIStoryboard+USnap.m in Sources */,
 				27DF7E4E19AF860E00F970AF /* WKCameraOverlayViewController.m in Sources */,
