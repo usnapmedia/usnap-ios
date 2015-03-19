@@ -44,10 +44,11 @@
     self.editMediaVC.drawButton.tintColor = [UIColor whiteColor];
     self.editMediaVC.drawButton.alpha = 0.5f;
 
+    self.editMediaVC.textView.delegate = self;
+
     self.editMediaVC.textView.editable = YES;
     self.editMediaVC.textView.userInteractionEnabled = YES;
     [self.editMediaVC.textView becomeFirstResponder];
-    self.editMediaVC.textView.delegate = self;
     self.editMediaVC.textButton.alpha = 1.0f;
 
     self.editMediaVC.editAccessoriesContainerView.hidden = YES;
