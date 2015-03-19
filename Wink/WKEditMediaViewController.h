@@ -44,7 +44,6 @@
 
 // Text
 @property(nonatomic, strong) SSOEditMediaMovableTextView *textView;
-@property(nonatomic) BOOL movingTextView;
 
 // Brightness & Contrast
 @property(weak, nonatomic) IBOutlet UIView *editAccessoriesContainerView;

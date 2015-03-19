@@ -97,6 +97,14 @@
     [self.moviePlayerView.player pause];
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    // Remove the keyboard observer
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    // Remove the keyboard
+    [self.textView resignFirstResponder];
+}
+
 #pragma mark - Getter
 
 /**
