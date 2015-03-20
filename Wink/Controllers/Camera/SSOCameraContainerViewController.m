@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
-#import "SSOVideoContainerViewController.h"
+#import "SSOCameraContainerViewController.h"
 #import "WKImagePickerController.h"
 #import "SSOCameraViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -18,11 +18,11 @@
 
 #define kMaximumVideoLength 30.0f
 
-@interface SSOVideoContainerViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface SSOCameraContainerViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
 
-@implementation SSOVideoContainerViewController
+@implementation SSOCameraContainerViewController
 
 #pragma mark - View Controller Life Cycle
 
@@ -41,13 +41,17 @@
     self.showsCameraControls = NO;
 }
 
+// @TODO: Move method to category for AVAssetExportSession
+// @TODO: Add comments
+// @TODO: Simplify
+
 /**
  *  Crop video into a square
  *
  *  @param mediaURL file location for video
  */
-- (void)cropVideo:(NSURL *)mediaURL {
-    AVAssetExportSession *exporter;
+- (void)cropVideo:(NSURL *)mediaURL withStatus:(void (^)(AVAssetExportSessionStatus, AVAssetExportSession *))statusBlock {
+    __block AVAssetExportSession *exporter;
 
     // load our movie Asset
     AVAsset *asset = [AVAsset assetWithURL:mediaURL];
@@ -55,13 +59,14 @@
     // create an avassetrack with our asset
     AVAssetTrack *clipVideoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
 
-    // create a video composition and preset some settings
+    // Create a video composition and preset some settings
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
     videoComposition.frameDuration = CMTimeMake(1, 30);
 
     // Set your desired output aspect ratio here. 1.0 for square, 16/9.0 for widescreen, etc.
     CGFloat desiredAspectRatio = self.view.bounds.size.height / self.view.bounds.size.width;
-    // here we are setting its render size to its height x height (Square)
+
+    // Here we are setting its render size to its height x height (Square)
     CGSize naturalSize = CGSizeMake(clipVideoTrack.naturalSize.width, clipVideoTrack.naturalSize.height);
     CGSize adjustedSize = CGSizeApplyAffineTransform(naturalSize, clipVideoTrack.preferredTransform);
     adjustedSize.width = ABS(adjustedSize.width);
@@ -70,7 +75,7 @@
     CGFloat newHeight = clipVideoTrack.naturalSize.height * desiredAspectRatio;
     videoComposition.renderSize = CGSizeMake(clipVideoTrack.naturalSize.height, newHeight);
 
-    // create a video instruction
+    // Create a video instruction
     AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
 
     instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30));
@@ -78,10 +83,10 @@
     AVMutableVideoCompositionLayerInstruction *transformer =
         [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:clipVideoTrack];
 
-    CGAffineTransform finalTransform = [self fixOrientationWithAsset:asset withVideoComposition:videoComposition];
+    CGAffineTransform finalTransform = [AVAsset fixOrientationWithAsset:asset withVideoComposition:videoComposition withView:self.view];
     [transformer setTransform:finalTransform atTime:kCMTimeZero];
 
-    // add the transformer layer instructions, then add to video composition
+    // Add the transformer layer instructions, then add to video composition
     instruction.layerInstructions = [NSArray arrayWithObject:transformer];
     videoComposition.instructions = [NSArray arrayWithObject:instruction];
 
@@ -93,117 +98,27 @@
     // Remove any previous videos at that path
     [[NSFileManager defaultManager] removeItemAtURL:exportUrl error:nil];
 
-    // Export square video
+    // Export video
     exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
     exporter.videoComposition = videoComposition;
 
     exporter.outputURL = exportUrl;
     exporter.outputFileType = AVFileTypeQuickTimeMovie;
 
+    // @TODO: Add error handling
     [exporter exportAsynchronouslyWithCompletionHandler:^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            // Dismiss HUD
-            [SVProgressHUD dismiss];
-
-            [self.videoDelegate enableUserInteraction];
-
-            // Edit the selected media
-            WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
-            controller.mediaURL = exporter.outputURL;
-            [self.navigationController pushViewController:controller animated:YES];
+            statusBlock(exporter.status, exporter);
 
         });
     }];
 }
 
-- (CGAffineTransform)fixOrientationWithAsset:(AVAsset *)asset withVideoComposition:(AVMutableVideoComposition *)videoComposition {
-
-    CGAffineTransform finalTransform;
-
-    UIImageOrientation videoOrientation = [self getVideoOrientationFromAsset:asset];
-    AVAssetTrack *clipVideoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
-
-    // Set frame of video
-    // Set your desired output aspect ratio here. 1.0 for square, 16/9.0 for widescreen, etc.
-    CGFloat desiredAspectRatio = self.view.bounds.size.height / self.view.bounds.size.width;
-    // here we are setting its render size to its height x height (Square)
-    CGSize naturalSize = CGSizeMake(clipVideoTrack.naturalSize.width, clipVideoTrack.naturalSize.height);
-    CGSize adjustedSize = CGSizeApplyAffineTransform(naturalSize, clipVideoTrack.preferredTransform);
-    adjustedSize.width = ABS(adjustedSize.width);
-    adjustedSize.height = ABS(adjustedSize.height);
-
-    CGFloat newHeight = adjustedSize.height * desiredAspectRatio;
-    CGFloat newWidth = adjustedSize.width * desiredAspectRatio;
-
-    CGAffineTransform t1 = CGAffineTransformIdentity;
-    CGAffineTransform t2 = CGAffineTransformIdentity;
-    CGAffineTransform t3 = CGAffineTransformIdentity;
-
-    videoComposition.renderSize = CGSizeMake(adjustedSize.width, adjustedSize.height);
-
-    switch (videoOrientation) {
-    case UIImageOrientationUp: // Good
-
-        newHeight = adjustedSize.width * desiredAspectRatio;
-        videoComposition.renderSize = CGSizeMake(adjustedSize.width, newHeight);
-
-        t1 = CGAffineTransformRotate(t1, M_PI_2);
-
-        t2 = CGAffineTransformMakeTranslation(adjustedSize.width, -(adjustedSize.height - newHeight) / 2);
-        t3 = CGAffineTransformConcat(t1, t2);
-
-        break;
-    case UIImageOrientationDown:
-        newHeight = adjustedSize.width * desiredAspectRatio;
-        videoComposition.renderSize = CGSizeMake(adjustedSize.width, newHeight);
-
-        t1 = CGAffineTransformRotate(t1, M_PI + M_PI_2);
-
-        t2 = CGAffineTransformMakeTranslation(0, adjustedSize.height - (adjustedSize.height - newHeight) / 2);
-        t3 = CGAffineTransformConcat(t1, t2);
-        break;
-    case UIImageOrientationRight:
-        newWidth = adjustedSize.width / desiredAspectRatio;
-        videoComposition.renderSize = CGSizeMake(newWidth, adjustedSize.height);
-
-        t1 = CGAffineTransformRotate(t1, 0);
-
-        t2 = CGAffineTransformMakeTranslation((adjustedSize.height - newWidth) / 2, 0);
-        t3 = CGAffineTransformConcat(t1, t2);
-        break;
-    case UIImageOrientationLeft:
-        newWidth = adjustedSize.height * desiredAspectRatio;
-        videoComposition.renderSize = CGSizeMake(newWidth, adjustedSize.width);
-
-        t1 = CGAffineTransformRotate(t1, M_PI);
-
-        t2 = CGAffineTransformMakeTranslation(adjustedSize.width - (adjustedSize.width - newWidth) / 2, newWidth);
-        t3 = CGAffineTransformConcat(t1, t2);
-        break;
-    default:
-        NSLog(@"no supported orientation has been found in this video");
-        break;
-    }
-
-    finalTransform = t3;
-
-    return finalTransform;
-}
-
-- (UIImageOrientation)getVideoOrientationFromAsset:(AVAsset *)asset {
-    AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
-    CGSize size = [videoTrack naturalSize];
-    CGAffineTransform txf = [videoTrack preferredTransform];
-
-    if (size.width == txf.tx && size.height == txf.ty)
-        return UIImageOrientationLeft; // return UIInterfaceOrientationLandscapeLeft;
-    else if (txf.tx == 0 && txf.ty == 0)
-        return UIImageOrientationRight; // return UIInterfaceOrientationLandscapeRight;
-    else if (txf.tx == 0 && txf.ty == size.width)
-        return UIImageOrientationDown; // return UIInterfaceOrientationPortraitUpsideDown;
-    else
-        return UIImageOrientationUp; // return UIInterfaceOrientationPortrait;
-}
+// @FIXME: Doesn't crop perfectly well
+// @TODO: Remove FastttCamera
+// @TODO: Add comments
+// @TODO: Move to category
+// Simplify
 
 - (UIImage *)cropImage:(UIImage *)image {
 
@@ -219,6 +134,7 @@
 
     adjustedSize.width = ABS(naturalSize.height);
     adjustedSize.height = ABS(naturalSize.width);
+
     if (adjustedSize.width > adjustedSize.height) {
         newRenderSize = CGSizeMake(adjustedSize.height * desiredAspectRatio, adjustedSize.height);
         t1 = CGAffineTransformMakeTranslation(-(adjustedSize.width - newRenderSize.width) / 2.0, 0);
@@ -243,7 +159,7 @@
     UIImage *imageFromCamera = nil;
     NSURL *videoURL = nil;
 
-    //    if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
+    // If the user took a picture
     if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeImage)) {
 
         imageFromCamera = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -258,25 +174,50 @@
         controller.image = newImage;
         [self.navigationController pushViewController:controller animated:YES];
 
+        // If the user took a video
     } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
 
         videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
+        [self cropVideo:videoURL
+             withStatus:^(AVAssetExportSessionStatus status, AVAssetExportSession *exporter) {
+                 switch (status) {
+                 case AVAssetExportSessionStatusUnknown:
+                     break;
+                 case AVAssetExportSessionStatusWaiting:
+                     break;
+                 case AVAssetExportSessionStatusExporting:
+                     break;
+                 case AVAssetExportSessionStatusCompleted: {
+                     // Dismiss HUD
+                     [SVProgressHUD dismiss];
 
-        [self cropVideo:videoURL];
+                     [self.videoDelegate enableUserInteraction];
+
+                     // Edit the selected media
+                     WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+                     controller.mediaURL = exporter.outputURL;
+                     [self.navigationController pushViewController:controller animated:YES];
+                 } break;
+                 case AVAssetExportSessionStatusFailed:
+
+                     break;
+                 case AVAssetExportSessionStatusCancelled:
+                     break;
+
+                 default:
+                     break;
+                 }
+             }];
     }
 
     // Dismiss the media picker
-    if (picker != self) {
-        [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
+    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 
     // Dismis the media picker
-    if (picker != self) {
-        [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
+    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Utilities
@@ -293,6 +234,18 @@
     self.sourceType = UIImagePickerControllerSourceTypeCamera;
 
     self.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+}
+
+- (void)flashTurnedOn {
+    if ([UIImagePickerController isFlashAvailableForCameraDevice:self.cameraDevice]) {
+        self.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
+    }
+}
+
+- (void)flashTurnedOff {
+    if ([UIImagePickerController isFlashAvailableForCameraDevice:self.cameraDevice]) {
+        self.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
+    }
 }
 
 @end

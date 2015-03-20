@@ -141,13 +141,17 @@
 - (void)updateFlashUI {
     // Change flash button icon
     if (self.isFlashOn) {
-        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconON.png"] forState:UIControlStateNormal];
+        if (self.isVideoOn) {
+            [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconOFF.png"] forState:UIControlStateNormal];
+            [self.containerViewController.cameraContainerVC flashTurnedOff];
 
-        [self.containerViewController.photoContainerVC flashTurnedOn];
+        } else {
+            [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconON.png"] forState:UIControlStateNormal];
+            [self.containerViewController.cameraContainerVC flashTurnedOn];
+        }
     } else {
         [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconOFF.png"] forState:UIControlStateNormal];
-
-        [self.containerViewController.photoContainerVC flashTurnedOff];
+        [self.containerViewController.cameraContainerVC flashTurnedOff];
     }
 }
 
@@ -160,8 +164,7 @@
     if (self.isCameraRearFacing) {
         self.flashButton.hidden = YES;
 
-        [self.containerViewController.photoContainerVC rearCameraTurnedOn];
-        [self.containerViewController.videoContainerVC turnRearCameraOn];
+        [self.containerViewController.cameraContainerVC turnRearCameraOn];
 
     } else {
         if (!self.isVideoOn) {
@@ -169,8 +172,7 @@
         } else {
             self.flashButton.hidden = YES;
         }
-        [self.containerViewController.photoContainerVC rearCameraTurnedOff];
-        [self.containerViewController.videoContainerVC turnRearCameraOff];
+        [self.containerViewController.cameraContainerVC turnRearCameraOff];
     }
 }
 
@@ -224,7 +226,7 @@
  *  @return
  */
 - (NSMutableAttributedString *)setupUIForButtonWithText:(NSString *)text {
-    NSMutableAttributedString *attrStringSelected = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(text, @"").uppercaseString];
+    NSMutableAttributedString *attrStringSelected = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(text, nil).uppercaseString];
     [attrStringSelected addAttribute:NSKernAttributeName
                                value:[NSNumber numberWithInteger:2]
                                range:[attrStringSelected.string rangeOfString:attrStringSelected.string]];
@@ -317,17 +319,21 @@
 
         self.isVideoOn = [[NSUserDefaults standardUserDefaults] boolForKey:kIsVideoOn];
 
+        [containerViewController setInitialViewController];
+        self.containerViewController = containerViewController;
+
         if (self.isVideoOn) {
-            [containerViewController setInitialViewController:VideoContainerCamera];
+            self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
+
         } else {
-            [containerViewController setInitialViewController:VideoContainerCamera];
+            self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
         }
 
         // Store the container view controller in a property to be used to swap view controller
         self.containerViewController = containerViewController;
 
         // Set delegate for video view controller to enable user interaction in this vc after the video is done recording
-        self.containerViewController.videoContainerVC.videoDelegate = self;
+        self.containerViewController.cameraContainerVC.videoDelegate = self;
     }
 }
 
@@ -342,8 +348,6 @@
 #pragma mark Video/Photo Buttons
 
 - (IBAction)photoContainerButtonPushed:(id)sender {
-//    self.view.userInteractionEnabled = NO;
-
     // Animate moving the photo and video buttons with constraints
     [self swapPhotoAndVideoButtonsWithButtonToCenter:self.photoButton
                               andCenteringConstraint:self.photoCenteringConstraint
@@ -352,6 +356,7 @@
                                             animated:YES];
 
     self.isVideoOn = NO;
+    self.isFlashOn = [[NSUserDefaults standardUserDefaults] boolForKey:kIsFlashOn];
 
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kIsVideoOn];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -362,8 +367,6 @@
 }
 
 - (IBAction)videoContainerButtonPushed:(id)sender {
-//    self.view.userInteractionEnabled = NO;
-
     // Animate moving the photo and video buttons with constraints
     [self swapPhotoAndVideoButtonsWithButtonToCenter:self.videoButton
                               andCenteringConstraint:self.videoCenteringConstraint
@@ -401,23 +404,6 @@
     [self updateFlashUI];
 }
 
-- (IBAction)cameraDeviceButtonTouched:(id)sender {
-    if (self.isCameraRearFacing) {
-        self.isCameraRearFacing = NO;
-
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kIsCameraRearFacing];
-
-    } else {
-        self.isCameraRearFacing = YES;
-
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsCameraRearFacing];
-    }
-
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
-    [self updateRearCameraFacingUI];
-}
-
 - (IBAction)mediaButtonTouched:(id)sender {
     // Open a controller that holds the user's photos and videos
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Photo or video?", nil)
@@ -435,6 +421,23 @@
     [self.navigationController.visibleViewController presentViewController:navController animated:YES completion:nil];
 }
 
+- (IBAction)cameraDeviceButtonTouched:(id)sender {
+    if (self.isCameraRearFacing) {
+        self.isCameraRearFacing = NO;
+
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kIsCameraRearFacing];
+
+    } else {
+        self.isCameraRearFacing = YES;
+
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsCameraRearFacing];
+    }
+
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    [self updateRearCameraFacingUI];
+}
+
 #pragma mark Capture Button
 
 - (IBAction)captureButtonPushed:(id)sender {
@@ -442,8 +445,7 @@
     if (self.isVideoOn) {
 
         // Disable user interaction so that the user doesn't record multiple videos
-        self.containerViewController.videoContainerVC.heightOfTopBlackBar = self.topBlackBar.frame.size.height;
-        self.containerViewController.videoContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
+        self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
 
         if (self.isVideoRecording) {
             [self.timer invalidate];
@@ -453,7 +455,7 @@
             self.isVideoRecording = NO;
 
             // Stop recording
-            [self.containerViewController.videoContainerVC stopVideoCapture];
+            [self.containerViewController.cameraContainerVC stopVideoCapture];
 
             // Loading HUD until the video is done uploading
             [SVProgressHUD show];
@@ -468,16 +470,14 @@
             self.isVideoRecording = YES;
 
             // Start recording
-            [self.containerViewController.videoContainerVC startVideoCapture];
+            [self.containerViewController.cameraContainerVC startVideoCapture];
         }
 
         [self updateVideoRecordingUI];
 
     } else {
-        self.containerViewController.videoContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-
-        self.containerViewController.photoContainerVC.heightOfTopBlackBar = self.topBlackBar.frame.size.height;
-        [self.containerViewController.videoContainerVC takePicture];
+        self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+        [self.containerViewController.cameraContainerVC takePicture];
     }
 }
 

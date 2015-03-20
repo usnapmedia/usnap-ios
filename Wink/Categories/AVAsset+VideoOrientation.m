@@ -8,109 +8,80 @@
 
 #import "AVAsset+VideoOrientation.h"
 
-static inline CGFloat RadiansToDegrees(CGFloat radians) { return radians * 180 / M_PI; };
-
 @implementation AVAsset (VideoOrientation)
-@dynamic videoOrientation;
 
-- (LBVideoOrientation)videoOrientation {
-    NSArray *videoTracks = [self tracksWithMediaType:AVMediaTypeVideo];
-    if ([videoTracks count] == 0) {
-        return LBVideoOrientationNotFound;
-    }
++ (CGAffineTransform)fixOrientationWithAsset:(AVAsset *)asset withVideoComposition:(AVMutableVideoComposition *)videoComposition withView:(UIView *)view {
 
-    AVAssetTrack *videoTrack = [videoTracks objectAtIndex:0];
-    CGAffineTransform txf = [videoTrack preferredTransform];
-    CGFloat videoAngleInDegree = RadiansToDegrees(atan2(txf.b, txf.a));
+    CGAffineTransform finalTransform;
 
-    LBVideoOrientation orientation = 0;
-    switch ((int)videoAngleInDegree) {
-    case 0:
-        orientation = LBVideoOrientationRight;
-        break;
-    case 90:
-        orientation = LBVideoOrientationUp;
-        break;
-    case 180:
-        orientation = LBVideoOrientationLeft;
-        break;
-    case -90:
-        orientation = LBVideoOrientationDown;
-        break;
-    default:
-        orientation = LBVideoOrientationNotFound;
-        break;
-    }
+    UIImageOrientation videoOrientation = [self getVideoOrientationFromAsset:asset];
+    AVAssetTrack *clipVideoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
 
-    return orientation;
-}
-
-- (CGAffineTransform)fixOrientation {
-
-    UIImageOrientation orientation = [self getVideoOrientation];
-    CGAffineTransform transform = CGAffineTransformIdentity;
-
-    AVAssetTrack *clipVideoTrack = [[self tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+    // Set frame of video
+    // Set your desired output aspect ratio here. 1.0 for square, 16/9.0 for widescreen, etc.
+    CGFloat desiredAspectRatio = view.bounds.size.height / view.bounds.size.width;
+    // here we are setting its render size to its height x height (Square)
     CGSize naturalSize = CGSizeMake(clipVideoTrack.naturalSize.width, clipVideoTrack.naturalSize.height);
-
     CGSize adjustedSize = CGSizeApplyAffineTransform(naturalSize, clipVideoTrack.preferredTransform);
     adjustedSize.width = ABS(adjustedSize.width);
     adjustedSize.height = ABS(adjustedSize.height);
 
-    if (orientation == UIImageOrientationUp)
-        return transform;
+    CGFloat newHeight = adjustedSize.height * desiredAspectRatio;
+    CGFloat newWidth = adjustedSize.width * desiredAspectRatio;
 
-    //    switch (orientation) {
-    //    case UIImageOrientationDown:
-    //    case UIImageOrientationDownMirrored:
-    //        transform = CGAffineTransformTranslate(transform, adjustedSize.width, adjustedSize.height);
-    //        transform = CGAffineTransformRotate(transform, M_PI);
-    //        break;
-    //
-    //    case UIImageOrientationLeft:
-    //    case UIImageOrientationLeftMirrored:
-    //        transform = CGAffineTransformTranslate(transform, adjustedSize.width, 0);
-    //        transform = CGAffineTransformRotate(transform, M_PI_2);
-    //        break;
-    //
-    //    case UIImageOrientationRight:
-    //    case UIImageOrientationRightMirrored:
-    //        transform = CGAffineTransformTranslate(transform, 0, adjustedSize.height);
-    //        transform = CGAffineTransformRotate(transform, -M_PI_2);
-    //        break;
-    //    case UIImageOrientationUp:
-    //    case UIImageOrientationUpMirrored:
-    //        break;
-    //    }
-    //
-    //    switch (orientation) {
-    //    case UIImageOrientationUpMirrored:
-    //    case UIImageOrientationDownMirrored:
-    //        transform = CGAffineTransformTranslate(transform, adjustedSize.width, 0);
-    //        transform = CGAffineTransformScale(transform, -1, 1);
-    //        break;
-    //
-    //    case UIImageOrientationLeftMirrored:
-    //    case UIImageOrientationRightMirrored:
-    //        transform = CGAffineTransformTranslate(transform, adjustedSize.height, 0);
-    //        transform = CGAffineTransformScale(transform, -1, 1);
-    //        break;
-    //    case UIImageOrientationUp:
-    //    case UIImageOrientationDown:
-    //    case UIImageOrientationLeft:
-    //    case UIImageOrientationRight:
-    //        break;
-    //    }
+    CGAffineTransform t1 = CGAffineTransformIdentity;
+    CGAffineTransform t2 = CGAffineTransformIdentity;
+    CGAffineTransform t3 = CGAffineTransformIdentity;
 
-    CGAffineTransform t1 =
-        CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height, -(clipVideoTrack.naturalSize.width - clipVideoTrack.naturalSize.height * 1.2) / 2);
-    CGAffineTransform t2 = CGAffineTransformRotate(t1, M_PI_2);
+    videoComposition.renderSize = CGSizeMake(adjustedSize.width, adjustedSize.height);
 
-    return t2;
+    switch (videoOrientation) {
+    case UIImageOrientationUp:
+
+        newHeight = adjustedSize.width * desiredAspectRatio;
+        videoComposition.renderSize = CGSizeMake(adjustedSize.width, newHeight);
+
+        t1 = CGAffineTransformRotate(t1, M_PI_2);
+        t2 = CGAffineTransformMakeTranslation(adjustedSize.width, -(adjustedSize.height - newHeight) / 2);
+        t3 = CGAffineTransformConcat(t1, t2);
+
+        break;
+    case UIImageOrientationDown:
+        newHeight = adjustedSize.width * desiredAspectRatio;
+        videoComposition.renderSize = CGSizeMake(adjustedSize.width, newHeight);
+
+        t1 = CGAffineTransformRotate(t1, M_PI + M_PI_2);
+        t2 = CGAffineTransformMakeTranslation(0, adjustedSize.height - (adjustedSize.height - newHeight) / 2);
+        t3 = CGAffineTransformConcat(t1, t2);
+        break;
+    case UIImageOrientationRight:
+        newWidth = adjustedSize.width / desiredAspectRatio;
+        videoComposition.renderSize = CGSizeMake(newWidth, adjustedSize.height);
+
+        t1 = CGAffineTransformRotate(t1, 0);
+        t2 = CGAffineTransformMakeTranslation((adjustedSize.height - newWidth) / 2, 0);
+        t3 = CGAffineTransformConcat(t1, t2);
+        break;
+    case UIImageOrientationLeft:
+        newWidth = adjustedSize.height * desiredAspectRatio;
+        videoComposition.renderSize = CGSizeMake(newWidth, adjustedSize.width);
+
+        t1 = CGAffineTransformRotate(t1, M_PI);
+        t2 = CGAffineTransformMakeTranslation(adjustedSize.width - (adjustedSize.width - newWidth) / 2, newWidth);
+        t3 = CGAffineTransformConcat(t1, t2);
+        break;
+    default:
+        NSLog(@"no supported orientation has been found in this video");
+        break;
+    }
+
+    finalTransform = t3;
+
+    return finalTransform;
 }
 
-- (UIImageOrientation)getVideoOrientation {
-    AVAssetTrack *videoTrack = [[self tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
++ (UIImageOrientation)getVideoOrientationFromAsset:(AVAsset *)asset {
+    AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
     CGSize size = [videoTrack naturalSize];
     CGAffineTransform txf = [videoTrack preferredTransform];
 

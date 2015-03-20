@@ -160,8 +160,7 @@
 		CB7E40161AB77CFC00CAACFA /* UIStoryboard+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E40151AB77CFC00CAACFA /* UIStoryboard+USnap.m */; };
 		CB7E40191AB7806F00CAACFA /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB7E40181AB7806F00CAACFA /* Camera.storyboard */; };
 		CB7E401C1AB782CF00CAACFA /* SSOContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E401B1AB782CF00CAACFA /* SSOContainerViewController.m */; };
-		CB7E401F1AB7844800CAACFA /* SSOPhotoContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E401E1AB7844800CAACFA /* SSOPhotoContainerViewController.m */; };
-		CB7E40221AB7845E00CAACFA /* SSOVideoContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E40211AB7845E00CAACFA /* SSOVideoContainerViewController.m */; };
+		CB7E40221AB7845E00CAACFA /* SSOCameraContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E40211AB7845E00CAACFA /* SSOCameraContainerViewController.m */; };
 		CBBEB8A61AB7870E00FEDAC9 /* SSStoryboardConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBEB8A51AB7870E00FEDAC9 /* SSStoryboardConstants.m */; };
 		CBBEB8A91AB7895B00FEDAC9 /* SSOCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBEB8A81AB7895B00FEDAC9 /* SSOCameraViewController.m */; };
 /* End PBXBuildFile section */
@@ -368,10 +367,8 @@
 		CB7E40181AB7806F00CAACFA /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Camera.storyboard; path = Controllers/Camera/Camera.storyboard; sourceTree = "<group>"; };
 		CB7E401A1AB782CF00CAACFA /* SSOContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOContainerViewController.h; path = Controllers/Camera/SSOContainerViewController.h; sourceTree = "<group>"; };
 		CB7E401B1AB782CF00CAACFA /* SSOContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOContainerViewController.m; path = Controllers/Camera/SSOContainerViewController.m; sourceTree = "<group>"; };
-		CB7E401D1AB7844800CAACFA /* SSOPhotoContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOPhotoContainerViewController.h; path = Controllers/Camera/SSOPhotoContainerViewController.h; sourceTree = "<group>"; };
-		CB7E401E1AB7844800CAACFA /* SSOPhotoContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOPhotoContainerViewController.m; path = Controllers/Camera/SSOPhotoContainerViewController.m; sourceTree = "<group>"; };
-		CB7E40201AB7845E00CAACFA /* SSOVideoContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOVideoContainerViewController.h; path = Controllers/Camera/SSOVideoContainerViewController.h; sourceTree = "<group>"; };
-		CB7E40211AB7845E00CAACFA /* SSOVideoContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOVideoContainerViewController.m; path = Controllers/Camera/SSOVideoContainerViewController.m; sourceTree = "<group>"; };
+		CB7E40201AB7845E00CAACFA /* SSOCameraContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOCameraContainerViewController.h; path = Controllers/Camera/SSOCameraContainerViewController.h; sourceTree = "<group>"; };
+		CB7E40211AB7845E00CAACFA /* SSOCameraContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOCameraContainerViewController.m; path = Controllers/Camera/SSOCameraContainerViewController.m; sourceTree = "<group>"; };
 		CBBEB8A41AB7870E00FEDAC9 /* SSStoryboardConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSStoryboardConstants.h; path = "Supporting Files/SSStoryboardConstants.h"; sourceTree = "<group>"; };
 		CBBEB8A51AB7870E00FEDAC9 /* SSStoryboardConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSStoryboardConstants.m; path = "Supporting Files/SSStoryboardConstants.m"; sourceTree = "<group>"; };
 		CBBEB8A71AB7895B00FEDAC9 /* SSOCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOCameraViewController.h; path = Controllers/Camera/SSOCameraViewController.h; sourceTree = "<group>"; };
@@ -773,10 +770,8 @@
 				CBBEB8A81AB7895B00FEDAC9 /* SSOCameraViewController.m */,
 				CB7E401A1AB782CF00CAACFA /* SSOContainerViewController.h */,
 				CB7E401B1AB782CF00CAACFA /* SSOContainerViewController.m */,
-				CB7E401D1AB7844800CAACFA /* SSOPhotoContainerViewController.h */,
-				CB7E401E1AB7844800CAACFA /* SSOPhotoContainerViewController.m */,
-				CB7E40201AB7845E00CAACFA /* SSOVideoContainerViewController.h */,
-				CB7E40211AB7845E00CAACFA /* SSOVideoContainerViewController.m */,
+				CB7E40201AB7845E00CAACFA /* SSOCameraContainerViewController.h */,
+				CB7E40211AB7845E00CAACFA /* SSOCameraContainerViewController.m */,
 				CB7E40181AB7806F00CAACFA /* Camera.storyboard */,
 			);
 			name = Camera;
@@ -1210,7 +1205,6 @@
 				27AA325E19B8CCAE00558D7E /* UIView+WKAdditions.m in Sources */,
 				27017DC719DDEFDA0011ECCC /* AVAssetTrack+WKAdditions.m in Sources */,
 				CB1522201ABB7F6800BBE064 /* AVAsset+VideoOrientation.m in Sources */,
-				CB7E401F1AB7844800CAACFA /* SSOPhotoContainerViewController.m in Sources */,
 				27AA328719BDF21B00558D7E /* WKShareViewController.m in Sources */,
 				CBBEB8A61AB7870E00FEDAC9 /* SSStoryboardConstants.m in Sources */,
 				27AA325B19B8B06A00558D7E /* UIColor+WKAdditions.m in Sources */,
@@ -1229,7 +1223,7 @@
 				27AA325819B8AF8B00558D7E /* UIFont+WKAdditions.m in Sources */,
 				27DF7E4A19AF802300F970AF /* WKUser.m in Sources */,
 				270DFB2F19AE72AD00067072 /* WKNavigationController.m in Sources */,
-				CB7E40221AB7845E00CAACFA /* SSOVideoContainerViewController.m in Sources */,
+				CB7E40221AB7845E00CAACFA /* SSOCameraContainerViewController.m in Sources */,
 				27AA323C19B78CB700558D7E /* UIAlertView+Blocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
