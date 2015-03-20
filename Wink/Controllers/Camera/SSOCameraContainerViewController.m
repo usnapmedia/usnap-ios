@@ -36,7 +36,10 @@
 - (void)initializeVideoCamera {
     // Setup the camera view
     self.delegate = self;
-    self.sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        self.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+
     self.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
     self.showsCameraControls = NO;
 }
@@ -118,7 +121,7 @@
 // @TODO: Remove FastttCamera
 // @TODO: Add comments
 // @TODO: Move to category
-// Simplify
+// @TODO: Simplify
 
 - (UIImage *)cropImage:(UIImage *)image {
 
@@ -224,16 +227,25 @@
 
 - (void)turnRearCameraOff {
     // Make sure that the source type is UIImagePickerControllerSourceTypeCamera before setting the camera device. It'll crash otherwise
-    self.sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        self.sourceType = UIImagePickerControllerSourceTypeCamera;
 
-    self.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]) {
+            self.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+        }
+    }
 }
 
 - (void)turnRearCameraOn {
     // Make sure that the source type is UIImagePickerControllerSourceTypeCamera before setting the camera device. It'll crash otherwise
-    self.sourceType = UIImagePickerControllerSourceTypeCamera;
 
-    self.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        self.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
+            self.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+        }
+    }
 }
 
 - (void)flashTurnedOn {
