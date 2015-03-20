@@ -14,7 +14,6 @@
 #define USER_FILE_TYPE              @"plist"
 
 // Notifications
-NSString *const kCurrentUserStatusChanged           = @"kCurrentUserStatusChanged";
 NSString *const kCurrentUserInfoUpdated             = @"kCurrentUserInfoUpdated";
 
 // Current User

@@ -155,6 +155,7 @@
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
+		7BCFDA311ABC7FBC00E6D1EF /* SSOGooglePlusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFDA301ABC7FBC00E6D1EF /* SSOGooglePlusHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -346,6 +347,8 @@
 		7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		7B964EB71A8ABC3C00E181C2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		7BCFDA2F1ABC7FBC00E6D1EF /* SSOGooglePlusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOGooglePlusHelper.h; path = Networking/SSOGooglePlusHelper.h; sourceTree = "<group>"; };
+		7BCFDA301ABC7FBC00E6D1EF /* SSOGooglePlusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOGooglePlusHelper.m; path = Networking/SSOGooglePlusHelper.m; sourceTree = "<group>"; };
 		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB0B89041A8A8FA9005E6869 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		CB0B89051A8A8FA9005E6869 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
@@ -743,6 +746,8 @@
 				27AA323519B7739000558D7E /* Wink API */,
 				7B650E821A8D3E690060458E /* WKSocialNetworkHelper.h */,
 				7B650E831A8D3E690060458E /* WKSocialNetworkHelper.m */,
+				7BCFDA2F1ABC7FBC00E6D1EF /* SSOGooglePlusHelper.h */,
+				7BCFDA301ABC7FBC00E6D1EF /* SSOGooglePlusHelper.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -924,7 +929,7 @@
 				ORGANIZATIONNAME = Samsao;
 				TargetAttributes = {
 					270DFAF019AE71BE00067072 = {
-						DevelopmentTeam = QFTKNWRJGJ;
+						DevelopmentTeam = 8UQUNTB23H;
 					};
 					270DFB0B19AE71BE00067072 = {
 						DevelopmentTeam = 8UQUNTB23H;
@@ -1137,6 +1142,7 @@
 				27AA328719BDF21B00558D7E /* WKShareViewController.m in Sources */,
 				27AA325B19B8B06A00558D7E /* UIColor+WKAdditions.m in Sources */,
 				270DFB0119AE71BE00067072 /* main.m in Sources */,
+				7BCFDA311ABC7FBC00E6D1EF /* SSOGooglePlusHelper.m in Sources */,
 				27DF7EB419AFB52800F970AF /* WKCameraViewController.m in Sources */,
 				27017DC019DCA4460011ECCC /* WKVideoEditor.m in Sources */,
 				27AA323F19B78F8300558D7E /* NSDictionary+WKAdditions.m in Sources */,

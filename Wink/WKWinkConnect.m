@@ -36,25 +36,28 @@ NSString *const kWinkConnectAuthorizationDenied = @"kWinkConnectAuthorizationDen
                                 meta:(NSString *)meta
                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    NSString *url = [NSString stringWithFormat:@"%@/users", WINK_API_URL];
+    NSString *url = [NSString stringWithFormat:@"%@/login", WINK_API_URL];
 
     // AFHTTPRequestOperation *operation = [AFHTTPRequestOperation alloc]init
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [manager POST:url parameters:@{ @"email" : email, @"password" : password } success:success failure:failure];
+}
 
-    //    AFHTTPRequestOperation *operation =
-    //        [WKWinkConnect requestWithUrl:url
-    //                                 type:POST
-    //                                 path:nil
-    //                               params:[NSDictionary dictionaryWithObjectsAndKeys:email, @"email", password, @"password", meta, @"meta", nil]
-    //                                 data:nil
-    //                          accessToken:WINK_ACCESS_TOKEN
-    //                              success:success
-    //                              failure:failure];
-    //  [operation start];
-    // return operation;
++ (void)winkConnectRegisterWithUsername:(NSString *)email
+                            password:(NSString *)password
+                                meta:(NSString *)meta
+                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSString *url = [NSString stringWithFormat:@"%@/register", WINK_API_URL];
+    
+    // AFHTTPRequestOperation *operation = [AFHTTPRequestOperation alloc]init
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager POST:url parameters:@{ @"email" : email, @"password" : password } success:success failure:failure];
+    
 }
 
 #pragma mark - Get User Info

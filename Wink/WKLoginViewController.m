@@ -14,6 +14,8 @@
 #import "WKNavigationController.h"
 #import "WKAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "SSOGooglePlusHelper.h"
+#import "WKSocialNetworkHelper.h"
 
 @interface WKLoginViewController ()
 
@@ -23,6 +25,9 @@
 @property(weak, nonatomic) IBOutlet UITextField *passwordTextfield;
 @property(weak, nonatomic) IBOutlet UIButton *loginButton;
 @property(weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+
+@property(strong, nonatomic) SSOGooglePlusHelper *googlePlusHelper;
 
 @end
 
@@ -32,6 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setSocialNetworks];
     [self setUI];
     [self addObservers];
 }
@@ -54,23 +60,37 @@
 - (void)addObservers {
     // Register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)setSocialNetworks {
+
+    self.googlePlusHelper = [SSOGooglePlusHelper sharedInstance];
+
+    TWTRLogInButton *logInButton = [self setTwitterLoginButton];
+    
+    
+    GPPSignInButton *googleLogInButton = [self googlePlusButton];
+    
+
+    logInButton.center = self.view.center;
+    [self.view addSubview:logInButton];
+
+    googleLogInButton.frame = CGRectMake(logInButton.frame.origin.x, self.view.center.y - logInButton.frame.size.height - 20,
+                                         logInButton.frame.size.width, logInButton.frame.size.height);
+    
+    [self.view addSubview:googleLogInButton];
+    
+    // Set the facebook login frame
+    self.facebookLoginButton.frame = CGRectMake(logInButton.frame.origin.x, self.view.center.y + logInButton.frame.size.height + 20,
+                                                logInButton.frame.size.width, logInButton.frame.size.height);
 }
 
 /**
  *  Set the UI of the view on load
  */
 - (void)setUI {
-
-    TWTRLogInButton *logInButton = [self setTwitterLoginButton];
-
-    logInButton.center = self.view.center;
-    [self.view addSubview:logInButton];
-
-    // Set the facebook login frame
-    self.facebookLoginButton.frame = CGRectMake(logInButton.frame.origin.x, self.view.center.y + logInButton.frame.size.height + 20,
-                                                logInButton.frame.size.width, logInButton.frame.size.height);
 
     // Setup the background image
     if (self.isPhone) {
@@ -179,7 +199,7 @@
           [[NSUserDefaults standardUserDefaults] synchronize];
 
           // Push to camera view
-          [self pushToCameraViewController];
+          [WKSocialNetworkHelper pushToCameraViewController];
 
       } else {
           NSLog(@"error: %@", [error localizedDescription]);
@@ -192,15 +212,16 @@
     return logInButton;
 }
 
+- (GPPSignInButton *)googlePlusButton {
+
+    GPPSignInButton *button = [[GPPSignInButton alloc] init];
+
+    return button;
+}
+
 #pragma mark - View utilities
 
-/**
- *  Pushes the user to the camera view controller
- */
-- (void)pushToCameraViewController {
-    // Send notification for the app delegate to handle the switch of controller
-    [[NSNotificationCenter defaultCenter] postNotificationName:kCurrentUserStatusChanged object:nil];
-}
+
 
 #pragma mark - Keyboard Methods
 
@@ -288,7 +309,7 @@
               [[NSUserDefaults standardUserDefaults] synchronize];
 
               // Push the camera view controller
-              [self pushToCameraViewController];
+              [WKSocialNetworkHelper pushToCameraViewController];
 
             }
             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -309,27 +330,60 @@
                           tapBlock:nil];
     }
 }
+- (IBAction)registerWithEmailButtonTouched:(id)sender {
+    
+    UIAlertView *alert =
+    [UIAlertView showWithTitle:NSLocalizedString(@"Signing In...", @"") message:nil cancelButtonTitle:nil otherButtonTitles:nil tapBlock:nil];
+    
+    [WKWinkConnect winkConnectRegisterWithUsername:self.usernameTextfield.text password:self.passwordTextfield.text meta:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [alert dismissWithClickedButtonIndex:0 animated:YES];
+        
+        // Save the account value
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kEmailLoggedValue];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        UIAlertView *alert =
+        [UIAlertView showWithTitle:NSLocalizedString(@"Registered", @"") message:nil cancelButtonTitle:nil otherButtonTitles:nil tapBlock:nil];
+        // Push the camera view controller
+        
+        [alert dismissWithClickedButtonIndex:0 animated:YES];
+
+        [WKSocialNetworkHelper pushToCameraViewController];
+
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [alert dismissWithClickedButtonIndex:0 animated:YES];
+
+        
+    }];
+    
+}
+
 
 - (IBAction)loginWithFacebookButtonTapped:(id)sender {
+    
+    [WKSocialNetworkHelper loginwithSocialFramework:facebookSocialNetwork];
 
-    [SSFacebookHelper login:^() {
-      // Push to camera view
-      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
-      [[NSUserDefaults standardUserDefaults] synchronize];
-
-      // Push the camera view controller
-      [self pushToCameraViewController];
-
-    } onFailure:^(NSError *error) {
-      [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
-      [[NSUserDefaults standardUserDefaults] synchronize];
-
-      [UIAlertView showWithTitle:NSLocalizedString(@"Error", @"")
-                         message:NSLocalizedString(@"There was a problem connecting to Facebook. Please try again later.", @"")
-               cancelButtonTitle:NSLocalizedString(@"OK", @"")
-               otherButtonTitles:nil
-                        tapBlock:nil];
-    }];
+//    [SSFacebookHelper login:^() {
+//      // Push to camera view
+//      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
+//      [[NSUserDefaults standardUserDefaults] synchronize];
+//
+//      // Push the camera view controller
+//      [WKSocialNetworkHelper pushToCameraViewController];
+//
+//    } onFailure:^(NSError *error) {
+//      [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
+//      [[NSUserDefaults standardUserDefaults] synchronize];
+//
+//      [UIAlertView showWithTitle:NSLocalizedString(@"Error", @"")
+//                         message:NSLocalizedString(@"There was a problem connecting to Facebook. Please try again later.", @"")
+//               cancelButtonTitle:NSLocalizedString(@"OK", @"")
+//               otherButtonTitles:nil
+//                        tapBlock:nil];
+//    }];
 }
 
 @end

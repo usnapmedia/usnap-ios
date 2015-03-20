@@ -22,6 +22,12 @@ extern NSString *const kWinkConnectAuthorizationDenied;
                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
++ (void)winkConnectRegisterWithUsername:(NSString *)email
+                               password:(NSString *)password
+                                   meta:(NSString *)meta
+                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 + (AFHTTPRequestOperation *)winkConnectLoginWithUsername:(NSString *)username
                                                 password:(NSString *)password
                                                  success:(void (^)(id response))success

@@ -8,7 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
+
+    facebookSocialNetwork,
+    twitterSocialNetwork,
+    googleSocialNetwork
+
+};
+
 @interface WKSocialNetworkHelper : NSObject
+
+/**
+ *  Return SSKwirkAPI singleton instance
+ *
+ *  @return reference to the singleton
+ */
++ (WKSocialNetworkHelper *)sharedInstance;
 
 /**
  *  Connect the user to social networks by changing the value of the switchers in settings
@@ -41,5 +56,9 @@
  *  @param videoToPost the video to post
  */
 + (void)postVideoToFacebookWithMessage:(NSString *)message andVideo:(NSData *)videoToPost;
+
++ (void)loginwithSocialFramework:(SelectedSocialNetwork)socialNetwork;
+
++ (void)pushToCameraViewController;
 
 @end

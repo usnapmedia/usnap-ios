@@ -19,6 +19,8 @@
 #import <TwitterKit/TwitterKit.h>
 #import <PonyDebugger/PonyDebugger.h>
 
+#import <GooglePlus/GooglePlus.h>
+
 @implementation WKAppDelegate
 
 #pragma mark - App Delegate Methods
@@ -93,13 +95,23 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    if ([[url scheme] isEqualToString:kSchemeFacebook])
+        return [FBSession.activeSession handleOpenURL:url];
+    
+    if ([[url scheme] isEqualToString:kSchemeGooglePlus])
+        return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
+    
+    return NO;
     return [FBSession.activeSession handleOpenURL:url];
 }
+
 
 #pragma mark - Setup State
 
 - (void)setupAnimated:(BOOL)animated {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kEmailLoggedValue]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue] ||
+        [[NSUserDefaults standardUserDefaults] boolForKey:kEmailLoggedValue]) {
         WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
         WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:cameraController];
         self.window.rootViewController = navController;

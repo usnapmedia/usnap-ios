@@ -11,8 +11,11 @@
 #import "WKSettingSocialTableViewCell.h"
 #import "SSOSettingsSocialFakeTableViewCell.h"
 #import "WKSocialNetworkHelper.h"
+#import "SSOGooglePlusHelper.h"
 
 @interface WKSettingsViewController () <WKSettingsSocialCellDelegate>
+
+@property(strong, nonatomic) SSOGooglePlusHelper *googlePlusHelper;
 
 @end
 
@@ -24,6 +27,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.googlePlusHelper = [[SSOGooglePlusHelper alloc] init];
+    
 
     [self.tableView registerNib:[UINib nibWithNibName:@"SettingsSocialCell" bundle:nil] forCellReuseIdentifier:@"SETTINGS_SOCIAL_CELL"];
     [self.tableView registerNib:[UINib nibWithNibName:@"SettingsSocialFakeCell" bundle:nil] forCellReuseIdentifier:@"SETTINGS_SOCIAL_FAKE_CELL"];

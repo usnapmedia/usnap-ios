@@ -11,44 +11,130 @@
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
 #import <Crashlytics/Crashlytics.h>
+#import <GooglePlus.h>
+#import "SSOGooglePlusHelper.h"
+
+
 
 @implementation WKSocialNetworkHelper
 
 #pragma mark - Utilities
 
+/**
+ * @Override
+ * Singleton class
+ */
++ (WKSocialNetworkHelper *)sharedInstance {
+    static WKSocialNetworkHelper *wkSocialNetworkHelper = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+      wkSocialNetworkHelper = [[self alloc] init];
+    });
+    return wkSocialNetworkHelper;
+}
+
+// Login to the corresponding social network
++ (void)loginwithSocialFramework:(SelectedSocialNetwork)socialNetwork {
+
+    if (socialNetwork == facebookSocialNetwork) {
+
+        [SSFacebookHelper login:^{
+          NSLog(@" Facebook token : %@", [FBSession activeSession].accessTokenData);
+            [WKSocialNetworkHelper pushToCameraViewController];
+        } onFailure:^(NSError *error) {
+          NSLog(@" error FB : %@", error);
+        }];
+
+    } else if (socialNetwork == twitterSocialNetwork) {
+
+        [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
+
+          if (session) {
+              [[NSUserDefaults standardUserDefaults] setObject:[session userName] forKey:kTwitterAccountName];
+              [[NSUserDefaults standardUserDefaults] synchronize];
+          } else {
+              NSLog(@"error is : %@", error);
+          }
+        }];
+
+    } else if (socialNetwork == googleSocialNetwork) {
+
+        [[SSOGooglePlusHelper sharedInstance] signIn];
+    }
+}
+
+// Login to the corresponding social network
+- (void)logoutFromSocialFramework:(SelectedSocialNetwork)socialNetwork {
+
+    if (socialNetwork == facebookSocialNetwork) {
+
+        [SSFacebookHelper logout];
+    }
+
+    else if (socialNetwork == twitterSocialNetwork) {
+
+        [[Twitter sharedInstance] logOut];
+
+    }
+
+    else if (socialNetwork == googleSocialNetwork) {
+        [[SSOGooglePlusHelper sharedInstance] signOut];
+    }
+}
+
+/**
+ *  Pushes the user to the camera view controller
+ */
++ (void)pushToCameraViewController {
+    // Send notification for the app delegate to handle the switch of controller
+    [[NSNotificationCenter defaultCenter] postNotificationName:kCurrentUserStatusChanged object:nil];
+}
+
+// // // //
 + (void)manageConnectionToSocialNetwork:(NSString *)socialNetwork withSwitch:(UISwitch *)theSwitch {
 
     // Twitter
     if ([socialNetwork isEqualToString:kTwitterSwitchValue]) {
         if (theSwitch.on) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
+              [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
 
-                    if (session) {
-                        [[NSUserDefaults standardUserDefaults] setObject:[session userName] forKey:kTwitterAccountName];
-                        [[NSUserDefaults standardUserDefaults] synchronize];
-                    } else {
-                        // Set the switch back to no
-                        [theSwitch setOn:NO animated:YES];
-                        NSLog(@"error is : %@", error);
-                    }
-                }];
+                if (session) {
+                    [[NSUserDefaults standardUserDefaults] setObject:[session userName] forKey:kTwitterAccountName];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                } else {
+                    // Set the switch back to no
+                    [theSwitch setOn:NO animated:YES];
+                    NSLog(@"error is : %@", error);
+                }
+              }];
             });
         } else {
             [[Twitter sharedInstance] logOut];
         }
-    } else if ([socialNetwork isEqualToString:kFacebookSwitchValue]) {
+    } // Facebook
+    else if ([socialNetwork isEqualToString:kFacebookSwitchValue]) {
         // Log the user in
         if (theSwitch.on) {
-            [SSFacebookHelper login:^{ CLS_LOG(@"Facebook connected"); }
-                onFailure:^(NSError *error) {
-                    // Set the switch back to no
-                    [theSwitch setOn:NO animated:YES];
-                    CLS_LOG(@"Facebook connection error: %@", error.description);
-                }];
+            [SSFacebookHelper login:^{
+              CLS_LOG(@"Facebook connected");
+            } onFailure:^(NSError *error) {
+              // Set the switch back to no
+              [theSwitch setOn:NO animated:YES];
+              CLS_LOG(@"Facebook connection error: %@", error.description);
+            }];
         } else {
             // Logout
             [SSFacebookHelper logout];
+        }
+    } // Google +
+    else if ([socialNetwork isEqualToString:kGooglePlusSwitchValue]) {
+        // Log the user in
+        if (theSwitch.on) {
+            [[SSOGooglePlusHelper sharedInstance] signIn];
+        } else {
+            // Logout
+            [[SSOGooglePlusHelper sharedInstance] signOut];
         }
     }
 }
@@ -68,18 +154,22 @@
     [params setObject:UIImagePNGRepresentation(imageToPost) forKey:@"picture"];
 
     [SSFacebookHelper postImageWithParameters:params
-        onSuccess:^() { NSLog(@"SUCCESS"); }
+        onSuccess:^() {
+          NSLog(@"SUCCESS");
+        }
         failure:^(NSError *error) { // showing an alert for failure
-            NSLog(@"error: %@", error);
+          NSLog(@"error: %@", error);
         }];
 }
 
 + (void)postVideoToFacebookWithMessage:(NSString *)message andVideo:(NSData *)videoToPost {
     NSMutableDictionary *paramsVideo = [NSMutableDictionary dictionaryWithObjectsAndKeys:videoToPost, @"video.mov", message, @"description", nil];
     [SSFacebookHelper postVideoWithPath:paramsVideo
-        onSuccess:^() { NSLog(@"SUCCESS"); }
+        onSuccess:^() {
+          NSLog(@"SUCCESS");
+        }
         failure:^(NSError *error) { // showing an alert for failure
-            NSLog(@"error: %@", error);
+          NSLog(@"error: %@", error);
         }];
 }
 
@@ -96,48 +186,48 @@
             account = acc;
         }
     }
-    [accountStore
-        requestAccessToAccountsWithType:accountType
-                                options:nil
-                             completion:^(BOOL granted, NSError *error) {
+    
+    [accountStore requestAccessToAccountsWithType:accountType
+                                          options:nil
+                                       completion:^(BOOL granted, NSError *error) {
 
-                                 if (granted == YES) {
-                                     // Check if there is an image to upload (even if there should always be one...)
-                                     if (image) {
-                                         NSData *imageData = UIImageJPEGRepresentation(image, 1.0f);
+                                         if (granted == YES) {
+                                             // Check if there is an image to upload (even if there should always be one...)
+                                             if (image) {
+                                                 NSData *imageData = UIImageJPEGRepresentation(image, 1.0f);
 
-                                         // 1st step is to send the image on Twitter servers
-                                         [self postImageToTwitter:imageData
-                                                       withAccount:account
-                                             withCompletionHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                                                 // Check if the response is good, then if it is send
-                                                 if ([urlResponse statusCode] == 200) {
-                                                     // Make a dic from the response
-                                                     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
-                                                     // Get the media_id number from the dic and transform it into a string
-                                                     NSString *media_id_str = [[dic valueForKey:@"media_id"] stringValue];
-                                                     // If we got a success for the image we can then post the tweet
-                                                     [self postTweetWithMessage:message
-                                                                      onAccount:account
-                                                                     andIdImage:media_id_str
-                                                          withCompletionHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                                                              // Handle the errors
-                                                              if ([urlResponse statusCode] == 200) {
-                                                                  // Tweet has been uploaded
-                                                              } else {
-                                                                  NSLog(@"Error uploading tweet with error : %@", error);
-                                                              }
+                                                 // 1st step is to send the image on Twitter servers
+                                                 [self postImageToTwitter:imageData
+                                                               withAccount:account
+                                                     withCompletionHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                                                       // Check if the response is good, then if it is send
+                                                       if ([urlResponse statusCode] == 200) {
+                                                           // Make a dic from the response
+                                                           NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+                                                           // Get the media_id number from the dic and transform it into a string
+                                                           NSString *media_id_str = [[dic valueForKey:@"media_id"] stringValue];
+                                                           // If we got a success for the image we can then post the tweet
+                                                           [self postTweetWithMessage:message
+                                                                            onAccount:account
+                                                                           andIdImage:media_id_str
+                                                                withCompletionHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                                                                  // Handle the errors
+                                                                  if ([urlResponse statusCode] == 200) {
+                                                                      // Tweet has been uploaded
+                                                                  } else {
+                                                                      NSLog(@"Error uploading tweet with error : %@", error);
+                                                                  }
 
-                                                          }];
+                                                                }];
 
-                                                 } else {
-                                                     NSLog(@"Error uploading photo to Twitter with error : %@", error);
-                                                 }
+                                                       } else {
+                                                           NSLog(@"Error uploading photo to Twitter with error : %@", error);
+                                                       }
 
-                                             }];
-                                     }
-                                 }
-                             }];
+                                                     }];
+                                             }
+                                         }
+                                       }];
 }
 
 /**

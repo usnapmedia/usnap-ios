@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 // Notifications
-extern NSString *const kCurrentUserStatusChanged;
 extern NSString *const kCurrentUserInfoUpdated;
 
 @interface WKUser : NSObject <NSCoding> {

@@ -6,11 +6,17 @@
 //  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
+#pragma mark - URL schemes
+extern NSString *const kCurrentUserStatusChanged;
+
+extern NSString *const kSchemeFacebook;
+extern NSString *const kSchemeGooglePlus;
+
 #pragma mark - API constants
 
 extern NSString *const kTwitterMediaUploadURL;
 extern NSString *const kTwitterTweetUploadURL;
-
+extern NSString *const kGoogleClientId;
 #pragma mark - Notifications
 
 extern NSString *const kSocialNetworkCellSwitchNotification;
