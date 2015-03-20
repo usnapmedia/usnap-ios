@@ -24,3 +24,4 @@ extern NSString *const kTumblrSwitchValue;
 extern NSString *const kInstagramSwitchValue;
 extern NSString *const kTwitterAccountName;
 extern NSString *const kIsFacebookLoggedIn;
+extern NSString *const kEmailLoggedValue;

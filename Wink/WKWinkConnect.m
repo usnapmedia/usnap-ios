@@ -41,11 +41,8 @@ NSString *const kWinkConnectAuthorizationDenied = @"kWinkConnectAuthorizationDen
     // AFHTTPRequestOperation *operation = [AFHTTPRequestOperation alloc]init
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://samwize.com/api/poo/"
-        parameters:@{ @"email" : email,
-                      @"password" : password }
-        success:^(AFHTTPRequestOperation *operation, id responseObject) { NSLog(@"JSON: %@", responseObject); }
-        failure:^(AFHTTPRequestOperation *operation, NSError *error) { NSLog(@"Error: %@", error); }];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager POST:url parameters:@{ @"email" : email, @"password" : password } success:success failure:failure];
 
     //    AFHTTPRequestOperation *operation =
     //        [WKWinkConnect requestWithUrl:url
@@ -163,22 +160,22 @@ NSString *const kWinkConnectAuthorizationDenied = @"kWinkConnectAuthorizationDen
                                 parameters:params
                  constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 
-                     for (NSString *key in data.allKeys) {
-                         NSArray *components = [key componentsSeparatedByString:@"-"];
-                         if (components.count == 3) {
-                             NSError *error2 = nil;
-                             NSString *name = components[0];
-                             NSString *fileName = components[1];
-                             NSString *mimeType = components[2];
+                   for (NSString *key in data.allKeys) {
+                       NSArray *components = [key componentsSeparatedByString:@"-"];
+                       if (components.count == 3) {
+                           NSError *error2 = nil;
+                           NSString *name = components[0];
+                           NSString *fileName = components[1];
+                           NSString *mimeType = components[2];
 
-                             id dataObject = [data objectForKey:key];
-                             if ([dataObject isKindOfClass:[NSData class]]) {
-                                 [formData appendPartWithFileData:(NSData *)dataObject name:name fileName:fileName mimeType:mimeType];
-                             } else if ([dataObject isKindOfClass:[NSURL class]]) {
-                                 [formData appendPartWithFileURL:(NSURL *)dataObject name:name fileName:fileName mimeType:mimeType error:&error2];
-                             }
-                         }
-                     }
+                           id dataObject = [data objectForKey:key];
+                           if ([dataObject isKindOfClass:[NSData class]]) {
+                               [formData appendPartWithFileData:(NSData *)dataObject name:name fileName:fileName mimeType:mimeType];
+                           } else if ([dataObject isKindOfClass:[NSURL class]]) {
+                               [formData appendPartWithFileURL:(NSURL *)dataObject name:name fileName:fileName mimeType:mimeType error:&error2];
+                           }
+                       }
+                   }
 
                  } error:&error];
     }
@@ -188,19 +185,19 @@ NSString *const kWinkConnectAuthorizationDenied = @"kWinkConnectAuthorizationDen
     // Create the operation that expects a JSON as a response
     AFHTTPRequestOperation *operation = [manager HTTPRequestOperationWithRequest:request
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            if (success) {
-                success(responseObject);
-            }
+          if (success) {
+              success(responseObject);
+          }
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            if (failure) {
-                failure(error, operation.responseObject);
-            }
+          if (failure) {
+              failure(error, operation.responseObject);
+          }
 
-            // If receving a 403 error code then log the user out
-            if (operation.response.statusCode == 403) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:kWinkConnectAuthorizationDenied object:nil];
-            }
+          // If receving a 403 error code then log the user out
+          if (operation.response.statusCode == 403) {
+              [[NSNotificationCenter defaultCenter] postNotificationName:kWinkConnectAuthorizationDenied object:nil];
+          }
         }];
 
     return operation;

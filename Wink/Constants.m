@@ -24,3 +24,4 @@ NSString *const kTumblrSwitchValue = @"TumblSwitchValue";
 NSString *const kInstagramSwitchValue = @"InstagramSwitchValue";
 NSString *const kIsFacebookLoggedIn = @"kIsFacebookLoggedIn";
 NSString *const kTwitterAccountName = @"kTwitterAccountName";
+NSString *const kEmailLoggedValue = @"kEmailLoggedValue";

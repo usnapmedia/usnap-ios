@@ -28,29 +28,42 @@
 
 @implementation WKLoginViewController
 
-#pragma mark - View Methods
+#pragma mark - View LifeCycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUI];
+    [self addObservers];
+}
 
-    TWTRLogInButton *logInButton = [TWTRLogInButton buttonWithLogInCompletion:^(TWTRSession *session, NSError *error) {
-        // play with Twitter session
-        if (session) {
-            NSLog(@"signed in as %@", [session userName]);
-            // Save the account value
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kTwitterSwitchValue];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self setupViewForAnimation];
+}
 
-            // Push to camera view
-            [self pushToCameraViewController];
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
-        } else {
-            NSLog(@"error: %@", [error localizedDescription]);
-            // Save the account value
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kTwitterSwitchValue];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
-    }];
+#pragma mark - Utilities
+
+/**
+ *  Add observers to the VC
+ */
+- (void)addObservers {
+    // Register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+/**
+ *  Set the UI of the view on load
+ */
+- (void)setUI {
+
+    TWTRLogInButton *logInButton = [self setTwitterLoginButton];
 
     logInButton.center = self.view.center;
     [self.view addSubview:logInButton];
@@ -58,11 +71,6 @@
     // Set the facebook login frame
     self.facebookLoginButton.frame = CGRectMake(logInButton.frame.origin.x, self.view.center.y + logInButton.frame.size.height + 20,
                                                 logInButton.frame.size.width, logInButton.frame.size.height);
-
-    // Register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
     // Setup the background image
     if (self.isPhone) {
@@ -89,8 +97,10 @@
     [self.loginButton setTitle:NSLocalizedString(@"Sign In", @"").uppercaseString forState:UIControlStateNormal];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+/**
+ *  Set UI to display animations when the view appears
+ */
+- (void)setupViewForAnimation {
 
     // Setup textfields and button for animation
     self.usernameTextfield.transform = CGAffineTransformMakeScale(0.001f, 0.001f);
@@ -99,51 +109,87 @@
     self.passwordTextfield.alpha = 0.0f;
     self.loginButton.transform = CGAffineTransformMakeScale(0.001f, 0.001f);
     self.loginButton.alpha = 0.0f;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        CGFloat duration = 0.5f;
-        CGFloat delay = 0.2f;
+      CGFloat duration = 0.5f;
+      CGFloat delay = 0.2f;
 
-        CGFloat damping = 0.55f;
-        CGFloat velocity = 0.75f;
+      CGFloat damping = 0.55f;
+      CGFloat velocity = 0.75f;
 
-        [UIView animateWithDuration:duration
-                              delay:(delay * 0.0f)
-             usingSpringWithDamping:damping
-              initialSpringVelocity:velocity
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             self.usernameTextfield.transform = CGAffineTransformIdentity;
-                             self.usernameTextfield.alpha = 1.0f;
-                         }
-                         completion:nil];
+      [UIView animateWithDuration:duration
+                            delay:(delay * 0.0f)
+           usingSpringWithDamping:damping
+            initialSpringVelocity:velocity
+                          options:UIViewAnimationOptionCurveLinear
+                       animations:^{
+                         self.facebookLoginButton.transform = CGAffineTransformIdentity;
+                         self.facebookLoginButton.alpha = 1.0f;
+                       }
+                       completion:nil];
 
-        [UIView animateWithDuration:duration
-                              delay:(delay * 1.0f)
-             usingSpringWithDamping:damping
-              initialSpringVelocity:velocity
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             self.passwordTextfield.transform = CGAffineTransformIdentity;
-                             self.passwordTextfield.alpha = 1.0f;
-                         }
-                         completion:nil];
+      [UIView animateWithDuration:duration
+                            delay:(delay * 1.0f)
+           usingSpringWithDamping:damping
+            initialSpringVelocity:velocity
+                          options:UIViewAnimationOptionCurveLinear
+                       animations:^{
+                         self.usernameTextfield.transform = CGAffineTransformIdentity;
+                         self.usernameTextfield.alpha = 1.0f;
+                       }
+                       completion:nil];
 
-        [UIView animateWithDuration:duration
-                              delay:(delay * 2.0f)
-             usingSpringWithDamping:damping
-              initialSpringVelocity:velocity
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             self.loginButton.transform = CGAffineTransformIdentity;
-                             self.loginButton.alpha = 1.0f;
-                         }
-                         completion:nil];
+      [UIView animateWithDuration:duration
+                            delay:(delay * 2.0f)
+           usingSpringWithDamping:damping
+            initialSpringVelocity:velocity
+                          options:UIViewAnimationOptionCurveLinear
+                       animations:^{
+                         self.passwordTextfield.transform = CGAffineTransformIdentity;
+                         self.passwordTextfield.alpha = 1.0f;
+                       }
+                       completion:nil];
+
+      [UIView animateWithDuration:duration
+                            delay:(delay * 3.0f)
+           usingSpringWithDamping:damping
+            initialSpringVelocity:velocity
+                          options:UIViewAnimationOptionCurveLinear
+                       animations:^{
+                         self.loginButton.transform = CGAffineTransformIdentity;
+                         self.loginButton.alpha = 1.0f;
+                       }
+                       completion:nil];
     });
+}
+
+/**
+ *  Set the twitter's login button
+ *
+ *  @return the button
+ */
+- (TWTRLogInButton *)setTwitterLoginButton {
+
+    TWTRLogInButton *logInButton = [TWTRLogInButton buttonWithLogInCompletion:^(TWTRSession *session, NSError *error) {
+      // play with Twitter session
+      if (session) {
+          NSLog(@"signed in as %@", [session userName]);
+          // Save the account value
+          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kTwitterSwitchValue];
+          [[NSUserDefaults standardUserDefaults] synchronize];
+
+          // Push to camera view
+          [self pushToCameraViewController];
+
+      } else {
+          NSLog(@"error: %@", [error localizedDescription]);
+          // Save the account value
+          [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kTwitterSwitchValue];
+          [[NSUserDefaults standardUserDefaults] synchronize];
+      }
+    }];
+
+    return logInButton;
 }
 
 #pragma mark - View utilities
@@ -158,6 +204,11 @@
 
 #pragma mark - Keyboard Methods
 
+/**
+ *  Listen to the UIKeyboardWillShow notifcation and move the view up
+ *
+ *  @param notification UIKeyboardWillShow
+ */
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGFloat animationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     UIViewAnimationOptions animationCurve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue];
@@ -166,10 +217,17 @@
     [UIView animateWithDuration:animationDuration
                           delay:0.0f
                         options:animationCurve
-                     animations:^{ self.view.transform = CGAffineTransformMakeTranslation(0.0f, -size.height); }
+                     animations:^{
+                       self.view.transform = CGAffineTransformMakeTranslation(0.0f, -size.height);
+                     }
                      completion:nil];
 }
 
+/**
+ *  Listen to the UIKeyboardWillHide notifcation and move the view down
+ *
+ *  @param notification UIKeyboardWillHide
+ */
 - (void)keyboardWillHide:(NSNotification *)notification {
     CGFloat animationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     UIViewAnimationOptions animationCurve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue];
@@ -177,7 +235,9 @@
     [UIView animateWithDuration:animationDuration
                           delay:0.0f
                         options:animationCurve
-                     animations:^{ self.view.transform = CGAffineTransformIdentity; }
+                     animations:^{
+                       self.view.transform = CGAffineTransformIdentity;
+                     }
                      completion:nil];
 }
 
@@ -210,43 +270,36 @@
 
     if (self.usernameTextfield.text.length > 0 && self.passwordTextfield.text.length > 0) {
 
+        // Show an alertView with no buttons, will change this later with SVProgress or something else
+        // TODO: change this with SVProgress or something else
         UIAlertView *alert =
             [UIAlertView showWithTitle:NSLocalizedString(@"Signing In...", @"") message:nil cancelButtonTitle:nil otherButtonTitles:nil tapBlock:nil];
-        
-        
-        [WKWinkConnect winkConnectLoginWithUsername:self.usernameTextfield.text password:self.passwordTextfield.text meta:@"meta" success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            
-        }];
-        
-        [WKWinkConnect winkConnectLoginWithUsername:self.usernameTextfield.text password:self.passwordTextfield.text success:^(id response) {
-            
-        } failure:^(NSError *error, id response) {
-            
-        }];
 
         [WKWinkConnect winkConnectLoginWithUsername:self.usernameTextfield.text
             password:self.passwordTextfield.text
-            success:^(id response) {
+            meta:@"meta"
+            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              // Dismiss the alert
+              [alert dismissWithClickedButtonIndex:0 animated:YES];
+              NSLog(@"JSON: %@", responseObject);
 
-                [alert dismissWithClickedButtonIndex:0 animated:YES];
+              // Save the account value
+              [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kEmailLoggedValue];
+              [[NSUserDefaults standardUserDefaults] synchronize];
 
-                NSDictionary *responseDict = (NSDictionary *)response;
-                WKUser *user = [[WKUser alloc] initWithDictionary:responseDict];
-                [WKUser loginUser:user];
+              // Push the camera view controller
+              [self pushToCameraViewController];
 
             }
-            failure:^(NSError *error, id response) {
-                NSLog(@"%@", error.description);
-
-                [alert dismissWithClickedButtonIndex:0 animated:YES];
-
-                [UIAlertView showWithTitle:NSLocalizedString(@"Error", @"")
-                                   message:NSLocalizedString(@"Please verify your username and password are correct and try again!", @"")
-                         cancelButtonTitle:NSLocalizedString(@"ok", @"")
-                         otherButtonTitles:nil
-                                  tapBlock:nil];
+            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+              // Dismiss the alert
+              [alert dismissWithClickedButtonIndex:0 animated:YES];
+              [UIAlertView showWithTitle:NSLocalizedString(@"Error", @"")
+                                 message:NSLocalizedString(@"Please verify your username and password are correct and try again!", @"")
+                       cancelButtonTitle:NSLocalizedString(@"ok", @"")
+                       otherButtonTitles:nil
+                                tapBlock:nil];
             }];
     } else {
         [UIAlertView showWithTitle:NSLocalizedString(@"Missing Information", @"")
@@ -260,22 +313,22 @@
 - (IBAction)loginWithFacebookButtonTapped:(id)sender {
 
     [SSFacebookHelper login:^() {
-        // Push to camera view
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+      // Push to camera view
+      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
+      [[NSUserDefaults standardUserDefaults] synchronize];
 
-        // Push the camera view controller
-        [self pushToCameraViewController];
+      // Push the camera view controller
+      [self pushToCameraViewController];
 
     } onFailure:^(NSError *error) {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+      [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
+      [[NSUserDefaults standardUserDefaults] synchronize];
 
-        [UIAlertView showWithTitle:NSLocalizedString(@"Error", @"")
-                           message:NSLocalizedString(@"There was a problem connecting to Facebook. Please try again later.", @"")
-                 cancelButtonTitle:NSLocalizedString(@"OK", @"")
-                 otherButtonTitles:nil
-                          tapBlock:nil];
+      [UIAlertView showWithTitle:NSLocalizedString(@"Error", @"")
+                         message:NSLocalizedString(@"There was a problem connecting to Facebook. Please try again later.", @"")
+               cancelButtonTitle:NSLocalizedString(@"OK", @"")
+               otherButtonTitles:nil
+                        tapBlock:nil];
     }];
 }
 
