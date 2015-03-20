@@ -212,6 +212,19 @@
 
         UIAlertView *alert =
             [UIAlertView showWithTitle:NSLocalizedString(@"Signing In...", @"") message:nil cancelButtonTitle:nil otherButtonTitles:nil tapBlock:nil];
+        
+        
+        [WKWinkConnect winkConnectLoginWithUsername:self.usernameTextfield.text password:self.passwordTextfield.text meta:@"meta" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
+        
+        [WKWinkConnect winkConnectLoginWithUsername:self.usernameTextfield.text password:self.passwordTextfield.text success:^(id response) {
+            
+        } failure:^(NSError *error, id response) {
+            
+        }];
 
         [WKWinkConnect winkConnectLoginWithUsername:self.usernameTextfield.text
             password:self.passwordTextfield.text
