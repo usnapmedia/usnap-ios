@@ -10,6 +10,8 @@
 
 @implementation SSOGooglePlusHelper
 
+#pragma mark - Singleton
+
 + (instancetype)sharedInstance {
     static dispatch_once_t once;
     static id sharedInstance;
@@ -27,6 +29,8 @@
     });
     return sharedInstance;
 }
+
+#pragma mark - Google methods
 
 - (void)signIn {
     if ([GPPSignIn sharedInstance].clientID == nil) {
@@ -49,15 +53,14 @@
     [[GPPSignIn sharedInstance] disconnect];
 }
 
-#pragma mark - Delegate
+#pragma mark - GPPSignInDelegate
 
 - (void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {
+
     if (error) {
-        // Do some error handling here.
-        NSLog(@"Received error %@ and auth object %@", error, auth);
-    } else {
-        NSLog(@" success gg with auth : %@", auth);
+        [[GPPSignIn sharedInstance] signOut];
     }
+    [[SSOSocialNetworkAPI sharedInstance].delegate socialNetwork:googleSocialNetwork DidFinishLoginWithError:error];
 }
 
 - (void)didDisconnectWithError:(NSError *)error {
@@ -67,6 +70,7 @@
         // The user is signed out and disconnected.
         // Clean up user data as specified by the Google+ terms.
     }
+    [[SSOSocialNetworkAPI sharedInstance].delegate socialNetwork:googleSocialNetwork DidFinishLogoutWithError:error];
 }
 
 @end

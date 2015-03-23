@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <GooglePlus/GooglePlus.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>
+#import "SSOSocialNetworkAPI.h"
 
 @interface SSOGooglePlusHelper : NSObject <GPPSignInDelegate>
 
@@ -17,5 +18,6 @@
 + (instancetype)sharedInstance;
 - (void)signIn;
 - (void)signOut;
+- (void)disconnect;
 
 @end
