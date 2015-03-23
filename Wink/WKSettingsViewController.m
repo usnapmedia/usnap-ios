@@ -22,8 +22,6 @@
 
 @implementation WKSettingsViewController
 
-#define FacebookSwitchValue [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] valueForKey:@"FacebookSwitchValue"]]
-
 #pragma mark - View Methods
 
 - (void)viewDidLoad {
@@ -169,11 +167,6 @@
     // Save the social network login status
     [[NSUserDefaults standardUserDefaults] setBool:theSwitch.on forKey:socialNetwork];
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#pragma mark - Social network
-
-- (void)setSocialNetworkUserDefaults:(NSDictionary *)socialNetwork {
 }
 
 #pragma mark - TableView Methods

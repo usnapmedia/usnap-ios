@@ -13,11 +13,32 @@
 
 @interface SSOGooglePlusHelper : NSObject <GPPSignInDelegate>
 
-- (void)trySilentAuthentication;
-
+/**
+ *  Return SSOGooglePlusHelper singleton instance
+ *
+ *  @return reference to the singleton
+ */
 + (instancetype)sharedInstance;
+
+/**
+ *  Starts the authentication process. Set |attemptSSO| to try single sign-on.
+ *  If |attemptSSO| is true, this method also tries to authenticate with a
+ *  capable Google app, if installed.
+ *  The delegate will be called at the end of this process.
+ */
 - (void)signIn;
+
+/**
+ *  Removes the OAuth 2.0 token from the keychain.
+ */
 - (void)signOut;
+
+/**
+ *  Disconnects the user from the app and revokes previous authentication.
+ *  If the operation succeeds, the OAuth 2.0 token is also removed from keychain.
+ *  The token is needed to disconnect so do not call |signOut| if |disconnect| is
+ *  to be called.
+ */
 - (void)disconnect;
 
 @end

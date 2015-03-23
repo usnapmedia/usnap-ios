@@ -25,7 +25,7 @@
 @property(weak, nonatomic) IBOutlet UITextField *passwordTextfield;
 @property(weak, nonatomic) IBOutlet UIButton *loginButton;
 @property(weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
-@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property(weak, nonatomic) IBOutlet UIButton *registerButton;
 
 @property(strong, nonatomic) SSOGooglePlusHelper *googlePlusHelper;
 
@@ -69,19 +69,17 @@
     self.googlePlusHelper = [SSOGooglePlusHelper sharedInstance];
 
     TWTRLogInButton *logInButton = [self setTwitterLoginButton];
-    
-    
+
     GPPSignInButton *googleLogInButton = [self googlePlusButton];
-    
 
     logInButton.center = self.view.center;
     [self.view addSubview:logInButton];
 
-    googleLogInButton.frame = CGRectMake(logInButton.frame.origin.x, self.view.center.y - logInButton.frame.size.height - 20,
-                                         logInButton.frame.size.width, logInButton.frame.size.height);
-    
+    googleLogInButton.frame = CGRectMake(logInButton.frame.origin.x, self.view.center.y - logInButton.frame.size.height - 20, logInButton.frame.size.width,
+                                         logInButton.frame.size.height);
+
     [self.view addSubview:googleLogInButton];
-    
+
     // Set the facebook login frame
     self.facebookLoginButton.frame = CGRectMake(logInButton.frame.origin.x, self.view.center.y + logInButton.frame.size.height + 20,
                                                 logInButton.frame.size.width, logInButton.frame.size.height);
@@ -212,6 +210,11 @@
     return logInButton;
 }
 
+/**
+ *  Return a Google + button ( Added it in order to customize if necessary and keep it consistent with the twitter button )
+ *
+ *  @return the Google + button
+ */
 - (GPPSignInButton *)googlePlusButton {
 
     GPPSignInButton *button = [[GPPSignInButton alloc] init];
@@ -220,8 +223,6 @@
 }
 
 #pragma mark - View utilities
-
-
 
 #pragma mark - Keyboard Methods
 
@@ -285,6 +286,11 @@
 
 #pragma mark - Button Actions
 
+/**
+ *  Send the credentials to the backend for login
+ *
+ *  @param sender the login button
+ */
 - (IBAction)loginButtonTouched:(id)sender {
     [self.usernameTextfield resignFirstResponder];
     [self.passwordTextfield resignFirstResponder];
@@ -330,41 +336,46 @@
                           tapBlock:nil];
     }
 }
+
+/**
+ *  Send to the backend the informations the user entered to register
+ *
+ *  @param sender the register button
+ */
 - (IBAction)registerWithEmailButtonTouched:(id)sender {
-    
+
     UIAlertView *alert =
-    [UIAlertView showWithTitle:NSLocalizedString(@"Signing In...", @"") message:nil cancelButtonTitle:nil otherButtonTitles:nil tapBlock:nil];
-    
-    [WKWinkConnect winkConnectRegisterWithUsername:self.usernameTextfield.text password:self.passwordTextfield.text meta:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        [alert dismissWithClickedButtonIndex:0 animated:YES];
-        
-        // Save the account value
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kEmailLoggedValue];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        UIAlertView *alert =
-        [UIAlertView showWithTitle:NSLocalizedString(@"Registered", @"") message:nil cancelButtonTitle:nil otherButtonTitles:nil tapBlock:nil];
-        // Push the camera view controller
-        
-        [alert dismissWithClickedButtonIndex:0 animated:YES];
+        [UIAlertView showWithTitle:NSLocalizedString(@"Signing In...", @"") message:nil cancelButtonTitle:nil otherButtonTitles:nil tapBlock:nil];
 
-        [SSOSocialNetworkAPI pushToCameraViewController];
+    [WKWinkConnect winkConnectRegisterWithUsername:self.usernameTextfield.text
+        password:self.passwordTextfield.text
+        meta:nil
+        success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        [alert dismissWithClickedButtonIndex:0 animated:YES];
+          [alert dismissWithClickedButtonIndex:0 animated:YES];
 
-        
-    }];
-    
+          // Save the account value
+          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kEmailLoggedValue];
+          [[NSUserDefaults standardUserDefaults] synchronize];
+
+          UIAlertView *alert =
+              [UIAlertView showWithTitle:NSLocalizedString(@"Registered", @"") message:nil cancelButtonTitle:nil otherButtonTitles:nil tapBlock:nil];
+          // Push the camera view controller
+
+          [alert dismissWithClickedButtonIndex:0 animated:YES];
+
+          [SSOSocialNetworkAPI pushToCameraViewController];
+
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+          [alert dismissWithClickedButtonIndex:0 animated:YES];
+
+        }];
 }
 
-
+// TODO: Won't be there anymore I guess
 - (IBAction)loginWithFacebookButtonTapped:(id)sender {
-    
-
 }
 
 @end

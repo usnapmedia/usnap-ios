@@ -44,11 +44,6 @@
     [[GPPSignIn sharedInstance] signOut];
 }
 
-- (void)trySilentAuthentication {
-
-    [[GPPSignIn sharedInstance] trySilentAuthentication];
-}
-
 - (void)disconnect {
     [[GPPSignIn sharedInstance] disconnect];
 }

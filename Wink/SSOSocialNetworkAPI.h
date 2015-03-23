@@ -23,19 +23,11 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
 @property(weak, nonatomic) id<SocialNetworkDelegate> delegate;
 
 /**
- *  Return SSKwirkAPI singleton instance
+ *  Return SSOSocialNetworkAPI singleton instance
  *
  *  @return reference to the singleton
  */
 + (SSOSocialNetworkAPI *)sharedInstance;
-
-/**
- *  Connect the user to social networks by changing the value of the switchers in settings
- *
- *  @param socialNetwork the social network to connect
- *  @param theSwitch     the switch changed
- */
-- (void)manageConnectionToSocialNetwork:(NSString *)socialNetwork withSwitch:(UISwitch *)theSwitch;
 
 /**
  *  General method for Twitter. Will post the image
@@ -62,19 +54,20 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
 + (void)postVideoToFacebookWithMessage:(NSString *)message andVideo:(NSData *)videoToPost;
 
 /**
+ *  Login the user to the specified social network
  *
- *
- *
+ *  @param socialNetwork the social network
  */
 - (void)loginWithSocialFramework:(SelectedSocialNetwork)socialNetwork;
 
 /**
+ *  Logout the user to the specified social network
  *
- *
- *
+ *  @param socialNetwork the social network
  */
 - (void)logoutFromSocialFramework:(SelectedSocialNetwork)socialNetwork;
 
+// TODO: should not be there
 + (void)pushToCameraViewController;
 
 @end
@@ -82,12 +75,19 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
 @protocol SocialNetworkDelegate
 
 /**
- *  Return SSKwirkAPI singleton instance
+ *  SocialNetworkDelegate method called when the social network's login response arrives.
  *
- *  @return reference to the singleton
+ *  @param socialNetwork the social network
+ *  @param error         the error
  */
 - (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidFinishLoginWithError:(NSError *)error;
 
+/**
+ *  SocialNetworkDelegate method called when the social network's logout response arrives.
+ *
+ *  @param socialNetwork the social network
+ *  @param error         the error
+ */
 - (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidFinishLogoutWithError:(NSError *)error;
 
 @end

@@ -31,7 +31,6 @@
     return wkSocialNetworkHelper;
 }
 
-// Login to the corresponding social network
 - (void)loginWithSocialFramework:(SelectedSocialNetwork)socialNetwork {
 
     if (socialNetwork == facebookSocialNetwork) {
@@ -63,7 +62,6 @@
     }
 }
 
-// Login to the corresponding social network
 - (void)logoutFromSocialFramework:(SelectedSocialNetwork)socialNetwork {
 
     if (socialNetwork == facebookSocialNetwork) {
@@ -90,8 +88,15 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kCurrentUserStatusChanged object:nil];
 }
 
+// TODO: this should be moved in Facebook helper
 #pragma mark - Facebook
 
+/**
+ *  Post an image and a text on Facebook
+ *
+ *  @param message     the message
+ *  @param imageToPost the image
+ */
 + (void)postImageToFacebookWithMessage:(NSString *)message andImage:(UIImage *)imageToPost {
 
     // If there is no image we should not be there so return
@@ -113,6 +118,12 @@
         }];
 }
 
+/**
+ *  Post a video to facebook with a message
+ *
+ *  @param message     the message
+ *  @param videoToPost the video
+ */
 + (void)postVideoToFacebookWithMessage:(NSString *)message andVideo:(NSData *)videoToPost {
     NSMutableDictionary *paramsVideo = [NSMutableDictionary dictionaryWithObjectsAndKeys:videoToPost, @"video.mov", message, @"description", nil];
     [SSFacebookHelper postVideoWithPath:paramsVideo
@@ -124,8 +135,15 @@
         }];
 }
 
+// TODO: This should be moved in a Twitter helper
 #pragma mark - Twitter
 
+/**
+ *  Combines methods to post image then tweet it
+ *
+ *  @param message the message body
+ *  @param image   the image
+ */
 + (void)postTweetWithMessage:(NSString *)message andImage:(UIImage *)image {
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
