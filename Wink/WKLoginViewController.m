@@ -15,7 +15,7 @@
 #import "WKAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "SSOGooglePlusHelper.h"
-#import "WKSocialNetworkHelper.h"
+#import "SSOSocialNetworkAPI.h"
 
 @interface WKLoginViewController ()
 
@@ -199,7 +199,7 @@
           [[NSUserDefaults standardUserDefaults] synchronize];
 
           // Push to camera view
-          [WKSocialNetworkHelper pushToCameraViewController];
+          [SSOSocialNetworkAPI pushToCameraViewController];
 
       } else {
           NSLog(@"error: %@", [error localizedDescription]);
@@ -309,7 +309,7 @@
               [[NSUserDefaults standardUserDefaults] synchronize];
 
               // Push the camera view controller
-              [WKSocialNetworkHelper pushToCameraViewController];
+              [SSOSocialNetworkAPI pushToCameraViewController];
 
             }
             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -349,7 +349,7 @@
         
         [alert dismissWithClickedButtonIndex:0 animated:YES];
 
-        [WKSocialNetworkHelper pushToCameraViewController];
+        [SSOSocialNetworkAPI pushToCameraViewController];
 
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -364,26 +364,7 @@
 
 - (IBAction)loginWithFacebookButtonTapped:(id)sender {
     
-    [WKSocialNetworkHelper loginwithSocialFramework:facebookSocialNetwork];
 
-//    [SSFacebookHelper login:^() {
-//      // Push to camera view
-//      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
-//      [[NSUserDefaults standardUserDefaults] synchronize];
-//
-//      // Push the camera view controller
-//      [WKSocialNetworkHelper pushToCameraViewController];
-//
-//    } onFailure:^(NSError *error) {
-//      [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
-//      [[NSUserDefaults standardUserDefaults] synchronize];
-//
-//      [UIAlertView showWithTitle:NSLocalizedString(@"Error", @"")
-//                         message:NSLocalizedString(@"There was a problem connecting to Facebook. Please try again later.", @"")
-//               cancelButtonTitle:NSLocalizedString(@"OK", @"")
-//               otherButtonTitles:nil
-//                        tapBlock:nil];
-//    }];
 }
 
 @end

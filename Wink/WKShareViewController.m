@@ -18,7 +18,7 @@
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "WKSocialNetworkHelper.h"
+#import "SSOSocialNetworkAPI.h"
 #import <TwitterKit/TwitterKit.h>
 
 typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing, WKShareViewControllerModeShared } WKShareViewControllerMode;
@@ -432,11 +432,11 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 - (void)postImageOnSelectedSocialNetworks {
     // If the user activated Twitter, post it
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
-        [WKSocialNetworkHelper postTweetWithMessage:self.placeholderTextView.text andImage:[self editedImage]];
+        [SSOSocialNetworkAPI postTweetWithMessage:self.placeholderTextView.text andImage:[self editedImage]];
     }
     // If the user activated Facebook, post it
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
-        [WKSocialNetworkHelper postImageToFacebookWithMessage:self.placeholderTextView.text andImage:[self editedImage]];
+        [SSOSocialNetworkAPI postImageToFacebookWithMessage:self.placeholderTextView.text andImage:[self editedImage]];
     }
 }
 
@@ -446,7 +446,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 - (void)postVideoOnSelectedSocialNetworks:(NSData *)videoData {
     // If the user activated Facebook, post it
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
-        [WKSocialNetworkHelper postVideoToFacebookWithMessage:self.placeholderTextView.text andVideo:videoData];
+        [SSOSocialNetworkAPI postVideoToFacebookWithMessage:self.placeholderTextView.text andVideo:videoData];
     }
 }
 
