@@ -63,23 +63,23 @@
     // Set permissions for Facebook
     [SSFacebookHelper sharedInstance].facebookPermissions = @[ @"publish_actions" ];
 
-    // Do silent login if the user has logged on to Facebook before to validate the Facebook token, so they can post an image and video
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
-        [SSFacebookHelper silentLogin:^() {
-          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
-          [[NSUserDefaults standardUserDefaults] synchronize];
-          // Setup state
-          [self setupAnimated:NO];
-        } onFailure:^(NSError *error) {
-          [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
-          [[NSUserDefaults standardUserDefaults] synchronize];
-          // Setup state
-          [self setupAnimated:NO];
-        }];
-    } else {
-        // Setup state
-        [self setupAnimated:NO];
-    }
+    //    // Do silent login if the user has logged on to Facebook before to validate the Facebook token, so they can post an image and video
+    //    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
+    //        [SSFacebookHelper silentLogin:^() {
+    //          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
+    //          [[NSUserDefaults standardUserDefaults] synchronize];
+    //          // Setup state
+    //          [self setupAnimated:NO];
+    //        } onFailure:^(NSError *error) {
+    //          [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
+    //          [[NSUserDefaults standardUserDefaults] synchronize];
+    //          // Setup state
+    //          [self setupAnimated:NO];
+    //        }];
+    //    } else {
+    // Setup state
+    [self setupAnimated:NO];
+    //   }
 
     return YES;
 }
@@ -95,32 +95,32 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    
+
     if ([[url scheme] isEqualToString:kSchemeFacebook])
         return [FBSession.activeSession handleOpenURL:url];
-    
+
     if ([[url scheme] isEqualToString:kSchemeGooglePlus])
         return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
-    
+
     return NO;
     return [FBSession.activeSession handleOpenURL:url];
 }
 
-
 #pragma mark - Setup State
 
 - (void)setupAnimated:(BOOL)animated {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue] ||
-        [[NSUserDefaults standardUserDefaults] boolForKey:kEmailLoggedValue]) {
-        WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
-        WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:cameraController];
-        self.window.rootViewController = navController;
-    } else {
-        WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
-        WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginController];
-        navController.navigationBarHidden = YES;
-        self.window.rootViewController = navController;
-    }
+    //    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]
+    //    ||
+    //        [[NSUserDefaults standardUserDefaults] boolForKey:kEmailLoggedValue]) {
+    WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
+    WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:cameraController];
+    self.window.rootViewController = navController;
+    //    } else {
+    //        WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
+    //        WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginController];
+    //        navController.navigationBarHidden = YES;
+    //        self.window.rootViewController = navController;
+    //    }
 }
 
 #pragma mark - Current User Changed
