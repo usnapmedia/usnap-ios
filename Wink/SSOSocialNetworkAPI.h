@@ -16,14 +16,18 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
 
 };
 
-@interface WKSocialNetworkHelper : NSObject
+@protocol SocialNetworkDelegate;
+
+@interface SSOSocialNetworkAPI : NSObject
+
+@property(weak, nonatomic) id<SocialNetworkDelegate> delegate;
 
 /**
  *  Return SSKwirkAPI singleton instance
  *
  *  @return reference to the singleton
  */
-+ (WKSocialNetworkHelper *)sharedInstance;
++ (SSOSocialNetworkAPI *)sharedInstance;
 
 /**
  *  Connect the user to social networks by changing the value of the switchers in settings
@@ -31,7 +35,7 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
  *  @param socialNetwork the social network to connect
  *  @param theSwitch     the switch changed
  */
-+ (void)manageConnectionToSocialNetwork:(NSString *)socialNetwork withSwitch:(UISwitch *)theSwitch;
+- (void)manageConnectionToSocialNetwork:(NSString *)socialNetwork withSwitch:(UISwitch *)theSwitch;
 
 /**
  *  General method for Twitter. Will post the image
@@ -57,8 +61,33 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
  */
 + (void)postVideoToFacebookWithMessage:(NSString *)message andVideo:(NSData *)videoToPost;
 
-+ (void)loginwithSocialFramework:(SelectedSocialNetwork)socialNetwork;
+/**
+ *
+ *
+ *
+ */
+- (void)loginWithSocialFramework:(SelectedSocialNetwork)socialNetwork;
+
+/**
+ *
+ *
+ *
+ */
+- (void)logoutFromSocialFramework:(SelectedSocialNetwork)socialNetwork;
 
 + (void)pushToCameraViewController;
+
+@end
+
+@protocol SocialNetworkDelegate
+
+/**
+ *  Return SSKwirkAPI singleton instance
+ *
+ *  @return reference to the singleton
+ */
+- (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidFinishLoginWithError:(NSError *)error;
+
+- (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidFinishLogoutWithError:(NSError *)error;
 
 @end
