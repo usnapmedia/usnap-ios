@@ -155,8 +155,10 @@
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
-		CB15221D1ABA42FC00BBE064 /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15221C1ABA42FC00BBE064 /* UIImage+FixOrientation.m */; };
-		CB1522201ABB7F6800BBE064 /* AVAsset+VideoOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15221F1ABB7F6800BBE064 /* AVAsset+VideoOrientation.m */; };
+		CB15221D1ABA42FC00BBE064 /* UIImage+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15221C1ABA42FC00BBE064 /* UIImage+Tools.m */; };
+		CB57186B1AC0C3020078740E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB57186A1AC0C3020078740E /* CoreMedia.framework */; };
+		CB57186D1AC0C3090078740E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB57186C1AC0C3090078740E /* CoreVideo.framework */; };
+		CB6D428B1AC0812400524965 /* SSOVideoEditingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6D428A1AC0812400524965 /* SSOVideoEditingHelper.m */; };
 		CB7E40161AB77CFC00CAACFA /* UIStoryboard+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E40151AB77CFC00CAACFA /* UIStoryboard+USnap.m */; };
 		CB7E40191AB7806F00CAACFA /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB7E40181AB7806F00CAACFA /* Camera.storyboard */; };
 		CB7E401C1AB782CF00CAACFA /* SSOContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7E401B1AB782CF00CAACFA /* SSOContainerViewController.m */; };
@@ -357,10 +359,12 @@
 		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB0B89041A8A8FA9005E6869 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		CB0B89051A8A8FA9005E6869 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
-		CB15221B1ABA42FC00BBE064 /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
-		CB15221C1ABA42FC00BBE064 /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
-		CB15221E1ABB7F6800BBE064 /* AVAsset+VideoOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVAsset+VideoOrientation.h"; sourceTree = "<group>"; };
-		CB15221F1ABB7F6800BBE064 /* AVAsset+VideoOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVAsset+VideoOrientation.m"; sourceTree = "<group>"; };
+		CB15221B1ABA42FC00BBE064 /* UIImage+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tools.h"; sourceTree = "<group>"; };
+		CB15221C1ABA42FC00BBE064 /* UIImage+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tools.m"; sourceTree = "<group>"; };
+		CB57186A1AC0C3020078740E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		CB57186C1AC0C3090078740E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		CB6D42891AC0812400524965 /* SSOVideoEditingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOVideoEditingHelper.h; sourceTree = "<group>"; };
+		CB6D428A1AC0812400524965 /* SSOVideoEditingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOVideoEditingHelper.m; sourceTree = "<group>"; };
 		CB72FC4E1AB9D98400D0050E /* VideoRecordingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoRecordingDelegate.h; sourceTree = "<group>"; };
 		CB7E40141AB77CFC00CAACFA /* UIStoryboard+USnap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+USnap.h"; sourceTree = "<group>"; };
 		CB7E40151AB77CFC00CAACFA /* UIStoryboard+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+USnap.m"; sourceTree = "<group>"; };
@@ -381,6 +385,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				270DFAF719AE71BE00067072 /* CoreGraphics.framework in Frameworks */,
+				CB57186D1AC0C3090078740E /* CoreVideo.framework in Frameworks */,
+				CB57186B1AC0C3020078740E /* CoreMedia.framework in Frameworks */,
 				7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */,
 				2747B0A119E5DE9A00C3D779 /* libz.dylib in Frameworks */,
 				2747B09F19E5DE9500C3D779 /* SystemConfiguration.framework in Frameworks */,
@@ -392,7 +399,6 @@
 				2743319119B760B7003334BB /* AssetsLibrary.framework in Frameworks */,
 				2743318F19B760B2003334BB /* Accelerate.framework in Frameworks */,
 				2743316819B64257003334BB /* MobileCoreServices.framework in Frameworks */,
-				270DFAF719AE71BE00067072 /* CoreGraphics.framework in Frameworks */,
 				7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */,
 				1F7F85AC1A8A743900BBC5D5 /* Fabric.framework in Frameworks */,
 				270DFAF919AE71BE00067072 /* UIKit.framework in Frameworks */,
@@ -450,10 +456,8 @@
 				1F2C62A21A8E52320038868F /* UIImage+Resizing.m */,
 				CB7E40141AB77CFC00CAACFA /* UIStoryboard+USnap.h */,
 				CB7E40151AB77CFC00CAACFA /* UIStoryboard+USnap.m */,
-				CB15221B1ABA42FC00BBE064 /* UIImage+FixOrientation.h */,
-				CB15221C1ABA42FC00BBE064 /* UIImage+FixOrientation.m */,
-				CB15221E1ABB7F6800BBE064 /* AVAsset+VideoOrientation.h */,
-				CB15221F1ABB7F6800BBE064 /* AVAsset+VideoOrientation.m */,
+				CB15221B1ABA42FC00BBE064 /* UIImage+Tools.h */,
+				CB15221C1ABA42FC00BBE064 /* UIImage+Tools.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -490,6 +494,8 @@
 		270DFAF319AE71BE00067072 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CB57186C1AC0C3090078740E /* CoreVideo.framework */,
+				CB57186A1AC0C3020078740E /* CoreMedia.framework */,
 				7B964EB71A8ABC3C00E181C2 /* Accounts.framework */,
 				7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */,
 				7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */,
@@ -516,6 +522,7 @@
 		270DFAFA19AE71BE00067072 /* Wink */ = {
 			isa = PBXGroup;
 			children = (
+				CB6D42881AC080F900524965 /* Helpers */,
 				CB72FC4D1AB9D95400D0050E /* Protocol */,
 				1F2C62A01A8E52230038868F /* Categories */,
 				27017DBD19DCA41F0011ECCC /* Video Editing */,
@@ -903,6 +910,15 @@
 			name = Cell;
 			sourceTree = "<group>";
 		};
+		CB6D42881AC080F900524965 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CB6D42891AC0812400524965 /* SSOVideoEditingHelper.h */,
+				CB6D428A1AC0812400524965 /* SSOVideoEditingHelper.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		CB72FC4D1AB9D95400D0050E /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -1193,7 +1209,7 @@
 				7B650E781A8BDD360060458E /* Constants.m in Sources */,
 				270DFB2B19AE724500067072 /* WKLoginViewController.m in Sources */,
 				2716CB1019C880B900FC226A /* WKImagePickerController.m in Sources */,
-				CB15221D1ABA42FC00BBE064 /* UIImage+FixOrientation.m in Sources */,
+				CB15221D1ABA42FC00BBE064 /* UIImage+Tools.m in Sources */,
 				1F2C629F1A8E508A0038868F /* SSOFacebookLoginButton.m in Sources */,
 				CB7E40161AB77CFC00CAACFA /* UIStoryboard+USnap.m in Sources */,
 				27DF7E4E19AF860E00F970AF /* WKCameraOverlayViewController.m in Sources */,
@@ -1204,7 +1220,6 @@
 				270DFB0519AE71BE00067072 /* WKAppDelegate.m in Sources */,
 				27AA325E19B8CCAE00558D7E /* UIView+WKAdditions.m in Sources */,
 				27017DC719DDEFDA0011ECCC /* AVAssetTrack+WKAdditions.m in Sources */,
-				CB1522201ABB7F6800BBE064 /* AVAsset+VideoOrientation.m in Sources */,
 				27AA328719BDF21B00558D7E /* WKShareViewController.m in Sources */,
 				CBBEB8A61AB7870E00FEDAC9 /* SSStoryboardConstants.m in Sources */,
 				27AA325B19B8B06A00558D7E /* UIColor+WKAdditions.m in Sources */,
@@ -1220,6 +1235,7 @@
 				2743315E19B63205003334BB /* WKSettingsViewController.m in Sources */,
 				1F2C62A81A8E8AD60038868F /* SSOSettingsSocialFakeTableViewCell.m in Sources */,
 				27AA32B519BE3B7800558D7E /* WKColorPickerView.m in Sources */,
+				CB6D428B1AC0812400524965 /* SSOVideoEditingHelper.m in Sources */,
 				27AA325819B8AF8B00558D7E /* UIFont+WKAdditions.m in Sources */,
 				27DF7E4A19AF802300F970AF /* WKUser.m in Sources */,
 				270DFB2F19AE72AD00067072 /* WKNavigationController.m in Sources */,

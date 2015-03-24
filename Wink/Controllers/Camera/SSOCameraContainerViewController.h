@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "VideoRecordingDelegate.h"
 
-@interface SSOCameraContainerViewController : UIImagePickerController
+@interface SSOCameraContainerViewController : UIViewController
 
 @property(nonatomic) CGFloat heightOfTopBlackBar;
 @property(strong, nonatomic) id<VideoRecordingDelegate> videoDelegate;
@@ -33,5 +33,11 @@
  *  Flash for camera turned off
  */
 - (void)flashTurnedOff;
+
+- (void)capturePhoto;
+
+- (void)startRecordingVideo;
+
+- (void)stopRecordingVideo;
 
 @end

@@ -13,12 +13,25 @@
 #import "WKEditMediaViewController.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "UIImage+FastttCamera.h"
-#import "UIImage+FixOrientation.h"
-#import "AVAsset+VideoOrientation.h"
+#import "UIImage+Tools.h"
+#import "SSOVideoEditingHelper.h"
+#import "CoreGraphics/CoreGraphics.h"
+#import "CoreVideo/CoreVideo.h"
+#import "CoreMedia/CoreMedia.h"
+#import <AVFoundation/AVFoundation.h>
+#import <ImageIO/ImageIO.h>
+#import <QuartzCore/QuartzCore.h>
+#import "FastttCamera.h"
 
 #define kMaximumVideoLength 30.0f
 
-@interface SSOCameraContainerViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface SSOCameraContainerViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVCaptureFileOutputRecordingDelegate>
+
+@property(nonatomic, retain) AVCaptureStillImageOutput *stillImageOutput;
+@property(nonatomic, retain) AVCaptureMovieFileOutput *movieFileOutput;
+@property(strong, nonatomic) AVCaptureVideoPreviewLayer *previewLayer;
+
+@property(strong, nonatomic) AVCaptureSession *session;
 
 @end
 
@@ -28,236 +41,302 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initializeVideoCamera];
+    [self initializeCamera];
 }
 
 #pragma mark - Utilities
 
-- (void)initializeVideoCamera {
-    // Setup the camera view
-    self.delegate = self;
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        self.sourceType = UIImagePickerControllerSourceTypeCamera;
+- (void)initializeCamera {
+    //    // Setup the camera view
+    //    self.delegate = self;
+    //    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    //        self.sourceType = UIImagePickerControllerSourceTypeCamera;
+    //    }
+    //
+    //    self.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage, nil];
+    //    self.showsCameraControls = NO;
+    //    self.videoQuality = UIImagePickerControllerQualityTypeHigh;
+
+    self.session = [[AVCaptureSession alloc] init];
+    // session is global object.
+    self.session.sessionPreset = AVCaptureSessionPresetMedium;
+    AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
+    captureVideoPreviewLayer.frame = self.view.frame;
+    [self.view.layer addSublayer:captureVideoPreviewLayer];
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    NSError *error = nil;
+    NSLog(@"start      3");
+    AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+    if (!input) {
+        NSLog(@"Error");
+    }
+    [self.session addInput:input];
+
+    [self.session beginConfiguration];
+
+    self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecJPEG, AVVideoCodecKey, nil];
+    [self.stillImageOutput setOutputSettings:outputSettings];
+    [self.session addOutput:self.stillImageOutput];
+    
+    
+    self.movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+    [self.session addOutput:self.movieFileOutput];
+
+    [self.session commitConfiguration];
+
+    [self.session startRunning];
+    //    [self performSelector:@selector(startRecording) withObject:nil afterDelay:10.0];
+    //[aMovieFileOutput startRecordingToOutputFileURL:fileURL recordingDelegate:self];
+    // previously i used to do this way but saw people doing it after delay thought it might be taking some time to initialized so tried this way also.
+}
+
+- (void)capturePhoto {
+    AVCaptureConnection *videoConnection = nil;
+    for (AVCaptureConnection *connection in self.stillImageOutput.connections) {
+        for (AVCaptureInputPort *port in [connection inputPorts]) {
+            if ([[port mediaType] isEqual:AVMediaTypeVideo]) {
+                videoConnection = connection;
+                break;
+            }
+        }
+        if (videoConnection) {
+            break;
+        }
     }
 
-    self.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
-    self.showsCameraControls = NO;
+    NSLog(@"about to request a capture from: %@", self.stillImageOutput);
+    [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection
+                                                       completionHandler:^(CMSampleBufferRef imageSampleBuffer, NSError *error) {
+                                                           CFDictionaryRef exifAttachments =
+                                                               CMGetAttachment(imageSampleBuffer, kCGImagePropertyExifDictionary, NULL);
+                                                           if (exifAttachments) {
+                                                               // Do something with the attachments.
+                                                               NSLog(@"attachements: %@", exifAttachments);
+                                                           } else
+                                                               NSLog(@"no attachments");
+
+                                                           NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
+                                                           UIImage *image = [[UIImage alloc] initWithData:imageData];
+
+                                                           CGRect cropRect = [image fastttCropRectFromPreviewLayer:self.previewLayer];
+
+                                                           CGFloat desiredRatio = self.view.frame.size.height / self.view.frame.size.width;
+
+                                                           if (cropRect.size.height > cropRect.size.width) {
+                                                               cropRect = CGRectMake(cropRect.origin.x, cropRect.origin.y, cropRect.size.height,
+                                                                                     cropRect.size.height * desiredRatio);
+
+                                                           } else {
+
+                                                               cropRect = CGRectMake(cropRect.origin.x, cropRect.origin.y, cropRect.size.height * desiredRatio,
+                                                                                     cropRect.size.height);
+                                                           }
+
+                                                           // Newly cropped image with correct size and translation
+                                                           CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect);
+                                                           UIImage *croppedImage =
+                                                               [UIImage imageWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];
+                                                           CGImageRelease(imageRef);
+                                                           UIImage *newImage = [croppedImage fixOrientation];
+
+                                                           // Edit the selected media
+                                                           WKEditMediaViewController *controller =
+                                                               [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+                                                           controller.image = image;
+                                                           [self.navigationController pushViewController:controller animated:YES];
+
+                                                       }];
 }
 
-// @TODO: Move method to category for AVAssetExportSession
-// @TODO: Add comments
-// @TODO: Simplify
-
-/**
- *  Crop video into a square
- *
- *  @param mediaURL file location for video
- */
-- (void)cropVideo:(NSURL *)mediaURL withStatus:(void (^)(AVAssetExportSessionStatus, AVAssetExportSession *))statusBlock {
-    __block AVAssetExportSession *exporter;
-
-    // load our movie Asset
-    AVAsset *asset = [AVAsset assetWithURL:mediaURL];
-
-    // create an avassetrack with our asset
-    AVAssetTrack *clipVideoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
-
-    // Create a video composition and preset some settings
-    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
-    videoComposition.frameDuration = CMTimeMake(1, 30);
-
-    // Set your desired output aspect ratio here. 1.0 for square, 16/9.0 for widescreen, etc.
-    CGFloat desiredAspectRatio = self.view.bounds.size.height / self.view.bounds.size.width;
-
-    // Here we are setting its render size to its height x height (Square)
-    CGSize naturalSize = CGSizeMake(clipVideoTrack.naturalSize.width, clipVideoTrack.naturalSize.height);
-    CGSize adjustedSize = CGSizeApplyAffineTransform(naturalSize, clipVideoTrack.preferredTransform);
-    adjustedSize.width = ABS(adjustedSize.width);
-    adjustedSize.height = ABS(adjustedSize.height);
-
-    CGFloat newHeight = clipVideoTrack.naturalSize.height * desiredAspectRatio;
-    videoComposition.renderSize = CGSizeMake(clipVideoTrack.naturalSize.height, newHeight);
-
-    // Create a video instruction
-    AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-
-    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30));
-
-    AVMutableVideoCompositionLayerInstruction *transformer =
-        [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:clipVideoTrack];
-
-    CGAffineTransform finalTransform = [AVAsset fixOrientationWithAsset:asset withVideoComposition:videoComposition withView:self.view];
-    [transformer setTransform:finalTransform atTime:kCMTimeZero];
-
-    // Add the transformer layer instructions, then add to video composition
-    instruction.layerInstructions = [NSArray arrayWithObject:transformer];
-    videoComposition.instructions = [NSArray arrayWithObject:instruction];
-
-    // Create an Export Path to store the cropped video
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *exportPath = [documentsPath stringByAppendingFormat:@"/CroppedVideo.mp4"];
-    NSURL *exportUrl = [NSURL fileURLWithPath:exportPath];
-
-    // Remove any previous videos at that path
-    [[NSFileManager defaultManager] removeItemAtURL:exportUrl error:nil];
-
-    // Export video
-    exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
-    exporter.videoComposition = videoComposition;
-
-    exporter.outputURL = exportUrl;
-    exporter.outputFileType = AVFileTypeQuickTimeMovie;
-
-    // @TODO: Add error handling
-    [exporter exportAsynchronouslyWithCompletionHandler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            statusBlock(exporter.status, exporter);
-
-        });
-    }];
-}
-
-// @FIXME: Doesn't crop perfectly well
-// @TODO: Remove FastttCamera
-// @TODO: Add comments
-// @TODO: Move to category
-// @TODO: Simplify
-
-- (UIImage *)cropImage:(UIImage *)image {
-
-    CGSize newRenderSize;
-    CGAffineTransform t1;
-
-    CIImage *coreImage = [CIImage imageWithCGImage:image.CGImage];
-
-    // Set your desired output aspect ratio here. 1.0 for square, 16/9.0 for widescreen, etc.
-    CGFloat desiredAspectRatio = self.view.bounds.size.height / self.view.bounds.size.width;
-    CGSize naturalSize = CGSizeMake(image.size.width, image.size.height);
-    CGSize adjustedSize = naturalSize;
-
-    adjustedSize.width = ABS(naturalSize.height);
-    adjustedSize.height = ABS(naturalSize.width);
-
-    if (adjustedSize.width > adjustedSize.height) {
-        newRenderSize = CGSizeMake(adjustedSize.height * desiredAspectRatio, adjustedSize.height);
-        t1 = CGAffineTransformMakeTranslation(-(adjustedSize.width - newRenderSize.width) / 2.0, 0);
-
-    } else {
-        newRenderSize = CGSizeMake(adjustedSize.height, adjustedSize.width);
-        t1 = CGAffineTransformMakeTranslation(0, -(adjustedSize.height - newRenderSize.height) / 2.0);
+- (void)startRecordingVideo {
+    NSLog(@"startRecording");
+    NSString *plistPath;
+    NSString *rootPath;
+    rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    plistPath = [rootPath stringByAppendingPathComponent:@"test.mov"];
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:plistPath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:plistPath]) {
     }
-
-    coreImage = [coreImage imageByApplyingTransform:t1];
-
-    CGRect rect = CGRectMake(coreImage.extent.origin.x, coreImage.extent.origin.y, newRenderSize.width, newRenderSize.height);
-    UIImage *imageWithCorrectSize = [image fastttCroppedImageFromCropRect:rect];
-
-    return [imageWithCorrectSize fixOrientation];
+    [self.movieFileOutput startRecordingToOutputFileURL:fileURL recordingDelegate:self];
 }
+
+- (void)stopRecordingVideo {
+    [self.movieFileOutput stopRecording];
+}
+
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput
+    didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
+                        fromConnections:(NSArray *)connections
+                                  error:(NSError *)error {
+    NSLog(@"sofijsdofij");
+
+    NSLog(@"outputFileURL :%@", outputFileURL);
+
+    [SSOVideoEditingHelper cropVideo:outputFileURL
+                          withStatus:^(AVAssetExportSessionStatus status, AVAssetExportSession *exporter) {
+                              switch (status) {
+                              case AVAssetExportSessionStatusUnknown:
+                                  [SVProgressHUD dismiss];
+                                  [self.videoDelegate enableUserInteraction];
+
+                                  break;
+                              case AVAssetExportSessionStatusWaiting:
+                                  break;
+                              case AVAssetExportSessionStatusExporting:
+                                  break;
+                              case AVAssetExportSessionStatusCompleted: {
+                                  // Dismiss HUD
+                                  [SVProgressHUD dismiss];
+                                  [self.videoDelegate enableUserInteraction];
+
+                                  // Edit the selected media
+                                  WKEditMediaViewController *controller =
+                                      [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+                                  controller.mediaURL = exporter.outputURL;
+                                  [self.navigationController pushViewController:controller animated:YES];
+                              } break;
+                              case AVAssetExportSessionStatusFailed:
+                                  [SVProgressHUD dismiss];
+                                  [self.videoDelegate enableUserInteraction];
+
+                                  break;
+                              case AVAssetExportSessionStatusCancelled:
+                                  [SVProgressHUD dismiss];
+                                  [self.videoDelegate enableUserInteraction];
+
+                                  break;
+
+                              default:
+                                  break;
+                              }
+                          }
+                     inContainerView:self.view];
+}
+
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections {
+    NSLog(@"sofijsdofij");
+}
+
+//-(void)setSession:(AVCaptureSession *)session
+//{
+//    NSLog(@"setting session...");
+//    self.captureSession=session;
+//}
 
 #pragma mark - UIImagePickerControllerDelegate
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    UIImage *imageFromCamera = nil;
-    NSURL *videoURL = nil;
-
-    // If the user took a picture
-    if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeImage)) {
-
-        imageFromCamera = [info objectForKey:UIImagePickerControllerOriginalImage];
-        if (imageFromCamera == nil) {
-            imageFromCamera = [info objectForKey:UIImagePickerControllerOriginalImage];
-        }
-
-        UIImage *newImage = [self cropImage:imageFromCamera];
-
-        // Edit the selected media
-        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
-        controller.image = newImage;
-        [self.navigationController pushViewController:controller animated:YES];
-
-        // If the user took a video
-    } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
-
-        videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
-        [self cropVideo:videoURL
-             withStatus:^(AVAssetExportSessionStatus status, AVAssetExportSession *exporter) {
-                 switch (status) {
-                 case AVAssetExportSessionStatusUnknown:
-                     break;
-                 case AVAssetExportSessionStatusWaiting:
-                     break;
-                 case AVAssetExportSessionStatusExporting:
-                     break;
-                 case AVAssetExportSessionStatusCompleted: {
-                     // Dismiss HUD
-                     [SVProgressHUD dismiss];
-
-                     [self.videoDelegate enableUserInteraction];
-
-                     // Edit the selected media
-                     WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
-                     controller.mediaURL = exporter.outputURL;
-                     [self.navigationController pushViewController:controller animated:YES];
-                 } break;
-                 case AVAssetExportSessionStatusFailed:
-
-                     break;
-                 case AVAssetExportSessionStatusCancelled:
-                     break;
-
-                 default:
-                     break;
-                 }
-             }];
-    }
-
-    // Dismiss the media picker
-    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-
-    // Dismis the media picker
-    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-}
+//
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+//    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+//    UIImage *imageFromCamera = nil;
+//    NSURL *videoURL = nil;
+//
+//    // If the user took a picture
+//    if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeImage)) {
+//
+//        imageFromCamera = [info objectForKey:UIImagePickerControllerOriginalImage];
+//        if (imageFromCamera == nil) {
+//            imageFromCamera = [info objectForKey:UIImagePickerControllerOriginalImage];
+//        }
+//
+//        UIImage *newImage = [imageFromCamera cropImage:imageFromCamera inContainView:self.view];
+//
+//        // Edit the selected media
+//        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+//        controller.image = newImage;
+//        [self.navigationController pushViewController:controller animated:YES];
+//
+//        // If the user took a video
+//    } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
+//
+//        videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
+//        [SSOVideoEditingHelper cropVideo:videoURL
+//                              withStatus:^(AVAssetExportSessionStatus status, AVAssetExportSession *exporter) {
+//                                  switch (status) {
+//                                  case AVAssetExportSessionStatusUnknown:
+//                                      [SVProgressHUD dismiss];
+//                                      [self.videoDelegate enableUserInteraction];
+//
+//                                      break;
+//                                  case AVAssetExportSessionStatusWaiting:
+//                                      break;
+//                                  case AVAssetExportSessionStatusExporting:
+//                                      break;
+//                                  case AVAssetExportSessionStatusCompleted: {
+//                                      // Dismiss HUD
+//                                      [SVProgressHUD dismiss];
+//                                      [self.videoDelegate enableUserInteraction];
+//
+//                                      // Edit the selected media
+//                                      WKEditMediaViewController *controller =
+//                                          [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+//                                      controller.mediaURL = exporter.outputURL;
+//                                      [self.navigationController pushViewController:controller animated:YES];
+//                                  } break;
+//                                  case AVAssetExportSessionStatusFailed:
+//                                      [SVProgressHUD dismiss];
+//                                      [self.videoDelegate enableUserInteraction];
+//
+//                                      break;
+//                                  case AVAssetExportSessionStatusCancelled:
+//                                      [SVProgressHUD dismiss];
+//                                      [self.videoDelegate enableUserInteraction];
+//
+//                                      break;
+//
+//                                  default:
+//                                      break;
+//                                  }
+//                              }
+//                         inContainerView:self.view];
+//    }
+//
+//    // Dismiss the media picker
+//    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//}
+//
+//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+//
+//    // Dismis the media picker
+//    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//}
 
 #pragma mark - Utilities
 
-- (void)turnRearCameraOff {
-    // Make sure that the source type is UIImagePickerControllerSourceTypeCamera before setting the camera device. It'll crash otherwise
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        self.sourceType = UIImagePickerControllerSourceTypeCamera;
-
-        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]) {
-            self.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-        }
-    }
-}
-
-- (void)turnRearCameraOn {
-    // Make sure that the source type is UIImagePickerControllerSourceTypeCamera before setting the camera device. It'll crash otherwise
-
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        self.sourceType = UIImagePickerControllerSourceTypeCamera;
-
-        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
-            self.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-        }
-    }
-}
-
-- (void)flashTurnedOn {
-    if ([UIImagePickerController isFlashAvailableForCameraDevice:self.cameraDevice]) {
-        self.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
-    }
-}
-
-- (void)flashTurnedOff {
-    if ([UIImagePickerController isFlashAvailableForCameraDevice:self.cameraDevice]) {
-        self.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
-    }
-}
+//- (void)turnRearCameraOff {
+//    // Make sure that the source type is UIImagePickerControllerSourceTypeCamera before setting the camera device. It'll crash otherwise
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//        self.sourceType = UIImagePickerControllerSourceTypeCamera;
+//
+//        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]) {
+//            self.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+//        }
+//    }
+//}
+//
+//- (void)turnRearCameraOn {
+//    // Make sure that the source type is UIImagePickerControllerSourceTypeCamera before setting the camera device. It'll crash otherwise
+//
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//        self.sourceType = UIImagePickerControllerSourceTypeCamera;
+//
+//        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
+//            self.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+//        }
+//    }
+//}
+//
+//- (void)flashTurnedOn {
+//    if ([UIImagePickerController isFlashAvailableForCameraDevice:self.cameraDevice]) {
+//        self.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
+//    }
+//}
+//
+//- (void)flashTurnedOff {
+//    if ([UIImagePickerController isFlashAvailableForCameraDevice:self.cameraDevice]) {
+//        self.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
+//    }
+//}
 
 @end

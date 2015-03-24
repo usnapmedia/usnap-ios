@@ -38,6 +38,9 @@
 // View Controllers
 @property(weak, nonatomic) SSOContainerViewController *containerViewController;
 
+// Views
+@property(strong, nonatomic) UIView *blackView;
+
 // Data
 @property(nonatomic) BOOL isVideoOn;
 @property(nonatomic) BOOL isFlashOn;
@@ -67,10 +70,6 @@
     [self initializeGestures];
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 #pragma mark - Utilities
 
 /**
@@ -78,9 +77,6 @@
  */
 - (void)initializeData {
     self.videoTimeRemaining = kTotalVideoRecordingTime;
-
-    // Register notification when is camera is ready to be swapped
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cameraIsReady:) name:AVCaptureSessionDidStartRunningNotification object:nil];
 }
 
 /**
@@ -112,15 +108,20 @@
 
     // Setup UI for photo/video buttons
     [self.photoButton setAttributedTitle:[self setupUIForButtonWithText:@"Photo"] forState:UIControlStateSelected];
-    [self.photoButton setAttributedTitle:[self setupUIForButtonWithText:@"Video"] forState:UIControlStateSelected];
+    [self.videoButton setAttributedTitle:[self setupUIForButtonWithText:@"Video"] forState:UIControlStateSelected];
 
     // Setup UI for video recording label
-
     [self updateVideoUI];
     [self updateFlashUI];
     [self updateRearCameraFacingUI];
-}
 
+    // Add black view in between switching between photo and video
+    self.blackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height)];
+    self.blackView.backgroundColor = [UIColor blackColor];
+    self.blackView.alpha = 0.0;
+    [self.containerView addSubview:self.blackView];
+    [self.view bringSubviewToFront:self.captureButton];
+}
 /**
  *  Update Video UI
  */
@@ -143,15 +144,15 @@
     if (self.isFlashOn) {
         if (self.isVideoOn) {
             [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconOFF.png"] forState:UIControlStateNormal];
-            [self.containerViewController.cameraContainerVC flashTurnedOff];
+            //            [self.containerViewController.cameraContainerVC flashTurnedOff];
 
         } else {
             [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconON.png"] forState:UIControlStateNormal];
-            [self.containerViewController.cameraContainerVC flashTurnedOn];
+            //            [self.containerViewController.cameraContainerVC flashTurnedOn];
         }
     } else {
         [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconOFF.png"] forState:UIControlStateNormal];
-        [self.containerViewController.cameraContainerVC flashTurnedOff];
+        //        [self.containerViewController.cameraContainerVC flashTurnedOff];
     }
 }
 
@@ -164,7 +165,7 @@
     if (self.isCameraRearFacing) {
         self.flashButton.hidden = YES;
 
-        [self.containerViewController.cameraContainerVC turnRearCameraOn];
+        //        [self.containerViewController.cameraContainerVC turnRearCameraOn];
 
     } else {
         if (!self.isVideoOn) {
@@ -172,7 +173,7 @@
         } else {
             self.flashButton.hidden = YES;
         }
-        [self.containerViewController.cameraContainerVC turnRearCameraOff];
+        //        [self.containerViewController.cameraContainerVC turnRearCameraOff];
     }
 }
 
@@ -195,6 +196,29 @@
         self.videoAndPhotoContainerView.hidden = NO;
         self.recordingVideoLabel.hidden = YES;
     }
+}
+
+/**
+ *  Animate black view to cover the camera view and disable interaction to give enough time to switch between photo and video
+ */
+- (void)animateBlackViewOntoScreen {
+
+    self.captureButton.userInteractionEnabled = NO;
+
+    [UIView animateWithDuration:0.54
+        delay:0.0
+        options:UIViewAnimationOptionCurveEaseIn
+        animations:^{ self.blackView.alpha = 0.7; }
+        completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.2
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveLinear
+                             animations:^{
+                                 self.blackView.alpha = 0.0;
+                                 self.captureButton.userInteractionEnabled = YES;
+                             }
+                             completion:nil];
+        }];
 }
 
 /**
@@ -323,10 +347,10 @@
         self.containerViewController = containerViewController;
 
         if (self.isVideoOn) {
-            self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
+            //            self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
 
         } else {
-            self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+            //            self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
         }
 
         // Store the container view controller in a property to be used to swap view controller
@@ -335,12 +359,6 @@
         // Set delegate for video view controller to enable user interaction in this vc after the video is done recording
         self.containerViewController.cameraContainerVC.videoDelegate = self;
     }
-}
-
-#pragma mark - Notification
-
-- (void)cameraIsReady:(NSNotification *)notification {
-    self.view.userInteractionEnabled = YES;
 }
 
 #pragma mark - IBActions
@@ -364,6 +382,8 @@
     [self updateVideoUI];
     [self updateFlashUI];
     [self updateRearCameraFacingUI];
+
+    [self animateBlackViewOntoScreen];
 }
 
 - (IBAction)videoContainerButtonPushed:(id)sender {
@@ -383,6 +403,8 @@
     [self updateVideoUI];
     [self updateFlashUI];
     [self updateRearCameraFacingUI];
+
+    [self animateBlackViewOntoScreen];
 }
 
 #pragma mark Corner Icons
@@ -445,7 +467,7 @@
     if (self.isVideoOn) {
 
         // Disable user interaction so that the user doesn't record multiple videos
-        self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
+        //        self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
 
         if (self.isVideoRecording) {
             [self.timer invalidate];
@@ -455,7 +477,7 @@
             self.isVideoRecording = NO;
 
             // Stop recording
-            [self.containerViewController.cameraContainerVC stopVideoCapture];
+            [self.containerViewController.cameraContainerVC stopRecordingVideo];
 
             // Loading HUD until the video is done uploading
             [SVProgressHUD show];
@@ -470,20 +492,24 @@
             self.isVideoRecording = YES;
 
             // Start recording
-            [self.containerViewController.cameraContainerVC startVideoCapture];
+            [self.containerViewController.cameraContainerVC startRecordingVideo];
         }
 
         [self updateVideoRecordingUI];
 
     } else {
-        self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-        [self.containerViewController.cameraContainerVC takePicture];
+        //        self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+        //        [self.containerViewController.cameraContainerVC takePicture];
+
+        [self.containerViewController.cameraContainerVC capturePhoto];
     }
 }
 
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+
+    // Open library of photos and videos
     BOOL allowsEditing = NO;
     NSArray *mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
 
