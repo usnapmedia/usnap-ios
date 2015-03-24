@@ -38,9 +38,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wM-d9-iM7">
-                                <rect key="frame" x="0.0" y="76" width="320" height="384"/>
+                                <rect key="frame" x="0.0" y="76" width="320" height="320"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="5wM-d9-iM7" secondAttribute="height" multiplier="1:1.2" id="QgM-Q6-75y"/>
+                                    <constraint firstAttribute="width" secondItem="5wM-d9-iM7" secondAttribute="height" multiplier="1:1" id="QgM-Q6-75y"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="p1H-PN-LOb" kind="embed" identifier="CAMERA_CONTAINER_SEGUE" id="x2m-Yj-GyQ"/>
@@ -94,10 +94,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9G-9M-9NP">
-                                <rect key="frame" x="0.0" y="460" width="320" height="108"/>
+                                <rect key="frame" x="0.0" y="396" width="320" height="172"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ory-3p-MjP" userLabel="Photo/Video + Buttons View">
-                                        <rect key="frame" x="0.0" y="56" width="320" height="32"/>
+                                        <rect key="frame" x="0.0" y="120" width="320" height="32"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhK-sY-xII" userLabel="Photo/Video View">
                                                 <rect key="frame" x="67" y="0.0" width="186" height="32"/>
@@ -199,10 +199,10 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1V-Yw-4Yf" userLabel="Circle View">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nh-k5-MSM">
-                                                <rect key="frame" x="122" y="-11" width="77" height="77"/>
+                                                <rect key="frame" x="122" y="21" width="77" height="77"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="3Nh-k5-MSM" secondAttribute="height" multiplier="1:1" id="iaa-DD-F95"/>
                                                     <constraint firstAttribute="height" constant="77" id="nrE-Cw-GkE"/>
@@ -293,7 +293,7 @@
                         <viewControllerLayoutGuide type="bottom" id="qfL-C8-xzR"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="kxz-Q6-7zD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="384"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

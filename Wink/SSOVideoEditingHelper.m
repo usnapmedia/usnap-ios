@@ -58,7 +58,7 @@
         break;
     case UIImageOrientationRight:
         newWidth = adjustedSize.width / desiredAspectRatio;
-        videoComposition.renderSize = CGSizeMake(newWidth, adjustedSize.height);
+        videoComposition.renderSize = CGSizeMake(adjustedSize.height, adjustedSize.height);
 
         rotateTransform = CGAffineTransformRotate(rotateTransform, 0);
         translateTransform = CGAffineTransformMakeTranslation((adjustedSize.height - newWidth) / 2, 0);

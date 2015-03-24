@@ -8,36 +8,58 @@
 
 #import <UIKit/UIKit.h>
 #import "VideoRecordingDelegate.h"
+#import <FastttCamera.h>
 
 @interface SSOCameraContainerViewController : UIViewController
 
 @property(nonatomic) CGFloat heightOfTopBlackBar;
 @property(strong, nonatomic) id<VideoRecordingDelegate> videoDelegate;
+@property(nonatomic, strong) FastttCamera *fastCamera;
+
+#pragma mark - Capture Video and Photo
 
 /**
- *  Turn the rear camera off, i.e. turn the front facing camera on
+ *  Take picture
  */
-- (void)turnRearCameraOff;
+- (void)capturePhoto;
 
 /**
- *  Turn the rear camera on, i.e. turn the front facing camera on
+ *  Start recording video
  */
-- (void)turnRearCameraOn;
+- (void)startRecordingVideo;
+
+/**
+ *  Stop recording video
+ */
+- (void)stopRecordingVideo;
+
+#pragma mark - Flash
 
 /**
  *  Flash for camera turned on
  */
-- (void)flashTurnedOn;
+- (void)turnFlashOn;
+
+/**
+ *  Flash is turned off or on depending on the lighting in the environment
+ */
+- (void)turnFlashAuto;
 
 /**
  *  Flash for camera turned off
  */
-- (void)flashTurnedOff;
+- (void)turnFlashOff;
 
-- (void)capturePhoto;
+#pragma mark - Rear and Front Camera
 
-- (void)startRecordingVideo;
+/**
+ *  Turn on front facing camera
+ */
+- (void)turnOnFrontCamera;
 
-- (void)stopRecordingVideo;
+/**
+ *  Turn on rear facing camera
+ */
+- (void)turnOnRearCamera;
 
 @end

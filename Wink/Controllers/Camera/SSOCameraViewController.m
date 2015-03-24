@@ -449,10 +449,14 @@
 
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kIsCameraRearFacing];
 
+        [self.containerViewController.cameraContainerVC turnOnFrontCamera];
+
     } else {
         self.isCameraRearFacing = YES;
 
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsCameraRearFacing];
+
+        [self.containerViewController.cameraContainerVC turnOnRearCamera];
     }
 
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -465,9 +469,6 @@
 - (IBAction)captureButtonPushed:(id)sender {
     // Send message to photo or video view controller to take photo or video
     if (self.isVideoOn) {
-
-        // Disable user interaction so that the user doesn't record multiple videos
-        //        self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
 
         if (self.isVideoRecording) {
             [self.timer invalidate];
@@ -498,9 +499,6 @@
         [self updateVideoRecordingUI];
 
     } else {
-        //        self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-        //        [self.containerViewController.cameraContainerVC takePicture];
-
         [self.containerViewController.cameraContainerVC capturePhoto];
     }
 }
