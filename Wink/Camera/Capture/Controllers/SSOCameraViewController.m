@@ -37,6 +37,7 @@
 
 // View Controllers
 @property(weak, nonatomic) SSOContainerViewController *containerViewController;
+@property(weak, nonatomic) WKEditMediaViewController *mediaEditViewController;
 
 // Views
 @property(strong, nonatomic) UIView *blackView;
@@ -208,16 +209,18 @@
     [UIView animateWithDuration:0.54
         delay:0.0
         options:UIViewAnimationOptionCurveEaseIn
-        animations:^{ self.blackView.alpha = 0.7; }
+        animations:^{
+          self.blackView.alpha = 0.7;
+        }
         completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.2
-                                  delay:0.0
-                                options:UIViewAnimationOptionCurveLinear
-                             animations:^{
-                                 self.blackView.alpha = 0.0;
-                                 self.captureButton.userInteractionEnabled = YES;
-                             }
-                             completion:nil];
+          [UIView animateWithDuration:0.2
+                                delay:0.0
+                              options:UIViewAnimationOptionCurveLinear
+                           animations:^{
+                             self.blackView.alpha = 0.0;
+                             self.captureButton.userInteractionEnabled = YES;
+                           }
+                           completion:nil];
         }];
 }
 
@@ -284,7 +287,9 @@
          usingSpringWithDamping:0.5f
           initialSpringVelocity:1.0f
                         options:UIViewAnimationOptionCurveLinear
-                     animations:^{ [self.view layoutIfNeeded]; }
+                     animations:^{
+                       [self.view layoutIfNeeded];
+                     }
                      completion:nil];
 }
 
@@ -334,7 +339,7 @@
     }
 }
 
-#pragma mark - Prepare for Segue
+#pragma mark - Prepare for Segue / Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Set up container view controller
@@ -359,6 +364,51 @@
         // Set delegate for video view controller to enable user interaction in this vc after the video is done recording
         self.containerViewController.cameraContainerVC.videoDelegate = self;
     }
+}
+
+/**
+ *  Init and present the UIImagePickerController to allow the user to select a photo or video from camera roll
+ */
+- (void)displayCamerallRollPickerVC {
+    UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+    controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    controller.navigationBarHidden = NO;
+    controller.delegate = self;
+    controller.toolbarHidden = NO;
+    controller.mediaTypes = @[ (NSString *)kUTTypeImage, (NSString *)kUTTypeMovie ];
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+/**
+ *  Push to EditMediaVC and pass it the image or video
+ *
+ *  @param mediaDic the dic returned by the UIImagePickerViewDelegate
+ */
+- (void)pushToEditVCWithMedia:(NSDictionary *)mediaDic {
+
+    NSString *mediaType = [mediaDic objectForKey:UIImagePickerControllerMediaType];
+    NSURL *mediaURL = nil;
+    UIImage *image = nil;
+
+    // Check what kind of data is returned
+    if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeImage)) {
+        image = [mediaDic objectForKey:UIImagePickerControllerEditedImage];
+        if (image == nil) {
+            image = [mediaDic objectForKey:UIImagePickerControllerOriginalImage];
+        }
+    } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
+        mediaURL = [mediaDic objectForKey:UIImagePickerControllerMediaURL];
+        if (mediaURL == nil) {
+            mediaURL = [mediaDic objectForKey:UIImagePickerControllerReferenceURL];
+        }
+    }
+
+    // Instanciate the editMediaVC and pass it the image and video url
+    WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+    controller.mediaURL = mediaURL;
+    controller.image = image;
+    // Push to editMediaVC
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - IBActions
@@ -516,15 +566,27 @@
         mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, nil];
     }
 
-    UIImagePickerController *controller = [[UIImagePickerController alloc] init];
-    controller.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    controller.navigationBarHidden = NO;
-    controller.delegate = self;
-    controller.toolbarHidden = NO;
-    controller.mediaTypes = mediaTypes;
-    [self presentViewController:controller animated:YES completion:nil];
+    [self displayCamerallRollPickerVC];
 }
 
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    NSURL *mediaURL = nil;
+
+    if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
+        mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
+        if (mediaURL == nil) {
+            mediaURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+        }
+    }
+    // Pass the dictionary in order to push to editMediaVC
+    [self pushToEditVCWithMedia:info];
+
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 #pragma mark - VideoRecordingDelegate
 
 - (void)enableUserInteraction {

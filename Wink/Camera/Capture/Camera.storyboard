@@ -64,6 +64,9 @@
                                         <state key="normal" image="flash">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="4" y="8" width="55" height="55"/>
+                                        </variation>
                                         <connections>
                                             <action selector="flashButtonTouched:" destination="KDe-mF-eVw" eventType="touchUpInside" id="jnD-k5-V8u"/>
                                         </connections>
@@ -110,10 +113,6 @@
                                         <exclude reference="lhy-8W-4VU"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="agH-4m-mz7"/>
-                                        <exclude reference="cyC-H6-vGb"/>
-                                        <exclude reference="hr4-EF-cW7"/>
-                                        <exclude reference="obZ-sr-AwB"/>
                                         <exclude reference="09b-fb-9Ly"/>
                                         <exclude reference="OP9-47-HRK"/>
                                         <exclude reference="V91-lx-UMw"/>
@@ -122,6 +121,10 @@
                                         <exclude reference="rcK-fo-xXp"/>
                                         <exclude reference="xGk-SW-rvG"/>
                                         <exclude reference="y2Q-Yv-cYG"/>
+                                        <exclude reference="agH-4m-mz7"/>
+                                        <exclude reference="cyC-H6-vGb"/>
+                                        <exclude reference="hr4-EF-cW7"/>
+                                        <exclude reference="obZ-sr-AwB"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact">
@@ -129,12 +132,12 @@
                                         <include reference="lhy-8W-4VU"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="agH-4m-mz7"/>
-                                        <include reference="cyC-H6-vGb"/>
                                         <include reference="OP9-47-HRK"/>
                                         <include reference="V91-lx-UMw"/>
                                         <include reference="cZs-KU-wOa"/>
                                         <include reference="xGk-SW-rvG"/>
+                                        <include reference="agH-4m-mz7"/>
+                                        <include reference="cyC-H6-vGb"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -142,12 +145,12 @@
                                         <include reference="lhy-8W-4VU"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="hr4-EF-cW7"/>
-                                        <include reference="obZ-sr-AwB"/>
                                         <include reference="09b-fb-9Ly"/>
                                         <include reference="Zn7-DI-A8c"/>
                                         <include reference="rcK-fo-xXp"/>
                                         <include reference="y2Q-Yv-cYG"/>
+                                        <include reference="hr4-EF-cW7"/>
+                                        <include reference="obZ-sr-AwB"/>
                                     </mask>
                                 </variation>
                             </view>
