@@ -81,6 +81,7 @@
 		335723E61ACB097C000CC846 /* SSOFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723AD1ACB097C000CC846 /* SSOFacebookLoginButton.m */; };
 		335723E71ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723B01ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.m */; };
 		335723E81ACB097C000CC846 /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723B21ACB097C000CC846 /* WKSettingSocialTableViewCell.m */; };
+		33CE6CCD1ACB4C470095027A /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CE6CCC1ACB4C470095027A /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
@@ -211,6 +212,8 @@
 		335723B01ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSettingsSocialFakeTableViewCell.m; sourceTree = "<group>"; };
 		335723B11ACB097C000CC846 /* WKSettingSocialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKSettingSocialTableViewCell.h; sourceTree = "<group>"; };
 		335723B21ACB097C000CC846 /* WKSettingSocialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSettingSocialTableViewCell.m; sourceTree = "<group>"; };
+		33CE6CCB1ACB4C470095027A /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
+		33CE6CCC1ACB4C470095027A /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
@@ -431,6 +434,8 @@
 		335723571ACB097C000CC846 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				33CE6CCB1ACB4C470095027A /* ALAssetsLibrary+CustomPhotoAlbum.h */,
+				33CE6CCC1ACB4C470095027A /* ALAssetsLibrary+CustomPhotoAlbum.m */,
 				335723581ACB097C000CC846 /* AVAssetTrack+WKAdditions.h */,
 				335723591ACB097C000CC846 /* AVAssetTrack+WKAdditions.m */,
 				3357235A1ACB097C000CC846 /* NSDictionary+WKAdditions.h */,
@@ -853,6 +858,7 @@
 				335723D91ACB097C000CC846 /* WKSettingsViewController.m in Sources */,
 				335723BA1ACB097C000CC846 /* WKEditMediaViewController.m in Sources */,
 				335723C11ACB097C000CC846 /* UIFont+WKAdditions.m in Sources */,
+				33CE6CCD1ACB4C470095027A /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

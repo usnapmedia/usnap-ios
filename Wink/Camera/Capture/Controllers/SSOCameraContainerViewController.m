@@ -22,10 +22,13 @@
 #import <ImageIO/ImageIO.h>
 #import <QuartzCore/QuartzCore.h>
 #import "FastttCamera.h"
+#import "ALAssetsLibrary+CustomPhotoAlbum.h"
 
 #define kMaximumVideoLength 30.0f
 
 @interface SSOCameraContainerViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, FastttCameraDelegate>
+
+@property (strong, atomic) ALAssetsLibrary* library;
 
 @end
 
@@ -38,6 +41,7 @@
 
     self.fastCamera = [FastttCamera new];
     self.fastCamera.delegate = self;
+    self.library = [[ALAssetsLibrary alloc] init];
 
     [self fastttAddChildViewController:self.fastCamera];
     self.fastCamera.view.frame = self.view.frame;
@@ -99,6 +103,10 @@
     // Edit the selected media
     WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
     controller.image = capturedImage.fullImage;
+    [self.library saveImage:controller.image toAlbum:@"Snapzizi" withCompletionBlock:^(NSError *error) {
+        NSLog(@"Error saving image in camera roll: %@", [error description]);
+
+    }];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
