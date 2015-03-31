@@ -71,6 +71,14 @@
     [self initializeGestures];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    if (self.containerViewController.cameraContainerVC.libraryImage) {
+        [self.mediaButton setImage:self.containerViewController.cameraContainerVC.libraryImage forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - Utilities
 
 /**
@@ -145,15 +153,15 @@
     if (self.isFlashOn) {
         if (self.isVideoOn) {
             [self.flashButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
-            //            [self.containerViewController.cameraContainerVC flashTurnedOff];
+            [self.containerViewController.cameraContainerVC turnFlashOff];
 
         } else {
             [self.flashButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
-            //            [self.containerViewController.cameraContainerVC flashTurnedOn];
+            [self.containerViewController.cameraContainerVC turnFlashOn];
         }
     } else {
         [self.flashButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
-        //        [self.containerViewController.cameraContainerVC flashTurnedOff];
+        [self.containerViewController.cameraContainerVC turnFlashOff];
     }
 }
 

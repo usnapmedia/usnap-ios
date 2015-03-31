@@ -273,7 +273,6 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="BFZ-sQ-cdZ"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="bottomContainerView" destination="q9G-9M-9NP" id="hkM-Vk-PGs"/>

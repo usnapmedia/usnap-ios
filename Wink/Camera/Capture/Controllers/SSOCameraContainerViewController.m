@@ -28,7 +28,7 @@
 
 @interface SSOCameraContainerViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, FastttCameraDelegate>
 
-@property (strong, atomic) ALAssetsLibrary* library;
+@property(strong, atomic) ALAssetsLibrary *library;
 
 @end
 
@@ -41,10 +41,17 @@
 
     self.fastCamera = [FastttCamera new];
     self.fastCamera.delegate = self;
-    self.library = [[ALAssetsLibrary alloc] init];
 
     [self fastttAddChildViewController:self.fastCamera];
     self.fastCamera.view.frame = self.view.frame;
+}
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self initializeAssetsLibrary];
+
+    
+    
 }
 
 #pragma mark - Utilities
@@ -103,53 +110,93 @@
     // Edit the selected media
     WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
     controller.image = capturedImage.fullImage;
-    [self.library saveImage:controller.image toAlbum:@"Snapzizi" withCompletionBlock:^(NSError *error) {
-        NSLog(@"Error saving image in camera roll: %@", [error description]);
+    [self.library saveImage:controller.image
+                    toAlbum:@"Snapzizi"
+        withCompletionBlock:^(NSError *error) {
+          NSLog(@"Error saving image in camera roll: %@", [error description]);
 
-    }];
+        }];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)cameraController:(id<FastttCameraInterface>)cameraController didFinishRecordingVideo:(NSURL *)videoURL {
     [SSOVideoEditingHelper cropVideo:videoURL
                           withStatus:^(AVAssetExportSessionStatus status, AVAssetExportSession *exporter) {
-                              switch (status) {
-                              case AVAssetExportSessionStatusUnknown:
-                                  [SVProgressHUD dismiss];
-                                  [self.videoDelegate enableUserInteraction];
+                            switch (status) {
+                            case AVAssetExportSessionStatusUnknown:
+                                [SVProgressHUD dismiss];
+                                [self.videoDelegate enableUserInteraction];
 
-                                  break;
-                              case AVAssetExportSessionStatusWaiting:
-                                  break;
-                              case AVAssetExportSessionStatusExporting:
-                                  break;
-                              case AVAssetExportSessionStatusCompleted: {
-                                  // Dismiss HUD
-                                  [SVProgressHUD dismiss];
-                                  [self.videoDelegate enableUserInteraction];
+                                break;
+                            case AVAssetExportSessionStatusWaiting:
+                                break;
+                            case AVAssetExportSessionStatusExporting:
+                                break;
+                            case AVAssetExportSessionStatusCompleted: {
+                                // Dismiss HUD
+                                [SVProgressHUD dismiss];
+                                [self.videoDelegate enableUserInteraction];
 
-                                  // Edit the selected media
-                                  WKEditMediaViewController *controller =
-                                      [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
-                                  controller.mediaURL = exporter.outputURL;
-                                  [self.navigationController pushViewController:controller animated:YES];
-                              } break;
-                              case AVAssetExportSessionStatusFailed:
-                                  [SVProgressHUD dismiss];
-                                  [self.videoDelegate enableUserInteraction];
+                                // Edit the selected media
+                                WKEditMediaViewController *controller =
+                                    [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+                                controller.mediaURL = exporter.outputURL;
+                                [self.navigationController pushViewController:controller animated:YES];
+                            } break;
+                            case AVAssetExportSessionStatusFailed:
+                                [SVProgressHUD dismiss];
+                                [self.videoDelegate enableUserInteraction];
 
-                                  break;
-                              case AVAssetExportSessionStatusCancelled:
-                                  [SVProgressHUD dismiss];
-                                  [self.videoDelegate enableUserInteraction];
+                                break;
+                            case AVAssetExportSessionStatusCancelled:
+                                [SVProgressHUD dismiss];
+                                [self.videoDelegate enableUserInteraction];
 
-                                  break;
+                                break;
 
-                              default:
-                                  break;
-                              }
+                            default:
+                                break;
+                            }
                           }
                      inContainerView:self.view];
+}
+
+/**
+ *  Initialize the camera library and display the last picture in cameraRoll imageView
+ */
+- (void)initializeAssetsLibrary {
+    self.library = [[ALAssetsLibrary alloc] init];
+
+    //[SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil)];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      [self.library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
+          usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            //                                    [SVProgressHUD dismiss];
+
+            if (group != nil) {
+                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+
+                [group enumerateAssetsWithOptions:NSEnumerationReverse
+                                       usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+
+                                         if (asset) {
+                                             UIImage *img = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
+                                             self.libraryImage = img;
+
+                                             *stop = YES;
+                                         }
+                                       }];
+            }
+
+            *stop = NO;
+          }
+          failureBlock:^(NSError *error) {
+            //[SVProgressHUD dismiss];
+
+            NSLog(@"error %@", error);
+          }];
+
+    });
 }
 
 @end

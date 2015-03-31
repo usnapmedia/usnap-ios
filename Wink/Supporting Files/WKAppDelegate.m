@@ -101,16 +101,17 @@
 #pragma mark - Setup State
 
 - (void)setupRootViewController {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
+   // if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
         WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
         UINavigationController *navController = [[UIStoryboard cameraStoryboard] instantiateViewControllerWithIdentifier:@"CAMERA_NAV_VC"];
         self.window.rootViewController = navController;
-    } else {
-        WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
-        WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginController];
-        navController.navigationBarHidden = YES;
-        self.window.rootViewController = navController;
-    }
+  //  }
+//    else {
+//        WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
+//        WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginController];
+//        navController.navigationBarHidden = YES;
+//        self.window.rootViewController = navController;
+//    }
 }
 
 #pragma mark - Current User Changed
