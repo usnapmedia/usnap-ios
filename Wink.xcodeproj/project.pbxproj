@@ -75,7 +75,6 @@
 		335723DF1ACB097C000CC846 /* WKShareViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3357239C1ACB097C000CC846 /* WKShareViewController_iPad.xib */; };
 		335723E01ACB097C000CC846 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3357239F1ACB097C000CC846 /* Constants.m */; };
 		335723E11ACB097C000CC846 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A01ACB097C000CC846 /* main.m */; };
-		335723E21ACB097C000CC846 /* SSStoryboardConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A21ACB097C000CC846 /* SSStoryboardConstants.m */; };
 		335723E31ACB097C000CC846 /* Wink-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335723A31ACB097C000CC846 /* Wink-Info.plist */; };
 		335723E41ACB097C000CC846 /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A61ACB097C000CC846 /* WKAppDelegate.m */; };
 		335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */; };
@@ -801,7 +800,7 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Wink/Controllers/Camera/Camera.storyboard",
+				"$(SRCROOT)/Wink/Camera/Capture/Camera.storyboard",
 			);
 			name = "Generate Storyboard Identifiers";
 			outputPaths = (
@@ -852,7 +851,6 @@
 				335723B91ACB097C000CC846 /* SSOVideoEditingHelper.m in Sources */,
 				335723CF1ACB097C000CC846 /* WKLoginViewController.m in Sources */,
 				335723D91ACB097C000CC846 /* WKSettingsViewController.m in Sources */,
-				335723E21ACB097C000CC846 /* SSStoryboardConstants.m in Sources */,
 				335723BA1ACB097C000CC846 /* WKEditMediaViewController.m in Sources */,
 				335723C11ACB097C000CC846 /* UIFont+WKAdditions.m in Sources */,
 			);
@@ -1004,8 +1002,8 @@
 					"$(PROJECT_DIR)/Wink",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Wink/Wink-Prefix.pch";
-				INFOPLIST_FILE = "Wink/Wink-Info.plist";
+				GCC_PREFIX_HEADER = "Wink/Supporting Files/Wink-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Wink/Supporting Files/Wink-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1032,8 +1030,8 @@
 					"$(PROJECT_DIR)/Wink",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Wink/Wink-Prefix.pch";
-				INFOPLIST_FILE = "Wink/Wink-Info.plist";
+				GCC_PREFIX_HEADER = "Wink/Supporting Files/Wink-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Wink/Supporting Files/Wink-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
