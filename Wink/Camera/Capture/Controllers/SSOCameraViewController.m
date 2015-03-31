@@ -143,15 +143,15 @@
     // Change flash button icon
     if (self.isFlashOn) {
         if (self.isVideoOn) {
-            [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconOFF.png"] forState:UIControlStateNormal];
+            [self.flashButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
             //            [self.containerViewController.cameraContainerVC flashTurnedOff];
 
         } else {
-            [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconON.png"] forState:UIControlStateNormal];
+            [self.flashButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
             //            [self.containerViewController.cameraContainerVC flashTurnedOn];
         }
     } else {
-        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconOFF.png"] forState:UIControlStateNormal];
+        [self.flashButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
         //        [self.containerViewController.cameraContainerVC flashTurnedOff];
     }
 }
