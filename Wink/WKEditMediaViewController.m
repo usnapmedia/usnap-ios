@@ -15,6 +15,9 @@
 #import "SSOMediaEditStateDrawColor.h"
 #import "SSOMediaEditStateBrightness.h"
 
+#import "SSCellViewItem.h"
+#import "SSCellViewSection.h"
+
 #import <Masonry.h>
 
 @interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate>
@@ -23,6 +26,9 @@
 @property(weak, nonatomic) IBOutlet UIImageView *watermarkImageView;
 @property(weak, nonatomic) IBOutlet UIButton *postButton;
 @property(weak, nonatomic) IBOutlet UIButton *backButton;
+
+@property (nonatomic, strong) NSMutableArray *arrayImages;
+
 
 @property(nonatomic, strong, readwrite) ACEDrawingView *drawView;
 @property(strong, nonatomic, readwrite) BrightnessContrastSlidersContainerView *brightnessContrastContainerView;
@@ -73,6 +79,51 @@
     // Setup the text view
     self.textView = [[SSOEditMediaMovableTextView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.overlayView.frame.size.width, 70.0f)];
     [self.overlayView insertSubview:self.textView belowSubview:self.watermarkImageView];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"CustomCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"collectionCell"];
+    self.collectionView.inputData = [self populateCellData].mutableCopy;
+    [self.collectionView reloadData];
+
+}
+
+-(NSMutableArray *)arrayImages {
+    
+    if (!_arrayImages) {
+        _arrayImages = [[NSMutableArray alloc]init];
+    }
+    
+    _arrayImages = @[[UIImage imageNamed:@"Alien"], [UIImage imageNamed:@"hankey"], [UIImage imageNamed:@"Unknown"], [UIImage imageNamed:@"Alien"], [UIImage imageNamed:@"hankey"], [UIImage imageNamed:@"Unknown"], [UIImage imageNamed:@"Alien"], [UIImage imageNamed:@"hankey"], [UIImage imageNamed:@"Unknown"]].mutableCopy;
+    //[_arrayImages arrayByAddingObjectsFromArray:_arrayImages];
+    
+    return _arrayImages;
+}
+
+/**
+ *  This method is just used to generate the table view data for the SSBaseCollectionView.
+ *
+ *  @param inputArray Takes as input an organized array of Adjicons
+ *
+ *  @return Returns an array of arrays with sections containing elements
+ */
+
+- (NSArray *)populateCellData {
+    
+    NSMutableArray *cellDataArray = [NSMutableArray new];
+    
+    SSCellViewSection *section = [[SSCellViewSection alloc] init];
+    
+    for (UIImage *image in self.arrayImages) {
+        SSCellViewItem *newElement;
+        
+        newElement = [SSCellViewItem new];
+        newElement.cellReusableIdentifier = @"collectionCell";
+        newElement.objectData = image;
+        [section.rows addObject:newElement];
+    }
+    
+    [cellDataArray addObject:section];
+    
+    return cellDataArray;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

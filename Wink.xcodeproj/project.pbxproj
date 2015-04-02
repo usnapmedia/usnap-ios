@@ -145,6 +145,12 @@
 		27DF7E4F19AF860E00F970AF /* WKCameraOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DF7E4D19AF860E00F970AF /* WKCameraOverlayViewController.xib */; };
 		27DF7EB419AFB52800F970AF /* WKCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DF7EB219AFB52800F970AF /* WKCameraViewController.m */; };
 		27DF7EB519AFB52800F970AF /* WKCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */; };
+		336F918B1ACDD80C003B0AA4 /* SSBaseCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F918A1ACDD80C003B0AA4 /* SSBaseCollectionView.m */; };
+		336F918E1ACDD817003B0AA4 /* SSCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F918D1ACDD817003B0AA4 /* SSCollectionViewCell.m */; };
+		336F91941ACDD849003B0AA4 /* SSCellViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F91911ACDD849003B0AA4 /* SSCellViewItem.m */; };
+		336F91951ACDD849003B0AA4 /* SSCellViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F91931ACDD849003B0AA4 /* SSCellViewSection.m */; };
+		336F919B1ACDE4EB003B0AA4 /* CustomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 336F919A1ACDE4EB003B0AA4 /* CustomCollectionViewCell.xib */; };
+		336F919E1ACDED62003B0AA4 /* imageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F919D1ACDED62003B0AA4 /* imageCollectionViewCell.m */; };
 		7B1F1F931AB90BEF0070B48D /* UIColor+PickerColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F1F921AB90BEF0070B48D /* UIColor+PickerColors.m */; };
 		7B1F1F961AB90C0B0070B48D /* NSBundle+SSOHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F1F951AB90C0B0070B48D /* NSBundle+SSOHelper.m */; };
 		7B1F1F991AB90CA40070B48D /* SSOMediaEditStateDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F1F981AB90CA30070B48D /* SSOMediaEditStateDraw.m */; };
@@ -348,6 +354,18 @@
 		27DF7EB119AFB52800F970AF /* WKCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCameraViewController.h; sourceTree = "<group>"; };
 		27DF7EB219AFB52800F970AF /* WKCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCameraViewController.m; sourceTree = "<group>"; };
 		27DF7EB319AFB52800F970AF /* WKCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKCameraViewController.xib; sourceTree = "<group>"; };
+		336F91891ACDD80C003B0AA4 /* SSBaseCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseCollectionView.h; sourceTree = "<group>"; };
+		336F918A1ACDD80C003B0AA4 /* SSBaseCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBaseCollectionView.m; sourceTree = "<group>"; };
+		336F918C1ACDD817003B0AA4 /* SSCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCollectionViewCell.h; sourceTree = "<group>"; };
+		336F918D1ACDD817003B0AA4 /* SSCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCollectionViewCell.m; sourceTree = "<group>"; };
+		336F918F1ACDD849003B0AA4 /* SSBaseViewCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseViewCellProtocol.h; sourceTree = "<group>"; };
+		336F91901ACDD849003B0AA4 /* SSCellViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewItem.h; sourceTree = "<group>"; };
+		336F91911ACDD849003B0AA4 /* SSCellViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewItem.m; sourceTree = "<group>"; };
+		336F91921ACDD849003B0AA4 /* SSCellViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewSection.h; sourceTree = "<group>"; };
+		336F91931ACDD849003B0AA4 /* SSCellViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewSection.m; sourceTree = "<group>"; };
+		336F919A1ACDE4EB003B0AA4 /* CustomCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCollectionViewCell.xib; sourceTree = "<group>"; };
+		336F919C1ACDED62003B0AA4 /* imageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageCollectionViewCell.h; sourceTree = "<group>"; };
+		336F919D1ACDED62003B0AA4 /* imageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageCollectionViewCell.m; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7B1F1F911AB90BEF0070B48D /* UIColor+PickerColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PickerColors.h"; sourceTree = "<group>"; };
 		7B1F1F921AB90BEF0070B48D /* UIColor+PickerColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PickerColors.m"; sourceTree = "<group>"; };
@@ -436,6 +454,7 @@
 		1F2C62931A8E501F0038868F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				336F91871ACDD7EC003B0AA4 /* Base Views */,
 				7BE67C8C1AB8D27D009DA9A7 /* MediaEditContainerView */,
 				7BE67C931AB8D2FD009DA9A7 /* ColorPicker */,
 				7BCD1C3C1AB77FDA00F962F5 /* TextView */,
@@ -893,6 +912,33 @@
 			name = User;
 			sourceTree = "<group>";
 		};
+		336F91871ACDD7EC003B0AA4 /* Base Views */ = {
+			isa = PBXGroup;
+			children = (
+				336F91881ACDD7F8003B0AA4 /* CollectionView */,
+			);
+			name = "Base Views";
+			sourceTree = "<group>";
+		};
+		336F91881ACDD7F8003B0AA4 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				336F91891ACDD80C003B0AA4 /* SSBaseCollectionView.h */,
+				336F918A1ACDD80C003B0AA4 /* SSBaseCollectionView.m */,
+				336F918C1ACDD817003B0AA4 /* SSCollectionViewCell.h */,
+				336F918D1ACDD817003B0AA4 /* SSCollectionViewCell.m */,
+				336F918F1ACDD849003B0AA4 /* SSBaseViewCellProtocol.h */,
+				336F91901ACDD849003B0AA4 /* SSCellViewItem.h */,
+				336F91911ACDD849003B0AA4 /* SSCellViewItem.m */,
+				336F91921ACDD849003B0AA4 /* SSCellViewSection.h */,
+				336F91931ACDD849003B0AA4 /* SSCellViewSection.m */,
+				336F919C1ACDED62003B0AA4 /* imageCollectionViewCell.h */,
+				336F919D1ACDED62003B0AA4 /* imageCollectionViewCell.m */,
+				336F919A1ACDE4EB003B0AA4 /* CustomCollectionViewCell.xib */,
+			);
+			name = CollectionView;
+			sourceTree = "<group>";
+		};
 		7B3F105C1AB73D4600D0A6B2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1165,6 +1211,7 @@
 				27AA32A819BE35B500558D7E /* brightnessIcon@2x.png in Resources */,
 				2716CAFC19C75D4B00FC226A /* captureButton_iPad@2x.png in Resources */,
 				2716CAE419C75D2B00FC226A /* textButtonIcon_iPad.png in Resources */,
+				336F919B1ACDE4EB003B0AA4 /* CustomCollectionViewCell.xib in Resources */,
 				270DFB2C19AE724500067072 /* WKLoginViewController.xib in Resources */,
 				2716CAE219C75D2B00FC226A /* forwardsButtonIcon_iPad.png in Resources */,
 				2716CAC519C746BD00FC226A /* Localizable.strings in Resources */,
@@ -1275,16 +1322,20 @@
 				27AA325E19B8CCAE00558D7E /* UIView+WKAdditions.m in Sources */,
 				27017DC719DDEFDA0011ECCC /* AVAssetTrack+WKAdditions.m in Sources */,
 				7BE67C921AB8D298009DA9A7 /* BrightnessContrastSlidersContainerView.m in Sources */,
+				336F918E1ACDD817003B0AA4 /* SSCollectionViewCell.m in Sources */,
+				336F918B1ACDD80C003B0AA4 /* SSBaseCollectionView.m in Sources */,
 				27AA328719BDF21B00558D7E /* WKShareViewController.m in Sources */,
 				7B1F1F931AB90BEF0070B48D /* UIColor+PickerColors.m in Sources */,
 				7BE67C961AB8D2FD009DA9A7 /* WKColorPickerView.m in Sources */,
 				27AA325B19B8B06A00558D7E /* UIColor+WKAdditions.m in Sources */,
 				270DFB0119AE71BE00067072 /* main.m in Sources */,
 				27DF7EB419AFB52800F970AF /* WKCameraViewController.m in Sources */,
+				336F91951ACDD849003B0AA4 /* SSCellViewSection.m in Sources */,
 				7BE67C7E1AB8859B009DA9A7 /* SSOMediaEditState.m in Sources */,
 				7BCD1C3F1AB7801800F962F5 /* SSOEditMediaMovableTextView.m in Sources */,
 				27017DC019DCA4460011ECCC /* WKVideoEditor.m in Sources */,
 				27AA323F19B78F8300558D7E /* NSDictionary+WKAdditions.m in Sources */,
+				336F919E1ACDED62003B0AA4 /* imageCollectionViewCell.m in Sources */,
 				7B650E841A8D3E690060458E /* WKSocialNetworkHelper.m in Sources */,
 				2743319E19B76843003334BB /* WKMoviePlayerView.m in Sources */,
 				7BE67C831AB8859B009DA9A7 /* SSOMediaEditStateText.m in Sources */,
@@ -1297,6 +1348,7 @@
 				27AA325819B8AF8B00558D7E /* UIFont+WKAdditions.m in Sources */,
 				27DF7E4A19AF802300F970AF /* WKUser.m in Sources */,
 				270DFB2F19AE72AD00067072 /* WKNavigationController.m in Sources */,
+				336F91941ACDD849003B0AA4 /* SSCellViewItem.m in Sources */,
 				7B3F10661AB7446800D0A6B2 /* SSOAccessoryHelper.m in Sources */,
 				7BE67C801AB8859B009DA9A7 /* SSOMediaEditStateCrop.m in Sources */,
 				7BE67C8F1AB8D27D009DA9A7 /* SSOColorPickerContainerView.m in Sources */,
