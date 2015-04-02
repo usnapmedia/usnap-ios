@@ -34,20 +34,20 @@
                         <viewControllerLayoutGuide type="bottom" id="doZ-ra-0Jc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ck7-Ge-pVp">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wM-d9-iM7">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <connections>
                                     <segue destination="p1H-PN-LOb" kind="embed" identifier="CAMERA_CONTAINER_SEGUE" id="x2m-Yj-GyQ"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77y-R9-8Qn" userLabel="Top View">
-                                <rect key="frame" x="0.0" y="55" width="568" height="69"/>
+                                <rect key="frame" x="0.0" y="55" width="320" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="std-T3-Jlg">
-                                        <rect key="frame" x="509" y="7" width="55" height="55"/>
+                                        <rect key="frame" x="261" y="7" width="55" height="55"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="std-T3-Jlg" secondAttribute="height" multiplier="1:1" id="7go-jo-Oo5"/>
                                             <constraint firstAttribute="height" constant="55" id="ZIm-Eh-Cbx"/>
@@ -72,7 +72,7 @@
                                         </connections>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JrL-gd-Mf6">
-                                        <rect key="frame" x="270" y="54" width="28" height="21"/>
+                                        <rect key="frame" x="146" y="54" width="28" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -155,7 +155,7 @@
                                 </variation>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NzS-ma-Rxx">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="55"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="sB1-Rv-0Lx"/>
@@ -180,7 +180,7 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9G-9M-9NP" userLabel="Bottom View">
-                                <rect key="frame" x="0.0" y="220" width="568" height="100"/>
+                                <rect key="frame" x="0.0" y="468" width="320" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LzJ-oa-rGY">
                                         <rect key="frame" x="8" y="43" width="49" height="49"/>
@@ -209,7 +209,7 @@
                                     <constraint firstAttribute="height" constant="100" id="r5R-i1-jEH"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nh-k5-MSM" userLabel="Capture button">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nh-k5-MSM" userLabel="Capture button" customClass="SSORoundedAnimatedButton">
                                 <rect key="frame" x="122" y="476" width="77" height="77"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="3Nh-k5-MSM" secondAttribute="height" multiplier="1:1" id="iaa-DD-F95"/>
@@ -275,9 +275,9 @@
                     <navigationItem key="navigationItem" id="BFZ-sQ-cdZ"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="animatedCaptureButton" destination="3Nh-k5-MSM" id="Hrh-9X-wQM"/>
                         <outlet property="bottomContainerView" destination="q9G-9M-9NP" id="hkM-Vk-PGs"/>
                         <outlet property="cameraRotationButton" destination="std-T3-Jlg" id="O5Z-RY-eAd"/>
-                        <outlet property="captureButton" destination="3Nh-k5-MSM" id="R0W-be-dw9"/>
                         <outlet property="containerView" destination="5wM-d9-iM7" id="9Ju-x3-zGo"/>
                         <outlet property="containerViewController" destination="5wM-d9-iM7" id="zXo-rM-jUg"/>
                         <outlet property="flashButton" destination="F1C-vy-mwx" id="ldB-Gt-3ea"/>
@@ -299,7 +299,7 @@
                         <viewControllerLayoutGuide type="bottom" id="qfL-C8-xzR"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="kxz-Q6-7zD">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

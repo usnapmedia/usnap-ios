@@ -81,6 +81,7 @@
 		335723E61ACB097C000CC846 /* SSOFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723AD1ACB097C000CC846 /* SSOFacebookLoginButton.m */; };
 		335723E71ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723B01ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.m */; };
 		335723E81ACB097C000CC846 /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723B21ACB097C000CC846 /* WKSettingSocialTableViewCell.m */; };
+		336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */; };
 		33CE6CCD1ACB4C470095027A /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CE6CCC1ACB4C470095027A /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
@@ -212,6 +213,8 @@
 		335723B01ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSettingsSocialFakeTableViewCell.m; sourceTree = "<group>"; };
 		335723B11ACB097C000CC846 /* WKSettingSocialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKSettingSocialTableViewCell.h; sourceTree = "<group>"; };
 		335723B21ACB097C000CC846 /* WKSettingSocialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSettingSocialTableViewCell.m; sourceTree = "<group>"; };
+		336F913E1ACD963D003B0AA4 /* SSORoundedAnimatedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSORoundedAnimatedButton.h; path = Views/SSORoundedAnimatedButton.h; sourceTree = "<group>"; };
+		336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSORoundedAnimatedButton.m; path = Views/SSORoundedAnimatedButton.m; sourceTree = "<group>"; };
 		33CE6CCB1ACB4C470095027A /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
 		33CE6CCC1ACB4C470095027A /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -361,6 +364,7 @@
 		3357233D1ACB097C000CC846 /* Capture */ = {
 			isa = PBXGroup;
 			children = (
+				336F913D1ACD95A7003B0AA4 /* VIews */,
 				3357233E1ACB097C000CC846 /* Camera.storyboard */,
 				3357233F1ACB097C000CC846 /* Controllers */,
 				335723491ACB097C000CC846 /* Delegates */,
@@ -623,6 +627,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		336F913D1ACD95A7003B0AA4 /* VIews */ = {
+			isa = PBXGroup;
+			children = (
+				336F913E1ACD963D003B0AA4 /* SSORoundedAnimatedButton.h */,
+				336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */,
+			);
+			name = VIews;
+			sourceTree = "<group>";
+		};
 		ED65896723BCE61EECA4D660 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -846,6 +859,7 @@
 				335723D41ACB097C000CC846 /* WKSocialNetworkHelper.m in Sources */,
 				335723B61ACB097C000CC846 /* SSOContainerViewController.m in Sources */,
 				335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */,
+				336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */,
 				335723C41ACB097C000CC846 /* UIStoryboard+USnap.m in Sources */,
 				335723D71ACB097C000CC846 /* WKViewController.m in Sources */,
 				335723CE1ACB097C000CC846 /* WKImagePickerController.m in Sources */,

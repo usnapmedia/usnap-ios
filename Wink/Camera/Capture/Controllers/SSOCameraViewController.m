@@ -15,10 +15,12 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "VideoRecordingDelegate.h"
 #import "WKEditMediaViewController.h"
+#import "SSORoundedAnimatedButton.h"
+
 
 #define kTotalVideoRecordingTime 30
 
-@interface SSOCameraViewController () <UIAlertViewDelegate, VideoRecordingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface SSOCameraViewController () <UIAlertViewDelegate, VideoRecordingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SSORoundedAnimatedButtonProtocol>
 
 // IBOutlets
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *videoCenteringConstraint;
@@ -34,6 +36,7 @@
 @property(weak, nonatomic) IBOutlet UIView *topBlackBar;
 @property(weak, nonatomic) IBOutlet UIButton *captureButton;
 @property(weak, nonatomic) IBOutlet UIView *bottomContainerView;
+@property (weak, nonatomic) IBOutlet SSORoundedAnimatedButton *animatedCaptureButton;
 
 // View Controllers
 @property(weak, nonatomic) SSOContainerViewController *containerViewController;
@@ -69,6 +72,8 @@
     // Start with the photo button in the middle
     [self initializeUI];
     [self initializeGestures];
+    
+    [self initAnimatedButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -80,6 +85,15 @@
 }
 
 #pragma mark - Utilities
+
+-(void)initAnimatedButton
+{
+    self.animatedCaptureButton.delegate = self;
+    self.animatedCaptureButton.circleColor = [UIColor blueColor];
+    self.animatedCaptureButton.circleOpacity = 0.8;
+    self.animatedCaptureButton.circleLineWidth = 20;
+    
+}
 
 /**
  *  Intialize data
@@ -129,7 +143,7 @@
     self.blackView.backgroundColor = [UIColor blackColor];
     self.blackView.alpha = 0.0;
     [self.containerView addSubview:self.blackView];
-    [self.view bringSubviewToFront:self.captureButton];
+    [self.view bringSubviewToFront:self.animatedCaptureButton];
 }
 /**
  *  Update Video UI
@@ -212,7 +226,7 @@
  */
 - (void)animateBlackViewOntoScreen {
 
-    self.captureButton.userInteractionEnabled = NO;
+    self.animatedCaptureButton.userInteractionEnabled = NO;
 
     [UIView animateWithDuration:0.54
         delay:0.0
@@ -226,7 +240,7 @@
                               options:UIViewAnimationOptionCurveLinear
                            animations:^{
                              self.blackView.alpha = 0.0;
-                             self.captureButton.userInteractionEnabled = YES;
+                             self.animatedCaptureButton.userInteractionEnabled = YES;
                            }
                            completion:nil];
         }];
@@ -559,6 +573,27 @@
     } else {
         [self.containerViewController.cameraContainerVC capturePhoto];
     }
+}
+
+#pragma mark - SSORoundedAnimatedButtonProtocol
+
+
+-(void)didStartAnimation:(SSORoundedAnimatedButton *)button {
+//    if (self.isVideoOn) {
+//        if (!self.isVideoRecording) {
+//            self.isVideoRecording = YES;
+    
+    [self.containerViewController.cameraContainerVC startRecordingVideo];
+            
+//        }
+//    }
+//
+    
+}
+
+-(void)didFinishAnimation:(SSORoundedAnimatedButton *)button {
+    
+      [self.containerViewController.cameraContainerVC stopRecordingVideo];
 }
 
 #pragma mark - UIAlertViewDelegate
