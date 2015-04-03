@@ -7,32 +7,52 @@
 //
 
 #import "WKViewController.h"
+#import "ACEDrawingView.h"
+#import "WKMoviePlayerView.h"
+#import "WKShareViewController.h"
+#import "WKColorPickerView.h"
+#import "YKImageCropperView.h"
+#import "SSOEditMediaMovableTextView.h"
+
+#import <RSKImageCropViewController.h>
+
+#import "SSOColorPickerContainerView.h"
+#import "BrightnessContrastSlidersContainerView.h"
+#import "SSOBrightnessContrastHelper.h"
 
 @interface WKEditMediaViewController : WKViewController {
-    
 }
 
 // Media
-@property (nonatomic, strong) UIImage *image;
-@property (nonatomic, strong) NSURL *mediaURL;
+@property(nonatomic, strong) UIImage *image;
+@property(nonatomic, strong) NSURL *mediaURL;
 
 // UI
-@property (weak, nonatomic) IBOutlet UIView *overlayView;
-@property (weak, nonatomic) IBOutlet UIImageView *watermarkImageView;
-@property (weak, nonatomic) IBOutlet UIButton *postButton;
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UIImageView *drawIconBorderImageView;
-@property (weak, nonatomic) IBOutlet UIButton *drawButton;
-@property (weak, nonatomic) IBOutlet UIButton *textButton;
-@property (weak, nonatomic) IBOutlet UIButton *brightnessButton;
-@property (weak, nonatomic) IBOutlet UIButton *cropButton;
+@property(weak, nonatomic) IBOutlet UIView *overlayView;
+@property(weak, nonatomic) IBOutlet UIButton *drawButton;
+@property(weak, nonatomic) IBOutlet UIButton *textButton;
+@property(weak, nonatomic) IBOutlet UIButton *brightnessButton;
+@property(weak, nonatomic) IBOutlet UIButton *cropButton;
 
-// Button Actions
-- (IBAction)drawButtonTouched:(id)sender;
-- (IBAction)textButtonTouched:(id)sender;
-- (IBAction)brightnessButtonTouched:(id)sender;
-- (IBAction)cropButtonTouched:(id)sender;
-- (IBAction)postButtonTouched:(id)sender;
-- (IBAction)backButtonTouched:(id)sender;
+// Media
+@property(nonatomic, strong) UIImageView *imageView;
+@property(nonatomic, strong) UIImageView *modifiedImageView;
+@property(nonatomic, strong) WKMoviePlayerView *moviePlayerView;
+
+// Drawing
+@property(nonatomic, strong, readonly) ACEDrawingView *drawView;
+
+// Text
+@property(nonatomic, strong) SSOEditMediaMovableTextView *textView;
+
+// Brightness & Contrast
+@property(weak, nonatomic) IBOutlet UIView *editAccessoriesContainerView;
+
+// Containers
+@property(strong, nonatomic, readonly) BrightnessContrastSlidersContainerView *brightnessContrastContainerView;
+@property(strong, nonatomic, readonly) SSOColorPickerContainerView *colorPickerContainerView;
+
+// Helper
+@property(strong, nonatomic, readonly) SSOBrightnessContrastHelper *brightnessContrastHelper;
 
 @end

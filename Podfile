@@ -15,7 +15,8 @@ pod 'Facebook-iOS-SDK'
 pod 'PonyDebugger'
 pod 'SSFacebookHelper'
 pod "FastttCamera", :git => 'https://github.com/KhanFu/FastttCamera', :branch => 'master'
-pod 'Masonry', '0.6.1'
+pod 'Masonry'
+pod 'RSKImageCropper'
 pod 'SVProgressHUD'
 
 # Samsao libraries

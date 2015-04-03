@@ -9,7 +9,7 @@
 #import "WKColorPickerView.h"
 
 @interface WKColorPickerView ()
-@property (nonatomic, strong) CAGradientLayer *gradientLayer;
+@property(nonatomic, strong) CAGradientLayer *gradientLayer;
 @end
 
 @implementation WKColorPickerView
@@ -37,7 +37,7 @@
 - (void)setColors:(NSArray *)colors {
     if (_colors != colors) {
         _colors = colors;
-        
+        _color = [colors firstObject];
         [self setNeedsLayout];
     }
 }
@@ -45,12 +45,12 @@
 #pragma mark - Setup & Update UI
 
 - (void)setupUI {
-    
+
     // Setup the view
     self.layer.borderColor = [UIColor whiteColor].CGColor;
     self.layer.borderWidth = 2.0f;
     self.layer.cornerRadius = 2.0f;
-    
+
     // Setup the gradient layer
     [self.gradientLayer removeFromSuperlayer];
     self.gradientLayer = [CAGradientLayer layer];
@@ -58,13 +58,13 @@
 }
 
 - (void)updateUI {
-    
+
     // Create array of CGColor objects
     NSMutableArray *colors = [NSMutableArray array];
     for (UIColor *color in self.colors) {
         [colors addObject:(id)color.CGColor];
     }
-    
+
     // Setup the gradient
     self.gradientLayer.frame = self.bounds;
     self.gradientLayer.startPoint = CGPointMake(0.0f, 0.5f);
@@ -76,30 +76,30 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    
+
     CGPoint point = [touches.anyObject locationInView:self];
     if (CGRectContainsPoint([self touchFrame], point)) {
-        self.color = [self colorAtPoint:CGPointMake(point.x, roundf(self.bounds.size.height/2.0f))];
+        self.color = [self colorAtPoint:CGPointMake(point.x, roundf(self.bounds.size.height / 2.0f))];
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
-    
+
     CGPoint point = [touches.anyObject locationInView:self];
     if (CGRectContainsPoint([self touchFrame], point)) {
-        self.color = [self colorAtPoint:CGPointMake(point.x, roundf(self.bounds.size.height/2.0f))];
+        self.color = [self colorAtPoint:CGPointMake(point.x, roundf(self.bounds.size.height / 2.0f))];
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    
+
     CGPoint point = [touches.anyObject locationInView:self];
     if (CGRectContainsPoint([self touchFrame], point)) {
-        self.color = [self colorAtPoint:CGPointMake(point.x, roundf(self.bounds.size.height/2.0f))];
+        self.color = [self colorAtPoint:CGPointMake(point.x, roundf(self.bounds.size.height / 2.0f))];
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
 }
@@ -108,7 +108,8 @@
 
 - (CGRect)touchFrame {
     CGFloat margin = 10.0f;
-    CGRect touchFrame = CGRectMake(self.bounds.origin.x - margin, self.bounds.origin.y - margin, self.bounds.size.width + (margin * 2), self.bounds.size.height + (margin * 2));
+    CGRect touchFrame =
+        CGRectMake(self.bounds.origin.x - margin, self.bounds.origin.y - margin, self.bounds.size.width + (margin * 2), self.bounds.size.height + (margin * 2));
     return touchFrame;
 }
 
@@ -124,7 +125,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     // Update the UI
     [self updateUI];
 }
