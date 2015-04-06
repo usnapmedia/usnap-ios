@@ -20,6 +20,8 @@
 #import "BrightnessContrastSlidersContainerView.h"
 #import "SSOBrightnessContrastHelper.h"
 
+#import "SSBaseCollectionView.h"
+
 @interface WKEditMediaViewController : WKViewController {
 }
 
@@ -51,6 +53,8 @@
 // Containers
 @property(strong, nonatomic, readonly) BrightnessContrastSlidersContainerView *brightnessContrastContainerView;
 @property(strong, nonatomic, readonly) SSOColorPickerContainerView *colorPickerContainerView;
+
+@property (weak, nonatomic) IBOutlet SSBaseCollectionView *collectionView;
 
 // Helper
 @property(strong, nonatomic, readonly) SSOBrightnessContrastHelper *brightnessContrastHelper;
