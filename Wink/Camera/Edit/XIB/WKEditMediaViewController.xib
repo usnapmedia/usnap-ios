@@ -28,7 +28,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDS-Th-jEq" userLabel="overlay view">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wink_watermark.png" translatesAutoresizingMaskIntoConstraints="NO" id="6nm-lF-IF7">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wink_watermark" translatesAutoresizingMaskIntoConstraints="NO" id="6nm-lF-IF7">
                             <rect key="frame" x="540" y="549" width="40" height="31"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="31" id="e0j-GQ-xwl"/>
@@ -77,7 +77,7 @@
                                 <constraint firstAttribute="height" constant="47" id="6C7-ZY-bfe"/>
                                 <constraint firstAttribute="width" constant="47" id="eYm-F7-Fj9"/>
                             </constraints>
-                            <state key="normal" image="backButtonWhite.png">
+                            <state key="normal" image="backButtonWhite">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -90,7 +90,7 @@
                                 <constraint firstAttribute="width" constant="47" id="gfM-fT-SYI"/>
                                 <constraint firstAttribute="height" constant="47" id="pWz-tS-tbA"/>
                             </constraints>
-                            <state key="normal" image="forwardButtonWhite.png">
+                            <state key="normal" image="forwardButtonWhite">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <variation key="heightClass=regular-widthClass=compact">
@@ -148,7 +148,7 @@
                                 <action selector="drawButtonTouched:" destination="-1" eventType="touchUpInside" id="7FO-tF-msd"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drawIconBorder.png" translatesAutoresizingMaskIntoConstraints="NO" id="LpT-bU-UBC">
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drawIconBorder" translatesAutoresizingMaskIntoConstraints="NO" id="LpT-bU-UBC">
                             <rect key="frame" x="8" y="5" width="47" height="47"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="47" id="5HE-1G-X3V"/>
@@ -157,7 +157,7 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7B-e2-vee" userLabel="textButton">
                             <rect key="frame" x="63" y="5" width="47" height="47"/>
-                            <state key="normal" image="textIcon.png">
+                            <state key="normal" image="textIcon">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -166,7 +166,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFT-LT-JLd" userLabel="contrastButton">
                             <rect key="frame" x="118" y="5" width="47" height="47"/>
-                            <state key="normal" image="brightnessIcon.png">
+                            <state key="normal" image="brightnessIcon">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -175,7 +175,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCo-Ii-L8U" userLabel="cropButton">
                             <rect key="frame" x="173" y="5" width="47" height="47"/>
-                            <state key="normal" image="cropIcon.png">
+                            <state key="normal" image="cropIcon">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -313,13 +313,13 @@
         </view>
     </objects>
     <resources>
-        <image name="backButtonWhite.png" width="27" height="27"/>
-        <image name="brightnessIcon.png" width="30" height="30"/>
-        <image name="cropIcon.png" width="27" height="27"/>
+        <image name="backButtonWhite" width="27" height="27"/>
+        <image name="brightnessIcon" width="30" height="30"/>
+        <image name="cropIcon" width="27" height="27"/>
         <image name="drawIcon.png" width="26" height="26"/>
-        <image name="drawIconBorder.png" width="27" height="27"/>
-        <image name="forwardButtonWhite.png" width="23" height="13"/>
-        <image name="textIcon.png" width="21" height="24"/>
-        <image name="wink_watermark.png" width="101" height="78"/>
+        <image name="drawIconBorder" width="27" height="27"/>
+        <image name="forwardButtonWhite" width="23" height="13"/>
+        <image name="textIcon" width="21" height="24"/>
+        <image name="wink_watermark" width="101" height="78"/>
     </resources>
 </document>
