@@ -45,13 +45,10 @@
     [self fastttAddChildViewController:self.fastCamera];
     self.fastCamera.view.frame = self.view.frame;
 }
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self initializeAssetsLibrary];
 
-    
-    
+    [self initializeAssetsLibrary];
 }
 
 #pragma mark - Utilities
@@ -111,7 +108,7 @@
     WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
     controller.image = capturedImage.fullImage;
     [self.library saveImage:controller.image
-                    toAlbum:@"Snapzizi"
+                    toAlbum:@"uSnap"
         withCompletionBlock:^(NSError *error) {
           NSLog(@"Error saving image in camera roll: %@", [error description]);
 

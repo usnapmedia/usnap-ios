@@ -80,10 +80,6 @@
     [super viewDidAppear:animated];
 
     [self animateCameraRollImageChange];
-
-    //    if (self.containerViewController.cameraContainerVC.libraryImage) {
-    //        [self.mediaButton setImage:self.containerViewController.cameraContainerVC.libraryImage forState:UIControlStateNormal];
-    //    }
 }
 
 #pragma mark - Utilities
