@@ -67,9 +67,6 @@
 		335723E31ACB097C000CC846 /* Wink-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335723A31ACB097C000CC846 /* Wink-Info.plist */; };
 		335723E41ACB097C000CC846 /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A61ACB097C000CC846 /* WKAppDelegate.m */; };
 		335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */; };
-		335723E61ACB097C000CC846 /* SSOFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723AD1ACB097C000CC846 /* SSOFacebookLoginButton.m */; };
-		335723E71ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723B01ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.m */; };
-		335723E81ACB097C000CC846 /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723B21ACB097C000CC846 /* WKSettingSocialTableViewCell.m */; };
 		336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */; };
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
@@ -105,6 +102,15 @@
 		D830F4221ACDDBF1002A503D /* UIImage+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4151ACDDBF1002A503D /* UIImage+Tools.m */; };
 		D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4171ACDDBF1002A503D /* UIStoryboard+USnap.m */; };
 		D830F4241ACDDBF1002A503D /* UIView+WKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4191ACDDBF1002A503D /* UIView+WKAdditions.m */; };
+		D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */; };
+		D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m */; };
+		D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */; };
+		D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */; };
+		D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94B31ACF492000CFF801 /* SSCollectionViewCell.m */; };
+		D86E94C91ACF4A1400CFF801 /* CustomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86E94C01ACF4A1400CFF801 /* CustomCollectionViewCell.xib */; };
+		D86E94CA1ACF4A1400CFF801 /* imageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C21ACF4A1400CFF801 /* imageCollectionViewCell.m */; };
+		D86E94CB1ACF4A1400CFF801 /* SSCellViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C61ACF4A1400CFF801 /* SSCellViewItem.m */; };
+		D86E94CC1ACF4A1400CFF801 /* SSCellViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C81ACF4A1400CFF801 /* SSCellViewSection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,12 +210,6 @@
 		335723A61ACB097C000CC846 /* WKAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKAppDelegate.m; sourceTree = "<group>"; };
 		335723A81ACB097C000CC846 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
-		335723AC1ACB097C000CC846 /* SSOFacebookLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFacebookLoginButton.h; sourceTree = "<group>"; };
-		335723AD1ACB097C000CC846 /* SSOFacebookLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFacebookLoginButton.m; sourceTree = "<group>"; };
-		335723AF1ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSettingsSocialFakeTableViewCell.h; sourceTree = "<group>"; };
-		335723B01ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSettingsSocialFakeTableViewCell.m; sourceTree = "<group>"; };
-		335723B11ACB097C000CC846 /* WKSettingSocialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKSettingSocialTableViewCell.h; sourceTree = "<group>"; };
-		335723B21ACB097C000CC846 /* WKSettingSocialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSettingSocialTableViewCell.m; sourceTree = "<group>"; };
 		336F913E1ACD963D003B0AA4 /* SSORoundedAnimatedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSORoundedAnimatedButton.h; path = Views/SSORoundedAnimatedButton.h; sourceTree = "<group>"; };
 		336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSORoundedAnimatedButton.m; path = Views/SSORoundedAnimatedButton.m; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -273,6 +273,24 @@
 		D830F4171ACDDBF1002A503D /* UIStoryboard+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+USnap.m"; sourceTree = "<group>"; };
 		D830F4181ACDDBF1002A503D /* UIView+WKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WKAdditions.h"; sourceTree = "<group>"; };
 		D830F4191ACDDBF1002A503D /* UIView+WKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WKAdditions.m"; sourceTree = "<group>"; };
+		D86E94A11ACF492000CFF801 /* SSOFacebookLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFacebookLoginButton.h; sourceTree = "<group>"; };
+		D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFacebookLoginButton.m; sourceTree = "<group>"; };
+		D86E94A41ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSettingsSocialFakeTableViewCell.h; sourceTree = "<group>"; };
+		D86E94A51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSettingsSocialFakeTableViewCell.m; sourceTree = "<group>"; };
+		D86E94A61ACF492000CFF801 /* WKSettingSocialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKSettingSocialTableViewCell.h; sourceTree = "<group>"; };
+		D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSettingSocialTableViewCell.m; sourceTree = "<group>"; };
+		D86E94AB1ACF492000CFF801 /* SSBaseCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseCollectionView.h; sourceTree = "<group>"; };
+		D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBaseCollectionView.m; sourceTree = "<group>"; };
+		D86E94AD1ACF492000CFF801 /* SSBaseViewCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseViewCellProtocol.h; sourceTree = "<group>"; };
+		D86E94B21ACF492000CFF801 /* SSCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCollectionViewCell.h; sourceTree = "<group>"; };
+		D86E94B31ACF492000CFF801 /* SSCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCollectionViewCell.m; sourceTree = "<group>"; };
+		D86E94C01ACF4A1400CFF801 /* CustomCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCollectionViewCell.xib; sourceTree = "<group>"; };
+		D86E94C11ACF4A1400CFF801 /* imageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageCollectionViewCell.h; sourceTree = "<group>"; };
+		D86E94C21ACF4A1400CFF801 /* imageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageCollectionViewCell.m; sourceTree = "<group>"; };
+		D86E94C51ACF4A1400CFF801 /* SSCellViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewItem.h; sourceTree = "<group>"; };
+		D86E94C61ACF4A1400CFF801 /* SSCellViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewItem.m; sourceTree = "<group>"; };
+		D86E94C71ACF4A1400CFF801 /* SSCellViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewSection.h; sourceTree = "<group>"; };
+		D86E94C81ACF4A1400CFF801 /* SSCellViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewSection.m; sourceTree = "<group>"; };
 		EAE311565BE99D01341CE159 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -372,12 +390,14 @@
 				335723681ACB097C000CC846 /* en.lproj */,
 				3357236D1ACB097C000CC846 /* fr.lproj */,
 				335723721ACB097C000CC846 /* Helpers */,
+				D86E94BD1ACF4A1400CFF801 /* Live Feed */,
+				D86E94C31ACF4A1400CFF801 /* Model */,
 				335723751ACB097C000CC846 /* Old:To Check */,
 				3357238E1ACB097C000CC846 /* Settings */,
 				335723971ACB097C000CC846 /* Sharing */,
 				3357239D1ACB097C000CC846 /* Supporting Files */,
 				335723A71ACB097C000CC846 /* UIAlertView+Blocks */,
-				335723AA1ACB097C000CC846 /* Views */,
+				D86E949F1ACF492000CFF801 /* Views */,
 				270DFB0619AE71BE00067072 /* Images.xcassets */,
 			);
 			path = Wink;
@@ -614,35 +634,6 @@
 			path = "UIAlertView+Blocks";
 			sourceTree = "<group>";
 		};
-		335723AA1ACB097C000CC846 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				335723AB1ACB097C000CC846 /* Button */,
-				335723AE1ACB097C000CC846 /* Cell */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		335723AB1ACB097C000CC846 /* Button */ = {
-			isa = PBXGroup;
-			children = (
-				335723AC1ACB097C000CC846 /* SSOFacebookLoginButton.h */,
-				335723AD1ACB097C000CC846 /* SSOFacebookLoginButton.m */,
-			);
-			path = Button;
-			sourceTree = "<group>";
-		};
-		335723AE1ACB097C000CC846 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				335723AF1ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.h */,
-				335723B01ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.m */,
-				335723B11ACB097C000CC846 /* WKSettingSocialTableViewCell.h */,
-				335723B21ACB097C000CC846 /* WKSettingSocialTableViewCell.m */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		336F913D1ACD95A7003B0AA4 /* VIews */ = {
 			isa = PBXGroup;
 			children = (
@@ -757,6 +748,85 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		D86E949F1ACF492000CFF801 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D86E94A01ACF492000CFF801 /* Button */,
+				D86E94A31ACF492000CFF801 /* Cell */,
+				D86E94AB1ACF492000CFF801 /* SSBaseCollectionView.h */,
+				D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */,
+				D86E94AD1ACF492000CFF801 /* SSBaseViewCellProtocol.h */,
+				D86E94B21ACF492000CFF801 /* SSCollectionViewCell.h */,
+				D86E94B31ACF492000CFF801 /* SSCollectionViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D86E94A01ACF492000CFF801 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				D86E94A11ACF492000CFF801 /* SSOFacebookLoginButton.h */,
+				D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		D86E94A31ACF492000CFF801 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D86E94A41ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.h */,
+				D86E94A51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m */,
+				D86E94A61ACF492000CFF801 /* WKSettingSocialTableViewCell.h */,
+				D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		D86E94BD1ACF4A1400CFF801 /* Live Feed */ = {
+			isa = PBXGroup;
+			children = (
+				D86E94BE1ACF4A1400CFF801 /* Preview */,
+			);
+			path = "Live Feed";
+			sourceTree = "<group>";
+		};
+		D86E94BE1ACF4A1400CFF801 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				D86E94BF1ACF4A1400CFF801 /* Views */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
+		D86E94BF1ACF4A1400CFF801 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D86E94C01ACF4A1400CFF801 /* CustomCollectionViewCell.xib */,
+				D86E94C11ACF4A1400CFF801 /* imageCollectionViewCell.h */,
+				D86E94C21ACF4A1400CFF801 /* imageCollectionViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D86E94C31ACF4A1400CFF801 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D86E94C41ACF4A1400CFF801 /* Collection view */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D86E94C41ACF4A1400CFF801 /* Collection view */ = {
+			isa = PBXGroup;
+			children = (
+				D86E94C51ACF4A1400CFF801 /* SSCellViewItem.h */,
+				D86E94C61ACF4A1400CFF801 /* SSCellViewItem.m */,
+				D86E94C71ACF4A1400CFF801 /* SSCellViewSection.h */,
+				D86E94C81ACF4A1400CFF801 /* SSCellViewSection.m */,
+			);
+			path = "Collection view";
+			sourceTree = "<group>";
+		};
 		ED65896723BCE61EECA4D660 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -856,6 +926,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D830F3F91ACDDAE7002A503D /* ColorPickerContainerView.xib in Resources */,
+				D86E94C91ACF4A1400CFF801 /* CustomCollectionViewCell.xib in Resources */,
 				D830F3F81ACDDAE7002A503D /* BrightnessContrastContainerView.xib in Resources */,
 				335723CD1ACB097C000CC846 /* WKCameraOverlayViewController_iPad.xib in Resources */,
 				335723D01ACB097C000CC846 /* WKLoginViewController.xib in Resources */,
@@ -960,14 +1031,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D830F4201ACDDBF1002A503D /* UIFont+WKAdditions.m in Sources */,
+				D86E94CC1ACF4A1400CFF801 /* SSCellViewSection.m in Sources */,
 				335723D21ACB097C000CC846 /* WKMoviePlayerView.m in Sources */,
-				335723E71ACB097C000CC846 /* SSOSettingsSocialFakeTableViewCell.m in Sources */,
 				335723CB1ACB097C000CC846 /* WKCameraOverlayViewController.m in Sources */,
 				D830F4021ACDDBD9002A503D /* SSOBrightnessContrastHelper.m in Sources */,
 				335723D81ACB097C000CC846 /* WKWinkConnect.m in Sources */,
 				335723B41ACB097C000CC846 /* SSOCameraContainerViewController.m in Sources */,
-				335723E81ACB097C000CC846 /* WKSettingSocialTableViewCell.m in Sources */,
 				D830F4241ACDDBF1002A503D /* UIView+WKAdditions.m in Sources */,
+				D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */,
 				D830F3DB1ACDDA15002A503D /* SSOMediaEditStateBrightness.m in Sources */,
 				D830F41B1ACDDBF1002A503D /* AVAssetTrack+WKAdditions.m in Sources */,
 				335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */,
@@ -979,9 +1050,10 @@
 				D830F41C1ACDDBF1002A503D /* NSBundle+SSOHelper.m in Sources */,
 				D830F3F41ACDDAE7002A503D /* BrightnessContrastSlidersContainerView.m in Sources */,
 				335723E11ACB097C000CC846 /* main.m in Sources */,
-				335723E61ACB097C000CC846 /* SSOFacebookLoginButton.m in Sources */,
+				D86E94CB1ACF4A1400CFF801 /* SSCellViewItem.m in Sources */,
 				D830F4011ACDDBD9002A503D /* SSOAccessoryHelper.m in Sources */,
 				335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */,
+				D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */,
 				D830F3E01ACDDA15002A503D /* SSOMediaEditStateNone.m in Sources */,
 				D830F4221ACDDBF1002A503D /* UIImage+Tools.m in Sources */,
 				335723E01ACB097C000CC846 /* Constants.m in Sources */,
@@ -991,6 +1063,7 @@
 				D830F3F61ACDDAE7002A503D /* SSOEditMediaMovableTextView.m in Sources */,
 				D830F41F1ACDDBF1002A503D /* UIColor+WKAdditions.m in Sources */,
 				335723B61ACB097C000CC846 /* SSOContainerViewController.m in Sources */,
+				D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */,
 				335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */,
 				D830F3F71ACDDAE7002A503D /* WKColorPickerView.m in Sources */,
 				D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */,
@@ -1002,12 +1075,15 @@
 				D830F3E11ACDDA15002A503D /* SSOMediaEditStateText.m in Sources */,
 				D830F3DD1ACDDA15002A503D /* SSOMediaEditStateDraw.m in Sources */,
 				335723D31ACB097C000CC846 /* WKNavigationController.m in Sources */,
+				D86E94CA1ACF4A1400CFF801 /* imageCollectionViewCell.m in Sources */,
 				D830F3DA1ACDDA15002A503D /* SSOMediaEditState.m in Sources */,
 				D830F41A1ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				D830F3F51ACDDAE7002A503D /* SSOColorPickerContainerView.m in Sources */,
 				D830F4211ACDDBF1002A503D /* UIImage+Resizing.m in Sources */,
 				335723B91ACB097C000CC846 /* SSOVideoEditingHelper.m in Sources */,
+				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
 				D830F3DC1ACDDA15002A503D /* SSOMediaEditStateCrop.m in Sources */,
+				D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */,
 				335723CF1ACB097C000CC846 /* WKLoginViewController.m in Sources */,
 				335723D91ACB097C000CC846 /* WKSettingsViewController.m in Sources */,
 				335723BA1ACB097C000CC846 /* WKEditMediaViewController.m in Sources */,

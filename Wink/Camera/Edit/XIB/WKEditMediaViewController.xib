@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="backButton" destination="5Fh-sC-V9Y" id="5H8-bH-qG6"/>
                 <outlet property="brightnessButton" destination="IFT-LT-JLd" id="0AD-jq-6Rq"/>
+                <outlet property="collectionView" destination="rqF-N2-Y3I" id="qDO-Yj-ajG"/>
                 <outlet property="cropButton" destination="bCo-Ii-L8U" id="yMC-tL-bY2"/>
                 <outlet property="drawButton" destination="ij0-qJ-bSo" id="g7m-i0-ykf"/>
                 <outlet property="editAccessoriesContainerView" destination="wTZ-7I-Ufn" id="36z-jj-sKS"/>
@@ -68,7 +69,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWV-R5-qgn" userLabel="topView">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                    <rect key="frame" x="0.0" y="60" width="600" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Fh-sC-V9Y" userLabel="backButton">
                             <rect key="frame" x="15" y="7" width="47" height="47"/>
@@ -242,6 +243,19 @@
                         </mask>
                     </variation>
                 </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="rqF-N2-Y3I" customClass="SSBaseCollectionView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="kDR-c0-nt5"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ebz-oK-U2l">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells/>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -253,9 +267,12 @@
                 <constraint firstItem="ugy-th-tqC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Yp8-0p-2jI"/>
                 <constraint firstAttribute="bottom" secondItem="ugy-th-tqC" secondAttribute="bottom" id="Z0A-1b-sE0"/>
                 <constraint firstAttribute="trailing" secondItem="nWV-R5-qgn" secondAttribute="trailing" id="Z4a-sM-M4V"/>
-                <constraint firstItem="nWV-R5-qgn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="bJy-PS-E7x"/>
+                <constraint firstItem="nWV-R5-qgn" firstAttribute="top" secondItem="rqF-N2-Y3I" secondAttribute="bottom" id="aEL-Wf-YJy"/>
+                <constraint firstItem="rqF-N2-Y3I" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aGC-hR-BQJ"/>
                 <constraint firstAttribute="trailing" secondItem="ugy-th-tqC" secondAttribute="trailing" id="baG-Nj-EiX"/>
                 <constraint firstAttribute="trailing" secondItem="wTZ-7I-Ufn" secondAttribute="trailing" id="k21-q4-NDe"/>
+                <constraint firstItem="rqF-N2-Y3I" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kjW-YF-CKI"/>
+                <constraint firstAttribute="trailing" secondItem="rqF-N2-Y3I" secondAttribute="trailing" id="oyw-pS-j6R"/>
                 <constraint firstItem="wTZ-7I-Ufn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qyk-Bc-PDq"/>
                 <constraint firstItem="gDS-Th-jEq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yaT-av-2NG"/>
             </constraints>
@@ -266,6 +283,7 @@
                     <include reference="wTZ-7I-Ufn"/>
                     <include reference="nWV-R5-qgn"/>
                     <include reference="ugy-th-tqC"/>
+                    <include reference="rqF-N2-Y3I"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -274,6 +292,7 @@
                     <include reference="wTZ-7I-Ufn"/>
                     <include reference="nWV-R5-qgn"/>
                     <include reference="ugy-th-tqC"/>
+                    <include reference="rqF-N2-Y3I"/>
                 </mask>
                 <mask key="constraints">
                     <include reference="3BK-Hy-Ew4"/>
@@ -282,7 +301,6 @@
                     <include reference="yaT-av-2NG"/>
                     <include reference="4mi-II-mdq"/>
                     <include reference="Z4a-sM-M4V"/>
-                    <include reference="bJy-PS-E7x"/>
                     <include reference="k21-q4-NDe"/>
                     <include reference="qyk-Bc-PDq"/>
                     <include reference="5s5-Dn-hya"/>
