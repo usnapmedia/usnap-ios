@@ -17,10 +17,10 @@
 #import "WKEditMediaViewController.h"
 #import "SSORoundedAnimatedButton.h"
 
-
 #define kTotalVideoRecordingTime 30
 
-@interface SSOCameraViewController () <UIAlertViewDelegate, VideoRecordingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SSORoundedAnimatedButtonProtocol>
+@interface SSOCameraViewController () <UIAlertViewDelegate, VideoRecordingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
+                                       SSORoundedAnimatedButtonProtocol>
 
 // IBOutlets
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *videoCenteringConstraint;
@@ -36,7 +36,7 @@
 @property(weak, nonatomic) IBOutlet UIView *topBlackBar;
 @property(weak, nonatomic) IBOutlet UIButton *captureButton;
 @property(weak, nonatomic) IBOutlet UIView *bottomContainerView;
-@property (weak, nonatomic) IBOutlet SSORoundedAnimatedButton *animatedCaptureButton;
+@property(weak, nonatomic) IBOutlet SSORoundedAnimatedButton *animatedCaptureButton;
 
 // View Controllers
 @property(weak, nonatomic) SSOContainerViewController *containerViewController;
@@ -72,27 +72,27 @@
     // Start with the photo button in the middle
     [self initializeUI];
     [self initializeGestures];
-    
+
     [self initAnimatedButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-    if (self.containerViewController.cameraContainerVC.libraryImage) {
-        [self.mediaButton setImage:self.containerViewController.cameraContainerVC.libraryImage forState:UIControlStateNormal];
-    }
+    [self animateCameraRollImageChange];
+
+    //    if (self.containerViewController.cameraContainerVC.libraryImage) {
+    //        [self.mediaButton setImage:self.containerViewController.cameraContainerVC.libraryImage forState:UIControlStateNormal];
+    //    }
 }
 
 #pragma mark - Utilities
 
--(void)initAnimatedButton
-{
+- (void)initAnimatedButton {
     self.animatedCaptureButton.delegate = self;
     self.animatedCaptureButton.circleColor = [UIColor blueColor];
     self.animatedCaptureButton.circleOpacity = 0.8;
     self.animatedCaptureButton.circleLineWidth = 20;
-    
 }
 
 /**
@@ -345,6 +345,29 @@
         [self animatePhotoVideoSwitch];
     }
 }
+
+/**
+ *  Add an animation to the camera roll preview image when we take a picture and come back to camera view
+ */
+- (void)animateCameraRollImageChange {
+
+    if (self.containerViewController.cameraContainerVC.libraryImage) {
+
+        [UIView animateWithDuration:0.3
+            animations:^{
+              self.mediaButton.alpha = 0.1;
+            }
+            completion:^(BOOL finished) {
+
+              [UIView animateWithDuration:0.3
+                               animations:^{
+                                 [self.mediaButton setImage:self.containerViewController.cameraContainerVC.libraryImage forState:UIControlStateNormal];
+
+                                 self.mediaButton.alpha = 1;
+                               }];
+            }];
+    }
+}
 #pragma mark - UIGestureRecognizer
 
 /**
@@ -577,23 +600,21 @@
 
 #pragma mark - SSORoundedAnimatedButtonProtocol
 
+- (void)didStartAnimation:(SSORoundedAnimatedButton *)button {
+    //    if (self.isVideoOn) {
+    //        if (!self.isVideoRecording) {
+    //            self.isVideoRecording = YES;
 
--(void)didStartAnimation:(SSORoundedAnimatedButton *)button {
-//    if (self.isVideoOn) {
-//        if (!self.isVideoRecording) {
-//            self.isVideoRecording = YES;
-    
     [self.containerViewController.cameraContainerVC startRecordingVideo];
-            
-//        }
-//    }
-//
-    
+
+    //        }
+    //    }
+    //
 }
 
--(void)didFinishAnimation:(SSORoundedAnimatedButton *)button {
-    
-      [self.containerViewController.cameraContainerVC stopRecordingVideo];
+- (void)didFinishAnimation:(SSORoundedAnimatedButton *)button {
+
+    [self.containerViewController.cameraContainerVC stopRecordingVideo];
 }
 
 #pragma mark - UIAlertViewDelegate
