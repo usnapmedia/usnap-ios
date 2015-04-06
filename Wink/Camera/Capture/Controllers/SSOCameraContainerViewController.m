@@ -110,8 +110,9 @@
     [self.library saveImage:controller.image
                     toAlbum:@"uSnap"
         withCompletionBlock:^(NSError *error) {
-          NSLog(@"Error saving image in camera roll: %@", [error description]);
-
+          if (error) {
+              NSLog(@"Error saving image in camera roll: %@", [error description]);
+          }
         }];
     [self.navigationController pushViewController:controller animated:YES];
 }
