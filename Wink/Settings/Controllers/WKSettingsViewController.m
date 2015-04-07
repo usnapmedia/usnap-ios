@@ -10,20 +10,26 @@
 #import "WKUser.h"
 #import "WKSettingSocialTableViewCell.h"
 #import "SSOSettingsSocialFakeTableViewCell.h"
-#import "WKSocialNetworkHelper.h"
+#import "SSOSocialNetworkAPI.h"
+#import "SSOGooglePlusHelper.h"
 
-@interface WKSettingsViewController () <WKSettingsSocialCellDelegate>
+@interface WKSettingsViewController () <WKSettingsSocialCellDelegate, SocialNetworkDelegate>
+
+@property(strong, nonatomic) SSOGooglePlusHelper *googlePlusHelper;
+@property(strong, nonatomic) UISwitch *cellSwitch;
 
 @end
 
 @implementation WKSettingsViewController
 
-#define FacebookSwitchValue [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] valueForKey:@"FacebookSwitchValue"]]
-
 #pragma mark - View Methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.googlePlusHelper = [[SSOGooglePlusHelper alloc] init];
+
+    [[SSOSocialNetworkAPI sharedInstance] setDelegate:self];
 
     [self.tableView registerNib:[UINib nibWithNibName:@"SettingsSocialCell" bundle:nil] forCellReuseIdentifier:@"SETTINGS_SOCIAL_CELL"];
     [self.tableView registerNib:[UINib nibWithNibName:@"SettingsSocialFakeCell" bundle:nil] forCellReuseIdentifier:@"SETTINGS_SOCIAL_FAKE_CELL"];
@@ -90,19 +96,35 @@
 - (NSArray *)arraySocialNetworks {
 
     NSArray *socialNetworks = [[NSArray alloc]
-        initWithObjects:
-            @{ @"name" : @"Facebook",
-               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]] },
-            @{ @"name" : @"Twitter",
-               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]] },
-            @{ @"name" : @"Google+",
-               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kGooglePlusSwitchValue]] },
-            @{ @"name" : @"Tumblr",
-               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kTumblrSwitchValue]] },
-            @{ @"name" : @"Instagram",
-               @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kInstagramSwitchValue]] },
+        initWithObjects:@{
+            @"name" : @"Facebook",
+            @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]],
+            @"socialNetworkEnumType" : [NSNumber numberWithInteger:facebookSocialNetwork]
+        },
+                        @{
+                            @"name" : @"Twitter",
+                            @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]],
+                            @"socialNetworkEnumType" : [NSNumber numberWithInteger:twitterSocialNetwork]
+                        },
+                        @{
+                            @"name" : @"Google+",
+                            @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kGooglePlusSwitchValue]],
+                            @"socialNetworkEnumType" : [NSNumber numberWithInteger:googleSocialNetwork]
+                        },
+                        @{
+                            @"name" : @"Tumblr",
+                            @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kTumblrSwitchValue]],
+                            @"socialNetworkEnumType" : [NSNumber numberWithInteger:googleSocialNetwork]
 
-            nil];
+                        },
+                        @{
+                            @"name" : @"Instagram",
+                            @"switchValue" : [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults] boolForKey:kInstagramSwitchValue]],
+                            @"socialNetworkEnumType" : [NSNumber numberWithInteger:googleSocialNetwork]
+
+                        },
+
+                        nil];
     return socialNetworks;
 }
 
@@ -129,18 +151,22 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     NSString *socialNetwork = [[[self arraySocialNetworks] objectAtIndex:indexPath.row] valueForKey:@"name"];
 
+    NSLog(@"cell viewWithTag 10 : %@", [cell viewWithTag:10]);
+
     socialNetwork = [socialNetwork stringByAppendingString:@"SwitchValue"];
 
-    [WKSocialNetworkHelper manageConnectionToSocialNetwork:socialNetwork withSwitch:theSwitch];
+    if (theSwitch.on) {
+        [[SSOSocialNetworkAPI sharedInstance]
+            loginWithSocialFramework:[[[[self arraySocialNetworks] objectAtIndex:indexPath.row] valueForKey:@"socialNetworkEnumType"] intValue]];
+    } else {
+        [[SSOSocialNetworkAPI sharedInstance]
+            logoutFromSocialFramework:[[[[self arraySocialNetworks] objectAtIndex:indexPath.row] valueForKey:@"socialNetworkEnumType"] intValue]];
+    }
+    self.cellSwitch = theSwitch;
 
     // Save the social network login status
     [[NSUserDefaults standardUserDefaults] setBool:theSwitch.on forKey:socialNetwork];
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#pragma mark - Social network
-
-- (void)setSocialNetworkUserDefaults:(NSDictionary *)socialNetwork {
 }
 
 #pragma mark - TableView Methods
@@ -191,12 +217,12 @@
              cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
              otherButtonTitles:@[ NSLocalizedString(@"Call", @"") ]
                       tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                          if (buttonIndex > 0) {
-                              NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [WKUser currentUser].manager.phone]];
-                              if ([[UIApplication sharedApplication] canOpenURL:phoneURL]) {
-                                  [[UIApplication sharedApplication] openURL:phoneURL];
-                              }
-                          }
+                        if (buttonIndex > 0) {
+                            NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [WKUser currentUser].manager.phone]];
+                            if ([[UIApplication sharedApplication] canOpenURL:phoneURL]) {
+                                [[UIApplication sharedApplication] openURL:phoneURL];
+                            }
+                        }
                       }];
 }
 
@@ -206,14 +232,58 @@
              cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
              otherButtonTitles:@[ NSLocalizedString(@"Sign Out", @"") ]
                       tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                          if (buttonIndex > 0) {
-                              [WKUser logoutCurrentUser];
-                          }
+                        if (buttonIndex > 0) {
+                            [WKUser logoutCurrentUser];
+                        }
                       }];
 }
 
 - (IBAction)doneButtonTouched:(id)sender {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - SocialNetworkDelegate
+
+/**
+ *   SocialNetworkDelegate method called when a social network login by changing the switch associated to it.
+ *
+ *  @param socialNetwork the social network
+ *  @param error         the error. Can be nil wich me login succeeded
+ */
+- (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidFinishLoginWithError:(NSError *)error {
+
+    if (error) {
+        self.cellSwitch.on = NO;
+        // Do some error handling here.
+        NSLog(@"Received login error %@", error);
+        if ([error code] == -1) {
+            NSLog(@"Unknown error, but user probably cancelled login with Google.");
+        }
+
+    } else {
+        self.cellSwitch.on = YES;
+        NSLog(@" success gg with auth ");
+    }
+}
+
+/**
+ *  SocialNetworkDelegate method called when a social network logout by changing the switch associated to it.
+ *  Actually the only socialNetwork providing a feedback on logout is Google's delegate
+ *
+ *  @param socialNetwork the social network
+ *  @param error         the error. Can be nil wich mean logout succeeded
+ */
+- (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidFinishLogoutWithError:(NSError *)error {
+
+    if (error) {
+        self.cellSwitch.on = YES;
+        // Do some error handling here.
+        NSLog(@"Received logout error %@", error);
+
+    } else {
+        self.cellSwitch.on = NO;
+        NSLog(@"Logged out with success");
+    }
 }
 
 @end

@@ -19,6 +19,8 @@
 #import <TwitterKit/TwitterKit.h>
 #import <PonyDebugger/PonyDebugger.h>
 
+#import <GooglePlus/GooglePlus.h>
+
 @implementation WKAppDelegate
 
 #pragma mark - App Delegate Methods
@@ -61,19 +63,19 @@
     // Set permissions for Facebook
     [SSFacebookHelper sharedInstance].facebookPermissions = @[ @"publish_actions" ];
 
-    // Do silent login if the user has logged on to Facebook before to validate the Facebook token, so they can post an image and video
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
-        [SSFacebookHelper silentLogin:^() {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            // Setup state
-            [self setupRootViewController];
+    //    // Do silent login if the user has logged on to Facebook before to validate the Facebook token, so they can post an image and video
+    //    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
+    //        [SSFacebookHelper silentLogin:^() {
+    //          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
+    //          [[NSUserDefaults standardUserDefaults] synchronize];
+    //          // Setup state
+    //          [self setupAnimated:NO];
 
-        } onFailure:^(NSError *error) {
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            // Setup state
-            [self setupRootViewController];
+    //        } onFailure:^(NSError *error) {
+    //          [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
+    //          [[NSUserDefaults standardUserDefaults] synchronize];
+    //          // Setup state
+    //          [self setupAnimated:NO];
 
         }];
     } else {
@@ -88,13 +90,19 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background,
     // optionally refresh the user interface.
 
-    // Update current user info
-    [WKUser updateCurrentUserInfo];
 
     [FBAppCall handleDidBecomeActive];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+
+    if ([[url scheme] isEqualToString:kSchemeFacebook])
+        return [FBSession.activeSession handleOpenURL:url];
+
+    if ([[url scheme] isEqualToString:kSchemeGooglePlus])
+        return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
+
+    return NO;
     return [FBSession.activeSession handleOpenURL:url];
 }
 
@@ -102,6 +110,7 @@
 
 - (void)setupRootViewController {
    // if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
+        [[NSUserDefaults standardUserDefaults] boolForKey:kEmailLoggedValue]) {
         WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
         UINavigationController *navController = [[UIStoryboard cameraStoryboard] instantiateViewControllerWithIdentifier:@"CAMERA_NAV_VC"];
         self.window.rootViewController = navController;

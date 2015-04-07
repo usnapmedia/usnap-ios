@@ -14,7 +14,6 @@
 #define USER_FILE_TYPE              @"plist"
 
 // Notifications
-NSString *const kCurrentUserStatusChanged           = @"kCurrentUserStatusChanged";
 NSString *const kCurrentUserInfoUpdated             = @"kCurrentUserInfoUpdated";
 
 // Current User
@@ -94,23 +93,6 @@ static WKUser *_currentUser = nil;
     return result;
 }
 
-#pragma mark - Update user info
-
-+ (void)updateCurrentUserInfo {
-    if (_currentUser) {
-        [WKWinkConnect winkConnectGetUserInfo:_currentUser.accessToken success:^(id response) {
-            
-            NSDictionary *responseDict = (NSDictionary *)response;
-            [_currentUser setupWithDictionary:responseDict];
-            [WKUser saveCurrentUser];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kCurrentUserInfoUpdated object:_currentUser];
-            
-        } failure:^(NSError *error, id response) {
-            NSLog(@"Error updating user info: %@", error.description);
-        }];
-    }
-}
 
 #pragma mark - Login & Logout
 

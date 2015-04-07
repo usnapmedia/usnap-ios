@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 // Notifications
-extern NSString *const kCurrentUserStatusChanged;
 extern NSString *const kCurrentUserInfoUpdated;
 
 @interface WKUser : NSObject <NSCoding> {
@@ -37,8 +36,6 @@ extern NSString *const kCurrentUserInfoUpdated;
 + (BOOL)saveCurrentUser;
 + (BOOL)loadCurrentUser;
 
-// Update user info
-+ (void)updateCurrentUserInfo;
 
 // Login & Logout
 + (void)loginUser:(WKUser *)user;
