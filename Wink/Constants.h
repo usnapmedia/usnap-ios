@@ -17,6 +17,8 @@ extern NSString *const kSchemeGooglePlus;
 extern NSString *const kTwitterMediaUploadURL;
 extern NSString *const kTwitterTweetUploadURL;
 extern NSString *const kGoogleClientId;
+extern NSString *const kAPIUrl;
+
 #pragma mark - Notifications
 
 extern NSString *const kSocialNetworkCellSwitchNotification;

@@ -18,13 +18,14 @@ NSString *const kSchemeGooglePlus = @"com.samsao.winktalent";
 NSString *const kTwitterMediaUploadURL = @"https://upload.twitter.com/1.1/media/upload.json";
 NSString *const kTwitterTweetUploadURL = @"https://api.twitter.com/1.1/statuses/update.json";
 NSString *const kGoogleClientId = @"705787939641-q7u2cb9tbrd04ku4jc99h4bd5c1cs7bk.apps.googleusercontent.com";
+NSString *const kAPIUrl = @"http://d.tanios.ca/usnap/api/v1";
 
 #pragma mark - Notifications
 
 NSString *const kSocialNetworkCellSwitchNotification = @"SOCIAL_NETWORK_CELL_SWITCH_NOTIFICATION";
 
 #pragma mark - Soocial network
-
+//@TODO Refactor
 NSString *const kFacebookSwitchValue = @"FacebookSwitchValue";
 NSString *const kTwitterSwitchValue = @"TwitterSwitchValue";
 NSString *const kGooglePlusSwitchValue = @"Google+SwitchValue";

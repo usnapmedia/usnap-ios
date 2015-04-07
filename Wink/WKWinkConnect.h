@@ -28,31 +28,5 @@ extern NSString *const kWinkConnectAuthorizationDenied;
                                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-+ (AFHTTPRequestOperation *)winkConnectLoginWithUsername:(NSString *)username
-                                                password:(NSString *)password
-                                                 success:(void (^)(id response))success
-                                                 failure:(void (^)(NSError *error, id response))failure;
-
-// Get User Info
-+ (AFHTTPRequestOperation *)winkConnectGetUserInfo:(NSString *)accessToken
-                                           success:(void (^)(id response))success
-                                           failure:(void (^)(NSError *error, id response))failure;
-
-// Post Image
-+ (AFHTTPRequestOperation *)winkConnectPostImage:(UIImage *)image
-                                   modifiedImage:(UIImage *)modifiedImage
-                                    overlayImage:(UIImage *)overlayImage
-                                            text:(NSString *)text
-                                     accessToken:(NSString *)accessToken
-                                         success:(void (^)(id response))success
-                                         failure:(void (^)(NSError *error, id response))failure;
-
-// Post Video
-+ (AFHTTPRequestOperation *)winkConnectPostVideo:(NSURL *)videoURL
-                                    overlayImage:(UIImage *)overlayImage
-                                            text:(NSString *)text
-                                     accessToken:(NSString *)accessToken
-                                         success:(void (^)(id response))success
-                                         failure:(void (^)(NSError *error, id response))failure;
 
 @end

@@ -36,8 +36,6 @@ extern NSString *const kCurrentUserInfoUpdated;
 + (BOOL)saveCurrentUser;
 + (BOOL)loadCurrentUser;
 
-// Update user info
-+ (void)updateCurrentUserInfo;
 
 // Login & Logout
 + (void)loginUser:(WKUser *)user;
