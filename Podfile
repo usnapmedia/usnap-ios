@@ -19,6 +19,8 @@ pod 'googleplus-ios-sdk'
 pod 'Masonry'
 pod 'RSKImageCropper'
 pod 'SVProgressHUD'
+pod 'pop'
+
 
 # Samsao libraries
 

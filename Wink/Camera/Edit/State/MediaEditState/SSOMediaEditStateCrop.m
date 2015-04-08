@@ -40,7 +40,7 @@
 
     self.editMediaVC.cropButton.alpha = 1.0f;
 
-    self.editMediaVC.editAccessoriesContainerView.hidden = YES;
+//    self.editMediaVC.editAccessoriesContainerView.hidden = YES;
 
     [self initCropperVC];
 }

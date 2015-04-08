@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -8,14 +8,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKEditMediaViewController">
             <connections>
                 <outlet property="backButton" destination="5Fh-sC-V9Y" id="5H8-bH-qG6"/>
+                <outlet property="bottomView" destination="ugy-th-tqC" id="ZFY-dy-8ux"/>
                 <outlet property="brightnessButton" destination="IFT-LT-JLd" id="0AD-jq-6Rq"/>
                 <outlet property="collectionView" destination="rqF-N2-Y3I" id="qDO-Yj-ajG"/>
                 <outlet property="cropButton" destination="bCo-Ii-L8U" id="yMC-tL-bY2"/>
                 <outlet property="drawButton" destination="ij0-qJ-bSo" id="g7m-i0-ykf"/>
-                <outlet property="editAccessoriesContainerView" destination="wTZ-7I-Ufn" id="36z-jj-sKS"/>
                 <outlet property="overlayView" destination="gDS-Th-jEq" id="Xaw-YF-bgr"/>
                 <outlet property="postButton" destination="ATe-3P-Slw" id="1Ud-Ed-QQ2"/>
                 <outlet property="textButton" destination="l7B-e2-vee" id="oNa-4Q-inb"/>
+                <outlet property="topView" destination="nWV-R5-qgn" id="5jF-sZ-T7B"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="watermarkImageView" destination="6nm-lF-IF7" id="x4f-mn-cNk"/>
             </connections>
@@ -53,18 +54,6 @@
                         <mask key="constraints">
                             <include reference="CuC-mH-BeL"/>
                             <include reference="rUi-ng-Qgf"/>
-                        </mask>
-                    </variation>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTZ-7I-Ufn" userLabel="Accessories view">
-                    <rect key="frame" x="0.0" y="422" width="600" height="120"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="120" id="caN-NB-0ic"/>
-                    </constraints>
-                    <variation key="heightClass=regular-widthClass=compact">
-                        <mask key="constraints">
-                            <include reference="caN-NB-0ic"/>
                         </mask>
                     </variation>
                 </view>
@@ -132,7 +121,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugy-th-tqC" userLabel="bottomVIew">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugy-th-tqC" userLabel="bottomVIew" customClass="SSOBottomContainerView">
                     <rect key="frame" x="0.0" y="542" width="600" height="58"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ij0-qJ-bSo" userLabel="drawButton">
@@ -261,7 +250,6 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="gDS-Th-jEq" secondAttribute="trailing" id="3BK-Hy-Ew4"/>
                 <constraint firstItem="nWV-R5-qgn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4mi-II-mdq"/>
-                <constraint firstItem="ugy-th-tqC" firstAttribute="top" secondItem="wTZ-7I-Ufn" secondAttribute="bottom" id="5s5-Dn-hya"/>
                 <constraint firstItem="gDS-Th-jEq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="JIi-Pg-IGk"/>
                 <constraint firstAttribute="bottom" secondItem="gDS-Th-jEq" secondAttribute="bottom" id="WHA-Nh-yE1"/>
                 <constraint firstItem="ugy-th-tqC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Yp8-0p-2jI"/>
@@ -270,17 +258,14 @@
                 <constraint firstItem="nWV-R5-qgn" firstAttribute="top" secondItem="rqF-N2-Y3I" secondAttribute="bottom" id="aEL-Wf-YJy"/>
                 <constraint firstItem="rqF-N2-Y3I" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aGC-hR-BQJ"/>
                 <constraint firstAttribute="trailing" secondItem="ugy-th-tqC" secondAttribute="trailing" id="baG-Nj-EiX"/>
-                <constraint firstAttribute="trailing" secondItem="wTZ-7I-Ufn" secondAttribute="trailing" id="k21-q4-NDe"/>
                 <constraint firstItem="rqF-N2-Y3I" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kjW-YF-CKI"/>
                 <constraint firstAttribute="trailing" secondItem="rqF-N2-Y3I" secondAttribute="trailing" id="oyw-pS-j6R"/>
-                <constraint firstItem="wTZ-7I-Ufn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qyk-Bc-PDq"/>
                 <constraint firstItem="gDS-Th-jEq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yaT-av-2NG"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <variation key="heightClass=compact">
                 <mask key="subviews">
                     <include reference="gDS-Th-jEq"/>
-                    <include reference="wTZ-7I-Ufn"/>
                     <include reference="nWV-R5-qgn"/>
                     <include reference="ugy-th-tqC"/>
                     <include reference="rqF-N2-Y3I"/>
@@ -289,7 +274,6 @@
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="subviews">
                     <include reference="gDS-Th-jEq"/>
-                    <include reference="wTZ-7I-Ufn"/>
                     <include reference="nWV-R5-qgn"/>
                     <include reference="ugy-th-tqC"/>
                     <include reference="rqF-N2-Y3I"/>
@@ -301,9 +285,6 @@
                     <include reference="yaT-av-2NG"/>
                     <include reference="4mi-II-mdq"/>
                     <include reference="Z4a-sM-M4V"/>
-                    <include reference="k21-q4-NDe"/>
-                    <include reference="qyk-Bc-PDq"/>
-                    <include reference="5s5-Dn-hya"/>
                     <include reference="Yp8-0p-2jI"/>
                     <include reference="Z0A-1b-sE0"/>
                     <include reference="baG-Nj-EiX"/>

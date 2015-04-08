@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,44 +11,42 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Zn-VC-Cle">
-                    <rect key="frame" x="16" y="4" width="47" height="47"/>
+                    <rect key="frame" x="16" y="14" width="47" height="28"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="47" id="EXX-dP-bDp"/>
+                        <constraint firstAttribute="height" constant="40" id="EXX-dP-bDp"/>
                         <constraint firstAttribute="width" constant="47" id="be8-bB-iU4"/>
                     </constraints>
                     <color key="tintColor" red="0.98823529409999999" green="0.97512383319999996" blue="0.94017371859999999" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" image="undoButtonIcon.png"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="EXX-dP-bDp"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="resetButtonPressed:" destination="pXn-Ka-muc" eventType="touchUpInside" id="tPW-Cl-VO1"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1XI-HV-Vax" customClass="WKColorPickerView">
-                    <rect key="frame" x="71" y="18" width="505" height="20"/>
+                    <rect key="frame" x="71" y="13" width="505" height="30"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="asY-MU-ACx"/>
+                    </constraints>
                     <connections>
                         <action selector="colorPickerColorChanged:" destination="pXn-Ka-muc" eventType="valueChanged" id="5lu-ii-Qf3"/>
                     </connections>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="1XI-HV-Vax" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pXn-Ka-muc" secondAttribute="top" constant="18" id="AAD-GX-cI7"/>
                 <constraint firstItem="0Zn-VC-Cle" firstAttribute="leading" secondItem="pXn-Ka-muc" secondAttribute="leading" constant="16" id="Riq-OQ-rTH"/>
                 <constraint firstItem="1XI-HV-Vax" firstAttribute="leading" secondItem="0Zn-VC-Cle" secondAttribute="trailing" constant="8" id="TsW-kp-cfT"/>
-                <constraint firstAttribute="centerY" secondItem="0Zn-VC-Cle" secondAttribute="centerY" id="X3Q-NO-OYa"/>
                 <constraint firstItem="1XI-HV-Vax" firstAttribute="centerY" secondItem="0Zn-VC-Cle" secondAttribute="centerY" id="YWI-uR-TWF"/>
                 <constraint firstAttribute="trailing" secondItem="1XI-HV-Vax" secondAttribute="trailing" constant="24" id="i6x-s6-PmJ"/>
-                <constraint firstAttribute="bottom" secondItem="1XI-HV-Vax" secondAttribute="bottom" constant="18" id="ijr-Fg-YMi"/>
-                <constraint firstAttribute="height" constant="56" id="k2c-tT-aiu"/>
-                <constraint firstAttribute="bottom" secondItem="0Zn-VC-Cle" secondAttribute="bottom" constant="5" id="qhh-G4-Lpu"/>
-                <constraint firstItem="0Zn-VC-Cle" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pXn-Ka-muc" secondAttribute="top" constant="4" id="y61-H7-oSy"/>
+                <constraint firstAttribute="centerY" secondItem="1XI-HV-Vax" secondAttribute="centerY" id="yyW-8D-Bd8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="k2c-tT-aiu"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="colorPickerView" destination="1XI-HV-Vax" id="JOk-aB-Vx4"/>
             </connections>

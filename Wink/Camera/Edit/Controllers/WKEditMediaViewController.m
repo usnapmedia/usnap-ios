@@ -7,6 +7,10 @@
 //
 
 #import "WKEditMediaViewController.h"
+#import "SSOEditToolController.h"
+#import "SSODrawToolController.h"
+#import "SSOSubtoolContainerView.h"
+#import "SSOBottomContainerView.h"
 #import "SSOMediaEditState.h"
 #import "SSOMediaEditStateCrop.h"
 #import "SSOMediaEditStateNone.h"
@@ -19,6 +23,7 @@
 #import "SSCellViewSection.h"
 
 #import <Masonry.h>
+#import <pop/POP.h>
 
 @interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate>
 
@@ -27,15 +32,25 @@
 @property(weak, nonatomic) IBOutlet UIButton *postButton;
 @property(weak, nonatomic) IBOutlet UIButton *backButton;
 
-@property (nonatomic, strong) NSMutableArray *arrayImages;
+@property(nonatomic, strong) NSMutableArray *arrayImages;
 
+@property(strong, nonatomic) SSOEditToolController *childViewController;
 
-@property(nonatomic, strong, readwrite) ACEDrawingView *drawView;
-@property(strong, nonatomic, readwrite) BrightnessContrastSlidersContainerView *brightnessContrastContainerView;
-@property(strong, nonatomic, readwrite) SSOColorPickerContainerView *colorPickerContainerView;
+// Containers
+@property(weak, nonatomic) IBOutlet SSOBottomContainerView *bottomView;
+@property(weak, nonatomic) IBOutlet UIView *topView;
+@property(strong, nonatomic) SSOSubtoolContainerView *subtoolContainerView;
+@property(strong, nonatomic) UIView *accessoryContainerView;
+@property(strong, nonatomic) UIView *buttonsContainerView;
 
-// Helper
-@property(strong, nonatomic, readwrite) SSOBrightnessContrastHelper *brightnessContrastHelper;
+// Tools
+@property(nonatomic, strong) ACEDrawingView *drawView;
+@property(nonatomic, strong) SSOEditMediaMovableTextView *textView;
+
+// Media
+@property(nonatomic, strong) UIImageView *imageView;
+@property(nonatomic, strong) UIImageView *modifiedImageView;
+@property(nonatomic, strong) WKMoviePlayerView *moviePlayerView;
 
 @end
 
@@ -76,54 +91,10 @@
         self.cropButton.hidden = YES;
     }
 
-    // Setup the text view
-    self.textView = [[SSOEditMediaMovableTextView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.overlayView.frame.size.width, 70.0f)];
-    [self.overlayView insertSubview:self.textView belowSubview:self.watermarkImageView];
-    
+    //@FIXME
     [self.collectionView registerNib:[UINib nibWithNibName:@"CustomCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"collectionCell"];
     self.collectionView.inputData = [self populateCellData].mutableCopy;
     [self.collectionView reloadData];
-
-}
-
--(NSMutableArray *)arrayImages {
-    
-    if (!_arrayImages) {
-        _arrayImages = [[NSMutableArray alloc]init];
-    }
-    
-    _arrayImages = @[[UIImage imageNamed:@"Alien"], [UIImage imageNamed:@"hankey"], [UIImage imageNamed:@"Unknown"], [UIImage imageNamed:@"Alien"], [UIImage imageNamed:@"hankey"], [UIImage imageNamed:@"Unknown"], [UIImage imageNamed:@"Alien"], [UIImage imageNamed:@"hankey"], [UIImage imageNamed:@"Unknown"]].mutableCopy;
-    //[_arrayImages arrayByAddingObjectsFromArray:_arrayImages];
-    
-    return _arrayImages;
-}
-
-/**
- *  This method is just used to generate the table view data for the SSBaseCollectionView.
- *
- *  @param inputArray Takes as input an organized array of Adjicons
- *
- *  @return Returns an array of arrays with sections containing elements
- */
-
-- (NSArray *)populateCellData {
-    
-    NSMutableArray *cellDataArray = [NSMutableArray new];
-    
-    SSCellViewSection *section = [[SSCellViewSection alloc] init];
-    
-    for (UIImage *image in self.arrayImages) {
-        SSCellViewItem *newElement;
-        
-        newElement = [SSCellViewItem new];
-        newElement.cellReusableIdentifier = @"collectionCell";
-        newElement.objectData = image;
-        [section.rows addObject:newElement];
-    }
-    
-    [cellDataArray addObject:section];
-    
-    return cellDataArray;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -148,7 +119,7 @@
     [self.moviePlayerView.player pause];
 }
 
--(void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     // Remove the keyboard observer
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -158,75 +129,55 @@
 
 #pragma mark - Getter
 
-/**
- *  Lazy instanciation
- *
- *  @return the helper
- */
-- (SSOBrightnessContrastHelper *)brightnessContrastHelper {
-    if (!_brightnessContrastHelper) {
-        _brightnessContrastHelper = [[SSOBrightnessContrastHelper alloc] init];
-        self.brightnessContrastHelper.imageViewToEdit = self.imageView;
-        self.brightnessContrastHelper.imageToEdit = self.image;
+//@TODO
+- (NSMutableArray *)arrayImages {
+
+    if (!_arrayImages) {
+        _arrayImages = [[NSMutableArray alloc] init];
     }
-    return _brightnessContrastHelper;
+
+    _arrayImages = @[
+        [UIImage imageNamed:@"Alien"],
+        [UIImage imageNamed:@"hankey"],
+        [UIImage imageNamed:@"Unknown"],
+        [UIImage imageNamed:@"Alien"],
+        [UIImage imageNamed:@"hankey"],
+        [UIImage imageNamed:@"Unknown"],
+        [UIImage imageNamed:@"Alien"],
+        [UIImage imageNamed:@"hankey"],
+        [UIImage imageNamed:@"Unknown"]
+    ].mutableCopy;
+    //[_arrayImages arrayByAddingObjectsFromArray:_arrayImages];
+
+    return _arrayImages;
 }
 
 /**
- *  Lazy instanciation
+ *  This method is just used to generate the table view data for the SSBaseCollectionView.
  *
- *  @return the view
- */
-- (ACEDrawingView *)drawView {
-    if (!_drawView) {
-        // Setup view
-        _drawView = [[ACEDrawingView alloc] initWithFrame:self.view.frame];
-        _drawView.backgroundColor = [UIColor clearColor];
-        _drawView.lineWidth = 4.0f;
-
-        // Insert view
-        [self.overlayView insertSubview:_drawView belowSubview:self.textView];
-
-        // Set constraints
-        [_drawView mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.edges.equalTo(self.view);
-        }];
-    }
-    return _drawView;
-}
-
-/**
- *  Lazy instanciation
+ *  @param inputArray Takes as input an organized array of Adjicons
  *
- *  @return the view
+ *  @return Returns an array of arrays with sections containing elements
  */
-- (BrightnessContrastSlidersContainerView *)brightnessContrastContainerView {
-    if (!_brightnessContrastContainerView) {
-        _brightnessContrastContainerView = [NSBundle loadBrightnessContrastContainerView];
-        // Set the view for the helper
-        [self.brightnessContrastHelper setView:_brightnessContrastContainerView];
 
-        // Insert view
-        [self.editAccessoriesContainerView addSubview:_brightnessContrastContainerView];
-        // Set the container inside the view to have constraints on the edges
-        [_brightnessContrastContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.edges.equalTo(self.editAccessoriesContainerView);
-        }];
-    }
-    return _brightnessContrastContainerView;
-}
+- (NSArray *)populateCellData {
 
-- (SSOColorPickerContainerView *)colorPickerContainerView {
-    if (!_colorPickerContainerView) {
-        _colorPickerContainerView = [NSBundle loadColorPickerContainerView];
-        // Insert view
-        [self.editAccessoriesContainerView addSubview:_colorPickerContainerView];
-        // Set the container inside the view to have constraints on the edges
-        [_colorPickerContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.edges.equalTo(self.editAccessoriesContainerView);
-        }];
+    NSMutableArray *cellDataArray = [NSMutableArray new];
+
+    SSCellViewSection *section = [[SSCellViewSection alloc] init];
+
+    for (UIImage *image in self.arrayImages) {
+        SSCellViewItem *newElement;
+
+        newElement = [SSCellViewItem new];
+        newElement.cellReusableIdentifier = @"collectionCell";
+        newElement.objectData = image;
+        [section.rows addObject:newElement];
     }
-    return _colorPickerContainerView;
+
+    [cellDataArray addObject:section];
+
+    return cellDataArray;
 }
 
 #pragma mark - Setter
@@ -280,6 +231,43 @@
     }
 }
 
+#pragma mark - Child View Controller
+
+- (void)animateToChildViewController:(SSOEditToolController *)newVC {
+    if (self.childViewController) {
+
+        [self.childViewController willMoveToParentViewController:nil]; // 1
+        [self addChildViewController:newVC];
+        newVC.view.frame = self.view.frame;
+
+        [self transitionFromViewController:self.childViewController
+            toViewController:newVC
+            duration:0.5
+            options:0
+            animations:^{
+              if ([self.childViewController respondsToSelector:@selector(hideContainerViews:)]) {
+                  [self.childViewController hideContainerViews:YES];
+              }
+            }
+            completion:^(BOOL finished) {
+              [self.childViewController removeFromParentViewController];
+              self.childViewController = newVC;
+              if ([self.childViewController respondsToSelector:@selector(displayContainerViews:)]) {
+                  [self.childViewController displayContainerViews:YES];
+              }
+              [self.childViewController didMoveToParentViewController:self];
+            }];
+    } else {
+        self.childViewController = newVC;
+        [self addChildViewController:self.childViewController];
+        self.childViewController.view.frame = self.view.frame;
+        if ([self.childViewController respondsToSelector:@selector(displayContainerViews:)]) {
+            [self.childViewController displayContainerViews:YES];
+        }
+        [self.childViewController didMoveToParentViewController:self];
+    }
+}
+
 #pragma mark - Movie View Methods
 
 - (void)moviePlayerViewDidFinishPlayingToEndTime:(WKMoviePlayerView *)moviePlayer {
@@ -289,16 +277,8 @@
 #pragma mark - Button Actions
 
 - (IBAction)drawButtonTouched:(id)sender {
-    // Set the next state for the media edit
-    if ([self.mediaEditState state] == SSOMediaEditStateEnumDrawGray) {
-        self.mediaEditState = [SSOMediaEditStateNone new];
-    } else if ([self.mediaEditState state] == SSOMediaEditStateEnumDrawColor) {
-        self.mediaEditState = [SSOMediaEditStateDrawGray new];
-    } else {
-        self.mediaEditState = [SSOMediaEditStateDrawColor new];
-    }
-
-    [self.mediaEditState drawButtonTouched];
+    SSODrawToolController *childVC = [SSODrawToolController new];
+    [self animateToChildViewController:childVC];
 }
 
 - (IBAction)textButtonTouched:(id)sender {
@@ -376,4 +356,109 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - SSOEditViewControllerProtocol
+
+#pragma mark Tools view
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the view
+ */
+- (ACEDrawingView *)drawView {
+    if (!_drawView) {
+        // Setup view
+        _drawView = [[ACEDrawingView alloc] initWithFrame:self.view.frame];
+        _drawView.backgroundColor = [UIColor clearColor];
+        _drawView.lineWidth = 4.0f;
+
+        // Insert view
+        [self.overlayView insertSubview:_drawView belowSubview:self.textView];
+
+        // Set constraints
+        [_drawView mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.edges.equalTo(self.view);
+        }];
+    }
+    return _drawView;
+}
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the view
+ */
+- (SSOEditMediaMovableTextView *)textView {
+    if (!_textView) {
+        // Setup the text view
+        _textView = [[SSOEditMediaMovableTextView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.overlayView.frame.size.width, 70.0f)];
+        [self.overlayView insertSubview:_textView belowSubview:self.watermarkImageView];
+    }
+    return _textView;
+}
+
+- (UIImageView *)imageView {
+    return _imageView;
+}
+
+#pragma mark Container view
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the view
+ */
+- (UIView *)subtoolContainerView {
+    if (!_subtoolContainerView) {
+        // Initialize as big as the bottom view
+        _subtoolContainerView = [[SSOSubtoolContainerView alloc] initWithFrame:self.bottomView.frame];
+        // Hide and add the view
+        _subtoolContainerView.hidden = YES;
+        [self.view addSubview:_subtoolContainerView];
+    }
+
+    return _subtoolContainerView;
+}
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the view
+ */
+- (UIView *)accessoryContainerView {
+    if (!_accessoryContainerView) {
+        // Initialize as big as the bottom view
+        _accessoryContainerView = [[UIView alloc] initWithFrame:self.bottomView.frame];
+        // Hide and add the view
+        _accessoryContainerView.hidden = YES;
+        [self.view addSubview:_accessoryContainerView];
+    }
+
+    return _accessoryContainerView;
+}
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the view
+ */
+- (UIView *)buttonsContainerView {
+    if (!_buttonsContainerView) {
+        // Initialize as big as the top view
+        _buttonsContainerView = [[UIView alloc] initWithFrame:self.topView.frame];
+        // Hide and add the view
+        _buttonsContainerView.hidden = YES;
+        [self.view addSubview:_buttonsContainerView];
+    }
+
+    return _buttonsContainerView;
+}
+
+- (UIView<SSOAnimatableView> *)bottomView {
+    return _bottomView;
+}
+
+- (UIView<SSOAnimatableView> *)topView {
+    return _topView;
+}
 @end
