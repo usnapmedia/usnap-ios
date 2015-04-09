@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03AE7D391AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m */; };
 		1371ECB88315E29A37A65496 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A060E699D67AED42FA7FA09C /* libPods.a */; };
 		1F7F85AB1A8A743900BBC5D5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */; };
 		1F7F85AC1A8A743900BBC5D5 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */; };
@@ -126,6 +127,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03AE7D381AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+SSOLockedNavigationController.h"; sourceTree = "<group>"; };
+		03AE7D391AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SSOLockedNavigationController.m"; sourceTree = "<group>"; };
 		1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		270DFAF119AE71BE00067072 /* Wink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wink.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -760,6 +763,8 @@
 				D830F4171ACDDBF1002A503D /* UIStoryboard+USnap.m */,
 				D830F4181ACDDBF1002A503D /* UIView+WKAdditions.h */,
 				D830F4191ACDDBF1002A503D /* UIView+WKAdditions.m */,
+				03AE7D381AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.h */,
+				03AE7D391AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1098,6 +1103,7 @@
 				D830F41A1ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				D830F3F51ACDDAE7002A503D /* SSOColorPickerContainerView.m in Sources */,
 				D830F4211ACDDBF1002A503D /* UIImage+Resizing.m in Sources */,
+				03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */,
 				335723B91ACB097C000CC846 /* SSOVideoEditingHelper.m in Sources */,
 				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
 				D830F3DC1ACDDA15002A503D /* SSOMediaEditStateCrop.m in Sources */,
