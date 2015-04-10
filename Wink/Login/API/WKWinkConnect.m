@@ -50,4 +50,14 @@ NSString *const kWinkConnectAuthorizationDenied = @"kWinkConnectAuthorizationDen
     [manager POST:url parameters:@{ @"email" : email, @"password" : password } success:success failure:failure];
 }
 
++ (void)winkConnectSocialNetworksWithData:(NSDictionary *)data
+                                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+
+    NSString *url = [NSString stringWithFormat:@"%@/connect", kAPIUrl];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager POST:url parameters:data success:success failure:failure];
+}
+
 @end
