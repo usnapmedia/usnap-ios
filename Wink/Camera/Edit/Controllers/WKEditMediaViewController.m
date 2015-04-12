@@ -10,14 +10,9 @@
 #import "SSOEditToolController.h"
 #import "SSODrawToolController.h"
 #import "SSOSubtoolContainerView.h"
+#import "SSOButtonsContainerView.h"
+#import "SSOAccessoryContainerView.h"
 #import "SSOFadingContainerView.h"
-#import "SSOMediaEditState.h"
-#import "SSOMediaEditStateCrop.h"
-#import "SSOMediaEditStateNone.h"
-#import "SSOMediaEditStateText.h"
-#import "SSOMediaEditStateDrawGray.h"
-#import "SSOMediaEditStateDrawColor.h"
-#import "SSOMediaEditStateBrightness.h"
 
 #import "SSCellViewItem.h"
 #import "SSCellViewSection.h"
@@ -27,7 +22,6 @@
 
 @interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate>
 
-@property(nonatomic, strong) SSOMediaEditState *mediaEditState;
 @property(weak, nonatomic) IBOutlet UIImageView *watermarkImageView;
 @property(weak, nonatomic) IBOutlet UIButton *postButton;
 @property(weak, nonatomic) IBOutlet UIButton *backButton;
@@ -38,10 +32,10 @@
 
 // Containers
 @property(weak, nonatomic) IBOutlet SSOFadingContainerView *bottomView;
-@property(weak, nonatomic) IBOutlet UIView *topView;
+@property(weak, nonatomic) IBOutlet SSOFadingContainerView *topView;
 @property(strong, nonatomic) SSOSubtoolContainerView *subtoolContainerView;
-@property(strong, nonatomic) UIView *accessoryContainerView;
-@property(strong, nonatomic) UIView *buttonsContainerView;
+@property(strong, nonatomic) SSOAccessoryContainerView *accessoryContainerView;
+@property(strong, nonatomic) SSOButtonsContainerView *buttonsContainerView;
 
 // Tools
 @property(nonatomic, strong) ACEDrawingView *drawView;
@@ -60,8 +54,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.mediaEditState = [SSOMediaEditStateNone new];
 
     // Register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
@@ -99,10 +91,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
-    // Reset the state to none
-    self.mediaEditState = [SSOMediaEditStateNone new];
-    [(SSOMediaEditStateNone *)self.mediaEditState resetButtonsState];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -180,20 +168,12 @@
     return cellDataArray;
 }
 
-#pragma mark - Setter
-
-- (void)setMediaEditState:(SSOMediaEditState *)mediaEditState {
-    _mediaEditState = mediaEditState;
-    // Set the VC for the state object
-    [_mediaEditState setEditMediaVC:self];
-}
-
 #pragma mark - Keyboard Methods
 
 - (void)keyboardWillHide {
     // Set the type to none and reset the button
-    self.mediaEditState = [SSOMediaEditStateNone new];
-    [(SSOMediaEditStateNone *)self.mediaEditState resetButtonsState];
+    //    self.mediaEditState = [SSOMediaEditStateNone new];
+    //    [(SSOMediaEditStateNone *)self.mediaEditState resetButtonsState];
 }
 
 #pragma mark - Touch Methods
@@ -202,33 +182,33 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     // We have to check since the method is optional
-    if ([self.mediaEditState respondsToSelector:@selector(touchesBegan:withEvent:)]) {
-        [self.mediaEditState touchesBegan:touches withEvent:event];
-    }
+    //    if ([self.mediaEditState respondsToSelector:@selector(touchesBegan:withEvent:)]) {
+    //        [self.mediaEditState touchesBegan:touches withEvent:event];
+    //    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
     // We have to check since the method is optional
-    if ([self.mediaEditState respondsToSelector:@selector(touchesMoved:withEvent:)]) {
-        [self.mediaEditState touchesMoved:touches withEvent:event];
-    }
+    //    if ([self.mediaEditState respondsToSelector:@selector(touchesMoved:withEvent:)]) {
+    //        [self.mediaEditState touchesMoved:touches withEvent:event];
+    //    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
     // We have to check since the method is optional
-    if ([self.mediaEditState respondsToSelector:@selector(touchesEnded:withEvent:)]) {
-        [self.mediaEditState touchesEnded:touches withEvent:event];
-    }
+    //    if ([self.mediaEditState respondsToSelector:@selector(touchesEnded:withEvent:)]) {
+    //        [self.mediaEditState touchesEnded:touches withEvent:event];
+    //    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesCancelled:touches withEvent:event];
     // We have to check since the method is optional
-    if ([self.mediaEditState respondsToSelector:@selector(touchesCancelled:withEvent:)]) {
-        [self.mediaEditState touchesCancelled:touches withEvent:event];
-    }
+    //    if ([self.mediaEditState respondsToSelector:@selector(touchesCancelled:withEvent:)]) {
+    //        [self.mediaEditState touchesCancelled:touches withEvent:event];
+    //    }
 }
 
 #pragma mark - Child View Controller
@@ -283,32 +263,14 @@
 
 - (IBAction)textButtonTouched:(id)sender {
     // Set the next state for the media edit
-    if ([self.mediaEditState state] == SSOMediaEditStateEnumText) {
-        self.mediaEditState = [SSOMediaEditStateNone new];
-    } else {
-        self.mediaEditState = [SSOMediaEditStateText new];
-    }
-    [self.mediaEditState textButtonTouched];
 }
 
 - (IBAction)brightnessButtonTouched:(id)sender {
     // Set the next state for the media edit
-    if ([self.mediaEditState state] == SSOMediaEditStateEnumBrightness) {
-        self.mediaEditState = [SSOMediaEditStateNone new];
-    } else {
-        self.mediaEditState = [SSOMediaEditStateBrightness new];
-    }
-    [self.mediaEditState brightnessButtonTouched];
 }
 
 - (IBAction)cropButtonTouched:(id)sender {
-    // Set the next state for the media edit
-    if ([self.mediaEditState state] == SSOMediaEditStateEnumCrop) {
-        self.mediaEditState = [SSOMediaEditStateNone new];
-    } else {
-        self.mediaEditState = [SSOMediaEditStateCrop new];
-    }
-    [self.mediaEditState cropButtonTouched];
+    // Set the next state for the media editw
 }
 
 - (IBAction)postButtonTouched:(id)sender {
@@ -410,11 +372,12 @@
  */
 - (UIView *)subtoolContainerView {
     if (!_subtoolContainerView) {
-        // Initialize the view with the bottom view size. We also need to push it at the bottom of the view completely as it's initial position for the scroll effect.
+        // Initialize the view with the bottom view size. We also need to push it at the bottom of the view completely as it's initial position for the scroll
+        // effect.
         //@FIXME Orientation will be problematic
-        _subtoolContainerView = [[SSOSubtoolContainerView alloc] initWithFrame:CGRectMake(self.bottomView.frame.origin.x, self.view.frame.size.height, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
-        // Hide and add the view
-        _subtoolContainerView.hidden = YES;
+        _subtoolContainerView = [[SSOSubtoolContainerView alloc] initWithFrame:CGRectMake(self.bottomView.frame.origin.x, self.view.frame.size.height,
+                                                                                          self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
+        // Add the view
         [self.view addSubview:_subtoolContainerView];
     }
 
@@ -429,9 +392,8 @@
 - (UIView *)accessoryContainerView {
     if (!_accessoryContainerView) {
         // Initialize as big as the bottom view
-        _accessoryContainerView = [[UIView alloc] initWithFrame:self.bottomView.frame];
-        // Hide and add the view
-        _accessoryContainerView.hidden = YES;
+        _accessoryContainerView = [[SSOAccessoryContainerView alloc] initWithFrame:self.bottomView.frame];
+        // Add the view
         [self.view addSubview:_accessoryContainerView];
     }
 
@@ -446,7 +408,7 @@
 - (UIView *)buttonsContainerView {
     if (!_buttonsContainerView) {
         // Initialize as big as the top view
-        _buttonsContainerView = [[UIView alloc] initWithFrame:self.topView.frame];
+        _buttonsContainerView = [[SSOButtonsContainerView alloc] initWithFrame:self.topView.frame];
         // Hide and add the view
         _buttonsContainerView.hidden = YES;
         [self.view addSubview:_buttonsContainerView];

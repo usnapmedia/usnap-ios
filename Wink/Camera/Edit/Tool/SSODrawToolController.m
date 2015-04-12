@@ -16,8 +16,11 @@
 NSString *const kColorPickerContainerViewAnimationInName = @"kColorPickerContainerViewAnimationInName";
 NSString *const kColorPickerContainerViewAnimationOutName = @"kColorPickerContainerViewAnimationOutName";
 
-@interface SSODrawToolController () <POPAnimationDelegate, SSOColorPickerContainerViewDelegate>
+@interface SSODrawToolController () <POPAnimationDelegate, SSOColorPickerContainerViewDelegate, SSODrawContainerViewDelegate>
 
+#pragma mark Views
+
+@property(strong, nonatomic) SSODrawAccessoryContainerView *accessoryContainerView;
 @property(strong, nonatomic) SSOColorPickerContainerView *colorPickerContainerView;
 @property(weak, nonatomic) ACEDrawingView *drawView;
 
@@ -46,7 +49,7 @@ NSString *const kColorPickerContainerViewAnimationOutName = @"kColorPickerContai
 #pragma mark - Initialization
 
 - (void)initializeContainerViewToParentVC:(UIViewController<SSOEditViewControllerProtocol> *)parent {
-    NSAssert([parent respondsToSelector:@selector(subtoolContainerView)], @"Parent view controller must have a subtool container view");
+    NSAssert([parent respondsToSelector:@selector(accessoryContainerView)], @"Parent view controller must have a accessory container view");
     self.colorPickerContainerView = [NSBundle loadColorPickerContainerView];
     // Insert view to parent
     [[parent accessoryContainerView] addSubview:_colorPickerContainerView];
@@ -57,6 +60,18 @@ NSString *const kColorPickerContainerViewAnimationOutName = @"kColorPickerContai
     // Set the color picker view
     self.colorPickerContainerView.delegate = self;
     self.colorPickerContainerView.colorPickerView.colors = [UIColor colorsArray];
+
+    // Add the accessory view to the parent VC
+    NSAssert([parent respondsToSelector:@selector(subtoolContainerView)], @"Parent view controller must have a subtool container view");
+    self.accessoryContainerView = [NSBundle loadDrawAccessoryContainerView];
+    // Insert view to parent
+    [[parent subtoolContainerView] addSubview:_accessoryContainerView];
+    // Set the container inside the view to have constraints on the edges
+    [self.accessoryContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.edges.equalTo([parent subtoolContainerView]);
+    }];
+    
+    self.accessoryContainerView.delegate = self;
 
     // Set the container to the draw view delegate
     self.drawView = [parent drawView];
@@ -93,6 +108,8 @@ NSString *const kColorPickerContainerViewAnimationOutName = @"kColorPickerContai
 - (void)displayContainerViews:(BOOL)animated {
     [self.subtoolView setHidden:NO];
     [self.subtoolView displayView:animated];
+    [self.accessoryView setHidden:NO];
+    [self.accessoryView displayView:animated];
     [self.bottomView hideView:animated];
     if (animated) {
         [self.colorPickerContainerView pop_addAnimation:self.colorPickerContainerViewAnimationIn forKey:kColorPickerContainerViewAnimationInName];
@@ -103,6 +120,7 @@ NSString *const kColorPickerContainerViewAnimationOutName = @"kColorPickerContai
 
 - (void)hideContainerViews:(BOOL)animated {
     [self.subtoolView hideView:animated];
+    [self.accessoryView hideView:animated];
     [self.bottomView displayView:animated];
     if (animated) {
         [self.colorPickerContainerView pop_addAnimation:self.colorPickerContainerViewAnimationIn forKey:kColorPickerContainerViewAnimationInName];
@@ -127,6 +145,15 @@ NSString *const kColorPickerContainerViewAnimationOutName = @"kColorPickerContai
 
 - (void)colorPickerDidChangeColor:(SSOColorPickerContainerView *)colorPickerContainerView withColor:(UIColor *)color {
     self.drawView.lineColor = color;
+}
+
+#pragma mark - SSODrawContainerViewDelegate 
+
+-(void)drawContainer:(UIView *)view didChangePointSize:(CGFloat)lineSize {
+}
+
+-(void)containerViewDoneButtonPressed:(UIView *)view {
+    [self hideContainerViews:YES];
 }
 
 @end

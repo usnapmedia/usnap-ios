@@ -1,5 +1,5 @@
 //
-//  NSBundle+SSOHelper.h
+//  NSBundle+Wink.h
 //  Wink
 //
 //  Created by Nicolas Vincensini on 2015-03-16.
@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "BrightnessContrastSlidersContainerView.h"
 #import "SSOColorPickerContainerView.h"
+#import "SSODrawAccessoryContainerView.h"
 
-@interface NSBundle (SSOHelper)
+@interface NSBundle (Wink)
 
 /**
  *  Get the brightness contrast container view
@@ -25,5 +26,12 @@
  *  @return the view
  */
 + (SSOColorPickerContainerView *)loadColorPickerContainerView;
+
+/**
+ *  Get the draw accessory container view
+ *
+ *  @return the view
+ */
++(SSODrawAccessoryContainerView *)loadDrawAccessoryContainerView;
 
 @end

@@ -28,7 +28,7 @@
         self.subtoolView = [parent subtoolContainerView];
     }
     if ([parent respondsToSelector:@selector(accessoryContainerView)]) {
-        self.buttonsView = [parent accessoryContainerView];
+        self.accessoryView = [parent accessoryContainerView];
     }
     if ([parent respondsToSelector:@selector(bottomView)]) {
         self.bottomView = [parent bottomView];

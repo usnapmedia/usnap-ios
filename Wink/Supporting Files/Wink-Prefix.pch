@@ -23,6 +23,6 @@
     #import "SSFacebookHelper.h"
     #import "UIStoryboard+USnap.h"
     #import "SSStoryboardConstants.h"
-    #import "NSBundle+SSOHelper.h"
+    #import "NSBundle+Wink.h"
 
 #endif
