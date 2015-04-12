@@ -10,12 +10,6 @@
 
 @protocol SSOAnimatableView <NSObject>
 
-// Animations
-@property(strong, nonatomic) POPSpringAnimation *viewAnimationIn;
-@property(strong, nonatomic) POPSpringAnimation *viewAnimationOut;
-@property CGRect viewInRect;
-@property CGRect viewOutRect;
-
 /**
  *  Display the view
  *

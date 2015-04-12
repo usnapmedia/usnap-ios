@@ -10,7 +10,7 @@
 #import "SSOEditToolController.h"
 #import "SSODrawToolController.h"
 #import "SSOSubtoolContainerView.h"
-#import "SSOBottomContainerView.h"
+#import "SSOFadingContainerView.h"
 #import "SSOMediaEditState.h"
 #import "SSOMediaEditStateCrop.h"
 #import "SSOMediaEditStateNone.h"
@@ -37,7 +37,7 @@
 @property(strong, nonatomic) SSOEditToolController *childViewController;
 
 // Containers
-@property(weak, nonatomic) IBOutlet SSOBottomContainerView *bottomView;
+@property(weak, nonatomic) IBOutlet SSOFadingContainerView *bottomView;
 @property(weak, nonatomic) IBOutlet UIView *topView;
 @property(strong, nonatomic) SSOSubtoolContainerView *subtoolContainerView;
 @property(strong, nonatomic) UIView *accessoryContainerView;
@@ -410,8 +410,9 @@
  */
 - (UIView *)subtoolContainerView {
     if (!_subtoolContainerView) {
-        // Initialize as big as the bottom view
-        _subtoolContainerView = [[SSOSubtoolContainerView alloc] initWithFrame:self.bottomView.frame];
+        // Initialize the view with the bottom view size. We also need to push it at the bottom of the view completely as it's initial position for the scroll effect.
+        //@FIXME Orientation will be problematic
+        _subtoolContainerView = [[SSOSubtoolContainerView alloc] initWithFrame:CGRectMake(self.bottomView.frame.origin.x, self.view.frame.size.height, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
         // Hide and add the view
         _subtoolContainerView.hidden = YES;
         [self.view addSubview:_subtoolContainerView];

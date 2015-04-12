@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SSOAnimatableView.h"
+#import "SSOSlidingContainerView.h"
 
-@interface SSOSubtoolContainerView : UIView <SSOAnimatableView>
+@interface SSOSubtoolContainerView : SSOSlidingContainerView
 
 @end

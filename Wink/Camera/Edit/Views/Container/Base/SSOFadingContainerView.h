@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SSOAnimatableView.h"
 
-@interface SSOBottomContainerView : UIView <SSOAnimatableView>
+@interface SSOFadingContainerView : UIView <SSOAnimatableView>
 
 @end

@@ -8,31 +8,7 @@
 
 #import "SSOSubtoolContainerView.h"
 
-NSString *const kSSOSubtoolContainerViewInName = @"kSSOSubtoolContainerViewInName";
-NSString *const kSSOSubtoolContainerViewOutName = @"kSSOSubtoolContainerViewOutName";
-
 @implementation SSOSubtoolContainerView
-
-@synthesize viewAnimationIn;
-@synthesize viewAnimationOut;
-@synthesize viewOutRect;
-@synthesize viewInRect;
-
-#pragma mark - Initialization
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        [self initializeAnimations];
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        [self initializeAnimations];
-    }
-    return self;
-}
 
 #pragma mark - Animations
 
@@ -40,44 +16,11 @@ NSString *const kSSOSubtoolContainerViewOutName = @"kSSOSubtoolContainerViewOutN
  *  Initialize animations variables
  */
 - (void)initializeAnimations {
-    
+
+    self.alpha = 0.0f;
     // Set the color picker in and out rect
     self.viewInRect = CGRectMake(self.frame.origin.x, self.frame.origin.y - self.frame.size.height, self.frame.size.width, self.frame.size.height);
     self.viewOutRect = CGRectMake(self.frame.origin.x, self.frame.origin.y + self.frame.size.height, self.frame.size.width, self.frame.size.height);
-
-    // Initialize navigation bar animation
-    self.viewAnimationIn = [POPSpringAnimation animation];
-    self.viewAnimationIn.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
-    self.viewAnimationIn.name = kSSOSubtoolContainerViewInName;
-    self.viewAnimationIn.delegate = self;
-    // Move the color picker up it's size + the offset
-    self.viewAnimationIn.toValue = [NSValue valueWithCGRect:self.viewInRect];
-
-    self.viewAnimationOut = [POPSpringAnimation animation];
-    self.viewAnimationOut.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
-    self.viewAnimationOut.name = kSSOSubtoolContainerViewOutName;
-    self.viewAnimationOut.delegate = self;
-
-    // Move the color picker down it's size + the offset
-    self.viewAnimationOut.toValue = [NSValue valueWithCGRect:self.viewOutRect];
-}
-
-#pragma mark - SSOAnimatableView
-
-- (void)displayView:(BOOL)animated {
-    if (animated) {
-        [self pop_addAnimation:self.viewAnimationIn forKey:kSSOSubtoolContainerViewInName];
-    } else {
-        self.frame = self.viewInRect;
-    }
-}
-
-- (void)hideView:(BOOL)animated {
-    if (animated) {
-        [self pop_addAnimation:self.viewAnimationOut forKey:kSSOSubtoolContainerViewOutName];
-    } else {
-        self.frame = self.viewOutRect;
-    }
 }
 
 @end

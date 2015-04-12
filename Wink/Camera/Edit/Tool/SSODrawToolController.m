@@ -49,10 +49,10 @@ NSString *const kColorPickerContainerViewAnimationOutName = @"kColorPickerContai
     NSAssert([parent respondsToSelector:@selector(subtoolContainerView)], @"Parent view controller must have a subtool container view");
     self.colorPickerContainerView = [NSBundle loadColorPickerContainerView];
     // Insert view to parent
-    [[parent subtoolContainerView] addSubview:_colorPickerContainerView];
+    [[parent accessoryContainerView] addSubview:_colorPickerContainerView];
     // Set the container inside the view to have constraints on the edges
     [self.colorPickerContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.edges.equalTo([parent subtoolContainerView]);
+      make.edges.equalTo([parent accessoryContainerView]);
     }];
     // Set the color picker view
     self.colorPickerContainerView.delegate = self;

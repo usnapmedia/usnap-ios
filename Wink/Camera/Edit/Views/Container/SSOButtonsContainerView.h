@@ -1,5 +1,5 @@
 //
-//  SSOFadingoutContainerView.h
+//  SSOButtonsContainerView.h
 //  Wink
 //
 //  Created by Gabriel Cartier on 2015-04-08.
@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SSOSlidingContainerView.h"
 
-@interface SSOFadingoutContainerView : UIView
+@interface SSOButtonsContainerView : SSOSlidingContainerView
 
 @end
