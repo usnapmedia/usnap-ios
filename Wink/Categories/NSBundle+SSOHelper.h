@@ -11,6 +11,7 @@
 #import "SSOColorPickerContainerView.h"
 #import "SSOLoginContainerView.h"
 #import "SSORegisterContainerView.h"
+#import "SSOLoginViewController.h"
 
 @interface NSBundle (SSOHelper)
 
@@ -31,5 +32,8 @@
 + (SSOLoginContainerView *)loadLoginContainerView;
 
 + (SSORegisterContainerView *)loadRegisterContainerView;
+
++ (SSOLoginViewController *)loadLoginViewController;
+
 
 @end

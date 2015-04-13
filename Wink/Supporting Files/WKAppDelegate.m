@@ -118,7 +118,7 @@
 //        self.window.rootViewController = navController;
   //  }
 //    else {
-    SSOLoginViewController *loginViewController = [[SSOLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
+    SSOLoginViewController *loginViewController = [NSBundle loadLoginViewController];
      //   WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
         WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginViewController];
         navController.navigationBarHidden = YES;
