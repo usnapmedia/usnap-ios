@@ -49,6 +49,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="colorPickerView" destination="1XI-HV-Vax" id="JOk-aB-Vx4"/>
+                <outlet property="resetButton" destination="0Zn-VC-Cle" id="NR4-Vp-QkN"/>
             </connections>
             <point key="canvasLocation" x="486" y="316"/>
         </view>

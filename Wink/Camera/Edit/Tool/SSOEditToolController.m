@@ -20,19 +20,39 @@
 
 - (void)willMoveToParentViewController:(UIViewController<SSOEditViewControllerProtocol> *)parent {
     [super willMoveToParentViewController:parent];
-    // Set the subviews if needed
-    if ([parent respondsToSelector:@selector(buttonsContainerView)]) {
-        self.buttonsView = [parent buttonsContainerView];
+    // Animate the views
+    if (parent) {
+        // Set the subviews if needed
+        if ([parent respondsToSelector:@selector(buttonsContainerView)]) {
+            self.buttonsView = [parent buttonsContainerView];
+        }
+        if ([parent respondsToSelector:@selector(subtoolContainerView)]) {
+            self.subtoolView = [parent subtoolContainerView];
+        }
+        if ([parent respondsToSelector:@selector(accessoryContainerView)]) {
+            self.accessoryView = [parent accessoryContainerView];
+        }
+        if ([parent respondsToSelector:@selector(bottomView)]) {
+            self.bottomView = [parent bottomView];
+        }
+        [self displayContainerViews:YES];
+    } else {
+        [self hideContainerViews:YES];
     }
-    if ([parent respondsToSelector:@selector(subtoolContainerView)]) {
-        self.subtoolView = [parent subtoolContainerView];
-    }
-    if ([parent respondsToSelector:@selector(accessoryContainerView)]) {
-        self.accessoryView = [parent accessoryContainerView];
-    }
-    if ([parent respondsToSelector:@selector(bottomView)]) {
-        self.bottomView = [parent bottomView];
-    }
+}
+
+#pragma mark - SSOEditToolProtocol
+
+/**
+ * @NOTE: To be overriden
+ */
+- (void)displayContainerViews:(BOOL)animated {
+}
+
+/**
+ * @NOTE: To be overriden
+ */
+- (void)hideContainerViews:(BOOL)animated {
 }
 
 @end

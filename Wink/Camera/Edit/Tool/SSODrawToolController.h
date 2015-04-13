@@ -8,7 +8,6 @@
 
 #import "SSOEditToolController.h"
 #import <ACEDrawingView.h>
-#import "UIColor+PickerColors.h"
 
 
 @interface SSODrawToolController : SSOEditToolController <ACEDrawingViewDelegate>

@@ -10,6 +10,8 @@
 
 @protocol SSOContainerViewDelegate <NSObject>
 
+@optional
+
 /**
  *  Called when the done button is pressed on a container view
  *
@@ -20,7 +22,7 @@
 /**
  *  Called when the cancel button is pressed on a container view
  *
- *  @param view the biew it is called from
+ *  @param view the view it is called from
  */
 - (void)containerViewCancelButtonPressed:(UIView *)view;
 

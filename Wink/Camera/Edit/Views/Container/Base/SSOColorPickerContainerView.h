@@ -16,6 +16,13 @@
 @property(weak, nonatomic) id<SSOColorPickerContainerViewDelegate> delegate;
 @property(weak, nonatomic, readonly) IBOutlet WKColorPickerView *colorPickerView;
 
+/**
+ *  Set the reset button image
+ *
+ *  @param image the image
+ */
+- (void)setResetButtonImage:(UIImage *)image;
+
 @end
 
 /**

@@ -10,6 +10,7 @@
 #import "BrightnessContrastSlidersContainerView.h"
 #import "SSOColorPickerContainerView.h"
 #import "SSODrawAccessoryContainerView.h"
+#import "SSOTextAccessoryContainerView.h"
 
 @interface NSBundle (Wink)
 
@@ -32,6 +33,13 @@
  *
  *  @return the view
  */
-+(SSODrawAccessoryContainerView *)loadDrawAccessoryContainerView;
++ (SSODrawAccessoryContainerView *)loadDrawAccessoryContainerView;
+
+/**
+ *  Get the text accessory container view
+ *
+ *  @return the view
+ */
++ (SSOTextAccessoryContainerView *)loadTextAccessoryContainerView;
 
 @end

@@ -8,9 +8,9 @@
 
 #import "SSODrawAccessoryContainerView.h"
 
-#define kFirstPointSize 10.0f
-#define kSecondPointSize 15.0f
-#define kThirdPointSize 20.0f
+#define kFirstPointSize 5.0f
+#define kSecondPointSize 10.0f
+#define kThirdPointSize 15.0f
 
 @implementation SSODrawAccessoryContainerView
 

@@ -9,6 +9,7 @@
 #import "WKEditMediaViewController.h"
 #import "SSOEditToolController.h"
 #import "SSODrawToolController.h"
+#import "SSOTextToolController.h"
 #import "SSOSubtoolContainerView.h"
 #import "SSOButtonsContainerView.h"
 #import "SSOAccessoryContainerView.h"
@@ -20,7 +21,7 @@
 #import <Masonry.h>
 #import <pop/POP.h>
 
-@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate>
+@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, SSOEditToolDelegate>
 
 @property(weak, nonatomic) IBOutlet UIImageView *watermarkImageView;
 @property(weak, nonatomic) IBOutlet UIButton *postButton;
@@ -214,38 +215,23 @@
 #pragma mark - Child View Controller
 
 - (void)animateToChildViewController:(SSOEditToolController *)newVC {
-    if (self.childViewController) {
+    // Set child VC
+    self.childViewController = newVC;
+    // Add the child vc
+    [self addChildViewController:newVC];
+    // Set the frame
+    newVC.view.frame = self.view.frame;
+//    // Add subview
+//    [self.view addSubview:newVC.view];
+    // Call delegate
+    [newVC didMoveToParentViewController:self];
+}
 
-        [self.childViewController willMoveToParentViewController:nil]; // 1
-        [self addChildViewController:newVC];
-        newVC.view.frame = self.view.frame;
-
-        [self transitionFromViewController:self.childViewController
-            toViewController:newVC
-            duration:0.5
-            options:0
-            animations:^{
-              if ([self.childViewController respondsToSelector:@selector(hideContainerViews:)]) {
-                  [self.childViewController hideContainerViews:YES];
-              }
-            }
-            completion:^(BOOL finished) {
-              [self.childViewController removeFromParentViewController];
-              self.childViewController = newVC;
-              if ([self.childViewController respondsToSelector:@selector(displayContainerViews:)]) {
-                  [self.childViewController displayContainerViews:YES];
-              }
-              [self.childViewController didMoveToParentViewController:self];
-            }];
-    } else {
-        self.childViewController = newVC;
-        [self addChildViewController:self.childViewController];
-        self.childViewController.view.frame = self.view.frame;
-        if ([self.childViewController respondsToSelector:@selector(displayContainerViews:)]) {
-            [self.childViewController displayContainerViews:YES];
-        }
-        [self.childViewController didMoveToParentViewController:self];
-    }
+- (void)removeChildViewController {
+    [self.childViewController willMoveToParentViewController:nil];
+    [self.childViewController.view removeFromSuperview];
+    [self.childViewController removeFromParentViewController];
+    self.childViewController = nil;
 }
 
 #pragma mark - Movie View Methods
@@ -258,11 +244,15 @@
 
 - (IBAction)drawButtonTouched:(id)sender {
     SSODrawToolController *childVC = [SSODrawToolController new];
+    childVC.delegate = self;
     [self animateToChildViewController:childVC];
 }
 
 - (IBAction)textButtonTouched:(id)sender {
     // Set the next state for the media edit
+    SSOTextToolController *childVC = [SSOTextToolController new];
+    childVC.delegate = self;
+    [self animateToChildViewController:childVC];
 }
 
 - (IBAction)brightnessButtonTouched:(id)sender {
@@ -316,6 +306,13 @@
 
 - (IBAction)backButtonTouched:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - SSOEditToolDelegate
+
+- (void)editToolWillEndEditing:(SSOEditToolController *)tool {
+    // Remove the VC
+    [self removeChildViewController];
 }
 
 #pragma mark - SSOEditViewControllerProtocol

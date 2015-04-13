@@ -10,10 +10,17 @@
 
 @interface SSOColorPickerContainerView ()
 @property(weak, nonatomic, readwrite) IBOutlet WKColorPickerView *colorPickerView;
+@property(weak, nonatomic) IBOutlet UIButton *resetButton;
 
 @end
 
 @implementation SSOColorPickerContainerView
+
+#pragma mark - Setter
+
+- (void)setResetButtonImage:(UIImage *)image {
+    [self.resetButton setImage:image forState:UIControlStateNormal];
+}
 
 #pragma mark - IBAction
 
