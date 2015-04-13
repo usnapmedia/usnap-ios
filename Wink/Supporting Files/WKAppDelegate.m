@@ -21,6 +21,8 @@
 
 #import <GooglePlus/GooglePlus.h>
 
+#import "SSOLoginViewController.h"
+
 @implementation WKAppDelegate
 
 #pragma mark - App Delegate Methods
@@ -77,11 +79,11 @@
     //          // Setup state
     //          [self setupAnimated:NO];
 
-        }];
-    } else {
+//        }];
+//    } else {
         // Setup state
         [self setupRootViewController];
-    }
+ //   }
 
     return YES;
 }
@@ -110,16 +112,17 @@
 
 - (void)setupRootViewController {
    // if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
-        [[NSUserDefaults standardUserDefaults] boolForKey:kEmailLoggedValue]) {
-        WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
-        UINavigationController *navController = [[UIStoryboard cameraStoryboard] instantiateViewControllerWithIdentifier:@"CAMERA_NAV_VC"];
-        self.window.rootViewController = navController;
+       // [[NSUserDefaults standardUserDefaults] boolForKey:kEmailLoggedValue]) {
+//        WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
+//        UINavigationController *navController = [[UIStoryboard cameraStoryboard] instantiateViewControllerWithIdentifier:@"CAMERA_NAV_VC"];
+//        self.window.rootViewController = navController;
   //  }
 //    else {
-//        WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
-//        WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginController];
-//        navController.navigationBarHidden = YES;
-//        self.window.rootViewController = navController;
+    SSOLoginViewController *loginViewController = [[SSOLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
+     //   WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
+        WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginViewController];
+        navController.navigationBarHidden = YES;
+        self.window.rootViewController = navController;
 //    }
 }
 

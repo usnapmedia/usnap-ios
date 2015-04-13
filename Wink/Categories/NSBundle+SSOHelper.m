@@ -18,4 +18,12 @@
     return [[[NSBundle mainBundle] loadNibNamed:@"ColorPickerContainerView" owner:self options:nil] firstObject];
 }
 
++ (SSOLoginContainerView *)loadLoginContainerView {
+    return [[[NSBundle mainBundle] loadNibNamed:@"SSOLoginContainerView" owner:self options:nil] firstObject];
+}
+
++ (SSORegisterContainerView *)loadRegisterContainerView {
+    return [[[NSBundle mainBundle] loadNibNamed:@"SSORegisterContainerView" owner:self options:nil] firstObject];
+}
+
 @end
