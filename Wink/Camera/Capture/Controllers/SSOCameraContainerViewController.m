@@ -56,6 +56,7 @@
 #pragma mark Capture Photo and Video
 
 - (void)capturePhoto {
+    _capturing = YES;
     [self.fastCamera takePicture];
 }
 
@@ -103,7 +104,9 @@
 
 #pragma mark - FastttCameraDelegate
 
+
 - (void)cameraController:(FastttCamera *)cameraController didFinishNormalizingCapturedImage:(FastttCapturedImage *)capturedImage {
+
     // Edit the selected media
     WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
     controller.image = capturedImage.fullImage;
@@ -115,6 +118,7 @@
           }
         }];
     [self.navigationController pushViewController:controller animated:YES];
+    _capturing = NO;
 }
 
 - (void)cameraController:(id<FastttCameraInterface>)cameraController didFinishRecordingVideo:(NSURL *)videoURL {

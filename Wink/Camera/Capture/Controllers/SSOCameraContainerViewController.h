@@ -16,6 +16,7 @@
 @property(strong, nonatomic) id<VideoRecordingDelegate> videoDelegate;
 @property(nonatomic, strong) FastttCamera *fastCamera;
 @property(nonatomic, strong) UIImage *libraryImage;
+@property(nonatomic, readonly) BOOL capturing;
 
 #pragma mark - Capture Video and Photo
 

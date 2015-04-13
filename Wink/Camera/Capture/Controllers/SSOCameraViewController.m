@@ -72,7 +72,6 @@
     // Initialize UI
     // Start with the photo button in the middle
     [self initializeUI];
-    [self initializeGestures];
 
     [self initAnimatedButton];
 }
@@ -129,6 +128,7 @@
 
     // Allow the user to rotate the screen when the view just appeared
     self.isRotationAllowed = YES;
+    self.isVideoRecording = NO;
 
     // Setup UI for photo/video buttons
     [self.photoButton setAttributedTitle:[self setupUIForButtonWithText:@"Photo"] forState:UIControlStateSelected];
@@ -207,52 +207,6 @@
 }
 
 /**
- *  Update the UI when the video is recording
- */
-- (void)updateVideoRecordingUI {
-    if (self.isVideoRecording) {
-        self.flashButton.hidden = YES;
-        self.cameraRotationButton.hidden = YES;
-        self.mediaButton.hidden = YES;
-        self.settingsButton.hidden = YES;
-        self.videoAndPhotoContainerView.hidden = YES;
-        self.recordingVideoLabel.hidden = NO;
-    } else {
-        self.flashButton.hidden = YES;
-        self.cameraRotationButton.hidden = NO;
-        self.mediaButton.hidden = NO;
-        self.settingsButton.hidden = NO;
-        self.videoAndPhotoContainerView.hidden = NO;
-        self.recordingVideoLabel.hidden = YES;
-    }
-}
-
-/**
- *  Animate black view to cover the camera view and disable interaction to give enough time to switch between photo and video
- */
-- (void)animateBlackViewOntoScreen {
-
-    self.animatedCaptureButton.userInteractionEnabled = NO;
-
-    [UIView animateWithDuration:0.54
-        delay:0.0
-        options:UIViewAnimationOptionCurveEaseIn
-        animations:^{
-          self.blackView.alpha = 0.7;
-        }
-        completion:^(BOOL finished) {
-          [UIView animateWithDuration:0.2
-                                delay:0.0
-                              options:UIViewAnimationOptionCurveLinear
-                           animations:^{
-                             self.blackView.alpha = 0.0;
-                             self.animatedCaptureButton.userInteractionEnabled = YES;
-                           }
-                           completion:nil];
-        }];
-}
-
-/**
  *  While recording this code will update the timer to count down
  *
  *  @param secondsRemaining
@@ -290,20 +244,6 @@
                                range:[attrStringSelected.string rangeOfString:attrStringSelected.string]];
 
     return attrStringSelected;
-}
-
-/**
- *  Initialize swiping gestures for video and photo
- */
-- (void)initializeGestures {
-    // Add the swipe gestures
-    UISwipeGestureRecognizer *swipeRightGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGestureAction:)];
-    swipeRightGesture.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:swipeRightGesture];
-
-    UISwipeGestureRecognizer *swipeLeftGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGestureAction:)];
-    swipeLeftGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:swipeLeftGesture];
 }
 
 /**
@@ -380,15 +320,15 @@
  *  When the user swipes left or right, change between the video or photo container
  *
  *  @param swipeGesture
- */
-- (IBAction)swipeGestureAction:(UISwipeGestureRecognizer *)swipeGesture {
-    if (swipeGesture.direction & UISwipeGestureRecognizerDirectionLeft) {
-        [self videoContainerButtonPushed:self.videoButton];
-
-    } else if (swipeGesture.direction & UISwipeGestureRecognizerDirectionRight) {
-        [self photoContainerButtonPushed:self.photoButton];
-    }
-}
+// */
+//- (IBAction)swipeGestureAction:(UISwipeGestureRecognizer *)swipeGesture {
+//    if (swipeGesture.direction & UISwipeGestureRecognizerDirectionLeft) {
+//        [self videoContainerButtonPushed:self.videoButton];
+//
+//    } else if (swipeGesture.direction & UISwipeGestureRecognizerDirectionRight) {
+//        [self photoContainerButtonPushed:self.photoButton];
+//    }
+//}
 
 #pragma mark - Prepare for Segue / Navigation
 
@@ -462,52 +402,6 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-#pragma mark - IBActions
-
-#pragma mark Video/Photo Buttons
-
-- (IBAction)photoContainerButtonPushed:(id)sender {
-    // Animate moving the photo and video buttons with constraints
-    [self swapPhotoAndVideoButtonsWithButtonToCenter:self.photoButton
-                              andCenteringConstraint:self.photoCenteringConstraint
-                                 andConstraintToMove:self.videoCenteringConstraint
-                              withLeftwardsDirection:NO
-                                            animated:YES];
-
-    self.isVideoOn = NO;
-    self.isFlashOn = [[NSUserDefaults standardUserDefaults] boolForKey:kIsFlashOn];
-
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kIsVideoOn];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
-    [self updateVideoUI];
-    [self updateFlashUI];
-    [self updateRearCameraFacingUI];
-
-    [self animateBlackViewOntoScreen];
-}
-
-- (IBAction)videoContainerButtonPushed:(id)sender {
-    // Animate moving the photo and video buttons with constraints
-    [self swapPhotoAndVideoButtonsWithButtonToCenter:self.videoButton
-                              andCenteringConstraint:self.videoCenteringConstraint
-                                 andConstraintToMove:self.photoCenteringConstraint
-                              withLeftwardsDirection:YES
-                                            animated:YES];
-
-    self.isVideoOn = YES;
-    self.isFlashOn = NO;
-
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsVideoOn];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
-    [self updateVideoUI];
-    [self updateFlashUI];
-    [self updateRearCameraFacingUI];
-
-    [self animateBlackViewOntoScreen];
-}
-
 #pragma mark Corner Icons
 
 - (IBAction)flashButtonTouched:(id)sender {
@@ -568,38 +462,10 @@
 #pragma mark Capture Button
 
 - (IBAction)captureButtonPushed:(id)sender {
-    // Send message to photo or video view controller to take photo or video
-    if (self.isVideoOn) {
-
-        if (self.isVideoRecording) {
-            [self.timer invalidate];
-
-            self.videoTimeRemaining = kTotalVideoRecordingTime;
-
-            self.isVideoRecording = NO;
-
-            // Stop recording
-            [self.containerViewController.cameraContainerVC stopRecordingVideo];
-
-            // Loading HUD until the video is done uploading
-            [SVProgressHUD show];
-
-            // Disable user interaction
-            self.view.userInteractionEnabled = NO;
-        } else {
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateVideoRecordingLabel:) userInfo:nil repeats:YES];
-            [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-
-            [self.timer fire];
-            self.isVideoRecording = YES;
-
-            // Start recording
-            [self.containerViewController.cameraContainerVC startRecordingVideo];
-        }
-
-        [self updateVideoRecordingUI];
-
-    } else {
+    
+    NSLog(@" capturing %d", self.containerViewController.cameraContainerVC.capturing);
+    // Check
+    if (!self.isVideoRecording && !self.containerViewController.cameraContainerVC.capturing) {
         [self.containerViewController.cameraContainerVC capturePhoto];
     }
 }
@@ -607,17 +473,10 @@
 #pragma mark - SSORoundedAnimatedButtonProtocol
 
 - (void)didStartLongPressGesture:(SSORoundedAnimatedButton *)button {
-    //    if (self.isVideoOn) {
-    //        if (!self.isVideoRecording) {
-    //            self.isVideoRecording = YES;
 
     [self.containerViewController.cameraContainerVC startRecordingVideo];
     self.isRotationAllowed = NO;
-    
-
-    //        }
-    //    }
-    //
+    self.isVideoRecording = YES;
 }
 
 - (void)didFinishLongPressGesture:(SSORoundedAnimatedButton *)button {
@@ -625,6 +484,7 @@
     [button pauseAnimation];
 
     [self.containerViewController.cameraContainerVC stopRecordingVideo];
+    self.isVideoRecording = NO;
 }
 
 #pragma mark - UIAlertViewDelegate
