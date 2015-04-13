@@ -33,23 +33,12 @@
     [super viewDidLoad];
     // [self setSocialNetworks];
     //  [self setUI];
-    [self addObservers];
+    //   [self addObservers];
 
-    self.loginView.backgroundColor = [UIColor clearColor];
-    self.loginContainerView.backgroundColor = [UIColor clearColor];
-
-    self.registerView.backgroundColor = [UIColor clearColor];
-    self.registerContainerView.backgroundColor = [UIColor clearColor];
-    self.registerContainerView.hidden = YES;
-
-    self.loginButton.selected = YES;
-    self.signUpButton.selected = NO;
+    [self setUI];
 
     self.loginView.delegate = self;
     self.registerView.delegate = self;
-
-    NSLog(@"self.signUpButton.selected %d", self.signUpButton.selected);
-    NSLog(@"self.loginButton.selected %d", self.loginButton.selected);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -64,18 +53,48 @@
 
 #pragma mark - Utilities
 
+/**
+ *  Set the UI for the VC
+ */
 - (void)setUI {
+
+    self.loginView.backgroundColor = [UIColor clearColor];
+    self.loginContainerView.backgroundColor = [UIColor clearColor];
+
+    self.registerView.backgroundColor = [UIColor clearColor];
+    self.registerContainerView.backgroundColor = [UIColor clearColor];
+    self.registerContainerView.hidden = YES;
+
+    self.loginButton.selected = YES;
+    self.signUpButton.selected = NO;
+}
+
+/**
+ *  Simple method to select/unselect the buttons
+ */
+- (void)switchSelectedButtons {
+    self.signUpButton.selected = !self.signUpButton.selected;
+    self.loginButton.selected = !self.loginButton.selected;
+}
+
+/**
+ *  Simple method to hide/show the desired view
+ */
+- (void)switchHiddenContainers {
+
+    self.loginContainerView.hidden = !self.loginContainerView.hidden;
+    self.registerContainerView.hidden = !self.registerContainerView.hidden;
 }
 
 /**
  *  Add observers to the VC
  */
-- (void)addObservers {
-    // Register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-}
+//- (void)addObservers {
+//    // Register for keyboard notifications
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+//}
 
 /**
  *  Lazy instanciation
@@ -158,22 +177,10 @@
                      completion:nil];
 }
 
-
-
-- (void)switchSelectedButtons {
-    self.signUpButton.selected = !self.signUpButton.selected;
-    self.loginButton.selected = !self.loginButton.selected;
-}
-
-- (void)switchHiddenContainers {
-
-    self.loginContainerView.hidden = !self.loginContainerView.hidden;
-    self.registerContainerView.hidden = !self.registerContainerView.hidden;
-}
-
 #pragma mark - IBActions
 
 - (IBAction)loginButtonPushed:(id)sender {
+    // Check if the button is already selected and return if so.
     if (self.loginButton.selected) {
         return;
     }
@@ -182,6 +189,7 @@
 }
 
 - (IBAction)signUpButton:(id)sender {
+    // Check if the button is already selected and return if so.
     if (self.signUpButton.selected) {
         return;
     }
@@ -193,34 +201,30 @@
 
 - (void)didLoginWithInfo:(NSDictionary *)info {
 
-    NSLog(@"info is : %@", info);
-
     [WKWinkConnect winkConnectLoginWithUsername:[info valueForKey:@"email"]
         password:[info valueForKey:@"password"]
         meta:nil
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          NSLog(@"Login success");
 
         }
-        failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          NSLog(@"Login failed");
 
         }];
 }
 
 - (void)didRegisterWithInfo:(NSDictionary *)info andMeta:(NSDictionary *)meta {
 
-    NSLog(@"info is : %@ and meta : %@", info, meta);
-
     [WKWinkConnect winkConnectRegisterWithUsername:[info valueForKey:@"email"]
         password:[info valueForKey:@"password"]
         meta:meta
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-          NSLog(@"Login success");
+          NSLog(@"Register success");
 
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-          NSLog(@"Login failure");
+          NSLog(@"Register failure");
 
         }];
 }
