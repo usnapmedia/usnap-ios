@@ -48,6 +48,13 @@
     [[GPPSignIn sharedInstance] disconnect];
 }
 
+- (NSString *)getAccessToken {
+
+    NSString *token = [[GPPSignIn sharedInstance] idToken];
+
+    return token;
+}
+
 #pragma mark - GPPSignInDelegate
 
 - (void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {

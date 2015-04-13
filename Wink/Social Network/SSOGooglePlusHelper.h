@@ -41,4 +41,11 @@
  */
 - (void)disconnect;
 
+/**
+ *  Get the token from Google Plus
+ *
+ *  @return idToken
+ */
+- (NSString *)getAccessToken;
+
 @end
