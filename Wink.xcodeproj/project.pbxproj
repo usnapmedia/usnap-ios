@@ -116,7 +116,7 @@
 		D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C801AD4287C008D2A37 /* WKWinkConnect.m */; };
 		D8EA5C8A1AD4287C008D2A37 /* WKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */; };
 		D8EA5C8B1AD4287C008D2A37 /* WKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C851AD4287C008D2A37 /* WKUser.m */; };
-		D8EA5C8C1AD4287C008D2A37 /* WKLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C871AD4287C008D2A37 /* WKLoginViewController.xib */; };
+		D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */; };
 		D8EA5C8D1AD4287C008D2A37 /* WKLoginViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C881AD4287C008D2A37 /* WKLoginViewController_iPad.xib */; };
 		D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C8F1AD428D3008D2A37 /* SSOGooglePlusHelper.m */; };
 /* End PBXBuildFile section */
@@ -310,7 +310,7 @@
 		D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKLoginViewController.m; sourceTree = "<group>"; };
 		D8EA5C841AD4287C008D2A37 /* WKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKUser.h; sourceTree = "<group>"; };
 		D8EA5C851AD4287C008D2A37 /* WKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKUser.m; sourceTree = "<group>"; };
-		D8EA5C871AD4287C008D2A37 /* WKLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKLoginViewController.xib; sourceTree = "<group>"; };
+		D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOLoginViewController.xib; sourceTree = "<group>"; };
 		D8EA5C881AD4287C008D2A37 /* WKLoginViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKLoginViewController_iPad.xib; sourceTree = "<group>"; };
 		D8EA5C8E1AD428D3008D2A37 /* SSOGooglePlusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOGooglePlusHelper.h; sourceTree = "<group>"; };
 		D8EA5C8F1AD428D3008D2A37 /* SSOGooglePlusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOGooglePlusHelper.m; sourceTree = "<group>"; };
@@ -913,7 +913,7 @@
 		D8EA5C861AD4287C008D2A37 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
-				D8EA5C871AD4287C008D2A37 /* WKLoginViewController.xib */,
+				D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */,
 				D8EA5C881AD4287C008D2A37 /* WKLoginViewController_iPad.xib */,
 				3303DDCD1AD83E42002B74F9 /* SSORegisterContainerView.xib */,
 				3303DDCF1AD84F19002B74F9 /* SSOLoginContainerView.xib */,
@@ -1040,7 +1040,7 @@
 				D830F3FA1ACDDAE7002A503D /* WKEditMediaViewController.xib in Resources */,
 				3303DDD01AD84F19002B74F9 /* SSOLoginContainerView.xib in Resources */,
 				335723E31ACB097C000CC846 /* Wink-Info.plist in Resources */,
-				D8EA5C8C1AD4287C008D2A37 /* WKLoginViewController.xib in Resources */,
+				D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */,
 				335723C81ACB097C000CC846 /* InfoPlist.strings in Resources */,
 				335723DE1ACB097C000CC846 /* WKShareViewController.xib in Resources */,
 				270DFB0719AE71BE00067072 /* Images.xcassets in Resources */,
