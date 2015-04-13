@@ -50,6 +50,7 @@
 @property(nonatomic) BOOL isFlashOn;
 @property(nonatomic) BOOL isCameraRearFacing;
 @property(nonatomic) BOOL isVideoRecording;
+@property(nonatomic) BOOL isRotationAllowed;
 
 @property(nonatomic) NSInteger videoTimeRemaining;
 @property(strong, nonatomic) NSTimer *timer;
@@ -126,6 +127,9 @@
                                                 animated:YES];
     }
 
+    // Allow the user to rotate the screen when the view just appeared
+    self.isRotationAllowed = YES;
+
     // Setup UI for photo/video buttons
     [self.photoButton setAttributedTitle:[self setupUIForButtonWithText:@"Photo"] forState:UIControlStateSelected];
     [self.videoButton setAttributedTitle:[self setupUIForButtonWithText:@"Video"] forState:UIControlStateSelected];
@@ -154,6 +158,11 @@
     } else {
         self.flashButton.hidden = YES;
     }
+}
+
+- (BOOL)shouldAutorotate {
+
+    return self.isRotationAllowed;
 }
 
 /**
@@ -603,6 +612,8 @@
     //            self.isVideoRecording = YES;
 
     [self.containerViewController.cameraContainerVC startRecordingVideo];
+    self.isRotationAllowed = NO;
+    
 
     //        }
     //    }
