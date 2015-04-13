@@ -89,6 +89,7 @@
     self.animatedCaptureButton.circleColor = [UIColor blueColor];
     self.animatedCaptureButton.circleOpacity = 0.8;
     self.animatedCaptureButton.circleLineWidth = 20;
+    [self.animatedCaptureButton resetAnimation];
 }
 
 /**
@@ -596,7 +597,7 @@
 
 #pragma mark - SSORoundedAnimatedButtonProtocol
 
-- (void)didStartAnimation:(SSORoundedAnimatedButton *)button {
+- (void)didStartLongPressGesture:(SSORoundedAnimatedButton *)button {
     //    if (self.isVideoOn) {
     //        if (!self.isVideoRecording) {
     //            self.isVideoRecording = YES;
@@ -608,7 +609,9 @@
     //
 }
 
-- (void)didFinishAnimation:(SSORoundedAnimatedButton *)button {
+- (void)didFinishLongPressGesture:(SSORoundedAnimatedButton *)button {
+
+    [button pauseAnimation];
 
     [self.containerViewController.cameraContainerVC stopRecordingVideo];
 }

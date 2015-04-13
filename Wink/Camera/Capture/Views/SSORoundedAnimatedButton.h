@@ -13,26 +13,39 @@
 @interface SSORoundedAnimatedButton : UIButton
 
 // Color of the circle
-@property (nonatomic, strong) UIColor* circleColor;
+@property(nonatomic, strong) UIColor *circleColor;
 // Opacity of the circle
-@property (nonatomic) float circleOpacity;
+@property(nonatomic) float circleOpacity;
 // Thickness of the circle
-@property (nonatomic) float circleLineWidth;
+@property(nonatomic) float circleLineWidth;
 // Duration of the animation
-@property (nonatomic) float animationDuration;
+@property(nonatomic) float animationDuration;
 // Minimum time before the animation start
-@property (nonatomic) float minimumPressDuration;
+@property(nonatomic) float minimumPressDuration;
 
-@property (nonatomic, weak) id<SSORoundedAnimatedButtonProtocol> delegate;
+@property(nonatomic, weak) id<SSORoundedAnimatedButtonProtocol> delegate;
+
+/**
+ *  Pause the animation
+ */
+- (void)pauseAnimation;
+
+/**
+ *  Resume the animation where it was paused
+ */
+- (void)resumeAnimation;
+
+/**
+ *  Reset the animation
+ */
+- (void)resetAnimation;
 
 @end
 
 @protocol SSORoundedAnimatedButtonProtocol
 
-- (void)didStartAnimation:(SSORoundedAnimatedButton *)button;
+- (void)didStartLongPressGesture:(SSORoundedAnimatedButton *)button;
 
-- (void)didFinishAnimation:(SSORoundedAnimatedButton *)button;
-
+- (void)didFinishLongPressGesture:(SSORoundedAnimatedButton *)button;
 
 @end
-
