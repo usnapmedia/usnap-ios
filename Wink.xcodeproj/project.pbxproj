@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03AE7D391AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m */; };
 		1371ECB88315E29A37A65496 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A060E699D67AED42FA7FA09C /* libPods.a */; };
 		1F7F85AB1A8A743900BBC5D5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */; };
 		1F7F85AC1A8A743900BBC5D5 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */; };
@@ -28,6 +29,8 @@
 		2747B09D19E5DE8F00C3D779 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2747B09C19E5DE8F00C3D779 /* CoreData.framework */; };
 		2747B09F19E5DE9500C3D779 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2747B09E19E5DE9500C3D779 /* SystemConfiguration.framework */; };
 		2747B0A119E5DE9A00C3D779 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2747B0A019E5DE9A00C3D779 /* libz.dylib */; };
+		330B38E21AD314D3003E9798 /* SSOEditSideMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 330B38E11AD314D3003E9798 /* SSOEditSideMenuView.xib */; };
+		330B38E61AD31ADB003E9798 /* SSOEditSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 330B38E51AD31ADB003E9798 /* SSOEditSideMenuView.m */; };
 		335723B31ACB097C000CC846 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3357233E1ACB097C000CC846 /* Camera.storyboard */; };
 		335723B41ACB097C000CC846 /* SSOCameraContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723411ACB097C000CC846 /* SSOCameraContainerViewController.m */; };
 		335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723431ACB097C000CC846 /* SSOCameraViewController.m */; };
@@ -126,6 +129,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03AE7D381AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+SSOLockedNavigationController.h"; sourceTree = "<group>"; };
+		03AE7D391AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SSOLockedNavigationController.m"; sourceTree = "<group>"; };
 		1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		270DFAF119AE71BE00067072 /* Wink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wink.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +152,9 @@
 		2747B09C19E5DE8F00C3D779 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2747B09E19E5DE9500C3D779 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2747B0A019E5DE9A00C3D779 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		330B38E11AD314D3003E9798 /* SSOEditSideMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOEditSideMenuView.xib; sourceTree = "<group>"; };
+		330B38E41AD31ADB003E9798 /* SSOEditSideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOEditSideMenuView.h; sourceTree = "<group>"; };
+		330B38E51AD31ADB003E9798 /* SSOEditSideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOEditSideMenuView.m; sourceTree = "<group>"; };
 		3357233E1ACB097C000CC846 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		335723401ACB097C000CC846 /* SSOCameraContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCameraContainerViewController.h; sourceTree = "<group>"; };
 		335723411ACB097C000CC846 /* SSOCameraContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCameraContainerViewController.m; sourceTree = "<group>"; };
@@ -429,6 +437,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		330B38E31AD31A9A003E9798 /* Side Menu Tools */ = {
+			isa = PBXGroup;
+			children = (
+				330B38E41AD31ADB003E9798 /* SSOEditSideMenuView.h */,
+				330B38E51AD31ADB003E9798 /* SSOEditSideMenuView.m */,
+			);
+			name = "Side Menu Tools";
+			sourceTree = "<group>";
+		};
 		3357233C1ACB097C000CC846 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
@@ -677,11 +694,13 @@
 		D830F3E51ACDDAE7002A503D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				330B38E31AD31A9A003E9798 /* Side Menu Tools */,
 				D830F3E61ACDDAE7002A503D /* MediaEditContainerView */,
 				D830F3EB1ACDDAE7002A503D /* SSOEditMediaMovableTextView.h */,
 				D830F3EC1ACDDAE7002A503D /* SSOEditMediaMovableTextView.m */,
 				D830F3ED1ACDDAE7002A503D /* WKColorPickerView.h */,
 				D830F3EE1ACDDAE7002A503D /* WKColorPickerView.m */,
+				330B38E11AD314D3003E9798 /* SSOEditSideMenuView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -744,6 +763,8 @@
 				D830F4171ACDDBF1002A503D /* UIStoryboard+USnap.m */,
 				D830F4181ACDDBF1002A503D /* UIView+WKAdditions.h */,
 				D830F4191ACDDBF1002A503D /* UIView+WKAdditions.m */,
+				03AE7D381AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.h */,
+				03AE7D391AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -983,6 +1004,7 @@
 				335723DB1ACB097C000CC846 /* SettingsSocialCell.xib in Resources */,
 				D8EA5C8D1AD4287C008D2A37 /* WKLoginViewController_iPad.xib in Resources */,
 				335723DF1ACB097C000CC846 /* WKShareViewController_iPad.xib in Resources */,
+				330B38E21AD314D3003E9798 /* SSOEditSideMenuView.xib in Resources */,
 				335723DC1ACB097C000CC846 /* SettingsSocialFakeCell.xib in Resources */,
 				335723C61ACB097C000CC846 /* InfoPlist.strings in Resources */,
 				335723DA1ACB097C000CC846 /* WKSettingsViewController.xib in Resources */,
@@ -1103,6 +1125,7 @@
 				D830F4011ACDDBD9002A503D /* SSOAccessoryHelper.m in Sources */,
 				335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */,
 				D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */,
+				330B38E61AD31ADB003E9798 /* SSOEditSideMenuView.m in Sources */,
 				D830F3E01ACDDA15002A503D /* SSOMediaEditStateNone.m in Sources */,
 				D830F4221ACDDBF1002A503D /* UIImage+Tools.m in Sources */,
 				335723E01ACB097C000CC846 /* Constants.m in Sources */,
@@ -1131,6 +1154,7 @@
 				D830F41A1ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				D830F3F51ACDDAE7002A503D /* SSOColorPickerContainerView.m in Sources */,
 				D830F4211ACDDBF1002A503D /* UIImage+Resizing.m in Sources */,
+				03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */,
 				335723B91ACB097C000CC846 /* SSOVideoEditingHelper.m in Sources */,
 				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
 				D830F3DC1ACDDA15002A503D /* SSOMediaEditStateCrop.m in Sources */,
