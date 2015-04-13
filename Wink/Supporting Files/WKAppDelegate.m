@@ -77,11 +77,11 @@
     //          // Setup state
     //          [self setupAnimated:NO];
 
-        }];
-    } else {
+//        }];
+//    } else {
         // Setup state
         [self setupRootViewController];
-    }
+  //  }
 
     return YES;
 }
@@ -110,7 +110,7 @@
 
 - (void)setupRootViewController {
    // if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
-        [[NSUserDefaults standardUserDefaults] boolForKey:kEmailLoggedValue]) {
+      //  [[NSUserDefaults standardUserDefaults] boolForKey:kEmailLoggedValue]) {
         WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
         UINavigationController *navController = [[UIStoryboard cameraStoryboard] instantiateViewControllerWithIdentifier:@"CAMERA_NAV_VC"];
         self.window.rootViewController = navController;
