@@ -9,6 +9,11 @@
 #import "WKViewController.h"
 #import "SSOLoginRegisterDelegate.h"
 
+//@protocol LoginViewControllerDelegate;
+
 @interface SSOLoginViewController : UIViewController <UITextFieldDelegate, SSOLoginRegisterDelegate>
 
+@property(weak, nonatomic) id<SSOLoginRegisterDelegate> delegate;
+
 @end
+

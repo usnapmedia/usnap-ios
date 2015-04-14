@@ -43,6 +43,11 @@ extern NSString *const kTokenGoogleString;
 extern NSString *const kIsCameraRearFacing;
 extern NSString *const kIsFlashOn;
 extern NSString *const kIsVideoOn;
+extern NSString *const kIsFirstLogin;
+extern NSString *const kIsFirstLoginDate;
+extern NSString *const kUSnapKeychainServiceKey;
+extern NSString *const kIsUserLoggedIn;
+extern NSString *const kEmailLoggedString;
 
 #pragma mark - Storyboard
 

@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSOLoginViewController">
             <connections>
+                <outlet property="cancelButton" destination="0V0-PS-IOt" id="kcx-Hn-QI9"/>
                 <outlet property="loginButton" destination="L9d-i3-B4P" id="9ne-ZQ-lQc"/>
                 <outlet property="loginContainerView" destination="1jz-yV-PGL" id="WAv-Lu-G4u"/>
                 <outlet property="registerContainerView" destination="6G7-MO-4dZ" id="WB5-9z-bN2"/>
@@ -57,7 +58,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    <color key="backgroundColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Bm5-bk-NTn" secondAttribute="trailing" id="EBL-FW-gZY"/>
                         <constraint firstItem="L9d-i3-B4P" firstAttribute="leading" secondItem="MdS-IV-9nO" secondAttribute="leading" id="ErT-lU-4Rd"/>
@@ -70,11 +71,22 @@
                         <constraint firstAttribute="height" constant="50" id="mu8-V8-dle"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0V0-PS-IOt">
+                    <rect key="frame" x="8" y="8" width="56" height="34"/>
+                    <state key="normal" title="Cancel">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelButtonTouched:" destination="-1" eventType="touchUpInside" id="Knd-Zh-t2l"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="MdS-IV-9nO" secondAttribute="trailing" id="0Ff-z6-LtT"/>
                 <constraint firstAttribute="centerX" secondItem="6G7-MO-4dZ" secondAttribute="centerX" id="0ov-9O-hLC"/>
+                <constraint firstItem="0V0-PS-IOt" firstAttribute="top" secondItem="RMS-1K-AQe" secondAttribute="top" constant="8" id="1ad-j4-XZo"/>
                 <constraint firstAttribute="centerY" secondItem="6G7-MO-4dZ" secondAttribute="centerY" id="6rw-Ku-57M"/>
                 <constraint firstItem="6G7-MO-4dZ" firstAttribute="leading" secondItem="RMS-1K-AQe" secondAttribute="leading" id="DxA-lb-0C9"/>
                 <constraint firstAttribute="centerY" secondItem="1jz-yV-PGL" secondAttribute="centerY" id="I4W-NR-bcl"/>
@@ -82,6 +94,7 @@
                 <constraint firstAttribute="trailing" secondItem="6G7-MO-4dZ" secondAttribute="trailing" id="ZmK-9r-fzz"/>
                 <constraint firstItem="MdS-IV-9nO" firstAttribute="leading" secondItem="RMS-1K-AQe" secondAttribute="leading" id="atp-2t-2iJ"/>
                 <constraint firstItem="1jz-yV-PGL" firstAttribute="leading" secondItem="RMS-1K-AQe" secondAttribute="leading" id="dQh-gT-2xQ"/>
+                <constraint firstItem="0V0-PS-IOt" firstAttribute="leading" secondItem="RMS-1K-AQe" secondAttribute="leading" constant="8" id="eAe-HJ-xTy"/>
                 <constraint firstAttribute="trailing" secondItem="1jz-yV-PGL" secondAttribute="trailing" id="gaa-jX-I3W"/>
                 <constraint firstItem="1jz-yV-PGL" firstAttribute="top" secondItem="MdS-IV-9nO" secondAttribute="bottom" id="nZ2-3U-8oJ"/>
                 <constraint firstItem="6G7-MO-4dZ" firstAttribute="top" secondItem="MdS-IV-9nO" secondAttribute="bottom" id="qk7-rS-2gi"/>

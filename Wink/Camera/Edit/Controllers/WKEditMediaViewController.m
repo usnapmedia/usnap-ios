@@ -22,23 +22,27 @@
 
 #import <Masonry.h>
 #import "SSOEditSideMenuView.h"
+#import "SSOLoginViewController.h"
+#import "SSSessionManager.h"
+#import "NSUserDefaults+USnap.h"
+#import "WKNavigationController.h"
 
-@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate>
+@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, SSOLoginRegisterDelegate>
 
-@property (nonatomic, strong) SSOMediaEditState* mediaEditState;
-@property (weak, nonatomic) IBOutlet UIImageView* watermarkImageView;
-@property (weak, nonatomic) IBOutlet UIButton* postButton;
-@property (weak, nonatomic) IBOutlet UIButton* backButton;
-@property (weak, nonatomic) IBOutlet SSOEditSideMenuView* sideMenuView;
+@property(nonatomic, strong) SSOMediaEditState *mediaEditState;
+@property(weak, nonatomic) IBOutlet UIImageView *watermarkImageView;
+@property(weak, nonatomic) IBOutlet UIButton *postButton;
+@property(weak, nonatomic) IBOutlet UIButton *backButton;
+@property(weak, nonatomic) IBOutlet SSOEditSideMenuView *sideMenuView;
 
-@property (nonatomic, strong) NSMutableArray* arrayImages;
+@property(nonatomic, strong) NSMutableArray *arrayImages;
 
-@property (nonatomic, strong, readwrite) ACEDrawingView* drawView;
-@property (strong, nonatomic, readwrite) BrightnessContrastSlidersContainerView* brightnessContrastContainerView;
-@property (strong, nonatomic, readwrite) SSOColorPickerContainerView* colorPickerContainerView;
+@property(nonatomic, strong, readwrite) ACEDrawingView *drawView;
+@property(strong, nonatomic, readwrite) BrightnessContrastSlidersContainerView *brightnessContrastContainerView;
+@property(strong, nonatomic, readwrite) SSOColorPickerContainerView *colorPickerContainerView;
 
 // Helper
-@property (strong, nonatomic, readwrite) SSOBrightnessContrastHelper* brightnessContrastHelper;
+@property(strong, nonatomic, readwrite) SSOBrightnessContrastHelper *brightnessContrastHelper;
 
 @end
 
@@ -46,16 +50,68 @@
 
 #pragma mark - View Lifecycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     self.mediaEditState = [SSOMediaEditStateNone new];
 
     //  UINavigationController *controller;
+    [self setUI];
 
     // Register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
+
+    //    self.sideMenuView.heightOfVC = self.view.frame.size.height - self.collectionView.frame.size.height;
+    //    self.sideMenuView.widthOfVC = self.view.frame.size.width;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    [self.sideMenuView setSizeOfView:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - self.collectionView.frame.size.height)];
+
+    // Reset the state to none
+    self.mediaEditState = [SSOMediaEditStateNone new];
+    [(SSOMediaEditStateNone *)self.mediaEditState resetButtonsState];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    // [self.sideMenuView addButtonsToView];
+
+    // Play the movie player
+    [self.moviePlayerView.player play];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+
+    // Stop the movie player
+    [self.moviePlayerView.player pause];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    // Remove the keyboard observer
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    // Remove the keyboard
+    [self.textView resignFirstResponder];
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    CGSize sizeMinusCollectionView = CGSizeMake(size.width, size.height - self.collectionView.frame.size.height);
+
+    [self.sideMenuView setSizeOfView:sizeMinusCollectionView];
+}
+
+- (void)setUI {
 
     // Setup the imageview
     if (self.image) {
@@ -89,26 +145,6 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"CustomCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"collectionCell"];
     self.collectionView.inputData = [self populateCellData].mutableCopy;
     [self.collectionView reloadData];
-
-    //    self.sideMenuView.heightOfVC = self.view.frame.size.height - self.collectionView.frame.size.height;
-    //    self.sideMenuView.widthOfVC = self.view.frame.size.width;
-}
-
-- (NSMutableArray*)arrayImages
-{
-
-    if (!_arrayImages) {
-        _arrayImages = [[NSMutableArray alloc] init];
-        _arrayImages = @[ [UIImage imageNamed:@"Alien"], [UIImage imageNamed:@"hankey"], [UIImage imageNamed:@"Unknown"], [UIImage imageNamed:@"Alien"], [UIImage imageNamed:@"hankey"], [UIImage imageNamed:@"Unknown"], [UIImage imageNamed:@"Alien"], [UIImage imageNamed:@"hankey"], [UIImage imageNamed:@"Unknown"] ].mutableCopy;
-    }
-
-    return _arrayImages;
-}
-
-- (BOOL)shouldAutorotate
-{
-
-    return NO;
 }
 
 /**
@@ -118,15 +154,14 @@
  *
  *  @return Returns an array of arrays with sections containing elements
  */
-- (NSArray*)populateCellData
-{
+- (NSArray *)populateCellData {
 
-    NSMutableArray* cellDataArray = [NSMutableArray new];
+    NSMutableArray *cellDataArray = [NSMutableArray new];
 
-    SSCellViewSection* section = [[SSCellViewSection alloc] init];
+    SSCellViewSection *section = [[SSCellViewSection alloc] init];
 
-    for (UIImage* image in self.arrayImages) {
-        SSCellViewItem* newElement;
+    for (UIImage *image in self.arrayImages) {
+        SSCellViewItem *newElement;
 
         newElement = [SSCellViewItem new];
         newElement.cellReusableIdentifier = @"collectionCell";
@@ -139,56 +174,34 @@
     return cellDataArray;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+/**
+ *  Just an array of images for the collectionView
+ *
+ *  @return an array
+ */
+- (NSMutableArray *)arrayImages {
 
-    [self.sideMenuView setSizeOfView:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - self.collectionView.frame.size.height)];
+    if (!_arrayImages) {
+        _arrayImages = [[NSMutableArray alloc] init];
+        _arrayImages = @[
+            [UIImage imageNamed:@"Alien"],
+            [UIImage imageNamed:@"hankey"],
+            [UIImage imageNamed:@"Unknown"],
+            [UIImage imageNamed:@"Alien"],
+            [UIImage imageNamed:@"hankey"],
+            [UIImage imageNamed:@"Unknown"],
+            [UIImage imageNamed:@"Alien"],
+            [UIImage imageNamed:@"hankey"],
+            [UIImage imageNamed:@"Unknown"]
+        ].mutableCopy;
+    }
 
-    // Reset the state to none
-    self.mediaEditState = [SSOMediaEditStateNone new];
-    [(SSOMediaEditStateNone*)self.mediaEditState resetButtonsState];
+    return _arrayImages;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+- (BOOL)shouldAutorotate {
 
-    // [self.sideMenuView addButtonsToView];
-
-    // Play the movie player
-    [self.moviePlayerView.player play];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-
-    // Stop the movie player
-    [self.moviePlayerView.player pause];
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    // Remove the keyboard observer
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    // Remove the keyboard
-    [self.textView resignFirstResponder];
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    CGSize sizeMinusCollectionView = CGSizeMake(size.width, size.height - self.collectionView.frame.size.height);
-
-    [self.sideMenuView setSizeOfView:sizeMinusCollectionView];
+    return NO;
 }
 
 #pragma mark - Getter
@@ -198,8 +211,7 @@
  *
  *  @return the helper
  */
-- (SSOBrightnessContrastHelper*)brightnessContrastHelper
-{
+- (SSOBrightnessContrastHelper *)brightnessContrastHelper {
     if (!_brightnessContrastHelper) {
         _brightnessContrastHelper = [[SSOBrightnessContrastHelper alloc] init];
         self.brightnessContrastHelper.imageViewToEdit = self.imageView;
@@ -213,8 +225,7 @@
  *
  *  @return the view
  */
-- (ACEDrawingView*)drawView
-{
+- (ACEDrawingView *)drawView {
     if (!_drawView) {
         // Setup view
         _drawView = [[ACEDrawingView alloc] initWithFrame:self.view.frame];
@@ -225,7 +236,7 @@
         [self.overlayView insertSubview:_drawView belowSubview:self.textView];
 
         // Set constraints
-        [_drawView mas_makeConstraints:^(MASConstraintMaker* make) {
+        [_drawView mas_makeConstraints:^(MASConstraintMaker *make) {
           make.edges.equalTo(self.view);
         }];
     }
@@ -237,8 +248,7 @@
  *
  *  @return the view
  */
-- (BrightnessContrastSlidersContainerView*)brightnessContrastContainerView
-{
+- (BrightnessContrastSlidersContainerView *)brightnessContrastContainerView {
     if (!_brightnessContrastContainerView) {
         _brightnessContrastContainerView = [NSBundle loadBrightnessContrastContainerView];
         // Set the view for the helper
@@ -247,21 +257,20 @@
         // Insert view
         [self.editAccessoriesContainerView addSubview:_brightnessContrastContainerView];
         // Set the container inside the view to have constraints on the edges
-        [_brightnessContrastContainerView mas_makeConstraints:^(MASConstraintMaker* make) {
+        [_brightnessContrastContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
           make.edges.equalTo(self.editAccessoriesContainerView);
         }];
     }
     return _brightnessContrastContainerView;
 }
 
-- (SSOColorPickerContainerView*)colorPickerContainerView
-{
+- (SSOColorPickerContainerView *)colorPickerContainerView {
     if (!_colorPickerContainerView) {
         _colorPickerContainerView = [NSBundle loadColorPickerContainerView];
         // Insert view
         [self.editAccessoriesContainerView addSubview:_colorPickerContainerView];
         // Set the container inside the view to have constraints on the edges
-        [_colorPickerContainerView mas_makeConstraints:^(MASConstraintMaker* make) {
+        [_colorPickerContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
           make.edges.equalTo(self.editAccessoriesContainerView);
         }];
     }
@@ -270,8 +279,7 @@
 
 #pragma mark - Setter
 
-- (void)setMediaEditState:(SSOMediaEditState*)mediaEditState
-{
+- (void)setMediaEditState:(SSOMediaEditState *)mediaEditState {
     _mediaEditState = mediaEditState;
     // Set the VC for the state object
     [_mediaEditState setEditMediaVC:self];
@@ -279,18 +287,16 @@
 
 #pragma mark - Keyboard Methods
 
-- (void)keyboardWillHide
-{
+- (void)keyboardWillHide {
     // Set the type to none and reset the button
     self.mediaEditState = [SSOMediaEditStateNone new];
-    [(SSOMediaEditStateNone*)self.mediaEditState resetButtonsState];
+    [(SSOMediaEditStateNone *)self.mediaEditState resetButtonsState];
 }
 
 #pragma mark - Touch Methods
 
 //@FIXME
-- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event
-{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     // We have to check since the method is optional
     if ([self.mediaEditState respondsToSelector:@selector(touchesBegan:withEvent:)]) {
@@ -298,8 +304,7 @@
     }
 }
 
-- (void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event
-{
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
     // We have to check since the method is optional
     if ([self.mediaEditState respondsToSelector:@selector(touchesMoved:withEvent:)]) {
@@ -307,8 +312,7 @@
     }
 }
 
-- (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event
-{
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
     // We have to check since the method is optional
     if ([self.mediaEditState respondsToSelector:@selector(touchesEnded:withEvent:)]) {
@@ -316,8 +320,7 @@
     }
 }
 
-- (void)touchesCancelled:(NSSet*)touches withEvent:(UIEvent*)event
-{
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesCancelled:touches withEvent:event];
     // We have to check since the method is optional
     if ([self.mediaEditState respondsToSelector:@selector(touchesCancelled:withEvent:)]) {
@@ -327,68 +330,68 @@
 
 #pragma mark - Movie View Methods
 
-- (void)moviePlayerViewDidFinishPlayingToEndTime:(WKMoviePlayerView*)moviePlayer
-{
+- (void)moviePlayerViewDidFinishPlayingToEndTime:(WKMoviePlayerView *)moviePlayer {
     [self.moviePlayerView.player play];
 }
 
 #pragma mark - Button Actions
 
-- (IBAction)drawButtonTouched:(id)sender
-{
+- (IBAction)drawButtonTouched:(id)sender {
     // Set the next state for the media edit
     if ([self.mediaEditState state] == SSOMediaEditStateEnumDrawGray) {
         self.mediaEditState = [SSOMediaEditStateNone new];
-    }
-    else if ([self.mediaEditState state] == SSOMediaEditStateEnumDrawColor) {
+    } else if ([self.mediaEditState state] == SSOMediaEditStateEnumDrawColor) {
         self.mediaEditState = [SSOMediaEditStateDrawGray new];
-    }
-    else {
+    } else {
         self.mediaEditState = [SSOMediaEditStateDrawColor new];
     }
 
     [self.mediaEditState drawButtonTouched];
 }
 
-- (IBAction)textButtonTouched:(id)sender
-{
+- (IBAction)textButtonTouched:(id)sender {
     // Set the next state for the media edit
     if ([self.mediaEditState state] == SSOMediaEditStateEnumText) {
         self.mediaEditState = [SSOMediaEditStateNone new];
-    }
-    else {
+    } else {
         self.mediaEditState = [SSOMediaEditStateText new];
     }
     [self.mediaEditState textButtonTouched];
 }
 
-- (IBAction)brightnessButtonTouched:(id)sender
-{
+- (IBAction)brightnessButtonTouched:(id)sender {
     // Set the next state for the media edit
     if ([self.mediaEditState state] == SSOMediaEditStateEnumBrightness) {
         self.mediaEditState = [SSOMediaEditStateNone new];
-    }
-    else {
+    } else {
         self.mediaEditState = [SSOMediaEditStateBrightness new];
     }
     [self.mediaEditState brightnessButtonTouched];
 }
 
-- (IBAction)cropButtonTouched:(id)sender
-{
+- (IBAction)cropButtonTouched:(id)sender {
     // Set the next state for the media edit
     if ([self.mediaEditState state] == SSOMediaEditStateEnumCrop) {
         self.mediaEditState = [SSOMediaEditStateNone new];
-    }
-    else {
+    } else {
         self.mediaEditState = [SSOMediaEditStateCrop new];
     }
     [self.mediaEditState cropButtonTouched];
 }
 
-- (IBAction)postButtonTouched:(id)sender
-{
-    WKShareViewController* controller = [[WKShareViewController alloc] initWithNibName:@"WKShareViewController" bundle:nil];
+- (IBAction)postButtonTouched:(id)sender {
+
+    if (![NSUserDefaults isUserLoggedIn]) {
+        SSOLoginViewController *loginVC = [NSBundle loadLoginViewController];
+        loginVC.delegate = self;
+        
+        //   UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginController];
+
+        [self presentViewController:loginVC animated:YES completion:nil];
+        return;
+    }
+
+    WKShareViewController *controller = [[WKShareViewController alloc] initWithNibName:@"WKShareViewController" bundle:nil];
     controller.image = [self.imageView snapshotImage];
     controller.mediaURL = self.mediaURL;
     if (self.modifiedImageView.image) {
@@ -396,11 +399,10 @@
     }
     if (self.image) {
         controller.overlayImage = [self.overlayView snapshotImage];
-    }
-    else {
+    } else {
 
         // Scale the overlay image to the same size as the video while keeping the aspect ratio
-        UIImage* overlayImage = [self.overlayView snapshotImage];
+        UIImage *overlayImage = [self.overlayView snapshotImage];
         CGSize videoSize = self.moviePlayerView.videoSize;
 
         // Get appropriate scale factor
@@ -429,9 +431,22 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (IBAction)backButtonTouched:(id)sender
-{
+- (IBAction)backButtonTouched:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)didFinishAuthProcess {
+    WKShareViewController *controller = [[WKShareViewController alloc] initWithNibName:@"WKShareViewController" bundle:nil];
+    controller.image = [self.imageView snapshotImage];
+    controller.mediaURL = self.mediaURL;
+    if (self.modifiedImageView.image) {
+        controller.modifiedImage = [self.modifiedImageView snapshotImage];
+    }
+    if (self.image) {
+        controller.overlayImage = [self.overlayView snapshotImage];
+    }
+
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKEditMediaViewController">
@@ -19,14 +19,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDS-Th-jEq" userLabel="overlay view">
-                    <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wink_watermark" translatesAutoresizingMaskIntoConstraints="NO" id="6nm-lF-IF7">
-                            <rect key="frame" x="607" y="324" width="40" height="31"/>
+                            <rect key="frame" x="315" y="616" width="40" height="31"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="31" id="e0j-GQ-xwl"/>
                                 <constraint firstAttribute="width" constant="40" id="fVx-rj-IvK"/>
@@ -75,10 +75,10 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWV-R5-qgn" userLabel="topView">
-                    <rect key="frame" x="0.0" y="60" width="667" height="60"/>
+                    <rect key="frame" x="0.0" y="60" width="375" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATe-3P-Slw" userLabel="postButton">
-                            <rect key="frame" x="605" y="7" width="47" height="47"/>
+                            <rect key="frame" x="313" y="7" width="47" height="47"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="47" id="gfM-fT-SYI"/>
                                 <constraint firstAttribute="height" constant="47" id="pWz-tS-tbA"/>
@@ -170,7 +170,7 @@
                     </variation>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="rqF-N2-Y3I" customClass="SSBaseCollectionView">
-                    <rect key="frame" x="0.0" y="0.0" width="667" height="60"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="kDR-c0-nt5"/>
                     </constraints>

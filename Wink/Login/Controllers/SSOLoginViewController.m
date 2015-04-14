@@ -14,6 +14,8 @@
 #import <Masonry.h>
 #import "SSOCustomSignInButton.h"
 #import "WKWinkConnect.h"
+#import "SSSessionManager.h"
+#import "UINavigationController+SSOLockedNavigationController.h"
 
 @interface SSOLoginViewController ()
 @property(weak, nonatomic) IBOutlet UIView *loginContainerView;
@@ -22,6 +24,7 @@
 @property(strong, nonatomic) SSORegisterContainerView *registerView;
 @property(weak, nonatomic) IBOutlet SSOCustomSignInButton *loginButton;
 @property(weak, nonatomic) IBOutlet SSOCustomSignInButton *signUpButton;
+@property(weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @end
 
@@ -49,6 +52,16 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (BOOL)shouldAutorotate {
+
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+
+    return UIDeviceOrientationPortrait;
 }
 
 #pragma mark - Utilities
@@ -196,6 +209,10 @@
     [self switchSelectedButtons];
     [self switchHiddenContainers];
 }
+- (IBAction)cancelButtonTouched:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    //  [self popViewControllerAnimated:YES];
+}
 
 #pragma mark - SSOLoginRegisterDelegate
 
@@ -205,11 +222,23 @@
         password:[info valueForKey:@"password"]
         meta:nil
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+          // Save the username and password in the keychain
+          [SSSessionManager saveSecuredPassword:[info valueForKey:@"password"] withAccount:[info valueForKey:@"email"]];
+
+          [self dismissViewControllerAnimated:YES
+                                   completion:^{
+                                     // Call the delegate
+                                     [self.delegate didFinishAuthProcess];
+
+                                   }];
+
           NSLog(@"Login success");
 
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           NSLog(@"Login failed");
+          [UIAlertView showWithTitle:@"Wrong login informations" message:@"Check your credentials" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
 
         }];
 }
@@ -220,6 +249,15 @@
         password:[info valueForKey:@"password"]
         meta:meta
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          // Save the username and password in the keychain
+          [SSSessionManager saveSecuredPassword:[info valueForKey:@"password"] withAccount:[info valueForKey:@"email"]];
+
+          [self dismissViewControllerAnimated:YES
+                                   completion:^{
+                                     [self.delegate didFinishAuthProcess];
+
+                                   }];
+
           NSLog(@"Register success");
 
         }

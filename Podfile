@@ -19,6 +19,7 @@ pod 'googleplus-ios-sdk'
 pod 'Masonry'
 pod 'RSKImageCropper'
 pod 'SVProgressHUD'
+pod 'SSKeychain'
 
 pod 'IQKeyboardManager'
 

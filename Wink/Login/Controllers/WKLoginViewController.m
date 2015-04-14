@@ -16,6 +16,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "SSOGooglePlusHelper.h"
 #import "SSOSocialNetworkAPI.h"
+#import "SSSessionManager.h"
 
 @interface WKLoginViewController ()
 
@@ -310,6 +311,9 @@
               [alert dismissWithClickedButtonIndex:0 animated:YES];
               NSLog(@"JSON: %@", responseObject);
 
+              // Save the username and password in the keychain
+              [SSSessionManager saveSecuredPassword:self.passwordTextfield.text withAccount:self.usernameTextfield.text];
+
               // Save the account value
               [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kEmailLoggedValue];
               [[NSUserDefaults standardUserDefaults] synchronize];
@@ -353,6 +357,9 @@
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
           [alert dismissWithClickedButtonIndex:0 animated:YES];
+
+          // Save the username and password in the keychain
+          [SSSessionManager saveSecuredPassword:self.passwordTextfield.text withAccount:self.usernameTextfield.text];
 
           // Save the account value
           [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kEmailLoggedValue];

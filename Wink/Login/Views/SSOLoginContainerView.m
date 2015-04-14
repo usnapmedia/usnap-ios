@@ -8,7 +8,7 @@
 
 #import "SSOLoginContainerView.h"
 
-@interface SSOLoginContainerView ()
+@interface SSOLoginContainerView () <UITextFieldDelegate>
 
 @property(strong, nonatomic) NSDictionary *infoDic;
 
@@ -87,9 +87,8 @@
 
     if (!_infoDic) {
         _infoDic = [[NSDictionary alloc] init];
-
-        _infoDic = @{ @"email" : self.textFieldEmail.text, @"password" : self.textFieldPassword.text };
     }
+    _infoDic = @{ @"email" : _textFieldEmail.text, @"password" : _textFieldPassword.text };
 
     return _infoDic;
 }

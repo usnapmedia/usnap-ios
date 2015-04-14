@@ -45,6 +45,13 @@ NSString *const kIsCameraRearFacing = @"kIsCameraRearFacing";
 NSString *const kIsFlashOn = @"kIsFlashOn";
 NSString *const kIsVideoOn = @"kIsVideoOn";
 
+NSString *const kIsFirstLogin = @"kIsFirstLogin";
+NSString *const kIsFirstLoginDate = @"kIsFirstLoginDate";
+NSString *const kUSnapKeychainServiceKey = @"kUSnapKeychainServiceKey";
+
+NSString *const kIsUserLoggedIn = @"kIsUserLoggedIn";
+NSString *const kEmailLoggedString = @"kEmailLoggedString";
+
 #pragma mark - Storyboard
 
 NSString *const kCameraStoryboard = @"Camera";

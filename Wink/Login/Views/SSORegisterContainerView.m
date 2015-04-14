@@ -85,9 +85,8 @@
 
     if (!_infoDic) {
         _infoDic = [[NSDictionary alloc] init];
-
-        _infoDic = @{ @"email" : self.textFieldEmail.text, @"password" : self.textFieldPassword.text };
     }
+    _infoDic = @{ @"email" : self.textFieldEmail.text, @"password" : self.textFieldPassword.text };
 
     return _infoDic;
 }
@@ -95,14 +94,14 @@
 
     if (!_metaDic) {
         _metaDic = [[NSDictionary alloc] init];
-
-        _metaDic = @{
-            @"birthday" : self.textFieldBirthday.text,
-            @"lastName" : self.textFieldLastName.text,
-            @"firstName" : self.textFieldFirstName.text,
-            @"username" : self.textFieldUsername.text
-        };
     }
+
+    _metaDic = @{
+        @"birthday" : self.textFieldBirthday.text,
+        @"lastName" : self.textFieldLastName.text,
+        @"firstName" : self.textFieldFirstName.text,
+        @"username" : self.textFieldUsername.text
+    };
 
     return _metaDic;
 }

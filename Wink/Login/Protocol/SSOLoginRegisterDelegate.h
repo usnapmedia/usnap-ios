@@ -17,4 +17,6 @@
 - (void)didLoginWithInfo:(NSDictionary *)info;
 
 - (void)didRegisterWithInfo:(NSDictionary *)info andMeta:(NSDictionary *)meta;
+
+- (void)didFinishAuthProcess;
 @end
