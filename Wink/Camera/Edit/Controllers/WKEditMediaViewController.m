@@ -179,37 +179,10 @@
 
 #pragma mark - Touch Methods
 
-//@FIXME
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    // We have to check since the method is optional
-    //    if ([self.mediaEditState respondsToSelector:@selector(touchesBegan:withEvent:)]) {
-    //        [self.mediaEditState touchesBegan:touches withEvent:event];
-    //    }
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesMoved:touches withEvent:event];
-    // We have to check since the method is optional
-    //    if ([self.mediaEditState respondsToSelector:@selector(touchesMoved:withEvent:)]) {
-    //        [self.mediaEditState touchesMoved:touches withEvent:event];
-    //    }
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesEnded:touches withEvent:event];
-    // We have to check since the method is optional
-    //    if ([self.mediaEditState respondsToSelector:@selector(touchesEnded:withEvent:)]) {
-    //        [self.mediaEditState touchesEnded:touches withEvent:event];
-    //    }
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesCancelled:touches withEvent:event];
-    // We have to check since the method is optional
-    //    if ([self.mediaEditState respondsToSelector:@selector(touchesCancelled:withEvent:)]) {
-    //        [self.mediaEditState touchesCancelled:touches withEvent:event];
-    //    }
+    // Send touch to the child VC
+    [self.childViewController touchesBegan:touches withEvent:event];
 }
 
 #pragma mark - Child View Controller
@@ -221,8 +194,8 @@
     [self addChildViewController:newVC];
     // Set the frame
     newVC.view.frame = self.view.frame;
-//    // Add subview
-//    [self.view addSubview:newVC.view];
+    //    // Add subview
+    //    [self.view addSubview:newVC.view];
     // Call delegate
     [newVC didMoveToParentViewController:self];
 }
@@ -414,10 +387,20 @@
     return _buttonsContainerView;
 }
 
+/**
+ *  Get the bottom container view
+ *
+ *  @return the view
+ */
 - (UIView<SSOAnimatableView> *)bottomView {
     return _bottomView;
 }
 
+/**
+ *  Get the top container view
+ *
+ *  @return the view
+ */
 - (UIView<SSOAnimatableView> *)topView {
     return _topView;
 }

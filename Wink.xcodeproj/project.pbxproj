@@ -106,6 +106,10 @@
 		D8349A331ADC805800F38DE7 /* SSOColorPickerContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8349A321ADC805800F38DE7 /* SSOColorPickerContainerView.m */; };
 		D8349A361ADC813E00F38DE7 /* SSOTextAccessoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8349A351ADC813E00F38DE7 /* SSOTextAccessoryContainerView.m */; };
 		D8349A391ADC83EF00F38DE7 /* SSOTextToolController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8349A381ADC83EF00F38DE7 /* SSOTextToolController.m */; };
+		D85D6E621ADCD83900CDAB4B /* SSOBaseProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D85D6E611ADCD83900CDAB4B /* SSOBaseProvider.m */; };
+		D85D6E651ADCDD7F00CDAB4B /* SSOTextFontCollectionViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D85D6E641ADCDD7F00CDAB4B /* SSOTextFontCollectionViewProvider.m */; };
+		D85D6E671ADCE11E00CDAB4B /* SSOFontCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D85D6E661ADCE11E00CDAB4B /* SSOFontCollectionViewCell.xib */; };
+		D85D6E6B1ADCE3B100CDAB4B /* SSOFontCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D85D6E6A1ADCE3B100CDAB4B /* SSOFontCollectionViewCell.m */; };
 		D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */; };
 		D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m */; };
 		D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */; };
@@ -115,6 +119,8 @@
 		D86E94CA1ACF4A1400CFF801 /* imageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C21ACF4A1400CFF801 /* imageCollectionViewCell.m */; };
 		D86E94CB1ACF4A1400CFF801 /* SSCellViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C61ACF4A1400CFF801 /* SSCellViewItem.m */; };
 		D86E94CC1ACF4A1400CFF801 /* SSCellViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C81ACF4A1400CFF801 /* SSCellViewSection.m */; };
+		D89E71671ADCC2AC00D348FE /* SSOBaseTableViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D89E71661ADCC2AC00D348FE /* SSOBaseTableViewProvider.m */; };
+		D89E716A1ADCC33100D348FE /* SSOBaseCollectionViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D89E71691ADCC33100D348FE /* SSOBaseCollectionViewProvider.m */; };
 		D8EA5C7C1AD4281B008D2A37 /* SSOSocialNetworkAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C7B1AD4281B008D2A37 /* SSOSocialNetworkAPI.m */; };
 		D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C801AD4287C008D2A37 /* WKWinkConnect.m */; };
 		D8EA5C8A1AD4287C008D2A37 /* WKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */; };
@@ -299,6 +305,13 @@
 		D8349A351ADC813E00F38DE7 /* SSOTextAccessoryContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTextAccessoryContainerView.m; sourceTree = "<group>"; };
 		D8349A371ADC83EF00F38DE7 /* SSOTextToolController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTextToolController.h; sourceTree = "<group>"; };
 		D8349A381ADC83EF00F38DE7 /* SSOTextToolController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTextToolController.m; sourceTree = "<group>"; };
+		D85D6E601ADCD83900CDAB4B /* SSOBaseProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseProvider.h; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
+		D85D6E611ADCD83900CDAB4B /* SSOBaseProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseProvider.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
+		D85D6E631ADCDD7F00CDAB4B /* SSOTextFontCollectionViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTextFontCollectionViewProvider.h; sourceTree = "<group>"; };
+		D85D6E641ADCDD7F00CDAB4B /* SSOTextFontCollectionViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTextFontCollectionViewProvider.m; sourceTree = "<group>"; };
+		D85D6E661ADCE11E00CDAB4B /* SSOFontCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOFontCollectionViewCell.xib; sourceTree = "<group>"; };
+		D85D6E691ADCE3B100CDAB4B /* SSOFontCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFontCollectionViewCell.h; sourceTree = "<group>"; };
+		D85D6E6A1ADCE3B100CDAB4B /* SSOFontCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFontCollectionViewCell.m; sourceTree = "<group>"; };
 		D86E94A11ACF492000CFF801 /* SSOFacebookLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFacebookLoginButton.h; sourceTree = "<group>"; };
 		D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFacebookLoginButton.m; sourceTree = "<group>"; };
 		D86E94A41ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSettingsSocialFakeTableViewCell.h; sourceTree = "<group>"; };
@@ -317,6 +330,10 @@
 		D86E94C61ACF4A1400CFF801 /* SSCellViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewItem.m; sourceTree = "<group>"; };
 		D86E94C71ACF4A1400CFF801 /* SSCellViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewSection.h; sourceTree = "<group>"; };
 		D86E94C81ACF4A1400CFF801 /* SSCellViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewSection.m; sourceTree = "<group>"; };
+		D89E71651ADCC2AC00D348FE /* SSOBaseTableViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseTableViewProvider.h; sourceTree = "<group>"; };
+		D89E71661ADCC2AC00D348FE /* SSOBaseTableViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseTableViewProvider.m; sourceTree = "<group>"; };
+		D89E71681ADCC33100D348FE /* SSOBaseCollectionViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseCollectionViewProvider.h; sourceTree = "<group>"; };
+		D89E71691ADCC33100D348FE /* SSOBaseCollectionViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseCollectionViewProvider.m; sourceTree = "<group>"; };
 		D8C9B6621AD4D37600AAC8FB /* SSOAnimatableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSOAnimatableView.h; sourceTree = "<group>"; };
 		D8EA5C7A1AD4281B008D2A37 /* SSOSocialNetworkAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSocialNetworkAPI.h; sourceTree = "<group>"; };
 		D8EA5C7B1AD4281B008D2A37 /* SSOSocialNetworkAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSocialNetworkAPI.m; sourceTree = "<group>"; };
@@ -435,6 +452,7 @@
 				D8EA5C7D1AD4287C008D2A37 /* Login */,
 				D86E94C31ACF4A1400CFF801 /* Model */,
 				335723751ACB097C000CC846 /* Old:To Check */,
+				D89E71641ADCC2AC00D348FE /* Providers */,
 				3357238E1ACB097C000CC846 /* Settings */,
 				335723971ACB097C000CC846 /* Sharing */,
 				D8EA5C791AD4281B008D2A37 /* Social Network */,
@@ -524,6 +542,7 @@
 				3357234F1ACB097C000CC846 /* Controllers */,
 				D830F3FC1ACDDBD9002A503D /* Helpers */,
 				D80ED2191AD4A2DC00B4FAD1 /* Protocols */,
+				D89E71631ADCC1D200D348FE /* Providers */,
 				D830F3C81ACDDA15002A503D /* State */,
 				D8EA5C911AD437A1008D2A37 /* Tool */,
 				D830F3E51ACDDAE7002A503D /* Views */,
@@ -708,6 +727,7 @@
 		D830F3E51ACDDAE7002A503D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D85D6E681ADCE39A00CDAB4B /* Cells */,
 				D8C9B6631AD4D40E00AAC8FB /* Container */,
 				D830F3EB1ACDDAE7002A503D /* SSOEditMediaMovableTextView.h */,
 				D830F3EC1ACDDAE7002A503D /* SSOEditMediaMovableTextView.m */,
@@ -728,6 +748,7 @@
 				D830F3F21ACDDAE7002A503D /* WKEditMediaViewController.xib */,
 				D830F3F31ACDDAE7002A503D /* WKEditMediaViewController_iPad.xib */,
 				D8191AF91ADB061500810DAB /* SSODrawAccessoryContainerView.xib */,
+				D85D6E661ADCE11E00CDAB4B /* SSOFontCollectionViewCell.xib */,
 			);
 			path = XIB;
 			sourceTree = "<group>";
@@ -826,6 +847,15 @@
 			path = Draw;
 			sourceTree = "<group>";
 		};
+		D85D6E681ADCE39A00CDAB4B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D85D6E691ADCE3B100CDAB4B /* SSOFontCollectionViewCell.h */,
+				D85D6E6A1ADCE3B100CDAB4B /* SSOFontCollectionViewCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		D86E949F1ACF492000CFF801 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -903,6 +933,28 @@
 				D86E94C81ACF4A1400CFF801 /* SSCellViewSection.m */,
 			);
 			path = "Collection view";
+			sourceTree = "<group>";
+		};
+		D89E71631ADCC1D200D348FE /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				D85D6E631ADCDD7F00CDAB4B /* SSOTextFontCollectionViewProvider.h */,
+				D85D6E641ADCDD7F00CDAB4B /* SSOTextFontCollectionViewProvider.m */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		D89E71641ADCC2AC00D348FE /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				D85D6E601ADCD83900CDAB4B /* SSOBaseProvider.h */,
+				D85D6E611ADCD83900CDAB4B /* SSOBaseProvider.m */,
+				D89E71651ADCC2AC00D348FE /* SSOBaseTableViewProvider.h */,
+				D89E71661ADCC2AC00D348FE /* SSOBaseTableViewProvider.m */,
+				D89E71681ADCC33100D348FE /* SSOBaseCollectionViewProvider.h */,
+				D89E71691ADCC33100D348FE /* SSOBaseCollectionViewProvider.m */,
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 		D8C9B6631AD4D40E00AAC8FB /* Container */ = {
@@ -1075,6 +1127,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D86E94C91ACF4A1400CFF801 /* CustomCollectionViewCell.xib in Resources */,
+				D85D6E671ADCE11E00CDAB4B /* SSOFontCollectionViewCell.xib in Resources */,
 				D830F3F81ACDDAE7002A503D /* SSOBrightnessContrastContainerView.xib in Resources */,
 				335723CD1ACB097C000CC846 /* WKCameraOverlayViewController_iPad.xib in Resources */,
 				7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */,
@@ -1215,15 +1268,20 @@
 				D830F4221ACDDBF1002A503D /* UIImage+Tools.m in Sources */,
 				335723E01ACB097C000CC846 /* Constants.m in Sources */,
 				335723D61ACB097C000CC846 /* WKVideoEditor.m in Sources */,
+				D85D6E621ADCD83900CDAB4B /* SSOBaseProvider.m in Sources */,
+				D89E716A1ADCC33100D348FE /* SSOBaseCollectionViewProvider.m in Sources */,
 				D830F41D1ACDDBF1002A503D /* NSDictionary+WKAdditions.m in Sources */,
 				D8349A291ADC78F100F38DE7 /* SSODrawAccessoryContainerView.m in Sources */,
 				335723D41ACB097C000CC846 /* WKSocialNetworkHelper.m in Sources */,
+				D85D6E651ADCDD7F00CDAB4B /* SSOTextFontCollectionViewProvider.m in Sources */,
 				D830F3F61ACDDAE7002A503D /* SSOEditMediaMovableTextView.m in Sources */,
 				D8EA5C8B1AD4287C008D2A37 /* WKUser.m in Sources */,
 				D830F41F1ACDDBF1002A503D /* UIColor+WKAdditions.m in Sources */,
+				D89E71671ADCC2AC00D348FE /* SSOBaseTableViewProvider.m in Sources */,
 				335723B61ACB097C000CC846 /* SSOContainerViewController.m in Sources */,
 				D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */,
 				335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */,
+				D85D6E6B1ADCE3B100CDAB4B /* SSOFontCollectionViewCell.m in Sources */,
 				D830F3F71ACDDAE7002A503D /* WKColorPickerView.m in Sources */,
 				D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */,
 				336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */,

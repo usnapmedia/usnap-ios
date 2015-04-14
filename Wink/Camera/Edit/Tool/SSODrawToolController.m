@@ -33,6 +33,14 @@
     [self initializeContainerViewToParentVC];
 }
 
+-(void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
+    if (!parent) {
+        // Remove the interaction on the draw view
+        [self.drawView setUserInteractionEnabled:NO];
+    }
+}
+
 #pragma mark - Initialization
 
 - (void)initializeContainerViewToParentVC {
@@ -87,8 +95,6 @@
     [self.subtoolView hideView:animated];
     [self.accessoryView hideView:animated];
     [self.bottomView displayView:animated];
-    // Remove the interaction on the draw view
-    [self.drawView setUserInteractionEnabled:NO];
 }
 
 #pragma mark - SSOColorPickerContainerViewDelegate

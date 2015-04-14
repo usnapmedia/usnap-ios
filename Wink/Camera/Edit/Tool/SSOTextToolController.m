@@ -9,16 +9,18 @@
 #import "SSOTextToolController.h"
 #import "SSOTextAccessoryContainerView.h"
 #import "SSOEditViewControllerProtocol.h"
+#import "SSOTextFontCollectionViewProvider.h"
 #import "UIColor+PickerColors.h"
 #import <Masonry.h>
 
 #define kPaddingKeyboardAndTextView 20
-#define kKeyboardHeight [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height
+#define kTextViewFontSize 40.0f
 
-@interface SSOTextToolController () <SSOColorPickerContainerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, SSOContainerViewDelegate,
-                                     UITextViewDelegate>
+@interface SSOTextToolController () <SSOColorPickerContainerViewDelegate, SSOBaseProviderDelegate, SSOContainerViewDelegate, UITextViewDelegate>
+
 @property(strong, nonatomic) SSOTextAccessoryContainerView *accessoryContainerView;
 @property(strong, nonatomic) SSOColorPickerContainerView *colorPickerContainerView;
+@property(strong, nonatomic) SSOTextFontCollectionViewProvider *provider;
 @property(weak, nonatomic) UITextView *textView;
 
 @property(nonatomic) float keyBoardHeight;
@@ -29,13 +31,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)willMoveToParentViewController:(UIViewController<SSOEditViewControllerProtocol> *)parent {
-    [super willMoveToParentViewController:parent];
-    if (parent) {
-        NSAssert([parent respondsToSelector:@selector(textView)], @"Parent view controller should have a text view to edit");
-    }
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Initialize the VC to the parent VC
@@ -44,11 +39,14 @@
     [self initializeTextView];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-
-    // Remove the observer
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+- (void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
+    if (!parent) {
+        // Remove the interaction on the text view
+        [self.textView setUserInteractionEnabled:NO];
+        // Remove oberservers
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
 }
 
 #pragma mark - Initialization
@@ -83,8 +81,23 @@
     self.accessoryContainerView.delegate = self;
 
     // Set the text view
-    NSAssert([parent respondsToSelector:@selector(textView)], @"Parent view controller should have a draw view to draw on");
+    NSAssert([parent respondsToSelector:@selector(textView)], @"Parent view controller should have a text view to write");
     self.textView = parent.textView;
+
+    // Set the provider for the font collection view
+    self.provider = [[SSOTextFontCollectionViewProvider alloc] initWithDefaultData];
+    // Set the delegate
+    self.accessoryContainerView.fontCollectionView.delegate = self.provider;
+    self.accessoryContainerView.fontCollectionView.dataSource = self.provider;
+    self.provider.delegate = self;
+    // Register the XIB
+    [self.accessoryContainerView.fontCollectionView registerNib:[UINib nibWithNibName:@"SSOFontCollectionViewCell" bundle:nil]
+                                     forCellWithReuseIdentifier:@"fontCollectionViewCellIdentifier"];
+
+    // Set the background to clear
+    [self.accessoryContainerView.fontCollectionView setBackgroundColor:[UIColor clearColor]];
+    // Reload the data
+    [self.accessoryContainerView.fontCollectionView reloadData];
 }
 
 /**
@@ -155,6 +168,7 @@
 - (void)moveTextViewAboveKeyboard {
     CGRect rectTextView = self.textView.frame;
 
+    // If textview is to be under the keyboard, slide it up
     if (CGRectGetMaxY(rectTextView) >= self.keyBoardHeight) {
         [UIView animateWithDuration:0.3
                          animations:^{
@@ -210,6 +224,15 @@
         }
     }
     return YES;
+}
+
+#pragma mark - SSOBaseProviderDelegate
+
+- (void)provider:(SSOBaseProvider *)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSAssert([[self.provider objectDataAtIndexPath:indexPath] isKindOfClass:[NSDictionary class]], @"Object data has to be of NSDictionary clasS");
+    NSDictionary *objectData = (NSDictionary *)[self.provider objectDataAtIndexPath:indexPath];
+    NSAssert([objectData objectForKey:@"font_name"], @"Object data must have the font name at the key font_name");
+    [self.textView setFont:[UIFont fontWithName:[objectData objectForKey:@"font_name"] size:kTextViewFontSize]];
 }
 
 @end
