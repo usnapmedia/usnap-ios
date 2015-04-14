@@ -35,6 +35,10 @@ NSString *const kIsFacebookLoggedIn = @"kIsFacebookLoggedIn";
 NSString *const kTwitterAccountName = @"kTwitterAccountName";
 NSString *const kEmailLoggedValue = @"kEmailLoggedValue";
 
+NSString *const kTokenFacebookString = @"kTokenFacebookString";
+NSString *const kTokenTwitterString = @"kTokenTwitterString";
+NSString *const kTokenGoogleString = @"kTokenGoogleString";
+
 #pragma mark - NSUserDefaults
 
 NSString *const kIsCameraRearFacing = @"kIsCameraRearFacing";

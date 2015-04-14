@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "BrightnessContrastSlidersContainerView.h"
 #import "SSOColorPickerContainerView.h"
+#import "SSOLoginContainerView.h"
+#import "SSORegisterContainerView.h"
+#import "SSOLoginViewController.h"
 
 @interface NSBundle (SSOHelper)
 
@@ -25,5 +28,12 @@
  *  @return the view
  */
 + (SSOColorPickerContainerView *)loadColorPickerContainerView;
+
++ (SSOLoginContainerView *)loadLoginContainerView;
+
++ (SSORegisterContainerView *)loadRegisterContainerView;
+
++ (SSOLoginViewController *)loadLoginViewController;
+
 
 @end

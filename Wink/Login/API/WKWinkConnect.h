@@ -24,9 +24,19 @@ extern NSString *const kWinkConnectAuthorizationDenied;
 
 + (void)winkConnectRegisterWithUsername:(NSString *)email
                                password:(NSString *)password
-                                   meta:(NSString *)meta
+                                   meta:(NSDictionary *)meta
                                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+/**
+ *  Send the necessary data to backend in order to post stuff on social networks
+ *
+ *  @param data    can be the token, secret key, etc...
+ *  @param success success block
+ *  @param failure failure block
+ */
++ (void)winkConnectSocialNetworksWithData:(NSDictionary *)data
+                                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

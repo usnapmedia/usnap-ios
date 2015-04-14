@@ -21,6 +21,8 @@
 
 #import <GooglePlus/GooglePlus.h>
 
+#import "SSOLoginViewController.h"
+
 @implementation WKAppDelegate
 
 #pragma mark - App Delegate Methods
@@ -81,7 +83,7 @@
 //    } else {
         // Setup state
         [self setupRootViewController];
-  //  }
+ //   }
 
     return YES;
 }
@@ -116,8 +118,9 @@
         self.window.rootViewController = navController;
   //  }
 //    else {
-//        WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
-//        WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginController];
+//    SSOLoginViewController *loginViewController = [NSBundle loadLoginViewController];
+//     //   WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
+//        WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginViewController];
 //        navController.navigationBarHidden = YES;
 //        self.window.rootViewController = navController;
 //    }

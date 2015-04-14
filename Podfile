@@ -20,6 +20,8 @@ pod 'Masonry'
 pod 'RSKImageCropper'
 pod 'SVProgressHUD'
 
+pod 'IQKeyboardManager'
+
 # Samsao libraries
 
 

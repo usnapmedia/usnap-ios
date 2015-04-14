@@ -29,8 +29,14 @@
 		2747B09D19E5DE8F00C3D779 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2747B09C19E5DE8F00C3D779 /* CoreData.framework */; };
 		2747B09F19E5DE9500C3D779 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2747B09E19E5DE9500C3D779 /* SystemConfiguration.framework */; };
 		2747B0A119E5DE9A00C3D779 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2747B0A019E5DE9A00C3D779 /* libz.dylib */; };
+		3303DDCE1AD83E42002B74F9 /* SSORegisterContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3303DDCD1AD83E42002B74F9 /* SSORegisterContainerView.xib */; };
+		3303DDD01AD84F19002B74F9 /* SSOLoginContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3303DDCF1AD84F19002B74F9 /* SSOLoginContainerView.xib */; };
+		3303DDD41AD8547F002B74F9 /* SSOLoginContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3303DDD31AD8547F002B74F9 /* SSOLoginContainerView.m */; };
+		3303DDD71AD85591002B74F9 /* SSOLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3303DDD61AD85591002B74F9 /* SSOLoginViewController.m */; };
+		3303DDDA1AD86F66002B74F9 /* SSOCustomSignInButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3303DDD91AD86F66002B74F9 /* SSOCustomSignInButton.m */; };
+		3303DDDD1AD87361002B74F9 /* SSORegisterContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3303DDDC1AD87361002B74F9 /* SSORegisterContainerView.m */; };
 		330B38E21AD314D3003E9798 /* SSOEditSideMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 330B38E11AD314D3003E9798 /* SSOEditSideMenuView.xib */; };
-		330B38E61AD31ADB003E9798 /* SSOEditSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 330B38E51AD31ADB003E9798 /* SSOEditSideMenuView.m */; };
+		3316F2D61ADD838700C7ED24 /* SSOEditSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316F2D51ADD838700C7ED24 /* SSOEditSideMenuView.m */; };
 		335723B31ACB097C000CC846 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3357233E1ACB097C000CC846 /* Camera.storyboard */; };
 		335723B41ACB097C000CC846 /* SSOCameraContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723411ACB097C000CC846 /* SSOCameraContainerViewController.m */; };
 		335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723431ACB097C000CC846 /* SSOCameraViewController.m */; };
@@ -113,7 +119,7 @@
 		D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C801AD4287C008D2A37 /* WKWinkConnect.m */; };
 		D8EA5C8A1AD4287C008D2A37 /* WKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */; };
 		D8EA5C8B1AD4287C008D2A37 /* WKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C851AD4287C008D2A37 /* WKUser.m */; };
-		D8EA5C8C1AD4287C008D2A37 /* WKLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C871AD4287C008D2A37 /* WKLoginViewController.xib */; };
+		D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */; };
 		D8EA5C8D1AD4287C008D2A37 /* WKLoginViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C881AD4287C008D2A37 /* WKLoginViewController_iPad.xib */; };
 		D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C8F1AD428D3008D2A37 /* SSOGooglePlusHelper.m */; };
 /* End PBXBuildFile section */
@@ -152,9 +158,22 @@
 		2747B09C19E5DE8F00C3D779 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2747B09E19E5DE9500C3D779 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2747B0A019E5DE9A00C3D779 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		3303DDCD1AD83E42002B74F9 /* SSORegisterContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSORegisterContainerView.xib; sourceTree = "<group>"; };
+		3303DDCF1AD84F19002B74F9 /* SSOLoginContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOLoginContainerView.xib; sourceTree = "<group>"; };
+		3303DDD21AD8547F002B74F9 /* SSOLoginContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOLoginContainerView.h; path = Views/SSOLoginContainerView.h; sourceTree = "<group>"; };
+		3303DDD31AD8547F002B74F9 /* SSOLoginContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOLoginContainerView.m; path = Views/SSOLoginContainerView.m; sourceTree = "<group>"; };
+		3303DDD51AD85591002B74F9 /* SSOLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOLoginViewController.h; sourceTree = "<group>"; };
+		3303DDD61AD85591002B74F9 /* SSOLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOLoginViewController.m; sourceTree = "<group>"; };
+		3303DDD81AD86F66002B74F9 /* SSOCustomSignInButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOCustomSignInButton.h; path = Views/SSOCustomSignInButton.h; sourceTree = "<group>"; };
+		3303DDD91AD86F66002B74F9 /* SSOCustomSignInButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOCustomSignInButton.m; path = Views/SSOCustomSignInButton.m; sourceTree = "<group>"; };
+		3303DDDB1AD87361002B74F9 /* SSORegisterContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSORegisterContainerView.h; path = Views/SSORegisterContainerView.h; sourceTree = "<group>"; };
+		3303DDDC1AD87361002B74F9 /* SSORegisterContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSORegisterContainerView.m; path = Views/SSORegisterContainerView.m; sourceTree = "<group>"; };
+		3303DDDF1AD88822002B74F9 /* SSOLoginRegisterDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SSOLoginRegisterDelegate.h; path = Protocol/SSOLoginRegisterDelegate.h; sourceTree = "<group>"; };
 		330B38E11AD314D3003E9798 /* SSOEditSideMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOEditSideMenuView.xib; sourceTree = "<group>"; };
 		330B38E41AD31ADB003E9798 /* SSOEditSideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOEditSideMenuView.h; sourceTree = "<group>"; };
 		330B38E51AD31ADB003E9798 /* SSOEditSideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOEditSideMenuView.m; sourceTree = "<group>"; };
+		3316F2D41ADD838700C7ED24 /* SSOEditSideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOEditSideMenuView.h; sourceTree = "<group>"; };
+		3316F2D51ADD838700C7ED24 /* SSOEditSideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOEditSideMenuView.m; sourceTree = "<group>"; };
 		3357233E1ACB097C000CC846 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		335723401ACB097C000CC846 /* SSOCameraContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCameraContainerViewController.h; sourceTree = "<group>"; };
 		335723411ACB097C000CC846 /* SSOCameraContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCameraContainerViewController.m; sourceTree = "<group>"; };
@@ -301,7 +320,7 @@
 		D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKLoginViewController.m; sourceTree = "<group>"; };
 		D8EA5C841AD4287C008D2A37 /* WKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKUser.h; sourceTree = "<group>"; };
 		D8EA5C851AD4287C008D2A37 /* WKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKUser.m; sourceTree = "<group>"; };
-		D8EA5C871AD4287C008D2A37 /* WKLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKLoginViewController.xib; sourceTree = "<group>"; };
+		D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOLoginViewController.xib; sourceTree = "<group>"; };
 		D8EA5C881AD4287C008D2A37 /* WKLoginViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKLoginViewController_iPad.xib; sourceTree = "<group>"; };
 		D8EA5C8E1AD428D3008D2A37 /* SSOGooglePlusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOGooglePlusHelper.h; sourceTree = "<group>"; };
 		D8EA5C8F1AD428D3008D2A37 /* SSOGooglePlusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOGooglePlusHelper.m; sourceTree = "<group>"; };
@@ -437,10 +456,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		330B38E31AD31A9A003E9798 /* Side Menu Tools */ = {
+		3303DDD11AD8541A002B74F9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3303DDD21AD8547F002B74F9 /* SSOLoginContainerView.h */,
+				3303DDD31AD8547F002B74F9 /* SSOLoginContainerView.m */,
+				3303DDDB1AD87361002B74F9 /* SSORegisterContainerView.h */,
+				3303DDDC1AD87361002B74F9 /* SSORegisterContainerView.m */,
+				3303DDD81AD86F66002B74F9 /* SSOCustomSignInButton.h */,
+				3303DDD91AD86F66002B74F9 /* SSOCustomSignInButton.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		3303DDDE1AD887FC002B74F9 /* Side Menu Tools */ = {
 			isa = PBXGroup;
 			children = (
 				330B38E41AD31ADB003E9798 /* SSOEditSideMenuView.h */,
+				3303DDDF1AD88822002B74F9 /* SSOLoginRegisterDelegate.h */,
 				330B38E51AD31ADB003E9798 /* SSOEditSideMenuView.m */,
 			);
 			name = "Side Menu Tools";
@@ -694,10 +727,11 @@
 		D830F3E51ACDDAE7002A503D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				330B38E31AD31A9A003E9798 /* Side Menu Tools */,
 				D830F3E61ACDDAE7002A503D /* MediaEditContainerView */,
 				D830F3EB1ACDDAE7002A503D /* SSOEditMediaMovableTextView.h */,
 				D830F3EC1ACDDAE7002A503D /* SSOEditMediaMovableTextView.m */,
+				3316F2D41ADD838700C7ED24 /* SSOEditSideMenuView.h */,
+				3316F2D51ADD838700C7ED24 /* SSOEditSideMenuView.m */,
 				D830F3ED1ACDDAE7002A503D /* WKColorPickerView.h */,
 				D830F3EE1ACDDAE7002A503D /* WKColorPickerView.m */,
 				330B38E11AD314D3003E9798 /* SSOEditSideMenuView.xib */,
@@ -862,6 +896,8 @@
 		D8EA5C7D1AD4287C008D2A37 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				3303DDDE1AD887FC002B74F9 /* Side Menu Tools */,
+				3303DDD11AD8541A002B74F9 /* Views */,
 				D8EA5C7E1AD4287C008D2A37 /* API */,
 				D8EA5C811AD4287C008D2A37 /* Controllers */,
 				D8EA5C861AD4287C008D2A37 /* XIB */,
@@ -883,6 +919,8 @@
 			children = (
 				D8EA5C821AD4287C008D2A37 /* WKLoginViewController.h */,
 				D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */,
+				3303DDD51AD85591002B74F9 /* SSOLoginViewController.h */,
+				3303DDD61AD85591002B74F9 /* SSOLoginViewController.m */,
 				D8EA5C841AD4287C008D2A37 /* WKUser.h */,
 				D8EA5C851AD4287C008D2A37 /* WKUser.m */,
 			);
@@ -892,8 +930,10 @@
 		D8EA5C861AD4287C008D2A37 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
-				D8EA5C871AD4287C008D2A37 /* WKLoginViewController.xib */,
+				D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */,
 				D8EA5C881AD4287C008D2A37 /* WKLoginViewController_iPad.xib */,
+				3303DDCD1AD83E42002B74F9 /* SSORegisterContainerView.xib */,
+				3303DDCF1AD84F19002B74F9 /* SSOLoginContainerView.xib */,
 			);
 			path = XIB;
 			sourceTree = "<group>";
@@ -996,6 +1036,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3303DDCE1AD83E42002B74F9 /* SSORegisterContainerView.xib in Resources */,
 				D830F3F91ACDDAE7002A503D /* ColorPickerContainerView.xib in Resources */,
 				D86E94C91ACF4A1400CFF801 /* CustomCollectionViewCell.xib in Resources */,
 				D830F3F81ACDDAE7002A503D /* BrightnessContrastContainerView.xib in Resources */,
@@ -1015,8 +1056,9 @@
 				335723C91ACB097C000CC846 /* Localizable.strings in Resources */,
 				335723C71ACB097C000CC846 /* Localizable.strings in Resources */,
 				D830F3FA1ACDDAE7002A503D /* WKEditMediaViewController.xib in Resources */,
+				3303DDD01AD84F19002B74F9 /* SSOLoginContainerView.xib in Resources */,
 				335723E31ACB097C000CC846 /* Wink-Info.plist in Resources */,
-				D8EA5C8C1AD4287C008D2A37 /* WKLoginViewController.xib in Resources */,
+				D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */,
 				335723C81ACB097C000CC846 /* InfoPlist.strings in Resources */,
 				335723DE1ACB097C000CC846 /* WKShareViewController.xib in Resources */,
 				270DFB0719AE71BE00067072 /* Images.xcassets in Resources */,
@@ -1125,7 +1167,6 @@
 				D830F4011ACDDBD9002A503D /* SSOAccessoryHelper.m in Sources */,
 				335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */,
 				D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */,
-				330B38E61AD31ADB003E9798 /* SSOEditSideMenuView.m in Sources */,
 				D830F3E01ACDDA15002A503D /* SSOMediaEditStateNone.m in Sources */,
 				D830F4221ACDDBF1002A503D /* UIImage+Tools.m in Sources */,
 				335723E01ACB097C000CC846 /* Constants.m in Sources */,
@@ -1137,17 +1178,20 @@
 				D830F41F1ACDDBF1002A503D /* UIColor+WKAdditions.m in Sources */,
 				335723B61ACB097C000CC846 /* SSOContainerViewController.m in Sources */,
 				D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */,
+				3303DDD41AD8547F002B74F9 /* SSOLoginContainerView.m in Sources */,
 				335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */,
 				D830F3F71ACDDAE7002A503D /* WKColorPickerView.m in Sources */,
 				D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */,
 				336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */,
 				D830F3DE1ACDDA15002A503D /* SSOMediaEditStateDrawColor.m in Sources */,
+				3303DDDD1AD87361002B74F9 /* SSORegisterContainerView.m in Sources */,
 				335723D71ACB097C000CC846 /* WKViewController.m in Sources */,
 				D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */,
 				335723CE1ACB097C000CC846 /* WKImagePickerController.m in Sources */,
 				D830F3DF1ACDDA15002A503D /* SSOMediaEditStateDrawGray.m in Sources */,
 				D830F3E11ACDDA15002A503D /* SSOMediaEditStateText.m in Sources */,
 				D830F3DD1ACDDA15002A503D /* SSOMediaEditStateDraw.m in Sources */,
+				3303DDD71AD85591002B74F9 /* SSOLoginViewController.m in Sources */,
 				335723D31ACB097C000CC846 /* WKNavigationController.m in Sources */,
 				D86E94CA1ACF4A1400CFF801 /* imageCollectionViewCell.m in Sources */,
 				D830F3DA1ACDDA15002A503D /* SSOMediaEditState.m in Sources */,
@@ -1160,9 +1204,11 @@
 				D830F3DC1ACDDA15002A503D /* SSOMediaEditStateCrop.m in Sources */,
 				D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */,
 				D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */,
+				3303DDDA1AD86F66002B74F9 /* SSOCustomSignInButton.m in Sources */,
 				D8EA5C8A1AD4287C008D2A37 /* WKLoginViewController.m in Sources */,
 				335723D91ACB097C000CC846 /* WKSettingsViewController.m in Sources */,
 				335723BA1ACB097C000CC846 /* WKEditMediaViewController.m in Sources */,
+				3316F2D61ADD838700C7ED24 /* SSOEditSideMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

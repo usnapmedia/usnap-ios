@@ -37,6 +37,12 @@
 
         [SSFacebookHelper login:^{
           [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:nil];
+
+          // TODO: See what to do exactly with the token
+          NSString *tokenFB = [[FBSession activeSession] accessTokenData].accessToken;
+            [[NSUserDefaults standardUserDefaults] setObject:tokenFB forKey:kTokenFacebookString];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
         } onFailure:^(NSError *error) {
           [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:error];
           CLS_LOG(@"error FB login :%@", error);
@@ -49,6 +55,10 @@
           [self.delegate socialNetwork:twitterSocialNetwork DidFinishLoginWithError:error];
 
           if (session) {
+              // TODO: See what to do exactly with the token
+              NSString *tokenTwitter = session.authToken;
+              [[NSUserDefaults standardUserDefaults] setObject:tokenTwitter forKey:kTokenTwitterString];
+              
               [[NSUserDefaults standardUserDefaults] setObject:[session userName] forKey:kTwitterAccountName];
               [[NSUserDefaults standardUserDefaults] synchronize];
           } else {
@@ -59,6 +69,11 @@
     } else if (socialNetwork == googleSocialNetwork) {
 
         [[SSOGooglePlusHelper sharedInstance] signIn];
+        
+        // TODO: See what to do exactly with the token
+        NSString *googleToken = [[SSOGooglePlusHelper sharedInstance] getAccessToken];
+        [[NSUserDefaults standardUserDefaults] setObject:googleToken forKey:kTokenGoogleString];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

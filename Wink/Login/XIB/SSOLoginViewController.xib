@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSOLoginViewController">
+            <connections>
+                <outlet property="loginButton" destination="L9d-i3-B4P" id="9ne-ZQ-lQc"/>
+                <outlet property="loginContainerView" destination="1jz-yV-PGL" id="WAv-Lu-G4u"/>
+                <outlet property="registerContainerView" destination="6G7-MO-4dZ" id="WB5-9z-bN2"/>
+                <outlet property="signUpButton" destination="Bm5-bk-NTn" id="6jt-f7-hkb"/>
+                <outlet property="view" destination="RMS-1K-AQe" id="HpM-ev-9G4"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="RMS-1K-AQe">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6G7-MO-4dZ" userLabel="RegisterContainerView">
+                    <rect key="frame" x="0.0" y="234" width="375" height="200"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="3X5-7N-rJF"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jz-yV-PGL" userLabel="LoginContainerView">
+                    <rect key="frame" x="0.0" y="234" width="375" height="200"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="aqV-eq-J6u"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MdS-IV-9nO" userLabel="Buttons View">
+                    <rect key="frame" x="0.0" y="184" width="375" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L9d-i3-B4P" customClass="SSOCustomSignInButton">
+                            <rect key="frame" x="0.0" y="0.0" width="188" height="50"/>
+                            <state key="normal" title="Login">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" title="Login"/>
+                            <connections>
+                                <action selector="loginButtonPushed:" destination="-1" eventType="touchUpInside" id="RdB-Xc-0La"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bm5-bk-NTn" customClass="SSOCustomSignInButton">
+                            <rect key="frame" x="188" y="0.0" width="187" height="50"/>
+                            <state key="normal" title="Sign up">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" title="Sign up"/>
+                            <connections>
+                                <action selector="signUpButton:" destination="-1" eventType="touchUpInside" id="JQI-go-J4q"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Bm5-bk-NTn" secondAttribute="trailing" id="EBL-FW-gZY"/>
+                        <constraint firstItem="L9d-i3-B4P" firstAttribute="leading" secondItem="MdS-IV-9nO" secondAttribute="leading" id="ErT-lU-4Rd"/>
+                        <constraint firstItem="Bm5-bk-NTn" firstAttribute="leading" secondItem="L9d-i3-B4P" secondAttribute="trailing" id="MYp-pY-Az5"/>
+                        <constraint firstItem="L9d-i3-B4P" firstAttribute="top" secondItem="MdS-IV-9nO" secondAttribute="top" id="NFl-mJ-pKB"/>
+                        <constraint firstItem="Bm5-bk-NTn" firstAttribute="width" secondItem="L9d-i3-B4P" secondAttribute="width" id="PHB-S3-AA8"/>
+                        <constraint firstAttribute="bottom" secondItem="Bm5-bk-NTn" secondAttribute="bottom" id="cWM-2v-fc7"/>
+                        <constraint firstAttribute="bottom" secondItem="L9d-i3-B4P" secondAttribute="bottom" id="gy9-3F-DaB"/>
+                        <constraint firstItem="Bm5-bk-NTn" firstAttribute="top" secondItem="MdS-IV-9nO" secondAttribute="top" id="ltS-RL-T5w"/>
+                        <constraint firstAttribute="height" constant="50" id="mu8-V8-dle"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="MdS-IV-9nO" secondAttribute="trailing" id="0Ff-z6-LtT"/>
+                <constraint firstAttribute="centerX" secondItem="6G7-MO-4dZ" secondAttribute="centerX" id="0ov-9O-hLC"/>
+                <constraint firstAttribute="centerY" secondItem="6G7-MO-4dZ" secondAttribute="centerY" id="6rw-Ku-57M"/>
+                <constraint firstItem="6G7-MO-4dZ" firstAttribute="leading" secondItem="RMS-1K-AQe" secondAttribute="leading" id="DxA-lb-0C9"/>
+                <constraint firstAttribute="centerY" secondItem="1jz-yV-PGL" secondAttribute="centerY" id="I4W-NR-bcl"/>
+                <constraint firstAttribute="centerX" secondItem="1jz-yV-PGL" secondAttribute="centerX" id="XnW-P3-WUb"/>
+                <constraint firstAttribute="trailing" secondItem="6G7-MO-4dZ" secondAttribute="trailing" id="ZmK-9r-fzz"/>
+                <constraint firstItem="MdS-IV-9nO" firstAttribute="leading" secondItem="RMS-1K-AQe" secondAttribute="leading" id="atp-2t-2iJ"/>
+                <constraint firstItem="1jz-yV-PGL" firstAttribute="leading" secondItem="RMS-1K-AQe" secondAttribute="leading" id="dQh-gT-2xQ"/>
+                <constraint firstAttribute="trailing" secondItem="1jz-yV-PGL" secondAttribute="trailing" id="gaa-jX-I3W"/>
+                <constraint firstItem="1jz-yV-PGL" firstAttribute="top" secondItem="MdS-IV-9nO" secondAttribute="bottom" id="nZ2-3U-8oJ"/>
+                <constraint firstItem="6G7-MO-4dZ" firstAttribute="top" secondItem="MdS-IV-9nO" secondAttribute="bottom" id="qk7-rS-2gi"/>
+            </constraints>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="130.5" y="443.5"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

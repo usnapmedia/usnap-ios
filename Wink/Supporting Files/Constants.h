@@ -34,6 +34,10 @@ extern NSString *const kTwitterAccountName;
 extern NSString *const kIsFacebookLoggedIn;
 extern NSString *const kEmailLoggedValue;
 
+extern NSString *const kTokenFacebookString;
+extern NSString *const kTokenTwitterString;
+extern NSString *const kTokenGoogleString;
+
 #pragma mark - NSUserDefaults
 
 extern NSString *const kIsCameraRearFacing;
