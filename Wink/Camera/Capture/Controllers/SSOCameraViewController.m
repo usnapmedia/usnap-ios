@@ -18,11 +18,12 @@
 #import "SSORoundedAnimatedButton.h"
 #import "AVCamPreviewView.h"
 #import "SSOCameraCaptureHelper.h"
+#import "SSOVideoEditingHelper.h"
 
 #define kTotalVideoRecordingTime 30
 
 @interface SSOCameraViewController () <UIAlertViewDelegate, VideoRecordingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-                                       SSORoundedAnimatedButtonProtocol>
+                                       SSORoundedAnimatedButtonProtocol, SSOCameraDelegate>
 
 // IBOutlets
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *videoCenteringConstraint;
@@ -109,6 +110,7 @@
 - (void)initializeData {
     self.videoTimeRemaining = kTotalVideoRecordingTime;
     self.cameraCaptureHelper = [[SSOCameraCaptureHelper alloc] initWithPreviewView:self.cameraPreviewView andOrientation:[self interfaceOrientation]];
+    self.cameraCaptureHelper.delegate = self;
 }
 
 /**
@@ -152,10 +154,10 @@
     [self updateRearCameraFacingUI];
 
     // Add black view in between switching between photo and video
-    self.blackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height)];
-    self.blackView.backgroundColor = [UIColor blackColor];
-    self.blackView.alpha = 0.0;
-    [self.containerView addSubview:self.blackView];
+//    self.blackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height)];
+//    self.blackView.backgroundColor = [UIColor blackColor];
+//    self.blackView.alpha = 0.0;
+//    [self.containerView addSubview:self.blackView];
     [self.view bringSubviewToFront:self.animatedCaptureButton];
 }
 /**
@@ -267,9 +269,7 @@
          usingSpringWithDamping:0.5f
           initialSpringVelocity:1.0f
                         options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                       [self.view layoutIfNeeded];
-                     }
+                     animations:^{ [self.view layoutIfNeeded]; }
                      completion:nil];
 }
 
@@ -312,17 +312,15 @@
     if (self.containerViewController.cameraContainerVC.libraryImage) {
 
         [UIView animateWithDuration:0.3
-            animations:^{
-              self.mediaButton.alpha = 0.1;
-            }
+            animations:^{ self.mediaButton.alpha = 0.1; }
             completion:^(BOOL finished) {
 
-              [UIView animateWithDuration:0.3
-                               animations:^{
-                                 [self.mediaButton setImage:self.containerViewController.cameraContainerVC.libraryImage forState:UIControlStateNormal];
+                [UIView animateWithDuration:0.3
+                                 animations:^{
+                                     [self.mediaButton setImage:self.containerViewController.cameraContainerVC.libraryImage forState:UIControlStateNormal];
 
-                                 self.mediaButton.alpha = 1;
-                               }];
+                                     self.mediaButton.alpha = 1;
+                                 }];
             }];
     }
 }
@@ -463,7 +461,6 @@
 
 - (IBAction)captureButtonPushed:(id)sender {
 
-    NSLog(@" capturing %d", self.containerViewController.cameraContainerVC.capturing);
     // Check
     [self.cameraCaptureHelper snapStillImage];
     //    if (!self.isVideoRecording && !self.containerViewController.cameraContainerVC.capturing) {
@@ -528,6 +525,76 @@
 
 - (void)enableUserInteraction {
     self.view.userInteractionEnabled = YES;
+}
+
+#pragma mark - SSOCameraDelegate
+
+- (void)didFinishCapturingImage:(UIImage *)image withError:(NSError *)error {
+
+    if (error) {
+
+    } else {
+        // Edit the selected media
+        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+        controller.image = image;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
+
+- (void)didFinishCapturingVideo:(NSURL *)video withError:(NSError *)error {
+
+    [SSOVideoEditingHelper
+              cropVideo:video
+             withStatus:^(AVAssetExportSessionStatus status, AVAssetExportSession *exporter) {
+                 switch (status) {
+                 case AVAssetExportSessionStatusUnknown:
+                     [SVProgressHUD dismiss];
+                     // [self.videoDelegate enableUserInteraction];
+
+                     break;
+                 case AVAssetExportSessionStatusWaiting:
+                     break;
+                 case AVAssetExportSessionStatusExporting:
+                     break;
+                 case AVAssetExportSessionStatusCompleted: {
+                     // Dismiss HUD
+                     [SVProgressHUD dismiss];
+                     // [self.videoDelegate enableUserInteraction];
+
+                     NSURLRequest *request = [NSURLRequest requestWithURL:exporter.outputURL];
+
+                     [NSURLConnection
+                         sendAsynchronousRequest:request
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                   NSURL *documentsURL =
+                                       [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+                                   NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[exporter.outputURL lastPathComponent]];
+                                   [data writeToURL:tempURL atomically:YES];
+                                   UISaveVideoAtPathToSavedPhotosAlbum(tempURL.path, nil, NULL, NULL);
+                               }];
+
+                     // Edit the selected media
+                     WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+                     controller.mediaURL = exporter.outputURL;
+                     [self.navigationController pushViewController:controller animated:YES];
+                 } break;
+                 case AVAssetExportSessionStatusFailed:
+                     [SVProgressHUD dismiss];
+                    // [self.videoDelegate enableUserInteraction];
+
+                     break;
+                 case AVAssetExportSessionStatusCancelled:
+                     [SVProgressHUD dismiss];
+                    // [self.videoDelegate enableUserInteraction];
+
+                     break;
+
+                 default:
+                     break;
+                 }
+             }
+        inContainerView:self.view];
 }
 
 @end
