@@ -16,13 +16,38 @@
 @property(nonatomic) UIInterfaceOrientation interfaceOrientation;
 @property(nonatomic, weak) id<SSOCameraDelegate> delegate;
 
+/**
+ *  Instantiate camera with preview view
+ *
+ *  @param previewView
+ *  @param orientation
+ *
+ *  @return
+ */
 - (instancetype)initWithPreviewView:(AVCamPreviewView *)previewView andOrientation:(UIInterfaceOrientation)orientation;
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
+
+/**
+ *  Start and stop video recording
+ */
 - (void)toggleMovieRecording;
-- (void)changeCamera;
+
+/**
+ *  Take a photo
+ */
 - (void)snapStillImage;
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
+/**
+ *  Animation when you take a photo
+ */
+- (void)runStillImageCaptureAnimation;
+
+/**
+ *  Change the camera from front facing to rear facing or vice versa
+ */
+- (void)changeCamera;
++ (void)setFlashMode:(AVCaptureFlashMode)flashMode forDevice:(AVCaptureDevice *)device;
 
 @end
 
