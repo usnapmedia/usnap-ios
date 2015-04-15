@@ -40,12 +40,9 @@
 		3316F2D31ADD6D9F00C7ED24 /* SSSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316F2D21ADD6D9F00C7ED24 /* SSSessionManager.m */; };
 		3316F2D61ADD838700C7ED24 /* SSOEditSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316F2D51ADD838700C7ED24 /* SSOEditSideMenuView.m */; };
 		335723B31ACB097C000CC846 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3357233E1ACB097C000CC846 /* Camera.storyboard */; };
-		335723B41ACB097C000CC846 /* SSOCameraContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723411ACB097C000CC846 /* SSOCameraContainerViewController.m */; };
 		335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723431ACB097C000CC846 /* SSOCameraViewController.m */; };
-		335723B61ACB097C000CC846 /* SSOContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723451ACB097C000CC846 /* SSOContainerViewController.m */; };
 		335723B71ACB097C000CC846 /* WKCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723471ACB097C000CC846 /* WKCameraViewController.m */; };
 		335723B81ACB097C000CC846 /* WKCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 335723481ACB097C000CC846 /* WKCameraViewController.xib */; };
-		335723B91ACB097C000CC846 /* SSOVideoEditingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3357234D1ACB097C000CC846 /* SSOVideoEditingHelper.m */; };
 		335723BA1ACB097C000CC846 /* WKEditMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723511ACB097C000CC846 /* WKEditMediaViewController.m */; };
 		335723C61ACB097C000CC846 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 335723691ACB097C000CC846 /* InfoPlist.strings */; };
 		335723C71ACB097C000CC846 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3357236B1ACB097C000CC846 /* Localizable.strings */; };
@@ -181,17 +178,11 @@
 		3316F2D41ADD838700C7ED24 /* SSOEditSideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOEditSideMenuView.h; sourceTree = "<group>"; };
 		3316F2D51ADD838700C7ED24 /* SSOEditSideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOEditSideMenuView.m; sourceTree = "<group>"; };
 		3357233E1ACB097C000CC846 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
-		335723401ACB097C000CC846 /* SSOCameraContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCameraContainerViewController.h; sourceTree = "<group>"; };
-		335723411ACB097C000CC846 /* SSOCameraContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCameraContainerViewController.m; sourceTree = "<group>"; };
 		335723421ACB097C000CC846 /* SSOCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCameraViewController.h; sourceTree = "<group>"; };
 		335723431ACB097C000CC846 /* SSOCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCameraViewController.m; sourceTree = "<group>"; };
-		335723441ACB097C000CC846 /* SSOContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOContainerViewController.h; sourceTree = "<group>"; };
-		335723451ACB097C000CC846 /* SSOContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOContainerViewController.m; sourceTree = "<group>"; };
 		335723461ACB097C000CC846 /* WKCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCameraViewController.h; sourceTree = "<group>"; };
 		335723471ACB097C000CC846 /* WKCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCameraViewController.m; sourceTree = "<group>"; };
 		335723481ACB097C000CC846 /* WKCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKCameraViewController.xib; sourceTree = "<group>"; };
-		3357234C1ACB097C000CC846 /* SSOVideoEditingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOVideoEditingHelper.h; sourceTree = "<group>"; };
-		3357234D1ACB097C000CC846 /* SSOVideoEditingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOVideoEditingHelper.m; sourceTree = "<group>"; };
 		335723501ACB097C000CC846 /* WKEditMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKEditMediaViewController.h; sourceTree = "<group>"; };
 		335723511ACB097C000CC846 /* WKEditMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKEditMediaViewController.m; sourceTree = "<group>"; };
 		3357236A1ACB097C000CC846 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
@@ -501,12 +492,8 @@
 		3357233F1ACB097C000CC846 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				335723401ACB097C000CC846 /* SSOCameraContainerViewController.h */,
-				335723411ACB097C000CC846 /* SSOCameraContainerViewController.m */,
 				335723421ACB097C000CC846 /* SSOCameraViewController.h */,
 				335723431ACB097C000CC846 /* SSOCameraViewController.m */,
-				335723441ACB097C000CC846 /* SSOContainerViewController.h */,
-				335723451ACB097C000CC846 /* SSOContainerViewController.m */,
 				335723461ACB097C000CC846 /* WKCameraViewController.h */,
 				335723471ACB097C000CC846 /* WKCameraViewController.m */,
 				335723481ACB097C000CC846 /* WKCameraViewController.xib */,
@@ -517,8 +504,6 @@
 		3357234B1ACB097C000CC846 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				3357234C1ACB097C000CC846 /* SSOVideoEditingHelper.h */,
-				3357234D1ACB097C000CC846 /* SSOVideoEditingHelper.m */,
 				CB8F0ABB1ADDDCB100C18263 /* SSOCameraCaptureHelper.h */,
 				CB8F0ABC1ADDDCB100C18263 /* SSOCameraCaptureHelper.m */,
 			);
@@ -1148,7 +1133,6 @@
 				335723D21ACB097C000CC846 /* WKMoviePlayerView.m in Sources */,
 				335723CB1ACB097C000CC846 /* WKCameraOverlayViewController.m in Sources */,
 				D830F4021ACDDBD9002A503D /* SSOBrightnessContrastHelper.m in Sources */,
-				335723B41ACB097C000CC846 /* SSOCameraContainerViewController.m in Sources */,
 				D830F4241ACDDBF1002A503D /* UIView+WKAdditions.m in Sources */,
 				D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */,
 				D830F3DB1ACDDA15002A503D /* SSOMediaEditStateBrightness.m in Sources */,
@@ -1176,7 +1160,6 @@
 				D8EA5C8B1AD4287C008D2A37 /* WKUser.m in Sources */,
 				CB8F0ABA1ADDDC8600C18263 /* AVCamPreviewView.m in Sources */,
 				D830F41F1ACDDBF1002A503D /* UIColor+WKAdditions.m in Sources */,
-				335723B61ACB097C000CC846 /* SSOContainerViewController.m in Sources */,
 				D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */,
 				3303DDD41AD8547F002B74F9 /* SSOLoginContainerView.m in Sources */,
 				335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */,
@@ -1200,7 +1183,6 @@
 				D830F3F51ACDDAE7002A503D /* SSOColorPickerContainerView.m in Sources */,
 				D830F4211ACDDBF1002A503D /* UIImage+Resizing.m in Sources */,
 				03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */,
-				335723B91ACB097C000CC846 /* SSOVideoEditingHelper.m in Sources */,
 				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
 				D830F3DC1ACDDA15002A503D /* SSOMediaEditStateCrop.m in Sources */,
 				D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */,
