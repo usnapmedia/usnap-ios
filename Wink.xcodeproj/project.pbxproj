@@ -190,7 +190,6 @@
 		335723461ACB097C000CC846 /* WKCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCameraViewController.h; sourceTree = "<group>"; };
 		335723471ACB097C000CC846 /* WKCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCameraViewController.m; sourceTree = "<group>"; };
 		335723481ACB097C000CC846 /* WKCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKCameraViewController.xib; sourceTree = "<group>"; };
-		3357234A1ACB097C000CC846 /* VideoRecordingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoRecordingDelegate.h; sourceTree = "<group>"; };
 		3357234C1ACB097C000CC846 /* SSOVideoEditingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOVideoEditingHelper.h; sourceTree = "<group>"; };
 		3357234D1ACB097C000CC846 /* SSOVideoEditingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOVideoEditingHelper.m; sourceTree = "<group>"; };
 		335723501ACB097C000CC846 /* WKEditMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKEditMediaViewController.h; sourceTree = "<group>"; };
@@ -494,7 +493,6 @@
 				336F913D1ACD95A7003B0AA4 /* VIews */,
 				3357233E1ACB097C000CC846 /* Camera.storyboard */,
 				3357233F1ACB097C000CC846 /* Controllers */,
-				335723491ACB097C000CC846 /* Delegates */,
 				3357234B1ACB097C000CC846 /* Helpers */,
 			);
 			path = Capture;
@@ -514,14 +512,6 @@
 				335723481ACB097C000CC846 /* WKCameraViewController.xib */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		335723491ACB097C000CC846 /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				3357234A1ACB097C000CC846 /* VideoRecordingDelegate.h */,
-			);
-			path = Delegates;
 			sourceTree = "<group>";
 		};
 		3357234B1ACB097C000CC846 /* Helpers */ = {

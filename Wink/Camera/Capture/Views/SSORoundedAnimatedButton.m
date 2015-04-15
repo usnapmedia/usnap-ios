@@ -43,8 +43,6 @@
 
 - (void)dealloc {
 
-    //[self removeAnimations];
-
     [self.layer removeAllAnimations];
 }
 
@@ -137,7 +135,7 @@
     }
 }
 
-#pragma mark - Lazy instanciations
+#pragma mark - Lazy instantiations
 
 - (UIColor *)circleColor {
 

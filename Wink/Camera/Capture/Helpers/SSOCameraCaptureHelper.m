@@ -248,6 +248,8 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
                                             [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage]
                                                                                              orientation:(ALAssetOrientation)[image imageOrientation]
                                                                                          completionBlock:nil];
+                                            
+                                            
                                         }
                                       }];
     });
