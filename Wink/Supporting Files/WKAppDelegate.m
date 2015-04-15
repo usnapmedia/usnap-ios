@@ -79,11 +79,11 @@
     //          // Setup state
     //          [self setupAnimated:NO];
 
-//        }];
-//    } else {
-        // Setup state
-        [self setupRootViewController];
- //   }
+    //        }];
+    //    } else {
+    // Setup state
+    [self setupRootViewController];
+    //   }
 
     return YES;
 }
@@ -91,7 +91,6 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background,
     // optionally refresh the user interface.
-
 
     [FBAppCall handleDidBecomeActive];
 }
@@ -111,19 +110,22 @@
 #pragma mark - Setup State
 
 - (void)setupRootViewController {
-   // if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue] || [[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
-      //  [[NSUserDefaults standardUserDefaults] boolForKey:kEmailLoggedValue]) {
-        WKCameraViewController *cameraController = [[WKCameraViewController alloc] initWithNibName:@"WKCameraViewController" bundle:nil];
-        UINavigationController *navController = [[UIStoryboard cameraStoryboard] instantiateViewControllerWithIdentifier:@"CAMERA_NAV_VC"];
-        self.window.rootViewController = navController;
-  //  }
-//    else {
-//    SSOLoginViewController *loginViewController = [NSBundle loadLoginViewController];
-//     //   WKLoginViewController *loginController = [[WKLoginViewController alloc] initWithNibName:@"WKLoginViewController" bundle:nil];
-//        WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginViewController];
-//        navController.navigationBarHidden = YES;
-//        self.window.rootViewController = navController;
-//    }
+
+    [self goCameraVC];
+}
+
+-(void)goCameraVC {
+    UINavigationController *navController = [[UIStoryboard cameraStoryboard] instantiateViewControllerWithIdentifier:@"CAMERA_NAV_VC"];
+    self.window.rootViewController = navController;
+
+}
+
+- (void)goLoginVC {
+
+    SSOLoginViewController *loginViewController = [NSBundle loadLoginViewController];
+    WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginViewController];
+    navController.navigationBarHidden = YES;
+    self.window.rootViewController = navController;
 }
 
 #pragma mark - Current User Changed
