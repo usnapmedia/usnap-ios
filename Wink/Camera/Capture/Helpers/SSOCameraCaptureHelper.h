@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "AVCamPreviewView.h"
 
+@protocol SSOCameraDelegate;
+
 @interface SSOCameraCaptureHelper : NSObject
 
 @property(nonatomic) UIInterfaceOrientation interfaceOrientation;
+@property(nonatomic, weak) id<SSOCameraDelegate> delegate;
 
 /**
  *  Instantiate camera with preview view
@@ -45,5 +48,13 @@
  */
 - (void)changeCamera;
 + (void)setFlashMode:(AVCaptureFlashMode)flashMode forDevice:(AVCaptureDevice *)device;
+
+@end
+
+@protocol SSOCameraDelegate
+
+- (void)didFinishCapturingImage:(UIImage *)image withError:(NSError *)error;
+
+- (void)didFinishCapturingVideo:(NSURL *)video withError:(NSError *)error;
 
 @end

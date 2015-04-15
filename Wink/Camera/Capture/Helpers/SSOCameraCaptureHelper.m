@@ -9,7 +9,7 @@
 #import "SSOCameraCaptureHelper.h"
 
 #import <AVFoundation/AVFoundation.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+#import "ALAssetsLibrary+CustomPhotoAlbum.h"
 
 static void *CapturingStillImageContext = &CapturingStillImageContext;
 static void *RecordingContext = &RecordingContext;
@@ -59,64 +59,64 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
         [self setSessionQueue:sessionQueue];
 
         dispatch_async(sessionQueue, ^{
-          [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
+            [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
 
-          NSError *error = nil;
+            NSError *error = nil;
 
-          AVCaptureDevice *videoDevice = [SSOCameraCaptureHelper deviceWithMediaType:AVMediaTypeVideo preferringPosition:AVCaptureDevicePositionBack];
-          AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
+            AVCaptureDevice *videoDevice = [SSOCameraCaptureHelper deviceWithMediaType:AVMediaTypeVideo preferringPosition:AVCaptureDevicePositionBack];
+            AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
 
-          if (error) {
-              NSLog(@"%@", error);
-          }
+            if (error) {
+                NSLog(@"%@", error);
+            }
 
-          if ([session canAddInput:videoDeviceInput]) {
-              [session addInput:videoDeviceInput];
-              [self setVideoDeviceInput:videoDeviceInput];
+            if ([session canAddInput:videoDeviceInput]) {
+                [session addInput:videoDeviceInput];
+                [self setVideoDeviceInput:videoDeviceInput];
 
-              dispatch_async(dispatch_get_main_queue(), ^{
-                // Why are we dispatching this to the main queue?
-                // Because AVCaptureVideoPreviewLayer is the backing layer for AVCamPreviewView and UIView can only be manipulated on main thread.
-                // Note: As an exception to the above rule, it is not necessary to serialize video orientation changes on the AVCaptureVideoPreviewLayer’s
-                // connection with other session manipulation.
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Why are we dispatching this to the main queue?
+                    // Because AVCaptureVideoPreviewLayer is the backing layer for AVCamPreviewView and UIView can only be manipulated on main thread.
+                    // Note: As an exception to the above rule, it is not necessary to serialize video orientation changes on the AVCaptureVideoPreviewLayer’s
+                    // connection with other session manipulation.
 
-                [[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] setVideoOrientation:(AVCaptureVideoOrientation)orientation];
-              });
-          }
+                    [[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] setVideoOrientation:(AVCaptureVideoOrientation)orientation];
+                });
+            }
 
-          AVCaptureDevice *audioDevice = [[AVCaptureDevice devicesWithMediaType:AVMediaTypeAudio] firstObject];
-          AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
+            AVCaptureDevice *audioDevice = [[AVCaptureDevice devicesWithMediaType:AVMediaTypeAudio] firstObject];
+            AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
 
-          if (error) {
-              NSLog(@"%@", error);
-          }
+            if (error) {
+                NSLog(@"%@", error);
+            }
 
-          if ([session canAddInput:audioDeviceInput]) {
-              [session addInput:audioDeviceInput];
-          }
+            if ([session canAddInput:audioDeviceInput]) {
+                [session addInput:audioDeviceInput];
+            }
 
-          AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
-          if ([session canAddOutput:movieFileOutput]) {
-              [session addOutput:movieFileOutput];
-              AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
-              if ([connection isVideoStabilizationSupported])
-                  [connection setEnablesVideoStabilizationWhenAvailable:YES];
-              [self setMovieFileOutput:movieFileOutput];
-          }
+            AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+            if ([session canAddOutput:movieFileOutput]) {
+                [session addOutput:movieFileOutput];
+                AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
+                if ([connection isVideoStabilizationSupported])
+                [connection setPreferredVideoStabilizationMode:AVCaptureVideoStabilizationModeAuto];
+                [self setMovieFileOutput:movieFileOutput];
+            }
 
-          AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
-          if ([session canAddOutput:stillImageOutput]) {
-              [stillImageOutput setOutputSettings:@{AVVideoCodecKey : AVVideoCodecJPEG}];
-              [session addOutput:stillImageOutput];
-              [self setStillImageOutput:stillImageOutput];
-          }
+            AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+            if ([session canAddOutput:stillImageOutput]) {
+                [stillImageOutput setOutputSettings:@{AVVideoCodecKey : AVVideoCodecJPEG}];
+                [session addOutput:stillImageOutput];
+                [self setStillImageOutput:stillImageOutput];
+            }
 
-          [[NSNotificationCenter defaultCenter] addObserver:self
-                                                   selector:@selector(subjectAreaDidChange:)
-                                                       name:AVCaptureDeviceSubjectAreaDidChangeNotification
-                                                     object:[[self videoDeviceInput] device]];
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(subjectAreaDidChange:)
+                                                         name:AVCaptureDeviceSubjectAreaDidChangeNotification
+                                                       object:[[self videoDeviceInput] device]];
 
-          [[self session] startRunning];
+            [[self session] startRunning];
         });
     }
     return self;
@@ -124,14 +124,14 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
 - (void)dealloc {
     dispatch_async([self sessionQueue], ^{
-      [[self session] stopRunning];
+        [[self session] stopRunning];
 
-      [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput] device]];
-      [[NSNotificationCenter defaultCenter] removeObserver:[self runtimeErrorHandlingObserver]];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput] device]];
+        [[NSNotificationCenter defaultCenter] removeObserver:[self runtimeErrorHandlingObserver]];
 
-      //      [self removeObserver:self forKeyPath:@"sessionRunningAndDeviceAuthorized" context:SessionRunningAndDeviceAuthorizedContext];
-      //      [self removeObserver:self forKeyPath:@"stillImageOutput.capturingStillImage" context:CapturingStillImageContext];
-      //      [self removeObserver:self forKeyPath:@"movieFileOutput.recording" context:RecordingContext];
+        //      [self removeObserver:self forKeyPath:@"sessionRunningAndDeviceAuthorized" context:SessionRunningAndDeviceAuthorizedContext];
+        //      [self removeObserver:self forKeyPath:@"stillImageOutput.capturingStillImage" context:CapturingStillImageContext];
+        //      [self removeObserver:self forKeyPath:@"movieFileOutput.recording" context:RecordingContext];
     });
 }
 
@@ -157,101 +157,103 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 - (void)toggleMovieRecording {
 
     dispatch_async([self sessionQueue], ^{
-      if (![[self movieFileOutput] isRecording]) {
+        if (![[self movieFileOutput] isRecording]) {
 
-          if ([[UIDevice currentDevice] isMultitaskingSupported]) {
-              // Setup background task. This is needed because the captureOutput:didFinishRecordingToOutputFileAtURL: callback is not received until AVCam
-              // returns to the foreground unless you request background execution time. This also ensures that there will be time to write the file to the
-              // assets library when AVCam is backgrounded. To conclude this background execution, -endBackgroundTask is called in
-              // -recorder:recordingDidFinishToOutputFileURL:error: after the recorded file has been saved.
-              [self setBackgroundRecordingID:[[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil]];
-          }
+            if ([[UIDevice currentDevice] isMultitaskingSupported]) {
+                // Setup background task. This is needed because the captureOutput:didFinishRecordingToOutputFileAtURL: callback is not received until AVCam
+                // returns to the foreground unless you request background execution time. This also ensures that there will be time to write the file to the
+                // assets library when AVCam is backgrounded. To conclude this background execution, -endBackgroundTask is called in
+                // -recorder:recordingDidFinishToOutputFileURL:error: after the recorded file has been saved.
+                [self setBackgroundRecordingID:[[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil]];
+            }
 
-          // Update the orientation on the movie file output video connection before starting recording.
-          [[[self movieFileOutput] connectionWithMediaType:AVMediaTypeVideo]
-              setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] videoOrientation]];
+            // Update the orientation on the movie file output video connection before starting recording.
+            [[[self movieFileOutput] connectionWithMediaType:AVMediaTypeVideo]
+                setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] videoOrientation]];
 
-          // Turning OFF flash for video recording
-          [SSOCameraCaptureHelper setFlashMode:AVCaptureFlashModeOff forDevice:[[self videoDeviceInput] device]];
+            // Turning OFF flash for video recording
+            [SSOCameraCaptureHelper setFlashMode:AVCaptureFlashModeOff forDevice:[[self videoDeviceInput] device]];
 
-          // Start recording to a temporary file.
-          NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[@"movie" stringByAppendingPathExtension:@"mov"]];
-          [[self movieFileOutput] startRecordingToOutputFileURL:[NSURL fileURLWithPath:outputFilePath] recordingDelegate:self];
-      } else {
-          [[self movieFileOutput] stopRecording];
-      }
+            // Start recording to a temporary file.
+            NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[@"movie" stringByAppendingPathExtension:@"mov"]];
+            [[self movieFileOutput] startRecordingToOutputFileURL:[NSURL fileURLWithPath:outputFilePath] recordingDelegate:self];
+        } else {
+            [[self movieFileOutput] stopRecording];
+        }
     });
 }
 
 - (void)changeCamera {
 
     dispatch_async([self sessionQueue], ^{
-      AVCaptureDevice *currentVideoDevice = [[self videoDeviceInput] device];
-      AVCaptureDevicePosition preferredPosition = AVCaptureDevicePositionUnspecified;
-      AVCaptureDevicePosition currentPosition = [currentVideoDevice position];
+        AVCaptureDevice *currentVideoDevice = [[self videoDeviceInput] device];
+        AVCaptureDevicePosition preferredPosition = AVCaptureDevicePositionUnspecified;
+        AVCaptureDevicePosition currentPosition = [currentVideoDevice position];
 
-      switch (currentPosition) {
-      case AVCaptureDevicePositionUnspecified:
-          preferredPosition = AVCaptureDevicePositionBack;
-          break;
-      case AVCaptureDevicePositionBack:
-          preferredPosition = AVCaptureDevicePositionFront;
-          break;
-      case AVCaptureDevicePositionFront:
-          preferredPosition = AVCaptureDevicePositionBack;
-          break;
-      }
+        switch (currentPosition) {
+        case AVCaptureDevicePositionUnspecified:
+            preferredPosition = AVCaptureDevicePositionBack;
+            break;
+        case AVCaptureDevicePositionBack:
+            preferredPosition = AVCaptureDevicePositionFront;
+            break;
+        case AVCaptureDevicePositionFront:
+            preferredPosition = AVCaptureDevicePositionBack;
+            break;
+        }
 
-      AVCaptureDevice *videoDevice = [SSOCameraCaptureHelper deviceWithMediaType:AVMediaTypeVideo preferringPosition:preferredPosition];
-      AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
+        AVCaptureDevice *videoDevice = [SSOCameraCaptureHelper deviceWithMediaType:AVMediaTypeVideo preferringPosition:preferredPosition];
+        AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
 
-      [[self session] beginConfiguration];
+        [[self session] beginConfiguration];
 
-      [[self session] removeInput:[self videoDeviceInput]];
-      if ([[self session] canAddInput:videoDeviceInput]) {
-          [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
+        [[self session] removeInput:[self videoDeviceInput]];
+        if ([[self session] canAddInput:videoDeviceInput]) {
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
 
-          [SSOCameraCaptureHelper setFlashMode:AVCaptureFlashModeAuto forDevice:videoDevice];
-          [[NSNotificationCenter defaultCenter] addObserver:self
-                                                   selector:@selector(subjectAreaDidChange:)
-                                                       name:AVCaptureDeviceSubjectAreaDidChangeNotification
-                                                     object:videoDevice];
+            [SSOCameraCaptureHelper setFlashMode:AVCaptureFlashModeAuto forDevice:videoDevice];
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(subjectAreaDidChange:)
+                                                         name:AVCaptureDeviceSubjectAreaDidChangeNotification
+                                                       object:videoDevice];
 
-          [[self session] addInput:videoDeviceInput];
-          [self setVideoDeviceInput:videoDeviceInput];
-      } else {
-          [[self session] addInput:[self videoDeviceInput]];
-      }
+            [[self session] addInput:videoDeviceInput];
+            [self setVideoDeviceInput:videoDeviceInput];
+        } else {
+            [[self session] addInput:[self videoDeviceInput]];
+        }
 
-      [[self session] commitConfiguration];
+        [[self session] commitConfiguration];
 
     });
 }
 
 - (void)snapStillImage {
     dispatch_async([self sessionQueue], ^{
-      // Update the orientation on the still image output video connection before capturing.
-      [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo]
-          setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] videoOrientation]];
+        // Update the orientation on the still image output video connection before capturing.
+        [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo]
+            setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] videoOrientation]];
 
-      // Flash set to Auto for Still Capture
-      [SSOCameraCaptureHelper setFlashMode:AVCaptureFlashModeAuto forDevice:[[self videoDeviceInput] device]];
+        // Flash set to Auto for Still Capture
+        [SSOCameraCaptureHelper setFlashMode:AVCaptureFlashModeAuto forDevice:[[self videoDeviceInput] device]];
 
-      // Capture a still image.
-      [[self stillImageOutput]
-          captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo]
-                                      completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+        // Capture a still image.
+        [[self stillImageOutput]
+            captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo]
+                                        completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
 
-                                        if (imageDataSampleBuffer) {
-                                            NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-                                            UIImage *image = [[UIImage alloc] initWithData:imageData];
-                                            [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage]
-                                                                                             orientation:(ALAssetOrientation)[image imageOrientation]
-                                                                                         completionBlock:nil];
-                                            
-                                            
-                                        }
-                                      }];
+                                            if (imageDataSampleBuffer) {
+                                                NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+                                                UIImage *image = [[UIImage alloc] initWithData:imageData];
+                                                ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+
+                                                NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+
+                                                [library saveImage:image
+                                                                toAlbum:appName
+                                                    withCompletionBlock:^(NSError *error) { [self.delegate didFinishCapturingImage:image withError:error]; }];
+                                            }
+                                        }];
     });
 }
 
@@ -286,13 +288,15 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
     [[[ALAssetsLibrary alloc] init] writeVideoAtPathToSavedPhotosAlbum:outputFileURL
                                                        completionBlock:^(NSURL *assetURL, NSError *error) {
-                                                         if (error)
-                                                             NSLog(@"%@", error);
+                                                           if (error)
+                                                               NSLog(@"%@", error);
+                                                           
+                                                           [self.delegate didFinishCapturingVideo:outputFileURL withError:error];
 
-                                                         [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
+                                                           [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
 
-                                                         if (backgroundRecordingID != UIBackgroundTaskInvalid)
-                                                             [[UIApplication sharedApplication] endBackgroundTask:backgroundRecordingID];
+                                                           if (backgroundRecordingID != UIBackgroundTaskInvalid)
+                                                               [[UIApplication sharedApplication] endBackgroundTask:backgroundRecordingID];
                                                        }];
 }
 
@@ -303,22 +307,22 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
                atDevicePoint:(CGPoint)point
     monitorSubjectAreaChange:(BOOL)monitorSubjectAreaChange {
     dispatch_async([self sessionQueue], ^{
-      AVCaptureDevice *device = [[self videoDeviceInput] device];
-      NSError *error = nil;
-      if ([device lockForConfiguration:&error]) {
-          if ([device isFocusPointOfInterestSupported] && [device isFocusModeSupported:focusMode]) {
-              [device setFocusMode:focusMode];
-              [device setFocusPointOfInterest:point];
-          }
-          if ([device isExposurePointOfInterestSupported] && [device isExposureModeSupported:exposureMode]) {
-              [device setExposureMode:exposureMode];
-              [device setExposurePointOfInterest:point];
-          }
-          [device setSubjectAreaChangeMonitoringEnabled:monitorSubjectAreaChange];
-          [device unlockForConfiguration];
-      } else {
-          NSLog(@"%@", error);
-      }
+        AVCaptureDevice *device = [[self videoDeviceInput] device];
+        NSError *error = nil;
+        if ([device lockForConfiguration:&error]) {
+            if ([device isFocusPointOfInterestSupported] && [device isFocusModeSupported:focusMode]) {
+                [device setFocusMode:focusMode];
+                [device setFocusPointOfInterest:point];
+            }
+            if ([device isExposurePointOfInterestSupported] && [device isExposureModeSupported:exposureMode]) {
+                [device setExposureMode:exposureMode];
+                [device setExposurePointOfInterest:point];
+            }
+            [device setSubjectAreaChangeMonitoringEnabled:monitorSubjectAreaChange];
+            [device unlockForConfiguration];
+        } else {
+            NSLog(@"%@", error);
+        }
     });
 }
 
@@ -352,11 +356,8 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
 - (void)runStillImageCaptureAnimation {
     dispatch_async(dispatch_get_main_queue(), ^{
-      [[[self previewView] layer] setOpacity:0.0];
-      [UIView animateWithDuration:.25
-                       animations:^{
-                         [[[self previewView] layer] setOpacity:1.0];
-                       }];
+        [[[self previewView] layer] setOpacity:0.0];
+        [UIView animateWithDuration:.25 animations:^{ [[[self previewView] layer] setOpacity:1.0]; }];
     });
 }
 

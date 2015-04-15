@@ -29,11 +29,25 @@
  */
 + (SSOColorPickerContainerView *)loadColorPickerContainerView;
 
+/**
+ *  Get the login container view
+ *
+ *  @return the view
+ */
 + (SSOLoginContainerView *)loadLoginContainerView;
 
+/**
+ *  Get the register container view
+ *
+ *  @return the view
+ */
 + (SSORegisterContainerView *)loadRegisterContainerView;
 
+/**
+ *  Get the login view controller
+ *
+ *  @return the VC
+ */
 + (SSOLoginViewController *)loadLoginViewController;
-
 
 @end

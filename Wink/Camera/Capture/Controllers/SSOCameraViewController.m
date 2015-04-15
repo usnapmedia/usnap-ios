@@ -16,6 +16,7 @@
 #import "SSORoundedAnimatedButton.h"
 #import "AVCamPreviewView.h"
 #import "SSOCameraCaptureHelper.h"
+#import "SSOVideoEditingHelper.h"
 
 #define kTotalVideoRecordingTime 30
 
@@ -92,6 +93,7 @@
  */
 - (void)initializeData {
     self.cameraCaptureHelper = [[SSOCameraCaptureHelper alloc] initWithPreviewView:self.cameraPreviewView andOrientation:[self interfaceOrientation]];
+    self.cameraCaptureHelper.delegate = self;
 }
 
 /**
@@ -169,6 +171,153 @@
         } else {
             self.flashButton.hidden = YES;
         }
+    }
+}
+
+/**
+ *  While recording this code will update the timer to count down
+ *
+ *  @param secondsRemaining
+ */
+- (void)updateVideoRecordingLabel:(NSTimer *)timer {
+    NSString *recordString = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"REC", @"")];
+    NSString *timeString = [NSString stringWithFormat:@"%02i", (int)self.videoTimeRemaining];
+    NSString *fullString = [NSString stringWithFormat:@"%@ %@", recordString, timeString];
+
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:fullString];
+    [attrString addAttribute:NSFontAttributeName value:[UIFont winkFontAvenirWithSize:16.0f] range:[fullString rangeOfString:recordString]];
+    [attrString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:[fullString rangeOfString:recordString]];
+    [attrString addAttribute:NSFontAttributeName value:[UIFont winkFontAvenirWithSize:22.0f] range:[fullString rangeOfString:timeString]];
+    [attrString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:[fullString rangeOfString:timeString]];
+
+    self.recordingVideoLabel.attributedText = attrString;
+
+    self.videoTimeRemaining--;
+}
+
+/**
+ *  Create an attributed string for the photo/video buttons
+ *
+ *  @param text - Button text
+ *
+ *  @return
+ */
+- (NSMutableAttributedString *)setupUIForButtonWithText:(NSString *)text {
+    NSMutableAttributedString *attrStringSelected = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(text, nil).uppercaseString];
+    [attrStringSelected addAttribute:NSKernAttributeName
+                               value:[NSNumber numberWithInteger:2]
+                               range:[attrStringSelected.string rangeOfString:attrStringSelected.string]];
+    [attrStringSelected addAttribute:NSForegroundColorAttributeName
+                               value:[UIColor yellowTextColorWithAlpha:1.0f]
+                               range:[attrStringSelected.string rangeOfString:attrStringSelected.string]];
+
+    return attrStringSelected;
+}
+
+/**
+ *  Animate the photo and video buttons positions using constraints
+ */
+- (void)animatePhotoVideoSwitch {
+    [UIView animateWithDuration:0.5f
+                          delay:0.0f
+         usingSpringWithDamping:0.5f
+          initialSpringVelocity:1.0f
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{ [self.view layoutIfNeeded]; }
+                     completion:nil];
+}
+
+/**
+ *  Swap video and photo buttons
+ *
+ *  @param buttonToCenter     Button that you would like to center
+ *  @param constraintToCenter Constraint that you will use to center the button
+ *  @param constraintToShift  Constraint of the button that you will shift to right or left out of the way
+ *  @param isMovingLeftwards  Check if the button you want to center is moving leftwards
+ *  @param animated
+ */
+- (void)swapPhotoAndVideoButtonsWithButtonToCenter:(UIButton *)buttonToCenter
+                            andCenteringConstraint:(NSLayoutConstraint *)constraintToCenter
+                               andConstraintToMove:(NSLayoutConstraint *)constraintToShift
+                            withLeftwardsDirection:(BOOL)isMovingLeftwards
+                                          animated:(BOOL)animated {
+    // Shift photo button to the left and move video button to the center
+    float widthOfButtonToCenter = buttonToCenter.frame.size.width;
+    float widthOfScreenMinusButtonToCenter = self.videoAndPhotoContainerView.frame.size.width / 2 - widthOfButtonToCenter / 2;
+
+    if (isMovingLeftwards) {
+        constraintToShift.constant = widthOfScreenMinusButtonToCenter / 2 + widthOfButtonToCenter / 2;
+    } else {
+        constraintToShift.constant = -(widthOfScreenMinusButtonToCenter / 2 + widthOfButtonToCenter / 2);
+    }
+    constraintToCenter.constant = 0;
+
+    // Animate the photo and video buttons positions
+    if (animated) {
+        [self animatePhotoVideoSwitch];
+    }
+}
+
+/**
+ *  Add an animation to the camera roll preview image when we take a picture and come back to camera view
+ */
+- (void)animateCameraRollImageChange {
+
+    if (self.containerViewController.cameraContainerVC.libraryImage) {
+
+        [UIView animateWithDuration:0.3
+            animations:^{ self.mediaButton.alpha = 0.1; }
+            completion:^(BOOL finished) {
+
+                [UIView animateWithDuration:0.3
+                                 animations:^{
+                                     [self.mediaButton setImage:self.containerViewController.cameraContainerVC.libraryImage forState:UIControlStateNormal];
+
+                                     self.mediaButton.alpha = 1;
+                                 }];
+            }];
+    }
+}
+#pragma mark - UIGestureRecognizer
+
+/**
+ *  When the user swipes left or right, change between the video or photo container
+ *
+ *  @param swipeGesture
+// */
+//- (IBAction)swipeGestureAction:(UISwipeGestureRecognizer *)swipeGesture {
+//    if (swipeGesture.direction & UISwipeGestureRecognizerDirectionLeft) {
+//        [self videoContainerButtonPushed:self.videoButton];
+//
+//    } else if (swipeGesture.direction & UISwipeGestureRecognizerDirectionRight) {
+//        [self photoContainerButtonPushed:self.photoButton];
+//    }
+//}
+
+#pragma mark - Prepare for Segue / Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Set up container view controller
+    if ([segue.identifier isEqualToString:kCameraContainerSegue]) {
+        SSOContainerViewController *containerViewController = (SSOContainerViewController *)segue.destinationViewController;
+
+        self.isVideoOn = [[NSUserDefaults standardUserDefaults] boolForKey:kIsVideoOn];
+
+        [containerViewController setInitialViewController];
+        self.containerViewController = containerViewController;
+
+        if (self.isVideoOn) {
+            //            self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeMovie];
+
+        } else {
+            //            self.containerViewController.cameraContainerVC.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+        }
+
+        // Store the container view controller in a property to be used to swap view controller
+        self.containerViewController = containerViewController;
+
+        // Set delegate for video view controller to enable user interaction in this vc after the video is done recording
+        self.containerViewController.cameraContainerVC.videoDelegate = self;
     }
 }
 
@@ -320,6 +469,80 @@
     [self pushToEditVCWithMedia:info];
 
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)enableUserInteraction {
+    self.view.userInteractionEnabled = YES;
+}
+
+#pragma mark - SSOCameraDelegate
+
+- (void)didFinishCapturingImage:(UIImage *)image withError:(NSError *)error {
+
+    if (error) {
+
+    } else {
+        // Edit the selected media
+        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+        controller.image = image;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
+
+- (void)didFinishCapturingVideo:(NSURL *)video withError:(NSError *)error {
+
+    [SSOVideoEditingHelper
+              cropVideo:video
+             withStatus:^(AVAssetExportSessionStatus status, AVAssetExportSession *exporter) {
+                 switch (status) {
+                 case AVAssetExportSessionStatusUnknown:
+                     [SVProgressHUD dismiss];
+                     // [self.videoDelegate enableUserInteraction];
+
+                     break;
+                 case AVAssetExportSessionStatusWaiting:
+                     break;
+                 case AVAssetExportSessionStatusExporting:
+                     break;
+                 case AVAssetExportSessionStatusCompleted: {
+                     // Dismiss HUD
+                     [SVProgressHUD dismiss];
+                     // [self.videoDelegate enableUserInteraction];
+
+                     NSURLRequest *request = [NSURLRequest requestWithURL:exporter.outputURL];
+
+                     [NSURLConnection
+                         sendAsynchronousRequest:request
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                   NSURL *documentsURL =
+                                       [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+                                   NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[exporter.outputURL lastPathComponent]];
+                                   [data writeToURL:tempURL atomically:YES];
+                                   UISaveVideoAtPathToSavedPhotosAlbum(tempURL.path, nil, NULL, NULL);
+                               }];
+
+                     // Edit the selected media
+                     WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+                     controller.mediaURL = exporter.outputURL;
+                     [self.navigationController pushViewController:controller animated:YES];
+                 } break;
+                 case AVAssetExportSessionStatusFailed:
+                     [SVProgressHUD dismiss];
+                    // [self.videoDelegate enableUserInteraction];
+
+                     break;
+                 case AVAssetExportSessionStatusCancelled:
+                     [SVProgressHUD dismiss];
+                    // [self.videoDelegate enableUserInteraction];
+
+                     break;
+
+                 default:
+                     break;
+                 }
+             }
+        inContainerView:self.view];
 }
 
 @end

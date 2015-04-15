@@ -29,7 +29,6 @@
 
 @interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, SSOLoginRegisterDelegate>
 
-@property(nonatomic, strong) SSOMediaEditState *mediaEditState;
 @property(weak, nonatomic) IBOutlet UIImageView *watermarkImageView;
 @property(weak, nonatomic) IBOutlet UIButton *postButton;
 @property(weak, nonatomic) IBOutlet UIButton *backButton;
@@ -53,32 +52,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.mediaEditState = [SSOMediaEditStateNone new];
-
-    //  UINavigationController *controller;
     [self setUI];
-
-    // Register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
-
-    //    self.sideMenuView.heightOfVC = self.view.frame.size.height - self.collectionView.frame.size.height;
-    //    self.sideMenuView.widthOfVC = self.view.frame.size.width;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
     [self.sideMenuView setSizeOfView:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - self.collectionView.frame.size.height)];
-
-    // Reset the state to none
-    self.mediaEditState = [SSOMediaEditStateNone new];
-    [(SSOMediaEditStateNone *)self.mediaEditState resetButtonsState];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
-    // [self.sideMenuView addButtonsToView];
 
     // Play the movie player
     [self.moviePlayerView.player play];
@@ -97,12 +81,17 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    // Remove the keyboard observer
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     // Remove the keyboard
     [self.textView resignFirstResponder];
 }
 
+/**
+ *  Detect if the phone is being rotated and return the new  size of the screen
+ *
+ *  @param size        the size of  the screen
+ *  @param coordinator transition coordinator
+ */
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
 
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
@@ -157,12 +146,10 @@
 - (NSArray *)populateCellData {
 
     NSMutableArray *cellDataArray = [NSMutableArray new];
-
     SSCellViewSection *section = [[SSCellViewSection alloc] init];
 
     for (UIImage *image in self.arrayImages) {
         SSCellViewItem *newElement;
-
         newElement = [SSCellViewItem new];
         newElement.cellReusableIdentifier = @"collectionCell";
         newElement.objectData = image;
@@ -199,6 +186,11 @@
     return _arrayImages;
 }
 
+/**
+ *  Block the screen rotation
+ *
+ *  @return BOOL
+ */
 - (BOOL)shouldAutorotate {
 
     return NO;
@@ -236,9 +228,7 @@
         [self.overlayView insertSubview:_drawView belowSubview:self.textView];
 
         // Set constraints
-        [_drawView mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.edges.equalTo(self.view);
-        }];
+        [_drawView mas_makeConstraints:^(MASConstraintMaker *make) { make.edges.equalTo(self.view); }];
     }
     return _drawView;
 }
@@ -257,9 +247,7 @@
         // Insert view
         [self.editAccessoriesContainerView addSubview:_brightnessContrastContainerView];
         // Set the container inside the view to have constraints on the edges
-        [_brightnessContrastContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.edges.equalTo(self.editAccessoriesContainerView);
-        }];
+        [_brightnessContrastContainerView mas_makeConstraints:^(MASConstraintMaker *make) { make.edges.equalTo(self.editAccessoriesContainerView); }];
     }
     return _brightnessContrastContainerView;
 }
@@ -270,62 +258,9 @@
         // Insert view
         [self.editAccessoriesContainerView addSubview:_colorPickerContainerView];
         // Set the container inside the view to have constraints on the edges
-        [_colorPickerContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.edges.equalTo(self.editAccessoriesContainerView);
-        }];
+        [_colorPickerContainerView mas_makeConstraints:^(MASConstraintMaker *make) { make.edges.equalTo(self.editAccessoriesContainerView); }];
     }
     return _colorPickerContainerView;
-}
-
-#pragma mark - Setter
-
-- (void)setMediaEditState:(SSOMediaEditState *)mediaEditState {
-    _mediaEditState = mediaEditState;
-    // Set the VC for the state object
-    [_mediaEditState setEditMediaVC:self];
-}
-
-#pragma mark - Keyboard Methods
-
-- (void)keyboardWillHide {
-    // Set the type to none and reset the button
-    self.mediaEditState = [SSOMediaEditStateNone new];
-    [(SSOMediaEditStateNone *)self.mediaEditState resetButtonsState];
-}
-
-#pragma mark - Touch Methods
-
-//@FIXME
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-    // We have to check since the method is optional
-    if ([self.mediaEditState respondsToSelector:@selector(touchesBegan:withEvent:)]) {
-        [self.mediaEditState touchesBegan:touches withEvent:event];
-    }
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesMoved:touches withEvent:event];
-    // We have to check since the method is optional
-    if ([self.mediaEditState respondsToSelector:@selector(touchesMoved:withEvent:)]) {
-        [self.mediaEditState touchesMoved:touches withEvent:event];
-    }
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesEnded:touches withEvent:event];
-    // We have to check since the method is optional
-    if ([self.mediaEditState respondsToSelector:@selector(touchesEnded:withEvent:)]) {
-        [self.mediaEditState touchesEnded:touches withEvent:event];
-    }
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesCancelled:touches withEvent:event];
-    // We have to check since the method is optional
-    if ([self.mediaEditState respondsToSelector:@selector(touchesCancelled:withEvent:)]) {
-        [self.mediaEditState touchesCancelled:touches withEvent:event];
-    }
 }
 
 #pragma mark - Movie View Methods
@@ -336,57 +271,12 @@
 
 #pragma mark - Button Actions
 
-- (IBAction)drawButtonTouched:(id)sender {
-    // Set the next state for the media edit
-    if ([self.mediaEditState state] == SSOMediaEditStateEnumDrawGray) {
-        self.mediaEditState = [SSOMediaEditStateNone new];
-    } else if ([self.mediaEditState state] == SSOMediaEditStateEnumDrawColor) {
-        self.mediaEditState = [SSOMediaEditStateDrawGray new];
-    } else {
-        self.mediaEditState = [SSOMediaEditStateDrawColor new];
-    }
-
-    [self.mediaEditState drawButtonTouched];
-}
-
-- (IBAction)textButtonTouched:(id)sender {
-    // Set the next state for the media edit
-    if ([self.mediaEditState state] == SSOMediaEditStateEnumText) {
-        self.mediaEditState = [SSOMediaEditStateNone new];
-    } else {
-        self.mediaEditState = [SSOMediaEditStateText new];
-    }
-    [self.mediaEditState textButtonTouched];
-}
-
-- (IBAction)brightnessButtonTouched:(id)sender {
-    // Set the next state for the media edit
-    if ([self.mediaEditState state] == SSOMediaEditStateEnumBrightness) {
-        self.mediaEditState = [SSOMediaEditStateNone new];
-    } else {
-        self.mediaEditState = [SSOMediaEditStateBrightness new];
-    }
-    [self.mediaEditState brightnessButtonTouched];
-}
-
-- (IBAction)cropButtonTouched:(id)sender {
-    // Set the next state for the media edit
-    if ([self.mediaEditState state] == SSOMediaEditStateEnumCrop) {
-        self.mediaEditState = [SSOMediaEditStateNone new];
-    } else {
-        self.mediaEditState = [SSOMediaEditStateCrop new];
-    }
-    [self.mediaEditState cropButtonTouched];
-}
-
 - (IBAction)postButtonTouched:(id)sender {
 
+    // If the user is not logged in, send him to login page
     if (![NSUserDefaults isUserLoggedIn]) {
         SSOLoginViewController *loginVC = [NSBundle loadLoginViewController];
         loginVC.delegate = self;
-        
-        //   UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginController];
-
         [self presentViewController:loginVC animated:YES completion:nil];
         return;
     }
@@ -435,6 +325,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - SSOLoginRegisterDelegate
+
+/**
+ *  Called when the loginVC is dismissed
+ */
 - (void)didFinishAuthProcess {
     WKShareViewController *controller = [[WKShareViewController alloc] initWithNibName:@"WKShareViewController" bundle:nil];
     controller.image = [self.imageView snapshotImage];

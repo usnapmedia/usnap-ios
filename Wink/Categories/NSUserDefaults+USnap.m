@@ -13,7 +13,7 @@
 
 + (BOOL)isFirstLogin {
     // Check if there is a first launch date
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:kIsFirstLogin]) {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:kIsFirstLoginDate]) {
         // set firstLaunch flag to initial date
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kIsFirstLoginDate];
         [[NSUserDefaults standardUserDefaults] synchronize];

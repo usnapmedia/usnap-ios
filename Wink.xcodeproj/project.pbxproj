@@ -325,10 +325,10 @@
 		D8EA5C7B1AD4281B008D2A37 /* SSOSocialNetworkAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSocialNetworkAPI.m; sourceTree = "<group>"; };
 		D8EA5C7F1AD4287C008D2A37 /* WKWinkConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWinkConnect.h; sourceTree = "<group>"; };
 		D8EA5C801AD4287C008D2A37 /* WKWinkConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWinkConnect.m; sourceTree = "<group>"; };
-		D8EA5C821AD4287C008D2A37 /* WKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKLoginViewController.h; sourceTree = "<group>"; };
-		D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKLoginViewController.m; sourceTree = "<group>"; };
-		D8EA5C841AD4287C008D2A37 /* WKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKUser.h; sourceTree = "<group>"; };
-		D8EA5C851AD4287C008D2A37 /* WKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKUser.m; sourceTree = "<group>"; };
+		D8EA5C821AD4287C008D2A37 /* WKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WKLoginViewController.h; path = ../Login/Controllers/WKLoginViewController.h; sourceTree = "<group>"; };
+		D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WKLoginViewController.m; path = ../Login/Controllers/WKLoginViewController.m; sourceTree = "<group>"; };
+		D8EA5C841AD4287C008D2A37 /* WKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WKUser.h; path = ../Login/Controllers/WKUser.h; sourceTree = "<group>"; };
+		D8EA5C851AD4287C008D2A37 /* WKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WKUser.m; path = ../Login/Controllers/WKUser.m; sourceTree = "<group>"; };
 		D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOLoginViewController.xib; sourceTree = "<group>"; };
 		D8EA5C881AD4287C008D2A37 /* WKLoginViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKLoginViewController_iPad.xib; sourceTree = "<group>"; };
 		D8EA5C8E1AD428D3008D2A37 /* SSOGooglePlusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOGooglePlusHelper.h; sourceTree = "<group>"; };
@@ -578,6 +578,10 @@
 		335723751ACB097C000CC846 /* Old:To Check */ = {
 			isa = PBXGroup;
 			children = (
+				D8EA5C841AD4287C008D2A37 /* WKUser.h */,
+				D8EA5C851AD4287C008D2A37 /* WKUser.m */,
+				D8EA5C821AD4287C008D2A37 /* WKLoginViewController.h */,
+				D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */,
 				335723761ACB097C000CC846 /* WKCameraOverlayViewController.h */,
 				335723771ACB097C000CC846 /* WKCameraOverlayViewController.m */,
 				335723781ACB097C000CC846 /* WKCameraOverlayViewController.xib */,
@@ -915,12 +919,8 @@
 		D8EA5C811AD4287C008D2A37 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D8EA5C821AD4287C008D2A37 /* WKLoginViewController.h */,
-				D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */,
 				3303DDD51AD85591002B74F9 /* SSOLoginViewController.h */,
 				3303DDD61AD85591002B74F9 /* SSOLoginViewController.m */,
-				D8EA5C841AD4287C008D2A37 /* WKUser.h */,
-				D8EA5C851AD4287C008D2A37 /* WKUser.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
