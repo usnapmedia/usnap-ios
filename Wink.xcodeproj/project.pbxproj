@@ -1344,7 +1344,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wink/Supporting Files/Wink-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Wink/Supporting Files/Wink-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Wink/GoogleAnalytics",
@@ -1372,7 +1372,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wink/Supporting Files/Wink-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Wink/Supporting Files/Wink-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Wink/GoogleAnalytics",

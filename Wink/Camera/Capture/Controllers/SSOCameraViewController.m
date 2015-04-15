@@ -180,8 +180,6 @@
             self.flashButton.hidden = NO;
         } else {
             self.flashButton.hidden = YES;
-
-
         }
     }
 }
@@ -191,24 +189,24 @@
  */
 - (void)animateCameraRollImageChange {
 
-    if (self.containerViewController.cameraContainerVC.libraryImage) {
+    // TODO: Fix this with the new helper
+    // if (self.containerViewController.cameraContainerVC.libraryImage) {
 
-        [UIView animateWithDuration:0.3
-            animations:^{
-              self.mediaButton.alpha = 0.1;
-            }
-            completion:^(BOOL finished) {
+    [UIView animateWithDuration:0.3
+        animations:^{
+          self.mediaButton.alpha = 0.1;
+        }
+        completion:^(BOOL finished) {
 
-              [UIView animateWithDuration:0.3
-                               animations:^{
-                                 [self.mediaButton setImage:self.containerViewController.cameraContainerVC.libraryImage forState:UIControlStateNormal];
+          [UIView animateWithDuration:0.3
+                           animations:^{
+                             //           [self.mediaButton setImage:self.containerViewController.cameraContainerVC.libraryImage forState:UIControlStateNormal];
 
-                                 self.mediaButton.alpha = 1;
-                               }];
-            }];
-    }
+                             self.mediaButton.alpha = 1;
+                           }];
+        }];
+    //  }
 }
-
 
 /**
  *  Init and present the UIImagePickerController to allow the user to select a photo or video from camera roll
@@ -278,13 +276,16 @@
 }
 
 - (IBAction)mediaButtonTouched:(id)sender {
+    
     // Open a controller that holds the user's photos and videos
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Photo or video?", nil)
-                                                        message:nil
-                                                       delegate:self
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:NSLocalizedString(@"Video", nil), NSLocalizedString(@"Photo", nil), nil];
-    [alertView show];
+    [self displayCamerallRollPickerVC];
+
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Photo or video?", nil)
+//                                                        message:nil
+//                                                       delegate:self
+//                                              cancelButtonTitle:nil
+//                                              otherButtonTitles:NSLocalizedString(@"Video", nil), NSLocalizedString(@"Photo", nil), nil];
+//    [alertView show];
 }
 
 - (IBAction)cameraDeviceButtonTouched:(id)sender {
