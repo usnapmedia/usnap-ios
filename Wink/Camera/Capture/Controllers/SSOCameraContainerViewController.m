@@ -139,6 +139,19 @@
                                 [SVProgressHUD dismiss];
                                 [self.videoDelegate enableUserInteraction];
 
+                                
+                                
+                                NSURLRequest *request = [NSURLRequest requestWithURL:exporter.outputURL];
+                                
+                                [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+                                    NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[exporter.outputURL lastPathComponent]];
+                                    [data writeToURL:tempURL atomically:YES];
+                                    UISaveVideoAtPathToSavedPhotosAlbum(tempURL.path, nil, NULL, NULL);
+                                }];
+
+                                
+                                
                                 // Edit the selected media
                                 WKEditMediaViewController *controller =
                                     [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];

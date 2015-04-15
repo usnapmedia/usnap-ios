@@ -138,13 +138,13 @@
     exporter.outputFileType = AVFileTypeQuickTimeMovie;
 
     [exporter exportAsynchronouslyWithCompletionHandler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Edit the selected media
-            WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
-            controller.mediaURL = exporter.outputURL;
-            [self.cameraImagePickerController pushViewController:controller animated:YES];
+      dispatch_async(dispatch_get_main_queue(), ^{
+        // Edit the selected media
+        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+        controller.mediaURL = exporter.outputURL;
+        [self.cameraImagePickerController pushViewController:controller animated:YES];
 
-        });
+      });
     }];
 }
 
@@ -177,7 +177,6 @@
     }
 }
 
-
 #pragma mark - Button Actions
 
 - (void)presentMediaPickerControllerAnimated:(BOOL)animated completed:(void (^)(void))completionBlock {
@@ -188,25 +187,25 @@
              otherButtonTitles:@[ NSLocalizedString(@"Video", @""), NSLocalizedString(@"Photo", @"") ]
                       tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
 
-                          BOOL allowsEditing = NO;
-                          NSArray *mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
-                          if (buttonIndex == 0) {
-                              allowsEditing = YES;
-                              mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, nil];
-                          }
+                        BOOL allowsEditing = NO;
+                        NSArray *mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
+                        if (buttonIndex == 0) {
+                            allowsEditing = YES;
+                            mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, nil];
+                        }
 
-                          WKImagePickerController *controller = [[WKImagePickerController alloc] init];
-                          controller.delegate = self;
-                          controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                          controller.videoMaximumDuration = 30.0f;
-                          controller.allowsEditing = allowsEditing;
-                          controller.navigationBarHidden = NO;
-                          controller.toolbarHidden = NO;
-                          controller.mediaTypes = mediaTypes;
-                          if (!self.isPhone) {
-                              controller.modalPresentationStyle = UIModalPresentationFormSheet;
-                          }
-                          [self.navigationController.visibleViewController presentViewController:controller animated:animated completion:completionBlock];
+                        WKImagePickerController *controller = [[WKImagePickerController alloc] init];
+                        controller.delegate = self;
+                        controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                        controller.videoMaximumDuration = 30.0f;
+                        controller.allowsEditing = allowsEditing;
+                        controller.navigationBarHidden = NO;
+                        controller.toolbarHidden = NO;
+                        controller.mediaTypes = mediaTypes;
+                        if (!self.isPhone) {
+                            controller.modalPresentationStyle = UIModalPresentationFormSheet;
+                        }
+                        [self.navigationController.visibleViewController presentViewController:controller animated:animated completion:completionBlock];
                       }];
 }
 

@@ -16,6 +16,8 @@
 #import "VideoRecordingDelegate.h"
 #import "WKEditMediaViewController.h"
 #import "SSORoundedAnimatedButton.h"
+#import "AVCamPreviewView.h"
+#import "SSOCameraCaptureHelper.h"
 
 #define kTotalVideoRecordingTime 30
 
@@ -37,6 +39,7 @@
 @property(weak, nonatomic) IBOutlet UIButton *captureButton;
 @property(weak, nonatomic) IBOutlet UIView *bottomContainerView;
 @property(weak, nonatomic) IBOutlet SSORoundedAnimatedButton *animatedCaptureButton;
+@property(weak, nonatomic) IBOutlet AVCamPreviewView *cameraPreviewView;
 
 // View Controllers
 @property(weak, nonatomic) SSOContainerViewController *containerViewController;
@@ -54,6 +57,8 @@
 
 @property(nonatomic) NSInteger videoTimeRemaining;
 @property(strong, nonatomic) NSTimer *timer;
+
+@property(strong, nonatomic) SSOCameraCaptureHelper *cameraCaptureHelper;
 
 @end
 
@@ -82,6 +87,12 @@
     [self animateCameraRollImageChange];
 }
 
+#pragma mark - Orientation
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [self.cameraCaptureHelper willRotateToInterfaceOrientation:toInterfaceOrientation];
+}
+
 #pragma mark - Utilities
 
 - (void)initAnimatedButton {
@@ -97,6 +108,7 @@
  */
 - (void)initializeData {
     self.videoTimeRemaining = kTotalVideoRecordingTime;
+    self.cameraCaptureHelper = [[SSOCameraCaptureHelper alloc] initWithPreviewView:self.cameraPreviewView andOrientation:[self interfaceOrientation]];
 }
 
 /**
@@ -441,40 +453,30 @@
 - (IBAction)cameraDeviceButtonTouched:(id)sender {
     if (self.isCameraRearFacing) {
         self.isCameraRearFacing = NO;
-
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kIsCameraRearFacing];
-
-        [self.containerViewController.cameraContainerVC turnOnFrontCamera];
-
     } else {
         self.isCameraRearFacing = YES;
-
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsCameraRearFacing];
-
-        [self.containerViewController.cameraContainerVC turnOnRearCamera];
     }
-
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
     [self updateRearCameraFacingUI];
 }
 
 #pragma mark Capture Button
 
 - (IBAction)captureButtonPushed:(id)sender {
-    
+
     NSLog(@" capturing %d", self.containerViewController.cameraContainerVC.capturing);
     // Check
-    if (!self.isVideoRecording && !self.containerViewController.cameraContainerVC.capturing) {
-        [self.containerViewController.cameraContainerVC capturePhoto];
-    }
+    [self.cameraCaptureHelper snapStillImage];
+    //    if (!self.isVideoRecording && !self.containerViewController.cameraContainerVC.capturing) {
+    //        [self.containerViewController.cameraContainerVC capturePhoto];
+    //    }
 }
 
 #pragma mark - SSORoundedAnimatedButtonProtocol
 
 - (void)didStartLongPressGesture:(SSORoundedAnimatedButton *)button {
 
-    [self.containerViewController.cameraContainerVC startRecordingVideo];
+    //    [self.containerViewController.cameraContainerVC startRecordingVideo];
+    [self.cameraCaptureHelper toggleMovieRecording];
     self.isRotationAllowed = NO;
     self.isVideoRecording = YES;
 }
@@ -483,7 +485,8 @@
 
     [button pauseAnimation];
 
-    [self.containerViewController.cameraContainerVC stopRecordingVideo];
+    //    [self.containerViewController.cameraContainerVC stopRecordingVideo];
+    [self.cameraCaptureHelper toggleMovieRecording];
     self.isVideoRecording = NO;
 }
 

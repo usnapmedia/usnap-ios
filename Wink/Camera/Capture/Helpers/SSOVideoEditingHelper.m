@@ -31,7 +31,6 @@
     CGAffineTransform translateTransform = CGAffineTransformIdentity;
     CGAffineTransform finalTransform = CGAffineTransformIdentity;
 
-    videoComposition.renderSize = CGSizeMake(adjustedSize.width, adjustedSize.height);
 
     switch (videoOrientation) {
     case UIImageOrientationUp:
