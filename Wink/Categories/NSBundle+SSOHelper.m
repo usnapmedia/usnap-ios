@@ -27,8 +27,6 @@
 }
 
 + (SSOLoginViewController *)loadLoginViewController {
-    //    return [[[NSBundle mainBundle] loadNibNamed:@"SSOLoginViewController" owner:self options:nil] firstObject];
-
     return [[SSOLoginViewController alloc] initWithNibName:@"SSOLoginViewController" bundle:nil];
 }
 

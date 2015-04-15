@@ -24,30 +24,36 @@ extern NSString *const kAPIUrl;
 extern NSString *const kSocialNetworkCellSwitchNotification;
 
 #pragma mark - Soocial network
-
+// Settings switches
 extern NSString *const kFacebookSwitchValue;
 extern NSString *const kTwitterSwitchValue;
 extern NSString *const kGooglePlusSwitchValue;
 extern NSString *const kTumblrSwitchValue;
 extern NSString *const kInstagramSwitchValue;
+
 extern NSString *const kTwitterAccountName;
 extern NSString *const kIsFacebookLoggedIn;
 extern NSString *const kEmailLoggedValue;
-
+// Tokens
 extern NSString *const kTokenFacebookString;
 extern NSString *const kTokenTwitterString;
 extern NSString *const kTokenGoogleString;
 
 #pragma mark - NSUserDefaults
 
+// Camera
 extern NSString *const kIsCameraRearFacing;
 extern NSString *const kIsFlashOn;
 extern NSString *const kIsVideoOn;
+
+// Login
 extern NSString *const kIsFirstLogin;
 extern NSString *const kIsFirstLoginDate;
-extern NSString *const kUSnapKeychainServiceKey;
 extern NSString *const kIsUserLoggedIn;
 extern NSString *const kEmailLoggedString;
+
+// Keychain
+extern NSString *const kUSnapKeychainServiceKey;
 
 #pragma mark - Storyboard
 

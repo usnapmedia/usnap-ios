@@ -34,9 +34,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // [self setSocialNetworks];
-    //  [self setUI];
-    //   [self addObservers];
 
     [self setUI];
 
@@ -98,16 +95,6 @@
     self.loginContainerView.hidden = !self.loginContainerView.hidden;
     self.registerContainerView.hidden = !self.registerContainerView.hidden;
 }
-
-/**
- *  Add observers to the VC
- */
-//- (void)addObservers {
-//    // Register for keyboard notifications
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-//
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-//}
 
 /**
  *  Lazy instanciation
@@ -218,6 +205,7 @@
 
 - (void)didLoginWithInfo:(NSDictionary *)info {
 
+    // Login on the backend
     [WKWinkConnect winkConnectLoginWithUsername:[info valueForKey:@"email"]
         password:[info valueForKey:@"password"]
         meta:nil
@@ -245,6 +233,7 @@
 
 - (void)didRegisterWithInfo:(NSDictionary *)info andMeta:(NSDictionary *)meta {
 
+    // Register on the backend
     [WKWinkConnect winkConnectRegisterWithUsername:[info valueForKey:@"email"]
         password:[info valueForKey:@"password"]
         meta:meta
@@ -254,6 +243,7 @@
 
           [self dismissViewControllerAnimated:YES
                                    completion:^{
+                                       // Call the delegate
                                      [self.delegate didFinishAuthProcess];
 
                                    }];
