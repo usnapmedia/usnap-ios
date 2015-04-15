@@ -66,7 +66,7 @@
 - (void)addViewWithBlur
 {
 
-    UIView* view = [[UIView alloc] initWithFrame:self.bounds];
+    UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.sizeOfView.width, self.sizeOfView.height)];
     view.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.3f];
     view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
@@ -84,7 +84,7 @@
 
     // add vibrancy to yet another effect view
    // UIVisualEffectView* vibrantView = [[UIVisualEffectView alloc] initWithEffect:vibrancy];
-    //effectView.frame = CGRectMake(0, 0, self.sizeOfView.width, self.sizeOfView.height);
+   // effectView.frame = CGRectMake(0, 0, self.sizeOfView.width, self.sizeOfView.height);
 
     // effectView.alpha = 0.7;
 
@@ -92,7 +92,7 @@
 
     // add both effect views to the image view
     [self addSubview:self.effectView];
-   // [self addSubview:vibrantView];
+    //[self addSubview:vibrantView];
 
     [self.effectView mas_remakeConstraints:^(MASConstraintMaker* make) {
         make.edges.equalTo(self);
