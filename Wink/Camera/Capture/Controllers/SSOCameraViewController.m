@@ -17,6 +17,7 @@
 #import "SSOCameraCaptureHelper.h"
 #import "SSOOrientationHelper.h"
 #import "UINavigationController+SSOLockedNavigationController.h"
+#import "ALAssetsLibrary+CustomPhotoAlbum.h"
 
 #define kTotalVideoRecordingTime 30
 
@@ -43,6 +44,7 @@
 @property(nonatomic) BOOL isRotationAllowed;
 @property(strong, nonatomic) SSOCameraCaptureHelper *cameraCaptureHelper;
 @property(strong, nonatomic) NSArray *arrayImages;
+@property(strong, nonatomic) UIImage *libraryImage;
 
 @end
 
@@ -52,6 +54,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -67,13 +70,16 @@
     [self initializeUI];
 
     [self initAnimatedButton];
+    [self initializeAssetsLibrary];
+
+    [self animateCameraRollImageChange];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
     self.animatedCaptureButton.userInteractionEnabled = YES;
-    [self animateCameraRollImageChange];
 }
 
 #pragma mark - Orientation
@@ -207,7 +213,7 @@
 
           [UIView animateWithDuration:0.3
                            animations:^{
-                             //           [self.mediaButton setImage:self.containerViewController.cameraContainerVC.libraryImage forState:UIControlStateNormal];
+                             [self.mediaButton setImage:self.libraryImage forState:UIControlStateNormal];
 
                              self.mediaButton.alpha = 1;
                            }];
@@ -226,6 +232,44 @@
     controller.toolbarHidden = NO;
     controller.mediaTypes = @[ (NSString *)kUTTypeImage, (NSString *)kUTTypeMovie ];
     [self presentViewController:controller animated:YES completion:nil];
+}
+
+/**
+ *  Initialize the camera library and display the last picture in cameraRoll imageView
+ */
+- (void)initializeAssetsLibrary {
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+
+    //[SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil)];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
+          usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            //                                    [SVProgressHUD dismiss];
+
+            if (group != nil) {
+                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+
+                [group enumerateAssetsWithOptions:NSEnumerationReverse
+                                       usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+
+                                         if (asset) {
+                                             UIImage *img = [UIImage imageWithCGImage:asset.thumbnail];
+                                             self.libraryImage = img;
+
+                                             *stop = YES;
+                                         }
+                                       }];
+            }
+
+            *stop = NO;
+          }
+          failureBlock:^(NSError *error) {
+            //[SVProgressHUD dismiss];
+
+            NSLog(@"error %@", error);
+          }];
+
+    });
 }
 
 /**
@@ -343,7 +387,7 @@
 
     [self.cameraCaptureHelper toggleMovieRecording];
     self.isVideoRecording = NO;
-    
+
     [button setUserInteractionEnabled:NO];
 }
 
