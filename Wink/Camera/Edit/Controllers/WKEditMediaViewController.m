@@ -58,8 +58,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // Register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
 
     // Setup the imageview
     if (self.image) {
@@ -90,10 +88,6 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"CustomCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"collectionCell"];
     self.collectionView.inputData = [self populateCellData].mutableCopy;
     [self.collectionView reloadData];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -169,14 +163,6 @@
     [cellDataArray addObject:section];
 
     return cellDataArray;
-}
-
-#pragma mark - Keyboard Methods
-
-- (void)keyboardWillHide {
-    // Set the type to none and reset the button
-    //    self.mediaEditState = [SSOMediaEditStateNone new];
-    //    [(SSOMediaEditStateNone *)self.mediaEditState resetButtonsState];
 }
 
 #pragma mark - Touch Methods
@@ -290,6 +276,13 @@
 - (void)editToolWillEndEditing:(SSOEditToolController *)tool {
     // Remove the VC
     [self removeChildViewController];
+}
+
+-(void)editToolWillBeginEditing:(SSOEditToolController *)tool {
+    // Remove all the subviews before displaying the new one
+    [self.accessoryContainerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.subtoolContainerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.buttonsContainerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
 #pragma mark - SSOEditViewControllerProtocol

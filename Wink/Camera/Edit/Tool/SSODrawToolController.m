@@ -32,13 +32,14 @@
     [self initializeContainerViewToParentVC];
 }
 
--(void)willMoveToParentViewController:(UIViewController *)parent {
+- (void)willMoveToParentViewController:(UIViewController *)parent {
     [super willMoveToParentViewController:parent];
     if (!parent) {
         // Remove the interaction on the draw view
         [self.drawView setUserInteractionEnabled:NO];
     }
 }
+
 
 #pragma mark - Initialization
 

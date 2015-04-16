@@ -18,6 +18,11 @@
 
 #pragma mark - View lifecycle
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.delegate editToolWillBeginEditing:self];
+}
+
 - (void)willMoveToParentViewController:(UIViewController<SSOEditViewControllerProtocol> *)parent {
     [super willMoveToParentViewController:parent];
     // Animate the views
