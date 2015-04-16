@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "270DFAF019AE71BE00067072"
-               BuildableName = "Wink.app"
-               BlueprintName = "Wink"
-               ReferencedContainer = "container:Wink.xcodeproj">
+               BuildableName = "uSnap.app"
+               BlueprintName = "uSnap"
+               ReferencedContainer = "container:uSnap.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "270DFB0B19AE71BE00067072"
-               BuildableName = "WinkTests.xctest"
-               BlueprintName = "WinkTests"
-               ReferencedContainer = "container:Wink.xcodeproj">
+               BuildableName = "uSnapTests.xctest"
+               BlueprintName = "uSnapTests"
+               ReferencedContainer = "container:uSnap.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "270DFB0B19AE71BE00067072"
-               BuildableName = "WinkTests.xctest"
-               BlueprintName = "WinkTests"
-               ReferencedContainer = "container:Wink.xcodeproj">
+               BuildableName = "uSnapTests.xctest"
+               BlueprintName = "uSnapTests"
+               ReferencedContainer = "container:uSnap.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "270DFAF019AE71BE00067072"
-            BuildableName = "Wink.app"
-            BlueprintName = "Wink"
-            ReferencedContainer = "container:Wink.xcodeproj">
+            BuildableName = "uSnap.app"
+            BlueprintName = "uSnap"
+            ReferencedContainer = "container:uSnap.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -72,13 +72,14 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "270DFAF019AE71BE00067072"
-            BuildableName = "Wink.app"
-            BlueprintName = "Wink"
-            ReferencedContainer = "container:Wink.xcodeproj">
+            BuildableName = "uSnap.app"
+            BlueprintName = "uSnap"
+            ReferencedContainer = "container:uSnap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -90,13 +91,14 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "270DFAF019AE71BE00067072"
-            BuildableName = "Wink.app"
-            BlueprintName = "Wink"
-            ReferencedContainer = "container:Wink.xcodeproj">
+            BuildableName = "uSnap.app"
+            BlueprintName = "uSnap"
+            ReferencedContainer = "container:uSnap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
