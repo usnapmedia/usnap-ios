@@ -22,7 +22,7 @@
 #import <Masonry.h>
 #import <pop/POP.h>
 
-@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, SSOEditToolDelegate>
+@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, SSOEditToolDelegate, RSKImageCropViewControllerDelegate>
 
 @property(weak, nonatomic) IBOutlet UIImageView *watermarkImageView;
 @property(weak, nonatomic) IBOutlet UIButton *postButton;
@@ -57,7 +57,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
 
     // Setup the imageview
     if (self.image) {
@@ -223,7 +222,14 @@
 }
 
 - (IBAction)cropButtonTouched:(id)sender {
-    // Set the next state for the media editw
+    RSKImageCropViewController *cropperVC = [[RSKImageCropViewController alloc] initWithImage:self.imageView.image];
+    cropperVC.delegate = self;
+    [cropperVC.cancelButton setTitle:NSLocalizedString(@"crop_cancel_button", nil) forState:UIControlStateNormal];
+    [cropperVC.chooseButton setTitle:NSLocalizedString(@"crop_done_button", nil) forState:UIControlStateNormal];
+    [cropperVC.moveAndScaleLabel setText:NSLocalizedString(@"crop_title", nil)];
+    // Set the crop rectangle to the image view
+    cropperVC.cropMode = RSKImageCropModeSquare;
+    [self presentViewController:cropperVC animated:YES completion:nil];
 }
 
 - (IBAction)postButtonTouched:(id)sender {
@@ -278,11 +284,35 @@
     [self removeChildViewController];
 }
 
--(void)editToolWillBeginEditing:(SSOEditToolController *)tool {
+- (void)editToolWillBeginEditing:(SSOEditToolController *)tool {
     // Remove all the subviews before displaying the new one
     [self.accessoryContainerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.subtoolContainerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.buttonsContainerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+}
+
+#pragma mark - RSKImageCropViewControllerDelegate
+
+/**
+ *  RSKImageCropViewControllerDelegate action when pressing back button
+ *
+ *  @param controller the RSKImageCropViewController
+ */
+- (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+/**
+ *  RSKImageCropViewControllerDelegate action when pressing confirm button to crop the image
+ *
+ *  @param controller the RSKImageCropViewController
+ *  @param croppedImage the returned cropped image
+ */
+- (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage usingCropRect:(CGRect)cropRect {
+    [controller dismissViewControllerAnimated:YES
+                                   completion:^{
+                                     self.imageView.image = croppedImage;
+                                   }];
 }
 
 #pragma mark - SSOEditViewControllerProtocol
