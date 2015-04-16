@@ -24,6 +24,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
       sharedInstance = [[self alloc] init];
+      [sharedInstance initializeData];
     });
     return sharedInstance;
 }
@@ -94,7 +95,7 @@
     _isUserLoggedIn = YES;
 
     // Save the password in the keychain
-  //  [SSSessionManager saveSecuredPassword:password withAccount:username];
+    //  [SSSessionManager saveSecuredPassword:password withAccount:username];
     // set isUserLogged flag to YES (hack to get the authentification working)
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsUserLoggedIn];
 

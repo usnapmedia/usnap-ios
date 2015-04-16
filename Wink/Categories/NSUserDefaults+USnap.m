@@ -24,7 +24,7 @@
 }
 
 + (BOOL)isUserLoggedIn {
-    return [[[NSUserDefaults standardUserDefaults] objectForKey:kIsUserLoggedIn] boolValue] ? YES : NO;
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:kIsUserLoggedIn] boolValue];
 }
 
 + (NSString *)loggedInUserEmail {
