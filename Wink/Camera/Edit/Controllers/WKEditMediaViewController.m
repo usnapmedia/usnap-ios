@@ -41,7 +41,6 @@
 @property(strong, nonatomic) SSOEditToolController *childViewController;
 
 // Containers
-@property(weak, nonatomic) IBOutlet SSOFadingContainerView *bottomView;
 @property(weak, nonatomic) IBOutlet SSOFadingContainerView *topView;
 @property(strong, nonatomic) SSOSubtoolContainerView *subtoolContainerView;
 @property(strong, nonatomic) SSOAccessoryContainerView *accessoryContainerView;
@@ -137,8 +136,8 @@
 
     // Remove brightness and crop options for media and re-position draw and text
     if (self.mediaURL) {
-        self.brightnessButton.hidden = YES;
-        self.cropButton.hidden = YES;
+//        self.brightnessButton.hidden = YES;
+//        self.cropButton.hidden = YES;
     }
 
     //@FIXME
@@ -416,8 +415,8 @@
         // Initialize the view with the bottom view size. We also need to push it at the bottom of the view completely as it's initial position for the scroll
         // effect.
         //@FIXME Orientation will be problematic
-        _subtoolContainerView = [[SSOSubtoolContainerView alloc] initWithFrame:CGRectMake(self.bottomView.frame.origin.x, self.view.frame.size.height,
-                                                                                          self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
+        _subtoolContainerView = [[SSOSubtoolContainerView alloc] initWithFrame:CGRectMake(self.sideMenuView.frame.origin.x, self.view.frame.size.height,
+                                                                                          self.sideMenuView.frame.size.width, self.sideMenuView.frame.size.height)];
         // Add the view
         [self.view addSubview:_subtoolContainerView];
     }
@@ -433,7 +432,7 @@
 - (UIView *)accessoryContainerView {
     if (!_accessoryContainerView) {
         // Initialize as big as the bottom view
-        _accessoryContainerView = [[SSOAccessoryContainerView alloc] initWithFrame:self.bottomView.frame];
+        _accessoryContainerView = [[SSOAccessoryContainerView alloc] initWithFrame:self.sideMenuView.frame];
         // Add the view
         [self.view addSubview:_accessoryContainerView];
     }
@@ -464,7 +463,7 @@
  *  @return the view
  */
 - (UIView<SSOAnimatableView> *)bottomView {
-    return _bottomView;
+    return _sideMenuView;
 }
 
 /**

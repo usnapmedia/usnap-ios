@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKEditMediaViewController">
             <connections>
                 <outlet property="backButton" destination="5Fh-sC-V9Y" id="5H8-bH-qG6"/>
                 <outlet property="collectionView" destination="rqF-N2-Y3I" id="qDO-Yj-ajG"/>
-                <outlet property="editAccessoriesContainerView" destination="wTZ-7I-Ufn" id="36z-jj-sKS"/>
                 <outlet property="overlayView" destination="gDS-Th-jEq" id="Xaw-YF-bgr"/>
                 <outlet property="postButton" destination="ATe-3P-Slw" id="1Ud-Ed-QQ2"/>
                 <outlet property="sideMenuView" destination="ugy-th-tqC" id="Hao-9Z-898"/>
+                <outlet property="topView" destination="nWV-R5-qgn" id="xak-Py-Uhc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="watermarkImageView" destination="6nm-lF-IF7" id="x4f-mn-cNk"/>
             </connections>
@@ -74,7 +73,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWV-R5-qgn" userLabel="topView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWV-R5-qgn" userLabel="topView" customClass="SSOFadingContainerView">
                     <rect key="frame" x="0.0" y="60" width="375" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATe-3P-Slw" userLabel="postButton">
@@ -96,7 +95,7 @@
                                 <action selector="postButtonTouched:" destination="-1" eventType="touchUpInside" id="IzQ-RH-7cR"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Fh-sC-V9Y" userLabel="backButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Fh-sC-V9Y" userLabel="backButton">
                             <rect key="frame" x="15" y="7" width="47" height="47"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="47" id="6C7-ZY-bfe"/>
@@ -117,6 +116,7 @@
                         <constraint firstAttribute="centerY" secondItem="ATe-3P-Slw" secondAttribute="centerY" id="8K7-S9-lXx"/>
                         <constraint firstAttribute="trailing" secondItem="ATe-3P-Slw" secondAttribute="trailing" constant="15" id="VST-90-Sga"/>
                         <constraint firstItem="5Fh-sC-V9Y" firstAttribute="leading" secondItem="nWV-R5-qgn" secondAttribute="leading" constant="15" id="f49-MP-i3I"/>
+                        <constraint firstItem="5Fh-sC-V9Y" firstAttribute="leading" secondItem="nWV-R5-qgn" secondAttribute="leading" constant="15" id="p74-Sw-bv3"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -143,10 +143,11 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ugy-th-tqC" userLabel="toolView" customClass="SSOEditSideMenuView">
-                    <rect key="frame" x="0.0" y="542" width="600" height="58"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugy-th-tqC" userLabel="toolView" customClass="SSOEditSideMenuView">
+                    <rect key="frame" x="0.0" y="609" width="375" height="58"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="58" id="VCM-C2-WfX"/>
                         <constraint firstAttribute="width" constant="80" id="nJr-QM-yTG">
                             <variation key="heightClass=compact" constant="70"/>
                         </constraint>
@@ -187,6 +188,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="gDS-Th-jEq" secondAttribute="trailing" id="3BK-Hy-Ew4"/>
                 <constraint firstItem="nWV-R5-qgn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4mi-II-mdq"/>
+                <constraint firstAttribute="trailing" secondItem="ugy-th-tqC" secondAttribute="trailing" id="9Sl-hc-e96"/>
                 <constraint firstItem="gDS-Th-jEq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="JIi-Pg-IGk"/>
                 <constraint firstItem="5Fh-sC-V9Y" firstAttribute="leading" secondItem="ugy-th-tqC" secondAttribute="trailing" constant="5" id="Ll9-o9-4nZ"/>
                 <constraint firstItem="ugy-th-tqC" firstAttribute="top" secondItem="rqF-N2-Y3I" secondAttribute="bottom" constant="266" id="SJ6-tN-kac"/>

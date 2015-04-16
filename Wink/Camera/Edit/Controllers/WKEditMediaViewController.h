@@ -25,10 +25,6 @@
 
 // UI
 @property(weak, nonatomic) IBOutlet UIView *overlayView;
-@property(weak, nonatomic) IBOutlet UIButton *drawButton;
-@property(weak, nonatomic) IBOutlet UIButton *textButton;
-@property(weak, nonatomic) IBOutlet UIButton *brightnessButton;
-@property(weak, nonatomic) IBOutlet UIButton *cropButton;
 
 @property(weak, nonatomic) IBOutlet SSBaseCollectionView *collectionView;
 

@@ -245,7 +245,7 @@
     }
 
     // Instanciate the editMediaVC and pass it the image and video url
-    WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+    WKEditMediaViewController *controller = [WKEditMediaViewController new];
     controller.mediaURL = mediaURL;
     controller.image = image;
     // Push to editMediaVC
