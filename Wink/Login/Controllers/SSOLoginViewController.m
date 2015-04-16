@@ -226,7 +226,11 @@
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           NSLog(@"Login failed");
-          [UIAlertView showWithTitle:@"Wrong login informations" message:@"Check your credentials" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+          [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"login.error.alert.title", @"Error when the login is wrong")
+                                      message:NSLocalizedString(@"login.error.alert.message", @"Error when the login is wrong")
+                                     delegate:nil
+                            cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                            otherButtonTitles:nil, nil] show];
           // Logout the user if there is an error
           [[SSSessionManager sharedInstance] logoutCurrentUser];
         }];
@@ -254,6 +258,11 @@
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           NSLog(@"Register failure");
+          [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"register.error.alert.title", @"Error when the register is wrong")
+                                      message:NSLocalizedString(@"register.error.alert.message", @"Error when the register is wrong")
+                                     delegate:nil
+                            cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                            otherButtonTitles:nil, nil] show];
           // Logout the user if there is an error
           [[SSSessionManager sharedInstance] logoutCurrentUser];
 
