@@ -7,16 +7,9 @@
 //
 
 #import "SSOCustomSignInButton.h"
+#import "SSOThemeHelper.h"
 
 @implementation SSOCustomSignInButton
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
 
@@ -26,15 +19,15 @@
 }
 
 - (void)setSelected:(BOOL)selected {
-    
-    [super setSelected:selected];
 
+    [super setSelected:selected];
+    UIColor *backgroundColor = [SSOThemeHelper firstColor];
     if (selected) {
-        self.backgroundColor = [UIColor purpleColorWithAlpha:0.2];
+        self.backgroundColor = [backgroundColor colorWithAlphaComponent:0.2];
 
     } else {
 
-        self.backgroundColor = [UIColor greenColorWithAlpha:0.2];
+        self.backgroundColor = [backgroundColor colorWithAlphaComponent:0.2];
     }
 }
 

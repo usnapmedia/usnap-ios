@@ -121,6 +121,7 @@
 		D86E94CA1ACF4A1400CFF801 /* imageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C21ACF4A1400CFF801 /* imageCollectionViewCell.m */; };
 		D86E94CB1ACF4A1400CFF801 /* SSCellViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C61ACF4A1400CFF801 /* SSCellViewItem.m */; };
 		D86E94CC1ACF4A1400CFF801 /* SSCellViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C81ACF4A1400CFF801 /* SSCellViewSection.m */; };
+		D8D4F17F1ADFFB52002FDE38 /* SSOThemeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D4F17E1ADFFB52002FDE38 /* SSOThemeHelper.m */; };
 		D8EA5C7C1AD4281B008D2A37 /* SSOSocialNetworkAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C7B1AD4281B008D2A37 /* SSOSocialNetworkAPI.m */; };
 		D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C801AD4287C008D2A37 /* WKWinkConnect.m */; };
 		D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */; };
@@ -328,6 +329,8 @@
 		D86E94C61ACF4A1400CFF801 /* SSCellViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewItem.m; sourceTree = "<group>"; };
 		D86E94C71ACF4A1400CFF801 /* SSCellViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewSection.h; sourceTree = "<group>"; };
 		D86E94C81ACF4A1400CFF801 /* SSCellViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewSection.m; sourceTree = "<group>"; };
+		D8D4F17D1ADFFB52002FDE38 /* SSOThemeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOThemeHelper.h; sourceTree = "<group>"; };
+		D8D4F17E1ADFFB52002FDE38 /* SSOThemeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOThemeHelper.m; sourceTree = "<group>"; };
 		D8EA5C7A1AD4281B008D2A37 /* SSOSocialNetworkAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSocialNetworkAPI.h; sourceTree = "<group>"; };
 		D8EA5C7B1AD4281B008D2A37 /* SSOSocialNetworkAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSocialNetworkAPI.m; sourceTree = "<group>"; };
 		D8EA5C7F1AD4287C008D2A37 /* WKWinkConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWinkConnect.h; sourceTree = "<group>"; };
@@ -558,6 +561,8 @@
 				3316F2D21ADD6D9F00C7ED24 /* SSSessionManager.m */,
 				335723731ACB097C000CC846 /* FacebookHelper.h */,
 				335723741ACB097C000CC846 /* FacebookHelper.m */,
+				D8D4F17D1ADFFB52002FDE38 /* SSOThemeHelper.h */,
+				D8D4F17E1ADFFB52002FDE38 /* SSOThemeHelper.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1244,6 +1249,7 @@
 				D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */,
 				3303DDD41AD8547F002B74F9 /* SSOLoginContainerView.m in Sources */,
 				D810B8CF1ADF506500B3AC11 /* SSOAdjustementsHelper.m in Sources */,
+				D8D4F17F1ADFFB52002FDE38 /* SSOThemeHelper.m in Sources */,
 				D810B8E71ADF506500B3AC11 /* SSOTextAccessoryContainerView.m in Sources */,
 				D810B9001ADF51BB00B3AC11 /* SSOBaseProvider.m in Sources */,
 				335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */,

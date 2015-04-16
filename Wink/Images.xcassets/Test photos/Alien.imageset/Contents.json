@@ -2,8 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "Alien-Meme-Aliens-meme-lol-funny-pictures-alien-cloaking-device-diy-how-to-build-alien-cloaking-1_zps32deb81e-1.jpg"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
@@ -12,8 +11,7 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "Alien-Meme-Aliens-meme-lol-funny-pictures-alien-cloaking-device-diy-how-to-build-alien-cloaking-1_zps32deb81e-2.jpg"
+      "scale" : "3x"
     }
   ],
   "info" : {

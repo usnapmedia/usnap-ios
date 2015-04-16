@@ -7,6 +7,7 @@
 //
 
 #import "SSORegisterContainerView.h"
+#import "SSOThemeHelper.h"
 
 @interface SSORegisterContainerView ()
 
@@ -38,6 +39,19 @@
 
     return self;
 }
+
+#pragma mark - Initialization
+
+/**
+ *  Setup the view UI
+ */
+- (void)setupUI {
+    [self setBackgroundColor:[SSOThemeHelper thirdColor]];
+    [self.buttonSignUp setBackgroundColor:[SSOThemeHelper firstColor]];
+}
+
+#pragma mark - Animations
+
 /**
  *  Set UI to display animations when the view appears
  */
@@ -50,43 +64,43 @@
     self.textFieldPassword.alpha = 0.0f;
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        CGFloat duration = 0.5f;
-        CGFloat delay = 0.2f;
+      CGFloat duration = 0.5f;
+      CGFloat delay = 0.2f;
 
-        CGFloat damping = 0.55f;
-        CGFloat velocity = 0.75f;
+      CGFloat damping = 0.55f;
+      CGFloat velocity = 0.75f;
 
-        [UIView animateWithDuration:duration
-                              delay:(delay * 0.0f)
-             usingSpringWithDamping:damping
-              initialSpringVelocity:velocity
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             self.textFieldEmail.transform = CGAffineTransformIdentity;
-                             self.textFieldEmail.alpha = 1.0f;
-                         }
-                         completion:nil];
+      [UIView animateWithDuration:duration
+                            delay:(delay * 0.0f)
+           usingSpringWithDamping:damping
+            initialSpringVelocity:velocity
+                          options:UIViewAnimationOptionCurveLinear
+                       animations:^{
+                         self.textFieldEmail.transform = CGAffineTransformIdentity;
+                         self.textFieldEmail.alpha = 1.0f;
+                       }
+                       completion:nil];
 
-        [UIView animateWithDuration:duration
-                              delay:(delay * 1.0f)
-             usingSpringWithDamping:damping
-              initialSpringVelocity:velocity
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             self.textFieldPassword.transform = CGAffineTransformIdentity;
-                             self.textFieldPassword.alpha = 1.0f;
-                         }
-                         completion:nil];
+      [UIView animateWithDuration:duration
+                            delay:(delay * 1.0f)
+           usingSpringWithDamping:damping
+            initialSpringVelocity:velocity
+                          options:UIViewAnimationOptionCurveLinear
+                       animations:^{
+                         self.textFieldPassword.transform = CGAffineTransformIdentity;
+                         self.textFieldPassword.alpha = 1.0f;
+                       }
+                       completion:nil];
 
-        [UIView animateWithDuration:duration
-                              delay:(delay * 2.0f)
-             usingSpringWithDamping:damping
-              initialSpringVelocity:velocity
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
+      [UIView animateWithDuration:duration
+                            delay:(delay * 2.0f)
+           usingSpringWithDamping:damping
+            initialSpringVelocity:velocity
+                          options:UIViewAnimationOptionCurveLinear
+                       animations:^{
 
-                         }
-                         completion:nil];
+                       }
+                       completion:nil];
 
     });
 }
