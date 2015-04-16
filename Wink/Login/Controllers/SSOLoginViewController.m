@@ -16,6 +16,7 @@
 #import "WKWinkConnect.h"
 #import "SSSessionManager.h"
 #import "UINavigationController+SSOLockedNavigationController.h"
+#import <SVProgressHUD.h>
 
 @interface SSOLoginViewController ()
 @property(weak, nonatomic) IBOutlet UIView *loginContainerView;
@@ -226,11 +227,8 @@
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           NSLog(@"Login failed");
-          [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"login.error.alert.title", @"Error when the login is wrong")
-                                      message:NSLocalizedString(@"login.error.alert.message", @"Error when the login is wrong")
-                                     delegate:nil
-                            cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                            otherButtonTitles:nil, nil] show];
+          //@FIXME Should be handled generally
+          [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"login.error.alert.message", @"Error when the login is wrong")];
           // Logout the user if there is an error
           [[SSSessionManager sharedInstance] logoutCurrentUser];
         }];
@@ -258,11 +256,9 @@
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           NSLog(@"Register failure");
-          [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"register.error.alert.title", @"Error when the register is wrong")
-                                      message:NSLocalizedString(@"register.error.alert.message", @"Error when the register is wrong")
-                                     delegate:nil
-                            cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                            otherButtonTitles:nil, nil] show];
+          //@FIXME Should be handled generally
+          [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"register.error.alert.title", @"Error when the login is wrong")];
+
           // Logout the user if there is an error
           [[SSSessionManager sharedInstance] logoutCurrentUser];
 

@@ -55,7 +55,6 @@
 		335723DC1ACB097C000CC846 /* SettingsSocialFakeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 335723961ACB097C000CC846 /* SettingsSocialFakeCell.xib */; };
 		335723DD1ACB097C000CC846 /* WKShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3357239A1ACB097C000CC846 /* WKShareViewController.m */; };
 		335723DE1ACB097C000CC846 /* WKShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3357239B1ACB097C000CC846 /* WKShareViewController.xib */; };
-		335723DF1ACB097C000CC846 /* WKShareViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3357239C1ACB097C000CC846 /* WKShareViewController_iPad.xib */; };
 		335723E01ACB097C000CC846 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3357239F1ACB097C000CC846 /* Constants.m */; };
 		335723E11ACB097C000CC846 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A01ACB097C000CC846 /* main.m */; };
 		335723E31ACB097C000CC846 /* Wink-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335723A31ACB097C000CC846 /* Wink-Info.plist */; };
@@ -204,7 +203,6 @@
 		335723991ACB097C000CC846 /* WKShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKShareViewController.h; sourceTree = "<group>"; };
 		3357239A1ACB097C000CC846 /* WKShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKShareViewController.m; sourceTree = "<group>"; };
 		3357239B1ACB097C000CC846 /* WKShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKShareViewController.xib; sourceTree = "<group>"; };
-		3357239C1ACB097C000CC846 /* WKShareViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKShareViewController_iPad.xib; sourceTree = "<group>"; };
 		3357239E1ACB097C000CC846 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		3357239F1ACB097C000CC846 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		335723A01ACB097C000CC846 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -625,7 +623,6 @@
 			children = (
 				335723981ACB097C000CC846 /* Controllers */,
 				3357239B1ACB097C000CC846 /* WKShareViewController.xib */,
-				3357239C1ACB097C000CC846 /* WKShareViewController_iPad.xib */,
 			);
 			path = Sharing;
 			sourceTree = "<group>";
@@ -1113,7 +1110,6 @@
 				D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */,
 				7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */,
 				335723DB1ACB097C000CC846 /* SettingsSocialCell.xib in Resources */,
-				335723DF1ACB097C000CC846 /* WKShareViewController_iPad.xib in Resources */,
 				D810B8EE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
 				D810B8EF1ADF506500B3AC11 /* SSOColorPickerContainerView.xib in Resources */,
 				335723DC1ACB097C000CC846 /* SettingsSocialFakeCell.xib in Resources */,
