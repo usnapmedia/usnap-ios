@@ -35,24 +35,15 @@
 		3303DDD71AD85591002B74F9 /* SSOLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3303DDD61AD85591002B74F9 /* SSOLoginViewController.m */; };
 		3303DDDA1AD86F66002B74F9 /* SSOCustomSignInButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3303DDD91AD86F66002B74F9 /* SSOCustomSignInButton.m */; };
 		3303DDDD1AD87361002B74F9 /* SSORegisterContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3303DDDC1AD87361002B74F9 /* SSORegisterContainerView.m */; };
-		330B38E21AD314D3003E9798 /* SSOEditSideMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 330B38E11AD314D3003E9798 /* SSOEditSideMenuView.xib */; };
 		3316F2D01ADD6CC900C7ED24 /* NSUserDefaults+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316F2CF1ADD6CC900C7ED24 /* NSUserDefaults+USnap.m */; };
 		3316F2D31ADD6D9F00C7ED24 /* SSSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316F2D21ADD6D9F00C7ED24 /* SSSessionManager.m */; };
-		3316F2D61ADD838700C7ED24 /* SSOEditSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316F2D51ADD838700C7ED24 /* SSOEditSideMenuView.m */; };
 		335723B31ACB097C000CC846 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3357233E1ACB097C000CC846 /* Camera.storyboard */; };
 		335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723431ACB097C000CC846 /* SSOCameraViewController.m */; };
-		335723B71ACB097C000CC846 /* WKCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723471ACB097C000CC846 /* WKCameraViewController.m */; };
-		335723B81ACB097C000CC846 /* WKCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 335723481ACB097C000CC846 /* WKCameraViewController.xib */; };
-		335723BA1ACB097C000CC846 /* WKEditMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723511ACB097C000CC846 /* WKEditMediaViewController.m */; };
 		335723C61ACB097C000CC846 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 335723691ACB097C000CC846 /* InfoPlist.strings */; };
 		335723C71ACB097C000CC846 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3357236B1ACB097C000CC846 /* Localizable.strings */; };
 		335723C81ACB097C000CC846 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3357236E1ACB097C000CC846 /* InfoPlist.strings */; };
 		335723C91ACB097C000CC846 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 335723701ACB097C000CC846 /* Localizable.strings */; };
 		335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723741ACB097C000CC846 /* FacebookHelper.m */; };
-		335723CB1ACB097C000CC846 /* WKCameraOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723771ACB097C000CC846 /* WKCameraOverlayViewController.m */; };
-		335723CC1ACB097C000CC846 /* WKCameraOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 335723781ACB097C000CC846 /* WKCameraOverlayViewController.xib */; };
-		335723CD1ACB097C000CC846 /* WKCameraOverlayViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 335723791ACB097C000CC846 /* WKCameraOverlayViewController_iPad.xib */; };
-		335723CE1ACB097C000CC846 /* WKImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3357237B1ACB097C000CC846 /* WKImagePickerController.m */; };
 		335723D21ACB097C000CC846 /* WKMoviePlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723811ACB097C000CC846 /* WKMoviePlayerView.m */; };
 		335723D31ACB097C000CC846 /* WKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723831ACB097C000CC846 /* WKNavigationController.m */; };
 		335723D41ACB097C000CC846 /* WKSocialNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723851ACB097C000CC846 /* WKSocialNetworkHelper.m */; };
@@ -78,27 +69,51 @@
 		CB57186D1AC0C3090078740E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB57186C1AC0C3090078740E /* CoreVideo.framework */; };
 		CB8F0ABA1ADDDC8600C18263 /* AVCamPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8F0AB91ADDDC8600C18263 /* AVCamPreviewView.m */; };
 		CB8F0ABD1ADDDCB100C18263 /* SSOCameraCaptureHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8F0ABC1ADDDCB100C18263 /* SSOCameraCaptureHelper.m */; };
-		D830F3DA1ACDDA15002A503D /* SSOMediaEditState.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3CB1ACDDA15002A503D /* SSOMediaEditState.m */; };
-		D830F3DB1ACDDA15002A503D /* SSOMediaEditStateBrightness.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3CD1ACDDA15002A503D /* SSOMediaEditStateBrightness.m */; };
-		D830F3DC1ACDDA15002A503D /* SSOMediaEditStateCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3CF1ACDDA15002A503D /* SSOMediaEditStateCrop.m */; };
-		D830F3DD1ACDDA15002A503D /* SSOMediaEditStateDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3D11ACDDA15002A503D /* SSOMediaEditStateDraw.m */; };
-		D830F3DE1ACDDA15002A503D /* SSOMediaEditStateDrawColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3D31ACDDA15002A503D /* SSOMediaEditStateDrawColor.m */; };
-		D830F3DF1ACDDA15002A503D /* SSOMediaEditStateDrawGray.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3D51ACDDA15002A503D /* SSOMediaEditStateDrawGray.m */; };
-		D830F3E01ACDDA15002A503D /* SSOMediaEditStateNone.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3D71ACDDA15002A503D /* SSOMediaEditStateNone.m */; };
-		D830F3E11ACDDA15002A503D /* SSOMediaEditStateText.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3D91ACDDA15002A503D /* SSOMediaEditStateText.m */; };
-		D830F3F41ACDDAE7002A503D /* BrightnessContrastSlidersContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3E81ACDDAE7002A503D /* BrightnessContrastSlidersContainerView.m */; };
-		D830F3F51ACDDAE7002A503D /* SSOColorPickerContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3EA1ACDDAE7002A503D /* SSOColorPickerContainerView.m */; };
-		D830F3F61ACDDAE7002A503D /* SSOEditMediaMovableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3EC1ACDDAE7002A503D /* SSOEditMediaMovableTextView.m */; };
-		D830F3F71ACDDAE7002A503D /* WKColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3EE1ACDDAE7002A503D /* WKColorPickerView.m */; };
-		D830F3F81ACDDAE7002A503D /* BrightnessContrastContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D830F3F01ACDDAE7002A503D /* BrightnessContrastContainerView.xib */; };
-		D830F3F91ACDDAE7002A503D /* ColorPickerContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D830F3F11ACDDAE7002A503D /* ColorPickerContainerView.xib */; };
-		D830F3FA1ACDDAE7002A503D /* WKEditMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D830F3F21ACDDAE7002A503D /* WKEditMediaViewController.xib */; };
-		D830F3FB1ACDDAE7002A503D /* WKEditMediaViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D830F3F31ACDDAE7002A503D /* WKEditMediaViewController_iPad.xib */; };
-		D830F4011ACDDBD9002A503D /* SSOAccessoryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F3FE1ACDDBD9002A503D /* SSOAccessoryHelper.m */; };
-		D830F4021ACDDBD9002A503D /* SSOBrightnessContrastHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4001ACDDBD9002A503D /* SSOBrightnessContrastHelper.m */; };
+		D810B8CD1ADF506500B3AC11 /* WKEditMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8761ADF506400B3AC11 /* WKEditMediaViewController.m */; };
+		D810B8CF1ADF506500B3AC11 /* SSOAdjustementsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B87A1ADF506400B3AC11 /* SSOAdjustementsHelper.m */; };
+		D810B8D01ADF506500B3AC11 /* SSOTextFontCollectionViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8811ADF506400B3AC11 /* SSOTextFontCollectionViewProvider.m */; };
+		D810B8D11ADF506500B3AC11 /* SSOMediaEditState.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8851ADF506400B3AC11 /* SSOMediaEditState.m */; };
+		D810B8D21ADF506500B3AC11 /* SSOMediaEditStateBrightness.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8871ADF506400B3AC11 /* SSOMediaEditStateBrightness.m */; };
+		D810B8D31ADF506500B3AC11 /* SSOMediaEditStateCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8891ADF506400B3AC11 /* SSOMediaEditStateCrop.m */; };
+		D810B8D41ADF506500B3AC11 /* SSOMediaEditStateDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B88B1ADF506400B3AC11 /* SSOMediaEditStateDraw.m */; };
+		D810B8D51ADF506500B3AC11 /* SSOMediaEditStateDrawColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B88D1ADF506400B3AC11 /* SSOMediaEditStateDrawColor.m */; };
+		D810B8D61ADF506500B3AC11 /* SSOMediaEditStateDrawGray.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B88F1ADF506400B3AC11 /* SSOMediaEditStateDrawGray.m */; };
+		D810B8D71ADF506500B3AC11 /* SSOMediaEditStateNone.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8911ADF506400B3AC11 /* SSOMediaEditStateNone.m */; };
+		D810B8D81ADF506500B3AC11 /* SSOMediaEditStateText.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8931ADF506400B3AC11 /* SSOMediaEditStateText.m */; };
+		D810B8D91ADF506500B3AC11 /* SSOAdjustmentToolController.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8961ADF506400B3AC11 /* SSOAdjustmentToolController.m */; };
+		D810B8DA1ADF506500B3AC11 /* SSODrawToolController.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8981ADF506400B3AC11 /* SSODrawToolController.m */; };
+		D810B8DB1ADF506500B3AC11 /* SSOEditToolController.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B89A1ADF506400B3AC11 /* SSOEditToolController.m */; };
+		D810B8DC1ADF506500B3AC11 /* SSOTextToolController.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B89C1ADF506400B3AC11 /* SSOTextToolController.m */; };
+		D810B8DD1ADF506500B3AC11 /* SSOFontCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8A01ADF506400B3AC11 /* SSOFontCollectionViewCell.m */; };
+		D810B8DE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8A41ADF506400B3AC11 /* SSOAdjustmentAccessoryContainerView.m */; };
+		D810B8DF1ADF506500B3AC11 /* SSOAdjustmentSliderContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8A61ADF506400B3AC11 /* SSOAdjustmentSliderContainerView.m */; };
+		D810B8E01ADF506500B3AC11 /* SSOAccessoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8A91ADF506400B3AC11 /* SSOAccessoryContainerView.m */; };
+		D810B8E11ADF506500B3AC11 /* SSOButtonsContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8AB1ADF506500B3AC11 /* SSOButtonsContainerView.m */; };
+		D810B8E21ADF506500B3AC11 /* SSOColorPickerContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8AD1ADF506500B3AC11 /* SSOColorPickerContainerView.m */; };
+		D810B8E31ADF506500B3AC11 /* SSOFadingContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8AF1ADF506500B3AC11 /* SSOFadingContainerView.m */; };
+		D810B8E41ADF506500B3AC11 /* SSOSlidingContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8B11ADF506500B3AC11 /* SSOSlidingContainerView.m */; };
+		D810B8E51ADF506500B3AC11 /* SSOSubtoolContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8B31ADF506500B3AC11 /* SSOSubtoolContainerView.m */; };
+		D810B8E61ADF506500B3AC11 /* SSODrawAccessoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8B61ADF506500B3AC11 /* SSODrawAccessoryContainerView.m */; };
+		D810B8E71ADF506500B3AC11 /* SSOTextAccessoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8BA1ADF506500B3AC11 /* SSOTextAccessoryContainerView.m */; };
+		D810B8E81ADF506500B3AC11 /* SSOEditMediaMovableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8BC1ADF506500B3AC11 /* SSOEditMediaMovableTextView.m */; };
+		D810B8E91ADF506500B3AC11 /* SSOEditSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8BE1ADF506500B3AC11 /* SSOEditSideMenuView.m */; };
+		D810B8EA1ADF506500B3AC11 /* SSOEditSideMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8BF1ADF506500B3AC11 /* SSOEditSideMenuView.xib */; };
+		D810B8EB1ADF506500B3AC11 /* SSOToolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8C11ADF506500B3AC11 /* SSOToolButton.m */; };
+		D810B8EC1ADF506500B3AC11 /* WKColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8C31ADF506500B3AC11 /* WKColorPickerView.m */; };
+		D810B8ED1ADF506500B3AC11 /* BrightnessContrastContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8C51ADF506500B3AC11 /* BrightnessContrastContainerView.xib */; };
+		D810B8EE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8C61ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib */; };
+		D810B8EF1ADF506500B3AC11 /* SSOColorPickerContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8C71ADF506500B3AC11 /* SSOColorPickerContainerView.xib */; };
+		D810B8F01ADF506500B3AC11 /* SSODrawAccessoryContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8C81ADF506500B3AC11 /* SSODrawAccessoryContainerView.xib */; };
+		D810B8F11ADF506500B3AC11 /* SSOFontCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8C91ADF506500B3AC11 /* SSOFontCollectionViewCell.xib */; };
+		D810B8F21ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8CA1ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib */; };
+		D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8CB1ADF506500B3AC11 /* WKEditMediaViewController.xib */; };
+		D810B8F41ADF506500B3AC11 /* WKEditMediaViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8CC1ADF506500B3AC11 /* WKEditMediaViewController_iPad.xib */; };
+		D810B8F71ADF508A00B3AC11 /* NSBundle+Wink.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8F61ADF508A00B3AC11 /* NSBundle+Wink.m */; };
+		D810B8FF1ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8FA1ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.m */; };
+		D810B9001ADF51BB00B3AC11 /* SSOBaseProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8FC1ADF51BB00B3AC11 /* SSOBaseProvider.m */; };
+		D810B9011ADF51BB00B3AC11 /* SSOBaseTableViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8FE1ADF51BB00B3AC11 /* SSOBaseTableViewProvider.m */; };
 		D830F41A1ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4051ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
 		D830F41B1ACDDBF1002A503D /* AVAssetTrack+WKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4071ACDDBF1002A503D /* AVAssetTrack+WKAdditions.m */; };
-		D830F41C1ACDDBF1002A503D /* NSBundle+SSOHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4091ACDDBF1002A503D /* NSBundle+SSOHelper.m */; };
 		D830F41D1ACDDBF1002A503D /* NSDictionary+WKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F40B1ACDDBF1002A503D /* NSDictionary+WKAdditions.m */; };
 		D830F41E1ACDDBF1002A503D /* UIColor+PickerColors.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F40D1ACDDBF1002A503D /* UIColor+PickerColors.m */; };
 		D830F41F1ACDDBF1002A503D /* UIColor+WKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F40F1ACDDBF1002A503D /* UIColor+WKAdditions.m */; };
@@ -118,8 +133,6 @@
 		D86E94CC1ACF4A1400CFF801 /* SSCellViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C81ACF4A1400CFF801 /* SSCellViewSection.m */; };
 		D8EA5C7C1AD4281B008D2A37 /* SSOSocialNetworkAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C7B1AD4281B008D2A37 /* SSOSocialNetworkAPI.m */; };
 		D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C801AD4287C008D2A37 /* WKWinkConnect.m */; };
-		D8EA5C8A1AD4287C008D2A37 /* WKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */; };
-		D8EA5C8B1AD4287C008D2A37 /* WKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C851AD4287C008D2A37 /* WKUser.m */; };
 		D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */; };
 		D8EA5C8D1AD4287C008D2A37 /* WKLoginViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C881AD4287C008D2A37 /* WKLoginViewController_iPad.xib */; };
 		D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C8F1AD428D3008D2A37 /* SSOGooglePlusHelper.m */; };
@@ -170,33 +183,19 @@
 		3303DDDB1AD87361002B74F9 /* SSORegisterContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSORegisterContainerView.h; path = Views/SSORegisterContainerView.h; sourceTree = "<group>"; };
 		3303DDDC1AD87361002B74F9 /* SSORegisterContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSORegisterContainerView.m; path = Views/SSORegisterContainerView.m; sourceTree = "<group>"; };
 		3303DDDF1AD88822002B74F9 /* SSOLoginRegisterDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SSOLoginRegisterDelegate.h; path = Protocol/SSOLoginRegisterDelegate.h; sourceTree = "<group>"; };
-		330B38E11AD314D3003E9798 /* SSOEditSideMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOEditSideMenuView.xib; sourceTree = "<group>"; };
 		3316F2CE1ADD6CC900C7ED24 /* NSUserDefaults+USnap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+USnap.h"; sourceTree = "<group>"; };
 		3316F2CF1ADD6CC900C7ED24 /* NSUserDefaults+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+USnap.m"; sourceTree = "<group>"; };
 		3316F2D11ADD6D9F00C7ED24 /* SSSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSessionManager.h; sourceTree = "<group>"; };
 		3316F2D21ADD6D9F00C7ED24 /* SSSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSessionManager.m; sourceTree = "<group>"; };
-		3316F2D41ADD838700C7ED24 /* SSOEditSideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOEditSideMenuView.h; sourceTree = "<group>"; };
-		3316F2D51ADD838700C7ED24 /* SSOEditSideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOEditSideMenuView.m; sourceTree = "<group>"; };
 		3357233E1ACB097C000CC846 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		335723421ACB097C000CC846 /* SSOCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCameraViewController.h; sourceTree = "<group>"; };
 		335723431ACB097C000CC846 /* SSOCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCameraViewController.m; sourceTree = "<group>"; };
-		335723461ACB097C000CC846 /* WKCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCameraViewController.h; sourceTree = "<group>"; };
-		335723471ACB097C000CC846 /* WKCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCameraViewController.m; sourceTree = "<group>"; };
-		335723481ACB097C000CC846 /* WKCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKCameraViewController.xib; sourceTree = "<group>"; };
-		335723501ACB097C000CC846 /* WKEditMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKEditMediaViewController.h; sourceTree = "<group>"; };
-		335723511ACB097C000CC846 /* WKEditMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKEditMediaViewController.m; sourceTree = "<group>"; };
 		3357236A1ACB097C000CC846 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		3357236C1ACB097C000CC846 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		3357236F1ACB097C000CC846 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = InfoPlist.strings; sourceTree = "<group>"; };
 		335723711ACB097C000CC846 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		335723731ACB097C000CC846 /* FacebookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookHelper.h; sourceTree = "<group>"; };
 		335723741ACB097C000CC846 /* FacebookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookHelper.m; sourceTree = "<group>"; };
-		335723761ACB097C000CC846 /* WKCameraOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCameraOverlayViewController.h; sourceTree = "<group>"; };
-		335723771ACB097C000CC846 /* WKCameraOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCameraOverlayViewController.m; sourceTree = "<group>"; };
-		335723781ACB097C000CC846 /* WKCameraOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKCameraOverlayViewController.xib; sourceTree = "<group>"; };
-		335723791ACB097C000CC846 /* WKCameraOverlayViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKCameraOverlayViewController_iPad.xib; sourceTree = "<group>"; };
-		3357237A1ACB097C000CC846 /* WKImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKImagePickerController.h; sourceTree = "<group>"; };
-		3357237B1ACB097C000CC846 /* WKImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKImagePickerController.m; sourceTree = "<group>"; };
 		335723801ACB097C000CC846 /* WKMoviePlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKMoviePlayerView.h; sourceTree = "<group>"; };
 		335723811ACB097C000CC846 /* WKMoviePlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKMoviePlayerView.m; sourceTree = "<group>"; };
 		335723821ACB097C000CC846 /* WKNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKNavigationController.h; sourceTree = "<group>"; };
@@ -240,44 +239,90 @@
 		CB8F0AB91ADDDC8600C18263 /* AVCamPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AVCamPreviewView.m; path = Views/AVCamPreviewView.m; sourceTree = "<group>"; };
 		CB8F0ABB1ADDDCB100C18263 /* SSOCameraCaptureHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCameraCaptureHelper.h; sourceTree = "<group>"; };
 		CB8F0ABC1ADDDCB100C18263 /* SSOCameraCaptureHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCameraCaptureHelper.m; sourceTree = "<group>"; };
-		D830F3CA1ACDDA15002A503D /* SSOMediaEditState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditState.h; sourceTree = "<group>"; };
-		D830F3CB1ACDDA15002A503D /* SSOMediaEditState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditState.m; sourceTree = "<group>"; };
-		D830F3CC1ACDDA15002A503D /* SSOMediaEditStateBrightness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateBrightness.h; sourceTree = "<group>"; };
-		D830F3CD1ACDDA15002A503D /* SSOMediaEditStateBrightness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateBrightness.m; sourceTree = "<group>"; };
-		D830F3CE1ACDDA15002A503D /* SSOMediaEditStateCrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateCrop.h; sourceTree = "<group>"; };
-		D830F3CF1ACDDA15002A503D /* SSOMediaEditStateCrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateCrop.m; sourceTree = "<group>"; };
-		D830F3D01ACDDA15002A503D /* SSOMediaEditStateDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateDraw.h; sourceTree = "<group>"; };
-		D830F3D11ACDDA15002A503D /* SSOMediaEditStateDraw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateDraw.m; sourceTree = "<group>"; };
-		D830F3D21ACDDA15002A503D /* SSOMediaEditStateDrawColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateDrawColor.h; sourceTree = "<group>"; };
-		D830F3D31ACDDA15002A503D /* SSOMediaEditStateDrawColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateDrawColor.m; sourceTree = "<group>"; };
-		D830F3D41ACDDA15002A503D /* SSOMediaEditStateDrawGray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateDrawGray.h; sourceTree = "<group>"; };
-		D830F3D51ACDDA15002A503D /* SSOMediaEditStateDrawGray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateDrawGray.m; sourceTree = "<group>"; };
-		D830F3D61ACDDA15002A503D /* SSOMediaEditStateNone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateNone.h; sourceTree = "<group>"; };
-		D830F3D71ACDDA15002A503D /* SSOMediaEditStateNone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateNone.m; sourceTree = "<group>"; };
-		D830F3D81ACDDA15002A503D /* SSOMediaEditStateText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateText.h; sourceTree = "<group>"; };
-		D830F3D91ACDDA15002A503D /* SSOMediaEditStateText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateText.m; sourceTree = "<group>"; };
-		D830F3E71ACDDAE7002A503D /* BrightnessContrastSlidersContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrightnessContrastSlidersContainerView.h; sourceTree = "<group>"; };
-		D830F3E81ACDDAE7002A503D /* BrightnessContrastSlidersContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrightnessContrastSlidersContainerView.m; sourceTree = "<group>"; };
-		D830F3E91ACDDAE7002A503D /* SSOColorPickerContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOColorPickerContainerView.h; sourceTree = "<group>"; };
-		D830F3EA1ACDDAE7002A503D /* SSOColorPickerContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOColorPickerContainerView.m; sourceTree = "<group>"; };
-		D830F3EB1ACDDAE7002A503D /* SSOEditMediaMovableTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOEditMediaMovableTextView.h; sourceTree = "<group>"; };
-		D830F3EC1ACDDAE7002A503D /* SSOEditMediaMovableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOEditMediaMovableTextView.m; sourceTree = "<group>"; };
-		D830F3ED1ACDDAE7002A503D /* WKColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKColorPickerView.h; sourceTree = "<group>"; };
-		D830F3EE1ACDDAE7002A503D /* WKColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKColorPickerView.m; sourceTree = "<group>"; };
-		D830F3F01ACDDAE7002A503D /* BrightnessContrastContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrightnessContrastContainerView.xib; sourceTree = "<group>"; };
-		D830F3F11ACDDAE7002A503D /* ColorPickerContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColorPickerContainerView.xib; sourceTree = "<group>"; };
-		D830F3F21ACDDAE7002A503D /* WKEditMediaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKEditMediaViewController.xib; sourceTree = "<group>"; };
-		D830F3F31ACDDAE7002A503D /* WKEditMediaViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKEditMediaViewController_iPad.xib; sourceTree = "<group>"; };
-		D830F3FD1ACDDBD9002A503D /* SSOAccessoryHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOAccessoryHelper.h; sourceTree = "<group>"; };
-		D830F3FE1ACDDBD9002A503D /* SSOAccessoryHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOAccessoryHelper.m; sourceTree = "<group>"; };
-		D830F3FF1ACDDBD9002A503D /* SSOBrightnessContrastHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBrightnessContrastHelper.h; sourceTree = "<group>"; };
-		D830F4001ACDDBD9002A503D /* SSOBrightnessContrastHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBrightnessContrastHelper.m; sourceTree = "<group>"; };
+		D810B8751ADF506400B3AC11 /* WKEditMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKEditMediaViewController.h; sourceTree = "<group>"; };
+		D810B8761ADF506400B3AC11 /* WKEditMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKEditMediaViewController.m; sourceTree = "<group>"; };
+		D810B8791ADF506400B3AC11 /* SSOAdjustementsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOAdjustementsHelper.h; sourceTree = "<group>"; };
+		D810B87A1ADF506400B3AC11 /* SSOAdjustementsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOAdjustementsHelper.m; sourceTree = "<group>"; };
+		D810B87C1ADF506400B3AC11 /* SSOAnimatableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOAnimatableView.h; sourceTree = "<group>"; };
+		D810B87D1ADF506400B3AC11 /* SSOContainerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOContainerViewDelegate.h; sourceTree = "<group>"; };
+		D810B87E1ADF506400B3AC11 /* SSOEditViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOEditViewControllerProtocol.h; sourceTree = "<group>"; };
+		D810B8801ADF506400B3AC11 /* SSOTextFontCollectionViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTextFontCollectionViewProvider.h; sourceTree = "<group>"; };
+		D810B8811ADF506400B3AC11 /* SSOTextFontCollectionViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTextFontCollectionViewProvider.m; sourceTree = "<group>"; };
+		D810B8841ADF506400B3AC11 /* SSOMediaEditState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditState.h; sourceTree = "<group>"; };
+		D810B8851ADF506400B3AC11 /* SSOMediaEditState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditState.m; sourceTree = "<group>"; };
+		D810B8861ADF506400B3AC11 /* SSOMediaEditStateBrightness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateBrightness.h; sourceTree = "<group>"; };
+		D810B8871ADF506400B3AC11 /* SSOMediaEditStateBrightness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateBrightness.m; sourceTree = "<group>"; };
+		D810B8881ADF506400B3AC11 /* SSOMediaEditStateCrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateCrop.h; sourceTree = "<group>"; };
+		D810B8891ADF506400B3AC11 /* SSOMediaEditStateCrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateCrop.m; sourceTree = "<group>"; };
+		D810B88A1ADF506400B3AC11 /* SSOMediaEditStateDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateDraw.h; sourceTree = "<group>"; };
+		D810B88B1ADF506400B3AC11 /* SSOMediaEditStateDraw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateDraw.m; sourceTree = "<group>"; };
+		D810B88C1ADF506400B3AC11 /* SSOMediaEditStateDrawColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateDrawColor.h; sourceTree = "<group>"; };
+		D810B88D1ADF506400B3AC11 /* SSOMediaEditStateDrawColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateDrawColor.m; sourceTree = "<group>"; };
+		D810B88E1ADF506400B3AC11 /* SSOMediaEditStateDrawGray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateDrawGray.h; sourceTree = "<group>"; };
+		D810B88F1ADF506400B3AC11 /* SSOMediaEditStateDrawGray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateDrawGray.m; sourceTree = "<group>"; };
+		D810B8901ADF506400B3AC11 /* SSOMediaEditStateNone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateNone.h; sourceTree = "<group>"; };
+		D810B8911ADF506400B3AC11 /* SSOMediaEditStateNone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateNone.m; sourceTree = "<group>"; };
+		D810B8921ADF506400B3AC11 /* SSOMediaEditStateText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMediaEditStateText.h; sourceTree = "<group>"; };
+		D810B8931ADF506400B3AC11 /* SSOMediaEditStateText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMediaEditStateText.m; sourceTree = "<group>"; };
+		D810B8951ADF506400B3AC11 /* SSOAdjustmentToolController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOAdjustmentToolController.h; sourceTree = "<group>"; };
+		D810B8961ADF506400B3AC11 /* SSOAdjustmentToolController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOAdjustmentToolController.m; sourceTree = "<group>"; };
+		D810B8971ADF506400B3AC11 /* SSODrawToolController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSODrawToolController.h; sourceTree = "<group>"; };
+		D810B8981ADF506400B3AC11 /* SSODrawToolController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSODrawToolController.m; sourceTree = "<group>"; };
+		D810B8991ADF506400B3AC11 /* SSOEditToolController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOEditToolController.h; sourceTree = "<group>"; };
+		D810B89A1ADF506400B3AC11 /* SSOEditToolController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOEditToolController.m; sourceTree = "<group>"; };
+		D810B89B1ADF506400B3AC11 /* SSOTextToolController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTextToolController.h; sourceTree = "<group>"; };
+		D810B89C1ADF506400B3AC11 /* SSOTextToolController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTextToolController.m; sourceTree = "<group>"; };
+		D810B89F1ADF506400B3AC11 /* SSOFontCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFontCollectionViewCell.h; sourceTree = "<group>"; };
+		D810B8A01ADF506400B3AC11 /* SSOFontCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFontCollectionViewCell.m; sourceTree = "<group>"; };
+		D810B8A31ADF506400B3AC11 /* SSOAdjustmentAccessoryContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOAdjustmentAccessoryContainerView.h; sourceTree = "<group>"; };
+		D810B8A41ADF506400B3AC11 /* SSOAdjustmentAccessoryContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOAdjustmentAccessoryContainerView.m; sourceTree = "<group>"; };
+		D810B8A51ADF506400B3AC11 /* SSOAdjustmentSliderContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOAdjustmentSliderContainerView.h; sourceTree = "<group>"; };
+		D810B8A61ADF506400B3AC11 /* SSOAdjustmentSliderContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOAdjustmentSliderContainerView.m; sourceTree = "<group>"; };
+		D810B8A81ADF506400B3AC11 /* SSOAccessoryContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOAccessoryContainerView.h; sourceTree = "<group>"; };
+		D810B8A91ADF506400B3AC11 /* SSOAccessoryContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOAccessoryContainerView.m; sourceTree = "<group>"; };
+		D810B8AA1ADF506400B3AC11 /* SSOButtonsContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOButtonsContainerView.h; sourceTree = "<group>"; };
+		D810B8AB1ADF506500B3AC11 /* SSOButtonsContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOButtonsContainerView.m; sourceTree = "<group>"; };
+		D810B8AC1ADF506500B3AC11 /* SSOColorPickerContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOColorPickerContainerView.h; sourceTree = "<group>"; };
+		D810B8AD1ADF506500B3AC11 /* SSOColorPickerContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOColorPickerContainerView.m; sourceTree = "<group>"; };
+		D810B8AE1ADF506500B3AC11 /* SSOFadingContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFadingContainerView.h; sourceTree = "<group>"; };
+		D810B8AF1ADF506500B3AC11 /* SSOFadingContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFadingContainerView.m; sourceTree = "<group>"; };
+		D810B8B01ADF506500B3AC11 /* SSOSlidingContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSlidingContainerView.h; sourceTree = "<group>"; };
+		D810B8B11ADF506500B3AC11 /* SSOSlidingContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSlidingContainerView.m; sourceTree = "<group>"; };
+		D810B8B21ADF506500B3AC11 /* SSOSubtoolContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSubtoolContainerView.h; sourceTree = "<group>"; };
+		D810B8B31ADF506500B3AC11 /* SSOSubtoolContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSubtoolContainerView.m; sourceTree = "<group>"; };
+		D810B8B51ADF506500B3AC11 /* SSODrawAccessoryContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSODrawAccessoryContainerView.h; sourceTree = "<group>"; };
+		D810B8B61ADF506500B3AC11 /* SSODrawAccessoryContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSODrawAccessoryContainerView.m; sourceTree = "<group>"; };
+		D810B8B91ADF506500B3AC11 /* SSOTextAccessoryContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTextAccessoryContainerView.h; sourceTree = "<group>"; };
+		D810B8BA1ADF506500B3AC11 /* SSOTextAccessoryContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTextAccessoryContainerView.m; sourceTree = "<group>"; };
+		D810B8BB1ADF506500B3AC11 /* SSOEditMediaMovableTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOEditMediaMovableTextView.h; sourceTree = "<group>"; };
+		D810B8BC1ADF506500B3AC11 /* SSOEditMediaMovableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOEditMediaMovableTextView.m; sourceTree = "<group>"; };
+		D810B8BD1ADF506500B3AC11 /* SSOEditSideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOEditSideMenuView.h; sourceTree = "<group>"; };
+		D810B8BE1ADF506500B3AC11 /* SSOEditSideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOEditSideMenuView.m; sourceTree = "<group>"; };
+		D810B8BF1ADF506500B3AC11 /* SSOEditSideMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOEditSideMenuView.xib; sourceTree = "<group>"; };
+		D810B8C01ADF506500B3AC11 /* SSOToolButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOToolButton.h; sourceTree = "<group>"; };
+		D810B8C11ADF506500B3AC11 /* SSOToolButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOToolButton.m; sourceTree = "<group>"; };
+		D810B8C21ADF506500B3AC11 /* WKColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKColorPickerView.h; sourceTree = "<group>"; };
+		D810B8C31ADF506500B3AC11 /* WKColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKColorPickerView.m; sourceTree = "<group>"; };
+		D810B8C51ADF506500B3AC11 /* BrightnessContrastContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrightnessContrastContainerView.xib; sourceTree = "<group>"; };
+		D810B8C61ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOAdjustmentAccessoryContainerView.xib; sourceTree = "<group>"; };
+		D810B8C71ADF506500B3AC11 /* SSOColorPickerContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOColorPickerContainerView.xib; sourceTree = "<group>"; };
+		D810B8C81ADF506500B3AC11 /* SSODrawAccessoryContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSODrawAccessoryContainerView.xib; sourceTree = "<group>"; };
+		D810B8C91ADF506500B3AC11 /* SSOFontCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOFontCollectionViewCell.xib; sourceTree = "<group>"; };
+		D810B8CA1ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOTextAccessoryContainerView.xib; sourceTree = "<group>"; };
+		D810B8CB1ADF506500B3AC11 /* WKEditMediaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKEditMediaViewController.xib; sourceTree = "<group>"; };
+		D810B8CC1ADF506500B3AC11 /* WKEditMediaViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKEditMediaViewController_iPad.xib; sourceTree = "<group>"; };
+		D810B8F51ADF508A00B3AC11 /* NSBundle+Wink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Wink.h"; sourceTree = "<group>"; };
+		D810B8F61ADF508A00B3AC11 /* NSBundle+Wink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Wink.m"; sourceTree = "<group>"; };
+		D810B8F91ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseCollectionViewProvider.h; sourceTree = "<group>"; };
+		D810B8FA1ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseCollectionViewProvider.m; sourceTree = "<group>"; };
+		D810B8FB1ADF51BB00B3AC11 /* SSOBaseProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseProvider.h; sourceTree = "<group>"; };
+		D810B8FC1ADF51BB00B3AC11 /* SSOBaseProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseProvider.m; sourceTree = "<group>"; };
+		D810B8FD1ADF51BB00B3AC11 /* SSOBaseTableViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseTableViewProvider.h; sourceTree = "<group>"; };
+		D810B8FE1ADF51BB00B3AC11 /* SSOBaseTableViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseTableViewProvider.m; sourceTree = "<group>"; };
 		D830F4041ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
 		D830F4051ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		D830F4061ACDDBF1002A503D /* AVAssetTrack+WKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVAssetTrack+WKAdditions.h"; sourceTree = "<group>"; };
 		D830F4071ACDDBF1002A503D /* AVAssetTrack+WKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVAssetTrack+WKAdditions.m"; sourceTree = "<group>"; };
-		D830F4081ACDDBF1002A503D /* NSBundle+SSOHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+SSOHelper.h"; sourceTree = "<group>"; };
-		D830F4091ACDDBF1002A503D /* NSBundle+SSOHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+SSOHelper.m"; sourceTree = "<group>"; };
 		D830F40A1ACDDBF1002A503D /* NSDictionary+WKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+WKAdditions.h"; sourceTree = "<group>"; };
 		D830F40B1ACDDBF1002A503D /* NSDictionary+WKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+WKAdditions.m"; sourceTree = "<group>"; };
 		D830F40C1ACDDBF1002A503D /* UIColor+PickerColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PickerColors.h"; sourceTree = "<group>"; };
@@ -316,10 +361,6 @@
 		D8EA5C7B1AD4281B008D2A37 /* SSOSocialNetworkAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSocialNetworkAPI.m; sourceTree = "<group>"; };
 		D8EA5C7F1AD4287C008D2A37 /* WKWinkConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWinkConnect.h; sourceTree = "<group>"; };
 		D8EA5C801AD4287C008D2A37 /* WKWinkConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWinkConnect.m; sourceTree = "<group>"; };
-		D8EA5C821AD4287C008D2A37 /* WKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WKLoginViewController.h; path = ../Login/Controllers/WKLoginViewController.h; sourceTree = "<group>"; };
-		D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WKLoginViewController.m; path = ../Login/Controllers/WKLoginViewController.m; sourceTree = "<group>"; };
-		D8EA5C841AD4287C008D2A37 /* WKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WKUser.h; path = ../Login/Controllers/WKUser.h; sourceTree = "<group>"; };
-		D8EA5C851AD4287C008D2A37 /* WKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WKUser.m; path = ../Login/Controllers/WKUser.m; sourceTree = "<group>"; };
 		D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOLoginViewController.xib; sourceTree = "<group>"; };
 		D8EA5C881AD4287C008D2A37 /* WKLoginViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKLoginViewController_iPad.xib; sourceTree = "<group>"; };
 		D8EA5C8E1AD428D3008D2A37 /* SSOGooglePlusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOGooglePlusHelper.h; sourceTree = "<group>"; };
@@ -427,6 +468,7 @@
 				D8EA5C7D1AD4287C008D2A37 /* Login */,
 				D86E94C31ACF4A1400CFF801 /* Model */,
 				335723751ACB097C000CC846 /* Old:To Check */,
+				D810B8F81ADF51BB00B3AC11 /* Providers */,
 				3357238E1ACB097C000CC846 /* Settings */,
 				335723971ACB097C000CC846 /* Sharing */,
 				D8EA5C791AD4281B008D2A37 /* Social Network */,
@@ -494,9 +536,6 @@
 			children = (
 				335723421ACB097C000CC846 /* SSOCameraViewController.h */,
 				335723431ACB097C000CC846 /* SSOCameraViewController.m */,
-				335723461ACB097C000CC846 /* WKCameraViewController.h */,
-				335723471ACB097C000CC846 /* WKCameraViewController.m */,
-				335723481ACB097C000CC846 /* WKCameraViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -513,22 +552,16 @@
 		3357234E1ACB097C000CC846 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
-				D830F3FC1ACDDBD9002A503D /* Helpers */,
-				D830F3C81ACDDA15002A503D /* State */,
-				3357234F1ACB097C000CC846 /* Controllers */,
-				D830F3E51ACDDAE7002A503D /* Views */,
-				D830F3EF1ACDDAE7002A503D /* XIB */,
+				D810B8741ADF506400B3AC11 /* Controllers */,
+				D810B8781ADF506400B3AC11 /* Helpers */,
+				D810B87B1ADF506400B3AC11 /* Protocols */,
+				D810B87F1ADF506400B3AC11 /* Providers */,
+				D810B8821ADF506400B3AC11 /* State */,
+				D810B8941ADF506400B3AC11 /* Tool */,
+				D810B89D1ADF506400B3AC11 /* Views */,
+				D810B8C41ADF506500B3AC11 /* XIB */,
 			);
 			path = Edit;
-			sourceTree = "<group>";
-		};
-		3357234F1ACB097C000CC846 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				335723501ACB097C000CC846 /* WKEditMediaViewController.h */,
-				335723511ACB097C000CC846 /* WKEditMediaViewController.m */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		335723681ACB097C000CC846 /* en.lproj */ = {
@@ -563,16 +596,6 @@
 		335723751ACB097C000CC846 /* Old:To Check */ = {
 			isa = PBXGroup;
 			children = (
-				D8EA5C841AD4287C008D2A37 /* WKUser.h */,
-				D8EA5C851AD4287C008D2A37 /* WKUser.m */,
-				D8EA5C821AD4287C008D2A37 /* WKLoginViewController.h */,
-				D8EA5C831AD4287C008D2A37 /* WKLoginViewController.m */,
-				335723761ACB097C000CC846 /* WKCameraOverlayViewController.h */,
-				335723771ACB097C000CC846 /* WKCameraOverlayViewController.m */,
-				335723781ACB097C000CC846 /* WKCameraOverlayViewController.xib */,
-				335723791ACB097C000CC846 /* WKCameraOverlayViewController_iPad.xib */,
-				3357237A1ACB097C000CC846 /* WKImagePickerController.h */,
-				3357237B1ACB097C000CC846 /* WKImagePickerController.m */,
 				335723801ACB097C000CC846 /* WKMoviePlayerView.h */,
 				335723811ACB097C000CC846 /* WKMoviePlayerView.m */,
 				335723821ACB097C000CC846 /* WKNavigationController.h */,
@@ -678,83 +701,209 @@
 			name = VIews;
 			sourceTree = "<group>";
 		};
-		D830F3C81ACDDA15002A503D /* State */ = {
+		D810B8741ADF506400B3AC11 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D830F3C91ACDDA15002A503D /* MediaEditState */,
+				D810B8751ADF506400B3AC11 /* WKEditMediaViewController.h */,
+				D810B8761ADF506400B3AC11 /* WKEditMediaViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D810B8781ADF506400B3AC11 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D810B8791ADF506400B3AC11 /* SSOAdjustementsHelper.h */,
+				D810B87A1ADF506400B3AC11 /* SSOAdjustementsHelper.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D810B87B1ADF506400B3AC11 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D810B87C1ADF506400B3AC11 /* SSOAnimatableView.h */,
+				D810B87D1ADF506400B3AC11 /* SSOContainerViewDelegate.h */,
+				D810B87E1ADF506400B3AC11 /* SSOEditViewControllerProtocol.h */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D810B87F1ADF506400B3AC11 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				D810B8801ADF506400B3AC11 /* SSOTextFontCollectionViewProvider.h */,
+				D810B8811ADF506400B3AC11 /* SSOTextFontCollectionViewProvider.m */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		D810B8821ADF506400B3AC11 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				D810B8831ADF506400B3AC11 /* MediaEditState */,
 			);
 			path = State;
 			sourceTree = "<group>";
 		};
-		D830F3C91ACDDA15002A503D /* MediaEditState */ = {
+		D810B8831ADF506400B3AC11 /* MediaEditState */ = {
 			isa = PBXGroup;
 			children = (
-				D830F3CA1ACDDA15002A503D /* SSOMediaEditState.h */,
-				D830F3CB1ACDDA15002A503D /* SSOMediaEditState.m */,
-				D830F3CC1ACDDA15002A503D /* SSOMediaEditStateBrightness.h */,
-				D830F3CD1ACDDA15002A503D /* SSOMediaEditStateBrightness.m */,
-				D830F3CE1ACDDA15002A503D /* SSOMediaEditStateCrop.h */,
-				D830F3CF1ACDDA15002A503D /* SSOMediaEditStateCrop.m */,
-				D830F3D01ACDDA15002A503D /* SSOMediaEditStateDraw.h */,
-				D830F3D11ACDDA15002A503D /* SSOMediaEditStateDraw.m */,
-				D830F3D21ACDDA15002A503D /* SSOMediaEditStateDrawColor.h */,
-				D830F3D31ACDDA15002A503D /* SSOMediaEditStateDrawColor.m */,
-				D830F3D41ACDDA15002A503D /* SSOMediaEditStateDrawGray.h */,
-				D830F3D51ACDDA15002A503D /* SSOMediaEditStateDrawGray.m */,
-				D830F3D61ACDDA15002A503D /* SSOMediaEditStateNone.h */,
-				D830F3D71ACDDA15002A503D /* SSOMediaEditStateNone.m */,
-				D830F3D81ACDDA15002A503D /* SSOMediaEditStateText.h */,
-				D830F3D91ACDDA15002A503D /* SSOMediaEditStateText.m */,
+				D810B8841ADF506400B3AC11 /* SSOMediaEditState.h */,
+				D810B8851ADF506400B3AC11 /* SSOMediaEditState.m */,
+				D810B8861ADF506400B3AC11 /* SSOMediaEditStateBrightness.h */,
+				D810B8871ADF506400B3AC11 /* SSOMediaEditStateBrightness.m */,
+				D810B8881ADF506400B3AC11 /* SSOMediaEditStateCrop.h */,
+				D810B8891ADF506400B3AC11 /* SSOMediaEditStateCrop.m */,
+				D810B88A1ADF506400B3AC11 /* SSOMediaEditStateDraw.h */,
+				D810B88B1ADF506400B3AC11 /* SSOMediaEditStateDraw.m */,
+				D810B88C1ADF506400B3AC11 /* SSOMediaEditStateDrawColor.h */,
+				D810B88D1ADF506400B3AC11 /* SSOMediaEditStateDrawColor.m */,
+				D810B88E1ADF506400B3AC11 /* SSOMediaEditStateDrawGray.h */,
+				D810B88F1ADF506400B3AC11 /* SSOMediaEditStateDrawGray.m */,
+				D810B8901ADF506400B3AC11 /* SSOMediaEditStateNone.h */,
+				D810B8911ADF506400B3AC11 /* SSOMediaEditStateNone.m */,
+				D810B8921ADF506400B3AC11 /* SSOMediaEditStateText.h */,
+				D810B8931ADF506400B3AC11 /* SSOMediaEditStateText.m */,
 			);
 			path = MediaEditState;
 			sourceTree = "<group>";
 		};
-		D830F3E51ACDDAE7002A503D /* Views */ = {
+		D810B8941ADF506400B3AC11 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				D830F3E61ACDDAE7002A503D /* MediaEditContainerView */,
-				D830F3EB1ACDDAE7002A503D /* SSOEditMediaMovableTextView.h */,
-				D830F3EC1ACDDAE7002A503D /* SSOEditMediaMovableTextView.m */,
-				3316F2D41ADD838700C7ED24 /* SSOEditSideMenuView.h */,
-				3316F2D51ADD838700C7ED24 /* SSOEditSideMenuView.m */,
-				D830F3ED1ACDDAE7002A503D /* WKColorPickerView.h */,
-				D830F3EE1ACDDAE7002A503D /* WKColorPickerView.m */,
-				330B38E11AD314D3003E9798 /* SSOEditSideMenuView.xib */,
+				D810B8951ADF506400B3AC11 /* SSOAdjustmentToolController.h */,
+				D810B8961ADF506400B3AC11 /* SSOAdjustmentToolController.m */,
+				D810B8971ADF506400B3AC11 /* SSODrawToolController.h */,
+				D810B8981ADF506400B3AC11 /* SSODrawToolController.m */,
+				D810B8991ADF506400B3AC11 /* SSOEditToolController.h */,
+				D810B89A1ADF506400B3AC11 /* SSOEditToolController.m */,
+				D810B89B1ADF506400B3AC11 /* SSOTextToolController.h */,
+				D810B89C1ADF506400B3AC11 /* SSOTextToolController.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		D810B89D1ADF506400B3AC11 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D810B89E1ADF506400B3AC11 /* Cells */,
+				D810B8A11ADF506400B3AC11 /* Container */,
+				D810B8BB1ADF506500B3AC11 /* SSOEditMediaMovableTextView.h */,
+				D810B8BC1ADF506500B3AC11 /* SSOEditMediaMovableTextView.m */,
+				D810B8BD1ADF506500B3AC11 /* SSOEditSideMenuView.h */,
+				D810B8BE1ADF506500B3AC11 /* SSOEditSideMenuView.m */,
+				D810B8BF1ADF506500B3AC11 /* SSOEditSideMenuView.xib */,
+				D810B8C01ADF506500B3AC11 /* SSOToolButton.h */,
+				D810B8C11ADF506500B3AC11 /* SSOToolButton.m */,
+				D810B8C21ADF506500B3AC11 /* WKColorPickerView.h */,
+				D810B8C31ADF506500B3AC11 /* WKColorPickerView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		D830F3E61ACDDAE7002A503D /* MediaEditContainerView */ = {
+		D810B89E1ADF506400B3AC11 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				D830F3E71ACDDAE7002A503D /* BrightnessContrastSlidersContainerView.h */,
-				D830F3E81ACDDAE7002A503D /* BrightnessContrastSlidersContainerView.m */,
-				D830F3E91ACDDAE7002A503D /* SSOColorPickerContainerView.h */,
-				D830F3EA1ACDDAE7002A503D /* SSOColorPickerContainerView.m */,
+				D810B89F1ADF506400B3AC11 /* SSOFontCollectionViewCell.h */,
+				D810B8A01ADF506400B3AC11 /* SSOFontCollectionViewCell.m */,
 			);
-			path = MediaEditContainerView;
+			path = Cells;
 			sourceTree = "<group>";
 		};
-		D830F3EF1ACDDAE7002A503D /* XIB */ = {
+		D810B8A11ADF506400B3AC11 /* Container */ = {
 			isa = PBXGroup;
 			children = (
-				D830F3F01ACDDAE7002A503D /* BrightnessContrastContainerView.xib */,
-				D830F3F11ACDDAE7002A503D /* ColorPickerContainerView.xib */,
-				D830F3F21ACDDAE7002A503D /* WKEditMediaViewController.xib */,
-				D830F3F31ACDDAE7002A503D /* WKEditMediaViewController_iPad.xib */,
+				D810B8A21ADF506400B3AC11 /* Adjust */,
+				D810B8A71ADF506400B3AC11 /* Base */,
+				D810B8B41ADF506500B3AC11 /* Draw */,
+				D810B8B71ADF506500B3AC11 /* Stickers */,
+				D810B8B81ADF506500B3AC11 /* Text */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
+		D810B8A21ADF506400B3AC11 /* Adjust */ = {
+			isa = PBXGroup;
+			children = (
+				D810B8A31ADF506400B3AC11 /* SSOAdjustmentAccessoryContainerView.h */,
+				D810B8A41ADF506400B3AC11 /* SSOAdjustmentAccessoryContainerView.m */,
+				D810B8A51ADF506400B3AC11 /* SSOAdjustmentSliderContainerView.h */,
+				D810B8A61ADF506400B3AC11 /* SSOAdjustmentSliderContainerView.m */,
+			);
+			path = Adjust;
+			sourceTree = "<group>";
+		};
+		D810B8A71ADF506400B3AC11 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				D810B8A81ADF506400B3AC11 /* SSOAccessoryContainerView.h */,
+				D810B8A91ADF506400B3AC11 /* SSOAccessoryContainerView.m */,
+				D810B8AA1ADF506400B3AC11 /* SSOButtonsContainerView.h */,
+				D810B8AB1ADF506500B3AC11 /* SSOButtonsContainerView.m */,
+				D810B8AC1ADF506500B3AC11 /* SSOColorPickerContainerView.h */,
+				D810B8AD1ADF506500B3AC11 /* SSOColorPickerContainerView.m */,
+				D810B8AE1ADF506500B3AC11 /* SSOFadingContainerView.h */,
+				D810B8AF1ADF506500B3AC11 /* SSOFadingContainerView.m */,
+				D810B8B01ADF506500B3AC11 /* SSOSlidingContainerView.h */,
+				D810B8B11ADF506500B3AC11 /* SSOSlidingContainerView.m */,
+				D810B8B21ADF506500B3AC11 /* SSOSubtoolContainerView.h */,
+				D810B8B31ADF506500B3AC11 /* SSOSubtoolContainerView.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		D810B8B41ADF506500B3AC11 /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				D810B8B51ADF506500B3AC11 /* SSODrawAccessoryContainerView.h */,
+				D810B8B61ADF506500B3AC11 /* SSODrawAccessoryContainerView.m */,
+			);
+			path = Draw;
+			sourceTree = "<group>";
+		};
+		D810B8B71ADF506500B3AC11 /* Stickers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Stickers;
+			sourceTree = "<group>";
+		};
+		D810B8B81ADF506500B3AC11 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				D810B8B91ADF506500B3AC11 /* SSOTextAccessoryContainerView.h */,
+				D810B8BA1ADF506500B3AC11 /* SSOTextAccessoryContainerView.m */,
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
+		D810B8C41ADF506500B3AC11 /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				D810B8C51ADF506500B3AC11 /* BrightnessContrastContainerView.xib */,
+				D810B8C61ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib */,
+				D810B8C71ADF506500B3AC11 /* SSOColorPickerContainerView.xib */,
+				D810B8C81ADF506500B3AC11 /* SSODrawAccessoryContainerView.xib */,
+				D810B8C91ADF506500B3AC11 /* SSOFontCollectionViewCell.xib */,
+				D810B8CA1ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib */,
+				D810B8CB1ADF506500B3AC11 /* WKEditMediaViewController.xib */,
+				D810B8CC1ADF506500B3AC11 /* WKEditMediaViewController_iPad.xib */,
 			);
 			path = XIB;
 			sourceTree = "<group>";
 		};
-		D830F3FC1ACDDBD9002A503D /* Helpers */ = {
+		D810B8F81ADF51BB00B3AC11 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
-				D830F3FD1ACDDBD9002A503D /* SSOAccessoryHelper.h */,
-				D830F3FE1ACDDBD9002A503D /* SSOAccessoryHelper.m */,
-				D830F3FF1ACDDBD9002A503D /* SSOBrightnessContrastHelper.h */,
-				D830F4001ACDDBD9002A503D /* SSOBrightnessContrastHelper.m */,
+				D810B8F91ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.h */,
+				D810B8FA1ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.m */,
+				D810B8FB1ADF51BB00B3AC11 /* SSOBaseProvider.h */,
+				D810B8FC1ADF51BB00B3AC11 /* SSOBaseProvider.m */,
+				D810B8FD1ADF51BB00B3AC11 /* SSOBaseTableViewProvider.h */,
+				D810B8FE1ADF51BB00B3AC11 /* SSOBaseTableViewProvider.m */,
 			);
-			path = Helpers;
+			path = Providers;
 			sourceTree = "<group>";
 		};
 		D830F4031ACDDBF1002A503D /* Categories */ = {
@@ -764,8 +913,8 @@
 				D830F4051ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m */,
 				D830F4061ACDDBF1002A503D /* AVAssetTrack+WKAdditions.h */,
 				D830F4071ACDDBF1002A503D /* AVAssetTrack+WKAdditions.m */,
-				D830F4081ACDDBF1002A503D /* NSBundle+SSOHelper.h */,
-				D830F4091ACDDBF1002A503D /* NSBundle+SSOHelper.m */,
+				D810B8F51ADF508A00B3AC11 /* NSBundle+Wink.h */,
+				D810B8F61ADF508A00B3AC11 /* NSBundle+Wink.m */,
 				D830F40A1ACDDBF1002A503D /* NSDictionary+WKAdditions.h */,
 				D830F40B1ACDDBF1002A503D /* NSDictionary+WKAdditions.m */,
 				D830F40C1ACDDBF1002A503D /* UIColor+PickerColors.h */,
@@ -1020,27 +1169,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				3303DDCE1AD83E42002B74F9 /* SSORegisterContainerView.xib in Resources */,
-				D830F3F91ACDDAE7002A503D /* ColorPickerContainerView.xib in Resources */,
 				D86E94C91ACF4A1400CFF801 /* CustomCollectionViewCell.xib in Resources */,
-				D830F3F81ACDDAE7002A503D /* BrightnessContrastContainerView.xib in Resources */,
-				335723CD1ACB097C000CC846 /* WKCameraOverlayViewController_iPad.xib in Resources */,
+				D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */,
 				7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */,
 				335723DB1ACB097C000CC846 /* SettingsSocialCell.xib in Resources */,
 				D8EA5C8D1AD4287C008D2A37 /* WKLoginViewController_iPad.xib in Resources */,
 				335723DF1ACB097C000CC846 /* WKShareViewController_iPad.xib in Resources */,
-				330B38E21AD314D3003E9798 /* SSOEditSideMenuView.xib in Resources */,
+				D810B8EE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
+				D810B8EF1ADF506500B3AC11 /* SSOColorPickerContainerView.xib in Resources */,
 				335723DC1ACB097C000CC846 /* SettingsSocialFakeCell.xib in Resources */,
 				335723C61ACB097C000CC846 /* InfoPlist.strings in Resources */,
 				335723DA1ACB097C000CC846 /* WKSettingsViewController.xib in Resources */,
-				335723B81ACB097C000CC846 /* WKCameraViewController.xib in Resources */,
-				335723CC1ACB097C000CC846 /* WKCameraOverlayViewController.xib in Resources */,
 				335723B31ACB097C000CC846 /* Camera.storyboard in Resources */,
-				D830F3FB1ACDDAE7002A503D /* WKEditMediaViewController_iPad.xib in Resources */,
+				D810B8F01ADF506500B3AC11 /* SSODrawAccessoryContainerView.xib in Resources */,
+				D810B8EA1ADF506500B3AC11 /* SSOEditSideMenuView.xib in Resources */,
 				335723C91ACB097C000CC846 /* Localizable.strings in Resources */,
 				335723C71ACB097C000CC846 /* Localizable.strings in Resources */,
-				D830F3FA1ACDDAE7002A503D /* WKEditMediaViewController.xib in Resources */,
+				D810B8ED1ADF506500B3AC11 /* BrightnessContrastContainerView.xib in Resources */,
+				D810B8F11ADF506500B3AC11 /* SSOFontCollectionViewCell.xib in Resources */,
 				3303DDD01AD84F19002B74F9 /* SSOLoginContainerView.xib in Resources */,
+				D810B8F41ADF506500B3AC11 /* WKEditMediaViewController_iPad.xib in Resources */,
 				335723E31ACB097C000CC846 /* Wink-Info.plist in Resources */,
+				D810B8F21ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib in Resources */,
 				D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */,
 				335723C81ACB097C000CC846 /* InfoPlist.strings in Resources */,
 				335723DE1ACB097C000CC846 /* WKShareViewController.xib in Resources */,
@@ -1129,70 +1279,82 @@
 			files = (
 				D8EA5C7C1AD4281B008D2A37 /* SSOSocialNetworkAPI.m in Sources */,
 				D830F4201ACDDBF1002A503D /* UIFont+WKAdditions.m in Sources */,
+				D810B8D51ADF506500B3AC11 /* SSOMediaEditStateDrawColor.m in Sources */,
+				D810B8DA1ADF506500B3AC11 /* SSODrawToolController.m in Sources */,
 				D86E94CC1ACF4A1400CFF801 /* SSCellViewSection.m in Sources */,
 				335723D21ACB097C000CC846 /* WKMoviePlayerView.m in Sources */,
-				335723CB1ACB097C000CC846 /* WKCameraOverlayViewController.m in Sources */,
-				D830F4021ACDDBD9002A503D /* SSOBrightnessContrastHelper.m in Sources */,
 				D830F4241ACDDBF1002A503D /* UIView+WKAdditions.m in Sources */,
+				D810B8EC1ADF506500B3AC11 /* WKColorPickerView.m in Sources */,
+				D810B8D41ADF506500B3AC11 /* SSOMediaEditStateDraw.m in Sources */,
 				D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */,
-				D830F3DB1ACDDA15002A503D /* SSOMediaEditStateBrightness.m in Sources */,
 				D830F41B1ACDDBF1002A503D /* AVAssetTrack+WKAdditions.m in Sources */,
+				D810B8E51ADF506500B3AC11 /* SSOSubtoolContainerView.m in Sources */,
+				D810B8CD1ADF506500B3AC11 /* WKEditMediaViewController.m in Sources */,
 				335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */,
 				335723DD1ACB097C000CC846 /* WKShareViewController.m in Sources */,
 				D830F41E1ACDDBF1002A503D /* UIColor+PickerColors.m in Sources */,
 				335723E41ACB097C000CC846 /* WKAppDelegate.m in Sources */,
-				335723B71ACB097C000CC846 /* WKCameraViewController.m in Sources */,
-				D830F41C1ACDDBF1002A503D /* NSBundle+SSOHelper.m in Sources */,
-				D830F3F41ACDDAE7002A503D /* BrightnessContrastSlidersContainerView.m in Sources */,
+				D810B8E81ADF506500B3AC11 /* SSOEditMediaMovableTextView.m in Sources */,
+				D810B8D81ADF506500B3AC11 /* SSOMediaEditStateText.m in Sources */,
 				335723E11ACB097C000CC846 /* main.m in Sources */,
+				D810B8EB1ADF506500B3AC11 /* SSOToolButton.m in Sources */,
+				D810B8E41ADF506500B3AC11 /* SSOSlidingContainerView.m in Sources */,
 				D86E94CB1ACF4A1400CFF801 /* SSCellViewItem.m in Sources */,
-				D830F4011ACDDBD9002A503D /* SSOAccessoryHelper.m in Sources */,
 				335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */,
+				D810B8D31ADF506500B3AC11 /* SSOMediaEditStateCrop.m in Sources */,
 				D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */,
-				D830F3E01ACDDA15002A503D /* SSOMediaEditStateNone.m in Sources */,
 				D830F4221ACDDBF1002A503D /* UIImage+Tools.m in Sources */,
 				335723E01ACB097C000CC846 /* Constants.m in Sources */,
 				335723D61ACB097C000CC846 /* WKVideoEditor.m in Sources */,
 				D830F41D1ACDDBF1002A503D /* NSDictionary+WKAdditions.m in Sources */,
 				3316F2D01ADD6CC900C7ED24 /* NSUserDefaults+USnap.m in Sources */,
+				D810B8D61ADF506500B3AC11 /* SSOMediaEditStateDrawGray.m in Sources */,
 				335723D41ACB097C000CC846 /* WKSocialNetworkHelper.m in Sources */,
-				D830F3F61ACDDAE7002A503D /* SSOEditMediaMovableTextView.m in Sources */,
-				D8EA5C8B1AD4287C008D2A37 /* WKUser.m in Sources */,
+				D810B8E31ADF506500B3AC11 /* SSOFadingContainerView.m in Sources */,
+				D810B8D91ADF506500B3AC11 /* SSOAdjustmentToolController.m in Sources */,
+				D810B8D21ADF506500B3AC11 /* SSOMediaEditStateBrightness.m in Sources */,
 				CB8F0ABA1ADDDC8600C18263 /* AVCamPreviewView.m in Sources */,
 				D830F41F1ACDDBF1002A503D /* UIColor+WKAdditions.m in Sources */,
 				D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */,
 				3303DDD41AD8547F002B74F9 /* SSOLoginContainerView.m in Sources */,
+				D810B8CF1ADF506500B3AC11 /* SSOAdjustementsHelper.m in Sources */,
+				D810B8E71ADF506500B3AC11 /* SSOTextAccessoryContainerView.m in Sources */,
+				D810B9001ADF51BB00B3AC11 /* SSOBaseProvider.m in Sources */,
 				335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */,
-				D830F3F71ACDDAE7002A503D /* WKColorPickerView.m in Sources */,
 				D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */,
 				336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */,
-				D830F3DE1ACDDA15002A503D /* SSOMediaEditStateDrawColor.m in Sources */,
+				D810B8DE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.m in Sources */,
 				3303DDDD1AD87361002B74F9 /* SSORegisterContainerView.m in Sources */,
 				335723D71ACB097C000CC846 /* WKViewController.m in Sources */,
+				D810B8D11ADF506500B3AC11 /* SSOMediaEditState.m in Sources */,
+				D810B9011ADF51BB00B3AC11 /* SSOBaseTableViewProvider.m in Sources */,
 				D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */,
-				335723CE1ACB097C000CC846 /* WKImagePickerController.m in Sources */,
-				D830F3DF1ACDDA15002A503D /* SSOMediaEditStateDrawGray.m in Sources */,
+				D810B8DB1ADF506500B3AC11 /* SSOEditToolController.m in Sources */,
 				CB8F0ABD1ADDDCB100C18263 /* SSOCameraCaptureHelper.m in Sources */,
-				D830F3E11ACDDA15002A503D /* SSOMediaEditStateText.m in Sources */,
-				D830F3DD1ACDDA15002A503D /* SSOMediaEditStateDraw.m in Sources */,
 				3303DDD71AD85591002B74F9 /* SSOLoginViewController.m in Sources */,
+				D810B8D71ADF506500B3AC11 /* SSOMediaEditStateNone.m in Sources */,
+				D810B8DC1ADF506500B3AC11 /* SSOTextToolController.m in Sources */,
 				335723D31ACB097C000CC846 /* WKNavigationController.m in Sources */,
 				D86E94CA1ACF4A1400CFF801 /* imageCollectionViewCell.m in Sources */,
-				D830F3DA1ACDDA15002A503D /* SSOMediaEditState.m in Sources */,
 				D830F41A1ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
-				D830F3F51ACDDAE7002A503D /* SSOColorPickerContainerView.m in Sources */,
+				D810B8F71ADF508A00B3AC11 /* NSBundle+Wink.m in Sources */,
+				D810B8DD1ADF506500B3AC11 /* SSOFontCollectionViewCell.m in Sources */,
 				D830F4211ACDDBF1002A503D /* UIImage+Resizing.m in Sources */,
+				D810B8E21ADF506500B3AC11 /* SSOColorPickerContainerView.m in Sources */,
+				D810B8E91ADF506500B3AC11 /* SSOEditSideMenuView.m in Sources */,
+				D810B8E11ADF506500B3AC11 /* SSOButtonsContainerView.m in Sources */,
 				03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */,
 				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
-				D830F3DC1ACDDA15002A503D /* SSOMediaEditStateCrop.m in Sources */,
 				D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */,
 				D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */,
+				D810B8FF1ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.m in Sources */,
+				D810B8E01ADF506500B3AC11 /* SSOAccessoryContainerView.m in Sources */,
+				D810B8DF1ADF506500B3AC11 /* SSOAdjustmentSliderContainerView.m in Sources */,
 				3303DDDA1AD86F66002B74F9 /* SSOCustomSignInButton.m in Sources */,
-				D8EA5C8A1AD4287C008D2A37 /* WKLoginViewController.m in Sources */,
+				D810B8D01ADF506500B3AC11 /* SSOTextFontCollectionViewProvider.m in Sources */,
+				D810B8E61ADF506500B3AC11 /* SSODrawAccessoryContainerView.m in Sources */,
 				335723D91ACB097C000CC846 /* WKSettingsViewController.m in Sources */,
 				3316F2D31ADD6D9F00C7ED24 /* SSSessionManager.m in Sources */,
-				335723BA1ACB097C000CC846 /* WKEditMediaViewController.m in Sources */,
-				3316F2D61ADD838700C7ED24 /* SSOEditSideMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

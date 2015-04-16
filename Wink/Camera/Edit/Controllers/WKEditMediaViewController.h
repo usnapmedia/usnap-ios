@@ -7,23 +7,17 @@
 //
 
 #import "WKViewController.h"
-#import "ACEDrawingView.h"
 #import "WKMoviePlayerView.h"
 #import "WKShareViewController.h"
 #import "WKColorPickerView.h"
-#import "YKImageCropperView.h"
-#import "SSOEditMediaMovableTextView.h"
 
 #import <RSKImageCropViewController.h>
 
-#import "SSOColorPickerContainerView.h"
-#import "BrightnessContrastSlidersContainerView.h"
-#import "SSOBrightnessContrastHelper.h"
-
 #import "SSBaseCollectionView.h"
 
-@interface WKEditMediaViewController : WKViewController {
-}
+#import "SSOEditViewControllerProtocol.h"
+
+@interface WKEditMediaViewController : WKViewController <SSOEditViewControllerProtocol>
 
 // Media
 @property(nonatomic, strong) UIImage *image;
@@ -36,27 +30,6 @@
 @property(weak, nonatomic) IBOutlet UIButton *brightnessButton;
 @property(weak, nonatomic) IBOutlet UIButton *cropButton;
 
-// Media
-@property(nonatomic, strong) UIImageView *imageView;
-@property(nonatomic, strong) UIImageView *modifiedImageView;
-@property(nonatomic, strong) WKMoviePlayerView *moviePlayerView;
-
-// Drawing
-@property(nonatomic, strong, readonly) ACEDrawingView *drawView;
-
-// Text
-@property(nonatomic, strong) SSOEditMediaMovableTextView *textView;
-
-// Brightness & Contrast
-@property(weak, nonatomic) IBOutlet UIView *editAccessoriesContainerView;
-
-// Containers
-@property(strong, nonatomic, readonly) BrightnessContrastSlidersContainerView *brightnessContrastContainerView;
-@property(strong, nonatomic, readonly) SSOColorPickerContainerView *colorPickerContainerView;
-
-@property (weak, nonatomic) IBOutlet SSBaseCollectionView *collectionView;
-
-// Helper
-@property(strong, nonatomic, readonly) SSOBrightnessContrastHelper *brightnessContrastHelper;
+@property(weak, nonatomic) IBOutlet SSBaseCollectionView *collectionView;
 
 @end

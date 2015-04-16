@@ -21,6 +21,8 @@ typedef enum {
 @protocol MediaEditStateProtocol <NSObject>
 
 @optional
+
+
 #pragma mark - Touches
 
 /**
@@ -82,6 +84,7 @@ typedef enum {
 @interface SSOMediaEditState : NSObject <MediaEditStateProtocol>
 
 @property(weak, nonatomic) WKEditMediaViewController *editMediaVC;
+
 @property BOOL isTextViewMoving;
 
 /**

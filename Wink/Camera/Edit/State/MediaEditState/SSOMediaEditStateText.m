@@ -85,7 +85,7 @@
     [self.editMediaVC.textView becomeFirstResponder];
     self.editMediaVC.textButton.alpha = 1.0f;
 
-    self.editMediaVC.editAccessoriesContainerView.hidden = YES;
+//    self.editMediaVC.editAccessoriesContainerView.hidden = YES;
     self.editMediaVC.brightnessButton.alpha = 0.5f;
 
     self.editMediaVC.cropButton.alpha = 0.5f;

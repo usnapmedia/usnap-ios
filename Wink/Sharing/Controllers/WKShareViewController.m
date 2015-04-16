@@ -10,7 +10,6 @@
 #import "GCPlaceholderTextView.h"
 #import "WKMoviePlayerView.h"
 #import "WKWinkConnect.h"
-#import "WKUser.h"
 #import "WKSettingsViewController.h"
 #import "WKNavigationController.h"
 #import "WKVideoEditor.h"

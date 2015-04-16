@@ -8,7 +8,6 @@
 
 #import "SSOCameraViewController.h"
 #import "WKSettingsViewController.h"
-#import "WKImagePickerController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "WKNavigationController.h"
 #import <SVProgressHUD/SVProgressHUD.h>
@@ -276,16 +275,16 @@
 }
 
 - (IBAction)mediaButtonTouched:(id)sender {
-    
+
     // Open a controller that holds the user's photos and videos
     [self displayCamerallRollPickerVC];
 
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Photo or video?", nil)
-//                                                        message:nil
-//                                                       delegate:self
-//                                              cancelButtonTitle:nil
-//                                              otherButtonTitles:NSLocalizedString(@"Video", nil), NSLocalizedString(@"Photo", nil), nil];
-//    [alertView show];
+    //    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Photo or video?", nil)
+    //                                                        message:nil
+    //                                                       delegate:self
+    //                                              cancelButtonTitle:nil
+    //                                              otherButtonTitles:NSLocalizedString(@"Video", nil), NSLocalizedString(@"Photo", nil), nil];
+    //    [alertView show];
 }
 
 - (IBAction)cameraDeviceButtonTouched:(id)sender {

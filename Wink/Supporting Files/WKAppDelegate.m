@@ -7,10 +7,6 @@
 //
 
 #import "WKAppDelegate.h"
-#import "WKNavigationController.h"
-#import "WKLoginViewController.h"
-#import "WKCameraViewController.h"
-#import "WKUser.h"
 #import "WKWinkConnect.h"
 #import "GAI.h"
 
@@ -28,11 +24,6 @@
 #pragma mark - App Delegate Methods
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Register for login/logout notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentUserChanged) name:kCurrentUserStatusChanged object:nil];
-
-    // Register for API authorization denied notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authorizationDenied) name:kWinkConnectAuthorizationDenied object:nil];
 
     [[Twitter sharedInstance] startWithConsumerKey:@"iig0OuJF0qucK8EXENTg4DPCF" consumerSecret:@"lrkVewgFN0Rnw1GGx6yMxWvhktQxfujJBRHGpkqw7Nd5XKcu7q"];
     //     Setup crashlytics
@@ -114,17 +105,8 @@
     [self goCameraVC];
 }
 
--(void)goCameraVC {
+- (void)goCameraVC {
     UINavigationController *navController = [[UIStoryboard cameraStoryboard] instantiateViewControllerWithIdentifier:@"CAMERA_NAV_VC"];
-    self.window.rootViewController = navController;
-
-}
-
-- (void)goLoginVC {
-
-    SSOLoginViewController *loginViewController = [NSBundle loadLoginViewController];
-    WKNavigationController *navController = [[WKNavigationController alloc] initWithRootViewController:loginViewController];
-    navController.navigationBarHidden = YES;
     self.window.rootViewController = navController;
 }
 
@@ -132,12 +114,6 @@
 
 - (void)currentUserChanged {
     [self setupRootViewController];
-}
-
-#pragma mark - Authorization Denied
-
-- (void)authorizationDenied {
-    [WKUser logoutCurrentUser];
 }
 
 @end

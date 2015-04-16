@@ -20,7 +20,7 @@ pod 'Masonry'
 pod 'RSKImageCropper'
 pod 'SVProgressHUD'
 pod 'SSKeychain'
-
+pod 'pop'
 pod 'IQKeyboardManager'
 
 # Samsao libraries

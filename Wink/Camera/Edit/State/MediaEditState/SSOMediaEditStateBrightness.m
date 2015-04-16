@@ -28,8 +28,6 @@
     self.editMediaVC.drawView.userInteractionEnabled = NO;
     self.editMediaVC.drawButton.tintColor = [UIColor whiteColor];
     self.editMediaVC.drawButton.alpha = 0.5f;
-    self.editMediaVC.colorPickerContainerView.hidden = YES;
-
     self.editMediaVC.textView.editable = NO;
     self.editMediaVC.textView.userInteractionEnabled = NO;
     [self.editMediaVC.textView resignFirstResponder];
@@ -41,8 +39,7 @@
     self.editMediaVC.cropButton.alpha = 0.5f;
     self.editMediaVC.cropButton.tintColor = [UIColor whiteColor];
 
-    self.editMediaVC.brightnessContrastContainerView.hidden = NO;
-    self.editMediaVC.editAccessoriesContainerView.hidden = NO;
+//    self.editMediaVC.editAccessoriesContainerView.hidden = NO;
 }
 
 @end

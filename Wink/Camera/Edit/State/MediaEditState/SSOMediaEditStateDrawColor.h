@@ -8,6 +8,7 @@
 
 #import "SSOMediaEditStateDraw.h"
 
+
 @interface SSOMediaEditStateDrawColor : SSOMediaEditStateDraw
 
 @end

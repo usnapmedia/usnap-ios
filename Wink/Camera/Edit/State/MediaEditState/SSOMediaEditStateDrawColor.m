@@ -28,7 +28,6 @@
 #pragma mark - MediaEditStateProtocol
 
 - (void)drawButtonTouched {
-    self.editMediaVC.colorPickerContainerView.colorPickerView.colors = [UIColor colorsArray];
     [super drawButtonTouched];
 }
 @end

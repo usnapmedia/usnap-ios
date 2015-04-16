@@ -22,8 +22,6 @@
     // Setup the draw view
     self.editMediaVC.drawView.delegate = self;
     self.editMediaVC.drawView.userInteractionEnabled = YES;
-    self.editMediaVC.drawView.lineColor = self.editMediaVC.colorPickerContainerView.colorPickerView.color;
-    self.editMediaVC.drawButton.tintColor = self.editMediaVC.colorPickerContainerView.colorPickerView.color;
     self.editMediaVC.drawButton.alpha = 1.0f;
 
     self.editMediaVC.textView.editable = NO;
@@ -32,13 +30,10 @@
     self.editMediaVC.textButton.alpha = 0.5f;
 
     self.editMediaVC.brightnessButton.alpha = 0.5f;
-    self.editMediaVC.brightnessContrastContainerView.hidden = YES;
 
     self.editMediaVC.cropButton.alpha = 0.5f;
 
-    self.editMediaVC.editAccessoriesContainerView.hidden = NO;
-    self.editMediaVC.colorPickerContainerView.hidden = NO;
-    self.editMediaVC.colorPickerContainerView.delegate = self;
+//    self.editMediaVC.editAccessoriesContainerView.hidden = NO;
 }
 
 #pragma mark - SSOColorPickerContainerViewDelegate

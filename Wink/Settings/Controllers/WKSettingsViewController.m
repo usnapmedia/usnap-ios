@@ -7,7 +7,6 @@
 //
 
 #import "WKSettingsViewController.h"
-#import "WKUser.h"
 #import "WKSettingSocialTableViewCell.h"
 #import "SSOSettingsSocialFakeTableViewCell.h"
 #import "SSOSocialNetworkAPI.h"
@@ -212,18 +211,11 @@
 #pragma mark - Button Actions
 
 - (IBAction)contactButtonTouched:(id)sender {
-    [UIAlertView showWithTitle:[WKUser currentUser].manager.phone
-                       message:nil
-             cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
-             otherButtonTitles:@[ NSLocalizedString(@"Call", @"") ]
-                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                        if (buttonIndex > 0) {
-                            NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [WKUser currentUser].manager.phone]];
-                            if ([[UIApplication sharedApplication] canOpenURL:phoneURL]) {
-                                [[UIApplication sharedApplication] openURL:phoneURL];
-                            }
-                        }
-                      }];
+    [[[UIAlertView alloc] initWithTitle:@"TODO"
+                                message:@"TODO"
+                               delegate:nil
+                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
+                      otherButtonTitles:nil, nil] show];
 }
 
 - (IBAction)signOutButtonTouched:(id)sender {
@@ -231,10 +223,7 @@
                        message:NSLocalizedString(@"Are you sure you would like to sign out of Wink?", @"")
              cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
              otherButtonTitles:@[ NSLocalizedString(@"Sign Out", @"") ]
-                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                        if (buttonIndex > 0) {
-                            [WKUser logoutCurrentUser];
-                        }
+                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex){
                       }];
 }
 

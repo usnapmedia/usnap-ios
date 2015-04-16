@@ -59,7 +59,7 @@
     self.editMediaVC.cropButton.alpha = 1.0f;
     self.editMediaVC.cropButton.tintColor = [UIColor whiteColor];
 
-    self.editMediaVC.editAccessoriesContainerView.hidden = YES;
+    //    self.editMediaVC.editAccessoriesContainerView.hidden = YES;
 }
 
 @end

@@ -7,13 +7,14 @@
 //
 
 #import "WKEditMediaViewController.h"
-#import "SSOMediaEditState.h"
-#import "SSOMediaEditStateCrop.h"
-#import "SSOMediaEditStateNone.h"
-#import "SSOMediaEditStateText.h"
-#import "SSOMediaEditStateDrawGray.h"
-#import "SSOMediaEditStateDrawColor.h"
-#import "SSOMediaEditStateBrightness.h"
+#import "SSOEditToolController.h"
+#import "SSODrawToolController.h"
+#import "SSOTextToolController.h"
+#import "SSOAdjustmentToolController.h"
+#import "SSOSubtoolContainerView.h"
+#import "SSOButtonsContainerView.h"
+#import "SSOAccessoryContainerView.h"
+#import "SSOFadingContainerView.h"
 
 #import "UINavigationController+SSOLockedNavigationController.h"
 
@@ -27,7 +28,8 @@
 #import "NSUserDefaults+USnap.h"
 #import "WKNavigationController.h"
 
-@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, SSOLoginRegisterDelegate>
+@interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, SSOLoginRegisterDelegate, SSOEditToolDelegate,
+                                         RSKImageCropViewControllerDelegate>
 
 @property(weak, nonatomic) IBOutlet UIImageView *watermarkImageView;
 @property(weak, nonatomic) IBOutlet UIButton *postButton;
@@ -36,12 +38,24 @@
 
 @property(nonatomic, strong) NSMutableArray *arrayImages;
 
-@property(nonatomic, strong, readwrite) ACEDrawingView *drawView;
-@property(strong, nonatomic, readwrite) BrightnessContrastSlidersContainerView *brightnessContrastContainerView;
-@property(strong, nonatomic, readwrite) SSOColorPickerContainerView *colorPickerContainerView;
+@property(strong, nonatomic) SSOEditToolController *childViewController;
 
-// Helper
-@property(strong, nonatomic, readwrite) SSOBrightnessContrastHelper *brightnessContrastHelper;
+// Containers
+@property(weak, nonatomic) IBOutlet SSOFadingContainerView *bottomView;
+@property(weak, nonatomic) IBOutlet SSOFadingContainerView *topView;
+@property(strong, nonatomic) SSOSubtoolContainerView *subtoolContainerView;
+@property(strong, nonatomic) SSOAccessoryContainerView *accessoryContainerView;
+@property(strong, nonatomic) SSOButtonsContainerView *buttonsContainerView;
+
+// Tools
+@property(nonatomic, strong) ACEDrawingView *drawView;
+@property(nonatomic, strong) SSOEditMediaMovableTextView *textView;
+@property(nonatomic, strong) SSOAdjustementsHelper *adjustementHelper;
+
+// Media
+@property(nonatomic, strong) UIImageView *imageView;
+@property(nonatomic, strong) UIImageView *modifiedImageView;
+@property(nonatomic, strong) WKMoviePlayerView *moviePlayerView;
 
 @end
 
@@ -127,15 +141,35 @@
         self.cropButton.hidden = YES;
     }
 
-    // Setup the text view
-    self.textView = [[SSOEditMediaMovableTextView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.overlayView.frame.size.width, 70.0f)];
-    [self.overlayView insertSubview:self.textView belowSubview:self.watermarkImageView];
-
+    //@FIXME
     [self.collectionView registerNib:[UINib nibWithNibName:@"CustomCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"collectionCell"];
     self.collectionView.inputData = [self populateCellData].mutableCopy;
     [self.collectionView reloadData];
 }
 
+#pragma mark - Getter
+
+//@TODO
+- (NSMutableArray *)arrayImages {
+
+    if (!_arrayImages) {
+        _arrayImages = [[NSMutableArray alloc] init];
+    }
+
+    _arrayImages = @[
+        [UIImage imageNamed:@"Alien"],
+        [UIImage imageNamed:@"hankey"],
+        [UIImage imageNamed:@"Unknown"],
+        [UIImage imageNamed:@"Alien"],
+        [UIImage imageNamed:@"hankey"],
+        [UIImage imageNamed:@"Unknown"],
+        [UIImage imageNamed:@"Alien"],
+        [UIImage imageNamed:@"hankey"],
+        [UIImage imageNamed:@"Unknown"]
+    ].mutableCopy;
+    //[_arrayImages arrayByAddingObjectsFromArray:_arrayImages];
+    return _arrayImages;
+}
 /**
  *  This method is just used to generate the table view data for the SSBaseCollectionView.
  *
@@ -143,13 +177,16 @@
  *
  *  @return Returns an array of arrays with sections containing elements
  */
+
 - (NSArray *)populateCellData {
 
     NSMutableArray *cellDataArray = [NSMutableArray new];
+
     SSCellViewSection *section = [[SSCellViewSection alloc] init];
 
     for (UIImage *image in self.arrayImages) {
         SSCellViewItem *newElement;
+
         newElement = [SSCellViewItem new];
         newElement.cellReusableIdentifier = @"collectionCell";
         newElement.objectData = image;
@@ -161,106 +198,34 @@
     return cellDataArray;
 }
 
-/**
- *  Just an array of images for the collectionView
- *
- *  @return an array
- */
-- (NSMutableArray *)arrayImages {
+#pragma mark - Touch Methods
 
-    if (!_arrayImages) {
-        _arrayImages = [[NSMutableArray alloc] init];
-        _arrayImages = @[
-            [UIImage imageNamed:@"Alien"],
-            [UIImage imageNamed:@"hankey"],
-            [UIImage imageNamed:@"Unknown"],
-            [UIImage imageNamed:@"Alien"],
-            [UIImage imageNamed:@"hankey"],
-            [UIImage imageNamed:@"Unknown"],
-            [UIImage imageNamed:@"Alien"],
-            [UIImage imageNamed:@"hankey"],
-            [UIImage imageNamed:@"Unknown"]
-        ].mutableCopy;
-    }
-
-    return _arrayImages;
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    // Send touch to the child VC
+    [self.childViewController touchesBegan:touches withEvent:event];
 }
 
-/**
- *  Block the screen rotation
- *
- *  @return BOOL
- */
-- (BOOL)shouldAutorotate {
+#pragma mark - Child View Controller
 
-    return NO;
+- (void)animateToChildViewController:(SSOEditToolController *)newVC {
+    // Set child VC
+    self.childViewController = newVC;
+    // Add the child vc
+    [self addChildViewController:newVC];
+    // Set the frame
+    newVC.view.frame = self.view.frame;
+    //    // Add subview
+    //    [self.view addSubview:newVC.view];
+    // Call delegate
+    [newVC didMoveToParentViewController:self];
 }
 
-#pragma mark - Getter
-
-/**
- *  Lazy instanciation
- *
- *  @return the helper
- */
-- (SSOBrightnessContrastHelper *)brightnessContrastHelper {
-    if (!_brightnessContrastHelper) {
-        _brightnessContrastHelper = [[SSOBrightnessContrastHelper alloc] init];
-        self.brightnessContrastHelper.imageViewToEdit = self.imageView;
-        self.brightnessContrastHelper.imageToEdit = self.image;
-    }
-    return _brightnessContrastHelper;
-}
-
-/**
- *  Lazy instanciation
- *
- *  @return the view
- */
-- (ACEDrawingView *)drawView {
-    if (!_drawView) {
-        // Setup view
-        _drawView = [[ACEDrawingView alloc] initWithFrame:self.view.frame];
-        _drawView.backgroundColor = [UIColor clearColor];
-        _drawView.lineWidth = 4.0f;
-
-        // Insert view
-        [self.overlayView insertSubview:_drawView belowSubview:self.textView];
-
-        // Set constraints
-        [_drawView mas_makeConstraints:^(MASConstraintMaker *make) { make.edges.equalTo(self.view); }];
-    }
-    return _drawView;
-}
-
-/**
- *  Lazy instanciation
- *
- *  @return the view
- */
-- (BrightnessContrastSlidersContainerView *)brightnessContrastContainerView {
-    if (!_brightnessContrastContainerView) {
-        _brightnessContrastContainerView = [NSBundle loadBrightnessContrastContainerView];
-        // Set the view for the helper
-        [self.brightnessContrastHelper setView:_brightnessContrastContainerView];
-
-        // Insert view
-        [self.editAccessoriesContainerView addSubview:_brightnessContrastContainerView];
-        // Set the container inside the view to have constraints on the edges
-        [_brightnessContrastContainerView mas_makeConstraints:^(MASConstraintMaker *make) { make.edges.equalTo(self.editAccessoriesContainerView); }];
-    }
-    return _brightnessContrastContainerView;
-}
-
-- (SSOColorPickerContainerView *)colorPickerContainerView {
-    if (!_colorPickerContainerView) {
-        _colorPickerContainerView = [NSBundle loadColorPickerContainerView];
-        // Insert view
-        [self.editAccessoriesContainerView addSubview:_colorPickerContainerView];
-        // Set the container inside the view to have constraints on the edges
-        [_colorPickerContainerView mas_makeConstraints:^(MASConstraintMaker *make) { make.edges.equalTo(self.editAccessoriesContainerView); }];
-    }
-    return _colorPickerContainerView;
+- (void)removeChildViewController {
+    [self.childViewController willMoveToParentViewController:nil];
+    [self.childViewController.view removeFromSuperview];
+    [self.childViewController removeFromParentViewController];
+    self.childViewController = nil;
 }
 
 #pragma mark - Movie View Methods
@@ -271,16 +236,37 @@
 
 #pragma mark - Button Actions
 
+- (IBAction)drawButtonTouched:(id)sender {
+    SSODrawToolController *childVC = [SSODrawToolController new];
+    childVC.delegate = self;
+    [self animateToChildViewController:childVC];
+}
+
+- (IBAction)textButtonTouched:(id)sender {
+    // Set the next state for the media edit
+    SSOTextToolController *childVC = [SSOTextToolController new];
+    childVC.delegate = self;
+    [self animateToChildViewController:childVC];
+}
+
+- (IBAction)adjustmentButtonTouched:(id)sender {
+    SSOAdjustmentToolController *childVC = [SSOAdjustmentToolController new];
+    childVC.delegate = self;
+    [self animateToChildViewController:childVC];
+}
+
+- (IBAction)cropButtonTouched:(id)sender {
+    RSKImageCropViewController *cropperVC = [[RSKImageCropViewController alloc] initWithImage:self.imageView.image];
+    cropperVC.delegate = self;
+    [cropperVC.cancelButton setTitle:NSLocalizedString(@"crop_cancel_button", nil) forState:UIControlStateNormal];
+    [cropperVC.chooseButton setTitle:NSLocalizedString(@"crop_done_button", nil) forState:UIControlStateNormal];
+    [cropperVC.moveAndScaleLabel setText:NSLocalizedString(@"crop_title", nil)];
+    // Set the crop rectangle to the image view
+    cropperVC.cropMode = RSKImageCropModeSquare;
+    [self presentViewController:cropperVC animated:YES completion:nil];
+}
+
 - (IBAction)postButtonTouched:(id)sender {
-
-    // If the user is not logged in, send him to login page
-    if (![NSUserDefaults isUserLoggedIn]) {
-        SSOLoginViewController *loginVC = [NSBundle loadLoginViewController];
-        loginVC.delegate = self;
-        [self presentViewController:loginVC animated:YES completion:nil];
-        return;
-    }
-
     WKShareViewController *controller = [[WKShareViewController alloc] initWithNibName:@"WKShareViewController" bundle:nil];
     controller.image = [self.imageView snapshotImage];
     controller.mediaURL = self.mediaURL;
@@ -323,6 +309,171 @@
 
 - (IBAction)backButtonTouched:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - SSOEditToolDelegate
+
+- (void)editToolWillEndEditing:(SSOEditToolController *)tool {
+    // Remove the VC
+    [self removeChildViewController];
+}
+
+- (void)editToolWillBeginEditing:(SSOEditToolController *)tool {
+    // Remove all the subviews before displaying the new one
+    [self.accessoryContainerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.subtoolContainerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.buttonsContainerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+}
+
+#pragma mark - RSKImageCropViewControllerDelegate
+
+/**
+ *  RSKImageCropViewControllerDelegate action when pressing back button
+ *
+ *  @param controller the RSKImageCropViewController
+ */
+- (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+/**
+ *  RSKImageCropViewControllerDelegate action when pressing confirm button to crop the image
+ *
+ *  @param controller the RSKImageCropViewController
+ *  @param croppedImage the returned cropped image
+ */
+- (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage usingCropRect:(CGRect)cropRect {
+    [controller dismissViewControllerAnimated:YES
+                                   completion:^{
+                                     self.imageView.image = croppedImage;
+                                   }];
+}
+
+#pragma mark - SSOEditViewControllerProtocol
+
+#pragma mark Tools view
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the view
+ */
+- (ACEDrawingView *)drawView {
+    if (!_drawView) {
+        // Setup view
+        _drawView = [[ACEDrawingView alloc] initWithFrame:self.view.frame];
+        _drawView.backgroundColor = [UIColor clearColor];
+        _drawView.lineWidth = 4.0f;
+
+        // Insert view
+        [self.overlayView insertSubview:_drawView belowSubview:self.textView];
+
+        // Set constraints
+        [_drawView mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.edges.equalTo(self.view);
+        }];
+    }
+    return _drawView;
+}
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the view
+ */
+- (SSOEditMediaMovableTextView *)textView {
+    if (!_textView) {
+        // Setup the text view
+        _textView = [[SSOEditMediaMovableTextView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.overlayView.frame.size.width, 70.0f)];
+        [self.overlayView insertSubview:_textView belowSubview:self.watermarkImageView];
+    }
+    return _textView;
+}
+
+- (UIImageView *)imageView {
+    return _imageView;
+}
+
+- (SSOAdjustementsHelper *)adjustmentHelper {
+    if (!_adjustementHelper) {
+        // Setup the text view
+        _adjustementHelper = [SSOAdjustementsHelper new];
+        _adjustementHelper.imageToEdit = self.image;
+        _adjustementHelper.imageViewToEdit = self.imageView;
+    }
+    return _adjustementHelper;
+}
+
+#pragma mark Container view
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the view
+ */
+- (UIView *)subtoolContainerView {
+    if (!_subtoolContainerView) {
+        // Initialize the view with the bottom view size. We also need to push it at the bottom of the view completely as it's initial position for the scroll
+        // effect.
+        //@FIXME Orientation will be problematic
+        _subtoolContainerView = [[SSOSubtoolContainerView alloc] initWithFrame:CGRectMake(self.bottomView.frame.origin.x, self.view.frame.size.height,
+                                                                                          self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
+        // Add the view
+        [self.view addSubview:_subtoolContainerView];
+    }
+
+    return _subtoolContainerView;
+}
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the view
+ */
+- (UIView *)accessoryContainerView {
+    if (!_accessoryContainerView) {
+        // Initialize as big as the bottom view
+        _accessoryContainerView = [[SSOAccessoryContainerView alloc] initWithFrame:self.bottomView.frame];
+        // Add the view
+        [self.view addSubview:_accessoryContainerView];
+    }
+
+    return _accessoryContainerView;
+}
+
+/**
+ *  Lazy instanciation
+ *
+ *  @return the view
+ */
+- (UIView *)buttonsContainerView {
+    if (!_buttonsContainerView) {
+        // Initialize as big as the top view
+        _buttonsContainerView = [[SSOButtonsContainerView alloc] initWithFrame:self.topView.frame];
+        // Hide and add the view
+        _buttonsContainerView.hidden = YES;
+        [self.view addSubview:_buttonsContainerView];
+    }
+
+    return _buttonsContainerView;
+}
+
+/**
+ *  Get the bottom container view
+ *
+ *  @return the view
+ */
+- (UIView<SSOAnimatableView> *)bottomView {
+    return _bottomView;
+}
+
+/**
+ *  Get the top container view
+ *
+ *  @return the view
+ */
+- (UIView<SSOAnimatableView> *)topView {
+    return _topView;
 }
 
 #pragma mark - SSOLoginRegisterDelegate
