@@ -8,10 +8,9 @@
 
 #import "SSOEditSideMenuView.h"
 #import <Masonry.h>
+#import "SSOOrientationHelper.h"
 
 @interface SSOEditSideMenuView ()
-
-@property(strong, nonatomic) NSString *orientationString;
 @property(nonatomic) CGSize sizeOfView;
 @property(nonatomic, strong) UIVisualEffectView *effectView;
 
@@ -35,27 +34,15 @@
     if ((self = [super initWithCoder:aDecoder])) {
 
         [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-
-        UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
-
-        if (deviceOrientation == UIDeviceOrientationPortrait) {
-            self.orientationString = @"portrait";
-            NSLog(@"portrait");
-        } else if (deviceOrientation == UIDeviceOrientationLandscapeLeft) {
-            self.orientationString = @"landscape";
-            NSLog(@"landscape left");
-        } else if (deviceOrientation == UIDeviceOrientationLandscapeRight) {
-            self.orientationString = @"landscape";
-            NSLog(@"landscape right");
-        }
     }
     return self;
 }
 
 - (void)setupUI {
     [self addViewWithBlur];
-
-    if ([self.orientationString isEqualToString:@"portrait"]) {
+    UIDeviceOrientation deviceOrientation = [[SSOOrientationHelper sharedInstance] orientation];
+    if (deviceOrientation == UIDeviceOrientationFaceUp || deviceOrientation == UIDeviceOrientationPortrait ||
+        deviceOrientation == UIDeviceOrientationPortraitUpsideDown || deviceOrientation == UIDeviceOrientationFaceDown) {
         [self addButtonsToViewPortraitMode];
     } else {
         [self addButtonsToViewLandscapeMode];
@@ -112,7 +99,7 @@
                 // Calcul for y constant position : buttonNumber/self.arrayButtons.count+1
 
                 // Number of buttons in the array
-                int numberItems = self.arrayButtons.count + 1;
+                long numberItems = self.arrayButtons.count + 1;
                 // Calculate the ratio
                 float ratio = ((float)buttonNumber / numberItems);
                 // Get the height of the view
@@ -161,7 +148,7 @@
                 // Calcul for y constant position : buttonNumber/self.arrayButtons.count+1
 
                 // Number of buttons in the array
-                int numberItems = self.arrayButtons.count + 1;
+                long numberItems = self.arrayButtons.count + 1;
                 // Calculate the ratio
                 float ratio = ((float)buttonNumber / numberItems);
                 // Get the height of the view

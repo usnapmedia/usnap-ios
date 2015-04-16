@@ -15,6 +15,7 @@
 #import "SSORoundedAnimatedButton.h"
 #import "AVCamPreviewView.h"
 #import "SSOCameraCaptureHelper.h"
+#import "SSOOrientationHelper.h"
 
 #define kTotalVideoRecordingTime 30
 
@@ -308,6 +309,16 @@
     [self.cameraCaptureHelper snapStillImage];
 }
 
+/**
+ *  Lock the orientation when the capture button begin to be touched
+ *
+ *  @param sender the button
+ */
+- (IBAction)captureButtonTouchedDown:(id)sender {
+
+    [[SSOOrientationHelper sharedInstance] setOrientation:[UIDevice currentDevice].orientation];
+}
+
 #pragma mark - SSORoundedAnimatedButtonProtocol
 
 - (void)didStartLongPressGesture:(SSORoundedAnimatedButton *)button {
@@ -383,7 +394,7 @@
 
     if (!error) {
         // Edit the selected media
-        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+        WKEditMediaViewController *controller = [WKEditMediaViewController new];
         controller.image = image;
         [self.navigationController pushViewController:controller animated:YES];
 

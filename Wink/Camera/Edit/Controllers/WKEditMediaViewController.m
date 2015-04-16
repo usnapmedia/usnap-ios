@@ -26,6 +26,7 @@
 #import "SSOEditSideMenuView.h"
 #import "SSOLoginViewController.h"
 #import "SSSessionManager.h"
+#import "SSOOrientationHelper.h"
 
 @interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, SSOLoginRegisterDelegate, SSOEditToolDelegate,
                                          RSKImageCropViewControllerDelegate>
@@ -91,6 +92,21 @@
 
     // Remove the keyboard
     [self.textView resignFirstResponder];
+}
+
+/**
+ *  Block the screen rotation
+ *
+ *  @return BOOL
+ */
+- (BOOL)shouldAutorotate {
+
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+
+    return [[SSOOrientationHelper sharedInstance] orientation];
 }
 
 /**
