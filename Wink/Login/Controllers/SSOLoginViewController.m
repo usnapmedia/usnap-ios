@@ -227,7 +227,8 @@
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           NSLog(@"Login failed");
           [UIAlertView showWithTitle:@"Wrong login informations" message:@"Check your credentials" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
-
+          // Logout the user if there is an error
+          [[SSSessionManager sharedInstance] logoutCurrentUser];
         }];
 }
 
@@ -243,7 +244,7 @@
 
           [self dismissViewControllerAnimated:YES
                                    completion:^{
-                                       // Call the delegate
+                                     // Call the delegate
                                      [self.delegate didFinishAuthProcess];
 
                                    }];
@@ -253,6 +254,8 @@
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           NSLog(@"Register failure");
+          // Logout the user if there is an error
+          [[SSSessionManager sharedInstance] logoutCurrentUser];
 
         }];
 }

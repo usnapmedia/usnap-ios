@@ -124,7 +124,6 @@
 		D8EA5C7C1AD4281B008D2A37 /* SSOSocialNetworkAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C7B1AD4281B008D2A37 /* SSOSocialNetworkAPI.m */; };
 		D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C801AD4287C008D2A37 /* WKWinkConnect.m */; };
 		D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */; };
-		D8EA5C8D1AD4287C008D2A37 /* WKLoginViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C881AD4287C008D2A37 /* WKLoginViewController_iPad.xib */; };
 		D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C8F1AD428D3008D2A37 /* SSOGooglePlusHelper.m */; };
 /* End PBXBuildFile section */
 
@@ -334,7 +333,6 @@
 		D8EA5C7F1AD4287C008D2A37 /* WKWinkConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWinkConnect.h; sourceTree = "<group>"; };
 		D8EA5C801AD4287C008D2A37 /* WKWinkConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWinkConnect.m; sourceTree = "<group>"; };
 		D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOLoginViewController.xib; sourceTree = "<group>"; };
-		D8EA5C881AD4287C008D2A37 /* WKLoginViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKLoginViewController_iPad.xib; sourceTree = "<group>"; };
 		D8EA5C8E1AD428D3008D2A37 /* SSOGooglePlusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOGooglePlusHelper.h; sourceTree = "<group>"; };
 		D8EA5C8F1AD428D3008D2A37 /* SSOGooglePlusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOGooglePlusHelper.m; sourceTree = "<group>"; };
 		EAE311565BE99D01341CE159 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1001,7 +999,6 @@
 			isa = PBXGroup;
 			children = (
 				D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */,
-				D8EA5C881AD4287C008D2A37 /* WKLoginViewController_iPad.xib */,
 				3303DDCD1AD83E42002B74F9 /* SSORegisterContainerView.xib */,
 				3303DDCF1AD84F19002B74F9 /* SSOLoginContainerView.xib */,
 			);
@@ -1111,7 +1108,6 @@
 				D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */,
 				7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */,
 				335723DB1ACB097C000CC846 /* SettingsSocialCell.xib in Resources */,
-				D8EA5C8D1AD4287C008D2A37 /* WKLoginViewController_iPad.xib in Resources */,
 				335723DF1ACB097C000CC846 /* WKShareViewController_iPad.xib in Resources */,
 				D810B8EE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
 				D810B8EF1ADF506500B3AC11 /* SSOColorPickerContainerView.xib in Resources */,

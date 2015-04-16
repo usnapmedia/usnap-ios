@@ -286,8 +286,24 @@
     [self presentViewController:cropperVC animated:YES completion:nil];
 }
 
+#pragma mark - IBAction
+
 - (IBAction)postButtonTouched:(id)sender {
-    WKShareViewController *controller = [[WKShareViewController alloc] initWithNibName:@"WKShareViewController" bundle:nil];
+    if ([[SSSessionManager sharedInstance] isUserLoggedIn]) {
+        [self pushToShareVC];
+    } else {
+        [self presentLoginVC];
+    }
+}
+
+- (IBAction)backButtonTouched:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Navigation
+
+- (void)pushToShareVC {
+    WKShareViewController *controller = [WKShareViewController new];
     controller.image = [self.imageView snapshotImage];
     controller.mediaURL = self.mediaURL;
     if (self.modifiedImageView.image) {
@@ -327,8 +343,11 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (IBAction)backButtonTouched:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)presentLoginVC {
+    SSOLoginViewController *loginVC = [SSOLoginViewController new];
+    loginVC.delegate = self;
+    // Present VC
+    [self presentViewController:loginVC animated:YES completion:nil];
 }
 
 #pragma mark - SSOEditToolDelegate
