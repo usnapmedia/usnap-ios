@@ -15,6 +15,7 @@
 #import "SSOButtonsContainerView.h"
 #import "SSOAccessoryContainerView.h"
 #import "SSOFadingContainerView.h"
+#import "SSOToolButton.h"
 
 #import "UINavigationController+SSOLockedNavigationController.h"
 
@@ -25,8 +26,6 @@
 #import "SSOEditSideMenuView.h"
 #import "SSOLoginViewController.h"
 #import "SSSessionManager.h"
-#import "NSUserDefaults+USnap.h"
-#import "WKNavigationController.h"
 
 @interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, SSOLoginRegisterDelegate, SSOEditToolDelegate,
                                          RSKImageCropViewControllerDelegate>
@@ -70,8 +69,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
-    [self.sideMenuView setSizeOfView:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - self.collectionView.frame.size.height)];
+    [self setupEditButtons];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -86,10 +84,6 @@
 
     // Stop the movie player
     [self.moviePlayerView.player pause];
-}
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -136,14 +130,41 @@
 
     // Remove brightness and crop options for media and re-position draw and text
     if (self.mediaURL) {
-//        self.brightnessButton.hidden = YES;
-//        self.cropButton.hidden = YES;
+        //        self.brightnessButton.hidden = YES;
+        //        self.cropButton.hidden = YES;
     }
 
     //@FIXME
     [self.collectionView registerNib:[UINib nibWithNibName:@"CustomCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"collectionCell"];
     self.collectionView.inputData = [self populateCellData].mutableCopy;
     [self.collectionView reloadData];
+}
+
+/**
+ *  Setup the edit buttons
+ */
+- (void)setupEditButtons {
+    //@TODO This should be generic
+    UIButton *drawButton = [UIButton new];
+    [drawButton setImage:[UIImage imageNamed:@"drawIconBorder"] forState:UIControlStateNormal];
+    [drawButton addTarget:self action:@selector(drawButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *textButton = [UIButton new];
+    [textButton setImage:[UIImage imageNamed:@"textIcon"] forState:UIControlStateNormal];
+    [textButton addTarget:self action:@selector(textButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *adjustmentButton = [UIButton new];
+    [adjustmentButton setImage:[UIImage imageNamed:@"brightnessIcon"] forState:UIControlStateNormal];
+    [adjustmentButton addTarget:self action:@selector(adjustmentButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *cropButton = [UIButton new];
+    [cropButton setImage:[UIImage imageNamed:@"cropIcon"] forState:UIControlStateNormal];
+    [cropButton addTarget:self action:@selector(cropButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+
+    // Set the array of buttons for the side menu
+    self.sideMenuView.arrayButtons = @[ drawButton, textButton, adjustmentButton, cropButton ];
+
+    [self.sideMenuView setSizeOfView:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - self.collectionView.frame.size.height)];
 }
 
 #pragma mark - Getter
@@ -235,26 +256,26 @@
 
 #pragma mark - Button Actions
 
-- (IBAction)drawButtonTouched:(id)sender {
+- (void)drawButtonTouched:(id)sender {
     SSODrawToolController *childVC = [SSODrawToolController new];
     childVC.delegate = self;
     [self animateToChildViewController:childVC];
 }
 
-- (IBAction)textButtonTouched:(id)sender {
+- (void)textButtonTouched:(id)sender {
     // Set the next state for the media edit
     SSOTextToolController *childVC = [SSOTextToolController new];
     childVC.delegate = self;
     [self animateToChildViewController:childVC];
 }
 
-- (IBAction)adjustmentButtonTouched:(id)sender {
+- (void)adjustmentButtonTouched:(id)sender {
     SSOAdjustmentToolController *childVC = [SSOAdjustmentToolController new];
     childVC.delegate = self;
     [self animateToChildViewController:childVC];
 }
 
-- (IBAction)cropButtonTouched:(id)sender {
+- (void)cropButtonTouched:(id)sender {
     RSKImageCropViewController *cropperVC = [[RSKImageCropViewController alloc] initWithImage:self.imageView.image];
     cropperVC.delegate = self;
     [cropperVC.cancelButton setTitle:NSLocalizedString(@"crop_cancel_button", nil) forState:UIControlStateNormal];
@@ -415,8 +436,9 @@
         // Initialize the view with the bottom view size. We also need to push it at the bottom of the view completely as it's initial position for the scroll
         // effect.
         //@FIXME Orientation will be problematic
-        _subtoolContainerView = [[SSOSubtoolContainerView alloc] initWithFrame:CGRectMake(self.sideMenuView.frame.origin.x, self.view.frame.size.height,
-                                                                                          self.sideMenuView.frame.size.width, self.sideMenuView.frame.size.height)];
+        _subtoolContainerView =
+            [[SSOSubtoolContainerView alloc] initWithFrame:CGRectMake(self.sideMenuView.frame.origin.x, self.view.frame.size.height,
+                                                                      self.sideMenuView.frame.size.width, self.sideMenuView.frame.size.height)];
         // Add the view
         [self.view addSubview:_subtoolContainerView];
     }

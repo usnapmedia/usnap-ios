@@ -13,18 +13,12 @@
 
 @interface SSOEditSideMenuView : SSOFadingContainerView
 
-@property(strong, nonatomic) UIButton *buttonText;
-@property(strong, nonatomic) UIButton *buttonDraw;
-@property(strong, nonatomic) UIButton *buttonCrop;
-@property(strong, nonatomic) UIButton *buttonStickers;
 @property(strong, nonatomic) NSArray *arrayButtons;
 
 @property(nonatomic) float heightOfVC;
 @property(nonatomic) float widthOfVC;
 
 - (void)setSizeOfView:(CGSize)sizeOfView;
-
-//- (void)addButtonsToView;
 - (void)setupUI;
 
 @end

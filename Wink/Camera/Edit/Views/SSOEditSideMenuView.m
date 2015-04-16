@@ -11,23 +11,26 @@
 
 @interface SSOEditSideMenuView ()
 
-@property (strong, nonatomic) NSString* orientationString;
-@property (nonatomic) CGSize sizeOfView;
-@property (nonatomic, strong) UIVisualEffectView *effectView;
+@property(strong, nonatomic) NSString *orientationString;
+@property(nonatomic) CGSize sizeOfView;
+@property(nonatomic, strong) UIVisualEffectView *effectView;
+
+@property(strong, nonatomic) UIButton *buttonText;
+@property(strong, nonatomic) UIButton *buttonDraw;
+@property(strong, nonatomic) UIButton *buttonCrop;
+@property(strong, nonatomic) UIButton *buttonStickers;
 
 @end
 
 @implementation SSOEditSideMenuView
 
-- (void)setSizeOfView:(CGSize)sizeOfView
-{
+- (void)setSizeOfView:(CGSize)sizeOfView {
 
     _sizeOfView = sizeOfView;
     [self setupUI];
 }
 
-- (id)initWithCoder:(NSCoder*)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder {
 
     if ((self = [super initWithCoder:aDecoder])) {
 
@@ -38,12 +41,10 @@
         if (deviceOrientation == UIDeviceOrientationPortrait) {
             self.orientationString = @"portrait";
             NSLog(@"portrait");
-        }
-        else if (deviceOrientation == UIDeviceOrientationLandscapeLeft) {
+        } else if (deviceOrientation == UIDeviceOrientationLandscapeLeft) {
             self.orientationString = @"landscape";
             NSLog(@"landscape left");
-        }
-        else if (deviceOrientation == UIDeviceOrientationLandscapeRight) {
+        } else if (deviceOrientation == UIDeviceOrientationLandscapeRight) {
             self.orientationString = @"landscape";
             NSLog(@"landscape right");
         }
@@ -51,72 +52,62 @@
     return self;
 }
 
-- (void)setupUI
-{
+- (void)setupUI {
     [self addViewWithBlur];
 
     if ([self.orientationString isEqualToString:@"portrait"]) {
         [self addButtonsToViewPortraitMode];
-    }
-    else {
+    } else {
         [self addButtonsToViewLandscapeMode];
     }
 }
 
-- (void)addViewWithBlur
-{
+/**
+ *  Add the blur view
+ */
+- (void)addViewWithBlur {
 
-    UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.sizeOfView.width, self.sizeOfView.height)];
-    view.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.3f];
-    view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    // Only add the view if the effect was never applied
+    if (!self.effectView) {
 
-    // create blur effect
-    UIBlurEffect* blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.sizeOfView.width, self.sizeOfView.height)];
+        view.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.3f];
+        view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
-    // create vibrancy effect
-    UIVibrancyEffect* vibrancy = [UIVibrancyEffect effectForBlurEffect:blur];
+        // create blur effect
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
 
-    // add blur to an effect view
-    self.effectView = [[UIVisualEffectView alloc] initWithEffect:blur];
-    NSLog(@"frame %f", self.frame.size.height);
+        // add blur to an effect view
+        self.effectView = [[UIVisualEffectView alloc] initWithEffect:blur];
+        NSLog(@"frame %f", self.frame.size.height);
 
-    self.effectView.frame = CGRectMake(0, 0, self.sizeOfView.width, self.sizeOfView.height);
+        self.effectView.frame = CGRectMake(0, 0, self.sizeOfView.width, self.sizeOfView.height);
 
-    // add vibrancy to yet another effect view
-   // UIVisualEffectView* vibrantView = [[UIVisualEffectView alloc] initWithEffect:vibrancy];
-   // effectView.frame = CGRectMake(0, 0, self.sizeOfView.width, self.sizeOfView.height);
+        [self.effectView.contentView addSubview:view];
 
-    // effectView.alpha = 0.7;
+        // add both effect views to the image view
+        [self addSubview:self.effectView];
+        //[self addSubview:vibrantView];
 
-    [self.effectView.contentView addSubview:view];
-
-    // add both effect views to the image view
-    [self addSubview:self.effectView];
-    //[self addSubview:vibrantView];
-
-    [self.effectView mas_remakeConstraints:^(MASConstraintMaker* make) {
-        make.edges.equalTo(self);
-    }];
-
-//    [vibrantView mas_makeConstraints:^(MASConstraintMaker* make) {
-//        make.edges.equalTo(self);
-//    }];
+        [self.effectView mas_remakeConstraints:^(MASConstraintMaker *make) {
+          make.edges.equalTo(self);
+        }];
+    }
 }
 
-- (void)addButtonsToViewLandscapeMode
-{
+- (void)addButtonsToViewLandscapeMode {
 
     if (self.arrayButtons) {
 
         int buttonNumber = 0;
-        UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
 
-        for (UIView* view in self.arrayButtons) {
+        for (UIView *view in self.arrayButtons) {
             if ([view isKindOfClass:[UIButton class]]) {
 
                 // Increment the buttonNumber in order to do maths later
                 buttonNumber++;
-                button = (UIButton*)view;
+                button = (UIButton *)view;
 
                 // Calcul for y constant position : buttonNumber/self.arrayButtons.count+1
 
@@ -135,22 +126,21 @@
 
                 [self addSubview:button];
 
-                [button mas_remakeConstraints:^(MASConstraintMaker* make) {
-                    
-                    make.centerX.equalTo(self.mas_centerX);
-                    make.leading.equalTo(self.mas_leading).with.offset(padding.left);
-                    make.trailing.equalTo(self.mas_trailing).with.offset(-padding.right);
-                    make.centerY.equalTo(self.mas_top).with.offset(padding.top);
+                [button mas_remakeConstraints:^(MASConstraintMaker *make) {
+
+                  make.centerX.equalTo(self.mas_centerX);
+                  make.leading.equalTo(self.mas_leading).with.offset(padding.left);
+                  make.trailing.equalTo(self.mas_trailing).with.offset(-padding.right);
+                  make.centerY.equalTo(self.mas_top).with.offset(padding.top);
                 }];
             }
         }
     }
 }
 
-- (void)addButtonsToViewPortraitMode
-{
+- (void)addButtonsToViewPortraitMode {
 
-    for (UIView* buttonview in self.subviews) {
+    for (UIView *buttonview in self.subviews) {
         if ([buttonview isKindOfClass:[UIButton class]]) {
             [buttonview removeFromSuperview];
         }
@@ -159,14 +149,14 @@
     if (self.arrayButtons) {
 
         int buttonNumber = 0;
-        UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
 
-        for (UIView* view in self.arrayButtons) {
+        for (UIView *view in self.arrayButtons) {
             if ([view isKindOfClass:[UIButton class]]) {
 
                 // Increment the buttonNumber in order to do maths later
                 buttonNumber++;
-                button = (UIButton*)view;
+                button = (UIButton *)view;
 
                 // Calcul for y constant position : buttonNumber/self.arrayButtons.count+1
 
@@ -185,12 +175,12 @@
 
                 [self addSubview:button];
 
-                [button mas_remakeConstraints:^(MASConstraintMaker* make) {
-                    
-                    make.centerY.equalTo(self.mas_centerY);
-                    make.centerX.equalTo(self.mas_leading).with.offset(padding.left);
-                    make.top.equalTo(self.mas_top).with.offset(padding.top);
-                    make.bottom.equalTo(self.mas_bottom).with.offset(-padding.bottom);
+                [button mas_remakeConstraints:^(MASConstraintMaker *make) {
+
+                  make.centerY.equalTo(self.mas_centerY);
+                  make.centerX.equalTo(self.mas_leading).with.offset(padding.left);
+                  make.top.equalTo(self.mas_top).with.offset(padding.top);
+                  make.bottom.equalTo(self.mas_bottom).with.offset(-padding.bottom);
                 }];
             }
         }
@@ -199,8 +189,7 @@
 
 #pragma mark - Lazy instanciations
 
-- (NSArray*)arrayButtons
-{
+- (NSArray *)arrayButtons {
 
     if (!_arrayButtons) {
         _arrayButtons = [[NSArray alloc] initWithObjects:self.buttonText, self.buttonDraw, self.buttonCrop, self.buttonStickers, nil];
@@ -209,12 +198,10 @@
     return _arrayButtons;
 }
 
-- (void)createButtonsWithArray:(NSArray*)arrayButtons
-{
+- (void)createButtonsWithArray:(NSArray *)arrayButtons {
 }
 
-- (UIButton*)buttonText
-{
+- (UIButton *)buttonText {
 
     if (!_buttonText) {
         _buttonText = [[UIButton alloc] init];
@@ -226,8 +213,7 @@
     return _buttonText;
 }
 
-- (UIButton*)buttonDraw
-{
+- (UIButton *)buttonDraw {
 
     if (!_buttonDraw) {
         _buttonDraw = [[UIButton alloc] init];
@@ -239,8 +225,7 @@
     return _buttonDraw;
 }
 
-- (UIButton*)buttonCrop
-{
+- (UIButton *)buttonCrop {
 
     if (!_buttonCrop) {
         _buttonCrop = [[UIButton alloc] init];
@@ -252,8 +237,7 @@
     return _buttonCrop;
 }
 
-- (UIButton*)buttonStickers
-{
+- (UIButton *)buttonStickers {
 
     if (!_buttonStickers) {
         _buttonStickers = [[UIButton alloc] init];
