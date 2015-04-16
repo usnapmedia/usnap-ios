@@ -39,13 +39,6 @@
     [debugger enableCoreDataDebugging];
 #endif
 
-    // Setup Google Analytics
-    /*
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    [GAI sharedInstance].dispatchInterval = 20;
-    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-    [[GAI sharedInstance] trackerWithTrackingId:@"UA-54518623-1"];
-     */
     // Setup the window
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -56,25 +49,7 @@
     // Set permissions for Facebook
     [SSFacebookHelper sharedInstance].facebookPermissions = @[ @"publish_actions" ];
 
-    //    // Do silent login if the user has logged on to Facebook before to validate the Facebook token, so they can post an image and video
-    //    if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
-    //        [SSFacebookHelper silentLogin:^() {
-    //          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFacebookSwitchValue];
-    //          [[NSUserDefaults standardUserDefaults] synchronize];
-    //          // Setup state
-    //          [self setupAnimated:NO];
-
-    //        } onFailure:^(NSError *error) {
-    //          [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kFacebookSwitchValue];
-    //          [[NSUserDefaults standardUserDefaults] synchronize];
-    //          // Setup state
-    //          [self setupAnimated:NO];
-
-    //        }];
-    //    } else {
-    // Setup state
     [self setupRootViewController];
-    //   }
 
     return YES;
 }
