@@ -7,7 +7,6 @@
 //
 
 #import "SSODrawToolController.h"
-#import "SSOEditViewControllerProtocol.h"
 #import "SSOAnimatableView.h"
 #import "SSOColorPickerContainerView.h"
 #import "UIColor+PickerColors.h"

@@ -48,4 +48,10 @@ extern NSString *const kCameraStoryboard;
 
 extern NSString *const kCameraContainerSegue;
 
+#pragma mark - Adjustement tool
+
+#define kSliderMinimumValue 0.0f
+#define kSliderMaximumValue 1.0f
+#define kSliderDefaultValue 0.5f
+
 #define kScreenSize [UIScreen mainScreen].bounds.size

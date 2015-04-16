@@ -10,6 +10,7 @@
 #import <ACEDrawingView.h>
 #import "SSOEditMediaMovableTextView.h"
 #import "SSOAnimatableView.h"
+#import "SSOAdjustementsHelper.h"
 
 @protocol SSOEditViewControllerProtocol <NSObject>
 
@@ -35,6 +36,13 @@
  *  @return the image view
  */
 - (UIImageView *)imageView;
+
+/**
+ *  Get the adjustment helper
+ *
+ *  @return the helper
+ */
+- (SSOAdjustementsHelper *)adjustmentHelper;
 
 #pragma mark - Container view
 

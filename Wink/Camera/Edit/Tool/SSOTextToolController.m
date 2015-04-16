@@ -8,7 +8,6 @@
 
 #import "SSOTextToolController.h"
 #import "SSOTextAccessoryContainerView.h"
-#import "SSOEditViewControllerProtocol.h"
 #import "SSOTextFontCollectionViewProvider.h"
 #import "UIColor+PickerColors.h"
 #import <Masonry.h>

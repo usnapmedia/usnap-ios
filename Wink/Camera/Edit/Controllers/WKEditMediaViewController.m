@@ -10,6 +10,7 @@
 #import "SSOEditToolController.h"
 #import "SSODrawToolController.h"
 #import "SSOTextToolController.h"
+#import "SSOAdjustmentToolController.h"
 #import "SSOSubtoolContainerView.h"
 #import "SSOButtonsContainerView.h"
 #import "SSOAccessoryContainerView.h"
@@ -41,6 +42,7 @@
 // Tools
 @property(nonatomic, strong) ACEDrawingView *drawView;
 @property(nonatomic, strong) SSOEditMediaMovableTextView *textView;
+@property(nonatomic, strong) SSOAdjustementsHelper *adjustementHelper;
 
 // Media
 @property(nonatomic, strong) UIImageView *imageView;
@@ -228,8 +230,10 @@
     [self animateToChildViewController:childVC];
 }
 
-- (IBAction)brightnessButtonTouched:(id)sender {
-    // Set the next state for the media edit
+- (IBAction)adjustmentButtonTouched:(id)sender {
+    SSOAdjustmentToolController *childVC = [SSOAdjustmentToolController new];
+    childVC.delegate = self;
+    [self animateToChildViewController:childVC];
 }
 
 - (IBAction)cropButtonTouched:(id)sender {
@@ -331,6 +335,16 @@
 
 - (UIImageView *)imageView {
     return _imageView;
+}
+
+- (SSOAdjustementsHelper *)adjustmentHelper {
+    if (!_adjustementHelper) {
+        // Setup the text view
+        _adjustementHelper = [SSOAdjustementsHelper new];
+        _adjustementHelper.imageToEdit = self.image;
+        _adjustementHelper.imageViewToEdit = self.imageView;
+    }
+    return _adjustementHelper;
 }
 
 #pragma mark Container view

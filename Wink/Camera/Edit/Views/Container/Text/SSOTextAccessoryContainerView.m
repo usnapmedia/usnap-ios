@@ -9,6 +9,7 @@
 #import "SSOTextAccessoryContainerView.h"
 
 @implementation SSOTextAccessoryContainerView
+
 - (IBAction)doneButtonPressed:(id)sender {
     [self.delegate containerViewDoneButtonPressed:self];
 }

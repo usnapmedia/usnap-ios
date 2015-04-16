@@ -10,10 +10,6 @@
 
 @implementation NSBundle (Wink)
 
-+ (BrightnessContrastSlidersContainerView *)loadBrightnessContrastContainerView {
-    return [[[NSBundle mainBundle] loadNibNamed:@"SSOBrightnessContrastContainerView" owner:self options:nil] firstObject];
-}
-
 + (SSOColorPickerContainerView *)loadColorPickerContainerView {
     return [[[NSBundle mainBundle] loadNibNamed:@"SSOColorPickerContainerView" owner:self options:nil] firstObject];
 }
@@ -24,6 +20,10 @@
 
 + (SSOTextAccessoryContainerView *)loadTextAccessoryContainerView {
     return [[[NSBundle mainBundle] loadNibNamed:@"SSOTextAccessoryContainerView" owner:self options:nil] firstObject];
+}
+
++ (SSOAdjustmentAccessoryContainerView *)loadAdjustAccessorryContainerView {
+    return [[[NSBundle mainBundle] loadNibNamed:@"SSOAdjustmentAccessoryContainerView" owner:self options:nil] firstObject];
 }
 
 @end

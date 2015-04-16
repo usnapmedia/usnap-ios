@@ -38,6 +38,7 @@
         [self displayContainerViews:YES];
     } else {
         [self hideContainerViews:YES];
+        [self.view removeFromSuperview];
     }
 }
 

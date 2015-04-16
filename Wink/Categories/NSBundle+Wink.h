@@ -7,19 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BrightnessContrastSlidersContainerView.h"
 #import "SSOColorPickerContainerView.h"
 #import "SSODrawAccessoryContainerView.h"
 #import "SSOTextAccessoryContainerView.h"
+#import "SSOAdjustmentAccessoryContainerView.h"
 
 @interface NSBundle (Wink)
-
-/**
- *  Get the brightness contrast container view
- *
- *  @return the view
- */
-+ (BrightnessContrastSlidersContainerView *)loadBrightnessContrastContainerView;
 
 /**
  *  Get the color picker container view
@@ -41,5 +34,12 @@
  *  @return the view
  */
 + (SSOTextAccessoryContainerView *)loadTextAccessoryContainerView;
+
+/**
+ *  Get the adjustment accessory container view
+ *
+ *  @return the view
+ */
++ (SSOAdjustmentAccessoryContainerView *)loadAdjustAccessorryContainerView;
 
 @end

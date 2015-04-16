@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SSOAnimatableView.h"
+#import "SSOEditViewControllerProtocol.h"
+
 
 @protocol SSOEditToolDelegate;
 
