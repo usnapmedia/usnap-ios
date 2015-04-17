@@ -37,6 +37,7 @@
 		3303DDDD1AD87361002B74F9 /* SSORegisterContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3303DDDC1AD87361002B74F9 /* SSORegisterContainerView.m */; };
 		3316F2D01ADD6CC900C7ED24 /* NSUserDefaults+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316F2CF1ADD6CC900C7ED24 /* NSUserDefaults+USnap.m */; };
 		3316F2D31ADD6D9F00C7ED24 /* SSSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316F2D21ADD6D9F00C7ED24 /* SSSessionManager.m */; };
+		333F49AE1AE01BEC004B5CC3 /* SSOOrientationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 333F49AD1AE01BEC004B5CC3 /* SSOOrientationHelper.m */; };
 		335723B31ACB097C000CC846 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3357233E1ACB097C000CC846 /* Camera.storyboard */; };
 		335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723431ACB097C000CC846 /* SSOCameraViewController.m */; };
 		335723C61ACB097C000CC846 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 335723691ACB097C000CC846 /* InfoPlist.strings */; };
@@ -57,7 +58,6 @@
 		335723DE1ACB097C000CC846 /* WKShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3357239B1ACB097C000CC846 /* WKShareViewController.xib */; };
 		335723E01ACB097C000CC846 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3357239F1ACB097C000CC846 /* Constants.m */; };
 		335723E11ACB097C000CC846 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A01ACB097C000CC846 /* main.m */; };
-		335723E31ACB097C000CC846 /* uSnap-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335723A31ACB097C000CC846 /* uSnap-Info.plist */; };
 		335723E41ACB097C000CC846 /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A61ACB097C000CC846 /* WKAppDelegate.m */; };
 		335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */; };
 		336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */; };
@@ -174,6 +174,8 @@
 		3316F2CF1ADD6CC900C7ED24 /* NSUserDefaults+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+USnap.m"; sourceTree = "<group>"; };
 		3316F2D11ADD6D9F00C7ED24 /* SSSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSessionManager.h; sourceTree = "<group>"; };
 		3316F2D21ADD6D9F00C7ED24 /* SSSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSessionManager.m; sourceTree = "<group>"; };
+		333F49AC1AE01BEC004B5CC3 /* SSOOrientationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOOrientationHelper.h; sourceTree = "<group>"; };
+		333F49AD1AE01BEC004B5CC3 /* SSOOrientationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOOrientationHelper.m; sourceTree = "<group>"; };
 		3357233E1ACB097C000CC846 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		335723421ACB097C000CC846 /* SSOCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCameraViewController.h; sourceTree = "<group>"; };
 		335723431ACB097C000CC846 /* SSOCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCameraViewController.m; sourceTree = "<group>"; };
@@ -547,6 +549,8 @@
 		335723721ACB097C000CC846 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				333F49AC1AE01BEC004B5CC3 /* SSOOrientationHelper.h */,
+				333F49AD1AE01BEC004B5CC3 /* SSOOrientationHelper.m */,
 				3316F2D11ADD6D9F00C7ED24 /* SSSessionManager.h */,
 				3316F2D21ADD6D9F00C7ED24 /* SSSessionManager.m */,
 				335723731ACB097C000CC846 /* FacebookHelper.h */,
@@ -1043,7 +1047,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SSO;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Samsao;
 				TargetAttributes = {
 					270DFAF019AE71BE00067072 = {
@@ -1101,7 +1105,6 @@
 				335723C71ACB097C000CC846 /* Localizable.strings in Resources */,
 				D810B8F11ADF506500B3AC11 /* SSOFontCollectionViewCell.xib in Resources */,
 				3303DDD01AD84F19002B74F9 /* SSOLoginContainerView.xib in Resources */,
-				335723E31ACB097C000CC846 /* uSnap-Info.plist in Resources */,
 				D810B8F21ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib in Resources */,
 				D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */,
 				335723C81ACB097C000CC846 /* InfoPlist.strings in Resources */,
@@ -1230,6 +1233,7 @@
 				D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */,
 				336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */,
 				D810B8DE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.m in Sources */,
+				333F49AE1AE01BEC004B5CC3 /* SSOOrientationHelper.m in Sources */,
 				3303DDDD1AD87361002B74F9 /* SSORegisterContainerView.m in Sources */,
 				335723D71ACB097C000CC846 /* WKViewController.m in Sources */,
 				D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */,
@@ -1354,7 +1358,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -1386,7 +1390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

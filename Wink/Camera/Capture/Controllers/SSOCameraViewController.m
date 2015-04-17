@@ -15,6 +15,9 @@
 #import "SSORoundedAnimatedButton.h"
 #import "AVCamPreviewView.h"
 #import "SSOCameraCaptureHelper.h"
+#import "SSOOrientationHelper.h"
+#import "UINavigationController+SSOLockedNavigationController.h"
+#import "ALAssetsLibrary+CustomPhotoAlbum.h"
 
 #define kTotalVideoRecordingTime 30
 
@@ -40,6 +43,8 @@
 @property(nonatomic) BOOL isVideoRecording;
 @property(nonatomic) BOOL isRotationAllowed;
 @property(strong, nonatomic) SSOCameraCaptureHelper *cameraCaptureHelper;
+@property(strong, nonatomic) NSArray *arrayImages;
+@property(strong, nonatomic) UIImage *libraryImage;
 
 @end
 
@@ -49,6 +54,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,12 +70,16 @@
     [self initializeUI];
 
     [self initAnimatedButton];
+    [self initializeAssetsLibrary];
+
+    [self animateCameraRollImageChange];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-    [self animateCameraRollImageChange];
+    self.animatedCaptureButton.userInteractionEnabled = YES;
 }
 
 #pragma mark - Orientation
@@ -103,6 +113,10 @@
 - (void)initializeData {
     self.cameraCaptureHelper = [[SSOCameraCaptureHelper alloc] initWithPreviewView:self.cameraPreviewView andOrientation:[self interfaceOrientation]];
     self.cameraCaptureHelper.delegate = self;
+    //@FIXME
+    [self.collectionView registerNib:[UINib nibWithNibName:@"CustomCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"collectionCell"];
+    self.collectionView.inputData = [self populateCellData].mutableCopy;
+    [self.collectionView reloadData];
 }
 
 /**
@@ -199,7 +213,7 @@
 
           [UIView animateWithDuration:0.3
                            animations:^{
-                             //           [self.mediaButton setImage:self.containerViewController.cameraContainerVC.libraryImage forState:UIControlStateNormal];
+                             [self.mediaButton setImage:self.libraryImage forState:UIControlStateNormal];
 
                              self.mediaButton.alpha = 1;
                            }];
@@ -218,6 +232,44 @@
     controller.toolbarHidden = NO;
     controller.mediaTypes = @[ (NSString *)kUTTypeImage, (NSString *)kUTTypeMovie ];
     [self presentViewController:controller animated:YES completion:nil];
+}
+
+/**
+ *  Initialize the camera library and display the last picture in cameraRoll imageView
+ */
+- (void)initializeAssetsLibrary {
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+
+    //[SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil)];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
+          usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            //                                    [SVProgressHUD dismiss];
+
+            if (group != nil) {
+                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+
+                [group enumerateAssetsWithOptions:NSEnumerationReverse
+                                       usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+
+                                         if (asset) {
+                                             UIImage *img = [UIImage imageWithCGImage:asset.thumbnail];
+                                             self.libraryImage = img;
+
+                                             *stop = YES;
+                                         }
+                                       }];
+            }
+
+            *stop = NO;
+          }
+          failureBlock:^(NSError *error) {
+            //[SVProgressHUD dismiss];
+
+            NSLog(@"error %@", error);
+          }];
+
+    });
 }
 
 /**
@@ -304,6 +356,18 @@
     [self.cameraCaptureHelper runStillImageCaptureAnimation];
 
     [self.cameraCaptureHelper snapStillImage];
+
+    [sender setUserInteractionEnabled:NO];
+}
+
+/**
+ *  Lock the orientation when the capture button begin to be touched
+ *
+ *  @param sender the button
+ */
+- (IBAction)captureButtonTouchedDown:(id)sender {
+
+    [[SSOOrientationHelper sharedInstance] setOrientation:[UIDevice currentDevice].orientation];
 }
 
 #pragma mark - SSORoundedAnimatedButtonProtocol
@@ -321,6 +385,8 @@
 
     [self.cameraCaptureHelper toggleMovieRecording];
     self.isVideoRecording = NO;
+
+    [button setUserInteractionEnabled:NO];
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -381,7 +447,7 @@
 
     if (!error) {
         // Edit the selected media
-        WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
+        WKEditMediaViewController *controller = [WKEditMediaViewController new];
         controller.image = image;
         [self.navigationController pushViewController:controller animated:YES];
 
@@ -398,6 +464,58 @@
         [self.navigationController pushViewController:controller animated:YES];
     } else {
     }
+}
+
+#pragma mark - BaseCollectionView
+
+/**
+ *  This method is just used to generate the table view data for the SSBaseCollectionView.
+ *
+ *  @param inputArray Takes as input an organized array of Adjicons
+ *
+ *  @return Returns an array of arrays with sections containing elements
+ */
+
+- (NSArray *)populateCellData {
+
+    NSMutableArray *cellDataArray = [NSMutableArray new];
+
+    SSCellViewSection *section = [[SSCellViewSection alloc] init];
+
+    for (UIImage *image in self.arrayImages) {
+        SSCellViewItem *newElement;
+
+        newElement = [SSCellViewItem new];
+        newElement.cellReusableIdentifier = @"collectionCell";
+        newElement.objectData = image;
+        [section.rows addObject:newElement];
+    }
+
+    [cellDataArray addObject:section];
+
+    return cellDataArray;
+}
+
+//@TODO
+- (NSMutableArray *)arrayImages {
+
+    if (!_arrayImages) {
+        _arrayImages = [[NSMutableArray alloc] init];
+    }
+
+    _arrayImages = @[
+        [UIImage imageNamed:@"Alien"],
+        [UIImage imageNamed:@"hankey"],
+        [UIImage imageNamed:@"Unknown"],
+        [UIImage imageNamed:@"Alien"],
+        [UIImage imageNamed:@"hankey"],
+        [UIImage imageNamed:@"Unknown"],
+        [UIImage imageNamed:@"Alien"],
+        [UIImage imageNamed:@"hankey"],
+        [UIImage imageNamed:@"Unknown"]
+    ].mutableCopy;
+    //[_arrayImages arrayByAddingObjectsFromArray:_arrayImages];
+    return _arrayImages;
 }
 
 @end

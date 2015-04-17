@@ -39,4 +39,19 @@ extern NSString *const kWinkConnectAuthorizationDenied;
                                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+/**
+ *  Post an image to the backend with multipart form data
+ *
+ *  @param imageToPost the image to post
+ *  @param text        the text that goes with the image
+ *  @param meta        description
+ *  @param success     success block
+ *  @param failure     failure block
+ */
++ (void)winkConnectPostImageToBackend:(UIImage *)imageToPost
+                             withText:(NSString *)text
+                              andMeta:(NSDictionary *)meta
+                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end

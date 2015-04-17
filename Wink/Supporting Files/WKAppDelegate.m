@@ -44,7 +44,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
-    [FBSession class];
+   // [FBSession class];
 
     // Set permissions for Facebook
     [SSFacebookHelper sharedInstance].facebookPermissions = @[ @"publish_actions" ];
@@ -58,19 +58,19 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background,
     // optionally refresh the user interface.
 
-    [FBAppCall handleDidBecomeActive];
+    //[FBAppCall handleDidBecomeActive];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
 
-    if ([[url scheme] isEqualToString:kSchemeFacebook])
-        return [FBSession.activeSession handleOpenURL:url];
+//    if ([[url scheme] isEqualToString:kSchemeFacebook])
+//        return [FBSession.activeSession handleOpenURL:url];
 
     if ([[url scheme] isEqualToString:kSchemeGooglePlus])
         return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
 
     return NO;
-    return [FBSession.activeSession handleOpenURL:url];
+  //  return [FBSession.activeSession handleOpenURL:url];
 }
 
 #pragma mark - Setup State

@@ -14,4 +14,6 @@
 @property CGRect viewInRect;
 @property CGRect viewOutRect;
 
+- (void)initializeAnimationWithOrientation:(UIDeviceOrientation)orientation;
+
 @end
