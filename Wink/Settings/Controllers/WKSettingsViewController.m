@@ -14,6 +14,12 @@
 
 @interface WKSettingsViewController () <WKSettingsSocialCellDelegate, SocialNetworkDelegate>
 
+// UI
+@property(weak, nonatomic) IBOutlet UITableView *tableView;
+@property(weak, nonatomic) IBOutlet UILabel *footerLabel;
+@property(weak, nonatomic) IBOutlet UIButton *contactButton;
+@property(weak, nonatomic) IBOutlet UIButton *signOutButton;
+
 @property(strong, nonatomic) SSOGooglePlusHelper *googlePlusHelper;
 @property(strong, nonatomic) UISwitch *cellSwitch;
 
@@ -127,16 +133,6 @@
     return socialNetworks;
 }
 
-/**
- *  Returns the array of fake social network
- *
- *  @return the array
- */
-- (NSArray *)arrayFakeSocialNetworks {
-
-    return @[ @"TAG Facebook", @"TAG Twitter", @"TAG Google+", @"TAG Tumblr", @"TAG Instagram", @"TAG Website", @"TAG Social Page" ];
-}
-
 #pragma mark - WKSettingsSocialCellDelegate
 
 /**
@@ -171,14 +167,12 @@
 #pragma mark - TableView Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return [self arraySocialNetworks].count;
-    } else if (section == 1) {
-        return [self arrayFakeSocialNetworks].count;
     }
     // SHOULD NOT HAPPEN
     return 0;
@@ -193,12 +187,6 @@
         cell.delegate = self;
 
         [cell configureCell:[[self arraySocialNetworks] objectAtIndex:indexPath.row]];
-        return cell;
-    } else if (indexPath.section == 1) {
-        NSString *cellIdentifier = @"SETTINGS_SOCIAL_FAKE_CELL";
-
-        SSOSettingsSocialFakeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-        [cell configureCell:[[self arrayFakeSocialNetworks] objectAtIndex:indexPath.row]];
         return cell;
     }
     return nil;
@@ -220,7 +208,7 @@
 
 - (IBAction)signOutButtonTouched:(id)sender {
     [UIAlertView showWithTitle:NSLocalizedString(@"Sign Out", @"")
-                       message:NSLocalizedString(@"Are you sure you would like to sign out of Wink?", @"")
+                       message:NSLocalizedString(@"Are you sure you would like to sign out?", @"")
              cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
              otherButtonTitles:@[ NSLocalizedString(@"Sign Out", @"") ]
                       tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex){
@@ -228,7 +216,7 @@
 }
 
 - (IBAction)doneButtonTouched:(id)sender {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - SocialNetworkDelegate
