@@ -278,13 +278,6 @@
 
     // Open a controller that holds the user's photos and videos
     [self displayCamerallRollPickerVC];
-
-    //    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Photo or video?", nil)
-    //                                                        message:nil
-    //                                                       delegate:self
-    //                                              cancelButtonTitle:nil
-    //                                              otherButtonTitles:NSLocalizedString(@"Video", nil), NSLocalizedString(@"Photo", nil), nil];
-    //    [alertView show];
 }
 
 - (IBAction)cameraDeviceButtonTouched:(id)sender {
@@ -297,6 +290,11 @@
         self.isCameraRearFacing = YES;
     }
     [self updateRearCameraFacingUI];
+}
+
+- (IBAction)profileButtonTouched:(id)sender {
+    WKSettingsViewController *settingsVC = [WKSettingsViewController new];
+    [self presentViewController:settingsVC animated:YES completion:nil];
 }
 
 #pragma mark Capture Button
