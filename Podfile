@@ -13,7 +13,6 @@ pod 'GCPlaceholderTextView'
 pod 'CWStatusBarNotification'
 pod 'Facebook-iOS-SDK'
 pod 'PonyDebugger'
-pod 'SSFacebookHelper'
 pod "FastttCamera", :git => 'https://github.com/KhanFu/FastttCamera', :branch => 'master'
 pod 'googleplus-ios-sdk'
 pod 'Masonry'
@@ -24,5 +23,6 @@ pod 'pop'
 pod 'IQKeyboardManager'
 
 # Samsao libraries
-
+pod 'SSFacebookHelper'
+pod 'SSOBaseProvider'
 

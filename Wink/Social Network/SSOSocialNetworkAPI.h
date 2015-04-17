@@ -67,9 +67,6 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
  */
 - (void)logoutFromSocialFramework:(SelectedSocialNetwork)socialNetwork;
 
-// TODO: should not be there
-+ (void)pushToCameraViewController;
-
 @end
 
 @protocol SocialNetworkDelegate

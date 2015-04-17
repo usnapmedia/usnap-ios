@@ -7,14 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SSBaseViewCellProtocol.h"
 
-@protocol SSCollectionViewCellProtocol
-
-@required
-- (void)configureCell:(id)cellData;
-
-@end
-
-@interface SSCollectionViewCell : UICollectionViewCell
+@interface SSCollectionViewCell : UICollectionViewCell <SSBaseViewCellProtocol>
 
 @end

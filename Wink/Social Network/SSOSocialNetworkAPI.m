@@ -95,13 +95,6 @@
     }
 }
 
-/**
- *  Pushes the user to the camera view controller
- */
-+ (void)pushToCameraViewController {
-    // Send notification for the app delegate to handle the switch of controller
-    [[NSNotificationCenter defaultCenter] postNotificationName:kCurrentUserStatusChanged object:nil];
-}
 
 // TODO: this should be moved in Facebook helper
 #pragma mark - Facebook

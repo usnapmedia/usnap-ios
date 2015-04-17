@@ -98,9 +98,6 @@
 		D810B8F21ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8CA1ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib */; };
 		D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8CB1ADF506500B3AC11 /* WKEditMediaViewController.xib */; };
 		D810B8F71ADF508A00B3AC11 /* NSBundle+Wink.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8F61ADF508A00B3AC11 /* NSBundle+Wink.m */; };
-		D810B8FF1ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8FA1ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.m */; };
-		D810B9001ADF51BB00B3AC11 /* SSOBaseProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8FC1ADF51BB00B3AC11 /* SSOBaseProvider.m */; };
-		D810B9011ADF51BB00B3AC11 /* SSOBaseTableViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8FE1ADF51BB00B3AC11 /* SSOBaseTableViewProvider.m */; };
 		D830F41A1ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4051ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
 		D830F41B1ACDDBF1002A503D /* AVAssetTrack+WKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4071ACDDBF1002A503D /* AVAssetTrack+WKAdditions.m */; };
 		D830F41D1ACDDBF1002A503D /* NSDictionary+WKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F40B1ACDDBF1002A503D /* NSDictionary+WKAdditions.m */; };
@@ -284,12 +281,6 @@
 		D810B8CB1ADF506500B3AC11 /* WKEditMediaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKEditMediaViewController.xib; sourceTree = "<group>"; };
 		D810B8F51ADF508A00B3AC11 /* NSBundle+Wink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Wink.h"; sourceTree = "<group>"; };
 		D810B8F61ADF508A00B3AC11 /* NSBundle+Wink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Wink.m"; sourceTree = "<group>"; };
-		D810B8F91ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseCollectionViewProvider.h; sourceTree = "<group>"; };
-		D810B8FA1ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseCollectionViewProvider.m; sourceTree = "<group>"; };
-		D810B8FB1ADF51BB00B3AC11 /* SSOBaseProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseProvider.h; sourceTree = "<group>"; };
-		D810B8FC1ADF51BB00B3AC11 /* SSOBaseProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseProvider.m; sourceTree = "<group>"; };
-		D810B8FD1ADF51BB00B3AC11 /* SSOBaseTableViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseTableViewProvider.h; sourceTree = "<group>"; };
-		D810B8FE1ADF51BB00B3AC11 /* SSOBaseTableViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseTableViewProvider.m; sourceTree = "<group>"; };
 		D830F4041ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
 		D830F4051ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		D830F4061ACDDBF1002A503D /* AVAssetTrack+WKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVAssetTrack+WKAdditions.h"; sourceTree = "<group>"; };
@@ -318,7 +309,6 @@
 		D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSettingSocialTableViewCell.m; sourceTree = "<group>"; };
 		D86E94AB1ACF492000CFF801 /* SSBaseCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseCollectionView.h; sourceTree = "<group>"; };
 		D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBaseCollectionView.m; sourceTree = "<group>"; };
-		D86E94AD1ACF492000CFF801 /* SSBaseViewCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseViewCellProtocol.h; sourceTree = "<group>"; };
 		D86E94B21ACF492000CFF801 /* SSCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCollectionViewCell.h; sourceTree = "<group>"; };
 		D86E94B31ACF492000CFF801 /* SSCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCollectionViewCell.m; sourceTree = "<group>"; };
 		D86E94C01ACF4A1400CFF801 /* CustomCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -441,7 +431,6 @@
 				D8EA5C7D1AD4287C008D2A37 /* Login */,
 				D86E94C31ACF4A1400CFF801 /* Model */,
 				335723751ACB097C000CC846 /* Old:To Check */,
-				D810B8F81ADF51BB00B3AC11 /* Providers */,
 				3357238E1ACB097C000CC846 /* Settings */,
 				335723971ACB097C000CC846 /* Sharing */,
 				D8EA5C791AD4281B008D2A37 /* Social Network */,
@@ -834,19 +823,6 @@
 			path = XIB;
 			sourceTree = "<group>";
 		};
-		D810B8F81ADF51BB00B3AC11 /* Providers */ = {
-			isa = PBXGroup;
-			children = (
-				D810B8F91ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.h */,
-				D810B8FA1ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.m */,
-				D810B8FB1ADF51BB00B3AC11 /* SSOBaseProvider.h */,
-				D810B8FC1ADF51BB00B3AC11 /* SSOBaseProvider.m */,
-				D810B8FD1ADF51BB00B3AC11 /* SSOBaseTableViewProvider.h */,
-				D810B8FE1ADF51BB00B3AC11 /* SSOBaseTableViewProvider.m */,
-			);
-			path = Providers;
-			sourceTree = "<group>";
-		};
 		D830F4031ACDDBF1002A503D /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -887,7 +863,6 @@
 				D86E94A31ACF492000CFF801 /* Cell */,
 				D86E94AB1ACF492000CFF801 /* SSBaseCollectionView.h */,
 				D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */,
-				D86E94AD1ACF492000CFF801 /* SSBaseViewCellProtocol.h */,
 				D86E94B21ACF492000CFF801 /* SSCollectionViewCell.h */,
 				D86E94B31ACF492000CFF801 /* SSCollectionViewCell.m */,
 			);
@@ -1251,14 +1226,12 @@
 				D810B8CF1ADF506500B3AC11 /* SSOAdjustementsHelper.m in Sources */,
 				D8D4F17F1ADFFB52002FDE38 /* SSOThemeHelper.m in Sources */,
 				D810B8E71ADF506500B3AC11 /* SSOTextAccessoryContainerView.m in Sources */,
-				D810B9001ADF51BB00B3AC11 /* SSOBaseProvider.m in Sources */,
 				335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */,
 				D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */,
 				336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */,
 				D810B8DE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.m in Sources */,
 				3303DDDD1AD87361002B74F9 /* SSORegisterContainerView.m in Sources */,
 				335723D71ACB097C000CC846 /* WKViewController.m in Sources */,
-				D810B9011ADF51BB00B3AC11 /* SSOBaseTableViewProvider.m in Sources */,
 				D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */,
 				D810B8DB1ADF506500B3AC11 /* SSOEditToolController.m in Sources */,
 				CB8F0ABD1ADDDCB100C18263 /* SSOCameraCaptureHelper.m in Sources */,
@@ -1277,7 +1250,6 @@
 				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
 				D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */,
 				D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */,
-				D810B8FF1ADF51BB00B3AC11 /* SSOBaseCollectionViewProvider.m in Sources */,
 				D810B8E01ADF506500B3AC11 /* SSOAccessoryContainerView.m in Sources */,
 				D810B8DF1ADF506500B3AC11 /* SSOAdjustmentSliderContainerView.m in Sources */,
 				3303DDDA1AD86F66002B74F9 /* SSOCustomSignInButton.m in Sources */,
