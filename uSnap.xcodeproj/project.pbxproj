@@ -58,7 +58,6 @@
 		335723DE1ACB097C000CC846 /* WKShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3357239B1ACB097C000CC846 /* WKShareViewController.xib */; };
 		335723E01ACB097C000CC846 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3357239F1ACB097C000CC846 /* Constants.m */; };
 		335723E11ACB097C000CC846 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A01ACB097C000CC846 /* main.m */; };
-		335723E31ACB097C000CC846 /* uSnap-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335723A31ACB097C000CC846 /* uSnap-Info.plist */; };
 		335723E41ACB097C000CC846 /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A61ACB097C000CC846 /* WKAppDelegate.m */; };
 		335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */; };
 		336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */; };
@@ -1073,7 +1072,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SSO;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Samsao;
 				TargetAttributes = {
 					270DFAF019AE71BE00067072 = {
@@ -1131,7 +1130,6 @@
 				335723C71ACB097C000CC846 /* Localizable.strings in Resources */,
 				D810B8F11ADF506500B3AC11 /* SSOFontCollectionViewCell.xib in Resources */,
 				3303DDD01AD84F19002B74F9 /* SSOLoginContainerView.xib in Resources */,
-				335723E31ACB097C000CC846 /* uSnap-Info.plist in Resources */,
 				D810B8F21ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib in Resources */,
 				D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */,
 				335723C81ACB097C000CC846 /* InfoPlist.strings in Resources */,
@@ -1388,7 +1386,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -1420,7 +1418,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

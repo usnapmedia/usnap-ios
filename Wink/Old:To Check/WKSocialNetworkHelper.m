@@ -40,12 +40,19 @@
     } else if ([socialNetwork isEqualToString:kFacebookSwitchValue]) {
         // Log the user in
         if (theSwitch.on) {
-            [SSFacebookHelper login:^{ CLS_LOG(@"Facebook connected"); }
-                onFailure:^(NSError *error) {
-                    // Set the switch back to no
-                    [theSwitch setOn:NO animated:YES];
-                    CLS_LOG(@"Facebook connection error: %@", error.description);
-                }];
+
+            [SSFacebookHelper login:^(FBSDKLoginManagerLoginResult *result) {
+                CLS_LOG(@"Facebook connected");
+
+            } onFailure:^(NSError *error) {
+                // Set the switch back to no
+                [theSwitch setOn:NO animated:YES];
+                CLS_LOG(@"Facebook connection error: %@", error.description);
+
+            } onCancellation:^{
+
+            }];
+
         } else {
             // Logout
             [SSFacebookHelper logout];
@@ -66,21 +73,10 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:message forKey:@"message"];
     [params setObject:UIImagePNGRepresentation(imageToPost) forKey:@"picture"];
-
-    [SSFacebookHelper postImageWithParameters:params
-        onSuccess:^() { NSLog(@"SUCCESS"); }
-        failure:^(NSError *error) { // showing an alert for failure
-            NSLog(@"error: %@", error);
-        }];
 }
 
 + (void)postVideoToFacebookWithMessage:(NSString *)message andVideo:(NSData *)videoToPost {
     NSMutableDictionary *paramsVideo = [NSMutableDictionary dictionaryWithObjectsAndKeys:videoToPost, @"video.mov", message, @"description", nil];
-    [SSFacebookHelper postVideoWithPath:paramsVideo
-        onSuccess:^() { NSLog(@"SUCCESS"); }
-        failure:^(NSError *error) { // showing an alert for failure
-            NSLog(@"error: %@", error);
-        }];
 }
 
 #pragma mark - Twitter

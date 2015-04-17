@@ -16,7 +16,6 @@
 #import "CWStatusBarNotification.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
-#import <FacebookSDK/FacebookSDK.h>
 #import "SSOSocialNetworkAPI.h"
 #import <TwitterKit/TwitterKit.h>
 #import <Masonry.h>
