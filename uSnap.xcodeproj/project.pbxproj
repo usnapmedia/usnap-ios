@@ -111,8 +111,6 @@
 		D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94B31ACF492000CFF801 /* SSCollectionViewCell.m */; };
 		D86E94C91ACF4A1400CFF801 /* CustomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86E94C01ACF4A1400CFF801 /* CustomCollectionViewCell.xib */; };
 		D86E94CA1ACF4A1400CFF801 /* imageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C21ACF4A1400CFF801 /* imageCollectionViewCell.m */; };
-		D86E94CB1ACF4A1400CFF801 /* SSCellViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C61ACF4A1400CFF801 /* SSCellViewItem.m */; };
-		D86E94CC1ACF4A1400CFF801 /* SSCellViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C81ACF4A1400CFF801 /* SSCellViewSection.m */; };
 		D8C83EA31AE1C74C00F187F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8C83E9F1AE1C74C00F187F1 /* InfoPlist.strings */; };
 		D8C83EA41AE1C74C00F187F1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8C83EA11AE1C74C00F187F1 /* Localizable.strings */; };
 		D8D4F17F1ADFFB52002FDE38 /* SSOThemeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D4F17E1ADFFB52002FDE38 /* SSOThemeHelper.m */; };
@@ -310,10 +308,6 @@
 		D86E94C01ACF4A1400CFF801 /* CustomCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCollectionViewCell.xib; sourceTree = "<group>"; };
 		D86E94C11ACF4A1400CFF801 /* imageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageCollectionViewCell.h; sourceTree = "<group>"; };
 		D86E94C21ACF4A1400CFF801 /* imageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageCollectionViewCell.m; sourceTree = "<group>"; };
-		D86E94C51ACF4A1400CFF801 /* SSCellViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewItem.h; sourceTree = "<group>"; };
-		D86E94C61ACF4A1400CFF801 /* SSCellViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewItem.m; sourceTree = "<group>"; };
-		D86E94C71ACF4A1400CFF801 /* SSCellViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewSection.h; sourceTree = "<group>"; };
-		D86E94C81ACF4A1400CFF801 /* SSCellViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewSection.m; sourceTree = "<group>"; };
 		D8C83EA01AE1C74C00F187F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D8C83EA21AE1C74C00F187F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D8C83EA51AE1C75400F187F1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -427,7 +421,6 @@
 				335723721ACB097C000CC846 /* Helpers */,
 				D86E94BD1ACF4A1400CFF801 /* Live Feed */,
 				D8EA5C7D1AD4287C008D2A37 /* Login */,
-				D86E94C31ACF4A1400CFF801 /* Model */,
 				335723751ACB097C000CC846 /* Old:To Check */,
 				3357238E1ACB097C000CC846 /* Settings */,
 				335723971ACB097C000CC846 /* Sharing */,
@@ -899,25 +892,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		D86E94C31ACF4A1400CFF801 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				D86E94C41ACF4A1400CFF801 /* Collection view */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		D86E94C41ACF4A1400CFF801 /* Collection view */ = {
-			isa = PBXGroup;
-			children = (
-				D86E94C51ACF4A1400CFF801 /* SSCellViewItem.h */,
-				D86E94C61ACF4A1400CFF801 /* SSCellViewItem.m */,
-				D86E94C71ACF4A1400CFF801 /* SSCellViewSection.h */,
-				D86E94C81ACF4A1400CFF801 /* SSCellViewSection.m */,
-			);
-			path = "Collection view";
-			sourceTree = "<group>";
-		};
 		D8EA5C791AD4281B008D2A37 /* Social Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -1173,7 +1147,6 @@
 				D8EA5C7C1AD4281B008D2A37 /* SSOSocialNetworkAPI.m in Sources */,
 				D830F4201ACDDBF1002A503D /* UIFont+WKAdditions.m in Sources */,
 				D810B8DA1ADF506500B3AC11 /* SSODrawToolController.m in Sources */,
-				D86E94CC1ACF4A1400CFF801 /* SSCellViewSection.m in Sources */,
 				335723D21ACB097C000CC846 /* WKMoviePlayerView.m in Sources */,
 				D830F4241ACDDBF1002A503D /* UIView+WKAdditions.m in Sources */,
 				D810B8EC1ADF506500B3AC11 /* WKColorPickerView.m in Sources */,
@@ -1189,7 +1162,6 @@
 				335723E11ACB097C000CC846 /* main.m in Sources */,
 				D810B8EB1ADF506500B3AC11 /* SSOToolButton.m in Sources */,
 				D810B8E41ADF506500B3AC11 /* SSOSlidingContainerView.m in Sources */,
-				D86E94CB1ACF4A1400CFF801 /* SSCellViewItem.m in Sources */,
 				335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */,
 				D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */,
 				D830F4221ACDDBF1002A503D /* UIImage+Tools.m in Sources */,
@@ -1377,10 +1349,6 @@
 				GCC_PREFIX_HEADER = "Wink/Supporting Files/uSnap-Prefix.pch";
 				INFOPLIST_FILE = "Wink/Supporting Files/uSnap-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Wink/GoogleAnalytics",
-				);
 				PRODUCT_NAME = uSnap;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1405,10 +1373,6 @@
 				GCC_PREFIX_HEADER = "Wink/Supporting Files/uSnap-Prefix.pch";
 				INFOPLIST_FILE = "Wink/Supporting Files/uSnap-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Wink/GoogleAnalytics",
-				);
 				PRODUCT_NAME = uSnap;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
