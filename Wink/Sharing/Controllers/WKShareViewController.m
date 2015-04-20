@@ -300,7 +300,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [SVProgressHUD showWithStatus:@"uploading"];
 
     [WKWinkConnect winkConnectPostImageToBackend:[self editedImage]
-        withText:@"TEstytext"
+        withText:self.placeholderTextView.text
         andMeta:@{
             @"something" : @"here"
         }

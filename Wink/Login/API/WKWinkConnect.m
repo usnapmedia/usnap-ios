@@ -8,6 +8,8 @@
 
 #import "WKWinkConnect.h"
 #import "Constants.h"
+#import "SSOHTTPRequestOperationManager.h"
+#import "SSSessionManager.h"
 
 // Request Types
 #define GET @"GET"
@@ -27,12 +29,8 @@ NSString *const kWinkConnectAuthorizationDenied = @"kWinkConnectAuthorizationDen
                                 meta:(NSString *)meta
                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    NSString *url = [NSString stringWithFormat:@"%@/login", kAPIUrl];
-
-    // AFHTTPRequestOperation *operation = [AFHTTPRequestOperation alloc]init
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSString *url = [NSString stringWithFormat:@"login"];
+    SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
     [manager POST:url parameters:@{ @"email" : email, @"password" : password } success:success failure:failure];
 }
 
@@ -41,13 +39,10 @@ NSString *const kWinkConnectAuthorizationDenied = @"kWinkConnectAuthorizationDen
                                    meta:(NSDictionary *)meta
                                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    NSString *url = [NSString stringWithFormat:@"%@/register", kAPIUrl];
+    NSString *url = [NSString stringWithFormat:@"register"];
 
-    // AFHTTPRequestOperation *operation = [AFHTTPRequestOperation alloc]init
+    SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
 
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [manager POST:url parameters:@{ @"email" : email, @"password" : password, @"meta" : meta } success:success failure:failure];
 }
 
@@ -55,9 +50,9 @@ NSString *const kWinkConnectAuthorizationDenied = @"kWinkConnectAuthorizationDen
                                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
 
-    NSString *url = [NSString stringWithFormat:@"%@/connect", kAPIUrl];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSString *url = [NSString stringWithFormat:@"connect"];
+    SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
+
     [manager POST:url parameters:data success:success failure:failure];
 }
 
@@ -67,16 +62,17 @@ NSString *const kWinkConnectAuthorizationDenied = @"kWinkConnectAuthorizationDen
                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
 
-    NSString *url = [NSString stringWithFormat:@"%@/share", kAPIUrl];
+    NSString *url = [NSString stringWithFormat:@"share"];
 
     NSData *imageData = UIImageJPEGRepresentation(imageToPost, 0.5);
 
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
     AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    // We need to reset the contentTypes here as we are setting a new responseSerializer
     responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     manager.responseSerializer = responseSerializer;
-    
-    //TODO: Temporary fix because problem with backend 
+
+    // TODO: Temporary fix because problem with backend
     int randomNumber = arc4random_uniform(1000);
     NSString *temporaryFileName = [NSString stringWithFormat:@"image%i.jpg", randomNumber];
 
