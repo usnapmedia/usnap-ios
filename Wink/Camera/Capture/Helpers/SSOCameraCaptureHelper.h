@@ -13,6 +13,10 @@
 
 @interface SSOCameraCaptureHelper : NSObject
 
+/**
+ *  Need access to the video device input to use flash
+ */
+@property(nonatomic) AVCaptureDeviceInput *videoDeviceInput;
 @property(nonatomic) UIInterfaceOrientation interfaceOrientation;
 @property(nonatomic, weak) id<SSOCameraDelegate> delegate;
 
@@ -24,7 +28,10 @@
  *
  *  @return
  */
-- (instancetype)initWithPreviewView:(AVCamPreviewView *)previewView andOrientation:(UIInterfaceOrientation)orientation;
+- (instancetype)initWithPreviewView:(AVCamPreviewView *)previewView
+                     andOrientation:(UIDeviceOrientation)orientation
+                 withDevicePosition:(AVCaptureDevicePosition)devicePosition
+                     withFlashState:(AVCaptureFlashMode)flashState;
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
 
@@ -46,8 +53,23 @@
 /**
  *  Change the camera from front facing to rear facing or vice versa
  */
-- (void)changeCamera;
+- (void)changeCameraWithDevicePosition:(AVCaptureDevicePosition)devicePosition;
+
+/**
+ *  Set flash mode to on, off, auto
+ *
+ *  @param flashMode
+ *  @param device
+ */
 + (void)setFlashMode:(AVCaptureFlashMode)flashMode forDevice:(AVCaptureDevice *)device;
+
+/**
+ *  Turn torch on, off, auto for video
+ *
+ *  @param torchMode
+ *  @param device
+ */
++ (void)setTorchMode:(AVCaptureTorchMode)torchMode forDevice:(AVCaptureDevice *)device;
 
 @end
 

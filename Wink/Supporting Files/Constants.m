@@ -42,8 +42,9 @@ NSString *const kTokenGoogleString = @"kTokenGoogleString";
 #pragma mark - NSUserDefaults
 
 NSString *const kIsCameraRearFacing = @"kIsCameraRearFacing";
-NSString *const kIsFlashOn = @"kIsFlashOn";
-NSString *const kIsVideoOn = @"kIsVideoOn";
+NSString *const kDevicePosition = @"kDevicePosition";
+NSString *const kFlashState = @"kFlashState";
+NSString *const kTorchState = @"kTorchState";
 
 NSString *const kIsFirstLogin = @"kIsFirstLogin";
 NSString *const kIsFirstLoginDate = @"kIsFirstLoginDate";

@@ -42,8 +42,9 @@ extern NSString *const kTokenGoogleString;
 #pragma mark - NSUserDefaults
 
 // Camera
-extern NSString *const kIsCameraRearFacing;
-extern NSString *const kIsFlashOn;
+extern NSString *const kDevicePosition;
+extern NSString *const kFlashState;
+extern NSString *const kTorchState;
 extern NSString *const kIsVideoOn;
 
 // Login
