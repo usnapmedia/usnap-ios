@@ -57,6 +57,7 @@
 		335723E41ACB097C000CC846 /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A61ACB097C000CC846 /* WKAppDelegate.m */; };
 		335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */; };
 		336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */; };
+		33B991491AE4522F002A30F8 /* SSOAlignedButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B991481AE4522F002A30F8 /* SSOAlignedButtonsView.m */; };
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
@@ -208,6 +209,8 @@
 		335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		336F913E1ACD963D003B0AA4 /* SSORoundedAnimatedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSORoundedAnimatedButton.h; path = Views/SSORoundedAnimatedButton.h; sourceTree = "<group>"; };
 		336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSORoundedAnimatedButton.m; path = Views/SSORoundedAnimatedButton.m; sourceTree = "<group>"; };
+		33B991471AE4522F002A30F8 /* SSOAlignedButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOAlignedButtonsView.h; sourceTree = "<group>"; };
+		33B991481AE4522F002A30F8 /* SSOAlignedButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOAlignedButtonsView.m; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
@@ -836,6 +839,8 @@
 		D86E949F1ACF492000CFF801 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				33B991471AE4522F002A30F8 /* SSOAlignedButtonsView.h */,
+				33B991481AE4522F002A30F8 /* SSOAlignedButtonsView.m */,
 				D86E94A01ACF492000CFF801 /* Button */,
 				D86E94A31ACF492000CFF801 /* Cell */,
 				D86E94AB1ACF492000CFF801 /* SSBaseCollectionView.h */,
@@ -1161,6 +1166,7 @@
 				D810B8E81ADF506500B3AC11 /* SSOEditMediaMovableTextView.m in Sources */,
 				335723E11ACB097C000CC846 /* main.m in Sources */,
 				D810B8EB1ADF506500B3AC11 /* SSOToolButton.m in Sources */,
+				33B991491AE4522F002A30F8 /* SSOAlignedButtonsView.m in Sources */,
 				D810B8E41ADF506500B3AC11 /* SSOSlidingContainerView.m in Sources */,
 				335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */,
 				D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */,

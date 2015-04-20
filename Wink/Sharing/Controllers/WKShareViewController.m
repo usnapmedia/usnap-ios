@@ -22,9 +22,14 @@
 #import "SSSessionManager.h"
 #import "WKWinkConnect.h"
 #import <SVProgressHUD.h>
+#import "SSOAlignedButtonsView.h"
+#import <POP.h>
+
+#define kOverlayViewAlpha 0.75
+
 typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing, WKShareViewControllerModeShared } WKShareViewControllerMode;
 
-@interface WKShareViewController () <WKMoviePlayerDelegate>
+@interface WKShareViewController () <WKMoviePlayerDelegate, POPAnimationDelegate>
 @property(strong, nonatomic) UIImageView *imageView;
 @property(strong, nonatomic) WKMoviePlayerView *moviePlayerView;
 @property(strong, nonatomic) UIImageView *overlayImageView;
@@ -35,6 +40,11 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 @property(weak, nonatomic) IBOutlet UIView *mediaContainerView;
 @property(weak, nonatomic) IBOutlet GCPlaceholderTextView *placeholderTextView;
 @property(weak, nonatomic) IBOutlet UIButton *shareButton;
+@property(weak, nonatomic) IBOutlet SSOAlignedButtonsView *topView;
+@property(weak, nonatomic) IBOutlet UIView *bottomView;
+@property(strong, nonatomic) IBOutlet UIView *overlayView;
+
+@property(strong, nonatomic) NSValue *bottomViewInitialCenter;
 
 @end
 
@@ -46,7 +56,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [super viewDidLoad];
 
     // Register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
@@ -90,6 +100,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     // Setup the share button
     self.shareButton.layer.cornerRadius = 2.0f;
 
+    [self.view insertSubview:self.overlayView belowSubview:self.bottomView];
+
     // Update UI
     // [self updateUI];
 }
@@ -98,8 +110,48 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [super viewDidAppear:animated];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self setupEditButtons];
+}
+
+#pragma mark - Getters
+
+/**
+ *  Lazy instanciation
+ */
+- (NSValue *)bottomViewInitialCenter {
+
+    if (!_bottomViewInitialCenter) {
+        _bottomViewInitialCenter = [NSValue valueWithCGPoint:self.bottomView.center];
+    }
+
+    return _bottomViewInitialCenter;
+}
+
+/**
+ *  Lazy instanciation
+ */
+- (UIView *)overlayView {
+
+    if (!_overlayView) {
+        // Set the overlay view
+        _overlayView = [[UIView alloc] initWithFrame:self.view.frame];
+        _overlayView.backgroundColor = [UIColor blackColor];
+        _overlayView.alpha = 0;
+        // Add tap recognizer to dismiss the keyboard
+        [_overlayView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(overlayViewTouched:)]];
+    }
+
+    return _overlayView;
 }
 
 #pragma mark - Utilities
@@ -139,6 +191,26 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
                      }
                      completion:nil];
+}
+
+/**
+ *  Setup the edit buttons
+ */
+- (void)setupEditButtons {
+    //@TODO This should be generic
+    UIButton *facebookButton = [UIButton new];
+    [facebookButton setImage:[UIImage imageNamed:@"drawIconBorder"] forState:UIControlStateNormal];
+    // [drawButton addTarget:self action:@selector(drawButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *twitterButton = [UIButton new];
+    [twitterButton setImage:[UIImage imageNamed:@"textIcon"] forState:UIControlStateNormal];
+    // [textButton addTarget:self action:@selector(textButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *googlePlusButton = [UIButton new];
+    [googlePlusButton setImage:[UIImage imageNamed:@"brightnessIcon"] forState:UIControlStateNormal];
+    // [adjustmentButton addTarget:self action:@selector(adjustmentButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.topView setupViewforOrientation:[UIDevice currentDevice].orientation withArrayButtons:@[ facebookButton, twitterButton, googlePlusButton ]];
 }
 
 #pragma mark - Set Share Mode
@@ -188,33 +260,71 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     return numberNetworksReturned;
 }
 
+#pragma mark - Action
+
+- (void)overlayViewTouched:(id)sender {
+    if ([self.placeholderTextView isFirstResponder]) {
+        [self.placeholderTextView resignFirstResponder];
+    }
+}
+
+#pragma mark - Animation
+
+- (void)animatedViewForKeyboardWithSize:(CGSize)size shouldSlideUp:(BOOL)isSlidingUp {
+
+    if (isSlidingUp) {
+        [self.overlayView setHidden:NO];
+        // Set the animation to slide the view up
+        POPSpringAnimation *moveUpAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
+        // We need to use the initial center to move with the auto-correct keyboard show/hide
+        CGPoint initialCenter = [self.bottomViewInitialCenter CGPointValue];
+        CGPoint center = CGPointMake(initialCenter.x, initialCenter.y - size.height);
+        moveUpAnimation.toValue = [NSValue valueWithCGPoint:center];
+        [self.bottomView pop_addAnimation:moveUpAnimation forKey:@"moveUp"];
+        // Set the animation to fade the view in
+        POPSpringAnimation *fadeInAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewAlpha];
+        fadeInAnimation.toValue = [NSNumber numberWithFloat:kOverlayViewAlpha];
+        fadeInAnimation.delegate = self;
+        fadeInAnimation.name = @"fadeInAnimation";
+        [self.overlayView pop_addAnimation:fadeInAnimation forKey:@"fadeIn"];
+
+    } else {
+        // Set the animation to side the view down
+        POPSpringAnimation *moveDownAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
+        moveDownAnimation.toValue = self.bottomViewInitialCenter;
+        [self.bottomView pop_addAnimation:moveDownAnimation forKey:@"moveDown"];
+        // Set the animation to fade out the background view
+        POPSpringAnimation *fadeOutAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewAlpha];
+        fadeOutAnimation.toValue = [NSNumber numberWithFloat:0];
+        fadeOutAnimation.delegate = self;
+        fadeOutAnimation.name = @"fadeOutAnimation";
+        [self.overlayView pop_addAnimation:fadeOutAnimation forKey:@"fadeOut"];
+    }
+}
+
+#pragma mark - POPAnimationDelegate
+
+- (void)pop_animationDidStop:(POPAnimation *)anim finished:(BOOL)finished {
+    // Check if it's a fade out animation
+    if ([anim.name isEqualToString:@"fadeOutAnimation"]) {
+        // Hide the view after the animation
+        [self.overlayView setHidden:YES];
+    }
+}
 #pragma mark - Keyboard Methods
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    CGFloat animationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationOptions animationCurve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue];
-    CGSize size = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
 
-    [UIView animateWithDuration:animationDuration
-                          delay:0.0f
-                        options:animationCurve
-                     animations:^{
-                       self.view.transform = CGAffineTransformMakeTranslation(0.0f, -size.height);
-                     }
-                     completion:nil];
+    // CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGSize keyboardFrameBegin = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+
+    [self animatedViewForKeyboardWithSize:keyboardFrameBegin shouldSlideUp:YES];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    CGFloat animationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationOptions animationCurve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue];
+    CGSize keyboardFrameBegin = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
-    [UIView animateWithDuration:animationDuration
-                          delay:0.0f
-                        options:animationCurve
-                     animations:^{
-                       self.view.transform = CGAffineTransformIdentity;
-                     }
-                     completion:nil];
+    [self animatedViewForKeyboardWithSize:keyboardFrameBegin shouldSlideUp:NO];
 }
 
 #pragma mark - Update UI
@@ -306,7 +416,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         }
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-            [SVProgressHUD setStatus:@"Success"];
+          [SVProgressHUD setStatus:@"Success"];
+            [SVProgressHUD dismiss];
 
           [self.navigationController popToRootViewControllerAnimated:YES];
 
@@ -318,8 +429,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
           [SVProgressHUD showWithStatus:@"Failed, backend error can't do anything about it until fixed"];
 
           NSLog(@"share failed because : %@", error);
-            
-            [SVProgressHUD dismiss];
+
+          [SVProgressHUD dismiss];
 
         }];
 

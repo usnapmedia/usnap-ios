@@ -18,6 +18,8 @@
 #import <GooglePlus/GooglePlus.h>
 
 #import "SSOLoginViewController.h"
+#import <IQKeyboardManager.h>
+#import "WKShareViewController.h"
 
 @implementation WKAppDelegate
 
@@ -44,12 +46,15 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
-   // [FBSession class];
+    // [FBSession class];
 
     // Set permissions for Facebook
     [SSFacebookHelper sharedInstance].facebookPermissions = @[ @"publish_actions" ];
 
     [self setupRootViewController];
+
+    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[WKShareViewController class]];
+    [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[WKShareViewController class]];
 
     return YES;
 }
@@ -63,14 +68,14 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
 
-//    if ([[url scheme] isEqualToString:kSchemeFacebook])
-//        return [FBSession.activeSession handleOpenURL:url];
+    //    if ([[url scheme] isEqualToString:kSchemeFacebook])
+    //        return [FBSession.activeSession handleOpenURL:url];
 
     if ([[url scheme] isEqualToString:kSchemeGooglePlus])
         return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
 
     return NO;
-  //  return [FBSession.activeSession handleOpenURL:url];
+    //  return [FBSession.activeSession handleOpenURL:url];
 }
 
 #pragma mark - Setup State
