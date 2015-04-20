@@ -351,7 +351,6 @@
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.cameraPreviewView cache:YES];
     [UIView commitAnimations];
 
-    [self verticalFlip];
     // Remove flash button
     // Send a message to the photo/video controller to change camera direction
     if (self.devicePosition == AVCaptureDevicePositionFront) {
@@ -373,36 +372,6 @@
 
     [[NSUserDefaults standardUserDefaults] setInteger:self.devicePosition forKey:kDevicePosition];
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)verticalFlip {
-
-    //    [UIView animateWithDuration:0 delay:0 options:nil animations:^{
-    //
-    //    } completion:^(BOOL finished) {
-    //
-    //    }]
-
-    [UIView animateWithDuration:0.5
-        delay:0
-        options:UIViewAnimationOptionTransitionFlipFromRight
-        animations:^{
-          // self.cameraPreviewView.layer.transform = CATransform3DMakeRotation(M_PI_2,0.0,1.0,0.0); //flip halfway
-        }
-        completion:^(BOOL finished) {
-          //        while ([self.cameraPreviewView.subviews count] > 0)
-          //            [[self.cameraPreviewView.subviews lastObject] removeFromSuperview]; // remove all subviews
-          // Add your new views here
-          [UIView animateWithDuration:0.5
-              delay:0
-              options:UIViewAnimationOptionTransitionFlipFromLeft
-              animations:^{
-                //      self.cameraPreviewView.layer.transform = CATransform3DMakeRotation(M_PI,0.0,1.0,0.0); //finish the flip
-              }
-              completion:^(BOOL finished){
-                  // Flip completion code here
-              }];
-        }];
 }
 
 - (IBAction)cameraDeviceButtonTouched:(id)sender {
@@ -459,12 +428,12 @@
 
 - (void)showBluredView {
     self.blurEffectview = [[UIView alloc] initWithFrame:self.view.bounds];
-    self.blurEffectview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.9];
+    self.blurEffectview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
     // self.blurEffectview.alpha = 0.9;
     self.blurEffectview.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
     // create blur effect
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
 
     // create vibrancy effect
     // UIVibrancyEffect *vibrancy = [UIVibrancyEffect effectForBlurEffect:blur];
