@@ -115,13 +115,15 @@
                             </connections>
                         </textView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="guN-2m-LW0" firstAttribute="top" secondItem="lS4-6t-jQm" secondAttribute="top" constant="20" id="2FD-fG-uRU"/>
-                        <constraint firstItem="guN-2m-LW0" firstAttribute="leading" secondItem="lS4-6t-jQm" secondAttribute="leading" constant="35" id="QFL-Dj-Uro"/>
+                        <constraint firstItem="guN-2m-LW0" firstAttribute="top" secondItem="lS4-6t-jQm" secondAttribute="top" constant="20" id="2FD-fG-uRU">
+                            <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                        </constraint>
+                        <constraint firstItem="guN-2m-LW0" firstAttribute="leading" secondItem="lS4-6t-jQm" secondAttribute="leading" constant="20" id="QFL-Dj-Uro"/>
                         <constraint firstItem="bMU-9d-GVA" firstAttribute="top" secondItem="aDp-Id-cQH" secondAttribute="bottom" id="Qg0-O0-2GT"/>
                         <constraint firstItem="bMU-9d-GVA" firstAttribute="leading" secondItem="lS4-6t-jQm" secondAttribute="leading" id="Son-2c-v6e"/>
-                        <constraint firstItem="aDp-Id-cQH" firstAttribute="top" secondItem="guN-2m-LW0" secondAttribute="bottom" constant="8" id="Usv-Ku-Yw9"/>
+                        <constraint firstItem="aDp-Id-cQH" firstAttribute="top" secondItem="guN-2m-LW0" secondAttribute="bottom" constant="15" id="Usv-Ku-Yw9"/>
                         <constraint firstAttribute="trailing" secondItem="aDp-Id-cQH" secondAttribute="trailing" id="XLe-ze-IwR"/>
                         <constraint firstItem="aDp-Id-cQH" firstAttribute="leading" secondItem="lS4-6t-jQm" secondAttribute="leading" id="dhW-Ol-Q9t"/>
                         <constraint firstAttribute="bottom" secondItem="bMU-9d-GVA" secondAttribute="bottom" id="j2p-nc-UJF"/>
