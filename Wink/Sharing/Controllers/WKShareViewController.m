@@ -107,37 +107,6 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     //    [self setupEditButtons];
 }
 
-#pragma mark - Getters
-
-/**
- *  Lazy instanciation
- */
-- (NSValue *)bottomViewInitialCenter {
-
-    if (!_bottomViewInitialCenter) {
-        _bottomViewInitialCenter = [NSValue valueWithCGPoint:self.bottomView.center];
-    }
-
-    return _bottomViewInitialCenter;
-}
-
-/**
- *  Lazy instanciation
- */
-- (UIView *)overlayView {
-
-    if (!_overlayView) {
-        // Set the overlay view
-        _overlayView = [[UIView alloc] initWithFrame:self.view.frame];
-        _overlayView.backgroundColor = [UIColor blackColor];
-        _overlayView.alpha = 0;
-        // Add tap recognizer to dismiss the keyboard
-        [_overlayView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(overlayViewTouched:)]];
-    }
-
-    return _overlayView;
-}
-
 #pragma mark - Utilities
 
 - (void)setUI {
@@ -355,8 +324,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
           [SVProgressHUD showWithStatus:@"Failed, backend error can't do anything about it until fixed"];
 
           NSLog(@"share failed because : %@", error);
-            
-            [SVProgressHUD dismiss];
+
+          [SVProgressHUD dismiss];
 
         }];
 
