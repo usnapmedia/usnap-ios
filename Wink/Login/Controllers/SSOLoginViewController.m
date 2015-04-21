@@ -199,7 +199,6 @@
 }
 - (IBAction)cancelButtonTouched:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    //  [self popViewControllerAnimated:YES];
 }
 
 #pragma mark - SSOLoginRegisterDelegate
@@ -237,12 +236,15 @@
 
 - (void)didRegisterWithInfo:(NSDictionary *)info andMeta:(NSDictionary *)meta {
 
-    // Register on the backend
-    [WKWinkConnect winkConnectRegisterWithUsername:[info valueForKey:@"email"]
+    [WKWinkConnect winkConnectRegisterWithEmail:[info valueForKey:@"email"]
         password:[info valueForKey:@"password"]
+        username:[info valueForKey:@"username"]
+        firstName:[info valueForKey:@"firstName"]
+        lastName:[info valueForKey:@"lastName"]
+        birthday:[info valueForKey:@"birthday"]
         meta:meta
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-          // Login the user
+
           [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"email"] andPassword:[info valueForKey:@"password"]];
 
           [self dismissViewControllerAnimated:YES
@@ -256,6 +258,7 @@
 
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
           NSLog(@"Register failure");
           //@FIXME Should be handled generally
           [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"register.error.alert.title", @"Error when the login is wrong")];

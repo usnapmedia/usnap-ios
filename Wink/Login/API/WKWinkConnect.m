@@ -31,16 +31,30 @@
     [manager POST:url parameters:@{ @"email" : email, @"password" : password } success:success failure:failure];
 }
 
-+ (void)winkConnectRegisterWithUsername:(NSString *)email
-                               password:(NSString *)password
-                                   meta:(NSDictionary *)meta
-                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
++ (void)winkConnectRegisterWithEmail:(NSString *)email
+                            password:(NSString *)password
+                            username:(NSString *)username
+                           firstName:(NSString *)firstName
+                            lastName:(NSString *)lastName
+                            birthday:(NSString *)birthday
+                                meta:(NSDictionary *)meta
+                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSString *url = [NSString stringWithFormat:@"register"];
 
     SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
 
-    [manager POST:url parameters:@{ @"email" : email, @"password" : password, @"meta" : meta } success:success failure:failure];
+    [manager POST:url
+        parameters:@{
+            @"email" : email,
+            @"password" : password,
+            @"username" : username,
+            @"first_name" : firstName,
+            @"last_name" : lastName,
+            @"dob" : birthday,
+            @"meta" : meta
+        } success:success
+           failure:failure];
 }
 
 + (void)winkConnectSocialNetworksWithData:(NSDictionary *)data

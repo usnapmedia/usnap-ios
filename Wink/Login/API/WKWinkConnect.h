@@ -32,14 +32,22 @@
  *
  *  @param email    the email
  *  @param password the password
+ *  @param username the username
+ *  @param firstName the firstName
+ *  @param lastName the lastName
+ *  @param birthday the birthday date
  *  @param success  success block
  *  @param failure  failure block
  */
-+ (void)winkConnectRegisterWithUsername:(NSString *)email
-                               password:(NSString *)password
-                                   meta:(NSDictionary *)meta
-                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
++ (void)winkConnectRegisterWithEmail:(NSString *)email
+                            password:(NSString *)password
+                            username:(NSString *)username
+                           firstName:(NSString *)firstName
+                            lastName:(NSString *)lastName
+                            birthday:(NSString *)birthday
+                                meta:(NSDictionary *)meta
+                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  *  Send the necessary data to backend in order to post stuff on social networks

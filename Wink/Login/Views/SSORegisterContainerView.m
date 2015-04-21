@@ -121,27 +121,38 @@
     });
 }
 
+/**
+ *  Dictionnary containing informations of the user
+ *
+ *  @return infoDic
+ */
 - (NSDictionary *)infoDic {
 
     if (!_infoDic) {
         _infoDic = [[NSDictionary alloc] init];
     }
-    _infoDic = @{ @"email" : self.textFieldEmail.text, @"password" : self.textFieldPassword.text };
-
-    return _infoDic;
-}
-- (NSDictionary *)metaDic {
-
-    if (!_metaDic) {
-        _metaDic = [[NSDictionary alloc] init];
-    }
-
-    _metaDic = @{
+    _infoDic = @{
+        @"email" : self.textFieldEmail.text,
+        @"password" : self.textFieldPassword.text,
         @"birthday" : self.textFieldBirthday.text,
         @"lastName" : self.textFieldLastName.text,
         @"firstName" : self.textFieldFirstName.text,
         @"username" : self.textFieldUsername.text
     };
+
+    return _infoDic;
+}
+
+/**
+ *  Dictionnary of meta data. ( not used since backend has changed )
+ *
+ *  @return metaDic
+ */
+- (NSDictionary *)metaDic {
+
+    if (!_metaDic) {
+        _metaDic = [[NSDictionary alloc] init];
+    }
 
     return _metaDic;
 }
