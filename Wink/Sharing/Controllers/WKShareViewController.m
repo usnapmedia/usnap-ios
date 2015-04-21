@@ -16,7 +16,7 @@
 #import "CWStatusBarNotification.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
-#import "SSOSocialNetworkAPI.h"
+#import "SSOSocialNetworkAPI+USnap.h"
 #import <TwitterKit/TwitterKit.h>
 #import <Masonry.h>
 #import "SSSessionManager.h"
@@ -24,12 +24,13 @@
 #import <SVProgressHUD.h>
 #import "SSOAlignedButtonsView.h"
 #import <POP.h>
+#import "SSOCustomSocialButton.h"
 
 #define kOverlayViewAlpha 0.75
 
 typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing, WKShareViewControllerModeShared } WKShareViewControllerMode;
 
-@interface WKShareViewController () <WKMoviePlayerDelegate, POPAnimationDelegate>
+@interface WKShareViewController () <WKMoviePlayerDelegate, POPAnimationDelegate, SocialNetworkDelegate>
 @property(strong, nonatomic) UIImageView *imageView;
 @property(strong, nonatomic) WKMoviePlayerView *moviePlayerView;
 @property(strong, nonatomic) UIImageView *overlayImageView;
@@ -99,6 +100,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     // Setup the share button
     self.shareButton.layer.cornerRadius = 2.0f;
+    
+    [SSOSocialNetworkAPI sharedInstance].delegate = self;
 
     [self.view insertSubview:self.overlayView belowSubview:self.bottomView];
 
@@ -120,7 +123,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self setupEditButtons];
+    [self setupSocialButtons];
 }
 
 #pragma mark - Getters
@@ -164,15 +167,6 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
           initialSpringVelocity:1.0f
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
-
-                       //                           self.backButton.transform = CGAffineTransformIdentity;
-                       //                           self.backButton.alpha = 1.0f;
-                       //                           self.placeholderTextView.backgroundColor = [UIColor whiteColor];
-                       //                           self.placeholderTextView.userInteractionEnabled = YES;
-                       //                           self.placeholderTextView.hidden = NO;
-                       //                           self.socialMediaContainerView.transform = CGAffineTransformIdentity;
-                       //                           self.socialMediaContainerView.alpha = 1.0f;
-
                        self.shareButton.layer.borderColor = [UIColor clearColor].CGColor;
                        self.shareButton.layer.borderWidth = 0.0f;
                        self.shareButton.backgroundColor = [UIColor purpleColorWithAlpha:1.0f];
@@ -196,19 +190,26 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 /**
  *  Setup the edit buttons
  */
-- (void)setupEditButtons {
-    //@TODO This should be generic
-    UIButton *facebookButton = [UIButton new];
-    [facebookButton setImage:[UIImage imageNamed:@"drawIconBorder"] forState:UIControlStateNormal];
-    // [drawButton addTarget:self action:@selector(drawButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+- (void)setupSocialButtons {
 
-    UIButton *twitterButton = [UIButton new];
-    [twitterButton setImage:[UIImage imageNamed:@"textIcon"] forState:UIControlStateNormal];
-    // [textButton addTarget:self action:@selector(textButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    SSOCustomSocialButton *facebookButton =
+        [[SSOCustomSocialButton alloc] initWithSocialNetwork:facebookSocialNetwork
+                                                       state:[[SSOSocialNetworkAPI sharedInstance] isConnectedToSocialNetwork:facebookSocialNetwork]];
+    facebookButton.tag = facebookSocialNetwork;
 
-    UIButton *googlePlusButton = [UIButton new];
-    [googlePlusButton setImage:[UIImage imageNamed:@"brightnessIcon"] forState:UIControlStateNormal];
-    // [adjustmentButton addTarget:self action:@selector(adjustmentButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [facebookButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
+
+    SSOCustomSocialButton *twitterButton =
+        [[SSOCustomSocialButton alloc] initWithSocialNetwork:twitterSocialNetwork
+                                                       state:[[SSOSocialNetworkAPI sharedInstance] isConnectedToSocialNetwork:twitterSocialNetwork]];
+    twitterButton.tag = twitterSocialNetwork;
+    [twitterButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
+
+    SSOCustomSocialButton *googlePlusButton =
+        [[SSOCustomSocialButton alloc] initWithSocialNetwork:googleSocialNetwork
+                                                       state:[[SSOSocialNetworkAPI sharedInstance] isConnectedToSocialNetwork:googleSocialNetwork]];
+    googlePlusButton.tag = googleSocialNetwork;
+    [googlePlusButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
 
     [self.topView setupViewforOrientation:[UIDevice currentDevice].orientation withArrayButtons:@[ facebookButton, twitterButton, googlePlusButton ]];
 }
@@ -417,7 +418,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
           [SVProgressHUD setStatus:@"Success"];
-            [SVProgressHUD dismiss];
+          [SVProgressHUD dismiss];
 
           [self.navigationController popToRootViewControllerAnimated:YES];
 
@@ -495,6 +496,39 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (IBAction)backButtonTouched:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)touchedSocialNetworkButton:(SSOCustomSocialButton *)button {
+    if (button.isSelected) {
+        [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:button.socialNetwork];
+    } else {
+        [[SSOSocialNetworkAPI sharedInstance] usnapConnectToSocialNetwork:button.socialNetwork];
+    }
+}
+
+#pragma mark - SocialNetworkDelegate
+
+- (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidFinishLoginWithError:(NSError *)error {
+
+    
+        
+    
+    for (UIView *view in self.topView.subviews) {
+        if ([view isKindOfClass:[SSOCustomSocialButton class]]) {
+            // Cast the view to get the social network
+            SSOCustomSocialButton *socialButton = (SSOCustomSocialButton *)view;
+            if (socialButton.socialNetwork == socialNetwork) {
+                if (error) {
+                // Disconnect the social network to reset it's value
+                [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:socialButton.socialNetwork];
+                    socialButton.selected = NO;
+                }
+                else {
+                    socialButton.selected = YES;
+                }
+            }
+        }
+    }
 }
 
 @end

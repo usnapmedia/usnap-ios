@@ -48,4 +48,11 @@
  */
 - (NSString *)getAccessToken;
 
+/**
+ *  Check if there is a user authenticated with google plus
+ *
+ *  @return <#return value description#>
+ */
+- (BOOL)isConnected;
+
 @end

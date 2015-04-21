@@ -10,4 +10,18 @@
 
 @interface SSOSocialNetworkAPI (USnap)
 
+/**
+ *  Connect to social network
+ *
+ *  @param socialNetwork the network
+ */
+- (void)usnapConnectToSocialNetwork:(SelectedSocialNetwork)socialNetwork;
+
+/**
+ *  Disconnect from social network
+ *
+ *  @param socialNetwork the network
+ */
+- (void)usnapDisconnectToSocialNetwork:(SelectedSocialNetwork)socialNetwork;
+
 @end
