@@ -88,6 +88,8 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
  */
 - (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidFinishLoginWithError:(NSError *)error;
 
+@optional
+
 /**
  *  SocialNetworkDelegate method called when the social network's logout response arrives.
  *

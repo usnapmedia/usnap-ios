@@ -7,7 +7,6 @@
 //
 
 #import "WKShareViewController.h"
-#import "GCPlaceholderTextView.h"
 #import "WKMoviePlayerView.h"
 #import "WKWinkConnect.h"
 #import "WKSettingsViewController.h"
@@ -25,6 +24,7 @@
 #import "SSOAlignedButtonsView.h"
 #import <POP.h>
 #import "SSOCustomSocialButton.h"
+#import <SZTextView.h>
 
 #define kOverlayViewAlpha 0.75
 
@@ -39,7 +39,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 @property(nonatomic) BOOL isTwitterConnected;
 
 @property(weak, nonatomic) IBOutlet UIView *mediaContainerView;
-@property(weak, nonatomic) IBOutlet GCPlaceholderTextView *placeholderTextView;
+@property(weak, nonatomic) IBOutlet SZTextView *placeholderTextView;
 @property(weak, nonatomic) IBOutlet UIButton *shareButton;
 @property(weak, nonatomic) IBOutlet SSOAlignedButtonsView *topView;
 @property(weak, nonatomic) IBOutlet UIView *bottomView;
@@ -94,9 +94,9 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     // Setup the text view
     self.placeholderTextView.layer.cornerRadius = 2.0f;
-    self.placeholderTextView.placeholderColor = [UIColor lightGreyTextColorWithAlpha:1.0f];
-    self.placeholderTextView.textColor = [UIColor lightGreyTextColorWithAlpha:1.0f];
-    //    self.placeholderTextView.placeholder = NSLocalizedString(@"Say something... (ex. Sunday #selfie)", @"");
+    self.placeholderTextView.placeholderTextColor = [UIColor lightGreyTextColorWithAlpha:1.0f];
+    self.placeholderTextView.textColor = [UIColor blackColor];
+    self.placeholderTextView.placeholder = NSLocalizedString(@"Insert comment", @"");
 
     // Setup the share button
     self.shareButton.layer.cornerRadius = 2.0f;
@@ -111,10 +111,18 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
+    // Animate the display of the topView after all layouts have been calculated (fix iPhone 6+ loop bug)
+    [UIView animateWithDuration:1
+                     animations:^{
+                       self.topView.alpha = 1;
+                       [self setupSocialButtons];
+                     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.topView.alpha = 0;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -123,7 +131,6 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self setupSocialButtons];
 }
 
 #pragma mark - Getters
@@ -411,16 +418,18 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [SVProgressHUD showWithStatus:@"uploading"];
 
     [WKWinkConnect winkConnectPostImageToBackend:[self editedImage]
-        withText:@"TEstytext"
+        withText:self.placeholderTextView.text
         andMeta:@{
             @"something" : @"here"
         }
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
           [SVProgressHUD setStatus:@"Success"];
-          [SVProgressHUD dismiss];
 
           [self.navigationController popToRootViewControllerAnimated:YES];
+            
+
+          [SVProgressHUD dismiss];
 
           NSLog(@"shared with succcess");
 
@@ -434,13 +443,6 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
           [SVProgressHUD dismiss];
 
         }];
-
-    // Check to see if it's image first
-    if ([self editedImage]) {
-        [self postImageOnSelectedSocialNetworks];
-    } else { // Else it's a movie, no need to send the video as it will be sent after the video edition and save in the
-             // Camera roll is done.
-    }
 }
 
 #pragma mark - Social networks
@@ -517,6 +519,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
             SSOCustomSocialButton *socialButton = (SSOCustomSocialButton *)view;
             if (socialButton.socialNetwork == socialNetwork) {
                 if (error) {
+                    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+                  //  [SVProgressHUD showWithStatus:error.localizedDescription];
                     // Disconnect the social network to reset it's value
                     [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:socialButton.socialNetwork];
                     socialButton.selected = NO;
