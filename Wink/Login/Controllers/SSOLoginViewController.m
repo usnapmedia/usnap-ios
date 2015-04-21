@@ -212,8 +212,8 @@
         meta:nil
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-          // Save the username and password in the keychain
-          [SSSessionManager saveSecuredPassword:[info valueForKey:@"password"] withAccount:[info valueForKey:@"email"]];
+          // Login the user
+          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"email"] andPassword:[info valueForKey:@"password"]];
 
           [self dismissViewControllerAnimated:YES
                                    completion:^{
@@ -229,7 +229,8 @@
           NSLog(@"Login failed");
           //@FIXME Should be handled generally
           [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"login.error.alert.message", @"Error when the login is wrong")];
-          // Logout the user if there is an error
+
+          // Logout when errors
           [[SSSessionManager sharedInstance] logoutCurrentUser];
         }];
 }
@@ -241,8 +242,8 @@
         password:[info valueForKey:@"password"]
         meta:meta
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-          // Save the username and password in the keychain
-          [SSSessionManager saveSecuredPassword:[info valueForKey:@"password"] withAccount:[info valueForKey:@"email"]];
+          // Login the user
+          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"email"] andPassword:[info valueForKey:@"password"]];
 
           [self dismissViewControllerAnimated:YES
                                    completion:^{
@@ -259,7 +260,7 @@
           //@FIXME Should be handled generally
           [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"register.error.alert.title", @"Error when the login is wrong")];
 
-          // Logout the user if there is an error
+          // Logout when errors
           [[SSSessionManager sharedInstance] logoutCurrentUser];
 
         }];

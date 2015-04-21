@@ -19,8 +19,8 @@
 
 #pragma mark - Properties of the session
 
-@property(strong, nonatomic) NSString *username;
-@property(strong, nonatomic) NSString *password;
+@property(strong, nonatomic, readonly) NSString *username;
+@property(strong, nonatomic, readonly) NSString *password;
 
 #pragma mark - Session methods
 
@@ -36,33 +36,6 @@
  */
 - (BOOL)isUserLoggedIn;
 
-/**
- *  Save the user password in Keychain
- *
- *  @param password The password to store
- *  @param email    The email associated with the PNP account
- *
- *  @return True if operation succeed
- */
-+ (BOOL)saveSecuredPassword:(NSString *)password withAccount:(NSString *)email;
-
-/**
- *  Fetch the the secured password from Keychain
- *
- *  @param email The email associated with the PNP account
- *
- *  @return The password value in clear text
- */
-+ (NSString *)getSecuredPasswordForAccount:(NSString *)email;
-
-/**
- *  Delete the password in Keychain
- *
- *  @param email The email associated with the PNP account
- *
- *  @return True if operation succeed
- */
-+ (BOOL)deletePasswordForAccount:(NSString *)email;
 
 /**
  *  Logout the current user. Will erase the data from the keychain

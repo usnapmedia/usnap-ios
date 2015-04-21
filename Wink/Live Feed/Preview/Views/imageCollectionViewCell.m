@@ -10,13 +10,12 @@
 
 @implementation imageCollectionViewCell
 
--(void)configureCell:(id)cellData {
-    
+- (void)configureCell:(id)cellData {
+    NSAssert([cellData isKindOfClass:[UIImage class]], @"Celldata has to be of image type");
     if ([cellData isKindOfClass:[UIImage class]]) {
         UIImage *image = (UIImage *)cellData;
         self.imageView.image = image;
     }
-    
 }
 
 @end

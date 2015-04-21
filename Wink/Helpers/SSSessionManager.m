@@ -14,6 +14,8 @@
 @interface SSSessionManager ()
 
 @property(nonatomic) BOOL isUserLoggedIn;
+@property(strong, nonatomic, readwrite) NSString *username;
+@property(strong, nonatomic, readwrite) NSString *password;
 
 @end
 
@@ -31,30 +33,52 @@
 
 #pragma mark - Setters
 
-//- (void)setPassword:(NSString *)password {
-//    if (_username) {
-//        SSKeychain setPassword:<#(NSString *)#> forService:<#(NSString *)#> account:<#(NSString *)#>
-//        [SSUserManager saveSecuredPassword:password withAccount:_username];
-//        _password = password;
-//    } else {
-//        CLS_LOG(@"Trying to save a password on a non-logged in user");
-//    }
-//}
-
-+ (BOOL)saveSecuredPassword:(NSString *)password withAccount:(NSString *)email {
+/**
+ *  Save the user password in Keychain
+ *
+ *  @param password The password to store
+ *  @param email    The email associated with the PNP account
+ *
+ *  @return True if operation succeed
+ */
+- (BOOL)saveSecuredPassword:(NSString *)password withAccount:(NSString *)email {
     NSLog(@"Saving password in keychain..");
     [[SSSessionManager sharedInstance] loginUserWithUsername:email andPassword:password];
     return [SSKeychain setPassword:password forService:kUSnapKeychainServiceKey account:email];
 }
 
-+ (NSString *)getSecuredPasswordForAccount:(NSString *)email {
+/**
+ *  Fetch the the secured password from Keychain
+ *
+ *  @param email The email associated with the PNP account
+ *
+ *  @return The password value in clear text
+ */
+- (NSString *)getSecuredPasswordForAccount:(NSString *)email {
     [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlock];
     return [SSKeychain passwordForService:kUSnapKeychainServiceKey account:email];
 }
 
-+ (BOOL)deletePasswordForAccount:(NSString *)email {
+/**
+ *  Delete the password in Keychain
+ *
+ *  @param email The email associated with the PNP account
+ *
+ *  @return True if operation succeed
+ */
+- (BOOL)deletePasswordForAccount:(NSString *)email {
     NSLog(@"Deleting password from keychain..");
     return [SSKeychain deletePasswordForService:kUSnapKeychainServiceKey account:email];
+}
+
+#pragma mark - Getters
+
+- (BOOL)isUserLoggedIn {
+    return _isUserLoggedIn;
+}
+
+- (NSString *)currentUsername {
+    return _username;
 }
 
 #pragma mark - Session methods
@@ -64,19 +88,15 @@
     if ([NSUserDefaults isUserLoggedIn]) {
         _isUserLoggedIn = YES;
         _username = [NSUserDefaults loggedInUserEmail];
-        _password = [SSSessionManager getSecuredPasswordForAccount:self.username];
+        _password = [self getSecuredPasswordForAccount:self.username];
     } else {
         _isUserLoggedIn = NO;
     }
 }
 
-- (BOOL)isUserLoggedIn {
-    return _isUserLoggedIn;
-}
-
 - (void)logoutCurrentUser {
     // delete password in Keychain
-    [SSSessionManager deletePasswordForAccount:_username];
+    [self deletePasswordForAccount:_username];
     // delete email in NSUserDefaults
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kEmailLoggedString];
 
@@ -95,7 +115,7 @@
     _isUserLoggedIn = YES;
 
     // Save the password in the keychain
-    //  [SSSessionManager saveSecuredPassword:password withAccount:username];
+    [self saveSecuredPassword:password withAccount:username];
     // set isUserLogged flag to YES (hack to get the authentification working)
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsUserLoggedIn];
 
@@ -104,10 +124,6 @@
 
     // Synchronize the UserDefaults
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (NSString *)currentUsername {
-    return _username;
 }
 
 @end
