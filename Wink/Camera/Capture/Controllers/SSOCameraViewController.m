@@ -28,6 +28,7 @@
 // IBOutlets
 @property(weak, nonatomic) IBOutlet UIButton *flashButton;
 @property(weak, nonatomic) IBOutlet UIButton *cameraRotationButton;
+@property(weak, nonatomic) IBOutlet UIButton *profileButton;
 @property(weak, nonatomic) IBOutlet UIButton *mediaButton;
 @property(weak, nonatomic) IBOutlet UIView *topBlackBar;
 @property(weak, nonatomic) IBOutlet UIView *bottomContainerView;
@@ -47,7 +48,7 @@
 @property(nonatomic) BOOL isVideoRecording;
 @property(nonatomic) BOOL isRotationAllowed;
 @property(strong, nonatomic) SSOCameraCaptureHelper *cameraCaptureHelper;
-@property(strong, nonatomic) NSArray *arrayImages;
+@property(strong, nonatomic) NSMutableArray *arrayImages;
 @property(strong, nonatomic) UIImage *libraryImage;
 
 @end
@@ -233,11 +234,9 @@
 - (void)initializeAssetsLibrary {
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 
-    //[SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
           usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-            //                                    [SVProgressHUD dismiss];
 
             if (group != nil) {
                 [group setAssetsFilter:[ALAssetsFilter allPhotos]];
@@ -257,8 +256,6 @@
             *stop = NO;
           }
           failureBlock:^(NSError *error) {
-            //[SVProgressHUD dismiss];
-
             NSLog(@"error %@", error);
           }];
 
@@ -299,11 +296,6 @@
 
 #pragma mark Corner Icons
 
-- (IBAction)flashButtonTouched:(id)sender {
-
-    [self switchFlashState];
-}
-
 /**
  *  Update flash button UI
  */
@@ -331,12 +323,6 @@
     [[NSUserDefaults standardUserDefaults] setInteger:self.torchState forKey:kTorchState];
     [[NSUserDefaults standardUserDefaults] setInteger:self.flashState forKey:kFlashState];
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (IBAction)mediaButtonTouched:(id)sender {
-
-    // Open a controller that holds the user's photos and videos
-    [self displayCamerallRollPickerVC];
 }
 
 /**
@@ -374,13 +360,21 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - IBActions
+
 - (IBAction)cameraDeviceButtonTouched:(id)sender {
     [self switchDeviceCameraState];
 }
 
-- (IBAction)profileButtonTouched:(id)sender {
-    WKSettingsViewController *settingsVC = [WKSettingsViewController new];
-    [self presentViewController:settingsVC animated:YES completion:nil];
+- (IBAction)mediaButtonTouched:(id)sender {
+
+    // Open a controller that holds the user's photos and videos
+    [self displayCamerallRollPickerVC];
+}
+
+- (IBAction)flashButtonTouched:(id)sender {
+
+    [self switchFlashState];
 }
 
 #pragma mark Capture Button
@@ -403,6 +397,11 @@
 - (IBAction)captureButtonTouchedDown:(id)sender {
 
     [[SSOOrientationHelper sharedInstance] setOrientation:[UIDevice currentDevice].orientation];
+}
+
+- (IBAction)profileButtonTouched:(id)sender {
+    WKSettingsViewController *settingsVC = [WKSettingsViewController new];
+    [self presentViewController:settingsVC animated:YES completion:nil];
 }
 
 #pragma mark - Blur
