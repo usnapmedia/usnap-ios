@@ -39,6 +39,10 @@ NSString *const kTokenFacebookString = @"kTokenFacebookString";
 NSString *const kTokenTwitterString = @"kTokenTwitterString";
 NSString *const kTokenGoogleString = @"kTokenGoogleString";
 
+NSString *const kFacebookSelected = @"kTokenFacebookSelected";
+NSString *const kTwitterSelected = @"kTokenTwitterSelected";
+NSString *const kGoogleSelected = @"kTokenGoogleSelected";
+
 #pragma mark - NSUserDefaults
 
 NSString *const kIsCameraRearFacing = @"kIsCameraRearFacing";

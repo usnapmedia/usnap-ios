@@ -39,6 +39,10 @@ extern NSString *const kTokenFacebookString;
 extern NSString *const kTokenTwitterString;
 extern NSString *const kTokenGoogleString;
 
+extern NSString *const kFacebookSelected;
+extern NSString *const kTwitterSelected;
+extern NSString *const kGoogleSelected;
+
 #pragma mark - NSUserDefaults
 
 // Camera
