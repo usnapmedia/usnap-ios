@@ -651,6 +651,15 @@
 			name = VIews;
 			sourceTree = "<group>";
 		};
+		338271E31AE6B3B0005A82FB /* Categorie */ = {
+			isa = PBXGroup;
+			children = (
+				33E8517A1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.h */,
+				33E8517B1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.m */,
+			);
+			name = Categorie;
+			sourceTree = "<group>";
+		};
 		3399F6D71AE5A0A900835B13 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -916,12 +925,11 @@
 		D8EA5C791AD4281B008D2A37 /* Social Network */ = {
 			isa = PBXGroup;
 			children = (
+				338271E31AE6B3B0005A82FB /* Categorie */,
 				D8EA5C8E1AD428D3008D2A37 /* SSOGooglePlusHelper.h */,
 				D8EA5C8F1AD428D3008D2A37 /* SSOGooglePlusHelper.m */,
 				D8EA5C7A1AD4281B008D2A37 /* SSOSocialNetworkAPI.h */,
 				D8EA5C7B1AD4281B008D2A37 /* SSOSocialNetworkAPI.m */,
-				33E8517A1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.h */,
-				33E8517B1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.m */,
 			);
 			path = "Social Network";
 			sourceTree = "<group>";

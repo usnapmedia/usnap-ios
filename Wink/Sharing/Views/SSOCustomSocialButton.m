@@ -51,5 +51,13 @@
     [self setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
 }
 
+-(void)setSelected:(BOOL)selected {
+    
+    [super setSelected:selected];
+    
+    [self imageForSocialNetwork];
+    
+}
+
 
 @end

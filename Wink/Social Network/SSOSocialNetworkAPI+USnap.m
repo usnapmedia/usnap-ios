@@ -14,18 +14,38 @@
 
     if ([self isConnectedToSocialNetwork:socialNetwork]) {
         [self setNSUserDefaultWithValue:YES andSocialNetwork:socialNetwork];
-    }
-    else {
-        
+    } else {
+
         [self loginWithSocialFramework:socialNetwork];
         [self setNSUserDefaultWithValue:YES andSocialNetwork:socialNetwork];
-
     }
 }
 
 - (void)usnapDisconnectToSocialNetwork:(SelectedSocialNetwork)socialNetwork {
 
     [self setNSUserDefaultWithValue:NO andSocialNetwork:socialNetwork];
+}
+
+- (BOOL)isUsnapConnectedToSocialNetwork:(SelectedSocialNetwork)socialNetwork {
+    NSString *key;
+
+    switch (socialNetwork) {
+    case facebookSocialNetwork:
+        key = kFacebookSelected;
+        break;
+
+    case twitterSocialNetwork:
+        key = kTwitterSelected;
+        break;
+
+    case googleSocialNetwork:
+        key = kGoogleSelected;
+        break;
+
+    default:
+        break;
+    }
+    return [[NSUserDefaults standardUserDefaults] boolForKey:key];
 }
 
 /**
@@ -55,7 +75,9 @@
         break;
     }
 
+    // Save the status
     [[NSUserDefaults standardUserDefaults] setBool:connectedValue forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

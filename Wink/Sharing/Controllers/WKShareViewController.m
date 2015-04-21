@@ -100,7 +100,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     // Setup the share button
     self.shareButton.layer.cornerRadius = 2.0f;
-    
+
     [SSOSocialNetworkAPI sharedInstance].delegate = self;
 
     [self.view insertSubview:self.overlayView belowSubview:self.bottomView];
@@ -194,20 +194,20 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     SSOCustomSocialButton *facebookButton =
         [[SSOCustomSocialButton alloc] initWithSocialNetwork:facebookSocialNetwork
-                                                       state:[[SSOSocialNetworkAPI sharedInstance] isConnectedToSocialNetwork:facebookSocialNetwork]];
+                                                       state:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:facebookSocialNetwork]];
     facebookButton.tag = facebookSocialNetwork;
 
     [facebookButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
 
     SSOCustomSocialButton *twitterButton =
         [[SSOCustomSocialButton alloc] initWithSocialNetwork:twitterSocialNetwork
-                                                       state:[[SSOSocialNetworkAPI sharedInstance] isConnectedToSocialNetwork:twitterSocialNetwork]];
+                                                       state:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:twitterSocialNetwork]];
     twitterButton.tag = twitterSocialNetwork;
     [twitterButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
 
     SSOCustomSocialButton *googlePlusButton =
         [[SSOCustomSocialButton alloc] initWithSocialNetwork:googleSocialNetwork
-                                                       state:[[SSOSocialNetworkAPI sharedInstance] isConnectedToSocialNetwork:googleSocialNetwork]];
+                                                       state:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:googleSocialNetwork]];
     googlePlusButton.tag = googleSocialNetwork;
     [googlePlusButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -499,7 +499,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 }
 
 - (void)touchedSocialNetworkButton:(SSOCustomSocialButton *)button {
-    if (button.isSelected) {
+    [button setSelected:!button.isSelected];
+    if (!button.isSelected) {
         [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:button.socialNetwork];
     } else {
         [[SSOSocialNetworkAPI sharedInstance] usnapConnectToSocialNetwork:button.socialNetwork];
@@ -510,20 +511,16 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidFinishLoginWithError:(NSError *)error {
 
-    
-        
-    
     for (UIView *view in self.topView.subviews) {
         if ([view isKindOfClass:[SSOCustomSocialButton class]]) {
             // Cast the view to get the social network
             SSOCustomSocialButton *socialButton = (SSOCustomSocialButton *)view;
             if (socialButton.socialNetwork == socialNetwork) {
                 if (error) {
-                // Disconnect the social network to reset it's value
-                [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:socialButton.socialNetwork];
+                    // Disconnect the social network to reset it's value
+                    [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:socialButton.socialNetwork];
                     socialButton.selected = NO;
-                }
-                else {
+                } else {
                     socialButton.selected = YES;
                 }
             }
