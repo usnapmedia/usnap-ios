@@ -10,18 +10,31 @@
 #import <AFNetworking.h>
 #import "AFHTTPRequestOperationManager.h"
 
-// Notification
-extern NSString *const kWinkConnectAuthorizationDenied;
-
 @interface WKWinkConnect : NSObject
 
-// Login
+/**
+ *  Login the user to the backend
+ *
+ *  @param email    the email
+ *  @param password the password
+ *  @param meta     the metadata @FIXME THIS SHOULD GO
+ *  @param success  success block
+ *  @param failure  failure block
+ */
 + (void)winkConnectLoginWithUsername:(NSString *)email
                             password:(NSString *)password
                                 meta:(NSString *)meta
                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+/**
+ *  Register the user to the backend
+ *
+ *  @param email    the email
+ *  @param password the password
+ *  @param success  success block
+ *  @param failure  failure block
+ */
 + (void)winkConnectRegisterWithUsername:(NSString *)email
                                password:(NSString *)password
                                    meta:(NSDictionary *)meta

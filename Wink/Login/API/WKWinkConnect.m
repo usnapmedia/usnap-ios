@@ -17,9 +17,6 @@
 #define PUT @"PUT"
 #define DELETE @"DELETE"
 
-// Notification
-NSString *const kWinkConnectAuthorizationDenied = @"kWinkConnectAuthorizationDenied";
-
 @implementation WKWinkConnect
 
 #pragma mark - Login
