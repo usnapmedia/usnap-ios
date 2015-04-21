@@ -14,7 +14,6 @@
 
 @interface SSOCameraViewController : UIViewController
 
-@property(weak, nonatomic) IBOutlet UIView *containerView;
 @property(weak, nonatomic) IBOutlet SSBaseCollectionView *collectionView;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "WKNavigationController.h"
+#import "WKShareViewController.h"
 
 @implementation WKNavigationController
 
@@ -14,18 +15,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.delegate = self;
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
+    if ([self.visibleViewController isKindOfClass:[WKShareViewController class]]) {
+        return UIInterfaceOrientationMaskPortrait;
+    } else {
+        return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscape;
+    }
 }
 
 - (BOOL)shouldAutorotate {
-    return NO;
+    return YES;
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal {
     return NO;
 }
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([viewController isKindOfClass:[WKShareViewController class]]) {
+
+        // if the current orientation is not already portrait, we need this hack in order to set the root back to portrait
+        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if (orientation != UIInterfaceOrientationPortrait) {
+
+            // HACK: setting the root view controller to nil and back again "resets" the navigation bar to the correct orientation
+            UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+            UIViewController *vc = window.rootViewController;
+            window.rootViewController = nil;
+            window.rootViewController = vc;
+        }
+    }
+}
+
 
 @end

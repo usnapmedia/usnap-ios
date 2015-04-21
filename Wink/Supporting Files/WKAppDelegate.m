@@ -18,6 +18,8 @@
 #import <GooglePlus/GooglePlus.h>
 
 #import "SSOLoginViewController.h"
+#import <IQKeyboardManager.h>
+#import "WKShareViewController.h"
 
 @implementation WKAppDelegate
 
@@ -39,17 +41,11 @@
     [debugger enableCoreDataDebugging];
 #endif
 
-    // Setup the window
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-
-   // [FBSession class];
-
     // Set permissions for Facebook
     [SSFacebookHelper sharedInstance].facebookPermissions = @[ @"publish_actions" ];
 
-    [self setupRootViewController];
+    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[WKShareViewController class]];
+    [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[WKShareViewController class]];
 
     return YES;
 }
@@ -71,24 +67,6 @@
 
     return NO;
   //  return [FBSession.activeSession handleOpenURL:url];
-}
-
-#pragma mark - Setup State
-
-- (void)setupRootViewController {
-
-    [self goCameraVC];
-}
-
-- (void)goCameraVC {
-    UINavigationController *navController = [[UIStoryboard cameraStoryboard] instantiateViewControllerWithIdentifier:@"CAMERA_NAV_VC"];
-    self.window.rootViewController = navController;
-}
-
-#pragma mark - Current User Changed
-
-- (void)currentUserChanged {
-    [self setupRootViewController];
 }
 
 @end

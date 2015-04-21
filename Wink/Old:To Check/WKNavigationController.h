@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WKNavigationController : UINavigationController
+@interface WKNavigationController : UINavigationController <UINavigationControllerDelegate>
 
 @end
