@@ -93,10 +93,11 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     }
 
     // Setup the text view
-    self.placeholderTextView.layer.cornerRadius = 2.0f;
+    //  self.placeholderTextView.layer.cornerRadius = 2.0f;
     self.placeholderTextView.placeholderTextColor = [UIColor lightGreyTextColorWithAlpha:1.0f];
     self.placeholderTextView.textColor = [UIColor blackColor];
     self.placeholderTextView.placeholder = NSLocalizedString(@"Insert comment", @"");
+    self.placeholderTextView.fadeTime = 0.2;
 
     // Setup the share button
     self.shareButton.layer.cornerRadius = 2.0f;
@@ -424,23 +425,26 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         }
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-          [SVProgressHUD setStatus:@"Success"];
+          //   [SVProgressHUD setStatus:@"Success"];
+
+          [SVProgressHUD showSuccessWithStatus:@"Image posted"];
 
           [self.navigationController popToRootViewControllerAnimated:YES];
-            
 
-          [SVProgressHUD dismiss];
+          //  [SVProgressHUD dismiss];
 
           NSLog(@"shared with succcess");
 
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
-          [SVProgressHUD showWithStatus:@"Failed, backend error can't do anything about it until fixed"];
+          [SVProgressHUD showErrorWithStatus:error.localizedDescription];
 
-          NSLog(@"share failed because : %@", error);
+          // [SVProgressHUD showWithStatus:@"Failed, backend error can't do anything about it until fixed"];
 
-          [SVProgressHUD dismiss];
+          // NSLog(@"share failed because : %@", error);
+
+          //[SVProgressHUD dismiss];
 
         }];
 }
@@ -520,7 +524,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
             if (socialButton.socialNetwork == socialNetwork) {
                 if (error) {
                     [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-                  //  [SVProgressHUD showWithStatus:error.localizedDescription];
+                    //  [SVProgressHUD showWithStatus:error.localizedDescription];
                     // Disconnect the social network to reset it's value
                     [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:socialButton.socialNetwork];
                     socialButton.selected = NO;
