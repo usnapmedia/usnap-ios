@@ -43,7 +43,6 @@
  */
 - (BOOL)saveSecuredPassword:(NSString *)password withAccount:(NSString *)email {
     NSLog(@"Saving password in keychain..");
-    [[SSSessionManager sharedInstance] loginUserWithUsername:email andPassword:password];
     return [SSKeychain setPassword:password forService:kUSnapKeychainServiceKey account:email];
 }
 

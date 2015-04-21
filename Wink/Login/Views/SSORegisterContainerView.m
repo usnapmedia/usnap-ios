@@ -9,7 +9,7 @@
 #import "SSORegisterContainerView.h"
 #import "SSOThemeHelper.h"
 
-@interface SSORegisterContainerView ()
+@interface SSORegisterContainerView () <UITextFieldDelegate>
 
 // Outlets
 @property(weak, nonatomic) IBOutlet UITextField *textFieldFirstName;
@@ -29,15 +29,31 @@
 @implementation SSORegisterContainerView
 
 - (void)awakeFromNib {
-    //  [self setupViewForAnimation];
+
+    [self setUpPickerViewForBirthday];
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+/**
+ *  Add a date picker as inputView of the birthday textfield
+ */
+- (void)setUpPickerViewForBirthday {
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    [datePicker setDate:[NSDate date]];
+    [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
+    [self.textFieldBirthday setInputView:datePicker];
+}
 
-    if (self == [super initWithCoder:aDecoder]) {
-    }
+/**
+ *  Format the text sent by the birthday date picker and display it in the textfield
+ *
+ *  @param sender the picker
+ */
+- (void)updateTextField:(id)sender {
 
-    return self;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    self.textFieldBirthday.text = [dateFormatter stringFromDate:[sender date]];
 }
 
 #pragma mark - Initialization

@@ -367,25 +367,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (IBAction)shareButtonTouched:(id)sender {
 
-    // TODO: Temporary fixes because problem with backend
-    NSString *userAccount = [[NSUserDefaults standardUserDefaults] valueForKey:kEmailLoggedString];
-
-    NSString *password = [SSSessionManager getSecuredPasswordForAccount:userAccount];
-
-    NSLog(@"user : %@ and pass :%@", userAccount, password);
-
-    [WKWinkConnect winkConnectLoginWithUsername:userAccount
-        password:password
-        meta:nil
-        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-          [SVProgressHUD showWithStatus:@"Connecting"];
-
-          [self post];
-
-        }
-        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          [SVProgressHUD showWithStatus:@"Error connection"];
-        }];
+    [self post];
 }
 
 - (IBAction)backButtonTouched:(id)sender {

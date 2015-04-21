@@ -28,7 +28,7 @@
             // Set header auth
             [self.requestSerializer
                 setAuthorizationHeaderFieldWithUsername:[SSSessionManager sharedInstance].username
-                                               password:[SSSessionManager sharedInstance].password]];
+                                               password:[SSSessionManager sharedInstance].password];
         }
     }
     return self;
