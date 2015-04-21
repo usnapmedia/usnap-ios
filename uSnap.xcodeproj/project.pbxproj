@@ -57,8 +57,6 @@
 		335723E41ACB097C000CC846 /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A61ACB097C000CC846 /* WKAppDelegate.m */; };
 		335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */; };
 		336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */; };
-		3399F6D61AE55A2C00835B13 /* SSOHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399F6D51AE55A2C00835B13 /* SSOHTTPRequestOperationManager.m */; };
-		33B991491AE4522F002A30F8 /* SSOAlignedButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B991481AE4522F002A30F8 /* SSOAlignedButtonsView.m */; };
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
@@ -106,6 +104,7 @@
 		D830F4221ACDDBF1002A503D /* UIImage+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4151ACDDBF1002A503D /* UIImage+Tools.m */; };
 		D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4171ACDDBF1002A503D /* UIStoryboard+USnap.m */; };
 		D830F4241ACDDBF1002A503D /* UIView+WKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4191ACDDBF1002A503D /* UIView+WKAdditions.m */; };
+		D86E08F01AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08EF1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m */; };
 		D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */; };
 		D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m */; };
 		D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */; };
@@ -210,10 +209,6 @@
 		335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		336F913E1ACD963D003B0AA4 /* SSORoundedAnimatedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSORoundedAnimatedButton.h; path = Views/SSORoundedAnimatedButton.h; sourceTree = "<group>"; };
 		336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSORoundedAnimatedButton.m; path = Views/SSORoundedAnimatedButton.m; sourceTree = "<group>"; };
-		3399F6D41AE55A2C00835B13 /* SSOHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOHTTPRequestOperationManager.h; sourceTree = "<group>"; };
-		3399F6D51AE55A2C00835B13 /* SSOHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOHTTPRequestOperationManager.m; sourceTree = "<group>"; };
-		33B991471AE4522F002A30F8 /* SSOAlignedButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOAlignedButtonsView.h; sourceTree = "<group>"; };
-		33B991481AE4522F002A30F8 /* SSOAlignedButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOAlignedButtonsView.m; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
@@ -301,6 +296,8 @@
 		D830F4171ACDDBF1002A503D /* UIStoryboard+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+USnap.m"; sourceTree = "<group>"; };
 		D830F4181ACDDBF1002A503D /* UIView+WKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WKAdditions.h"; sourceTree = "<group>"; };
 		D830F4191ACDDBF1002A503D /* UIView+WKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WKAdditions.m"; sourceTree = "<group>"; };
+		D86E08EE1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		D86E08EF1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOHTTPRequestOperationManager.m; sourceTree = "<group>"; };
 		D86E94A11ACF492000CFF801 /* SSOFacebookLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFacebookLoginButton.h; sourceTree = "<group>"; };
 		D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFacebookLoginButton.m; sourceTree = "<group>"; };
 		D86E94A41ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSettingsSocialFakeTableViewCell.h; sourceTree = "<group>"; };
@@ -422,6 +419,7 @@
 		270DFAFA19AE71BE00067072 /* Wink */ = {
 			isa = PBXGroup;
 			children = (
+				D86E08ED1AE6BDEA00711579 /* API */,
 				3357233C1ACB097C000CC846 /* Camera */,
 				D830F4031ACDDBF1002A503D /* Categories */,
 				335723721ACB097C000CC846 /* Helpers */,
@@ -839,6 +837,15 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		D86E08ED1AE6BDEA00711579 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				D86E08EE1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.h */,
+				D86E08EF1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		D86E949F1ACF492000CFF801 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -926,8 +933,6 @@
 			children = (
 				D8EA5C7F1AD4287C008D2A37 /* WKWinkConnect.h */,
 				D8EA5C801AD4287C008D2A37 /* WKWinkConnect.m */,
-				3399F6D41AE55A2C00835B13 /* SSOHTTPRequestOperationManager.h */,
-				3399F6D51AE55A2C00835B13 /* SSOHTTPRequestOperationManager.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1200,7 +1205,7 @@
 				3303DDD71AD85591002B74F9 /* SSOLoginViewController.m in Sources */,
 				D810B8DC1ADF506500B3AC11 /* SSOTextToolController.m in Sources */,
 				335723D31ACB097C000CC846 /* WKNavigationController.m in Sources */,
-				3399F6D61AE55A2C00835B13 /* SSOHTTPRequestOperationManager.m in Sources */,
+				D86E08F01AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m in Sources */,
 				D86E94CA1ACF4A1400CFF801 /* imageCollectionViewCell.m in Sources */,
 				D830F41A1ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				D810B8F71ADF508A00B3AC11 /* NSBundle+Wink.m in Sources */,

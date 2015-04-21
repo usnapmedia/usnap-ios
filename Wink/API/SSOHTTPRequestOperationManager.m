@@ -22,13 +22,13 @@
     NSURL *baseURL = [NSURL URLWithString:kAPIUrl];
     if (self = [super initWithBaseURL:baseURL]) {
         self.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-        
+
         // Check if the user is already logged in
         if ([[SSSessionManager sharedInstance] isUserLoggedIn]) {
             // Set header auth
             [self.requestSerializer
                 setAuthorizationHeaderFieldWithUsername:[SSSessionManager sharedInstance].username
-                                               password:[SSSessionManager getSecuredPasswordForAccount:[SSSessionManager sharedInstance].username]];
+                                               password:[SSSessionManager sharedInstance].password]];
         }
     }
     return self;
