@@ -105,13 +105,15 @@
 		D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4171ACDDBF1002A503D /* UIStoryboard+USnap.m */; };
 		D830F4241ACDDBF1002A503D /* UIView+WKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4191ACDDBF1002A503D /* UIView+WKAdditions.m */; };
 		D86E08F01AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08EF1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m */; };
+		D86E08F41AE6CDBE00711579 /* SSOFeedConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08F31AE6CDBE00711579 /* SSOFeedConnect.m */; };
+		D86E09151AE75DDF00711579 /* SSOFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E09131AE75DDF00711579 /* SSOFeedViewController.m */; };
 		D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */; };
 		D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m */; };
 		D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */; };
 		D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */; };
 		D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94B31ACF492000CFF801 /* SSCollectionViewCell.m */; };
-		D86E94C91ACF4A1400CFF801 /* CustomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86E94C01ACF4A1400CFF801 /* CustomCollectionViewCell.xib */; };
-		D86E94CA1ACF4A1400CFF801 /* imageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C21ACF4A1400CFF801 /* imageCollectionViewCell.m */; };
+		D86E94C91ACF4A1400CFF801 /* SSOImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86E94C01ACF4A1400CFF801 /* SSOImageCollectionViewCell.xib */; };
+		D86E94CA1ACF4A1400CFF801 /* SSOImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94C21ACF4A1400CFF801 /* SSOImageCollectionViewCell.m */; };
 		D8C83EA31AE1C74C00F187F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8C83E9F1AE1C74C00F187F1 /* InfoPlist.strings */; };
 		D8C83EA41AE1C74C00F187F1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8C83EA11AE1C74C00F187F1 /* Localizable.strings */; };
 		D8D4F17F1ADFFB52002FDE38 /* SSOThemeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D4F17E1ADFFB52002FDE38 /* SSOThemeHelper.m */; };
@@ -298,6 +300,10 @@
 		D830F4191ACDDBF1002A503D /* UIView+WKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WKAdditions.m"; sourceTree = "<group>"; };
 		D86E08EE1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOHTTPRequestOperationManager.h; sourceTree = "<group>"; };
 		D86E08EF1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		D86E08F21AE6CDBE00711579 /* SSOFeedConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFeedConnect.h; sourceTree = "<group>"; };
+		D86E08F31AE6CDBE00711579 /* SSOFeedConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFeedConnect.m; sourceTree = "<group>"; };
+		D86E09121AE75DDF00711579 /* SSOFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFeedViewController.h; sourceTree = "<group>"; };
+		D86E09131AE75DDF00711579 /* SSOFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFeedViewController.m; sourceTree = "<group>"; };
 		D86E94A11ACF492000CFF801 /* SSOFacebookLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFacebookLoginButton.h; sourceTree = "<group>"; };
 		D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFacebookLoginButton.m; sourceTree = "<group>"; };
 		D86E94A41ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSettingsSocialFakeTableViewCell.h; sourceTree = "<group>"; };
@@ -308,9 +314,9 @@
 		D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBaseCollectionView.m; sourceTree = "<group>"; };
 		D86E94B21ACF492000CFF801 /* SSCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCollectionViewCell.h; sourceTree = "<group>"; };
 		D86E94B31ACF492000CFF801 /* SSCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCollectionViewCell.m; sourceTree = "<group>"; };
-		D86E94C01ACF4A1400CFF801 /* CustomCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCollectionViewCell.xib; sourceTree = "<group>"; };
-		D86E94C11ACF4A1400CFF801 /* imageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageCollectionViewCell.h; sourceTree = "<group>"; };
-		D86E94C21ACF4A1400CFF801 /* imageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageCollectionViewCell.m; sourceTree = "<group>"; };
+		D86E94C01ACF4A1400CFF801 /* SSOImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		D86E94C11ACF4A1400CFF801 /* SSOImageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOImageCollectionViewCell.h; sourceTree = "<group>"; };
+		D86E94C21ACF4A1400CFF801 /* SSOImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOImageCollectionViewCell.m; sourceTree = "<group>"; };
 		D8C83EA01AE1C74C00F187F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D8C83EA21AE1C74C00F187F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D8C83EA51AE1C75400F187F1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -846,6 +852,24 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		D86E08F11AE6BE5900711579 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				D86E08F21AE6CDBE00711579 /* SSOFeedConnect.h */,
+				D86E08F31AE6CDBE00711579 /* SSOFeedConnect.m */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		D86E09111AE75DDF00711579 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D86E09121AE75DDF00711579 /* SSOFeedViewController.h */,
+				D86E09131AE75DDF00711579 /* SSOFeedViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		D86E949F1ACF492000CFF801 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -882,6 +906,8 @@
 		D86E94BD1ACF4A1400CFF801 /* Live Feed */ = {
 			isa = PBXGroup;
 			children = (
+				D86E08F11AE6BE5900711579 /* API */,
+				D86E09111AE75DDF00711579 /* Controllers */,
 				D86E94BE1ACF4A1400CFF801 /* Preview */,
 			);
 			path = "Live Feed";
@@ -898,9 +924,9 @@
 		D86E94BF1ACF4A1400CFF801 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D86E94C01ACF4A1400CFF801 /* CustomCollectionViewCell.xib */,
-				D86E94C11ACF4A1400CFF801 /* imageCollectionViewCell.h */,
-				D86E94C21ACF4A1400CFF801 /* imageCollectionViewCell.m */,
+				D86E94C01ACF4A1400CFF801 /* SSOImageCollectionViewCell.xib */,
+				D86E94C11ACF4A1400CFF801 /* SSOImageCollectionViewCell.h */,
+				D86E94C21ACF4A1400CFF801 /* SSOImageCollectionViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1055,7 +1081,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3303DDCE1AD83E42002B74F9 /* SSORegisterContainerView.xib in Resources */,
-				D86E94C91ACF4A1400CFF801 /* CustomCollectionViewCell.xib in Resources */,
+				D86E94C91ACF4A1400CFF801 /* SSOImageCollectionViewCell.xib in Resources */,
 				D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */,
 				7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */,
 				335723DB1ACB097C000CC846 /* SettingsSocialCell.xib in Resources */,
@@ -1172,6 +1198,7 @@
 				D830F41E1ACDDBF1002A503D /* UIColor+PickerColors.m in Sources */,
 				335723E41ACB097C000CC846 /* WKAppDelegate.m in Sources */,
 				D810B8E81ADF506500B3AC11 /* SSOEditMediaMovableTextView.m in Sources */,
+				D86E08F41AE6CDBE00711579 /* SSOFeedConnect.m in Sources */,
 				335723E11ACB097C000CC846 /* main.m in Sources */,
 				D810B8EB1ADF506500B3AC11 /* SSOToolButton.m in Sources */,
 				D810B8E41ADF506500B3AC11 /* SSOSlidingContainerView.m in Sources */,
@@ -1206,12 +1233,13 @@
 				D810B8DC1ADF506500B3AC11 /* SSOTextToolController.m in Sources */,
 				335723D31ACB097C000CC846 /* WKNavigationController.m in Sources */,
 				D86E08F01AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m in Sources */,
-				D86E94CA1ACF4A1400CFF801 /* imageCollectionViewCell.m in Sources */,
+				D86E94CA1ACF4A1400CFF801 /* SSOImageCollectionViewCell.m in Sources */,
 				D830F41A1ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				D810B8F71ADF508A00B3AC11 /* NSBundle+Wink.m in Sources */,
 				D810B8DD1ADF506500B3AC11 /* SSOFontCollectionViewCell.m in Sources */,
 				D830F4211ACDDBF1002A503D /* UIImage+Resizing.m in Sources */,
 				D810B8E21ADF506500B3AC11 /* SSOColorPickerContainerView.m in Sources */,
+				D86E09151AE75DDF00711579 /* SSOFeedViewController.m in Sources */,
 				D810B8E91ADF506500B3AC11 /* SSOEditSideMenuView.m in Sources */,
 				D810B8E11ADF506500B3AC11 /* SSOButtonsContainerView.m in Sources */,
 				03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */,

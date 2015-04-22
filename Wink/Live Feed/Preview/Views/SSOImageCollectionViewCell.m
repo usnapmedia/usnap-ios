@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Nicolas Vincensini. All rights reserved.
 //
 
-#import "imageCollectionViewCell.h"
+#import "SSOImageCollectionViewCell.h"
 
-@implementation imageCollectionViewCell
+@implementation SSOImageCollectionViewCell
 
 - (void)configureCell:(id)cellData {
     NSAssert([cellData isKindOfClass:[UIImage class]], @"Celldata has to be of image type");
