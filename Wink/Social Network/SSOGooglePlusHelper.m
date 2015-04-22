@@ -69,9 +69,15 @@
 
 - (void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {
 
+    NSLog(@"%li", error.code);
     if (error) {
         [[GPPSignIn sharedInstance] signOut];
+        if (error.code == -1) {
+            [[SSOSocialNetworkAPI sharedInstance].delegate socialNetwork:googleSocialNetwork DidCancelLogin:error];
+            return;
+        }
     }
+
     [[SSOSocialNetworkAPI sharedInstance].delegate socialNetwork:googleSocialNetwork DidFinishLoginWithError:error];
 }
 
