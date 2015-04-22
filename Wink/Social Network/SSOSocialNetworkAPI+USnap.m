@@ -10,14 +10,15 @@
 
 @implementation SSOSocialNetworkAPI (USnap)
 
-- (void)usnapConnectToSocialNetwork:(SelectedSocialNetwork)socialNetwork {
+- (BOOL)usnapConnectToSocialNetwork:(SelectedSocialNetwork)socialNetwork {
 
     if ([self isConnectedToSocialNetwork:socialNetwork]) {
         [self setNSUserDefaultWithValue:YES andSocialNetwork:socialNetwork];
+        return YES;
     } else {
-
         [self loginWithSocialFramework:socialNetwork];
         [self setNSUserDefaultWithValue:YES andSocialNetwork:socialNetwork];
+        return NO;
     }
 }
 

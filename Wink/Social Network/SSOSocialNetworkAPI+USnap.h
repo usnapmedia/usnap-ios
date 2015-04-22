@@ -14,8 +14,10 @@
  *  Connect to social network
  *
  *  @param socialNetwork the network
+ *
+ *  @return YES if was already connected, NO otherwise
  */
-- (void)usnapConnectToSocialNetwork:(SelectedSocialNetwork)socialNetwork;
+- (BOOL)usnapConnectToSocialNetwork:(SelectedSocialNetwork)socialNetwork;
 
 /**
  *  Disconnect from social network

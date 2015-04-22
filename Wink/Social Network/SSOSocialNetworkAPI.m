@@ -45,23 +45,28 @@
 
         } onCancellation:^{
 
+          [self.delegate socialNetwork:facebookSocialNetwork DidCancelLogin:nil];
+
         }];
 
     } else if (socialNetwork == twitterSocialNetwork) {
 
         [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
 
-          [self.delegate socialNetwork:twitterSocialNetwork DidFinishLoginWithError:error];
-
           if (session) {
+              [self.delegate socialNetwork:twitterSocialNetwork DidFinishLoginWithError:error];
+
               // TODO: See what to do exactly with the token
               NSString *tokenTwitter = session.authToken;
               [[NSUserDefaults standardUserDefaults] setObject:tokenTwitter forKey:kTokenTwitterString];
-
               [[NSUserDefaults standardUserDefaults] setObject:[session userName] forKey:kTwitterAccountName];
               [[NSUserDefaults standardUserDefaults] synchronize];
           } else {
               CLS_LOG(@"error is : %@", error);
+              // Check if the user cancelled the login
+              if (error.code == 1) {
+                  [self.delegate socialNetwork:twitterSocialNetwork DidCancelLogin:error];
+              }
           }
         }];
 
@@ -80,14 +85,13 @@
 
     switch (network) {
     case facebookSocialNetwork:
-
         return [self isFacebookConnected];
         break;
 
     case twitterSocialNetwork:
-
         return [self isTwitterConnected];
         break;
+
     case googleSocialNetwork:
         return [self isGoogleConnected];
         break;
@@ -96,7 +100,6 @@
         break;
     }
 }
-
 
 /**
  *  Check if the user is connected to facebook
