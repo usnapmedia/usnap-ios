@@ -55,6 +55,16 @@
     return token;
 }
 
+- (BOOL)isConnected {
+
+    if ([[GPPSignIn sharedInstance] authentication]) {
+        return YES;
+    } else {
+
+        return NO;
+    }
+}
+
 #pragma mark - GPPSignInDelegate
 
 - (void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {

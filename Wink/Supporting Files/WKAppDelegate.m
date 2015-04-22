@@ -20,6 +20,7 @@
 #import "SSOLoginViewController.h"
 #import <IQKeyboardManager.h>
 #import "WKShareViewController.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation WKAppDelegate
 
@@ -43,11 +44,10 @@
 
     // Set permissions for Facebook
     [SSFacebookHelper sharedInstance].facebookPermissions = @[ @"publish_actions" ];
-
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[WKShareViewController class]];
     [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[WKShareViewController class]];
 
-    return YES;
+    return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -55,18 +55,20 @@
     // optionally refresh the user interface.
 
     //[FBAppCall handleDidBecomeActive];
+    [FBSDKAppEvents activateApp];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
 
-//    if ([[url scheme] isEqualToString:kSchemeFacebook])
-//        return [FBSession.activeSession handleOpenURL:url];
+    if ([[url scheme] isEqualToString:kSchemeFacebook])
+        return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    //        return [FBSession.activeSession handleOpenURL:url];
 
     if ([[url scheme] isEqualToString:kSchemeGooglePlus])
         return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
 
     return NO;
-  //  return [FBSession.activeSession handleOpenURL:url];
+    //  return [FBSession.activeSession handleOpenURL:url];
 }
 
 @end

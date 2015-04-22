@@ -7,7 +7,6 @@
 //
 
 #import "WKShareViewController.h"
-#import "GCPlaceholderTextView.h"
 #import "WKMoviePlayerView.h"
 #import "WKWinkConnect.h"
 #import "WKSettingsViewController.h"
@@ -16,15 +15,22 @@
 #import "CWStatusBarNotification.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
-#import "SSOSocialNetworkAPI.h"
+#import "SSOSocialNetworkAPI+USnap.h"
 #import <TwitterKit/TwitterKit.h>
 #import <Masonry.h>
 #import "SSSessionManager.h"
 #import "WKWinkConnect.h"
 #import <SVProgressHUD.h>
+#import "SSOAlignedButtonsView.h"
+#import <POP.h>
+#import "SSOCustomSocialButton.h"
+#import <SZTextView.h>
+
+#define kOverlayViewAlpha 0.75
+
 typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing, WKShareViewControllerModeShared } WKShareViewControllerMode;
 
-@interface WKShareViewController () <WKMoviePlayerDelegate>
+@interface WKShareViewController () <WKMoviePlayerDelegate, POPAnimationDelegate, SocialNetworkDelegate>
 @property(strong, nonatomic) UIImageView *imageView;
 @property(strong, nonatomic) WKMoviePlayerView *moviePlayerView;
 @property(strong, nonatomic) UIImageView *overlayImageView;
@@ -33,8 +39,13 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 @property(nonatomic) BOOL isTwitterConnected;
 
 @property(weak, nonatomic) IBOutlet UIView *mediaContainerView;
-@property(weak, nonatomic) IBOutlet GCPlaceholderTextView *placeholderTextView;
+@property(weak, nonatomic) IBOutlet SZTextView *placeholderTextView;
 @property(weak, nonatomic) IBOutlet UIButton *shareButton;
+@property(weak, nonatomic) IBOutlet SSOAlignedButtonsView *topView;
+@property(weak, nonatomic) IBOutlet UIView *bottomView;
+@property(strong, nonatomic) IBOutlet UIView *overlayView;
+
+@property(strong, nonatomic) NSValue *bottomViewInitialCenter;
 
 @end
 
@@ -46,7 +57,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [super viewDidLoad];
 
     // Register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
@@ -82,13 +93,18 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     }
 
     // Setup the text view
-    self.placeholderTextView.layer.cornerRadius = 2.0f;
-    self.placeholderTextView.placeholderColor = [UIColor lightGreyTextColorWithAlpha:1.0f];
-    self.placeholderTextView.textColor = [UIColor lightGreyTextColorWithAlpha:1.0f];
-    //    self.placeholderTextView.placeholder = NSLocalizedString(@"Say something... (ex. Sunday #selfie)", @"");
+    //  self.placeholderTextView.layer.cornerRadius = 2.0f;
+    self.placeholderTextView.placeholderTextColor = [UIColor lightGreyTextColorWithAlpha:1.0f];
+    self.placeholderTextView.textColor = [UIColor blackColor];
+    self.placeholderTextView.placeholder = NSLocalizedString(@"Insert comment", @"");
+    self.placeholderTextView.fadeTime = 0.2;
 
     // Setup the share button
     self.shareButton.layer.cornerRadius = 2.0f;
+
+    [SSOSocialNetworkAPI sharedInstance].delegate = self;
+
+    [self.view insertSubview:self.overlayView belowSubview:self.bottomView];
 
     // Update UI
     // [self updateUI];
@@ -96,6 +112,18 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
+    // Animate the display of the topView after all layouts have been calculated (fix iPhone 6+ loop bug)
+    [UIView animateWithDuration:1
+                     animations:^{
+                       self.topView.alpha = 1;
+                       [self setupSocialButtons];
+                     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.topView.alpha = 0;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -104,7 +132,37 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    //    [self setupEditButtons];
+}
+
+#pragma mark - Getters
+
+/**
+ *  Lazy instanciation
+ */
+- (NSValue *)bottomViewInitialCenter {
+
+    if (!_bottomViewInitialCenter) {
+        _bottomViewInitialCenter = [NSValue valueWithCGPoint:self.bottomView.center];
+    }
+
+    return _bottomViewInitialCenter;
+}
+
+/**
+ *  Lazy instanciation
+ */
+- (UIView *)overlayView {
+
+    if (!_overlayView) {
+        // Set the overlay view
+        _overlayView = [[UIView alloc] initWithFrame:self.view.frame];
+        _overlayView.backgroundColor = [UIColor blackColor];
+        _overlayView.alpha = 0;
+        // Add tap recognizer to dismiss the keyboard
+        [_overlayView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(overlayViewTouched:)]];
+    }
+
+    return _overlayView;
 }
 
 #pragma mark - Utilities
@@ -117,15 +175,6 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
           initialSpringVelocity:1.0f
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
-
-                       //                           self.backButton.transform = CGAffineTransformIdentity;
-                       //                           self.backButton.alpha = 1.0f;
-                       //                           self.placeholderTextView.backgroundColor = [UIColor whiteColor];
-                       //                           self.placeholderTextView.userInteractionEnabled = YES;
-                       //                           self.placeholderTextView.hidden = NO;
-                       //                           self.socialMediaContainerView.transform = CGAffineTransformIdentity;
-                       //                           self.socialMediaContainerView.alpha = 1.0f;
-
                        self.shareButton.layer.borderColor = [UIColor clearColor].CGColor;
                        self.shareButton.layer.borderWidth = 0.0f;
                        self.shareButton.backgroundColor = [UIColor purpleColorWithAlpha:1.0f];
@@ -146,80 +195,97 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                      completion:nil];
 }
 
-#pragma mark - Set Share Mode
-
 /**
- *  Check the number of social networks the user is currently connected on
- *
- *  @return the number of connected social networks
+ *  Setup the edit buttons
  */
-- (NSNumber *)numberSocialNetworkConnected {
+- (void)setupSocialButtons {
 
-    int numberNetworks = 0;
+    SSOCustomSocialButton *facebookButton =
+        [[SSOCustomSocialButton alloc] initWithSocialNetwork:facebookSocialNetwork
+                                                       state:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:facebookSocialNetwork]];
+    facebookButton.tag = facebookSocialNetwork;
 
-    if ([self editedImage]) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kGooglePlusSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kTumblrSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kInstagramSwitchValue]) {
-            numberNetworks++;
-        }
-        // Else it's a video, only calculate the number of social networks supporting hosting videos
-    } else if (self.mediaURL) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kGooglePlusSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kTumblrSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kInstagramSwitchValue]) {
-            numberNetworks++;
-        }
-    }
-    NSNumber *numberNetworksReturned = [NSNumber numberWithInt:numberNetworks];
+    [facebookButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
 
-    return numberNetworksReturned;
+    SSOCustomSocialButton *twitterButton =
+        [[SSOCustomSocialButton alloc] initWithSocialNetwork:twitterSocialNetwork
+                                                       state:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:twitterSocialNetwork]];
+    twitterButton.tag = twitterSocialNetwork;
+    [twitterButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
+
+    SSOCustomSocialButton *googlePlusButton =
+        [[SSOCustomSocialButton alloc] initWithSocialNetwork:googleSocialNetwork
+                                                       state:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:googleSocialNetwork]];
+    googlePlusButton.tag = googleSocialNetwork;
+    [googlePlusButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.topView setupViewforOrientation:[UIDevice currentDevice].orientation withArrayButtons:@[ facebookButton, twitterButton, googlePlusButton ]];
 }
 
+#pragma mark - Action
+
+- (void)overlayViewTouched:(id)sender {
+    if ([self.placeholderTextView isFirstResponder]) {
+        [self.placeholderTextView resignFirstResponder];
+    }
+}
+
+#pragma mark - Animation
+
+- (void)animatedViewForKeyboardWithSize:(CGSize)size shouldSlideUp:(BOOL)isSlidingUp {
+
+    if (isSlidingUp) {
+        [self.overlayView setHidden:NO];
+        // Set the animation to slide the view up
+        POPSpringAnimation *moveUpAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
+        // We need to use the initial center to move with the auto-correct keyboard show/hide
+        CGPoint initialCenter = [self.bottomViewInitialCenter CGPointValue];
+        CGPoint center = CGPointMake(initialCenter.x, initialCenter.y - size.height);
+        moveUpAnimation.toValue = [NSValue valueWithCGPoint:center];
+        [self.bottomView pop_addAnimation:moveUpAnimation forKey:@"moveUp"];
+        // Set the animation to fade the view in
+        POPSpringAnimation *fadeInAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewAlpha];
+        fadeInAnimation.toValue = [NSNumber numberWithFloat:kOverlayViewAlpha];
+        fadeInAnimation.delegate = self;
+        fadeInAnimation.name = @"fadeInAnimation";
+        [self.overlayView pop_addAnimation:fadeInAnimation forKey:@"fadeIn"];
+
+    } else {
+        // Set the animation to side the view down
+        POPSpringAnimation *moveDownAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
+        moveDownAnimation.toValue = self.bottomViewInitialCenter;
+        [self.bottomView pop_addAnimation:moveDownAnimation forKey:@"moveDown"];
+        // Set the animation to fade out the background view
+        POPSpringAnimation *fadeOutAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewAlpha];
+        fadeOutAnimation.toValue = [NSNumber numberWithFloat:0];
+        fadeOutAnimation.delegate = self;
+        fadeOutAnimation.name = @"fadeOutAnimation";
+        [self.overlayView pop_addAnimation:fadeOutAnimation forKey:@"fadeOut"];
+    }
+}
+
+#pragma mark - POPAnimationDelegate
+
+- (void)pop_animationDidStop:(POPAnimation *)anim finished:(BOOL)finished {
+    // Check if it's a fade out animation
+    if ([anim.name isEqualToString:@"fadeOutAnimation"]) {
+        // Hide the view after the animation
+        [self.overlayView setHidden:YES];
+    }
+}
 #pragma mark - Keyboard Methods
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    CGFloat animationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationOptions animationCurve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue];
-    CGSize size = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
 
-    [UIView animateWithDuration:animationDuration
-                          delay:0.0f
-                        options:animationCurve
-                     animations:^{
-                       self.view.transform = CGAffineTransformMakeTranslation(0.0f, -size.height);
-                     }
-                     completion:nil];
+    CGSize keyboardFrameBegin = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+
+    [self animatedViewForKeyboardWithSize:keyboardFrameBegin shouldSlideUp:YES];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    CGFloat animationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationOptions animationCurve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue];
+    CGSize keyboardFrameBegin = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
-    [UIView animateWithDuration:animationDuration
-                          delay:0.0f
-                        options:animationCurve
-                     animations:^{
-                       self.view.transform = CGAffineTransformIdentity;
-                     }
-                     completion:nil];
+    [self animatedViewForKeyboardWithSize:keyboardFrameBegin shouldSlideUp:NO];
 }
 
 #pragma mark - Update UI
@@ -270,7 +336,11 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     }
 }
 
-// Return the image with the modifs made
+/**
+ *  Return the image with the modifs made
+ *
+ *  @return <#return value description#>
+ */
 - (UIImage *)editedImage {
 
     if (self.image) {
@@ -298,6 +368,9 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 #pragma mark - Post
 
+/**
+ *  Post the image to the backend
+ */
 - (void)post {
     [self.placeholderTextView resignFirstResponder];
     [self savePostToCameraRoll];
@@ -311,30 +384,18 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         }
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-          [SVProgressHUD setStatus:@"Success"];
-          [SVProgressHUD dismiss];
-
+          // @FIXME
+          [SVProgressHUD showSuccessWithStatus:@"Image posted"];
           [self.navigationController popToRootViewControllerAnimated:YES];
-
           NSLog(@"shared with succcess");
 
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-          [SVProgressHUD showWithStatus:@"Failed, backend error can't do anything about it until fixed"];
-
-          NSLog(@"share failed because : %@", error);
-
-          [SVProgressHUD dismiss];
+          //@FIXME
+          //@TODO: Should be handled generally
+          [SVProgressHUD showErrorWithStatus:error.localizedDescription];
 
         }];
-
-    // Check to see if it's image first
-    if ([self editedImage]) {
-        [self postImageOnSelectedSocialNetworks];
-    } else { // Else it's a movie, no need to send the video as it will be sent after the video edition and save in the
-             // Camera roll is done.
-    }
 }
 
 #pragma mark - Social networks
@@ -366,12 +427,43 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 #pragma mark - Button Actions
 
 - (IBAction)shareButtonTouched:(id)sender {
-
     [self post];
 }
 
 - (IBAction)backButtonTouched:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)touchedSocialNetworkButton:(SSOCustomSocialButton *)button {
+    [button setSelected:!button.isSelected];
+    if (!button.isSelected) {
+        [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:button.socialNetwork];
+    } else {
+        [[SSOSocialNetworkAPI sharedInstance] usnapConnectToSocialNetwork:button.socialNetwork];
+    }
+}
+
+#pragma mark - SocialNetworkDelegate
+
+- (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidFinishLoginWithError:(NSError *)error {
+
+    for (UIView *view in self.topView.subviews) {
+        if ([view isKindOfClass:[SSOCustomSocialButton class]]) {
+            // Cast the view to get the social network
+            SSOCustomSocialButton *socialButton = (SSOCustomSocialButton *)view;
+            if (socialButton.socialNetwork == socialNetwork) {
+                if (error) {
+                    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+                    //  [SVProgressHUD showWithStatus:error.localizedDescription];
+                    // Disconnect the social network to reset it's value
+                    [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:socialButton.socialNetwork];
+                    socialButton.selected = NO;
+                } else {
+                    socialButton.selected = YES;
+                }
+            }
+        }
+    }
 }
 
 @end

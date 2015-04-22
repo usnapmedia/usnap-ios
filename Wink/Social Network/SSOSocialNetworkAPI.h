@@ -67,6 +67,15 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
  */
 - (void)logoutFromSocialFramework:(SelectedSocialNetwork)socialNetwork;
 
+/**
+ *  Check if the user is connected to a social network
+ *
+ *  @param network the social network to check
+ *
+ *  @return YES if he is, No otherwise
+ */
+- (BOOL)isConnectedToSocialNetwork:(SelectedSocialNetwork)network;
+
 @end
 
 @protocol SocialNetworkDelegate
@@ -78,6 +87,8 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
  *  @param error         the error
  */
 - (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidFinishLoginWithError:(NSError *)error;
+
+@optional
 
 /**
  *  SocialNetworkDelegate method called when the social network's logout response arrives.
