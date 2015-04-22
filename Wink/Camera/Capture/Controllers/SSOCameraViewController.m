@@ -18,6 +18,7 @@
 #import "SSOOrientationHelper.h"
 #import "UINavigationController+SSOLockedNavigationController.h"
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
+#import "SSOFeedViewController.h"
 #import <Masonry.h>
 
 #define kTotalVideoRecordingTime 30
@@ -33,23 +34,20 @@
 @property(weak, nonatomic) IBOutlet UIView *bottomContainerView;
 @property(weak, nonatomic) IBOutlet SSORoundedAnimatedButton *animatedCaptureButton;
 @property(weak, nonatomic) IBOutlet AVCamPreviewView *cameraPreviewView;
+// Used to display a blur on the preview
 @property(strong, nonatomic) UIVisualEffectView *effectView;
 @property(strong, nonatomic) UIView *blurEffectview;
+// Preview image
+@property(strong, nonatomic) UIImage *libraryImage;
 @property(weak, nonatomic) IBOutlet UIView *feedContainerView;
 
-// View Controllers
-@property(weak, nonatomic) WKEditMediaViewController *mediaEditViewController;
-
 // Data
-@property(nonatomic) BOOL isVideoOn;
 @property(nonatomic) AVCaptureFlashMode flashState;
 @property(nonatomic) AVCaptureTorchMode torchState;
 @property(nonatomic) AVCaptureDevicePosition devicePosition;
 @property(nonatomic) BOOL isVideoRecording;
 @property(nonatomic) BOOL isRotationAllowed;
 @property(strong, nonatomic) SSOCameraCaptureHelper *cameraCaptureHelper;
-@property(strong, nonatomic) NSArray *arrayImages;
-@property(strong, nonatomic) UIImage *libraryImage;
 
 @end
 
@@ -151,11 +149,29 @@
     [self initializeUICameraDevice];
 
     [self.view bringSubviewToFront:self.animatedCaptureButton];
+    
+    // Set the feed controller
+    [self initializeFeedController];
 }
 
 - (BOOL)shouldAutorotate {
 
     return self.isRotationAllowed;
+}
+
+/**
+ *  Initialize the feed view controller
+ */
+- (void)initializeFeedController {
+    SSOFeedViewController *childVc = [SSOFeedViewController new];
+    // Add the child vc
+    [self addChildViewController:childVc];
+    // Set the frame
+    childVc.view.frame = self.feedContainerView.frame;
+    //    // Add subview
+    [self.feedContainerView addSubview:childVc.view];
+    // Call delegate
+    [childVc didMoveToParentViewController:self];
 }
 
 #pragma mark - Navigation
@@ -377,30 +393,29 @@
     });
 }
 
-
 /**
  *  Add an animation to the camera roll preview image when we take a picture and come back to camera view
  */
 - (void)animateCameraRollImageChange {
-    
+
     // Check if the libraryImage has been fetched from camera roll. If not call the method again with a small delay (avoid memory bad access)
     if (self.libraryImage) {
         [UIView animateWithDuration:0.3
-                         animations:^{
-                             // Fade in
-                             self.mediaButton.alpha = 0.1;
-                         }
-                         completion:^(BOOL finished) {
-                             
-                             [UIView animateWithDuration:0.3
-                                              animations:^{
-                                                  [self.mediaButton setImage:self.libraryImage forState:UIControlStateNormal];
-                                                  // Fade out
-                                                  self.mediaButton.alpha = 1;
-                                              }];
-                         }];
+            animations:^{
+              // Fade in
+              self.mediaButton.alpha = 0.1;
+            }
+            completion:^(BOOL finished) {
+
+              [UIView animateWithDuration:0.3
+                               animations:^{
+                                 [self.mediaButton setImage:self.libraryImage forState:UIControlStateNormal];
+                                 // Fade out
+                                 self.mediaButton.alpha = 1;
+                               }];
+            }];
     } else {
-        
+
         [self performSelector:@selector(animateCameraRollImageChange) withObject:nil afterDelay:0.2];
     }
 }

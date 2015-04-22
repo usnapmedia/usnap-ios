@@ -21,6 +21,7 @@ pod 'SVProgressHUD'
 pod 'SSKeychain'
 pod 'pop'
 pod 'IQKeyboardManager'
+pod 'SDWebImage'
 
 # Samsao libraries
 pod 'SSFacebookHelper'

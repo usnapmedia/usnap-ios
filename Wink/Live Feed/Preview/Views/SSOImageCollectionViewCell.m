@@ -7,14 +7,17 @@
 //
 
 #import "SSOImageCollectionViewCell.h"
+#import "SSOSnap.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation SSOImageCollectionViewCell
 
 - (void)configureCell:(id)cellData {
-    NSAssert([cellData isKindOfClass:[UIImage class]], @"Celldata has to be of image type");
-    if ([cellData isKindOfClass:[UIImage class]]) {
-        UIImage *image = (UIImage *)cellData;
-        self.imageView.image = image;
+    NSAssert([cellData isKindOfClass:[SSOSnap class]], @"Celldata has to be of SSOSnap type");
+    if ([cellData isKindOfClass:[SSOSnap class]]) {
+        SSOSnap *data = (SSOSnap *)cellData;
+        [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:data.url]];
     }
 }
 

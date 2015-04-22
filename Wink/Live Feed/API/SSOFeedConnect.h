@@ -12,10 +12,10 @@
 @interface SSOFeedConnect : NSObject
 
 /**
- *  <#Description#>
+ *  Get the latest live feed photos
  *
- *  @param success <#success description#>
- *  @param failure <#failure description#>
+ *  @param success success block
+ *  @param failure failure block
  */
 + (void)getliveFeedPhotosWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;

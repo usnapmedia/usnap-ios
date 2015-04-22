@@ -7,6 +7,8 @@
 //
 
 #import "SSOFeedViewController.h"
+#import "SSOFeedConnect.h"
+#import "SSOCountableItems.h"
 #import <SSOSimpleCollectionViewProvider.h>
 #import <Masonry.h>
 
@@ -46,17 +48,18 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
       make.edges.equalTo(self.view);
     }];
-    // Set the flow layout
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    self.collectionView.collectionViewLayout = flowLayout;
 }
 
 /**
  *  Initialize the data of the VC
  */
 - (void)initializeData {
-    self.collectionView = [UICollectionView new];
+    // Set the flow layout
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    // Initialize the view
+    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
+    self.collectionView.showsHorizontalScrollIndicator = NO;
     self.provider = [SSOSimpleCollectionViewProvider new];
 
     self.collectionView.delegate = self.provider;
@@ -66,8 +69,38 @@
           forCellWithReuseIdentifier:kImageCollectionViewCell];
 
     //@TODO Set the data for the datasource
-    self.provider.inputData = [self arrayImages];
-    [self.collectionView reloadData];
+    self.provider.cellReusableIdentifier = kImageCollectionViewCell;
+
+    [self loadLatestImages];
+}
+
+/**
+ *  Load the latest images from the backend
+ */
+- (void)loadLatestImages {
+    UIView *overlayView = [UIView new];
+    overlayView.backgroundColor = [UIColor lightGrayColor];
+    overlayView.alpha = 0.75f;
+    UIActivityIndicatorView *activityView = [UIActivityIndicatorView new];
+    [self.view addSubview:overlayView];
+    [overlayView addSubview:activityView];
+    [overlayView mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.edges.equalTo(self.view);
+    }];
+    [activityView mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.edges.equalTo(overlayView);
+    }];
+    [activityView startAnimating];
+
+    [SSOFeedConnect getliveFeedPhotosWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [overlayView setHidden:YES];
+      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject];
+      self.provider.inputData = [items.response mutableCopy];
+      [self.collectionView reloadData];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      [overlayView setHidden:YES];
+    }];
 }
 
 //@TODO
