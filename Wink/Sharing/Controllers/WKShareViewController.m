@@ -222,53 +222,6 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [self.topView setupViewforOrientation:[UIDevice currentDevice].orientation withArrayButtons:@[ facebookButton, twitterButton, googlePlusButton ]];
 }
 
-#pragma mark - Set Share Mode
-
-/**
- *  Check the number of social networks the user is currently connected on
- *
- *  @return the number of connected social networks
- */
-- (NSNumber *)numberSocialNetworkConnected {
-
-    int numberNetworks = 0;
-
-    if ([self editedImage]) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kTwitterSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kGooglePlusSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kTumblrSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kInstagramSwitchValue]) {
-            numberNetworks++;
-        }
-        // Else it's a video, only calculate the number of social networks supporting hosting videos
-    } else if (self.mediaURL) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kFacebookSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kGooglePlusSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kTumblrSwitchValue]) {
-            numberNetworks++;
-        }
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kInstagramSwitchValue]) {
-            numberNetworks++;
-        }
-    }
-    NSNumber *numberNetworksReturned = [NSNumber numberWithInt:numberNetworks];
-
-    return numberNetworksReturned;
-}
-
 #pragma mark - Action
 
 - (void)overlayViewTouched:(id)sender {
@@ -324,7 +277,6 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)keyboardWillShow:(NSNotification *)notification {
 
-    // CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     CGSize keyboardFrameBegin = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
 
     [self animatedViewForKeyboardWithSize:keyboardFrameBegin shouldSlideUp:YES];
@@ -384,7 +336,11 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     }
 }
 
-// Return the image with the modifs made
+/**
+ *  Return the image with the modifs made
+ *
+ *  @return <#return value description#>
+ */
 - (UIImage *)editedImage {
 
     if (self.image) {
