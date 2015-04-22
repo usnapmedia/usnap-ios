@@ -368,6 +368,9 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 #pragma mark - Post
 
+/**
+ *  Post the image to the backend
+ */
 - (void)post {
     [self.placeholderTextView resignFirstResponder];
     [self savePostToCameraRoll];
@@ -381,26 +384,16 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         }
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-          //   [SVProgressHUD setStatus:@"Success"];
-
+          // @FIXME
           [SVProgressHUD showSuccessWithStatus:@"Image posted"];
-
           [self.navigationController popToRootViewControllerAnimated:YES];
-
-          //  [SVProgressHUD dismiss];
-
           NSLog(@"shared with succcess");
 
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
+          //@FIXME
+          //@TODO: Should be handled generally
           [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-
-          // [SVProgressHUD showWithStatus:@"Failed, backend error can't do anything about it until fixed"];
-
-          // NSLog(@"share failed because : %@", error);
-
-          //[SVProgressHUD dismiss];
 
         }];
 }
@@ -434,26 +427,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 #pragma mark - Button Actions
 
 - (IBAction)shareButtonTouched:(id)sender {
-
-    // TODO: Temporary fixes because problem with backend
-    NSString *userAccount = [[NSUserDefaults standardUserDefaults] valueForKey:kEmailLoggedString];
-
-    NSString *password = [SSSessionManager getSecuredPasswordForAccount:userAccount];
-
-    NSLog(@"user : %@ and pass :%@", userAccount, password);
-
-    [WKWinkConnect winkConnectLoginWithUsername:userAccount
-        password:password
-        meta:nil
-        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-          [SVProgressHUD showWithStatus:@"Connecting"];
-
-          [self post];
-
-        }
-        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          [SVProgressHUD showWithStatus:@"Error connection"];
-        }];
+    [self post];
 }
 
 - (IBAction)backButtonTouched:(id)sender {

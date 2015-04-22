@@ -15,7 +15,7 @@
 #define kPaddingKeyboardAndTextView 20
 #define kTextViewFontSize 40.0f
 
-@interface SSOTextToolController () <SSOColorPickerContainerViewDelegate, SSOBaseProviderDelegate, SSOContainerViewDelegate, UITextViewDelegate>
+@interface SSOTextToolController () <SSOColorPickerContainerViewDelegate, SSOProviderDelegate, SSOContainerViewDelegate, UITextViewDelegate>
 
 @property(strong, nonatomic) SSOTextAccessoryContainerView *accessoryContainerView;
 @property(strong, nonatomic) SSOColorPickerContainerView *colorPickerContainerView;
