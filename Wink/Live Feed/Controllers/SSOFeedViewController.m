@@ -9,16 +9,15 @@
 #import "SSOFeedViewController.h"
 #import "SSOFeedConnect.h"
 #import "SSOCountableItems.h"
-#import <SSOSimpleCollectionViewProvider.h>
 #import <Masonry.h>
 
 #define kImageCollectionViewCell @"imageCollectionViewCell"
 #define kImageCollectionViewCellNib @"SSOImageCollectionViewCell"
 
-@interface SSOFeedViewController ()
+@interface SSOFeedViewController () <SSOProviderDelegate>
 
 @property(strong, nonatomic) UICollectionView *collectionView;
-@property(strong, nonatomic) SSOSimpleCollectionViewProvider *provider;
+@property(strong, nonatomic, readwrite) SSOSimpleCollectionViewProvider *provider;
 
 @end
 
@@ -68,9 +67,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:kImageCollectionViewCellNib bundle:[NSBundle mainBundle]]
           forCellWithReuseIdentifier:kImageCollectionViewCell];
 
-    //@TODO Set the data for the datasource
     self.provider.cellReusableIdentifier = kImageCollectionViewCell;
-
     [self loadLatestImages];
 }
 

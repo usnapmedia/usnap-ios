@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SSOSimpleCollectionViewProvider.h>
 
 @interface SSOFeedViewController : UIViewController
+
+@property(strong, nonatomic, readonly) SSOSimpleCollectionViewProvider *provider;
 
 @end

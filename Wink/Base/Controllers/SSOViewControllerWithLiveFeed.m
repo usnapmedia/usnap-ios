@@ -9,10 +9,11 @@
 #import "SSOViewControllerWithLiveFeed.h"
 #import "SSOFeedViewController.h"
 #import <Masonry.h>
+#import <SSOSimpleCollectionViewProvider.h>
 
-#define kFeedContainerHeight 50
+#define kFeedContainerHeight 55
 
-@interface SSOViewControllerWithLiveFeed ()
+@interface SSOViewControllerWithLiveFeed () <SSOProviderDelegate>
 
 @end
 
@@ -51,8 +52,6 @@
  */
 - (void)initializeFeedController {
     SSOFeedViewController *childVc = [SSOFeedViewController new];
-    //@TODO Add a delegate to present the VC on touch of photos.
-
     // Add the child vc
     [self addChildViewController:childVc];
     // Set the frame
@@ -61,6 +60,16 @@
     [self.feedContainerView addSubview:childVc.view];
     // Call delegate
     [childVc didMoveToParentViewController:self];
+
+    //  Make the view delegate for the provider to access the on select event
+    childVc.provider.delegate = self;
+}
+
+#pragma mark - SSOProviderDelegate
+
+- (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //@TODO Present fan page
+    [self presentViewController:[UIViewController new] animated:YES completion:nil];
 }
 
 @end
