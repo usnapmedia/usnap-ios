@@ -124,6 +124,7 @@
 		D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C801AD4287C008D2A37 /* WKWinkConnect.m */; };
 		D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */; };
 		D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C8F1AD428D3008D2A37 /* SSOGooglePlusHelper.m */; };
+		D8FBADAC1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FBADAB1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -337,6 +338,8 @@
 		D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOLoginViewController.xib; sourceTree = "<group>"; };
 		D8EA5C8E1AD428D3008D2A37 /* SSOGooglePlusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOGooglePlusHelper.h; sourceTree = "<group>"; };
 		D8EA5C8F1AD428D3008D2A37 /* SSOGooglePlusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOGooglePlusHelper.m; sourceTree = "<group>"; };
+		D8FBADAA1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOViewControllerWithLiveFeed.h; sourceTree = "<group>"; };
+		D8FBADAB1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOViewControllerWithLiveFeed.m; sourceTree = "<group>"; };
 		EAE311565BE99D01341CE159 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -432,6 +435,7 @@
 			isa = PBXGroup;
 			children = (
 				D86E08ED1AE6BDEA00711579 /* API */,
+				D8FBADA81AE933C8005D6C18 /* Base */,
 				3357233C1ACB097C000CC846 /* Camera */,
 				D830F4031ACDDBF1002A503D /* Categories */,
 				335723721ACB097C000CC846 /* Helpers */,
@@ -1000,6 +1004,23 @@
 			path = XIB;
 			sourceTree = "<group>";
 		};
+		D8FBADA81AE933C8005D6C18 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				D8FBADA91AE933C8005D6C18 /* Controllers */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		D8FBADA91AE933C8005D6C18 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D8FBADAA1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.h */,
+				D8FBADAB1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		ED65896723BCE61EECA4D660 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1234,6 +1255,7 @@
 				CB8F0ABA1ADDDC8600C18263 /* AVCamPreviewView.m in Sources */,
 				D830F41F1ACDDBF1002A503D /* UIColor+WKAdditions.m in Sources */,
 				D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */,
+				D8FBADAC1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.m in Sources */,
 				3303DDD41AD8547F002B74F9 /* SSOLoginContainerView.m in Sources */,
 				D810B8CF1ADF506500B3AC11 /* SSOAdjustementsHelper.m in Sources */,
 				D8D4F17F1ADFFB52002FDE38 /* SSOThemeHelper.m in Sources */,

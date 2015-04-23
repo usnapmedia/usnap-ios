@@ -8,9 +8,7 @@
 
 #import "SSOCameraViewController.h"
 #import "WKSettingsViewController.h"
-#import <MobileCoreServices/MobileCoreServices.h>
 #import "WKNavigationController.h"
-#import <SVProgressHUD/SVProgressHUD.h>
 #import "WKEditMediaViewController.h"
 #import "SSORoundedAnimatedButton.h"
 #import "AVCamPreviewView.h"
@@ -18,8 +16,10 @@
 #import "SSOOrientationHelper.h"
 #import "UINavigationController+SSOLockedNavigationController.h"
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
-#import "SSOFeedViewController.h"
 #import <Masonry.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+
 
 #define kTotalVideoRecordingTime 30
 
@@ -30,7 +30,7 @@
 @property(weak, nonatomic) IBOutlet UIButton *flashButton;
 @property(weak, nonatomic) IBOutlet UIButton *cameraRotationButton;
 @property(weak, nonatomic) IBOutlet UIButton *mediaButton;
-@property(weak, nonatomic) IBOutlet UIView *topBlackBar;
+@property(weak, nonatomic) IBOutlet UIView *topContainerView;
 @property(weak, nonatomic) IBOutlet UIView *bottomContainerView;
 @property(weak, nonatomic) IBOutlet SSORoundedAnimatedButton *animatedCaptureButton;
 @property(weak, nonatomic) IBOutlet AVCamPreviewView *cameraPreviewView;
@@ -39,7 +39,6 @@
 @property(strong, nonatomic) UIView *blurEffectview;
 // Preview image
 @property(strong, nonatomic) UIImage *libraryImage;
-@property(weak, nonatomic) IBOutlet UIView *feedContainerView;
 
 // Data
 @property(nonatomic) AVCaptureFlashMode flashState;
@@ -143,6 +142,12 @@
     // Allow the user to rotate the screen when the view just appeared
     self.isRotationAllowed = YES;
     self.isVideoRecording = NO;
+    
+    // Make the top container top constraint on the bottom of the feed controller.
+    // Feed controller comes from the base class
+    [self.topContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.feedContainerView.mas_bottom);
+    }];
 
     // Setup UI for video recording label
     [self initializeFlash];
@@ -150,8 +155,6 @@
 
     [self.view bringSubviewToFront:self.animatedCaptureButton];
     
-    // Set the feed controller
-    [self initializeFeedController];
 }
 
 - (BOOL)shouldAutorotate {
@@ -159,20 +162,6 @@
     return self.isRotationAllowed;
 }
 
-/**
- *  Initialize the feed view controller
- */
-- (void)initializeFeedController {
-    SSOFeedViewController *childVc = [SSOFeedViewController new];
-    // Add the child vc
-    [self addChildViewController:childVc];
-    // Set the frame
-    childVc.view.frame = self.feedContainerView.frame;
-    //    // Add subview
-    [self.feedContainerView addSubview:childVc.view];
-    // Call delegate
-    [childVc didMoveToParentViewController:self];
-}
 
 #pragma mark - Navigation
 

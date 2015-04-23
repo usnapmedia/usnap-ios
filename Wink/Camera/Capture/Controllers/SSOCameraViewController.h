@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SSOViewControllerWithLiveFeed.h"
 
-@interface SSOCameraViewController : UIViewController
+@interface SSOCameraViewController : SSOViewControllerWithLiveFeed
 @end
