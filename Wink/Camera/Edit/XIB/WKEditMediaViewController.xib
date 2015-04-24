@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKEditMediaViewController">
             <connections>
                 <outlet property="backButton" destination="xrZ-3G-dwT" id="9VC-ac-nlx"/>
-                <outlet property="collectionView" destination="eb7-ck-5qt" id="7Df-qA-dlg"/>
                 <outlet property="overlayView" destination="ViG-Cy-T47" id="1eq-1b-4gM"/>
                 <outlet property="postButton" destination="Cck-YF-TdY" id="Dox-nY-fWG"/>
                 <outlet property="sideMenuView" destination="55r-Oa-hPu" id="ZUQ-01-loo"/>
@@ -53,7 +52,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPu-n7-xWr" userLabel="topView" customClass="SSOFadingContainerView">
-                    <rect key="frame" x="0.0" y="60" width="375" height="60"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cck-YF-TdY" userLabel="postButton">
                             <rect key="frame" x="313" y="7" width="47" height="47"/>
@@ -75,7 +74,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrZ-3G-dwT" userLabel="backButton">
-                            <rect key="frame" x="15" y="7" width="47" height="47"/>
+                            <rect key="frame" x="53" y="7" width="47" height="47"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="47" id="EQw-ae-9TZ"/>
                                 <constraint firstAttribute="width" constant="47" id="dpN-x4-8HL"/>
@@ -122,7 +121,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="55r-Oa-hPu" userLabel="toolView" customClass="SSOEditSideMenuView">
-                    <rect key="frame" x="0.0" y="542" width="600" height="58"/>
+                    <rect key="frame" x="0.0" y="667" width="5" height="0.0"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="6dz-A3-ycI">
@@ -147,30 +146,10 @@
                         </mask>
                     </variation>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="eb7-ck-5qt" customClass="SSBaseCollectionView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="60" id="irk-Mb-x78"/>
-                    </constraints>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YbP-qa-vBa">
-                        <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                    <cells/>
-                </collectionView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="55r-Oa-hPu" firstAttribute="top" secondItem="eb7-ck-5qt" secondAttribute="bottom" constant="266" id="0Si-2k-MTL"/>
-                <constraint firstItem="cPu-n7-xWr" firstAttribute="top" secondItem="eb7-ck-5qt" secondAttribute="bottom" id="5cZ-zn-TuG"/>
-                <constraint firstItem="55r-Oa-hPu" firstAttribute="top" secondItem="eb7-ck-5qt" secondAttribute="bottom" constant="266" id="7ET-VB-w8l">
-                    <variation key="heightClass=compact" constant="0.0"/>
-                </constraint>
-                <constraint firstAttribute="trailing" secondItem="eb7-ck-5qt" secondAttribute="trailing" id="7GC-sJ-bfC"/>
-                <constraint firstItem="eb7-ck-5qt" firstAttribute="leading" secondItem="oum-iL-jh4" secondAttribute="leading" id="CQf-cU-dwN"/>
-                <constraint firstItem="eb7-ck-5qt" firstAttribute="top" secondItem="oum-iL-jh4" secondAttribute="top" id="PYj-Sl-wAn"/>
+                <constraint firstItem="cPu-n7-xWr" firstAttribute="top" secondItem="oum-iL-jh4" secondAttribute="top" placeholder="YES" id="GFH-QF-EJD"/>
                 <constraint firstAttribute="trailing" secondItem="cPu-n7-xWr" secondAttribute="trailing" id="SQS-Uc-3eM"/>
                 <constraint firstAttribute="bottom" secondItem="55r-Oa-hPu" secondAttribute="bottom" id="ShL-64-mwn"/>
                 <constraint firstItem="55r-Oa-hPu" firstAttribute="leading" secondItem="oum-iL-jh4" secondAttribute="leading" id="Yun-Dw-01m"/>
@@ -188,8 +167,6 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="oBE-IV-jso"/>
-                    <exclude reference="0Si-2k-MTL"/>
-                    <exclude reference="7ET-VB-w8l"/>
                     <exclude reference="tKG-Vb-ere"/>
                 </mask>
             </variation>
@@ -198,12 +175,9 @@
                     <include reference="ViG-Cy-T47"/>
                     <include reference="cPu-n7-xWr"/>
                     <include reference="55r-Oa-hPu"/>
-                    <include reference="eb7-ck-5qt"/>
                 </mask>
                 <mask key="constraints">
                     <include reference="oBE-IV-jso"/>
-                    <exclude reference="0Si-2k-MTL"/>
-                    <include reference="7ET-VB-w8l"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -211,7 +185,6 @@
                     <include reference="ViG-Cy-T47"/>
                     <include reference="cPu-n7-xWr"/>
                     <include reference="55r-Oa-hPu"/>
-                    <include reference="eb7-ck-5qt"/>
                 </mask>
                 <mask key="constraints">
                     <include reference="hFK-WG-mWn"/>
