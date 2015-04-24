@@ -21,7 +21,7 @@ pod 'SSKeychain'
 pod 'pop'
 pod 'IQKeyboardManager'
 pod 'SZTextView'
-pod 'XLPagerTabStrip'
+pod 'SDWebImage'
 
 # Samsao libraries
 pod 'SSFacebookHelper'

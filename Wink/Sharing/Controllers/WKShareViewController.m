@@ -1,3 +1,4 @@
+
 //
 //  WKShareViewController.m
 //  Wink
@@ -96,7 +97,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     //  self.placeholderTextView.layer.cornerRadius = 2.0f;
     self.placeholderTextView.placeholderTextColor = [UIColor lightGreyTextColorWithAlpha:1.0f];
     self.placeholderTextView.textColor = [UIColor blackColor];
-    self.placeholderTextView.placeholder = NSLocalizedString(@"Insert comment", @"");
+    self.placeholderTextView.placeholder = NSLocalizedString(@"shareview.textview.placeholder.text", @"");
     self.placeholderTextView.fadeTime = 0.2;
 
     // Setup the share button
@@ -434,13 +435,33 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+/**
+ *  Action called when the user press on a social network button
+ *
+ *  @param button the button
+ */
 - (void)touchedSocialNetworkButton:(SSOCustomSocialButton *)button {
-    [button setSelected:!button.isSelected];
-    if (!button.isSelected) {
+    // Disable interactions with the button so the user can't call 2 times the same action
+    if (button.isSelected) {
+        // User was already
         [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:button.socialNetwork];
+        [button setSelected:NO];
     } else {
+        [button setUserInteractionEnabled:NO];
+        [self performSelector:@selector(reEnableInteractionSocialButton:) withObject:button afterDelay:1];
         [[SSOSocialNetworkAPI sharedInstance] usnapConnectToSocialNetwork:button.socialNetwork];
+        [button setSelected:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:button.socialNetwork]];
     }
+}
+
+/**
+ *  Simple method called as selector to enable button interaction
+ *
+ *  @param button the social network button
+ */
+- (void)reEnableInteractionSocialButton:(SSOCustomSocialButton *)button {
+
+    [button setUserInteractionEnabled:YES];
 }
 
 #pragma mark - SocialNetworkDelegate
@@ -452,15 +473,35 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
             // Cast the view to get the social network
             SSOCustomSocialButton *socialButton = (SSOCustomSocialButton *)view;
             if (socialButton.socialNetwork == socialNetwork) {
+                // The interaction was disabled on touch, we need to reset it after the network response
+                [socialButton setUserInteractionEnabled:YES];
                 if (error) {
+                    NSLog(@"%@", error.localizedDescription);
                     [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-                    //  [SVProgressHUD showWithStatus:error.localizedDescription];
                     // Disconnect the social network to reset it's value
                     [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:socialButton.socialNetwork];
                     socialButton.selected = NO;
                 } else {
+                    // If there is no error, it means the user is connected and we can select the button to show him.
                     socialButton.selected = YES;
                 }
+            }
+        }
+    }
+}
+
+- (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidCancelLogin:(NSError *)error {
+
+    for (UIView *view in self.topView.subviews) {
+        if ([view isKindOfClass:[SSOCustomSocialButton class]]) {
+            // Cast the view to get the social network
+            SSOCustomSocialButton *socialButton = (SSOCustomSocialButton *)view;
+            // The interaction was disabled on touch, we need to reset it after the network response
+            [socialButton setUserInteractionEnabled:YES];
+            if (socialButton.socialNetwork == socialNetwork) {
+                socialButton.selected = NO;
+
+                [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:socialButton.socialNetwork];
             }
         }
     }

@@ -91,6 +91,14 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
 @optional
 
 /**
+ *  SocialNetwork method called when the user cancel login process
+ *
+ *  @param socialNetwork the social network
+ *  @param error         the error
+ */
+- (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidCancelLogin:(NSError *)error;
+
+/**
  *  SocialNetworkDelegate method called when the social network's logout response arrives.
  *
  *  @param socialNetwork the social network
