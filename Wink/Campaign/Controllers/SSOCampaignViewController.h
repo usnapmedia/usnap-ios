@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WKWinkConnect.h"
+#import "SSOCampaignTopViewControllerContainer.h"
+#import "SSOCountableItems.h"
+#import <Masonry.h>
 
 @interface SSOCampaignViewController : UIViewController
 

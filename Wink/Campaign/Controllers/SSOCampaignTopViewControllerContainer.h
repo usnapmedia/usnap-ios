@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <XLButtonBarPagerTabStripViewController.h>
+#import "WKWinkConnect.h"
+//#import "SSOCountableItems.h"
+#import <Masonry.h>
 
-@interface SSOCampaignTopViewControllerContainer : XLButtonBarPagerTabStripViewController
+@protocol TOpContainerFanPageDelegate;
+
+@interface SSOCampaignTopViewControllerContainer : UIViewController
 
 @property(nonatomic, strong) NSArray *arrayOfVC;
 

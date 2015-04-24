@@ -57,12 +57,15 @@
 		335723E41ACB097C000CC846 /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A61ACB097C000CC846 /* WKAppDelegate.m */; };
 		335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */; };
 		336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */; };
+		339841D91AEAB41000605C67 /* SSOCountableItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 339841D81AEAB41000605C67 /* SSOCountableItems.m */; };
+		339841E71AEACC5C00605C67 /* SSOFanPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339841E01AEACC5C00605C67 /* SSOFanPageViewController.m */; };
+		339841E81AEACC5C00605C67 /* SSOCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 339841E31AEACC5C00605C67 /* SSOCampaign.m */; };
+		339841E91AEACC5C00605C67 /* FanPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339841E61AEACC5C00605C67 /* FanPage.xib */; };
+		339841F21AEACC8600605C67 /* SSOCampaignTopViewControllerContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 339841ED1AEACC8600605C67 /* SSOCampaignTopViewControllerContainer.m */; };
+		339841F31AEACC8600605C67 /* SSOCampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339841EF1AEACC8600605C67 /* SSOCampaignViewController.m */; };
+		339841F41AEACC8600605C67 /* CampaignTopVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339841F11AEACC8600605C67 /* CampaignTopVIew.xib */; };
 		3399F6DA1AE5A0DB00835B13 /* SSOCustomSocialButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399F6D91AE5A0DB00835B13 /* SSOCustomSocialButton.m */; };
 		33B991491AE4522F002A30F8 /* SSOAlignedButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B991481AE4522F002A30F8 /* SSOAlignedButtonsView.m */; };
-		33D3F5291AE84DFE003EC437 /* FanPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33D3F5281AE84DFE003EC437 /* FanPage.xib */; };
-		33D3F52D1AE85CC9003EC437 /* CampaignTopVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33D3F52C1AE85CC9003EC437 /* CampaignTopVIew.xib */; };
-		33D3F5301AE85E66003EC437 /* SSOCampaignTopViewControllerContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D3F52F1AE85E66003EC437 /* SSOCampaignTopViewControllerContainer.m */; };
-		33D3F5331AE864ED003EC437 /* SSOCampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D3F5321AE864ED003EC437 /* SSOCampaignViewController.m */; };
 		33E8517C1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E8517B1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.m */; };
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
@@ -114,7 +117,6 @@
 		D86E08F01AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08EF1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m */; };
 		D86E08F41AE6CDBE00711579 /* SSOFeedConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08F31AE6CDBE00711579 /* SSOFeedConnect.m */; };
 		D86E09151AE75DDF00711579 /* SSOFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E09131AE75DDF00711579 /* SSOFeedViewController.m */; };
-		D86E091D1AE76E2500711579 /* SSOCountableItems.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E091A1AE76E2500711579 /* SSOCountableItems.m */; };
 		D86E091E1AE76E2500711579 /* SSOSnap.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E091C1AE76E2500711579 /* SSOSnap.m */; };
 		D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */; };
 		D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m */; };
@@ -221,16 +223,22 @@
 		335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		336F913E1ACD963D003B0AA4 /* SSORoundedAnimatedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSORoundedAnimatedButton.h; path = Views/SSORoundedAnimatedButton.h; sourceTree = "<group>"; };
 		336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSORoundedAnimatedButton.m; path = Views/SSORoundedAnimatedButton.m; sourceTree = "<group>"; };
+		339841D71AEAB41000605C67 /* SSOCountableItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOCountableItems.h; path = Model/SSOCountableItems.h; sourceTree = "<group>"; };
+		339841D81AEAB41000605C67 /* SSOCountableItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOCountableItems.m; path = Model/SSOCountableItems.m; sourceTree = "<group>"; };
+		339841DF1AEACC5C00605C67 /* SSOFanPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFanPageViewController.h; sourceTree = "<group>"; };
+		339841E01AEACC5C00605C67 /* SSOFanPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFanPageViewController.m; sourceTree = "<group>"; };
+		339841E21AEACC5C00605C67 /* SSOCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCampaign.h; sourceTree = "<group>"; };
+		339841E31AEACC5C00605C67 /* SSOCampaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCampaign.m; sourceTree = "<group>"; };
+		339841E61AEACC5C00605C67 /* FanPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FanPage.xib; sourceTree = "<group>"; };
+		339841EC1AEACC8600605C67 /* SSOCampaignTopViewControllerContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCampaignTopViewControllerContainer.h; sourceTree = "<group>"; };
+		339841ED1AEACC8600605C67 /* SSOCampaignTopViewControllerContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCampaignTopViewControllerContainer.m; sourceTree = "<group>"; };
+		339841EE1AEACC8600605C67 /* SSOCampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCampaignViewController.h; sourceTree = "<group>"; };
+		339841EF1AEACC8600605C67 /* SSOCampaignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCampaignViewController.m; sourceTree = "<group>"; };
+		339841F11AEACC8600605C67 /* CampaignTopVIew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CampaignTopVIew.xib; sourceTree = "<group>"; };
 		3399F6D81AE5A0DB00835B13 /* SSOCustomSocialButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOCustomSocialButton.h; path = Views/SSOCustomSocialButton.h; sourceTree = "<group>"; };
 		3399F6D91AE5A0DB00835B13 /* SSOCustomSocialButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOCustomSocialButton.m; path = Views/SSOCustomSocialButton.m; sourceTree = "<group>"; };
 		33B991471AE4522F002A30F8 /* SSOAlignedButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOAlignedButtonsView.h; sourceTree = "<group>"; };
 		33B991481AE4522F002A30F8 /* SSOAlignedButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOAlignedButtonsView.m; sourceTree = "<group>"; };
-		33D3F5281AE84DFE003EC437 /* FanPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FanPage.xib; sourceTree = "<group>"; };
-		33D3F52C1AE85CC9003EC437 /* CampaignTopVIew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CampaignTopVIew.xib; sourceTree = "<group>"; };
-		33D3F52E1AE85E66003EC437 /* SSOCampaignTopViewControllerContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOCampaignTopViewControllerContainer.h; path = Campaign/SSOCampaignTopViewControllerContainer.h; sourceTree = "<group>"; };
-		33D3F52F1AE85E66003EC437 /* SSOCampaignTopViewControllerContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOCampaignTopViewControllerContainer.m; path = Campaign/SSOCampaignTopViewControllerContainer.m; sourceTree = "<group>"; };
-		33D3F5311AE864ED003EC437 /* SSOCampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOCampaignViewController.h; path = Campaign/SSOCampaignViewController.h; sourceTree = "<group>"; };
-		33D3F5321AE864ED003EC437 /* SSOCampaignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOCampaignViewController.m; path = Campaign/SSOCampaignViewController.m; sourceTree = "<group>"; };
 		33E8517A1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SSOSocialNetworkAPI+USnap.h"; sourceTree = "<group>"; };
 		33E8517B1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SSOSocialNetworkAPI+USnap.m"; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -326,8 +334,6 @@
 		D86E08F31AE6CDBE00711579 /* SSOFeedConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFeedConnect.m; sourceTree = "<group>"; };
 		D86E09121AE75DDF00711579 /* SSOFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFeedViewController.h; sourceTree = "<group>"; };
 		D86E09131AE75DDF00711579 /* SSOFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOFeedViewController.m; sourceTree = "<group>"; };
-		D86E09191AE76E2500711579 /* SSOCountableItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCountableItems.h; sourceTree = "<group>"; };
-		D86E091A1AE76E2500711579 /* SSOCountableItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCountableItems.m; sourceTree = "<group>"; };
 		D86E091B1AE76E2500711579 /* SSOSnap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSnap.h; sourceTree = "<group>"; };
 		D86E091C1AE76E2500711579 /* SSOSnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSnap.m; sourceTree = "<group>"; };
 		D86E94A11ACF492000CFF801 /* SSOFacebookLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOFacebookLoginButton.h; sourceTree = "<group>"; };
@@ -456,11 +462,12 @@
 				D86E08ED1AE6BDEA00711579 /* API */,
 				D8FBADA81AE933C8005D6C18 /* Base */,
 				3357233C1ACB097C000CC846 /* Camera */,
+				339841EA1AEACC8600605C67 /* Campaign */,
 				D830F4031ACDDBF1002A503D /* Categories */,
-				33D3F52B1AE85B12003EC437 /* Campaign */,
-				33D3F5271AE84D3C003EC437 /* Fan page */,
+				339841DD1AEACC5C00605C67 /* Fan Page */,
 				335723721ACB097C000CC846 /* Helpers */,
 				D86E94BD1ACF4A1400CFF801 /* Live Feed */,
+				339841D61AEAB3E400605C67 /* Model */,
 				D8EA5C7D1AD4287C008D2A37 /* Login */,
 				335723751ACB097C000CC846 /* Old:To Check */,
 				3357238E1ACB097C000CC846 /* Settings */,
@@ -692,6 +699,87 @@
 			name = Categorie;
 			sourceTree = "<group>";
 		};
+		339841D61AEAB3E400605C67 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				339841D71AEAB41000605C67 /* SSOCountableItems.h */,
+				339841D81AEAB41000605C67 /* SSOCountableItems.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		339841DD1AEACC5C00605C67 /* Fan Page */ = {
+			isa = PBXGroup;
+			children = (
+				339841DE1AEACC5C00605C67 /* Controllers */,
+				339841E11AEACC5C00605C67 /* Model */,
+				339841E41AEACC5C00605C67 /* Views */,
+				339841E51AEACC5C00605C67 /* XIB */,
+			);
+			path = "Fan Page";
+			sourceTree = "<group>";
+		};
+		339841DE1AEACC5C00605C67 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				339841DF1AEACC5C00605C67 /* SSOFanPageViewController.h */,
+				339841E01AEACC5C00605C67 /* SSOFanPageViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		339841E11AEACC5C00605C67 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				339841E21AEACC5C00605C67 /* SSOCampaign.h */,
+				339841E31AEACC5C00605C67 /* SSOCampaign.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		339841E41AEACC5C00605C67 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		339841E51AEACC5C00605C67 /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				339841E61AEACC5C00605C67 /* FanPage.xib */,
+			);
+			path = XIB;
+			sourceTree = "<group>";
+		};
+		339841EA1AEACC8600605C67 /* Campaign */ = {
+			isa = PBXGroup;
+			children = (
+				339841EB1AEACC8600605C67 /* Controllers */,
+				339841F01AEACC8600605C67 /* XIB */,
+			);
+			path = Campaign;
+			sourceTree = "<group>";
+		};
+		339841EB1AEACC8600605C67 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				339841EC1AEACC8600605C67 /* SSOCampaignTopViewControllerContainer.h */,
+				339841ED1AEACC8600605C67 /* SSOCampaignTopViewControllerContainer.m */,
+				339841EE1AEACC8600605C67 /* SSOCampaignViewController.h */,
+				339841EF1AEACC8600605C67 /* SSOCampaignViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		339841F01AEACC8600605C67 /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				339841F11AEACC8600605C67 /* CampaignTopVIew.xib */,
+			);
+			path = XIB;
+			sourceTree = "<group>";
+		};
 		3399F6D71AE5A0A900835B13 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -699,34 +787,6 @@
 				3399F6D91AE5A0DB00835B13 /* SSOCustomSocialButton.m */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		33D3F5271AE84D3C003EC437 /* Fan page */ = {
-			isa = PBXGroup;
-			children = (
-				33D3F52A1AE84E08003EC437 /* Controllers */,
-				33D3F5281AE84DFE003EC437 /* FanPage.xib */,
-			);
-			name = "Fan page";
-			sourceTree = "<group>";
-		};
-		33D3F52A1AE84E08003EC437 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		33D3F52B1AE85B12003EC437 /* Campaign */ = {
-			isa = PBXGroup;
-			children = (
-				33D3F52C1AE85CC9003EC437 /* CampaignTopVIew.xib */,
-				33D3F52E1AE85E66003EC437 /* SSOCampaignTopViewControllerContainer.h */,
-				33D3F52F1AE85E66003EC437 /* SSOCampaignTopViewControllerContainer.m */,
-				33D3F5311AE864ED003EC437 /* SSOCampaignViewController.h */,
-				33D3F5321AE864ED003EC437 /* SSOCampaignViewController.m */,
-			);
-			name = Campaign;
 			sourceTree = "<group>";
 		};
 		D810B8741ADF506400B3AC11 /* Controllers */ = {
@@ -951,8 +1011,6 @@
 		D86E09181AE76E2500711579 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D86E09191AE76E2500711579 /* SSOCountableItems.h */,
-				D86E091A1AE76E2500711579 /* SSOCountableItems.m */,
 				D86E091B1AE76E2500711579 /* SSOSnap.h */,
 				D86E091C1AE76E2500711579 /* SSOSnap.m */,
 			);
@@ -1198,7 +1256,6 @@
 				D8D4F1811AE04B12002FDE38 /* Launch Screen.xib in Resources */,
 				D810B8EE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
 				D810B8EF1ADF506500B3AC11 /* SSOColorPickerContainerView.xib in Resources */,
-				33D3F5291AE84DFE003EC437 /* FanPage.xib in Resources */,
 				335723DC1ACB097C000CC846 /* SettingsSocialFakeCell.xib in Resources */,
 				D8C83EA31AE1C74C00F187F1 /* InfoPlist.strings in Resources */,
 				D8C83EA41AE1C74C00F187F1 /* Localizable.strings in Resources */,
@@ -1209,8 +1266,9 @@
 				D810B8F11ADF506500B3AC11 /* SSOFontCollectionViewCell.xib in Resources */,
 				3303DDD01AD84F19002B74F9 /* SSOLoginContainerView.xib in Resources */,
 				D810B8F21ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib in Resources */,
-				33D3F52D1AE85CC9003EC437 /* CampaignTopVIew.xib in Resources */,
 				D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */,
+				339841F41AEACC8600605C67 /* CampaignTopVIew.xib in Resources */,
+				339841E91AEACC5C00605C67 /* FanPage.xib in Resources */,
 				335723DE1ACB097C000CC846 /* WKShareViewController.xib in Resources */,
 				270DFB0719AE71BE00067072 /* Images.xcassets in Resources */,
 			);
@@ -1300,11 +1358,12 @@
 				D810B8DA1ADF506500B3AC11 /* SSODrawToolController.m in Sources */,
 				335723D21ACB097C000CC846 /* WKMoviePlayerView.m in Sources */,
 				D830F4241ACDDBF1002A503D /* UIView+WKAdditions.m in Sources */,
+				339841E71AEACC5C00605C67 /* SSOFanPageViewController.m in Sources */,
 				D810B8EC1ADF506500B3AC11 /* WKColorPickerView.m in Sources */,
-				33D3F5331AE864ED003EC437 /* SSOCampaignViewController.m in Sources */,
 				D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */,
 				3399F6DA1AE5A0DB00835B13 /* SSOCustomSocialButton.m in Sources */,
 				D830F41B1ACDDBF1002A503D /* AVAssetTrack+WKAdditions.m in Sources */,
+				339841F31AEACC8600605C67 /* SSOCampaignViewController.m in Sources */,
 				D810B8E51ADF506500B3AC11 /* SSOSubtoolContainerView.m in Sources */,
 				D810B8CD1ADF506500B3AC11 /* WKEditMediaViewController.m in Sources */,
 				335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */,
@@ -1339,7 +1398,6 @@
 				D810B8E71ADF506500B3AC11 /* SSOTextAccessoryContainerView.m in Sources */,
 				335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */,
 				D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */,
-				33D3F5301AE85E66003EC437 /* SSOCampaignTopViewControllerContainer.m in Sources */,
 				336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */,
 				D810B8DE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.m in Sources */,
 				333F49AE1AE01BEC004B5CC3 /* SSOOrientationHelper.m in Sources */,
@@ -1355,9 +1413,9 @@
 				D86E94CA1ACF4A1400CFF801 /* SSOImageCollectionViewCell.m in Sources */,
 				D830F41A1ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				D810B8F71ADF508A00B3AC11 /* NSBundle+Wink.m in Sources */,
+				339841E81AEACC5C00605C67 /* SSOCampaign.m in Sources */,
 				D810B8DD1ADF506500B3AC11 /* SSOFontCollectionViewCell.m in Sources */,
 				D830F4211ACDDBF1002A503D /* UIImage+Resizing.m in Sources */,
-				D86E091D1AE76E2500711579 /* SSOCountableItems.m in Sources */,
 				D810B8E21ADF506500B3AC11 /* SSOColorPickerContainerView.m in Sources */,
 				D86E09151AE75DDF00711579 /* SSOFeedViewController.m in Sources */,
 				D810B8E91ADF506500B3AC11 /* SSOEditSideMenuView.m in Sources */,
@@ -1366,9 +1424,11 @@
 				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
 				D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */,
 				D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */,
+				339841F21AEACC8600605C67 /* SSOCampaignTopViewControllerContainer.m in Sources */,
 				D810B8E01ADF506500B3AC11 /* SSOAccessoryContainerView.m in Sources */,
 				D810B8DF1ADF506500B3AC11 /* SSOAdjustmentSliderContainerView.m in Sources */,
 				3303DDDA1AD86F66002B74F9 /* SSOCustomSignInButton.m in Sources */,
+				339841D91AEAB41000605C67 /* SSOCountableItems.m in Sources */,
 				D810B8D01ADF506500B3AC11 /* SSOTextFontCollectionViewProvider.m in Sources */,
 				D810B8E61ADF506500B3AC11 /* SSODrawAccessoryContainerView.m in Sources */,
 				335723D91ACB097C000CC846 /* WKSettingsViewController.m in Sources */,
