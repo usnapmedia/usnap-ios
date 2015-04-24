@@ -10,6 +10,7 @@
 #import "SSOFeedViewController.h"
 #import <Masonry.h>
 #import <SSOSimpleCollectionViewProvider.h>
+#import "SSOFanPageViewController.h"
 
 #define kFeedContainerHeight 55
 
@@ -69,7 +70,7 @@
 
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //@TODO Present fan page
-    [self presentViewController:[UIViewController new] animated:YES completion:nil];
+    [self presentViewController:[SSOFanPageViewController new] animated:YES completion:nil];
 }
 
 @end

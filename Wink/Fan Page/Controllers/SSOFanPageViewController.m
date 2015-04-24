@@ -12,7 +12,7 @@
 #import "SSOCountableItems.h"
 #import <Masonry.h>
 
-@interface SSOFanPageViewController ()
+@interface SSOFanPageViewController () <TopContainerFanPageDelegate>
 
 @property(strong, nonatomic) SSOCampaignTopViewControllerContainer *campaingTopVCContainer;
 @property(weak, nonatomic) IBOutlet UIView *campaignViewControllerContainer;
@@ -66,18 +66,16 @@
     }];
 }
 
-#pragma mark - XLPagerTabStripViewControllerDelegate
+#pragma mark - TopContainerFanPageDelegate
 
 /**
- *  Delegate method returned when changing the campaign in the topVC
+ *  Delegate method from the topContainer called after the user swiped to a new campaign
  *
- *  @param pagerTabStripViewController the topVC
- *  @param fromIndex                   the index we are coming from
- *  @param toIndex                     the index we are going to
+ *  @param newCampaign the new campaign displayed
  */
-- (void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
-           updateIndicatorFromIndex:(NSInteger)fromIndex
-                            toIndex:(NSInteger)toIndex {
+- (void)topViewControllerDidChangeForNewCampaign:(SSOCampaign *)newCampaign {
+
+    NSLog(@" the new campaign is : %@", newCampaign);
 }
 
 @end
