@@ -10,11 +10,31 @@
 #import "WKWinkConnect.h"
 //#import "SSOCountableItems.h"
 #import <Masonry.h>
+#import "SSOCampaign.h"
 
-@protocol TOpContainerFanPageDelegate;
+@protocol TopContainerFanPageDelegate;
 
 @interface SSOCampaignTopViewControllerContainer : UIViewController
 
-@property(nonatomic, strong) NSArray *arrayOfVC;
+@property(weak, nonatomic) id<TopContainerFanPageDelegate> delegate;
+
+/**
+ *  Initialization
+ *
+ *  @param campaigns array of campaigns passes from FanPageVC
+ *
+ *  @return the controller
+ */
+- (instancetype)initWithArrayOfCampaigns:(NSArray *)campaigns;
+@end
+
+@protocol TopContainerFanPageDelegate <NSObject>
+
+/**
+ *  Delegate method returned when we change the campaign
+ *
+ *  @param newCampaign the new campaign
+ */
+- (void)topViewControllerDidChangeForNewCampaign:(SSOCampaign *)newCampaign;
 
 @end

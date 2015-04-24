@@ -7,22 +7,33 @@
 //
 
 #import "SSOCampaignTopViewControllerContainer.h"
-#import <SSOSimpleCollectionViewProvider.h>
 #import "WKWinkConnect.h"
+#import "SSOCampaignProvider.h"
+#import <Masonry.h>
 
-#define kTabCollectionViewCellNib @""
-#define kTabCollectionViewCell @""
+#define kTabCollectionViewCellNib @"SSOTopCampaignCollectionViewCell"
+#define kCollectionViewCellID @"campaignCell"
+#define kCollectionViewCellNIB @"SSOCampaignImageCellCollectionViewCell"
 
-@interface SSOCampaignTopViewControllerContainer () <SSOProviderDelegate>
+@interface SSOCampaignTopViewControllerContainer () <SSOCampaignProviderDelegate>
 
 @property(strong, nonatomic) UICollectionView *tabCollectionView;
-@property(strong, nonatomic) UICollectionView *imageCollectionView;
-@property(strong, nonatomic) SSOSimpleCollectionViewProvider *topProvider;
-@property(strong, nonatomic) SSOSimpleCollectionViewProvider *imageProvider;
+@property(strong, nonatomic) SSOSimpleCollectionViewProvider *provider;
+@property(nonatomic, strong) NSArray *arrayOfCampaigns;
 
 @end
 
 @implementation SSOCampaignTopViewControllerContainer
+
+- (instancetype)initWithArrayOfCampaigns:(NSArray *)campaigns {
+
+    if (self = [super init]) {
+
+        self.arrayOfCampaigns = campaigns;
+    }
+
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,47 +49,55 @@
  *  Initialize the data of the VC
  */
 - (void)initializeData {
-    // Set the flow layout
-    UICollectionViewFlowLayout *flowLayoutTop = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayoutTop setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    // Initialize the view
-    self.tabCollectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayoutTop];
-    self.tabCollectionView.showsHorizontalScrollIndicator = NO;
-    self.topProvider = [SSOSimpleCollectionViewProvider new];
 
-    self.tabCollectionView.delegate = self.topProvider;
-    self.tabCollectionView.dataSource = self.topProvider;
-
-    [self.tabCollectionView registerNib:[UINib nibWithNibName:kTabCollectionViewCellNib bundle:[NSBundle mainBundle]]
-             forCellWithReuseIdentifier:kTabCollectionViewCell];
-
-    self.topProvider.cellReusableIdentifier = kTabCollectionViewCell;
-
+    self.view.backgroundColor = [UIColor clearColor];
     // Set the flow layout
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    flowLayout.minimumInteritemSpacing = 0;
+    flowLayout.minimumLineSpacing = 0;
+
+    self.tabCollectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
+
+    self.tabCollectionView.backgroundColor = [UIColor clearColor];
+
+    // Add paging to collectionView
+    self.tabCollectionView.pagingEnabled = YES;
+
+    self.tabCollectionView.collectionViewLayout = flowLayout;
     // Initialize the view
-    self.imageCollectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
-    self.imageCollectionView.showsHorizontalScrollIndicator = NO;
-    self.imageProvider = [SSOSimpleCollectionViewProvider new];
+    self.tabCollectionView.showsHorizontalScrollIndicator = NO;
 
-    self.imageCollectionView.delegate = self.imageProvider;
-    self.imageCollectionView.dataSource = self.imageProvider;
+    // Init the provider with collectionViews and data
+    self.provider = [[SSOCampaignProvider alloc] initWithTabCollectionView:self.tabCollectionView andInputData:self.arrayOfCampaigns.mutableCopy];
+    self.provider.delegate = self;
 
-    [self.imageCollectionView registerNib:[UINib nibWithNibName:kTabCollectionViewCellNib bundle:[NSBundle mainBundle]]
-               forCellWithReuseIdentifier:kTabCollectionViewCell];
+    // Set the delegates and dataSources
+    self.tabCollectionView.delegate = self.provider;
+    self.tabCollectionView.dataSource = self.provider;
 
-    self.imageProvider.cellReusableIdentifier = kTabCollectionViewCell;
+    // Set the reusableIdentifiers for the cells
+    [self.tabCollectionView registerNib:[UINib nibWithNibName:kTabCollectionViewCellNib bundle:[NSBundle mainBundle]]
+             forCellWithReuseIdentifier:kCollectionViewCellID];
+    self.provider.cellReusableIdentifier = kCollectionViewCellID;
+
+    // Add the collectionViews to the view
+    [self.view addSubview:self.tabCollectionView];
+
+    // Add constraints
+    [self.tabCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.edges.equalTo(self.view);
+      make.height.equalTo(@50);
+    }];
+
+    // Reload the data
+    [self.tabCollectionView reloadData];
 }
 
-- (void)loadDataForCollectionViews {
+- (void)provider:(id)provider willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    [WKWinkConnect getCampaignsWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        se 
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-
-    }];
+    [self.delegate topViewControllerDidChangeForNewCampaign:[self.arrayOfCampaigns objectAtIndex:indexPath.row]];
+    NSLog(@"indexPath : %@   cell : %@", indexPath, cell);
 }
 
 @end
