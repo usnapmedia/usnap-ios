@@ -1,5 +1,5 @@
 //
-//  WKSocialNetworkHelper.m
+//  SSOSocialNetworkAPI.m
 //  Wink
 //
 //  Created by Nicolas Vincensini on 2015-02-12.
@@ -35,19 +35,20 @@
 
     if (socialNetwork == facebookSocialNetwork) {
 
-        [SSFacebookHelper login:^(FBSDKLoginManagerLoginResult *result) {
-          [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:nil];
+        [SSFacebookHelper loginWithPermissions:self.facebookPermissions
+            onSuccess:^(FBSDKLoginManagerLoginResult *result) {
+              [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:nil];
 
-        } onFailure:^(NSError *error) {
-          [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:error];
+            }
+            onFailure:^(NSError *error) {
+              [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:error];
 
-          CLS_LOG(@"error FB login :%@", error);
+              CLS_LOG(@"error FB login :%@", error);
+            }
+            onCancellation:^{
+              [self.delegate socialNetwork:facebookSocialNetwork DidCancelLogin:nil];
 
-        } onCancellation:^{
-
-          [self.delegate socialNetwork:facebookSocialNetwork DidCancelLogin:nil];
-
-        }];
+            }];
 
     } else if (socialNetwork == twitterSocialNetwork) {
 

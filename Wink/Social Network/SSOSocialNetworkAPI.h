@@ -1,5 +1,5 @@
 //
-//  WKSocialNetworkHelper.h
+//  SSOSocialNetworkAPI.h
 //  Wink
 //
 //  Created by Nicolas Vincensini on 2015-02-12.
@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
 @interface SSOSocialNetworkAPI : NSObject
 
 @property(weak, nonatomic) id<SocialNetworkDelegate> delegate;
+@property(strong, nonatomic) NSArray *facebookPermissions;
 
 /**
  *  Return SSOSocialNetworkAPI singleton instance

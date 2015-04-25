@@ -43,7 +43,6 @@
 		335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723741ACB097C000CC846 /* FacebookHelper.m */; };
 		335723D21ACB097C000CC846 /* WKMoviePlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723811ACB097C000CC846 /* WKMoviePlayerView.m */; };
 		335723D31ACB097C000CC846 /* WKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723831ACB097C000CC846 /* WKNavigationController.m */; };
-		335723D41ACB097C000CC846 /* WKSocialNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723851ACB097C000CC846 /* WKSocialNetworkHelper.m */; };
 		335723D61ACB097C000CC846 /* WKVideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723891ACB097C000CC846 /* WKVideoEditor.m */; };
 		335723D71ACB097C000CC846 /* WKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3357238B1ACB097C000CC846 /* WKViewController.m */; };
 		335723D91ACB097C000CC846 /* WKSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723911ACB097C000CC846 /* WKSettingsViewController.m */; };
@@ -185,8 +184,6 @@
 		335723811ACB097C000CC846 /* WKMoviePlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKMoviePlayerView.m; sourceTree = "<group>"; };
 		335723821ACB097C000CC846 /* WKNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKNavigationController.h; sourceTree = "<group>"; };
 		335723831ACB097C000CC846 /* WKNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKNavigationController.m; sourceTree = "<group>"; };
-		335723841ACB097C000CC846 /* WKSocialNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKSocialNetworkHelper.h; sourceTree = "<group>"; };
-		335723851ACB097C000CC846 /* WKSocialNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSocialNetworkHelper.m; sourceTree = "<group>"; };
 		335723881ACB097C000CC846 /* WKVideoEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKVideoEditor.h; sourceTree = "<group>"; };
 		335723891ACB097C000CC846 /* WKVideoEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKVideoEditor.m; sourceTree = "<group>"; };
 		3357238A1ACB097C000CC846 /* WKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKViewController.h; sourceTree = "<group>"; };
@@ -552,8 +549,6 @@
 				335723811ACB097C000CC846 /* WKMoviePlayerView.m */,
 				335723821ACB097C000CC846 /* WKNavigationController.h */,
 				335723831ACB097C000CC846 /* WKNavigationController.m */,
-				335723841ACB097C000CC846 /* WKSocialNetworkHelper.h */,
-				335723851ACB097C000CC846 /* WKSocialNetworkHelper.m */,
 				335723881ACB097C000CC846 /* WKVideoEditor.h */,
 				335723891ACB097C000CC846 /* WKVideoEditor.m */,
 				3357238A1ACB097C000CC846 /* WKViewController.h */,
@@ -1215,7 +1210,6 @@
 				335723D61ACB097C000CC846 /* WKVideoEditor.m in Sources */,
 				D830F41D1ACDDBF1002A503D /* NSDictionary+WKAdditions.m in Sources */,
 				3316F2D01ADD6CC900C7ED24 /* NSUserDefaults+USnap.m in Sources */,
-				335723D41ACB097C000CC846 /* WKSocialNetworkHelper.m in Sources */,
 				D810B8E31ADF506500B3AC11 /* SSOFadingContainerView.m in Sources */,
 				D810B8D91ADF506500B3AC11 /* SSOAdjustmentToolController.m in Sources */,
 				CB8F0ABA1ADDDC8600C18263 /* AVCamPreviewView.m in Sources */,

@@ -9,15 +9,13 @@
 #import "WKAppDelegate.h"
 #import "WKWinkConnect.h"
 #import "GAI.h"
+#import "SSOSocialNetworkAPI.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <TwitterKit/TwitterKit.h>
 #import <PonyDebugger/PonyDebugger.h>
-
 #import <GooglePlus/GooglePlus.h>
-
-#import "SSOLoginViewController.h"
 #import <IQKeyboardManager.h>
 #import "WKShareViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -43,7 +41,8 @@
 #endif
 
     // Set permissions for Facebook
-    [SSFacebookHelper sharedInstance].facebookPermissions = @[ @"publish_actions" ];
+    [[SSOSocialNetworkAPI sharedInstance] setFacebookPermissions:@[ @"publish_actions" ]];
+
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[WKShareViewController class]];
     [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[WKShareViewController class]];
 

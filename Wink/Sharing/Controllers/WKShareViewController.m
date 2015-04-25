@@ -428,9 +428,9 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 #pragma mark - Button Actions
 
 - (IBAction)shareButtonTouched:(id)sender {
+
     [self post];
 }
-
 - (IBAction)backButtonTouched:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }

@@ -1,5 +1,4 @@
 source 'https://github.com/CocoaPods/Specs.git'
-source 'git@gitlab.samsaodev.com:ios-development/private-pods.git'
 
 platform :ios, '8.0'
 
@@ -12,7 +11,6 @@ pod 'ACEDrawingView'
 pod 'CWStatusBarNotification'
 pod 'Facebook-iOS-SDK'
 pod 'PonyDebugger'
-pod "FastttCamera", :git => 'https://github.com/KhanFu/FastttCamera', :branch => 'master'
 pod 'googleplus-ios-sdk'
 pod 'Masonry'
 pod 'RSKImageCropper'
@@ -23,6 +21,6 @@ pod 'IQKeyboardManager'
 pod 'SZTextView'
 
 # Samsao libraries
-pod 'SSFacebookHelper'
-pod 'SSOBaseProvider'
+pod 'SSFacebookHelper', :git => 'git@gitlab.samsaodev.com:ios-development/ssfacebookhelper.git'
+pod 'SSOBaseProvider', :git => 'git@gitlab.samsaodev.com:ios-development/SSOBaseProvider.git'
 
