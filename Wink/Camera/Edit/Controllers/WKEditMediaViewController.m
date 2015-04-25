@@ -27,34 +27,32 @@
 #import "SSOLoginViewController.h"
 #import "SSSessionManager.h"
 #import "SSOOrientationHelper.h"
+#import <RSKImageCropViewController.h>
 
 @interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, SSOLoginRegisterDelegate, SSOEditToolDelegate,
                                          RSKImageCropViewControllerDelegate>
 
+// UI
 @property(weak, nonatomic) IBOutlet UIImageView *watermarkImageView;
 @property(weak, nonatomic) IBOutlet UIButton *postButton;
 @property(weak, nonatomic) IBOutlet UIButton *backButton;
 @property(weak, nonatomic) IBOutlet SSOEditSideMenuView *sideMenuView;
-
-@property(nonatomic, strong) NSMutableArray *arrayImages;
-
-@property(strong, nonatomic) SSOEditToolController *childViewController;
-
+@property(weak, nonatomic) IBOutlet UIView *overlayView;
 // Containers
 @property(weak, nonatomic) IBOutlet SSOFadingContainerView *topView;
 @property(strong, nonatomic) SSOSubtoolContainerView *subtoolContainerView;
 @property(strong, nonatomic) SSOAccessoryContainerView *accessoryContainerView;
 @property(strong, nonatomic) SSOButtonsContainerView *buttonsContainerView;
-
 // Tools
 @property(nonatomic, strong) ACEDrawingView *drawView;
 @property(nonatomic, strong) SSOEditMediaMovableTextView *textView;
 @property(nonatomic, strong) SSOAdjustementsHelper *adjustementHelper;
-
 // Media
 @property(nonatomic, strong) UIImageView *imageView;
 @property(nonatomic, strong) UIImageView *modifiedImageView;
 @property(nonatomic, strong) WKMoviePlayerView *moviePlayerView;
+
+@property(strong, nonatomic) SSOEditToolController *childViewController;
 
 @end
 
@@ -64,7 +62,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    // Setup UI
     [self setUI];
 }
 
@@ -94,6 +92,8 @@
     [self.textView resignFirstResponder];
 }
 
+#pragma mark - Orientation
+
 /**
  *  Block the screen rotation
  *
@@ -118,10 +118,12 @@
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
 
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    CGSize sizeMinusCollectionView = CGSizeMake(size.width, size.height - self.collectionView.frame.size.height);
+    CGSize sizeMinusCollectionView = CGSizeMake(size.width, size.height - self.feedContainerView.frame.size.height);
 
     [self.sideMenuView setSizeOfView:sizeMinusCollectionView];
 }
+
+#pragma mark - Initialization
 
 - (void)setUI {
 
@@ -144,16 +146,11 @@
         [self.view insertSubview:self.moviePlayerView atIndex:0];
     }
 
-    // Remove brightness and crop options for media and re-position draw and text
-    if (self.mediaURL) {
-        //        self.brightnessButton.hidden = YES;
-        //        self.cropButton.hidden = YES;
-    }
-
-    //@FIXME
-    [self.collectionView registerNib:[UINib nibWithNibName:@"CustomCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"collectionCell"];
-    self.collectionView.inputData = [self populateCellData].mutableCopy;
-    [self.collectionView reloadData];
+    // Make the top container top constraint on the bottom of the feed controller.
+    // Feed controller comes from the base class
+    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.top.equalTo(self.feedContainerView.mas_bottom);
+    }];
 }
 
 /**
@@ -180,58 +177,7 @@
     // Set the array of buttons for the side menu
     self.sideMenuView.arrayButtons = @[ drawButton, textButton, adjustmentButton, cropButton ];
 
-    [self.sideMenuView setSizeOfView:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - self.collectionView.frame.size.height)];
-}
-
-#pragma mark - Getter
-
-//@TODO
-- (NSMutableArray *)arrayImages {
-
-    if (!_arrayImages) {
-        _arrayImages = [[NSMutableArray alloc] init];
-    }
-
-    _arrayImages = @[
-        [UIImage imageNamed:@"Alien"],
-        [UIImage imageNamed:@"hankey"],
-        [UIImage imageNamed:@"Unknown"],
-        [UIImage imageNamed:@"Alien"],
-        [UIImage imageNamed:@"hankey"],
-        [UIImage imageNamed:@"Unknown"],
-        [UIImage imageNamed:@"Alien"],
-        [UIImage imageNamed:@"hankey"],
-        [UIImage imageNamed:@"Unknown"]
-    ].mutableCopy;
-    //[_arrayImages arrayByAddingObjectsFromArray:_arrayImages];
-    return _arrayImages;
-}
-/**
- *  This method is just used to generate the table view data for the SSBaseCollectionView.
- *
- *  @param inputArray Takes as input an organized array of Adjicons
- *
- *  @return Returns an array of arrays with sections containing elements
- */
-
-- (NSArray *)populateCellData {
-
-    NSMutableArray *cellDataArray = [NSMutableArray new];
-
-    SSCellViewSection *section = [[SSCellViewSection alloc] init];
-
-    for (UIImage *image in self.arrayImages) {
-        SSCellViewItem *newElement;
-
-        newElement = [SSCellViewItem new];
-        newElement.cellReusableIdentifier = @"collectionCell";
-        newElement.objectData = image;
-        [section.rows addObject:newElement];
-    }
-
-    [cellDataArray addObject:section];
-
-    return cellDataArray;
+    [self.sideMenuView setSizeOfView:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - self.feedContainerView.frame.size.height)];
 }
 
 #pragma mark - Touch Methods

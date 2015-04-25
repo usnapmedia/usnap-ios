@@ -8,9 +8,7 @@
 
 #import "SSOCameraViewController.h"
 #import "WKSettingsViewController.h"
-#import <MobileCoreServices/MobileCoreServices.h>
 #import "WKNavigationController.h"
-#import <SVProgressHUD/SVProgressHUD.h>
 #import "WKEditMediaViewController.h"
 #import "SSORoundedAnimatedButton.h"
 #import "AVCamPreviewView.h"
@@ -19,6 +17,10 @@
 #import "UINavigationController+SSOLockedNavigationController.h"
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 #import <Masonry.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <SSCellViewItem.h>
+#import <SSCellViewSection.h>
 
 #define kTotalVideoRecordingTime 30
 
@@ -30,18 +32,17 @@
 @property(weak, nonatomic) IBOutlet UIButton *cameraRotationButton;
 @property(weak, nonatomic) IBOutlet UIButton *profileButton;
 @property(weak, nonatomic) IBOutlet UIButton *mediaButton;
-@property(weak, nonatomic) IBOutlet UIView *topBlackBar;
+@property(weak, nonatomic) IBOutlet UIView *topContainerView;
 @property(weak, nonatomic) IBOutlet UIView *bottomContainerView;
 @property(weak, nonatomic) IBOutlet SSORoundedAnimatedButton *animatedCaptureButton;
 @property(weak, nonatomic) IBOutlet AVCamPreviewView *cameraPreviewView;
+// Used to display a blur on the preview
 @property(strong, nonatomic) UIVisualEffectView *effectView;
 @property(strong, nonatomic) UIView *blurEffectview;
-
-// View Controllers
-@property(weak, nonatomic) WKEditMediaViewController *mediaEditViewController;
+// Preview image
+@property(strong, nonatomic) UIImage *libraryImage;
 
 // Data
-@property(nonatomic) BOOL isVideoOn;
 @property(nonatomic) AVCaptureFlashMode flashState;
 @property(nonatomic) AVCaptureTorchMode torchState;
 @property(nonatomic) AVCaptureDevicePosition devicePosition;
@@ -49,7 +50,6 @@
 @property(nonatomic) BOOL isRotationAllowed;
 @property(strong, nonatomic) SSOCameraCaptureHelper *cameraCaptureHelper;
 @property(strong, nonatomic) NSMutableArray *arrayImages;
-@property(strong, nonatomic) UIImage *libraryImage;
 
 @end
 
@@ -101,7 +101,7 @@
     [self.cameraCaptureHelper willRotateToInterfaceOrientation:toInterfaceOrientation];
 }
 
-#pragma mark - Utilities
+#pragma mark - Initialization
 
 /**
  *  Initialize animated button
@@ -124,10 +124,6 @@
                                                                 withDevicePosition:self.devicePosition
                                                                     withFlashState:self.flashState];
     self.cameraCaptureHelper.delegate = self;
-    //@FIXME
-    [self.collectionView registerNib:[UINib nibWithNibName:@"CustomCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"collectionCell"];
-    self.collectionView.inputData = [self populateCellData].mutableCopy;
-    [self.collectionView reloadData];
 }
 
 /**
@@ -150,6 +146,12 @@
     self.isRotationAllowed = YES;
     self.isVideoRecording = NO;
 
+    // Make the top container top constraint on the bottom of the feed controller.
+    // Feed controller comes from the base class
+    [self.topContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.top.equalTo(self.feedContainerView.mas_bottom);
+    }];
+
     // Setup UI for video recording label
     [self initializeFlash];
     [self initializeUICameraDevice];
@@ -157,63 +159,12 @@
     [self.view bringSubviewToFront:self.animatedCaptureButton];
 }
 
-/**
- *  Update the UI for the camera device depending if it's rear facing or front facing
- */
-- (void)initializeUICameraDevice {
-    if (self.devicePosition == AVCaptureDevicePositionFront) {
-        self.flashButton.hidden = YES;
-    } else {
-        self.flashButton.hidden = NO;
-    }
-}
-
-/**
- *  Intialize flash
- */
-- (void)initializeFlash {
-    if (self.flashState == AVCaptureFlashModeOff) {
-        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconOFF"] forState:UIControlStateNormal];
-
-    } else if (self.flashState == AVCaptureFlashModeOn) {
-        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconON"] forState:UIControlStateNormal];
-
-    } else {
-        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconAUTO"] forState:UIControlStateNormal];
-    }
-}
-
 - (BOOL)shouldAutorotate {
 
     return self.isRotationAllowed;
 }
 
-/**
- *  Add an animation to the camera roll preview image when we take a picture and come back to camera view
- */
-- (void)animateCameraRollImageChange {
-
-    // Check if the libraryImage has been fetched from camera roll. If not call the method again with a small delay (avoid memory bad access)
-    if (self.libraryImage) {
-        [UIView animateWithDuration:0.3
-            animations:^{
-              // Fade in
-              self.mediaButton.alpha = 0.1;
-            }
-            completion:^(BOOL finished) {
-
-              [UIView animateWithDuration:0.3
-                               animations:^{
-                                 [self.mediaButton setImage:self.libraryImage forState:UIControlStateNormal];
-                                 // Fade out
-                                 self.mediaButton.alpha = 1;
-                               }];
-            }];
-    } else {
-
-        [self performSelector:@selector(animateCameraRollImageChange) withObject:nil afterDelay:0.2];
-    }
-}
+#pragma mark - Navigation
 
 /**
  *  Init and present the UIImagePickerController to allow the user to select a photo or video from camera roll
@@ -226,40 +177,6 @@
     controller.toolbarHidden = NO;
     controller.mediaTypes = @[ (NSString *)kUTTypeImage, (NSString *)kUTTypeMovie ];
     [self presentViewController:controller animated:YES completion:nil];
-}
-
-/**
- *  Initialize the camera library and display the last picture in cameraRoll imageView
- */
-- (void)initializeAssetsLibrary {
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
-          usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-
-            if (group != nil) {
-                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-
-                [group enumerateAssetsWithOptions:NSEnumerationReverse
-                                       usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-
-                                         if (asset) {
-                                             UIImage *img = [UIImage imageWithCGImage:asset.thumbnail];
-                                             self.libraryImage = img;
-
-                                             *stop = YES;
-                                         }
-                                       }];
-            }
-
-            *stop = NO;
-          }
-          failureBlock:^(NSError *error) {
-            NSLog(@"error %@", error);
-          }];
-
-    });
 }
 
 /**
@@ -294,7 +211,79 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-#pragma mark Corner Icons
+#pragma mark - IBAction
+
+#pragma mark Top icons
+
+- (IBAction)flashButtonTouched:(id)sender {
+
+    [self switchFlashState];
+}
+
+- (IBAction)mediaButtonTouched:(id)sender {
+
+    // Open a controller that holds the user's photos and videos
+    [self displayCamerallRollPickerVC];
+}
+
+- (IBAction)cameraDeviceButtonTouched:(id)sender {
+    [self switchDeviceCameraState];
+}
+
+- (IBAction)profileButtonTouched:(id)sender {
+    WKSettingsViewController *settingsVC = [WKSettingsViewController new];
+    [self presentViewController:settingsVC animated:YES completion:nil];
+}
+
+#pragma mark Capture Button
+
+- (IBAction)captureButtonPushed:(id)sender {
+
+    // Disable user interaction so they can't take more than one photo
+    [sender setUserInteractionEnabled:NO];
+
+    [self.cameraCaptureHelper runStillImageCaptureAnimation];
+
+    [self.cameraCaptureHelper snapStillImage];
+}
+
+/**
+ *  Lock the orientation when the capture button begin to be touched
+ *
+ *  @param sender the button
+ */
+- (IBAction)captureButtonTouchedDown:(id)sender {
+
+    [[SSOOrientationHelper sharedInstance] setOrientation:[UIDevice currentDevice].orientation];
+}
+
+#pragma mark - Camera
+
+/**
+ *  Update the UI for the camera device depending if it's rear facing or front facing
+ */
+- (void)initializeUICameraDevice {
+    if (self.devicePosition == AVCaptureDevicePositionFront) {
+        self.flashButton.hidden = YES;
+    } else {
+        self.flashButton.hidden = NO;
+    }
+}
+
+/**
+ *  Intialize flash
+ */
+- (void)initializeFlash {
+    if (self.flashState == AVCaptureFlashModeOff) {
+        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconOFF"] forState:UIControlStateNormal];
+
+    } else if (self.flashState == AVCaptureFlashModeOn) {
+        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconON"] forState:UIControlStateNormal];
+
+    } else {
+        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconAUTO"] forState:UIControlStateNormal];
+    }
+}
 
 /**
  *  Update flash button UI
@@ -360,48 +349,65 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#pragma mark - IBActions
+/**
+ *  Initialize the camera library and display the last picture in cameraRoll imageView
+ */
+- (void)initializeAssetsLibrary {
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 
-- (IBAction)cameraDeviceButtonTouched:(id)sender {
-    [self switchDeviceCameraState];
-}
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
+          usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            if (group != nil) {
+                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
 
-- (IBAction)mediaButtonTouched:(id)sender {
+                [group enumerateAssetsWithOptions:NSEnumerationReverse
+                                       usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
 
-    // Open a controller that holds the user's photos and videos
-    [self displayCamerallRollPickerVC];
-}
+                                         if (asset) {
+                                             UIImage *img = [UIImage imageWithCGImage:asset.thumbnail];
+                                             self.libraryImage = img;
 
-- (IBAction)flashButtonTouched:(id)sender {
+                                             *stop = YES;
+                                         }
+                                       }];
+            }
 
-    [self switchFlashState];
-}
+            *stop = NO;
+          }
+          failureBlock:^(NSError *error) {
+            NSLog(@"error %@", error);
 
-#pragma mark Capture Button
+          }];
 
-- (IBAction)captureButtonPushed:(id)sender {
-
-    // Disable user interaction so they can't take more than one photo
-    [sender setUserInteractionEnabled:NO];
-
-    [self.cameraCaptureHelper runStillImageCaptureAnimation];
-
-    [self.cameraCaptureHelper snapStillImage];
+    });
 }
 
 /**
- *  Lock the orientation when the capture button begin to be touched
- *
- *  @param sender the button
+ *  Add an animation to the camera roll preview image when we take a picture and come back to camera view
  */
-- (IBAction)captureButtonTouchedDown:(id)sender {
+- (void)animateCameraRollImageChange {
 
-    [[SSOOrientationHelper sharedInstance] setOrientation:[UIDevice currentDevice].orientation];
-}
+    // Check if the libraryImage has been fetched from camera roll. If not call the method again with a small delay (avoid memory bad access)
+    if (self.libraryImage) {
+        [UIView animateWithDuration:0.3
+            animations:^{
+              // Fade in
+              self.mediaButton.alpha = 0.1;
+            }
+            completion:^(BOOL finished) {
 
-- (IBAction)profileButtonTouched:(id)sender {
-    WKSettingsViewController *settingsVC = [WKSettingsViewController new];
-    [self presentViewController:settingsVC animated:YES completion:nil];
+              [UIView animateWithDuration:0.3
+                               animations:^{
+                                 [self.mediaButton setImage:self.libraryImage forState:UIControlStateNormal];
+                                 // Fade out
+                                 self.mediaButton.alpha = 1;
+                               }];
+            }];
+    } else {
+
+        [self performSelector:@selector(animateCameraRollImageChange) withObject:nil afterDelay:0.2];
+    }
 }
 
 #pragma mark - Blur
@@ -520,6 +526,8 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - Status bar
+
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
@@ -531,10 +539,6 @@
 
 - (UIViewController *)childViewControllerForStatusBarHidden {
     return nil;
-}
-
-- (void)enableUserInteraction {
-    self.view.userInteractionEnabled = YES;
 }
 
 #pragma mark - SSOCameraDelegate
@@ -590,28 +594,6 @@
     [cellDataArray addObject:section];
 
     return cellDataArray;
-}
-
-//@TODO
-- (NSMutableArray *)arrayImages {
-
-    if (!_arrayImages) {
-        _arrayImages = [[NSMutableArray alloc] init];
-    }
-
-    _arrayImages = @[
-        [UIImage imageNamed:@"Alien"],
-        [UIImage imageNamed:@"hankey"],
-        [UIImage imageNamed:@"Unknown"],
-        [UIImage imageNamed:@"Alien"],
-        [UIImage imageNamed:@"hankey"],
-        [UIImage imageNamed:@"Unknown"],
-        [UIImage imageNamed:@"Alien"],
-        [UIImage imageNamed:@"hankey"],
-        [UIImage imageNamed:@"Unknown"]
-    ].mutableCopy;
-    //[_arrayImages arrayByAddingObjectsFromArray:_arrayImages];
-    return _arrayImages;
 }
 
 @end
