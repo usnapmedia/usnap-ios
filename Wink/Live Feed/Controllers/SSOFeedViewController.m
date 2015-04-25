@@ -9,6 +9,7 @@
 #import "SSOFeedViewController.h"
 #import "SSOFeedConnect.h"
 #import "SSOCountableItems.h"
+#import "SSOSnap.h"
 #import <Masonry.h>
 
 #define kImageCollectionViewCell @"imageCollectionViewCell"
@@ -91,7 +92,7 @@
 
     [SSOFeedConnect getliveFeedPhotosWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
       [overlayView setHidden:YES];
-      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject];
+      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
       self.provider.inputData = [items.response mutableCopy];
       [self.collectionView reloadData];
 

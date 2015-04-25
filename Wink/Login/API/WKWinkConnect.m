@@ -12,7 +12,7 @@
 #import "SSSessionManager.h"
 
 // Request Types
-#define GET @"GET"
+//#define GET @"GET"
 //#define POST @"POST"
 #define PUT @"PUT"
 #define DELETE @"DELETE"
@@ -94,5 +94,17 @@
       [formData appendPartWithFileData:imageData name:@"image_data" fileName:temporaryFileName mimeType:@"image/jpg"];
     } success:success failure:failure];
 }
+
++ (void)getCampaignsWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    
+    NSString *url = [NSString stringWithFormat:@"campaigns"];
+    
+    SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
+    
+    [manager GET:url parameters:nil success:success failure:failure];
+}
+
+
 
 @end
