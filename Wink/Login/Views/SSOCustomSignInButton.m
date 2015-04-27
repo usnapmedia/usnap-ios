@@ -27,7 +27,7 @@
 
     } else {
 
-        self.backgroundColor = [backgroundColor colorWithAlphaComponent:0.1];
+        self.backgroundColor = [UIColor lightGrayColor];
     }
 }
 
