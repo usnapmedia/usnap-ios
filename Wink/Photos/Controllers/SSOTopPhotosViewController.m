@@ -11,11 +11,11 @@
 #import "SSOUSnapButton.h"
 #import <Masonry.h>
 
-#define kTopPhotosCellWidth 100
-#define kTopPhotosCellOffset 10
-#define kTopViewHeightConstraint @30
-#define kConstraintOffset 10
-#define kButtonWidthConstraint @60
+NSInteger const kTopPhotosCellWidth = 100;
+NSInteger const kTopPhotosCellOffset = 10;
+NSInteger const kTopViewHeightConstraint = 30;
+NSInteger const kConstraintOffset = 10;
+NSInteger const kButtonWidthConstraint = 60;
 
 @interface SSOTopPhotosViewController ()
 
@@ -62,7 +62,7 @@
     // Create the constraints
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
       make.top.and.left.and.right.equalTo(self.view);
-      make.height.equalTo(kTopViewHeightConstraint);
+      make.height.equalTo([NSNumber numberWithInt:kTopViewHeightConstraint]);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
       make.centerY.equalTo(self.topView);
@@ -74,7 +74,7 @@
     [self.seeAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
       make.centerY.equalTo(self.topView);
       make.right.equalTo(self.topView).with.offset(-kConstraintOffset);
-      make.width.equalTo(kButtonWidthConstraint);
+      make.width.equalTo([NSNumber numberWithInt:kButtonWidthConstraint]);
     }];
 
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
