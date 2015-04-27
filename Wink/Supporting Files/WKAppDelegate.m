@@ -28,7 +28,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [[Twitter sharedInstance] startWithConsumerKey:@"iig0OuJF0qucK8EXENTg4DPCF" consumerSecret:@"lrkVewgFN0Rnw1GGx6yMxWvhktQxfujJBRHGpkqw7Nd5XKcu7q"];
+    [[Twitter sharedInstance] startWithConsumerKey:@"xWN8D23Qr6E0gJJFpthMXjbKX" consumerSecret:@"CJy9NakTiTNlfFkKByYg2YJe1UzmWw43PN7qrKEixJOWFV2MYM"];
     //     Setup crashlytics
     [Fabric with:@[ CrashlyticsKit, TwitterKit ]];
 
