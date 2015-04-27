@@ -22,6 +22,7 @@ pod 'pop'
 pod 'IQKeyboardManager'
 pod 'SZTextView'
 pod 'SDWebImage'
+pod 'SDiPhoneVersion'
 
 # Samsao libraries
 pod 'SSFacebookHelper'

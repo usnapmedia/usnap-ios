@@ -8,17 +8,20 @@
 
 #import "SSORegisterContainerView.h"
 #import "SSOThemeHelper.h"
+#import "SSOTextFieldWithUnderline.h"
+#import "SSOScreenSizeHelper.h"
 
 @interface SSORegisterContainerView () <UITextFieldDelegate>
 
 // Outlets
-@property(weak, nonatomic) IBOutlet UITextField *textFieldFirstName;
-@property(weak, nonatomic) IBOutlet UITextField *textFieldLastName;
-@property(weak, nonatomic) IBOutlet UITextField *textFieldEmail;
-@property(weak, nonatomic) IBOutlet UITextField *textFieldUsername;
-@property(weak, nonatomic) IBOutlet UITextField *textFieldBirthday;
-@property(weak, nonatomic) IBOutlet UITextField *textFieldPassword;
+@property(weak, nonatomic) IBOutlet SSOTextFieldWithUnderline *textFieldFirstName;
+@property(weak, nonatomic) IBOutlet SSOTextFieldWithUnderline *textFieldLastName;
+@property(weak, nonatomic) IBOutlet SSOTextFieldWithUnderline *textFieldEmail;
+@property(weak, nonatomic) IBOutlet SSOTextFieldWithUnderline *textFieldUsername;
+@property(weak, nonatomic) IBOutlet SSOTextFieldWithUnderline *textFieldBirthday;
+@property(weak, nonatomic) IBOutlet SSOTextFieldWithUnderline *textFieldPassword;
 @property(weak, nonatomic) IBOutlet UIButton *buttonSignUp;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewHeightConstraint;
 
 // Data
 @property(strong, nonatomic) NSDictionary *infoDic;
@@ -31,6 +34,10 @@
 - (void)awakeFromNib {
 
     [self setUpPickerViewForBirthday];
+    self.buttonSignUp.layer.cornerRadius = 4;
+    self.bottomViewHeightConstraint.constant = [SSOScreenSizeHelper heightForRegisterBottomView].floatValue;
+
+    NSLog(@"%f", self.bottomViewHeightConstraint.constant);
 }
 
 /**

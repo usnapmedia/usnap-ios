@@ -37,6 +37,8 @@
 		3303DDDD1AD87361002B74F9 /* SSORegisterContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3303DDDC1AD87361002B74F9 /* SSORegisterContainerView.m */; };
 		3316F2D01ADD6CC900C7ED24 /* NSUserDefaults+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316F2CF1ADD6CC900C7ED24 /* NSUserDefaults+USnap.m */; };
 		3316F2D31ADD6D9F00C7ED24 /* SSSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316F2D21ADD6D9F00C7ED24 /* SSSessionManager.m */; };
+		332CF5B01AEEB92400396746 /* SSOScreenSizeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 332CF5AF1AEEB92400396746 /* SSOScreenSizeHelper.m */; };
+		332E0A511AEE85AC00F77969 /* SSOTextFieldWithUnderline.m in Sources */ = {isa = PBXBuildFile; fileRef = 332E0A501AEE85AC00F77969 /* SSOTextFieldWithUnderline.m */; };
 		333F49AE1AE01BEC004B5CC3 /* SSOOrientationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 333F49AD1AE01BEC004B5CC3 /* SSOOrientationHelper.m */; };
 		335723B31ACB097C000CC846 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3357233E1ACB097C000CC846 /* Camera.storyboard */; };
 		335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723431ACB097C000CC846 /* SSOCameraViewController.m */; };
@@ -179,6 +181,10 @@
 		3316F2CF1ADD6CC900C7ED24 /* NSUserDefaults+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+USnap.m"; sourceTree = "<group>"; };
 		3316F2D11ADD6D9F00C7ED24 /* SSSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSessionManager.h; sourceTree = "<group>"; };
 		3316F2D21ADD6D9F00C7ED24 /* SSSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSessionManager.m; sourceTree = "<group>"; };
+		332CF5AE1AEEB92400396746 /* SSOScreenSizeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOScreenSizeHelper.h; sourceTree = "<group>"; };
+		332CF5AF1AEEB92400396746 /* SSOScreenSizeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOScreenSizeHelper.m; sourceTree = "<group>"; };
+		332E0A4F1AEE85AC00F77969 /* SSOTextFieldWithUnderline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOTextFieldWithUnderline.h; path = Views/SSOTextFieldWithUnderline.h; sourceTree = "<group>"; };
+		332E0A501AEE85AC00F77969 /* SSOTextFieldWithUnderline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOTextFieldWithUnderline.m; path = Views/SSOTextFieldWithUnderline.m; sourceTree = "<group>"; };
 		333F49AC1AE01BEC004B5CC3 /* SSOOrientationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOOrientationHelper.h; sourceTree = "<group>"; };
 		333F49AD1AE01BEC004B5CC3 /* SSOOrientationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOOrientationHelper.m; sourceTree = "<group>"; };
 		3357233E1ACB097C000CC846 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
@@ -490,6 +496,8 @@
 				3303DDDC1AD87361002B74F9 /* SSORegisterContainerView.m */,
 				3303DDD81AD86F66002B74F9 /* SSOCustomSignInButton.h */,
 				3303DDD91AD86F66002B74F9 /* SSOCustomSignInButton.m */,
+				332E0A4F1AEE85AC00F77969 /* SSOTextFieldWithUnderline.h */,
+				332E0A501AEE85AC00F77969 /* SSOTextFieldWithUnderline.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -557,6 +565,8 @@
 				335723741ACB097C000CC846 /* FacebookHelper.m */,
 				D8D4F17D1ADFFB52002FDE38 /* SSOThemeHelper.h */,
 				D8D4F17E1ADFFB52002FDE38 /* SSOThemeHelper.m */,
+				332CF5AE1AEEB92400396746 /* SSOScreenSizeHelper.h */,
+				332CF5AF1AEEB92400396746 /* SSOScreenSizeHelper.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1301,6 +1311,7 @@
 				333F49AE1AE01BEC004B5CC3 /* SSOOrientationHelper.m in Sources */,
 				3303DDDD1AD87361002B74F9 /* SSORegisterContainerView.m in Sources */,
 				335723D71ACB097C000CC846 /* WKViewController.m in Sources */,
+				332CF5B01AEEB92400396746 /* SSOScreenSizeHelper.m in Sources */,
 				D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */,
 				D810B8DB1ADF506500B3AC11 /* SSOEditToolController.m in Sources */,
 				CB8F0ABD1ADDDCB100C18263 /* SSOCameraCaptureHelper.m in Sources */,
@@ -1319,6 +1330,7 @@
 				D810B8E91ADF506500B3AC11 /* SSOEditSideMenuView.m in Sources */,
 				D810B8E11ADF506500B3AC11 /* SSOButtonsContainerView.m in Sources */,
 				03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */,
+				332E0A511AEE85AC00F77969 /* SSOTextFieldWithUnderline.m in Sources */,
 				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
 				D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */,
 				D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */,
@@ -1466,7 +1478,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wink/Supporting Files/uSnap-Prefix.pch";
 				INFOPLIST_FILE = "Wink/Supporting Files/uSnap-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = uSnap;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1490,7 +1502,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wink/Supporting Files/uSnap-Prefix.pch";
 				INFOPLIST_FILE = "Wink/Supporting Files/uSnap-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = uSnap;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
