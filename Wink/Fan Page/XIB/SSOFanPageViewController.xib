@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7702"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSOFanPageViewController">
             <connections>
                 <outlet property="campaignViewControllerContainer" destination="clJ-Wg-ftN" id="jyR-ux-cs9"/>
+                <outlet property="livePhotosViewControllerContainer" destination="FEL-hX-FE3" id="ABG-2e-hpC"/>
+                <outlet property="topPhotosViewControllerContainer" destination="RB5-gd-VX2" id="Bhl-IM-E7Z"/>
                 <outlet property="view" destination="iN0-l3-epB" id="5s3-1Q-BKe"/>
             </connections>
         </placeholder>
@@ -22,12 +24,30 @@
                         <constraint firstAttribute="height" constant="180" id="23G-ff-b4M"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RB5-gd-VX2" userLabel="Top photos container view">
+                    <rect key="frame" x="0.0" y="180" width="375" height="200"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="Dad-Ua-Nk7"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FEL-hX-FE3" userLabel="Live photos container view">
+                    <rect key="frame" x="0.0" y="380" width="375" height="287"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="FEL-hX-FE3" firstAttribute="top" secondItem="RB5-gd-VX2" secondAttribute="bottom" id="CnM-AN-hDi"/>
+                <constraint firstAttribute="trailing" secondItem="RB5-gd-VX2" secondAttribute="trailing" id="M1w-TS-6D1"/>
+                <constraint firstItem="RB5-gd-VX2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QZv-k2-mAU"/>
+                <constraint firstAttribute="bottom" secondItem="FEL-hX-FE3" secondAttribute="bottom" id="Te2-FU-ohV"/>
+                <constraint firstItem="RB5-gd-VX2" firstAttribute="top" secondItem="clJ-Wg-ftN" secondAttribute="bottom" id="VE7-Bk-lOm"/>
                 <constraint firstItem="clJ-Wg-ftN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VtN-G7-994"/>
+                <constraint firstAttribute="trailing" secondItem="FEL-hX-FE3" secondAttribute="trailing" id="hlE-Jj-eet"/>
                 <constraint firstItem="clJ-Wg-ftN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hyh-SL-J7S"/>
                 <constraint firstAttribute="trailing" secondItem="clJ-Wg-ftN" secondAttribute="trailing" id="mJs-xb-iUO"/>
+                <constraint firstItem="FEL-hX-FE3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="x3O-xF-vZh"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

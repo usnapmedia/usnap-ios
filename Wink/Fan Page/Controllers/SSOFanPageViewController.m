@@ -10,12 +10,21 @@
 #import "SSOCampaignTopViewControllerContainer.h"
 #import "WKWinkConnect.h"
 #import "SSOCountableItems.h"
+#import "SSOSnap.h"
+#import "SSOTopPhotosViewController.h"
+#import "SSOFeedConnect.h"
 #import <Masonry.h>
+
+#define kTopPhotosNib @"SSOTopPhotosCollectionViewCell"
+#define kTopPhotosReusableId @"topPhotosCell"
 
 @interface SSOFanPageViewController () <TopContainerFanPageDelegate>
 
 @property(strong, nonatomic) SSOCampaignTopViewControllerContainer *campaingTopVCContainer;
+@property(strong, nonatomic) SSOTopPhotosViewController *topPhotosVC;
 @property(weak, nonatomic) IBOutlet UIView *campaignViewControllerContainer;
+@property(weak, nonatomic) IBOutlet UIView *topPhotosViewControllerContainer;
+@property(weak, nonatomic) IBOutlet UIView *livePhotosViewControllerContainer;
 
 @end
 
@@ -24,6 +33,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadCampaigns];
+    [self initializeTopPhotosController];
+    [self loadTopPhotos];
 
     // Do any additional setup after loading the view.
 }
@@ -51,6 +62,28 @@
 }
 
 /**
+ *  Initialize top photos container controller
+ */
+- (void)initializeTopPhotosController {
+    self.topPhotosVC = [SSOTopPhotosViewController new];
+
+    [self addChildViewController:self.topPhotosVC];
+    // Set the frame
+    self.topPhotosVC.view.frame = self.topPhotosViewControllerContainer.frame;
+    [self.topPhotosViewControllerContainer addSubview:self.topPhotosVC.view];
+
+    [self.topPhotosVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.edges.equalTo(self.topPhotosViewControllerContainer);
+    }];
+
+    [self.topPhotosVC didMoveToParentViewController:self];
+    // Display the loading overlay before the data loads
+    [self.topPhotosVC displayLoadingOverlay];
+}
+
+#pragma mark - Data
+
+/**
  *  Fetch the campaigns from the backend
  */
 - (void)loadCampaigns {
@@ -63,6 +96,16 @@
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){
 
+    }];
+}
+
+- (void)loadTopPhotos {
+    [SSOFeedConnect getTopPhotosWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
+      [self.topPhotosVC setData:items.response withCellNib:kTopPhotosNib andCellReusableIdentifier:kTopPhotosReusableId];
+      // Hide the loading overlay
+      [self.topPhotosVC hideLoadingOverlay];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
     }];
 }
 
