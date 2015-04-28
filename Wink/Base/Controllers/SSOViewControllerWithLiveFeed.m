@@ -8,11 +8,16 @@
 
 #import "SSOViewControllerWithLiveFeed.h"
 #import "SSOFeedViewController.h"
-#import <Masonry.h>
-#import <SSOSimpleCollectionViewProvider.h>
+#import "SSOFeedConnect.h"
 #import "SSOFanPageViewController.h"
+#import "SSOCountableItems.h"
+#import "SSOSnap.h"
+#import <SSOSimpleCollectionViewProvider.h>
+#import <Masonry.h>
 
 #define kFeedContainerHeight 55
+#define kImageCollectionViewCell @"imageCollectionViewCell"
+#define kImageCollectionViewCellNib @"SSOImageCollectionViewCell"
 
 @interface SSOViewControllerWithLiveFeed () <SSOProviderDelegate>
 
@@ -53,6 +58,8 @@
  */
 - (void)initializeFeedController {
     SSOFeedViewController *childVc = [SSOFeedViewController new];
+    // Fetch the latest pictures
+    [self fetchLatestImagesAndSendToController:childVc];
     // Add the child vc
     [self addChildViewController:childVc];
     // Set the frame
@@ -64,6 +71,21 @@
 
     //  Make the view delegate for the provider to access the on select event
     childVc.provider.delegate = self;
+}
+
+/**
+ *  Set the images to the view controller
+ *
+ *  @param childVC the child vc
+ */
+- (void)fetchLatestImagesAndSendToController:(SSOFeedViewController *)childVC {
+    [SSOFeedConnect getliveFeedPhotosWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
+      // Set the data of the VC
+      [childVC setData:items.response withCellNib:kImageCollectionViewCellNib andCellReusableIdentifier:kImageCollectionViewCell];
+      [childVC hideLoadingOverlay];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+    }];
 }
 
 #pragma mark - SSOProviderDelegate

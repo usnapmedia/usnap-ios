@@ -45,6 +45,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Initialization
+
 /**
  *  Initialize the data of the VC
  */
@@ -95,9 +97,7 @@
 }
 
 - (void)provider:(id)provider willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-
     [self.delegate topViewControllerDidChangeForNewCampaign:[self.arrayOfCampaigns objectAtIndex:indexPath.row]];
-    NSLog(@"indexPath : %@   cell : %@", indexPath, cell);
 }
 
 @end
