@@ -7,6 +7,7 @@
 //
 
 #import "SSOSocialNetworkAPI+USnap.h"
+#import "FBSDKAccessToken.h"
 
 @implementation SSOSocialNetworkAPI (USnap)
 
@@ -79,6 +80,14 @@
     // Save the status
     [[NSUserDefaults standardUserDefaults] setBool:connectedValue forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSDictionary *)connectedSocialNetworkAPIParameters {
+    NSMutableDictionary *paramDictionary = [NSMutableDictionary new];
+    if ([self isUsnapConnectedToSocialNetwork:facebookSocialNetwork]) {
+        [paramDictionary setObject:[FBSDKAccessToken currentAccessToken] forKey:@"fb"];
+    }
+    return paramDictionary.copy;
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "SSOHTTPRequestOperationManager.h"
 #import "SSSessionManager.h"
+#import "SSOSocialNetworkAPI+USnap.h"
 
 // Request Types
 #define GET @"GET"
@@ -86,13 +87,13 @@
     // TODO: Temporary fix because problem with backend
     int randomNumber = arc4random_uniform(1000);
     NSString *temporaryFileName = [NSString stringWithFormat:@"image%i.jpg", randomNumber];
+    NSMutableDictionary *parameters = [[SSOSocialNetworkAPI sharedInstance] connectedSocialNetworkAPIParameters].mutableCopy;
+    [parameters addEntriesFromDictionary:@{ @"text" : text, @"meta" : meta }];
 
-    [manager POST:url parameters:@{
-        @"text" : text,
-        @"meta" : meta
-    } constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-      [formData appendPartWithFileData:imageData name:@"image_data" fileName:temporaryFileName mimeType:@"image/jpg"];
-    } success:success failure:failure];
+    [manager POST:url parameters:parameters
+        constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+          [formData appendPartWithFileData:imageData name:@"image_data" fileName:temporaryFileName mimeType:@"image/jpg"];
+        } success:success failure:failure];
 }
 
 @end
