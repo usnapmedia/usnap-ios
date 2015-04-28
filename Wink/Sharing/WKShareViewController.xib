@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -426,13 +426,6 @@
                     <exclude reference="geU-ef-Z5L"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="0HV-02-pVv"/>
-                    <exclude reference="3xM-CR-RUU"/>
-                    <exclude reference="REG-9U-Fgj"/>
-                    <exclude reference="SPe-my-dhp"/>
-                    <exclude reference="auz-VT-Jw2"/>
-                    <exclude reference="mFb-2G-hJ9"/>
-                    <exclude reference="yf2-dE-qaO"/>
                     <exclude reference="1Mq-Fz-F5G"/>
                     <exclude reference="1fy-ac-ak2"/>
                     <exclude reference="SqL-dH-Wsu"/>
@@ -440,6 +433,13 @@
                     <exclude reference="GRa-c6-PWg"/>
                     <exclude reference="rN5-ah-kdF"/>
                     <exclude reference="uv2-d1-Mjy"/>
+                    <exclude reference="0HV-02-pVv"/>
+                    <exclude reference="3xM-CR-RUU"/>
+                    <exclude reference="REG-9U-Fgj"/>
+                    <exclude reference="SPe-my-dhp"/>
+                    <exclude reference="auz-VT-Jw2"/>
+                    <exclude reference="mFb-2G-hJ9"/>
+                    <exclude reference="yf2-dE-qaO"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -448,13 +448,6 @@
                     <include reference="geU-ef-Z5L"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="0HV-02-pVv"/>
-                    <include reference="3xM-CR-RUU"/>
-                    <include reference="REG-9U-Fgj"/>
-                    <include reference="SPe-my-dhp"/>
-                    <include reference="auz-VT-Jw2"/>
-                    <include reference="mFb-2G-hJ9"/>
-                    <include reference="yf2-dE-qaO"/>
                     <include reference="1Mq-Fz-F5G"/>
                     <include reference="1fy-ac-ak2"/>
                     <include reference="SqL-dH-Wsu"/>
@@ -462,6 +455,13 @@
                     <include reference="GRa-c6-PWg"/>
                     <include reference="rN5-ah-kdF"/>
                     <include reference="uv2-d1-Mjy"/>
+                    <include reference="0HV-02-pVv"/>
+                    <include reference="3xM-CR-RUU"/>
+                    <include reference="REG-9U-Fgj"/>
+                    <include reference="SPe-my-dhp"/>
+                    <include reference="auz-VT-Jw2"/>
+                    <include reference="mFb-2G-hJ9"/>
+                    <include reference="yf2-dE-qaO"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="296" y="293.5"/>
