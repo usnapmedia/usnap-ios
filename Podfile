@@ -20,7 +20,7 @@ pod 'pop'
 pod 'IQKeyboardManager'
 pod 'SZTextView'
 pod 'SDWebImage'
-pod 'CHTCollectionViewWaterfallLayout'
+pod 'SDiPhoneVersion'
 
 # Samsao libraries
 pod 'SSFacebookHelper', :git => 'git@gitlab.samsaodev.com:ios-development/ssfacebookhelper.git'

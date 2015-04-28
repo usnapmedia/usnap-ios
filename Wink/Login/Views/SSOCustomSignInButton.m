@@ -23,11 +23,11 @@
     [super setSelected:selected];
     UIColor *backgroundColor = [SSOThemeHelper firstColor];
     if (selected) {
-        self.backgroundColor = [backgroundColor colorWithAlphaComponent:0.2];
+        self.backgroundColor = [backgroundColor colorWithAlphaComponent:1];
 
     } else {
 
-        self.backgroundColor = [backgroundColor colorWithAlphaComponent:0.2];
+        self.backgroundColor = [UIColor lightGrayColor];
     }
 }
 

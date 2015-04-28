@@ -26,8 +26,11 @@
 #import <POP.h>
 #import "SSOCustomSocialButton.h"
 #import <SZTextView.h>
+#import "SSORectangleSocialButton.h"
+#import "SSOThemeHelper.h"
 
 #define kOverlayViewAlpha 0.75
+NSInteger const kNumberOfCharacters = 140;
 
 typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing, WKShareViewControllerModeShared } WKShareViewControllerMode;
 
@@ -36,15 +39,24 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 @property(strong, nonatomic) WKMoviePlayerView *moviePlayerView;
 @property(strong, nonatomic) UIImageView *overlayImageView;
 @property(strong, nonatomic) WKVideoEditor *videoEditor;
-//@property(nonatomic) WKShareViewControllerMode mode;
 @property(nonatomic) BOOL isTwitterConnected;
+@property(nonatomic, strong) NSNumber *numberCharactersLeft;
 
+// ContainerViews
+@property(weak, nonatomic) IBOutlet UIView *previewImageContainerView;
+@property(weak, nonatomic) IBOutlet UIView *buttonsContainerView;
 @property(weak, nonatomic) IBOutlet UIView *mediaContainerView;
+
 @property(weak, nonatomic) IBOutlet SZTextView *placeholderTextView;
 @property(weak, nonatomic) IBOutlet UIButton *shareButton;
-@property(weak, nonatomic) IBOutlet SSOAlignedButtonsView *topView;
 @property(weak, nonatomic) IBOutlet UIView *bottomView;
 @property(strong, nonatomic) IBOutlet UIView *overlayView;
+@property(weak, nonatomic) IBOutlet UILabel *labelCountCharacters;
+
+// Social buttons
+@property(weak, nonatomic) IBOutlet SSORectangleSocialButton *twitterButton;
+@property(weak, nonatomic) IBOutlet SSORectangleSocialButton *facebookButton;
+@property(weak, nonatomic) IBOutlet SSORectangleSocialButton *googleButton;
 
 @property(strong, nonatomic) NSValue *bottomViewInitialCenter;
 
@@ -57,27 +69,38 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.numberCharactersLeft = [NSNumber numberWithInteger:kNumberOfCharacters];
+    self.labelCountCharacters.text =
+        [NSString stringWithFormat:@"%li %@", self.numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
+    self.labelCountCharacters.textColor = [SSOThemeHelper firstColor];
+
+    self.buttonsContainerView.layer.cornerRadius = 4.0;
+    self.mediaContainerView.layer.cornerRadius = 4.0;
     // Register for keyboard notifications
     //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+
+    [self.view addGestureRecognizer:tapGesture];
 
     // Setup the imageview
     if (self.image || self.modifiedImage) {
         self.imageView = [UIImageView new];
         UIImage *image = (self.modifiedImage) ? self.modifiedImage : self.image;
         self.imageView.image = image;
-        [self.mediaContainerView addSubview:self.imageView];
+        [self.previewImageContainerView addSubview:self.imageView];
         [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.edges.equalTo(self.mediaContainerView);
+          make.edges.equalTo(self.previewImageContainerView);
         }];
     }
     // Setup the movie player view
     else {
         self.moviePlayerView = [WKMoviePlayerView moviePlayerViewWithPath:self.mediaURL];
-        [self.mediaContainerView addSubview:self.moviePlayerView];
+        [self.previewImageContainerView addSubview:self.moviePlayerView];
         [self.moviePlayerView mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.edges.equalTo(self.mediaContainerView);
+          make.edges.equalTo(self.previewImageContainerView);
         }];
 
         [self.moviePlayerView.player pause];
@@ -87,9 +110,9 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     if (self.overlayImage) {
         self.overlayImageView = [UIImageView new];
         self.overlayImageView.image = self.overlayImage;
-        [self.mediaContainerView addSubview:self.overlayImageView];
+        [self.previewImageContainerView addSubview:self.overlayImageView];
         [self.overlayImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.edges.equalTo(self.mediaContainerView);
+          make.edges.equalTo(self.previewImageContainerView);
         }];
     }
 
@@ -115,16 +138,20 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [super viewDidAppear:animated];
 
     // Animate the display of the topView after all layouts have been calculated (fix iPhone 6+ loop bug)
-    [UIView animateWithDuration:1
+    [UIView animateWithDuration:0.5
                      animations:^{
-                       self.topView.alpha = 1;
+                       self.facebookButton.alpha = 1;
+                       self.twitterButton.alpha = 1;
+                       self.googleButton.alpha = 1;
                        [self setupSocialButtons];
                      }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.topView.alpha = 0;
+    self.facebookButton.alpha = 0;
+    self.twitterButton.alpha = 0;
+    self.googleButton.alpha = 0;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -201,26 +228,50 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
  */
 - (void)setupSocialButtons {
 
-    SSOCustomSocialButton *facebookButton =
-        [[SSOCustomSocialButton alloc] initWithSocialNetwork:facebookSocialNetwork
-                                                       state:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:facebookSocialNetwork]];
-    facebookButton.tag = facebookSocialNetwork;
+    [self.facebookButton setState:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:facebookSocialNetwork]
+                 forSocialNetwork:facebookSocialNetwork];
+    self.facebookButton.tag = facebookSocialNetwork;
 
-    [facebookButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.facebookButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
 
-    SSOCustomSocialButton *twitterButton =
-        [[SSOCustomSocialButton alloc] initWithSocialNetwork:twitterSocialNetwork
-                                                       state:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:twitterSocialNetwork]];
-    twitterButton.tag = twitterSocialNetwork;
-    [twitterButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.twitterButton setState:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:twitterSocialNetwork]
+                forSocialNetwork:twitterSocialNetwork];
 
-    SSOCustomSocialButton *googlePlusButton =
-        [[SSOCustomSocialButton alloc] initWithSocialNetwork:googleSocialNetwork
-                                                       state:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:googleSocialNetwork]];
-    googlePlusButton.tag = googleSocialNetwork;
-    [googlePlusButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
+    self.twitterButton.tag = twitterSocialNetwork;
+    [self.twitterButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
 
-    [self.topView setupViewforOrientation:[UIDevice currentDevice].orientation withArrayButtons:@[ facebookButton, twitterButton, googlePlusButton ]];
+    [self.googleButton setState:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:googleSocialNetwork]
+               forSocialNetwork:googleSocialNetwork];
+
+    self.googleButton.tag = googleSocialNetwork;
+    [self.googleButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
+
+    //    SSOCustomSocialButton *facebookButton =
+    //        [[SSOCustomSocialButton alloc] initWithSocialNetwork:facebookSocialNetwork
+    //                                                       state:[[SSOSocialNetworkAPI sharedInstance]
+    //                                                       isUsnapConnectedToSocialNetwork:facebookSocialNetwork]];
+    //    facebookButton.tag = facebookSocialNetwork;
+    //
+    //    [facebookButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
+    //
+    //    SSOCustomSocialButton *twitterButton =
+    //        [[SSOCustomSocialButton alloc] initWithSocialNetwork:twitterSocialNetwork
+    //                                                       state:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:twitterSocialNetwork]];
+    //    twitterButton.tag = twitterSocialNetwork;
+    //    [twitterButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
+    //
+    //    SSOCustomSocialButton *googlePlusButton =
+    //        [[SSOCustomSocialButton alloc] initWithSocialNetwork:googleSocialNetwork
+    //                                                       state:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:googleSocialNetwork]];
+    //    googlePlusButton.tag = googleSocialNetwork;
+    //    [googlePlusButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
+
+    // [self.topView setupViewforOrientation:[UIDevice currentDevice].orientation withArrayButtons:@[ facebookButton, twitterButton, googlePlusButton ]];
+}
+
+- (void)dismissKeyboard {
+
+    [self.placeholderTextView resignFirstResponder];
 }
 
 #pragma mark - Action
@@ -468,10 +519,10 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidFinishLoginWithError:(NSError *)error {
 
-    for (UIView *view in self.topView.subviews) {
-        if ([view isKindOfClass:[SSOCustomSocialButton class]]) {
+    for (UIView *view in self.buttonsContainerView.subviews) {
+        if ([view isKindOfClass:[SSORectangleSocialButton class]]) {
             // Cast the view to get the social network
-            SSOCustomSocialButton *socialButton = (SSOCustomSocialButton *)view;
+            SSORectangleSocialButton *socialButton = (SSORectangleSocialButton *)view;
             if (socialButton.socialNetwork == socialNetwork) {
                 // The interaction was disabled on touch, we need to reset it after the network response
                 [socialButton setUserInteractionEnabled:YES];
@@ -492,10 +543,10 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)socialNetwork:(SelectedSocialNetwork)socialNetwork DidCancelLogin:(NSError *)error {
 
-    for (UIView *view in self.topView.subviews) {
-        if ([view isKindOfClass:[SSOCustomSocialButton class]]) {
+    for (UIView *view in self.buttonsContainerView.subviews) {
+        if ([view isKindOfClass:[SSORectangleSocialButton class]]) {
             // Cast the view to get the social network
-            SSOCustomSocialButton *socialButton = (SSOCustomSocialButton *)view;
+            SSORectangleSocialButton *socialButton = (SSORectangleSocialButton *)view;
             // The interaction was disabled on touch, we need to reset it after the network response
             [socialButton setUserInteractionEnabled:YES];
             if (socialButton.socialNetwork == socialNetwork) {
@@ -505,6 +556,18 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
             }
         }
     }
+}
+
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidChange:(UITextView *)textView {
+
+    NSNumber *numberCharactersLeft = [NSNumber numberWithInteger:(self.numberCharactersLeft.integerValue - textView.text.length)];
+
+    self.labelCountCharacters.text =
+        [NSString stringWithFormat:@"%li %@", numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
+
+    NSLog(@"textView %li", textView.text.length);
 }
 
 @end

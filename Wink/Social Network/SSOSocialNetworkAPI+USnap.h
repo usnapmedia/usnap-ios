@@ -36,4 +36,6 @@
  */
 - (BOOL)isUsnapConnectedToSocialNetwork:(SelectedSocialNetwork)socialNetwork;
 
+-(NSDictionary *)connectedSocialNetworkAPIParameters;
+
 @end

@@ -8,7 +8,7 @@
 
 #import "SSOLoginContainerView.h"
 #import "SSOThemeHelper.h"
-
+#import "SSOScreenSizeHelper.h"
 @interface SSOLoginContainerView () <UITextFieldDelegate>
 
 // Outlets
@@ -16,6 +16,7 @@
 @property(weak, nonatomic) IBOutlet UITextField *textFieldPassword;
 @property(weak, nonatomic) IBOutlet UIButton *buttonResetPassword;
 @property(weak, nonatomic) IBOutlet UIButton *loginButton;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewHeightConstraint;
 
 // Data
 @property(strong, nonatomic) NSDictionary *infoDic;
@@ -25,7 +26,10 @@
 @implementation SSOLoginContainerView
 
 - (void)awakeFromNib {
-    [self setupViewForAnimation];
+    //[self setupViewForAnimation];
+    self.loginButton.layer.cornerRadius = 4;
+
+    self.bottomViewHeightConstraint.constant = [SSOScreenSizeHelper heightForRegisterBottomView].floatValue;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

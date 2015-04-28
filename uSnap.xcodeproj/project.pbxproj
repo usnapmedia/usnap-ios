@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03AE7D391AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m */; };
-		1371ECB88315E29A37A65496 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A060E699D67AED42FA7FA09C /* libPods.a */; };
 		1F7F85AB1A8A743900BBC5D5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */; };
 		1F7F85AC1A8A743900BBC5D5 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */; };
 		270DFAF519AE71BE00067072 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270DFAF419AE71BE00067072 /* Foundation.framework */; };
@@ -37,7 +36,10 @@
 		3303DDDD1AD87361002B74F9 /* SSORegisterContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3303DDDC1AD87361002B74F9 /* SSORegisterContainerView.m */; };
 		3316F2D01ADD6CC900C7ED24 /* NSUserDefaults+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316F2CF1ADD6CC900C7ED24 /* NSUserDefaults+USnap.m */; };
 		3316F2D31ADD6D9F00C7ED24 /* SSSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316F2D21ADD6D9F00C7ED24 /* SSSessionManager.m */; };
+		332CF5B01AEEB92400396746 /* SSOScreenSizeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 332CF5AF1AEEB92400396746 /* SSOScreenSizeHelper.m */; };
+		332E0A511AEE85AC00F77969 /* SSOTextFieldWithUnderline.m in Sources */ = {isa = PBXBuildFile; fileRef = 332E0A501AEE85AC00F77969 /* SSOTextFieldWithUnderline.m */; };
 		333F49AE1AE01BEC004B5CC3 /* SSOOrientationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 333F49AD1AE01BEC004B5CC3 /* SSOOrientationHelper.m */; };
+		3348EC9A1AEEECBB008F2916 /* SSORectangleSocialButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3348EC991AEEECBB008F2916 /* SSORectangleSocialButton.m */; };
 		335723B31ACB097C000CC846 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3357233E1ACB097C000CC846 /* Camera.storyboard */; };
 		335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723431ACB097C000CC846 /* SSOCameraViewController.m */; };
 		335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723741ACB097C000CC846 /* FacebookHelper.m */; };
@@ -143,6 +145,7 @@
 		D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */; };
 		D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C8F1AD428D3008D2A37 /* SSOGooglePlusHelper.m */; };
 		D8FBADAC1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FBADAB1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.m */; };
+		E80D4E714C58C48AEC95B461 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9ECEFEEE6F33C8F8962807 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,8 +197,14 @@
 		3316F2CF1ADD6CC900C7ED24 /* NSUserDefaults+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+USnap.m"; sourceTree = "<group>"; };
 		3316F2D11ADD6D9F00C7ED24 /* SSSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSessionManager.h; sourceTree = "<group>"; };
 		3316F2D21ADD6D9F00C7ED24 /* SSSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSessionManager.m; sourceTree = "<group>"; };
+		332CF5AE1AEEB92400396746 /* SSOScreenSizeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOScreenSizeHelper.h; sourceTree = "<group>"; };
+		332CF5AF1AEEB92400396746 /* SSOScreenSizeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOScreenSizeHelper.m; sourceTree = "<group>"; };
+		332E0A4F1AEE85AC00F77969 /* SSOTextFieldWithUnderline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOTextFieldWithUnderline.h; path = Views/SSOTextFieldWithUnderline.h; sourceTree = "<group>"; };
+		332E0A501AEE85AC00F77969 /* SSOTextFieldWithUnderline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOTextFieldWithUnderline.m; path = Views/SSOTextFieldWithUnderline.m; sourceTree = "<group>"; };
 		333F49AC1AE01BEC004B5CC3 /* SSOOrientationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOOrientationHelper.h; sourceTree = "<group>"; };
 		333F49AD1AE01BEC004B5CC3 /* SSOOrientationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOOrientationHelper.m; sourceTree = "<group>"; };
+		3348EC981AEEECBB008F2916 /* SSORectangleSocialButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSORectangleSocialButton.h; path = Views/SSORectangleSocialButton.h; sourceTree = "<group>"; };
+		3348EC991AEEECBB008F2916 /* SSORectangleSocialButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSORectangleSocialButton.m; path = Views/SSORectangleSocialButton.m; sourceTree = "<group>"; };
 		3357233E1ACB097C000CC846 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		335723421ACB097C000CC846 /* SSOCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCameraViewController.h; sourceTree = "<group>"; };
 		335723431ACB097C000CC846 /* SSOCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCameraViewController.m; sourceTree = "<group>"; };
@@ -254,7 +263,7 @@
 		7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		7B964EB71A8ABC3C00E181C2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		A060E699D67AED42FA7FA09C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB9ECEFEEE6F33C8F8962807 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB57186A1AC0C3020078740E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		CB57186C1AC0C3090078740E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		CB8F0AB81ADDDC8600C18263 /* AVCamPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVCamPreviewView.h; path = Views/AVCamPreviewView.h; sourceTree = "<group>"; };
@@ -417,7 +426,7 @@
 				1F7F85AC1A8A743900BBC5D5 /* Fabric.framework in Frameworks */,
 				270DFAF919AE71BE00067072 /* UIKit.framework in Frameworks */,
 				270DFAF519AE71BE00067072 /* Foundation.framework in Frameworks */,
-				1371ECB88315E29A37A65496 /* libPods.a in Frameworks */,
+				E80D4E714C58C48AEC95B461 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +486,7 @@
 				270DFAF619AE71BE00067072 /* CoreGraphics.framework */,
 				270DFAF819AE71BE00067072 /* UIKit.framework */,
 				270DFB0D19AE71BE00067072 /* XCTest.framework */,
-				A060E699D67AED42FA7FA09C /* libPods.a */,
+				AB9ECEFEEE6F33C8F8962807 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -494,6 +503,7 @@
 				335723721ACB097C000CC846 /* Helpers */,
 				339841D61AEAB3E400605C67 /* Model */,
 				D8EA5C7D1AD4287C008D2A37 /* Login */,
+				3357238E1ACB097C000CC846 /* Settings */,
 				335723751ACB097C000CC846 /* Old:To Check */,
 				D8E677E41AEEE5F6006B8CD8 /* Photos */,
 				3357238E1ACB097C000CC846 /* Settings */,
@@ -535,6 +545,8 @@
 				3303DDDC1AD87361002B74F9 /* SSORegisterContainerView.m */,
 				3303DDD81AD86F66002B74F9 /* SSOCustomSignInButton.h */,
 				3303DDD91AD86F66002B74F9 /* SSOCustomSignInButton.m */,
+				332E0A4F1AEE85AC00F77969 /* SSOTextFieldWithUnderline.h */,
+				332E0A501AEE85AC00F77969 /* SSOTextFieldWithUnderline.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -602,6 +614,8 @@
 				335723741ACB097C000CC846 /* FacebookHelper.m */,
 				D8D4F17D1ADFFB52002FDE38 /* SSOThemeHelper.h */,
 				D8D4F17E1ADFFB52002FDE38 /* SSOThemeHelper.m */,
+				332CF5AE1AEEB92400396746 /* SSOScreenSizeHelper.h */,
+				332CF5AF1AEEB92400396746 /* SSOScreenSizeHelper.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -819,6 +833,8 @@
 			children = (
 				3399F6D81AE5A0DB00835B13 /* SSOCustomSocialButton.h */,
 				3399F6D91AE5A0DB00835B13 /* SSOCustomSocialButton.m */,
+				3348EC981AEEECBB008F2916 /* SSORectangleSocialButton.h */,
+				3348EC991AEEECBB008F2916 /* SSORectangleSocialButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1485,6 +1501,8 @@
 				333F49AE1AE01BEC004B5CC3 /* SSOOrientationHelper.m in Sources */,
 				3303DDDD1AD87361002B74F9 /* SSORegisterContainerView.m in Sources */,
 				335723D71ACB097C000CC846 /* WKViewController.m in Sources */,
+				3348EC9A1AEEECBB008F2916 /* SSORectangleSocialButton.m in Sources */,
+				332CF5B01AEEB92400396746 /* SSOScreenSizeHelper.m in Sources */,
 				D8EA5C891AD4287C008D2A37 /* WKWinkConnect.m in Sources */,
 				D810B8DB1ADF506500B3AC11 /* SSOEditToolController.m in Sources */,
 				CB8F0ABD1ADDDCB100C18263 /* SSOCameraCaptureHelper.m in Sources */,
@@ -1505,6 +1523,7 @@
 				D810B8E91ADF506500B3AC11 /* SSOEditSideMenuView.m in Sources */,
 				D810B8E11ADF506500B3AC11 /* SSOButtonsContainerView.m in Sources */,
 				03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */,
+				332E0A511AEE85AC00F77969 /* SSOTextFieldWithUnderline.m in Sources */,
 				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
 				D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */,
 				D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */,
