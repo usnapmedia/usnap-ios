@@ -85,7 +85,10 @@
 - (NSDictionary *)connectedSocialNetworkAPIParameters {
     NSMutableDictionary *paramDictionary = [NSMutableDictionary new];
     if ([self isUsnapConnectedToSocialNetwork:facebookSocialNetwork]) {
-        [paramDictionary setObject:[FBSDKAccessToken currentAccessToken] forKey:@"fb"];
+        FBSDKAccessToken *token = [FBSDKAccessToken currentAccessToken];
+        if ([[FBSDKAccessToken currentAccessToken] tokenString]) {
+            [paramDictionary setObject:[[FBSDKAccessToken currentAccessToken] tokenString] forKey:@"fb"];
+        }
     }
     return paramDictionary.copy;
 }
