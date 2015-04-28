@@ -16,8 +16,7 @@
 #import <Masonry.h>
 
 #define kFeedContainerHeight 55
-#define kImageCollectionViewCell @"imageCollectionViewCell"
-#define kImageCollectionViewCellNib @"SSOImageCollectionViewCell"
+
 
 @interface SSOViewControllerWithLiveFeed () <SSOProviderDelegate>
 
@@ -79,7 +78,7 @@
  *  @param childVC the child vc
  */
 - (void)fetchLatestImagesAndSendToController:(SSOFeedViewController *)childVC {
-    [SSOFeedConnect getliveFeedPhotosWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [SSOFeedConnect getRecentPhotosWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
       SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
       // Set the data of the VC
       [childVC setData:items.response withCellNib:kImageCollectionViewCellNib andCellReusableIdentifier:kImageCollectionViewCell];

@@ -13,20 +13,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="149" height="219"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xhC-MN-tqq">
-                        <rect key="frame" x="0.0" y="0.0" width="149" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="149" height="185"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="QhG-8S-kqm"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="QhG-8S-kqm"/>
+                            </mask>
+                        </variation>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uL7-sg-bhE" userLabel="Name">
-                        <rect key="frame" x="5" y="105" width="139" height="88"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="5" y="190" width="139" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHK-ma-aiM" userLabel="Points">
-                        <rect key="frame" x="5" y="198" width="139" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="5" y="205" width="139" height="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -41,7 +46,7 @@
                 <constraint firstItem="xhC-MN-tqq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="UTl-5q-u7Z"/>
                 <constraint firstItem="xhC-MN-tqq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="W3g-9N-cH2"/>
                 <constraint firstAttribute="trailing" secondItem="uL7-sg-bhE" secondAttribute="trailing" constant="5" id="Xzl-TD-lh2"/>
-                <constraint firstItem="yHK-ma-aiM" firstAttribute="top" secondItem="uL7-sg-bhE" secondAttribute="bottom" constant="5" id="ZdT-sM-Bw0"/>
+                <constraint firstItem="yHK-ma-aiM" firstAttribute="top" secondItem="uL7-sg-bhE" secondAttribute="bottom" id="ZdT-sM-Bw0"/>
                 <constraint firstAttribute="trailing" secondItem="xhC-MN-tqq" secondAttribute="trailing" id="r4S-Kv-Mpm"/>
                 <constraint firstAttribute="trailing" secondItem="yHK-ma-aiM" secondAttribute="trailing" constant="5" id="wCd-KR-cGW"/>
             </constraints>

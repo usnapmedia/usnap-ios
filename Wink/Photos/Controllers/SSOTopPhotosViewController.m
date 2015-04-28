@@ -43,7 +43,7 @@ NSInteger const kButtonWidthConstraint = 60;
     [super initializeData];
     self.topView = [UIView new];
     self.titleLabel = [UILabel new];
-    self.titleLabel.text = NSLocalizedString(@"fan-page.top-photos.title-label", @"Top 10 title");
+    self.titleLabel.text = [NSLocalizedString(@"fan-page.top-photos.title-label", @"Top 10 title") uppercaseString];
     self.seeAllButton = [SSOUSnapButton new];
     [self.seeAllButton setTitle:[NSLocalizedString(@"fan-page.see-all-button", @"See all button title") uppercaseString] forState:UIControlStateNormal];
 }
