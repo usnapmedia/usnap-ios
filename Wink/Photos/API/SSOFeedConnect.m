@@ -11,7 +11,7 @@
 
 @implementation SSOFeedConnect
 
-+ (void)getliveFeedPhotosWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
++ (void)getRecentPhotosWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSString *url = [NSString stringWithFormat:@"feed/live"];
     SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];

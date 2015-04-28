@@ -75,3 +75,9 @@ extern NSString *const kCameraContainerSegue;
 #define kSliderDefaultValue 0.5f
 
 #define kScreenSize [UIScreen mainScreen].bounds.size
+
+#pragma mark - Cells
+extern NSString *const kTopPhotosNib;
+extern NSString *const kTopPhotosReusableId;
+extern NSString *const kImageCollectionViewCell;
+extern NSString *const kImageCollectionViewCellNib;

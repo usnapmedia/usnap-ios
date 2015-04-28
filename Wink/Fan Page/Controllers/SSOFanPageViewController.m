@@ -12,19 +12,18 @@
 #import "SSOCountableItems.h"
 #import "SSOSnap.h"
 #import "SSOTopPhotosViewController.h"
+#import "SSORecentPhotosViewController.h"
 #import "SSOFeedConnect.h"
 #import <Masonry.h>
-
-#define kTopPhotosNib @"SSOTopPhotosCollectionViewCell"
-#define kTopPhotosReusableId @"topPhotosCell"
 
 @interface SSOFanPageViewController () <TopContainerFanPageDelegate>
 
 @property(strong, nonatomic) SSOCampaignTopViewControllerContainer *campaingTopVCContainer;
 @property(strong, nonatomic) SSOTopPhotosViewController *topPhotosVC;
+@property(strong, nonatomic) SSORecentPhotosViewController *recentPhotosVC;
 @property(weak, nonatomic) IBOutlet UIView *campaignViewControllerContainer;
 @property(weak, nonatomic) IBOutlet UIView *topPhotosViewControllerContainer;
-@property(weak, nonatomic) IBOutlet UIView *livePhotosViewControllerContainer;
+@property(weak, nonatomic) IBOutlet UIView *recentPhotosViewControllerContainer;
 
 @end
 
@@ -32,9 +31,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadCampaigns];
+
+
+    // Initialize the VCs
     [self initializeTopPhotosController];
+    [self initializeRecentPhotosController];
+
+    // Load the data
+    [self loadCampaigns];
     [self loadTopPhotos];
+    [self loadRecentPhotos];
 
     // Do any additional setup after loading the view.
 }
@@ -81,6 +87,27 @@
     [self.topPhotosVC displayLoadingOverlay];
 }
 
+/**
+ *  Initialize the recent photos controller
+ */
+- (void)initializeRecentPhotosController {
+
+    self.recentPhotosVC = [SSORecentPhotosViewController new];
+
+    [self addChildViewController:self.recentPhotosVC];
+    // Set the frame
+    self.recentPhotosVC.view.frame = self.recentPhotosViewControllerContainer.frame;
+    [self.recentPhotosViewControllerContainer addSubview:self.recentPhotosVC.view];
+
+    [self.recentPhotosVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.edges.equalTo(self.recentPhotosViewControllerContainer);
+    }];
+
+    [self.recentPhotosVC didMoveToParentViewController:self];
+    // Display the loading overlay before the data loads
+    [self.recentPhotosVC displayLoadingOverlay];
+}
+
 #pragma mark - Data
 
 /**
@@ -99,12 +126,35 @@
     }];
 }
 
+/**
+ *  Load top photos and assign them to the VC
+ */
 - (void)loadTopPhotos {
+    // Display loading UI
+    [self.topPhotosVC displayLoadingOverlay];
+
     [SSOFeedConnect getTopPhotosWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
       SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
       [self.topPhotosVC setData:items.response withCellNib:kTopPhotosNib andCellReusableIdentifier:kTopPhotosReusableId];
       // Hide the loading overlay
       [self.topPhotosVC hideLoadingOverlay];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+    }];
+}
+
+/**
+ *  Load the latest photos and assign them to the VC
+ */
+- (void)loadRecentPhotos {
+    // Display loading UI
+    [self.recentPhotosVC displayLoadingOverlay];
+
+    [SSOFeedConnect getRecentPhotosWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+      // Set the recent photos
+      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
+      [self.recentPhotosVC setInputData:items.response.mutableCopy];
+      // Hide the loading overlay
+      [self.recentPhotosVC hideLoadingOverlay];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){
     }];
 }

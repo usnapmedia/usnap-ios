@@ -6,7 +6,7 @@
 @property (nonatomic, strong) NSString * email;
 @property (nonatomic, strong) NSString * fb;
 @property (nonatomic, strong) NSObject * fbImageId;
-@property (nonatomic, strong) NSObject * fbLikes;
+@property (nonatomic, strong) NSNumber * fbLikes;
 @property (nonatomic, strong) NSString * filename;
 @property (nonatomic, strong) NSObject * gp;
 @property (nonatomic, strong) NSString * id;
