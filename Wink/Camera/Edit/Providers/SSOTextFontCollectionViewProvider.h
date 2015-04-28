@@ -6,16 +6,15 @@
 //  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
-#import "SSOBaseCollectionViewProvider.h"
+#import <SSOSimpleCollectionViewProvider.h>
 
-@interface SSOTextFontCollectionViewProvider : SSOBaseCollectionViewProvider
-
+@interface SSOTextFontCollectionViewProvider : SSOSimpleCollectionViewProvider
 
 /**
 *  Initialize the provider with the default data
 *
 *  @return the provider with default data
 */
--(instancetype)initWithDefaultData;
+- (instancetype)initWithDefaultData;
 
 @end

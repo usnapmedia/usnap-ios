@@ -48,7 +48,6 @@
     }
 }
 
-
 #pragma mark - Initialization
 
 - (void)initializeContainerViewToParentVC {
@@ -228,9 +227,9 @@
 
 #pragma mark - SSOBaseProviderDelegate
 
-- (void)provider:(SSOBaseProvider *)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSAssert([[self.provider objectDataAtIndexPath:indexPath] isKindOfClass:[NSDictionary class]], @"Object data has to be of NSDictionary clasS");
-    NSDictionary *objectData = (NSDictionary *)[self.provider objectDataAtIndexPath:indexPath];
+- (void)provider:(id)provider didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSAssert([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[NSDictionary class]], @"Object data has to be of NSDictionary class");
+    NSDictionary *objectData = (NSDictionary *)[self.provider.inputData objectAtIndex:indexPath.row];
     NSAssert([objectData objectForKey:@"font_name"], @"Object data must have the font name at the key font_name");
     [self.textView setFont:[UIFont fontWithName:[objectData objectForKey:@"font_name"] size:kTextViewFontSize]];
 }

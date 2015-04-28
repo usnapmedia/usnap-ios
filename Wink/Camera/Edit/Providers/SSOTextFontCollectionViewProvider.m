@@ -16,38 +16,17 @@ NSString *const kFontCellReusableIdentifier = @"fontCollectionViewCellIdentifier
 
 - (instancetype)initWithDefaultData {
     if (self = [super init]) {
-        self.inputData = [self generateDefaultData];
+        [self generateDefaultData];
     }
     return self;
 }
 
 /**
  *  Initialize default data for the font cells
- *
- *  @return the default data
  */
-- (NSMutableArray *)generateDefaultData {
-    SSCellViewSection *section = [[SSCellViewSection alloc] init];
-
-    SSCellViewItem *firstCellItem = [[SSCellViewItem alloc] init];
-    firstCellItem.objectData = @{ @"font_name" : @"Arial" };
-    firstCellItem.cellReusableIdentifier = kFontCellReusableIdentifier;
-    // Add the items to the section
-    [section.rows addObject:firstCellItem];
-
-    firstCellItem = [[SSCellViewItem alloc] init];
-    firstCellItem.objectData = @{ @"font_name" : @"Times" };
-    firstCellItem.cellReusableIdentifier = kFontCellReusableIdentifier;
-    // Add the items to the section
-    [section.rows addObject:firstCellItem];
-
-    firstCellItem = [[SSCellViewItem alloc] init];
-    firstCellItem.objectData = @{ @"font_name" : @"Roboto" };
-    firstCellItem.cellReusableIdentifier = kFontCellReusableIdentifier;
-    // Add the items to the section
-    [section.rows addObject:firstCellItem];
-
-    return [@[ section ] mutableCopy];
+- (void)generateDefaultData {
+    self.cellReusableIdentifier = kFontCellReusableIdentifier;
+    self.inputData = [[NSMutableArray alloc] initWithArray:@[ @{ @"font_name" : @"Arial" }, @{ @"font_name" : @"Times" }, @{ @"font_name" : @"Roboto" } ]];
 }
 
 @end
