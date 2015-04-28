@@ -12,11 +12,16 @@
 
 @implementation SSOImageCollectionViewCell
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
+}
+
+
 - (void)configureCell:(id)cellData {
     NSAssert([cellData isKindOfClass:[SSOSnap class]], @"Celldata has to be of SSOSnap type");
     if ([cellData isKindOfClass:[SSOSnap class]]) {
         SSOSnap *data = (SSOSnap *)cellData;
-        [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
         [self.imageView sd_setImageWithURL:[NSURL URLWithString:data.url]];
     }
 }

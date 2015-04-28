@@ -9,11 +9,10 @@
 #import "SSORecentPhotosViewController.h"
 #import "SSODynamicCellSizeCollectionViewProvider.h"
 #import "SSOUSnapButton.h"
+#import "SSOGrayBackgroundWithBorderView.h"
 #import <Masonry.h>
 
-NSInteger const kTopPhotosCellWidth = 100;
-NSInteger const kTopPhotosCellOffset = 10;
-NSInteger const kTopViewHeightConstraint = 30;
+NSInteger const kTopViewHeightConstraint = 40;
 NSInteger const kConstraintOffset = 10;
 NSInteger const kButtonWidthConstraint = 60;
 
@@ -23,7 +22,7 @@ NSInteger const kButtonWidthConstraint = 60;
 @property(strong, nonatomic) UIView *overlayView;
 @property(strong, nonatomic) UIActivityIndicatorView *loadingSpinner;
 @property(strong, nonatomic) SSODynamicCellSizeCollectionViewProvider *provider;
-@property(strong, nonatomic) UIView *topView;
+@property(strong, nonatomic) SSOGrayBackgroundWithBorderView *topView;
 @property(strong, nonatomic) UILabel *titleLabel;
 @property(strong, nonatomic) SSOUSnapButton *seeAllButton;
 
@@ -50,7 +49,7 @@ NSInteger const kButtonWidthConstraint = 60;
  *  Initialize the data of the VC
  */
 - (void)initializeData {
-    self.topView = [UIView new];
+    self.topView = [SSOGrayBackgroundWithBorderView new];
     self.titleLabel = [UILabel new];
     self.titleLabel.text = [NSLocalizedString(@"fan-page.recent-photos.title-label", @"Top 10 title") uppercaseString];
     self.seeAllButton = [SSOUSnapButton new];
@@ -82,6 +81,7 @@ NSInteger const kButtonWidthConstraint = 60;
     [self.view addSubview:self.topView];
     [self.topView addSubview:self.titleLabel];
     [self.topView addSubview:self.seeAllButton];
+
     // Set the see all button constraints
     [self.seeAllButton setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
 
