@@ -10,7 +10,7 @@
 #import "SSOSnap.h"
 
 NSInteger const kNumberOfSmallCellsPerRow = 5.0f;
-NSInteger const kCellSpacing = 5.0f;
+NSInteger const kCellSpacing = 2.5f;
 
 @implementation SSODynamicCellSizeCollectionViewProvider
 
@@ -20,6 +20,18 @@ NSInteger const kCellSpacing = 5.0f;
                     layout:(UICollectionViewLayout *)collectionViewLayout
     sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return [self cellSizeHeightAtIndexPath:indexPath forCollectionView:collectionView];
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                                      layout:(UICollectionViewLayout *)collectionViewLayout
+    minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return kCellSpacing;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                                 layout:(UICollectionViewLayout *)collectionViewLayout
+    minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return kCellSpacing * 2;
 }
 
 #pragma mark - Dynamic size cells

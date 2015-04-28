@@ -7,8 +7,9 @@
 //
 
 #import "WKViewController.h"
+#import "SSOViewControllerWithTabBar.h"
 
-@interface WKSettingsViewController : WKViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface WKSettingsViewController : SSOViewControllerWithTabBar <UITableViewDataSource, UITableViewDelegate> {
     
 }
 

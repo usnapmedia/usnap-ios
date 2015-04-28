@@ -27,7 +27,7 @@
 }
 
 + (UIColor *)thirdColor {
-    return [UIColor grayColor];
+    return [UIColor colorWithRed:237.0f / 255.0f green:237.0f / 255.0f blue:237.0f / 255.0f alpha:1.0f];
 }
 
 + (UIColor *)thirdSecondaryColor {

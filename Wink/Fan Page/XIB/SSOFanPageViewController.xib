@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSOFanPageViewController">
             <connections>
                 <outlet property="campaignViewControllerContainer" destination="clJ-Wg-ftN" id="jyR-ux-cs9"/>
-                <outlet property="livePhotosViewControllerContainer" destination="FEL-hX-FE3" id="ABG-2e-hpC"/>
+                <outlet property="customNavigationBar" destination="WQN-1J-hSa" id="3q5-mH-0Tp"/>
+                <outlet property="recentPhotosViewControllerContainer" destination="FEL-hX-FE3" id="t0i-Zg-Nr0"/>
                 <outlet property="topPhotosViewControllerContainer" destination="RB5-gd-VX2" id="Bhl-IM-E7Z"/>
                 <outlet property="view" destination="iN0-l3-epB" id="5s3-1Q-BKe"/>
             </connections>
@@ -17,41 +18,76 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQN-1J-hSa" userLabel="Nav bar">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="company_logo" translatesAutoresizingMaskIntoConstraints="NO" id="y4G-CS-eEm">
+                            <rect key="frame" x="21" y="0.0" width="333" height="40"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="y4G-CS-eEm" secondAttribute="centerX" id="4lO-zY-0Xx"/>
+                        <constraint firstAttribute="centerX" secondItem="y4G-CS-eEm" secondAttribute="centerX" id="9p3-X9-47D"/>
+                        <constraint firstItem="y4G-CS-eEm" firstAttribute="top" secondItem="WQN-1J-hSa" secondAttribute="top" id="cM6-Fl-goe"/>
+                        <constraint firstAttribute="bottom" secondItem="y4G-CS-eEm" secondAttribute="bottom" id="hWh-Be-Wgi"/>
+                        <constraint firstAttribute="height" constant="40" id="mP6-I9-N9d"/>
+                        <constraint firstItem="y4G-CS-eEm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WQN-1J-hSa" secondAttribute="leading" constant="20" symbolic="YES" id="tu5-5g-vor"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="y4G-CS-eEm" secondAttribute="trailing" constant="20" symbolic="YES" id="x92-TU-ily"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="9p3-X9-47D"/>
+                        </mask>
+                    </variation>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clJ-Wg-ftN" userLabel="Top campaign view">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                    <rect key="frame" x="0.0" y="40" width="375" height="250"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="180" id="23G-ff-b4M"/>
+                        <constraint firstAttribute="height" constant="250" id="23G-ff-b4M"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RB5-gd-VX2" userLabel="Top photos container view">
-                    <rect key="frame" x="0.0" y="180" width="375" height="200"/>
+                    <rect key="frame" x="0.0" y="290" width="375" height="200"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="Dad-Ua-Nk7"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FEL-hX-FE3" userLabel="Live photos container view">
-                    <rect key="frame" x="0.0" y="380" width="375" height="287"/>
+                    <rect key="frame" x="0.0" y="490" width="375" height="177"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="clJ-Wg-ftN" firstAttribute="top" secondItem="WQN-1J-hSa" secondAttribute="bottom" id="0wU-Qb-Ngr"/>
                 <constraint firstItem="FEL-hX-FE3" firstAttribute="top" secondItem="RB5-gd-VX2" secondAttribute="bottom" id="CnM-AN-hDi"/>
                 <constraint firstAttribute="trailing" secondItem="RB5-gd-VX2" secondAttribute="trailing" id="M1w-TS-6D1"/>
                 <constraint firstItem="RB5-gd-VX2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QZv-k2-mAU"/>
                 <constraint firstAttribute="bottom" secondItem="FEL-hX-FE3" secondAttribute="bottom" id="Te2-FU-ohV"/>
                 <constraint firstItem="RB5-gd-VX2" firstAttribute="top" secondItem="clJ-Wg-ftN" secondAttribute="bottom" id="VE7-Bk-lOm"/>
                 <constraint firstItem="clJ-Wg-ftN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VtN-G7-994"/>
+                <constraint firstItem="WQN-1J-hSa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="e7i-S5-OQF"/>
+                <constraint firstAttribute="trailing" secondItem="WQN-1J-hSa" secondAttribute="trailing" id="hhe-FW-d9u"/>
                 <constraint firstAttribute="trailing" secondItem="FEL-hX-FE3" secondAttribute="trailing" id="hlE-Jj-eet"/>
                 <constraint firstItem="clJ-Wg-ftN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hyh-SL-J7S"/>
+                <constraint firstItem="WQN-1J-hSa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="la7-dB-bXP"/>
                 <constraint firstAttribute="trailing" secondItem="clJ-Wg-ftN" secondAttribute="trailing" id="mJs-xb-iUO"/>
                 <constraint firstItem="FEL-hX-FE3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="x3O-xF-vZh"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="VtN-G7-994"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="389.5" y="440.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="company_logo" width="333" height="115"/>
+    </resources>
 </document>

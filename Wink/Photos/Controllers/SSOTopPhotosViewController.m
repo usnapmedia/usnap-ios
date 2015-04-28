@@ -9,17 +9,18 @@
 #import "SSOTopPhotosViewController.h"
 #import "SSOCustomCellSizeCollectionViewProvider.h"
 #import "SSOUSnapButton.h"
+#import "SSOGrayBackgroundWithBorderView.h"
 #import <Masonry.h>
 
 NSInteger const kTopPhotosCellWidth = 100;
 NSInteger const kTopPhotosCellOffset = 10;
-NSInteger const kTopViewHeightConstraint = 30;
+NSInteger const kTopViewHeightConstraint = 40;
 NSInteger const kConstraintOffset = 10;
 NSInteger const kButtonWidthConstraint = 60;
 
 @interface SSOTopPhotosViewController ()
 
-@property(strong, nonatomic) UIView *topView;
+@property(strong, nonatomic) SSOGrayBackgroundWithBorderView *topView;
 @property(strong, nonatomic) UILabel *titleLabel;
 @property(strong, nonatomic) SSOUSnapButton *seeAllButton;
 
@@ -41,9 +42,9 @@ NSInteger const kButtonWidthConstraint = 60;
 
 - (void)initializeData {
     [super initializeData];
-    self.topView = [UIView new];
+    self.topView = [SSOGrayBackgroundWithBorderView new];
     self.titleLabel = [UILabel new];
-    self.titleLabel.text = NSLocalizedString(@"fan-page.top-photos.title-label", @"Top 10 title");
+    self.titleLabel.text = [NSLocalizedString(@"fan-page.top-photos.title-label", @"Top 10 title") uppercaseString];
     self.seeAllButton = [SSOUSnapButton new];
     [self.seeAllButton setTitle:[NSLocalizedString(@"fan-page.see-all-button", @"See all button title") uppercaseString] forState:UIControlStateNormal];
 }

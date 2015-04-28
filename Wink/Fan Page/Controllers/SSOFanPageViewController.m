@@ -14,6 +14,7 @@
 #import "SSOTopPhotosViewController.h"
 #import "SSORecentPhotosViewController.h"
 #import "SSOFeedConnect.h"
+#import "SSOThemeHelper.h"
 #import <Masonry.h>
 
 @interface SSOFanPageViewController () <TopContainerFanPageDelegate>
@@ -24,6 +25,7 @@
 @property(weak, nonatomic) IBOutlet UIView *campaignViewControllerContainer;
 @property(weak, nonatomic) IBOutlet UIView *topPhotosViewControllerContainer;
 @property(weak, nonatomic) IBOutlet UIView *recentPhotosViewControllerContainer;
+@property(weak, nonatomic) IBOutlet UIView *customNavigationBar;
 
 @end
 
@@ -32,6 +34,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    // Initialize UI
+    [self initializeUI];
 
     // Initialize the VCs
     [self initializeTopPhotosController];
@@ -48,6 +52,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Initialization
+
+- (void)initializeUI {
+    //@FIXME
+    self.customNavigationBar.backgroundColor = [UIColor blackColor];
 }
 
 - (void)initializeCampaignTopViewControllerWithCampaigns:(NSArray *)campaigns {
