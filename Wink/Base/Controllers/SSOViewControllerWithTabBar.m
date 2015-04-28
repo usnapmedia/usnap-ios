@@ -9,6 +9,7 @@
 #import "SSOViewControllerWithTabBar.h"
 #import "SSOFanPageViewController.h"
 #import "WKSettingsViewController.h"
+#import "SSOProfileViewController.h"
 #import <Masonry.h>
 
 NSInteger const kTabBarHeight = 40;
@@ -146,11 +147,12 @@ CGFloat const kTabBarOpacity = 0.90;
         UIViewController *presentingVC = [self presentingViewController];
         [self dismissViewControllerAnimated:NO
                                  completion:^{
-                                   [presentingVC presentViewController:[WKSettingsViewController new]
-                                                              animated:NO
-                                                            completion:^{
-
-                                                            }];
+                                     [presentingVC presentViewController:[SSOProfileViewController new] animated:NO completion:nil];
+//                                   [presentingVC presentViewController:[WKSettingsViewController new]
+//                                                              animated:NO
+//                                                            completion:^{
+//
+//                                                            }];
                                  }];
     }
 }

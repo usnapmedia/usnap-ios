@@ -16,6 +16,7 @@
 #import "SSOOrientationHelper.h"
 #import "UINavigationController+SSOLockedNavigationController.h"
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
+#import "SSOProfileViewController.h"
 #import <Masonry.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <SVProgressHUD/SVProgressHUD.h>
@@ -235,8 +236,10 @@
 }
 
 - (IBAction)profileButtonTouched:(id)sender {
-    WKSettingsViewController *settingsVC = [WKSettingsViewController new];
-    [self presentViewController:settingsVC animated:YES completion:nil];
+//    WKSettingsViewController *settingsVC = [WKSettingsViewController new];
+//    [self presentViewController:settingsVC animated:YES completion:nil];
+    SSOProfileViewController *profileVC = [SSOProfileViewController new];
+    [self presentViewController:profileVC animated:YES completion:nil];
 }
 
 #pragma mark Capture Button
