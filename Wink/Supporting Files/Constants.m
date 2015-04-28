@@ -64,3 +64,9 @@ NSString *const kCameraStoryboard = @"Camera";
 #pragma mark - Segue
 
 NSString *const kCameraContainerSegue = @"CAMERA_CONTAINER_SEGUE";
+
+#pragma mark - Cells
+NSString *const kTopPhotosNib = @"SSOTopPhotosCollectionViewCell";
+NSString *const kTopPhotosReusableId = @"topPhotosCell";
+NSString *const kImageCollectionViewCell = @"imageCollectionViewCell";
+NSString *const kImageCollectionViewCellNib = @"SSOImageCollectionViewCell";

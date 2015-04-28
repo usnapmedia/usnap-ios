@@ -8,6 +8,6 @@
 
 #import "SSOSimpleCollectionViewProvider.h"
 
-@interface SSODynamicCellSizeCollectionViewProvider : SSOSimpleCollectionViewProvider
+@interface SSODynamicCellSizeCollectionViewProvider : SSOSimpleCollectionViewProvider <UICollectionViewDelegateFlowLayout>
 
 @end

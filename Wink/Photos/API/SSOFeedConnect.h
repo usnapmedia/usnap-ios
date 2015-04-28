@@ -19,9 +19,8 @@
  *  @param success success block
  *  @param failure failure block
  */
-+ (void)getliveFeedPhotosWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
++ (void)getRecentPhotosWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-
 /**
  *  Get the top photos
  *
