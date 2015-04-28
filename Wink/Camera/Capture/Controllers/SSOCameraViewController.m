@@ -185,6 +185,9 @@
  *  @param mediaDic the dic returned by the UIImagePickerViewDelegate
  */
 - (void)pushToEditVCWithMedia:(NSDictionary *)mediaDic {
+    
+    WKEditMediaViewController *controller = [WKEditMediaViewController new];
+
 
     NSString *mediaType = [mediaDic objectForKey:UIImagePickerControllerMediaType];
     NSURL *mediaURL = nil;
@@ -195,18 +198,19 @@
         image = [mediaDic objectForKey:UIImagePickerControllerEditedImage];
         if (image == nil) {
             image = [mediaDic objectForKey:UIImagePickerControllerOriginalImage];
+            controller.image = image;
+
         }
     } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
         mediaURL = [mediaDic objectForKey:UIImagePickerControllerMediaURL];
         if (mediaURL == nil) {
             mediaURL = [mediaDic objectForKey:UIImagePickerControllerReferenceURL];
+            controller.mediaURL = mediaURL;
+
         }
     }
 
     // Instanciate the editMediaVC and pass it the image and video url
-    WKEditMediaViewController *controller = [WKEditMediaViewController new];
-    controller.mediaURL = mediaURL;
-    controller.image = image;
     // Push to editMediaVC
     [self.navigationController pushViewController:controller animated:YES];
 }

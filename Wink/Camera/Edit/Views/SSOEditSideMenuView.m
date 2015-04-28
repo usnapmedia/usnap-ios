@@ -26,7 +26,7 @@
 - (void)setSizeOfView:(CGSize)sizeOfView {
 
     _sizeOfView = sizeOfView;
-    [self setupUI];
+    //[self setupUI];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -38,12 +38,24 @@
     return self;
 }
 
+-(void)layoutSubviews {
+    
+    [self setupUI];
+    NSLog(@"layoutSubviews");
+}
+
+-(void)layoutIfNeeded {
+    
+    NSLog(@"layoutIfNeeded");
+}
+
 - (void)setupUI {
     [self addViewWithBlur];
-//    UIDeviceOrientation deviceOrientation = [[SSOOrientationHelper sharedInstance] orientation];
-//    if (deviceOrientation == UIDeviceOrientationFaceUp || deviceOrientation == UIDeviceOrientationPortrait ||
-//        deviceOrientation == UIDeviceOrientationPortraitUpsideDown || deviceOrientation == UIDeviceOrientationFaceDown) {
+    UIDeviceOrientation deviceOrientation = [[SSOOrientationHelper sharedInstance] orientation];
+    if (deviceOrientation == UIDeviceOrientationFaceUp || deviceOrientation == UIDeviceOrientationPortrait ||
+        deviceOrientation == UIDeviceOrientationPortraitUpsideDown || deviceOrientation == UIDeviceOrientationFaceDown || deviceOrientation == UIDeviceOrientationUnknown) {
         [self addButtonsToViewPortraitMode];
+    }
 //    } else {
 //        [self addButtonsToViewLandscapeMode];
 //    }
