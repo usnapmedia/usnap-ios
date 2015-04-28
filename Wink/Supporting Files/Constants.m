@@ -10,7 +10,7 @@ NSString *const kCurrentUserStatusChanged = @"kCurrentUserStatusChanged";
 
 #pragma mark - URL schemes
 
-NSString *const kSchemeFacebook = @"fb284759385065022";
+NSString *const kSchemeFacebook = @"fb465899996898725";
 NSString *const kSchemeGooglePlus = @"com.samsao.winktalent";
 
 #pragma mark - API constants

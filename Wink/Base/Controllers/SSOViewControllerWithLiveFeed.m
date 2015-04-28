@@ -17,8 +17,9 @@
 
 #define kFeedContainerHeight 55
 
-
 @interface SSOViewControllerWithLiveFeed () <SSOProviderDelegate>
+
+@property(strong, nonatomic) SSOFeedViewController *childVc;
 
 @end
 
@@ -36,6 +37,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self fetchLatestImagesAndSendToController];
 }
 
 #pragma mark - Initialization
@@ -56,20 +61,19 @@
  *  Initialize the feed view controller
  */
 - (void)initializeFeedController {
-    SSOFeedViewController *childVc = [SSOFeedViewController new];
+    self.childVc = [SSOFeedViewController new];
     // Fetch the latest pictures
-    [self fetchLatestImagesAndSendToController:childVc];
     // Add the child vc
-    [self addChildViewController:childVc];
+    [self addChildViewController:self.childVc];
     // Set the frame
-    childVc.view.frame = self.feedContainerView.frame;
+    self.childVc.view.frame = self.feedContainerView.frame;
     //    // Add subview
-    [self.feedContainerView addSubview:childVc.view];
+    [self.feedContainerView addSubview:self.childVc.view];
     // Call delegate
-    [childVc didMoveToParentViewController:self];
+    [self.childVc didMoveToParentViewController:self];
 
     //  Make the view delegate for the provider to access the on select event
-    childVc.provider.delegate = self;
+    self.childVc.provider.delegate = self;
 }
 
 /**
@@ -77,12 +81,12 @@
  *
  *  @param childVC the child vc
  */
-- (void)fetchLatestImagesAndSendToController:(SSOFeedViewController *)childVC {
+- (void)fetchLatestImagesAndSendToController {
     [SSOFeedConnect getRecentPhotosWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
       SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
       // Set the data of the VC
-      [childVC setData:items.response withCellNib:kImageCollectionViewCellNib andCellReusableIdentifier:kImageCollectionViewCell];
-      [childVC hideLoadingOverlay];
+      [self.childVc setData:items.response withCellNib:kImageCollectionViewCellNib andCellReusableIdentifier:kImageCollectionViewCell];
+      [self.childVc hideLoadingOverlay];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){
     }];
 }

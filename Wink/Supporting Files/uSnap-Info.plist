@@ -23,9 +23,11 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb284759385065022</string>
+				<string>fb465899996898725</string>
 			</array>
 		</dict>
 		<dict>
@@ -67,7 +69,7 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>284759385065022</string>
+	<string>465899996898725</string>
 	<key>FacebookDisplayName</key>
 	<string>Wink Talent</string>
 	<key>LSRequiresIPhoneOS</key>
