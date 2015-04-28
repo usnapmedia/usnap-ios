@@ -26,7 +26,6 @@
 - (void)setSizeOfView:(CGSize)sizeOfView {
 
     _sizeOfView = sizeOfView;
-    //[self setupUI];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -38,27 +37,22 @@
     return self;
 }
 
--(void)layoutSubviews {
-    
-    [self setupUI];
-    NSLog(@"layoutSubviews");
-}
+- (void)layoutSubviews {
 
--(void)layoutIfNeeded {
-    
-    NSLog(@"layoutIfNeeded");
+    [self setupUI];
 }
 
 - (void)setupUI {
     [self addViewWithBlur];
     UIDeviceOrientation deviceOrientation = [[SSOOrientationHelper sharedInstance] orientation];
     if (deviceOrientation == UIDeviceOrientationFaceUp || deviceOrientation == UIDeviceOrientationPortrait ||
-        deviceOrientation == UIDeviceOrientationPortraitUpsideDown || deviceOrientation == UIDeviceOrientationFaceDown || deviceOrientation == UIDeviceOrientationUnknown) {
+        deviceOrientation == UIDeviceOrientationPortraitUpsideDown || deviceOrientation == UIDeviceOrientationFaceDown ||
+        deviceOrientation == UIDeviceOrientationUnknown) {
         [self addButtonsToViewPortraitMode];
     }
-//    } else {
-//        [self addButtonsToViewLandscapeMode];
-//    }
+    //    } else {
+    //        [self addButtonsToViewLandscapeMode];
+    //    }
 }
 
 /**
@@ -94,6 +88,9 @@
     }
 }
 
+/**
+ *  Display the buttons on the view when the phone is in landscape mode
+ */
 - (void)addButtonsToViewLandscapeMode {
 
     if (self.arrayButtons) {
@@ -137,6 +134,9 @@
     }
 }
 
+/**
+ *  Display the buttons on the view when the phone is in portrait mode
+ */
 - (void)addButtonsToViewPortraitMode {
 
     for (UIView *buttonview in self.subviews) {
