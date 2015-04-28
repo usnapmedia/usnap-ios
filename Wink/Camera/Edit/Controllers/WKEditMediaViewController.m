@@ -92,36 +92,6 @@
     [self.textView resignFirstResponder];
 }
 
-#pragma mark - Orientation
-
-/**
- *  Block the screen rotation
- *
- *  @return BOOL
- */
-- (BOOL)shouldAutorotate {
-
-    return NO;
-}
-
-- (NSUInteger)supportedInterfaceOrientations {
-
-    return [[SSOOrientationHelper sharedInstance] orientation];
-}
-
-/**
- *  Detect if the phone is being rotated and return the new  size of the screen
- *
- *  @param size        the size of  the screen
- *  @param coordinator transition coordinator
- */
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    CGSize sizeMinusCollectionView = CGSizeMake(size.width, size.height - self.feedContainerView.frame.size.height);
-
-    [self.sideMenuView setSizeOfView:sizeMinusCollectionView];
-}
 
 #pragma mark - Initialization
 

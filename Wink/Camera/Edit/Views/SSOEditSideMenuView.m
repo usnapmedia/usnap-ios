@@ -40,13 +40,13 @@
 
 - (void)setupUI {
     [self addViewWithBlur];
-    UIDeviceOrientation deviceOrientation = [[SSOOrientationHelper sharedInstance] orientation];
-    if (deviceOrientation == UIDeviceOrientationFaceUp || deviceOrientation == UIDeviceOrientationPortrait ||
-        deviceOrientation == UIDeviceOrientationPortraitUpsideDown || deviceOrientation == UIDeviceOrientationFaceDown) {
+//    UIDeviceOrientation deviceOrientation = [[SSOOrientationHelper sharedInstance] orientation];
+//    if (deviceOrientation == UIDeviceOrientationFaceUp || deviceOrientation == UIDeviceOrientationPortrait ||
+//        deviceOrientation == UIDeviceOrientationPortraitUpsideDown || deviceOrientation == UIDeviceOrientationFaceDown) {
         [self addButtonsToViewPortraitMode];
-    } else {
-        [self addButtonsToViewLandscapeMode];
-    }
+//    } else {
+//        [self addButtonsToViewLandscapeMode];
+//    }
 }
 
 /**
