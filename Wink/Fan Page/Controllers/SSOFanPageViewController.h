@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SSOViewControllerWithTabBar.h"
 
-@interface SSOFanPageViewController : SSOViewControllerWithTabBar
+@interface SSOFanPageViewController : UIViewController
 
 @end
