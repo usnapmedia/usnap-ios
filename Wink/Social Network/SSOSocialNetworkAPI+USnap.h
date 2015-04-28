@@ -36,6 +36,11 @@
  */
 - (BOOL)isUsnapConnectedToSocialNetwork:(SelectedSocialNetwork)socialNetwork;
 
--(NSDictionary *)connectedSocialNetworkAPIParameters;
+/**
+ *  Double check which social networks are connected. 1st with userDefault value, then with session. If there is no session just disconnect the social network
+ *
+ *  @return a dic containing the necessary session informations
+ */
+- (NSDictionary *)connectedSocialNetworkAPIParameters;
 
 @end

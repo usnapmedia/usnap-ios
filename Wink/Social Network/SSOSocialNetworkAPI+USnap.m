@@ -84,10 +84,28 @@
 
 - (NSDictionary *)connectedSocialNetworkAPIParameters {
     NSMutableDictionary *paramDictionary = [NSMutableDictionary new];
+
+    // I do a double check on each social network. 1st check is for the value in userDefault, 2nd is check the session or token. If the
     if ([self isUsnapConnectedToSocialNetwork:facebookSocialNetwork]) {
-        FBSDKAccessToken *token = [FBSDKAccessToken currentAccessToken];
-        if ([[FBSDKAccessToken currentAccessToken] tokenString]) {
-            [paramDictionary setObject:[[FBSDKAccessToken currentAccessToken] tokenString] forKey:@"fb"];
+        if ([self isConnectedToSocialNetwork:facebookSocialNetwork]) {
+            [paramDictionary setObject:[self facebookToken] forKey:@"fb"];
+        } else {
+            [self usnapDisconnectToSocialNetwork:facebookSocialNetwork];
+        }
+    }
+    if ([self isUsnapConnectedToSocialNetwork:twitterSocialNetwork]) {
+        if ([self isConnectedToSocialNetwork:twitterSocialNetwork]) {
+            [paramDictionary setObject:[self twitterToken] forKey:@"tw_key"];
+            [paramDictionary setObject:[self twitterSecret] forKey:@"tw_secret"];
+        } else {
+            [self usnapDisconnectToSocialNetwork:twitterSocialNetwork];
+        }
+    }
+    if ([self isUsnapConnectedToSocialNetwork:googleSocialNetwork]) {
+        if ([self isConnectedToSocialNetwork:googleSocialNetwork]) {
+            [paramDictionary setObject:[self googleToken] forKey:@"gp"];
+        } else {
+            [self usnapDisconnectToSocialNetwork:googleSocialNetwork];
         }
     }
     return paramDictionary.copy;
