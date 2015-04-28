@@ -75,4 +75,13 @@
                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+/**
+ *  Get the current campaigns from backend
+ *
+ *  @param success success block
+ *  @param failure failure block
+ */
++ (void)getCampaignsWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end
