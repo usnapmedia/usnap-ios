@@ -12,8 +12,8 @@
 #import <Masonry.h>
 
 NSInteger const kTabBarHeight = 40;
+CGFloat const kTabBarButtonOffset = 5.0f;
 CGFloat const kTabBarOpacity = 0.90;
-NSInteger const kCameraButtonWidth = 30;
 
 @interface SSOViewControllerWithTabBar ()
 
@@ -55,35 +55,43 @@ NSInteger const kCameraButtonWidth = 30;
     // Create the buttons
     UIButton *homeButton = [UIButton new];
     [homeButton setImage:[UIImage imageNamed:@"tab_bar_home_icon"] forState:UIControlStateNormal];
+    [homeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [homeButton addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.tabBar addSubview:homeButton];
 
     UIButton *cameraButton = [UIButton new];
     [cameraButton setImage:[UIImage imageNamed:@"tab_bar_camera_icon"] forState:UIControlStateNormal];
+    [cameraButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [cameraButton addTarget:self action:@selector(cameraButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.tabBar addSubview:cameraButton];
 
     UIButton *profileButton = [UIButton new];
     [profileButton setImage:[UIImage imageNamed:@"tab_bar_profile_icon"] forState:UIControlStateNormal];
+    [profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [profileButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.tabBar addSubview:profileButton];
 
     // Set constraints for the button
     [cameraButton mas_makeConstraints:^(MASConstraintMaker *make) {
       make.centerX.equalTo(self.tabBar);
-      make.top.and.bottom.equalTo(self.tabBar);
-      make.width.equalTo([NSNumber numberWithInt:kCameraButtonWidth]);
+      make.top.equalTo(self.tabBar).with.offset(kTabBarButtonOffset);
+      make.bottom.equalTo(self.tabBar).with.offset(-kTabBarButtonOffset);
+      make.width.equalTo([NSNumber numberWithFloat:kScreenSize.width / 3]);
     }];
 
     [homeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.top.and.bottom.and.left.equalTo(self.tabBar);
-      make.width.equalTo([NSNumber numberWithInt:kCameraButtonWidth]);
+      make.top.equalTo(self.tabBar).with.offset(kTabBarButtonOffset);
+      make.bottom.equalTo(self.tabBar).with.offset(-kTabBarButtonOffset);
+      make.right.equalTo(cameraButton.mas_left);
+      make.width.equalTo(cameraButton);
 
     }];
 
-    [homeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.top.and.bottom.and.right.equalTo(self.tabBar);
-      make.width.equalTo([NSNumber numberWithInt:kCameraButtonWidth]);
+    [profileButton mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.top.equalTo(self.tabBar).with.offset(kTabBarButtonOffset);
+      make.bottom.equalTo(self.tabBar).with.offset(-kTabBarButtonOffset);
+      make.left.equalTo(cameraButton.mas_right);
+      make.width.equalTo(cameraButton);
 
     }];
 }
@@ -100,13 +108,14 @@ NSInteger const kCameraButtonWidth = 30;
     // Only present if the VC is not of Fanpage kind
     if (![self isKindOfClass:[SSOFanPageViewController class]]) {
         // Simply switch the current VC
+        UIViewController *presentingVC = [self presentingViewController];
         [self dismissViewControllerAnimated:NO
                                  completion:^{
-                                   [[self presentingViewController] presentViewController:[WKSettingsViewController new]
-                                                                                 animated:NO
-                                                                               completion:^{
+                                   [presentingVC presentViewController:[SSOFanPageViewController new]
+                                                              animated:NO
+                                                            completion:^{
 
-                                                                               }];
+                                                            }];
                                  }];
     }
 }
@@ -134,13 +143,14 @@ NSInteger const kCameraButtonWidth = 30;
     // Only present if the VC is not of Settings kind
     if (![self isKindOfClass:[WKSettingsViewController class]]) {
         // Simply switch the current VC
+        UIViewController *presentingVC = [self presentingViewController];
         [self dismissViewControllerAnimated:NO
                                  completion:^{
-                                   [[self presentingViewController] presentViewController:[SSOFanPageViewController new]
-                                                                                 animated:NO
-                                                                               completion:^{
+                                   [presentingVC presentViewController:[WKSettingsViewController new]
+                                                              animated:NO
+                                                            completion:^{
 
-                                                                               }];
+                                                            }];
                                  }];
     }
 }
