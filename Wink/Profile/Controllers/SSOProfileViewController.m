@@ -126,12 +126,12 @@
 }
 
 - (void)loadMyFeed {
-    [SSOFeedConnect getMyFeedWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
-        id test = items.response;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-    }];
+//    [SSOFeedConnect getMyFeedWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
+//        id test = items.response;
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        
+//    }];
 }
 
 #pragma mark - IBActions
