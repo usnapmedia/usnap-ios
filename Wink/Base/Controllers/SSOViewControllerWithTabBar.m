@@ -137,7 +137,6 @@ CGFloat const kTabBarOpacity = 0.90;
     liveFeed.displayFanPageDelegate = self;
     [self presentViewController:cameraNavigationController animated:YES completion:nil];
 }
-
 /**
  *  When the profile button is pressed, simply switch the view
  *

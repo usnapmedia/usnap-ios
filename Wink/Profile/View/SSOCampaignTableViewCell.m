@@ -23,6 +23,12 @@
 
 @implementation SSOCampaignTableViewCell
 
+/**
+ *  Fill the cell with all the information that is needed
+ *
+ *  @param cellData cellData
+ */
+
 - (void)configureCell:(id)cellData {
     NSAssert([cellData isKindOfClass:[SSOCampaign class]], @"Cell data has to be a SSOCampaign class");
     if ([cellData isKindOfClass:[SSOCampaign class]]) {

@@ -6,9 +6,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSOProfileViewController">
             <connections>
+                <outlet property="contestActivityIndicator" destination="S66-dy-CcB" id="Wdm-88-u5Q"/>
                 <outlet property="contestView" destination="O1s-Eb-HRW" id="ZUh-bp-B62"/>
                 <outlet property="contestsButton" destination="8YF-2e-g47" id="7zT-Sp-WIb"/>
                 <outlet property="customNavBar" destination="uPB-ME-APc" id="R96-F3-sD2"/>
+                <outlet property="myFeedActivityIndicator" destination="QDm-33-YvC" id="fx9-lV-uOj"/>
                 <outlet property="myFeedButton" destination="CLe-Rv-vsy" id="kH5-pL-BiR"/>
                 <outlet property="myFeedView" destination="ibo-h6-dS9" id="I63-Cx-BiI"/>
                 <outlet property="numberScoreLabel" destination="Pue-eg-QeT" id="7y1-sa-C61"/>
@@ -212,11 +214,29 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O1s-Eb-HRW" userLabel="Contests view">
                     <rect key="frame" x="0.0" y="236" width="375" height="431"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="S66-dy-CcB">
+                            <rect key="frame" x="177" y="206" width="20" height="20"/>
+                        </activityIndicatorView>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="S66-dy-CcB" secondAttribute="centerY" constant="-0.5" id="XXK-Mv-7FC"/>
+                        <constraint firstAttribute="centerX" secondItem="S66-dy-CcB" secondAttribute="centerX" constant="0.5" id="xxw-qZ-beT"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ibo-h6-dS9">
                     <rect key="frame" x="0.0" y="236" width="375" height="431"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QDm-33-YvC">
+                            <rect key="frame" x="177" y="206" width="20" height="20"/>
+                        </activityIndicatorView>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="QDm-33-YvC" secondAttribute="centerY" id="Qwg-nu-pUJ"/>
+                        <constraint firstAttribute="centerX" secondItem="QDm-33-YvC" secondAttribute="centerX" id="oiw-NM-sxl"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

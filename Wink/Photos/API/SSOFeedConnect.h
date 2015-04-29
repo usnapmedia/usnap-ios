@@ -30,4 +30,13 @@
 + (void)getTopPhotosWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+/**
+ *  Get the user's feed
+ *
+ *  @param success success block
+ *  @param failure failure block
+ */
++ (void)getMyFeedWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end
