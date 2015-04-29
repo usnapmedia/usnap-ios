@@ -12,6 +12,7 @@
 #import "SSOProfileViewController.h"
 #import "SSOFanPageViewController.h"
 #import "SSOProfileViewController.h"
+#import "SSOViewControllerWithLiveFeed.h"
 
 #import <Masonry.h>
 
@@ -19,7 +20,7 @@ NSInteger const kTabBarHeight = 40;
 CGFloat const kTabBarButtonOffset = 5.0f;
 CGFloat const kTabBarOpacity = 0.90;
 
-@interface SSOViewControllerWithTabBar ()
+@interface SSOViewControllerWithTabBar () <DisplayFanPageFromCamera>
 
 @property(strong, nonatomic) UIView *customTabBar;
 
@@ -51,8 +52,7 @@ CGFloat const kTabBarOpacity = 0.90;
     SSOFanPageViewController *fanPageVC = [SSOFanPageViewController new];
     SSOProfileViewController *profileVC = [SSOProfileViewController new];
     //The initial view controller of the storyboard is the navigation view controller
-    UINavigationController *cameraNavigationController = [[UIStoryboard cameraStoryboard] instantiateInitialViewController];
-    [self setViewControllers:@[cameraNavigationController, fanPageVC, profileVC]];
+    [self setViewControllers:@[fanPageVC, profileVC]];
 }
 
 /**
@@ -123,22 +123,7 @@ CGFloat const kTabBarOpacity = 0.90;
  *  @param sender the button
  */
 - (void)homeButtonPressed:(id)sender {
-//    NSAssert(![self isBeingPresented], @"VC has to be presented");
-    // Only present if the VC is not of Fanpage kind
-//    if (![self isKindOfClass:[SSOFanPageViewController class]]) {
-        // Simply switch the current VC
-        [self setSelectedIndex:1];
-//    }
-//        UIViewController *presentingVC = [self presentingViewController];
-//        [self dismissViewControllerAnimated:NO
-//                                 completion:^{
-//                                   [presentingVC presentViewController:[SSOFanPageViewController new]
-//                                                              animated:NO
-//                                                            completion:^{
-//
-//                                                            }];
-//                                 }];
-//    }
+        [self setSelectedIndex:0];
 }
 
 /**
@@ -147,11 +132,14 @@ CGFloat const kTabBarOpacity = 0.90;
  *  @param sender the button
  */
 - (void)cameraButtonPressed:(id)sender {
-//    NSAssert(![self isBeingPresented], @"VC has to be presented");
-//    [self dismissViewControllerAnimated:YES
-//                             completion:^{
-//
-//                             }];
+    UINavigationController *cameraNavigationController = [[UIStoryboard cameraStoryboard] instantiateInitialViewController];
+    SSOViewControllerWithLiveFeed *liveFeed = [cameraNavigationController.viewControllers firstObject];
+    liveFeed.displayFanPageDelegate = self;
+    [self presentViewController:cameraNavigationController animated:YES completion:nil];
+}
+
+- (void)userDidDismissCamera
+{
     [self setSelectedIndex:0];
 }
 
@@ -161,22 +149,7 @@ CGFloat const kTabBarOpacity = 0.90;
  *  @param sender the button
  */
 - (void)profileButtonPressed:(id)sender {
-//    NSAssert(![self isBeingPresented], @"VC has to be presented");
-    // Only present if the VC is not of Settings kind
-//    if (![self isKindOfClass:[WKSettingsViewController class]]) {
-        // Simply switch the current VC
-        [self setSelectedIndex:2];
-//        UIViewController *presentingVC = [self presentingViewController];
-//        [self dismissViewControllerAnimated:NO
-//                                 completion:^{
-//                                   [presentingVC presentViewController:[SSOProfileViewController new] animated:NO completion:nil];
-                                   //                                   [presentingVC presentViewController:[WKSettingsViewController new]
-                                   //                                                              animated:NO
-                                   //                                                            completion:^{
-                                   //
-                                   //                                                            }];
-//                                 }];
-//    }
+        [self setSelectedIndex:1];
 }
 
 @end

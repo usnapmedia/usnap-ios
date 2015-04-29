@@ -16,10 +16,12 @@
 #import <Masonry.h>
 
 #define kFeedContainerHeight 55
+#define kFeedContainerLeft 45
 
 @interface SSOViewControllerWithLiveFeed () <SSOProviderDelegate>
 
 @property(strong, nonatomic) SSOFeedViewController *childVc;
+@property (strong, nonatomic) UIButton *dismissButton;
 
 @end
 
@@ -32,6 +34,7 @@
     // Initialize the view
     [self initializeFeedContainerView];
     [self initializeFeedController];
+    [self createDismissButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,7 +55,8 @@
     self.feedContainerView = [UIView new];
     [self.view addSubview:self.feedContainerView];
     [self.feedContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.top.and.left.and.right.equalTo(self.view);
+      make.top.and.right.equalTo(self.view);
+        make.left.equalTo([NSNumber numberWithInt:kFeedContainerLeft]);
       make.height.equalTo([NSNumber numberWithInt:kFeedContainerHeight]);
     }];
 }
@@ -76,6 +80,26 @@
     self.childVc.provider.delegate = self;
 }
 
+- (void)createDismissButton
+{
+    self.dismissButton = [UIButton new];
+    [self.dismissButton setTitle:@"X" forState:UIControlStateNormal];
+    self.dismissButton.backgroundColor = self.childVc.collectionView.backgroundColor;
+    [self.dismissButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.view addSubview:self.dismissButton];
+    [self.dismissButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.left.equalTo(self.view);
+        make.height.equalTo([NSNumber numberWithInt:kFeedContainerHeight]);
+        make.width.equalTo([NSNumber numberWithInt:kFeedContainerLeft]);
+    }];
+    [self.dismissButton addTarget:self action:@selector(buttonWasClicked) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)buttonWasClicked
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 /**
  *  Set the images to the view controller
  *
@@ -95,7 +119,10 @@
 
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //@TODO Present fan page
-    [self presentViewController:[SSOFanPageViewController new] animated:YES completion:nil];
+    if ([self.displayFanPageDelegate respondsToSelector:@selector(userDidDismissCamera)]) {
+        [self.displayFanPageDelegate userDidDismissCamera];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

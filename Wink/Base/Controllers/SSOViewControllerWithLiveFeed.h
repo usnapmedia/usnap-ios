@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DisplayFanPageFromCamera <NSObject>
+
+- (void)userDidDismissCamera;
+
+@end
+
 @interface SSOViewControllerWithLiveFeed : UIViewController
 
 @property(strong, nonatomic) UIView *feedContainerView;
+@property (weak, nonatomic) id <DisplayFanPageFromCamera> displayFanPageDelegate;
 
 @end
