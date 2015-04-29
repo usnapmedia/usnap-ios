@@ -23,12 +23,20 @@ CGFloat const kTableViewCellHeight = 125.0f;
 
 @implementation SSOCampaignViewController
 
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initializeUI];
     [self initializeData];
 }
+
+#pragma mark - Initialization
+
+/**
+ *  Initialize the UI
+ */
 
 - (void)initializeUI {
     self.tableView = [UITableView new];
@@ -47,6 +55,12 @@ CGFloat const kTableViewCellHeight = 125.0f;
     self.tableView.delegate = self.provider;
     self.tableView.dataSource = self.provider;
 }
+
+#pragma mark - UI
+
+/**
+ *  The table view receive the new data and the table view is reloaded
+ */
 
 - (void)setCampaignData:(NSArray *)data {
     self.provider.inputData = [NSMutableArray arrayWithArray:data];

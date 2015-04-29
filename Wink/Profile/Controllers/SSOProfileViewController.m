@@ -31,6 +31,8 @@
 @property(weak, nonatomic) IBOutlet UIView *customNavBar;
 @property(weak, nonatomic) IBOutlet UIView *contestView;
 @property(weak, nonatomic) IBOutlet UIView *myFeedView;
+@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *contestActivityIndicator;
+@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *myFeedActivityIndicator;
 
 @property(nonatomic) BOOL isContestsVisible;
 @property(strong, nonatomic) SSOCampaignViewController *campaignVC;
@@ -72,6 +74,8 @@
     self.contestsButton.backgroundColor = [SSOThemeHelper firstColor];
     //@FIXME
     self.customNavBar.backgroundColor = [UIColor blackColor];
+
+    NSLog(@"%f", self.tabBarController.tabBar.frame.size.height);
 }
 
 /**
@@ -87,7 +91,7 @@
     // Set the frame
     campaignVC.view.frame = self.contestView.frame;
     //
-    [self.contestView addSubview:campaignVC.view];
+    [self.contestView insertSubview:campaignVC.view belowSubview:self.contestActivityIndicator];
     [campaignVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
       make.edges.equalTo(self.contestView);
     }];
@@ -101,7 +105,8 @@
     // Set the frame
     myFeedVC.view.frame = self.myFeedView.frame;
     //
-    [self.myFeedView addSubview:myFeedVC.view];
+
+    [self.myFeedView insertSubview:myFeedVC.view belowSubview:self.myFeedActivityIndicator];
     [myFeedVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
       make.edges.equalTo(self.myFeedView);
     }];
@@ -118,6 +123,7 @@
 
       SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOCampaign class]];
       // self.campaingTopVCContainer = [[SSOCampaignTopViewControllerContainer alloc] initWithArrayOfCampaigns:items.response];
+      [self.contestActivityIndicator stopAnimating];
       [self.campaignVC setCampaignData:items.response];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){
@@ -125,12 +131,17 @@
     }];
 }
 
+/**
+ *  it loads the information of the user's feed collection view
+ */
+
 - (void)loadMyFeed {
     [SSOFeedConnect getMyFeedWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
-        id test = items.response;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
+      [self.myFeedActivityIndicator stopAnimating];
+      [self.myFeedVC setMyFeedData:items.response];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+
     }];
 }
 
