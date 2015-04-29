@@ -16,6 +16,7 @@
 #import "SSOOrientationHelper.h"
 #import "UINavigationController+SSOLockedNavigationController.h"
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
+#import "SSOProfileViewController.h"
 #import <Masonry.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <SVProgressHUD/SVProgressHUD.h>
@@ -143,6 +144,7 @@
 - (void)initializeUI {
 
     // Allow the user to rotate the screen when the view just appeared
+    self.profileButton.hidden = YES;
     self.isRotationAllowed = YES;
     self.isVideoRecording = NO;
 
@@ -235,8 +237,8 @@
 }
 
 - (IBAction)profileButtonTouched:(id)sender {
-    WKSettingsViewController *settingsVC = [WKSettingsViewController new];
-    [self presentViewController:settingsVC animated:YES completion:nil];
+    SSOProfileViewController *profileVC = [SSOProfileViewController new];
+    [self presentViewController:profileVC animated:YES completion:nil];
 }
 
 #pragma mark Capture Button

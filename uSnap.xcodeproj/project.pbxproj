@@ -146,6 +146,11 @@
 		D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C8F1AD428D3008D2A37 /* SSOGooglePlusHelper.m */; };
 		D8FBADAC1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FBADAB1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.m */; };
 		E80D4E714C58C48AEC95B461 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9ECEFEEE6F33C8F8962807 /* libPods.a */; };
+		FB19EA981AF0275100F8D587 /* SSOCampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB19EA971AF0275100F8D587 /* SSOCampaignViewController.m */; };
+		FB19EA9D1AF02AB400F8D587 /* SSOCampaignTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FB19EA9B1AF02AB400F8D587 /* SSOCampaignTableViewCell.m */; };
+		FB19EA9E1AF02AB400F8D587 /* SSOCampaignTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB19EA9C1AF02AB400F8D587 /* SSOCampaignTableViewCell.xib */; };
+		FB3A52C21AF01844003A9D92 /* SSOProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3A52C01AF01844003A9D92 /* SSOProfileViewController.m */; };
+		FB3A52C31AF01844003A9D92 /* SSOProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3A52C11AF01844003A9D92 /* SSOProfileViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -401,6 +406,14 @@
 		D8FBADAA1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOViewControllerWithLiveFeed.h; sourceTree = "<group>"; };
 		D8FBADAB1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOViewControllerWithLiveFeed.m; sourceTree = "<group>"; };
 		EAE311565BE99D01341CE159 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		FB19EA961AF0275100F8D587 /* SSOCampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCampaignViewController.h; sourceTree = "<group>"; };
+		FB19EA971AF0275100F8D587 /* SSOCampaignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCampaignViewController.m; sourceTree = "<group>"; };
+		FB19EA9A1AF02AB400F8D587 /* SSOCampaignTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCampaignTableViewCell.h; sourceTree = "<group>"; };
+		FB19EA9B1AF02AB400F8D587 /* SSOCampaignTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCampaignTableViewCell.m; sourceTree = "<group>"; };
+		FB19EA9C1AF02AB400F8D587 /* SSOCampaignTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOCampaignTableViewCell.xib; sourceTree = "<group>"; };
+		FB3A52BF1AF01844003A9D92 /* SSOProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOProfileViewController.h; sourceTree = "<group>"; };
+		FB3A52C01AF01844003A9D92 /* SSOProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOProfileViewController.m; sourceTree = "<group>"; };
+		FB3A52C11AF01844003A9D92 /* SSOProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOProfileViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -505,6 +518,7 @@
 				D8EA5C7D1AD4287C008D2A37 /* Login */,
 				335723751ACB097C000CC846 /* Old:To Check */,
 				D8E677E41AEEE5F6006B8CD8 /* Photos */,
+				FB3A52BC1AF01825003A9D92 /* Profile */,
 				3357238E1ACB097C000CC846 /* Settings */,
 				335723971ACB097C000CC846 /* Sharing */,
 				D8EA5C791AD4281B008D2A37 /* Social Network */,
@@ -1249,6 +1263,45 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FB19EA991AF02A8500F8D587 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FB19EA9A1AF02AB400F8D587 /* SSOCampaignTableViewCell.h */,
+				FB19EA9B1AF02AB400F8D587 /* SSOCampaignTableViewCell.m */,
+				FB19EA9C1AF02AB400F8D587 /* SSOCampaignTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FB3A52BC1AF01825003A9D92 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FB19EA991AF02A8500F8D587 /* View */,
+				FB3A52BD1AF01825003A9D92 /* Controllers */,
+				FB3A52BE1AF01825003A9D92 /* Provider */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		FB3A52BD1AF01825003A9D92 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FB3A52BF1AF01844003A9D92 /* SSOProfileViewController.h */,
+				FB3A52C01AF01844003A9D92 /* SSOProfileViewController.m */,
+				FB3A52C11AF01844003A9D92 /* SSOProfileViewController.xib */,
+				FB19EA961AF0275100F8D587 /* SSOCampaignViewController.h */,
+				FB19EA971AF0275100F8D587 /* SSOCampaignViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FB3A52BE1AF01825003A9D92 /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1347,11 +1400,13 @@
 				D810B8EE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
 				D810B8EF1ADF506500B3AC11 /* SSOColorPickerContainerView.xib in Resources */,
 				335723DC1ACB097C000CC846 /* SettingsSocialFakeCell.xib in Resources */,
+				FB3A52C31AF01844003A9D92 /* SSOProfileViewController.xib in Resources */,
 				D8C83EA31AE1C74C00F187F1 /* InfoPlist.strings in Resources */,
 				D8C83EA41AE1C74C00F187F1 /* Localizable.strings in Resources */,
 				335723DA1ACB097C000CC846 /* WKSettingsViewController.xib in Resources */,
 				335723B31ACB097C000CC846 /* Camera.storyboard in Resources */,
 				D810B8F01ADF506500B3AC11 /* SSODrawAccessoryContainerView.xib in Resources */,
+				FB19EA9E1AF02AB400F8D587 /* SSOCampaignTableViewCell.xib in Resources */,
 				D810B8EA1ADF506500B3AC11 /* SSOEditSideMenuView.xib in Resources */,
 				D810B8F11ADF506500B3AC11 /* SSOFontCollectionViewCell.xib in Resources */,
 				3303DDD01AD84F19002B74F9 /* SSOLoginContainerView.xib in Resources */,
@@ -1470,6 +1525,7 @@
 				335723E11ACB097C000CC846 /* main.m in Sources */,
 				D810B8EB1ADF506500B3AC11 /* SSOToolButton.m in Sources */,
 				33B991491AE4522F002A30F8 /* SSOAlignedButtonsView.m in Sources */,
+				FB19EA981AF0275100F8D587 /* SSOCampaignViewController.m in Sources */,
 				D810B8E41ADF506500B3AC11 /* SSOSlidingContainerView.m in Sources */,
 				335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */,
 				D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */,
@@ -1482,6 +1538,7 @@
 				D810B8D91ADF506500B3AC11 /* SSOAdjustmentToolController.m in Sources */,
 				CB8F0ABA1ADDDC8600C18263 /* AVCamPreviewView.m in Sources */,
 				D830F41F1ACDDBF1002A503D /* UIColor+WKAdditions.m in Sources */,
+				FB3A52C21AF01844003A9D92 /* SSOProfileViewController.m in Sources */,
 				33E8517C1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.m in Sources */,
 				D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */,
 				D8E677FC1AEEE5F6006B8CD8 /* SSOFeedConnect.m in Sources */,
@@ -1533,6 +1590,7 @@
 				339841D91AEAB41000605C67 /* SSOCountableItems.m in Sources */,
 				D810B8D01ADF506500B3AC11 /* SSOTextFontCollectionViewProvider.m in Sources */,
 				D810B8E61ADF506500B3AC11 /* SSODrawAccessoryContainerView.m in Sources */,
+				FB19EA9D1AF02AB400F8D587 /* SSOCampaignTableViewCell.m in Sources */,
 				335723D91ACB097C000CC846 /* WKSettingsViewController.m in Sources */,
 				3316F2D31ADD6D9F00C7ED24 /* SSSessionManager.m in Sources */,
 			);

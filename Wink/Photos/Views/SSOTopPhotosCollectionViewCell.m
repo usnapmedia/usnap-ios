@@ -40,15 +40,15 @@
         if ([snap.fbLikes integerValue] > 1) {
             [self.pointsLabel
                 setText:[NSString
-                            stringWithFormat:NSLocalizedString(@"fan-page.top-photos.points-label.plural", @"Number of points label in plural"), snap.fbLikes]];
+                            stringWithFormat:NSLocalizedString(@"fan-page.top-photos.points-label-plural", @"Number of points label in plural"), snap.fbLikes]];
         } else {
             // Check if the fblikes is actually set, else, just write 0
             if (!snap.fbLikes) {
                 [self.pointsLabel
-                    setText:[NSString stringWithFormat:NSLocalizedString(@"fan-page.top-photos.points-label.single", @"Number of points label in plural"), @0]];
+                    setText:[NSString stringWithFormat:NSLocalizedString(@"fan-page.top-photos.points-label-single", @"Number of points label in plural"), @0]];
             } else {
                 [self.pointsLabel
-                    setText:[NSString stringWithFormat:NSLocalizedString(@"fan-page.top-photos.points-label.single", @"Number of points label in plural"),
+                    setText:[NSString stringWithFormat:NSLocalizedString(@"fan-page.top-photos.points-label-single", @"Number of points label in plural"),
                                                        snap.fbLikes]];
             }
         }
