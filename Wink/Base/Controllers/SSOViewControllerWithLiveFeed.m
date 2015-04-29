@@ -21,7 +21,7 @@
 @interface SSOViewControllerWithLiveFeed () <SSOProviderDelegate>
 
 @property(strong, nonatomic) SSOFeedViewController *childVc;
-@property (strong, nonatomic) UIButton *dismissButton;
+@property(strong, nonatomic) UIButton *dismissButton;
 
 @end
 
@@ -42,7 +42,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [self fetchLatestImagesAndSendToController];
 }
 
@@ -56,7 +56,7 @@
     [self.view addSubview:self.feedContainerView];
     [self.feedContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
       make.top.and.right.equalTo(self.view);
-        make.left.equalTo([NSNumber numberWithInt:kFeedContainerLeft]);
+      make.left.equalTo([NSNumber numberWithInt:kFeedContainerLeft]);
       make.height.equalTo([NSNumber numberWithInt:kFeedContainerHeight]);
     }];
 }
@@ -84,17 +84,17 @@
  *  Dismiss Button for the Camera
  */
 
-- (void)createDismissButton
-{
+- (void)createDismissButton {
     self.dismissButton = [UIButton new];
+    //@FIXME Design will probably change
     [self.dismissButton setTitle:@"X" forState:UIControlStateNormal];
     self.dismissButton.backgroundColor = self.childVc.collectionView.backgroundColor;
     [self.dismissButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.view addSubview:self.dismissButton];
     [self.dismissButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.and.left.equalTo(self.view);
-        make.height.equalTo([NSNumber numberWithInt:kFeedContainerHeight]);
-        make.width.equalTo([NSNumber numberWithInt:kFeedContainerLeft]);
+      make.top.and.left.equalTo(self.view);
+      make.height.equalTo([NSNumber numberWithInt:kFeedContainerHeight]);
+      make.width.equalTo([NSNumber numberWithInt:kFeedContainerLeft]);
     }];
     [self.dismissButton addTarget:self action:@selector(buttonWasClicked) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -103,8 +103,7 @@
  *  Action of the dismiss button
  */
 
-- (void)buttonWasClicked
-{
+- (void)buttonWasClicked {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

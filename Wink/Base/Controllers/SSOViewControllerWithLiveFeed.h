@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 /**
- *  This protocol allows the user to go to the fan page when he click at the collection view
+ *  This delegate allows the user to go to the fan page when he click at the collection view
  */
 
-@protocol DisplayFanPageFromCamera <NSObject>
+@protocol LiveFeedViewControllerDelegate <NSObject>
 
 - (void)userDidDismissCamera;
 
@@ -21,6 +21,6 @@
 @interface SSOViewControllerWithLiveFeed : UIViewController
 
 @property(strong, nonatomic) UIView *feedContainerView;
-@property (weak, nonatomic) id <DisplayFanPageFromCamera> displayFanPageDelegate;
+@property(weak, nonatomic) id<LiveFeedViewControllerDelegate> displayFanPageDelegate;
 
 @end

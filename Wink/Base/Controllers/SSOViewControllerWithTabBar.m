@@ -20,7 +20,7 @@ NSInteger const kTabBarHeight = 40;
 CGFloat const kTabBarButtonOffset = 5.0f;
 CGFloat const kTabBarOpacity = 0.90;
 
-@interface SSOViewControllerWithTabBar () <DisplayFanPageFromCamera>
+@interface SSOViewControllerWithTabBar () <LiveFeedViewControllerDelegate>
 
 @property(strong, nonatomic) UIView *customTabBar;
 
@@ -33,7 +33,7 @@ CGFloat const kTabBarOpacity = 0.90;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+
     [self setInitalViewControllers];
     [self setTabBar];
 }
@@ -51,8 +51,8 @@ CGFloat const kTabBarOpacity = 0.90;
 - (void)setInitalViewControllers {
     SSOFanPageViewController *fanPageVC = [SSOFanPageViewController new];
     SSOProfileViewController *profileVC = [SSOProfileViewController new];
-    //The initial view controller of the storyboard is the navigation view controller
-    [self setViewControllers:@[fanPageVC, profileVC]];
+    // The initial view controller of the storyboard is the navigation view controller
+    [self setViewControllers:@[ fanPageVC, profileVC ]];
 }
 
 /**
@@ -123,7 +123,7 @@ CGFloat const kTabBarOpacity = 0.90;
  *  @param sender the button
  */
 - (void)homeButtonPressed:(id)sender {
-        [self setSelectedIndex:0];
+    [self setSelectedIndex:0];
 }
 
 /**
@@ -138,18 +138,19 @@ CGFloat const kTabBarOpacity = 0.90;
     [self presentViewController:cameraNavigationController animated:YES completion:nil];
 }
 
-- (void)userDidDismissCamera
-{
-    [self setSelectedIndex:0];
-}
-
 /**
  *  When the profile button is pressed, simply switch the view
  *
  *  @param sender the button
  */
 - (void)profileButtonPressed:(id)sender {
-        [self setSelectedIndex:1];
+    [self setSelectedIndex:1];
+}
+
+#pragma mark - LiveFeedViewControllerDelegate
+
+- (void)userDidDismissCamera {
+    [self setSelectedIndex:0];
 }
 
 @end
