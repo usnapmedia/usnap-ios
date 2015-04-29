@@ -80,6 +80,10 @@
     self.childVc.provider.delegate = self;
 }
 
+/**
+ *  Dismiss Button for the Camera
+ */
+
 - (void)createDismissButton
 {
     self.dismissButton = [UIButton new];
@@ -94,6 +98,10 @@
     }];
     [self.dismissButton addTarget:self action:@selector(buttonWasClicked) forControlEvents:UIControlEventTouchUpInside];
 }
+
+/**
+ *  Action of the dismiss button
+ */
 
 - (void)buttonWasClicked
 {
@@ -118,7 +126,6 @@
 #pragma mark - SSOProviderDelegate
 
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //@TODO Present fan page
     if ([self.displayFanPageDelegate respondsToSelector:@selector(userDidDismissCamera)]) {
         [self.displayFanPageDelegate userDidDismissCamera];
     }

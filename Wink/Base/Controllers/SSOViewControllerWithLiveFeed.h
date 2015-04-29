@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  This protocol allows the user to go to the fan page when he click at the collection view
+ */
+
 @protocol DisplayFanPageFromCamera <NSObject>
 
 - (void)userDidDismissCamera;
