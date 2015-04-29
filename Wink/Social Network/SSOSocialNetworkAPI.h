@@ -77,6 +77,34 @@ typedef NS_ENUM(NSInteger, SelectedSocialNetwork) {
  */
 - (BOOL)isConnectedToSocialNetwork:(SelectedSocialNetwork)network;
 
+/**
+ *  Get the facebook session token
+ *
+ *  @return the token as a string
+ */
+- (NSString *)facebookToken;
+
+/**
+ *  Get the google session token
+ *
+ *  @return the token as a string
+ */
+- (NSString *)googleToken;
+
+/**
+ *  Get the twitter session token
+ *
+ *  @return the token as a string
+ */
+- (NSString *)twitterToken;
+
+/**
+ *  Get the twitter session token secret
+ *
+ *  @return the token secret as a string
+ */
+- (NSString *)twitterSecret;
+
 @end
 
 @protocol SocialNetworkDelegate

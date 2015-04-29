@@ -14,6 +14,8 @@ extern NSString *const kSchemeGooglePlus;
 
 #pragma mark - API constants
 
+extern NSString *const kTwitterConsumerSecret;
+extern NSString *const kTwitterConsumerKey;
 extern NSString *const kTwitterMediaUploadURL;
 extern NSString *const kTwitterTweetUploadURL;
 extern NSString *const kGoogleClientId;

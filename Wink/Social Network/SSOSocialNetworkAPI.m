@@ -13,6 +13,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import <GooglePlus.h>
 #import "SSOGooglePlusHelper.h"
+#import <SSFacebookHelper.h>
 
 @implementation SSOSocialNetworkAPI
 
@@ -56,10 +57,7 @@
 
           if (session) {
               [self.delegate socialNetwork:twitterSocialNetwork DidFinishLoginWithError:error];
-
-              // TODO: See what to do exactly with the token
-              NSString *tokenTwitter = session.authToken;
-              [[NSUserDefaults standardUserDefaults] setObject:tokenTwitter forKey:kTokenTwitterString];
+              // Saving the account name in case we want to post directly to Twitter
               [[NSUserDefaults standardUserDefaults] setObject:[session userName] forKey:kTwitterAccountName];
               [[NSUserDefaults standardUserDefaults] synchronize];
           } else {
@@ -74,13 +72,28 @@
     } else if (socialNetwork == googleSocialNetwork) {
 
         [[SSOGooglePlusHelper sharedInstance] signIn];
-
-        // TODO: See what to do exactly with the token
-        NSString *googleToken = [[SSOGooglePlusHelper sharedInstance] getAccessToken];
-        [[NSUserDefaults standardUserDefaults] setObject:googleToken forKey:kTokenGoogleString];
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
+
+- (void)logoutFromSocialFramework:(SelectedSocialNetwork)socialNetwork {
+
+    if (socialNetwork == facebookSocialNetwork) {
+
+        [SSFacebookHelper logout];
+    }
+
+    else if (socialNetwork == twitterSocialNetwork) {
+
+        [[Twitter sharedInstance] logOut];
+
+    }
+
+    else if (socialNetwork == googleSocialNetwork) {
+        [[SSOGooglePlusHelper sharedInstance] disconnect];
+    }
+}
+
+#pragma mark - Connection checks
 
 - (BOOL)isConnectedToSocialNetwork:(SelectedSocialNetwork)network {
 
@@ -136,22 +149,26 @@
     return [[SSOGooglePlusHelper sharedInstance] isConnected];
 }
 
-- (void)logoutFromSocialFramework:(SelectedSocialNetwork)socialNetwork {
+#pragma mark - Session informations
 
-    if (socialNetwork == facebookSocialNetwork) {
+- (NSString *)facebookToken {
 
-        [SSFacebookHelper logout];
-    }
+    return [FBSDKAccessToken currentAccessToken].tokenString;
+}
 
-    else if (socialNetwork == twitterSocialNetwork) {
+- (NSString *)googleToken {
 
-        [[Twitter sharedInstance] logOut];
+    return [[SSOGooglePlusHelper sharedInstance] getAccessToken];
+}
 
-    }
+- (NSString *)twitterToken {
 
-    else if (socialNetwork == googleSocialNetwork) {
-        [[SSOGooglePlusHelper sharedInstance] disconnect];
-    }
+    return [[Twitter sharedInstance] session].authToken;
+}
+
+- (NSString *)twitterSecret {
+
+    return [[Twitter sharedInstance] session].authTokenSecret;
 }
 
 // TODO: this should be moved in Facebook helper

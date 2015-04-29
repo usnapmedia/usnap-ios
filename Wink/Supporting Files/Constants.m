@@ -15,6 +15,8 @@ NSString *const kSchemeGooglePlus = @"com.samsao.winktalent";
 
 #pragma mark - API constants
 
+NSString *const kTwitterConsumerSecret = @"CJy9NakTiTNlfFkKByYg2YJe1UzmWw43PN7qrKEixJOWFV2MYM";
+NSString *const kTwitterConsumerKey = @"xWN8D23Qr6E0gJJFpthMXjbKX";
 NSString *const kTwitterMediaUploadURL = @"https://upload.twitter.com/1.1/media/upload.json";
 NSString *const kTwitterTweetUploadURL = @"https://api.twitter.com/1.1/statuses/update.json";
 NSString *const kGoogleClientId = @"705787939641-q7u2cb9tbrd04ku4jc99h4bd5c1cs7bk.apps.googleusercontent.com";

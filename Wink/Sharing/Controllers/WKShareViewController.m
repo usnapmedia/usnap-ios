@@ -491,7 +491,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
  *
  *  @param button the button
  */
-- (void)touchedSocialNetworkButton:(SSOCustomSocialButton *)button {
+- (void)touchedSocialNetworkButton:(SSORectangleSocialButton *)button {
     // Disable interactions with the button so the user can't call 2 times the same action
     if (button.isSelected) {
         // User was already
