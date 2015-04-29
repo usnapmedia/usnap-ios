@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="fontCollectionViewCellIdentifier" id="3Le-al-moZ" customClass="SSOFontCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Aa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9DY-vK-rp4" userLabel="Font example">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="35"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Font" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQ6-3X-4Pu" userLabel="Font name">
+                        <rect key="frame" x="0.0" y="35" width="50" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="TQ6-3X-4Pu" firstAttribute="leading" secondItem="3Le-al-moZ" secondAttribute="leading" id="9AA-Ym-oWe"/>
+                <constraint firstItem="9DY-vK-rp4" firstAttribute="top" secondItem="3Le-al-moZ" secondAttribute="top" id="Eco-qZ-D7m"/>
+                <constraint firstAttribute="bottom" secondItem="TQ6-3X-4Pu" secondAttribute="bottom" id="VJJ-1b-kmL"/>
+                <constraint firstItem="TQ6-3X-4Pu" firstAttribute="top" secondItem="9DY-vK-rp4" secondAttribute="bottom" id="cIG-1o-nZT"/>
+                <constraint firstItem="9DY-vK-rp4" firstAttribute="leading" secondItem="3Le-al-moZ" secondAttribute="leading" id="dhD-9b-iee"/>
+                <constraint firstAttribute="trailing" secondItem="TQ6-3X-4Pu" secondAttribute="trailing" id="haM-1u-pkv"/>
+                <constraint firstAttribute="trailing" secondItem="9DY-vK-rp4" secondAttribute="trailing" id="qHi-kJ-lMG"/>
+            </constraints>
+            <connections>
+                <outlet property="fontExampleLabel" destination="9DY-vK-rp4" id="mk8-QR-59i"/>
+                <outlet property="fontNameLabel" destination="TQ6-3X-4Pu" id="Kl4-Ue-aX6"/>
+            </connections>
+            <point key="canvasLocation" x="211" y="166"/>
+        </collectionViewCell>
+    </objects>
+</document>

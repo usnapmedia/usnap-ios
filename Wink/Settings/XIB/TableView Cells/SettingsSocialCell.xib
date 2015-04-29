@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SETTINGS_SOCIAL_CELL" id="cHP-xK-o5C" customClass="WKSettingSocialTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cHP-xK-o5C" id="Zsj-p4-wRj">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEM-d1-iD1">
+                        <rect key="frame" x="20" y="11" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wpe-Bu-umR">
+                        <rect key="frame" x="531" y="6" width="51" height="31"/>
+                        <connections>
+                            <action selector="switchValueChanged:" destination="cHP-xK-o5C" eventType="valueChanged" id="oHn-QH-pIA"/>
+                        </connections>
+                    </switch>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="wpe-Bu-umR" secondAttribute="trailing" constant="20" id="6wl-hn-PLk"/>
+                    <constraint firstItem="wpe-Bu-umR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JEM-d1-iD1" secondAttribute="trailing" id="CSg-b8-ScN"/>
+                    <constraint firstAttribute="centerY" secondItem="JEM-d1-iD1" secondAttribute="centerY" id="R6F-66-CQK"/>
+                    <constraint firstItem="JEM-d1-iD1" firstAttribute="leading" secondItem="Zsj-p4-wRj" secondAttribute="leading" constant="20" id="wj6-yh-ZEU"/>
+                    <constraint firstAttribute="centerY" secondItem="wpe-Bu-umR" secondAttribute="centerY" id="y0c-D8-cr2"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="labelNameNetwork" destination="JEM-d1-iD1" id="YMl-5d-D2c"/>
+                <outlet property="switchNetwork" destination="wpe-Bu-umR" id="w2A-eR-MpF"/>
+            </connections>
+            <point key="canvasLocation" x="455" y="215"/>
+        </tableViewCell>
+    </objects>
+</document>

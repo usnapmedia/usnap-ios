@@ -1,0 +1,155 @@
+//
+//  SSORecentPhotosViewController.m
+//  uSnap
+//
+//  Created by Gabriel Cartier on 2015-04-27.
+//  Copyright (c) 2015 Samsao. All rights reserved.
+//
+
+#import "SSORecentPhotosViewController.h"
+#import "SSODynamicCellSizeCollectionViewProvider.h"
+#import "SSOUSnapButton.h"
+#import "SSOGrayBackgroundWithBorderView.h"
+#import <Masonry.h>
+
+NSInteger const kTopViewHeightConstraint = 40;
+NSInteger const kConstraintOffset = 10;
+NSInteger const kButtonWidthConstraint = 60;
+
+@interface SSORecentPhotosViewController ()
+
+@property(strong, nonatomic) UICollectionView *collectionView;
+@property(strong, nonatomic) UIView *overlayView;
+@property(strong, nonatomic) UIActivityIndicatorView *loadingSpinner;
+@property(strong, nonatomic) SSODynamicCellSizeCollectionViewProvider *provider;
+@property(strong, nonatomic) SSOGrayBackgroundWithBorderView *topView;
+@property(strong, nonatomic) UILabel *titleLabel;
+@property(strong, nonatomic) SSOUSnapButton *seeAllButton;
+
+@end
+
+@implementation SSORecentPhotosViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    [self initializeData];
+    [self initializeUI];
+    [self setLoadingOverlay];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Initialization
+
+/**
+ *  Initialize the data of the VC
+ */
+- (void)initializeData {
+    self.topView = [SSOGrayBackgroundWithBorderView new];
+    self.titleLabel = [UILabel new];
+    self.titleLabel.text = [NSLocalizedString(@"fan-page.recent-photos.title-label", @"Top 10 title") uppercaseString];
+    self.seeAllButton = [SSOUSnapButton new];
+    [self.seeAllButton setTitle:[NSLocalizedString(@"fan-page.see-all-button", @"See all button title") uppercaseString] forState:UIControlStateNormal];
+
+    // Set the flow layout
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    // Initialize the view
+    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
+    //@TODO Generic?
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.provider = [SSODynamicCellSizeCollectionViewProvider new];
+    self.collectionView.delegate = self.provider;
+    self.collectionView.dataSource = self.provider;
+
+    // Register and set the reusable ID
+    [self.collectionView registerNib:[UINib nibWithNibName:kImageCollectionViewCellNib bundle:[NSBundle mainBundle]]
+          forCellWithReuseIdentifier:kImageCollectionViewCell];
+    self.provider.cellReusableIdentifier = kImageCollectionViewCell;
+}
+
+/**
+ *  Initialization of the UI
+ */
+- (void)initializeUI {
+    [self.view addSubview:self.collectionView];
+    [self.view addSubview:self.topView];
+    [self.topView addSubview:self.titleLabel];
+    [self.topView addSubview:self.seeAllButton];
+
+    // Set the see all button constraints
+    [self.seeAllButton setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+
+    // Create the constraints
+    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.top.and.left.and.right.equalTo(self.view);
+      make.height.equalTo([NSNumber numberWithInt:kTopViewHeightConstraint]);
+    }];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.centerY.equalTo(self.topView);
+      make.left.equalTo(self.topView).with.offset(kConstraintOffset);
+      make.right.equalTo(self.seeAllButton.mas_left).with.offset(-kConstraintOffset);
+
+    }];
+
+    [self.seeAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.centerY.equalTo(self.topView);
+      make.right.equalTo(self.topView).with.offset(-kConstraintOffset);
+      make.width.equalTo([NSNumber numberWithInt:kButtonWidthConstraint]);
+    }];
+
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.left.and.right.and.bottom.equalTo(self.view);
+      make.top.equalTo(self.topView.mas_bottom);
+    }];
+}
+
+/**
+ *  Set a loading overlay while the data loads
+ */
+- (void)setLoadingOverlay {
+    self.overlayView = [UIView new];
+    self.overlayView.backgroundColor = [UIColor lightGrayColor];
+    self.overlayView.alpha = 0.75f;
+    self.loadingSpinner = [UIActivityIndicatorView new];
+    [self.view addSubview:self.overlayView];
+    [self.overlayView addSubview:self.loadingSpinner];
+    [self.overlayView mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.edges.equalTo(self.view);
+    }];
+    [self.loadingSpinner mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.edges.equalTo(self.overlayView);
+    }];
+    [self.loadingSpinner startAnimating];
+}
+
+#pragma mark - Setter
+
+/**
+ *  Set the data for the provider
+ *
+ *  @param data the data
+ */
+- (void)setInputData:(NSMutableArray *)data {
+    self.provider.inputData = data;
+    [self.collectionView reloadData];
+}
+
+#pragma mark - Animations
+
+- (void)displayLoadingOverlay {
+    self.overlayView.hidden = NO;
+    [self.loadingSpinner startAnimating];
+}
+
+- (void)hideLoadingOverlay {
+    self.overlayView.hidden = YES;
+    [self.loadingSpinner stopAnimating];
+}
+
+@end
