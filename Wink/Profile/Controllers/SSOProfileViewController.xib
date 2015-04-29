@@ -6,10 +6,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSOProfileViewController">
             <connections>
-                <outlet property="containerView" destination="O1s-Eb-HRW" id="rgm-iW-V06"/>
+                <outlet property="contestView" destination="O1s-Eb-HRW" id="ZUh-bp-B62"/>
                 <outlet property="contestsButton" destination="8YF-2e-g47" id="7zT-Sp-WIb"/>
                 <outlet property="customNavBar" destination="uPB-ME-APc" id="R96-F3-sD2"/>
                 <outlet property="myFeedButton" destination="CLe-Rv-vsy" id="kH5-pL-BiR"/>
+                <outlet property="myFeedView" destination="ibo-h6-dS9" id="I63-Cx-BiI"/>
                 <outlet property="numberScoreLabel" destination="Pue-eg-QeT" id="7y1-sa-C61"/>
                 <outlet property="numberSharesLabel" destination="M3i-TW-Lux" id="ey3-dq-qHi"/>
                 <outlet property="scoreLabel" destination="m5N-BK-Aab" id="kNM-e2-nId"/>
@@ -209,7 +210,11 @@
                         <constraint firstItem="CLe-Rv-vsy" firstAttribute="top" secondItem="T02-2N-lqb" secondAttribute="top" id="yoG-s5-saM"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O1s-Eb-HRW" userLabel="Container view">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O1s-Eb-HRW" userLabel="Contests view">
+                    <rect key="frame" x="0.0" y="236" width="375" height="431"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ibo-h6-dS9">
                     <rect key="frame" x="0.0" y="236" width="375" height="431"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -222,13 +227,17 @@
                 <constraint firstItem="z9r-th-7xo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BR4-Cc-MNh"/>
                 <constraint firstAttribute="trailing" secondItem="T02-2N-lqb" secondAttribute="trailing" id="BV9-HB-hAU"/>
                 <constraint firstItem="Hws-Bm-ZI2" firstAttribute="top" secondItem="z9r-th-7xo" secondAttribute="bottom" id="Dvw-fz-L2p"/>
+                <constraint firstItem="ibo-h6-dS9" firstAttribute="bottom" secondItem="O1s-Eb-HRW" secondAttribute="bottom" id="HMy-d5-zGo"/>
+                <constraint firstItem="ibo-h6-dS9" firstAttribute="trailing" secondItem="O1s-Eb-HRW" secondAttribute="trailing" id="I0Z-DC-QIn"/>
                 <constraint firstAttribute="bottom" secondItem="O1s-Eb-HRW" secondAttribute="bottom" id="Ku3-b0-ncm"/>
                 <constraint firstAttribute="trailing" secondItem="uPB-ME-APc" secondAttribute="trailing" id="LJt-Jx-rT9"/>
                 <constraint firstAttribute="trailing" secondItem="O1s-Eb-HRW" secondAttribute="trailing" id="QU6-hq-yNr"/>
                 <constraint firstItem="Hws-Bm-ZI2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TaM-Ir-ZRa"/>
                 <constraint firstItem="uPB-ME-APc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TfD-R9-rsT"/>
                 <constraint firstItem="z9r-th-7xo" firstAttribute="top" secondItem="uPB-ME-APc" secondAttribute="bottom" id="UF5-U8-NSV"/>
+                <constraint firstItem="ibo-h6-dS9" firstAttribute="leading" secondItem="O1s-Eb-HRW" secondAttribute="leading" id="dSc-D5-oA9"/>
                 <constraint firstItem="T02-2N-lqb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eYS-Gp-spp"/>
+                <constraint firstItem="ibo-h6-dS9" firstAttribute="top" secondItem="O1s-Eb-HRW" secondAttribute="top" id="kLP-yv-dht"/>
                 <constraint firstItem="O1s-Eb-HRW" firstAttribute="top" secondItem="T02-2N-lqb" secondAttribute="bottom" id="uy5-nH-Uu6"/>
                 <constraint firstItem="uPB-ME-APc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vgb-SM-4ot"/>
                 <constraint firstItem="O1s-Eb-HRW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zDI-F3-8aW"/>
