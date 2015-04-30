@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "ic_home-no-shadow.png"
+      "filename" : "ic_twitter_selected.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "ic_home-no-shadow@2x.png"
+      "filename" : "ic_twitter_selected@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "ic_home-no-shadow@3x.png"
+      "filename" : "ic_twitter_selected@3x.png"
     }
   ],
   "info" : {
