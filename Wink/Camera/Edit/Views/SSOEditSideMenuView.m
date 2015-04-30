@@ -43,6 +43,10 @@
 }
 
 - (void)setupUI {
+
+    if (self.sizeOfView.height == 0) {
+        self.sizeOfView = CGSizeMake(self.bounds.size.width, self.bounds.size.height);
+    }
     [self addViewWithBlur];
     UIDeviceOrientation deviceOrientation = [[SSOOrientationHelper sharedInstance] orientation];
     if (deviceOrientation == UIDeviceOrientationFaceUp || deviceOrientation == UIDeviceOrientationPortrait ||
