@@ -24,6 +24,9 @@ CGFloat const kTabBarOpacity = 0.90;
 
 @property(strong, nonatomic) UIView *customTabBar;
 
+@property(strong, nonatomic) NSArray *viewControllers;
+@property(nonatomic) NSInteger selectedIndex;
+
 @end
 
 @implementation SSOViewControllerWithTabBar
@@ -36,6 +39,7 @@ CGFloat const kTabBarOpacity = 0.90;
 
     [self setInitalViewControllers];
     [self setTabBar];
+    [self startFirstViewController];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,15 +55,34 @@ CGFloat const kTabBarOpacity = 0.90;
 - (void)setInitalViewControllers {
     SSOFanPageViewController *fanPageVC = [SSOFanPageViewController new];
     SSOProfileViewController *profileVC = [SSOProfileViewController new];
+
+    self.viewControllers = @[ fanPageVC, profileVC ];
     // The initial view controller of the storyboard is the navigation view controller
-    [self setViewControllers:@[ fanPageVC, profileVC ]];
+    //    [self setViewControllers:@[ fanPageVC, profileVC ]];
+}
+
+- (void)startFirstViewController
+{
+    UIViewController *containerVC = [self.viewControllers firstObject];
+    // Add the child vc
+    [self addChildViewController:containerVC];
+    // Set the frame
+    containerVC.view.frame = [self containerViewFrame];
+    //
+    [self.view addSubview:containerVC.view];
+    // Call delegate
+    [containerVC didMoveToParentViewController:self];
 }
 
 /**
  *  Initialize the tab bar UI
  */
 - (void)setTabBar {
-    [self.tabBar setHidden:YES];
+    //    [self.tabBar setHidden:NO];
+    //    CGRect tabBarFrame = self.tabBar.frame;
+    //    CGRect newFrame = CGRectMake(tabBarFrame.origin.x, self.tabBar.frame.origin.y + (tabBarFrame.size.height - kTabBarHeight),
+    //    self.tabBar.frame.size.width, kTabBarHeight);
+    //    [self.tabBar setFrame:newFrame];
 
     self.customTabBar = [UIView new];
     [self.customTabBar setAlpha:kTabBarOpacity];
@@ -115,6 +138,30 @@ CGFloat const kTabBarOpacity = 0.90;
     }];
 }
 
+- (CGRect)containerViewFrame {
+    return CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - kTabBarHeight);
+}
+
+- (void)switchCurrentViewControllerToNewViewController:(UIViewController *)newVC {
+    UIViewController *oldVC = [self.viewControllers objectAtIndex:self.selectedIndex];
+    [oldVC willMoveToParentViewController:nil]; // 1
+    [self addChildViewController:newVC];
+    newVC.view.frame = [self containerViewFrame];
+    [self transitionFromViewController: oldVC toViewController: newVC   // 3
+                              duration: 0.25 options:0
+                            animations:^{
+                                newVC.view.frame = oldVC.view.frame;                       // 4
+//                                oldVC.view.frame = endFrame;
+                            }
+                            completion:^(BOOL finished) {
+                                [oldVC removeFromParentViewController];                   // 5
+                                [newVC didMoveToParentViewController:self];
+                            }];
+//    CGRect endFrame = [self containerViewFrame]; //If I need a transition
+//    [oldVC removeFromParentViewController]; // 5
+//    [newVC didMoveToParentViewController:self];
+}
+
 #pragma mark - Action
 
 /**
@@ -123,7 +170,10 @@ CGFloat const kTabBarOpacity = 0.90;
  *  @param sender the button
  */
 - (void)homeButtonPressed:(id)sender {
-    [self setSelectedIndex:0];
+    if (self.selectedIndex != 0) {
+        [self switchCurrentViewControllerToNewViewController:[self.viewControllers firstObject]];
+        self.selectedIndex = 0;
+    }
 }
 
 /**
@@ -143,13 +193,19 @@ CGFloat const kTabBarOpacity = 0.90;
  *  @param sender the button
  */
 - (void)profileButtonPressed:(id)sender {
-    [self setSelectedIndex:1];
+    if (self.selectedIndex != 1) {
+        [self switchCurrentViewControllerToNewViewController:[self.viewControllers lastObject]];
+        self.selectedIndex = 1;
+    }
 }
 
 #pragma mark - LiveFeedViewControllerDelegate
 
 - (void)userDidDismissCamera {
-    [self setSelectedIndex:0];
+    if (self.selectedIndex != 0) {
+        [self switchCurrentViewControllerToNewViewController:[self.viewControllers firstObject]];
+        self.selectedIndex = 0;
+    }
 }
 
 @end
