@@ -77,6 +77,7 @@
  */
 - (void)initializeUI {
     [self.view addSubview:self.collectionView];
+    self.collectionView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
       make.edges.equalTo(self.view);
     }];
