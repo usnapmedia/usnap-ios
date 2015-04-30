@@ -9,7 +9,7 @@
 #import "SSODynamicCellSizeCollectionViewProvider.h"
 #import "SSOSnap.h"
 
-NSInteger const kNumberOfSmallCellsPerRow = 5.0f;
+NSInteger const kNumberOfSmallCellsPerRow = 2.0f;
 NSInteger const kCellSpacing = 2.5f;
 
 @implementation SSODynamicCellSizeCollectionViewProvider
@@ -51,14 +51,15 @@ NSInteger const kCellSpacing = 2.5f;
 
     // The width of a cell equals to the collection frame divided by the number of cells. We substract the spacing times the number of cells - 1 to get the
     // padding
-    CGFloat smallCellWidth = (collectionView.frame.size.width / kNumberOfSmallCellsPerRow) - (kCellSpacing * (kNumberOfSmallCellsPerRow - 1));
+    CGFloat smallCellWidth = (collectionView.frame.size.height / kNumberOfSmallCellsPerRow) - (kCellSpacing * (kNumberOfSmallCellsPerRow - 1));
     // Cell size has a ration of 1:1
     CGSize smallCellSize = CGSizeMake(smallCellWidth, smallCellWidth);
     // The size if based on the liked
-    if ([snap.fbLikes integerValue] < 100) {
+    if ([snap.fbLikes integerValue] < 1) {
         return smallCellSize;
     } else { // Bigger cells are twice as big
-        return CGSizeMake(smallCellWidth * 2, smallCellWidth * 2);
+        smallCellSize = CGSizeMake(smallCellWidth * 2, smallCellWidth * 2);
+        return smallCellSize;
     }
 }
 

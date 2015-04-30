@@ -10,6 +10,8 @@
 #import "SSOCustomCellSizeCollectionViewProvider.h"
 #import "SSOUSnapButton.h"
 #import "SSOGrayBackgroundWithBorderView.h"
+#import "SSOSnapViewController.h"
+#import "SSOFanPageViewController.h"
 #import <Masonry.h>
 #import "SSOPhotoDetailViewController.h"
 
@@ -49,6 +51,7 @@ NSInteger const kButtonWidthConstraint = 60;
     self.seeAllButton = [SSOUSnapButton new];
     [self.seeAllButton setTitle:[NSLocalizedString(@"fan-page.see-all-button", @"See all button title") uppercaseString] forState:UIControlStateNormal];
     self.provider.delegate = self;
+    [self.seeAllButton addTarget:self action:@selector(seeAllTopSnapsAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
 /**
@@ -93,15 +96,26 @@ NSInteger const kButtonWidthConstraint = 60;
 }
 
 #pragma mark - SSOProviderDelegate
+#pragma mark - IBActions
+
+/**
+ *  Action of the button See All
+ */
+
+- (void)seeAllTopSnapsAction
+{
+    SSOSnapViewController *snapVC = [SSOSnapViewController new];
+    SSOFanPageViewController *fanPageVC = (SSOFanPageViewController *)self.parentViewController;
+
+    [fanPageVC.navigationController pushViewController:snapVC animated:YES];
+    }
+}
 
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if ([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
-        //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
+  if ([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
+    //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
         SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc] initWithSnap:[self.provider.inputData objectAtIndex:indexPath.row]];
-
-        [self presentViewController:detailVC animated:YES completion:nil];
-    }
+   [self presentViewController:detailVC animated:YES completion:nil];
 }
 
 @end

@@ -26,9 +26,8 @@
         // Check if the user is already logged in
         if ([[SSSessionManager sharedInstance] isUserLoggedIn]) {
             // Set header auth
-            [self.requestSerializer
-                setAuthorizationHeaderFieldWithUsername:[SSSessionManager sharedInstance].username
-                                               password:[SSSessionManager sharedInstance].password];
+            [self.requestSerializer setAuthorizationHeaderFieldWithUsername:[SSSessionManager sharedInstance].username
+                                                                   password:[SSSessionManager sharedInstance].password];
         }
     }
     return self;

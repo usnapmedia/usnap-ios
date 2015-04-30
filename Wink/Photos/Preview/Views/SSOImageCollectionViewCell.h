@@ -10,6 +10,6 @@
 #import "SSBaseViewCellProtocol.h"
 
 @interface SSOImageCollectionViewCell : UICollectionViewCell<SSBaseViewCellProtocol>
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
