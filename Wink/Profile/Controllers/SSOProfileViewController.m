@@ -172,6 +172,7 @@
         self.contestView.hidden = YES;
         self.myFeedView.hidden = NO;
         [self changeButtonColor];
+        [self loadMyFeed];
     }
 }
 
