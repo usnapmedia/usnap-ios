@@ -34,7 +34,7 @@
     // Initialize the view
     [self initializeFeedContainerView];
     [self initializeFeedController];
-    [self createDismissButton];
+    //[self createDismissButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,8 +55,7 @@
     self.feedContainerView = [UIView new];
     [self.view addSubview:self.feedContainerView];
     [self.feedContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.top.and.right.equalTo(self.view);
-      make.left.equalTo([NSNumber numberWithInt:kFeedContainerLeft]);
+      make.top.and.right.and.left.equalTo(self.view);
       make.height.equalTo([NSNumber numberWithInt:kFeedContainerHeight]);
     }];
 }
@@ -83,7 +82,7 @@
 /**
  *  Dismiss Button for the Camera
  */
-
+// TODO:  Check if needed in the end
 - (void)createDismissButton {
     self.dismissButton = [UIButton new];
     //@FIXME Design will probably change

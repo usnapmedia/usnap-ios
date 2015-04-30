@@ -95,27 +95,26 @@ NSInteger const kButtonWidthConstraint = 60;
     return CGSizeMake(kTopPhotosCellWidth, self.collectionView.frame.size.height - kTopPhotosCellOffset);
 }
 
-#pragma mark - SSOProviderDelegate
 #pragma mark - IBActions
 
 /**
  *  Action of the button See All
  */
 
-- (void)seeAllTopSnapsAction
-{
+- (void)seeAllTopSnapsAction {
     SSOSnapViewController *snapVC = [SSOSnapViewController new];
-    SSOFanPageViewController *fanPageVC = (SSOFanPageViewController *)self.parentViewController;
 
-    [fanPageVC.navigationController pushViewController:snapVC animated:YES];
-    }
+    [self.navigationController pushViewController:snapVC animated:YES];
 }
 
+#pragma mark - SSOProviderDelegate
+
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  if ([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
-    //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
+    if ([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
+        //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
         SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc] initWithSnap:[self.provider.inputData objectAtIndex:indexPath.row]];
-   [self presentViewController:detailVC animated:YES completion:nil];
+        [self presentViewController:detailVC animated:YES completion:nil];
+    }
 }
 
 @end

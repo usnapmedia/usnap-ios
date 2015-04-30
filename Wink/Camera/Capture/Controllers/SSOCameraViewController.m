@@ -37,6 +37,7 @@
 @property(weak, nonatomic) IBOutlet UIView *bottomContainerView;
 @property(weak, nonatomic) IBOutlet SSORoundedAnimatedButton *animatedCaptureButton;
 @property(weak, nonatomic) IBOutlet AVCamPreviewView *cameraPreviewView;
+@property(weak, nonatomic) IBOutlet UIButton *backButton;
 // Used to display a blur on the preview
 @property(strong, nonatomic) UIVisualEffectView *effectView;
 @property(strong, nonatomic) UIView *blurEffectview;
@@ -187,9 +188,8 @@
  *  @param mediaDic the dic returned by the UIImagePickerViewDelegate
  */
 - (void)pushToEditVCWithMedia:(NSDictionary *)mediaDic {
-    
-    WKEditMediaViewController *controller = [WKEditMediaViewController new];
 
+    WKEditMediaViewController *controller = [WKEditMediaViewController new];
 
     NSString *mediaType = [mediaDic objectForKey:UIImagePickerControllerMediaType];
     NSURL *mediaURL = nil;
@@ -201,14 +201,12 @@
         if (image == nil) {
             image = [mediaDic objectForKey:UIImagePickerControllerOriginalImage];
             controller.image = image;
-
         }
     } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
         mediaURL = [mediaDic objectForKey:UIImagePickerControllerMediaURL];
         if (mediaURL == nil) {
             mediaURL = [mediaDic objectForKey:UIImagePickerControllerReferenceURL];
             controller.mediaURL = mediaURL;
-
         }
     }
 
@@ -239,6 +237,10 @@
 - (IBAction)profileButtonTouched:(id)sender {
     SSOProfileViewController *profileVC = [SSOProfileViewController new];
     [self presentViewController:profileVC animated:YES completion:nil];
+}
+
+- (IBAction)backButtonTouched:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark Capture Button

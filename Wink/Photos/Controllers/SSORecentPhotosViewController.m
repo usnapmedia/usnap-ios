@@ -12,6 +12,7 @@
 #import "SSOGrayBackgroundWithBorderView.h"
 #import <Masonry.h>
 #import "SSOPhotoDetailViewController.h"
+#import "SSOSnapViewController.h"
 
 NSInteger const kTopViewHeightConstraint = 40;
 NSInteger const kConstraintOffset = 10;
@@ -55,6 +56,7 @@ NSInteger const kButtonWidthConstraint = 60;
     self.titleLabel.text = [NSLocalizedString(@"fan-page.recent-photos.title-label", @"Top 10 title") uppercaseString];
     self.seeAllButton = [SSOUSnapButton new];
     [self.seeAllButton setTitle:[NSLocalizedString(@"fan-page.see-all-button", @"See all button title") uppercaseString] forState:UIControlStateNormal];
+    [self.seeAllButton addTarget:self action:@selector(seeAllTopSnapsAction) forControlEvents:UIControlEventTouchUpInside];
 
     // Set the flow layout
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -70,9 +72,9 @@ NSInteger const kButtonWidthConstraint = 60;
     self.collectionView.dataSource = self.provider;
 
     // Register and set the reusable ID
-    [self.collectionView registerNib:[UINib nibWithNibName:kImageCollectionViewCellNib bundle:[NSBundle mainBundle]]
-          forCellWithReuseIdentifier:kImageCollectionViewCell];
-    self.provider.cellReusableIdentifier = kImageCollectionViewCell;
+    [self.collectionView registerNib:[UINib nibWithNibName:kPhotosNibNameCollectionViewCell bundle:[NSBundle mainBundle]]
+          forCellWithReuseIdentifier:kPhotosCollectionViewCell];
+    self.provider.cellReusableIdentifier = kPhotosCollectionViewCell;
 }
 
 /**
@@ -154,13 +156,25 @@ NSInteger const kButtonWidthConstraint = 60;
     [self.loadingSpinner stopAnimating];
 }
 
+#pragma mark - IBActions
+
+/**
+ *  Action of the button See All
+ */
+
+- (void)seeAllTopSnapsAction {
+    SSOSnapViewController *snapVC = [SSOSnapViewController new];
+
+    [self.navigationController pushViewController:snapVC animated:YES];
+}
+
+#pragma mark - SSOProviderDelegate
+
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
-      //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
-        SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc]initWithSnap:[self.provider.inputData objectAtIndex:indexPath.row]];
-
-
-        [self presentViewController:detailVC animated:YES completion:nil];
+        //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
+        SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc] initWithSnap:[self.provider.inputData objectAtIndex:indexPath.row]];
+        [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
 
