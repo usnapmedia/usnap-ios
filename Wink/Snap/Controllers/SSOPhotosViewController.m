@@ -1,74 +1,69 @@
 //
-//  SSOMyFeedViewController.m
+//  SSOPhotosViewController.m
 //  uSnap
 //
-//  Created by Marcelo De Souza on 2015-04-29.
+//  Created by Marcelo De Souza on 2015-04-30.
 //  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
-#import "SSOMyFeedViewController.h"
+#import "SSOPhotosViewController.h"
 #import <SSOSimpleCollectionViewProvider.h>
-#import "SSOMyFeedViewController.h"
-#import "SSOMyFeedCollectionViewCell.h"
 #import <Masonry.h>
 
-NSString *const kMyFeedCollectionViewCell = @"MyFeedCollectionViewCell";
-NSString *const kMyFeedNibNameCollectionViewCell = @"SSOMyFeedCollectionViewCell";
-NSInteger const kCollectionViewMinimumInteritemSpacing = 0;
-NSInteger const kCollectionViewMinimumLineSpacing = 5;
-NSInteger const kNumberOfColumnsOfCollectionView = 3;
-NSInteger const KCollectionViewPadding = 5;
-CGFloat const kPercentageHeightWitdhCell = 1.15;
+NSString *const kPhotosCollectionViewCell = @"PhotosCollectionViewCell";
+NSString *const kPhotosNibNameCollectionViewCell = @"SSOPhotosCollectionViewCell";
+NSInteger const kPhotosCollectionViewMinimumInteritemSpacing = 1;
+NSInteger const kPhotosCollectionViewMinimumLineSpacing = 3;
+NSInteger const kPhotosNumberOfColumnsOfCollectionView = 4;
+NSInteger const KPhotosCollectionViewPadding = 0;
+CGFloat const kPhotosPercentageHeightWitdhCell = 1;
 
-@interface SSOMyFeedViewController ()
+@interface SSOPhotosViewController ()
 
 @property(strong, nonatomic) UICollectionView *collectionView;
 @property(strong, nonatomic) SSOSimpleCollectionViewProvider *provider;
 
 @end
 
-@implementation SSOMyFeedViewController
+@implementation SSOPhotosViewController
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
     [self initializeUI];
     [self initializeData];
 }
-
-#pragma mark - Initialization
 
 /**
  *  Initialize the UI
  */
 
 - (void)initializeUI {
-    // Creating the layout of the collection view
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    flowLayout.minimumInteritemSpacing = kCollectionViewMinimumInteritemSpacing;
-    flowLayout.minimumLineSpacing = kCollectionViewMinimumLineSpacing;
+    flowLayout.minimumInteritemSpacing = kPhotosCollectionViewMinimumInteritemSpacing;
+    flowLayout.minimumLineSpacing = kPhotosCollectionViewMinimumLineSpacing;
     // Creating the size of the collection view cell
-    CGFloat width = self.view.frame.size.width / kNumberOfColumnsOfCollectionView - KCollectionViewPadding * 2 -
-                    ((kNumberOfColumnsOfCollectionView - 1) * kCollectionViewMinimumInteritemSpacing); // Is 2 because is left and right
-    CGFloat height = width * kPercentageHeightWitdhCell;
+    CGFloat width = self.view.frame.size.width / kPhotosNumberOfColumnsOfCollectionView - (KPhotosCollectionViewPadding * 2) -
+                    ((kPhotosNumberOfColumnsOfCollectionView - 1) * kPhotosCollectionViewMinimumInteritemSpacing); // Is 2 because is left and right
+    CGFloat height = width * kPhotosPercentageHeightWitdhCell;
     flowLayout.itemSize = CGSizeMake(width, height);
     // Adding padding at the collection view (left and right)
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, KCollectionViewPadding, 0, KCollectionViewPadding);
-    // Creating the collection view
+    flowLayout.sectionInset = UIEdgeInsetsMake(0, KPhotosCollectionViewPadding, 0, KPhotosCollectionViewPadding);
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
       make.edges.equalTo(self.view);
     }];
-    [self.collectionView registerNib:[UINib nibWithNibName:kMyFeedNibNameCollectionViewCell bundle:nil] forCellWithReuseIdentifier:kMyFeedCollectionViewCell];
+    [self.collectionView registerNib:[UINib nibWithNibName:kPhotosNibNameCollectionViewCell bundle:nil] forCellWithReuseIdentifier:kPhotosCollectionViewCell];
 }
 
 - (void)initializeData {
     self.provider = [SSOSimpleCollectionViewProvider new];
-    self.provider.cellReusableIdentifier = kMyFeedCollectionViewCell;
+    self.provider.cellReusableIdentifier = kPhotosCollectionViewCell;
     self.collectionView.delegate = self.provider;
     self.collectionView.dataSource = self.provider;
 }
@@ -79,7 +74,7 @@ CGFloat const kPercentageHeightWitdhCell = 1.15;
  *  The collection view receive the new data and the collection view is reloaded
  */
 
-- (void)setMyFeedData:(NSArray *)data {
+- (void)setPhotosData:(NSArray *)data {
     self.provider.inputData = [NSMutableArray arrayWithArray:data];
     [self.collectionView reloadData];
 }
