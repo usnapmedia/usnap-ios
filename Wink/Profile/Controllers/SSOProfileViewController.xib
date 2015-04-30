@@ -32,7 +32,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="company_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ypa-pz-SD4">
-                            <rect key="frame" x="21" y="0.0" width="333" height="40"/>
+                            <rect key="frame" x="168" y="0.0" width="39" height="40"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -267,6 +267,6 @@
         </view>
     </objects>
     <resources>
-        <image name="company_logo" width="333" height="115"/>
+        <image name="company_logo" width="39" height="29"/>
     </resources>
 </document>

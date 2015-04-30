@@ -3,16 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "backButtonWhite.png"
+      "filename" : "ic_back.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "backButtonWhite@2x.png"
+      "filename" : "ic_back@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "ic_back@3x.png"
     }
   ],
   "info" : {

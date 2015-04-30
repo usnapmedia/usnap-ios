@@ -24,6 +24,9 @@ CGFloat const kTabBarOpacity = 0.90;
 
 @property(strong, nonatomic) UIView *customTabBar;
 
+@property(strong, nonatomic) NSArray *viewControllers;
+@property(nonatomic) NSInteger selectedIndex;
+
 @end
 
 @implementation SSOViewControllerWithTabBar
@@ -36,6 +39,7 @@ CGFloat const kTabBarOpacity = 0.90;
 
     [self setInitalViewControllers];
     [self setTabBar];
+    [self startFirstViewController];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,17 +54,37 @@ CGFloat const kTabBarOpacity = 0.90;
  */
 - (void)setInitalViewControllers {
     SSOFanPageViewController *fanPageVC = [SSOFanPageViewController new];
+    UINavigationController *fanPageNC = [[UINavigationController alloc] initWithRootViewController:fanPageVC];
+    [fanPageNC setNavigationBarHidden:YES];
     SSOProfileViewController *profileVC = [SSOProfileViewController new];
-    // The initial view controller of the storyboard is the navigation view controller
-    [self setViewControllers:@[ fanPageVC, profileVC ]];
+    UINavigationController *profilePageNC = [[UINavigationController alloc] initWithRootViewController:profileVC];
+    [profilePageNC setNavigationBarHidden:YES];
+
+    // Fan Page and Profile Page are on Navigation Controllers
+
+    self.viewControllers = @[fanPageNC, profilePageNC];
+}
+
+/**
+ *  Start the Fan Page View Controller
+ */
+
+- (void)startFirstViewController {
+    UIViewController *containerVC = [self.viewControllers firstObject];
+    // Add the child vc
+    [self addChildViewController:containerVC];
+    // Set the frame
+    containerVC.view.frame = [self containerViewFrame];
+    //
+    [self.view addSubview:containerVC.view];
+    // Call delegate
+    [containerVC didMoveToParentViewController:self];
 }
 
 /**
  *  Initialize the tab bar UI
  */
 - (void)setTabBar {
-    [self.tabBar setHidden:YES];
-
     self.customTabBar = [UIView new];
     [self.customTabBar setAlpha:kTabBarOpacity];
     //@FIXME
@@ -115,6 +139,43 @@ CGFloat const kTabBarOpacity = 0.90;
     }];
 }
 
+/**
+ *  Return the size of the view less the size of the tab bar
+ *
+ *  @return The Size of the contet view
+ */
+
+- (CGRect)containerViewFrame {
+    return CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - kTabBarHeight);
+}
+
+/**
+ *  Change the view that is visible
+ *
+ *  @param newVC the view to be displayed
+ */
+
+- (void)switchCurrentViewControllerToNewViewController:(UIViewController *)newVC {
+    UIViewController *oldVC = [self.viewControllers objectAtIndex:self.selectedIndex];
+    [oldVC willMoveToParentViewController:nil];
+    [self addChildViewController:newVC];
+    newVC.view.frame = [self containerViewFrame];
+
+    // It does the transition from one view to the other
+
+    [self transitionFromViewController:oldVC
+        toViewController:newVC
+        duration:0.25
+        options:0
+        animations:^{
+          newVC.view.frame = oldVC.view.frame;
+        }
+        completion:^(BOOL finished) {
+          [oldVC removeFromParentViewController];
+          [newVC didMoveToParentViewController:self];
+        }];
+}
+
 #pragma mark - Action
 
 /**
@@ -123,7 +184,10 @@ CGFloat const kTabBarOpacity = 0.90;
  *  @param sender the button
  */
 - (void)homeButtonPressed:(id)sender {
-    [self setSelectedIndex:0];
+    if (self.selectedIndex != 0) {
+        [self switchCurrentViewControllerToNewViewController:[self.viewControllers firstObject]];
+        self.selectedIndex = 0;
+    }
 }
 
 /**
@@ -143,13 +207,23 @@ CGFloat const kTabBarOpacity = 0.90;
  *  @param sender the button
  */
 - (void)profileButtonPressed:(id)sender {
-    [self setSelectedIndex:1];
+    if (self.selectedIndex != 1) {
+        [self switchCurrentViewControllerToNewViewController:[self.viewControllers lastObject]];
+        self.selectedIndex = 1;
+    }
 }
 
 #pragma mark - LiveFeedViewControllerDelegate
 
+/**
+ *  This delegate is called when the user tap on a photo at collection view at the top of the camera view
+ */
+
 - (void)userDidDismissCamera {
-    [self setSelectedIndex:0];
+    if (self.selectedIndex != 0) {
+        [self switchCurrentViewControllerToNewViewController:[self.viewControllers firstObject]];
+        self.selectedIndex = 0;
+    }
 }
 
 @end

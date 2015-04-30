@@ -50,12 +50,13 @@ CGFloat const kPercentageHeightWitdhCell = 1.15;
     flowLayout.minimumInteritemSpacing = kCollectionViewMinimumInteritemSpacing;
     flowLayout.minimumLineSpacing = kCollectionViewMinimumLineSpacing;
     // Creating the size of the collection view cell
-    CGFloat width = self.view.frame.size.width / kNumberOfColumnsOfCollectionView - KCollectionViewPadding * 2; // Is 2 because is left and right
+    CGFloat width = self.view.frame.size.width / kNumberOfColumnsOfCollectionView - KCollectionViewPadding * 2 -
+                    ((kNumberOfColumnsOfCollectionView - 1) * kCollectionViewMinimumInteritemSpacing); // Is 2 because is left and right
     CGFloat height = width * kPercentageHeightWitdhCell;
     flowLayout.itemSize = CGSizeMake(width, height);
-    // Adding border at the collection view (left and right)
+    // Adding padding at the collection view (left and right)
     flowLayout.sectionInset = UIEdgeInsetsMake(0, KCollectionViewPadding, 0, KCollectionViewPadding);
-    // Creating the collectio view
+    // Creating the collection view
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.collectionView];

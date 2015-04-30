@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SSOViewControllerWithTabBar : UITabBarController
+@interface SSOViewControllerWithTabBar : UIViewController
 
 @end

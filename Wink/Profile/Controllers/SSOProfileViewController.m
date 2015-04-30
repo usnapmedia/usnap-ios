@@ -77,7 +77,7 @@
 }
 
 /**
- *  Add the table view to the container
+ *  Add the table view and the collection view to the container
  */
 
 - (void)setChildVC {
@@ -111,6 +111,8 @@
     // Call delegate
     [myFeedVC didMoveToParentViewController:self];
 }
+
+#pragma mark - Data
 
 /**
  *  It loads the information of the contest table view
