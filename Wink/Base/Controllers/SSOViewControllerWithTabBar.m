@@ -62,7 +62,7 @@ CGFloat const kTabBarOpacity = 0.90;
 
     // Fan Page and Profile Page are on Navigation Controllers
 
-    self.viewControllers = @[ fanPageNC, profilePageNC ];
+    self.viewControllers = @[fanPageNC, profilePageNC];
 }
 
 /**

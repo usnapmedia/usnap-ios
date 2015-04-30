@@ -10,6 +10,8 @@
 #import "SSOCustomCellSizeCollectionViewProvider.h"
 #import "SSOUSnapButton.h"
 #import "SSOGrayBackgroundWithBorderView.h"
+#import "SSOSnapViewController.h"
+#import "SSOFanPageViewController.h"
 #import <Masonry.h>
 
 NSInteger const kTopPhotosCellWidth = 100;
@@ -47,6 +49,7 @@ NSInteger const kButtonWidthConstraint = 60;
     self.titleLabel.text = [NSLocalizedString(@"fan-page.top-photos.title-label", @"Top 10 title") uppercaseString];
     self.seeAllButton = [SSOUSnapButton new];
     [self.seeAllButton setTitle:[NSLocalizedString(@"fan-page.see-all-button", @"See all button title") uppercaseString] forState:UIControlStateNormal];
+    [self.seeAllButton addTarget:self action:@selector(seeAllTopSnapsAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
 /**
@@ -88,6 +91,19 @@ NSInteger const kButtonWidthConstraint = 60;
 
 - (CGSize)cellSize {
     return CGSizeMake(kTopPhotosCellWidth, self.collectionView.frame.size.height - kTopPhotosCellOffset);
+}
+
+#pragma mark - IBActions
+
+/**
+ *  Action of the button See All
+ */
+
+- (void)seeAllTopSnapsAction
+{
+    SSOSnapViewController *snapVC = [SSOSnapViewController new];
+    SSOFanPageViewController *fanPageVC = (SSOFanPageViewController *)self.parentViewController;
+    [fanPageVC.navigationController pushViewController:snapVC animated:YES];
 }
 
 @end
