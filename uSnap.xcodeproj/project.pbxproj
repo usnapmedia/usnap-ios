@@ -809,7 +809,6 @@
 				339841EB1AEACC8600605C67 /* Controllers */,
 				339841F51AEACF3900605C67 /* Provider */,
 				339842031AEAD60F00605C67 /* Views */,
-				339841F01AEACC8600605C67 /* XIB */,
 			);
 			path = Campaign;
 			sourceTree = "<group>";
@@ -821,13 +820,6 @@
 				339841ED1AEACC8600605C67 /* SSOCampaignTopViewControllerContainer.m */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		339841F01AEACC8600605C67 /* XIB */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = XIB;
 			sourceTree = "<group>";
 		};
 		339841F51AEACF3900605C67 /* Provider */ = {
