@@ -63,8 +63,6 @@ CGFloat const kTabBarOpacity = 0.90;
     // Fan Page and Profile Page are on Navigation Controllers
 
     self.viewControllers = @[ fanPageNC, profilePageNC ];
-    // The initial view controller of the storyboard is the navigation view controller
-    //    [self setViewControllers:@[ fanPageVC, profileVC ]];
 }
 
 /**
