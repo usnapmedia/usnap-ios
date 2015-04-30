@@ -58,20 +58,24 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1C-vy-mwx">
                                         <rect key="frame" x="4" y="24" width="15" height="22"/>
-                                        <state key="normal" image="flash">
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <state key="normal" title="X">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="4" y="8" width="55" height="55"/>
+                                        </variation>
                                         <connections>
-                                            <action selector="flashButtonTouched:" destination="KDe-mF-eVw" eventType="touchUpInside" id="jnD-k5-V8u"/>
+                                            <action selector="backButtonTouched:" destination="KDe-mF-eVw" eventType="touchUpInside" id="sMG-fa-jJj"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhy-8W-4VU">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <state key="normal" image="profile">
+                                        <state key="normal" image="flash">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="profileButtonTouched:" destination="KDe-mF-eVw" eventType="touchUpInside" id="FqA-aZ-0zN"/>
+                                            <action selector="flashButtonTouched:" destination="KDe-mF-eVw" eventType="touchUpInside" id="l1W-IS-I9S"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -238,12 +242,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="animatedCaptureButton" destination="3Nh-k5-MSM" id="Hrh-9X-wQM"/>
+                        <outlet property="backButton" destination="F1C-vy-mwx" id="Vg8-fp-azb"/>
                         <outlet property="bottomContainerView" destination="q9G-9M-9NP" id="hkM-Vk-PGs"/>
                         <outlet property="cameraPreviewView" destination="PI2-ch-fMg" id="nLD-mr-UKp"/>
                         <outlet property="cameraRotationButton" destination="std-T3-Jlg" id="O5Z-RY-eAd"/>
-                        <outlet property="flashButton" destination="F1C-vy-mwx" id="ldB-Gt-3ea"/>
+                        <outlet property="flashButton" destination="lhy-8W-4VU" id="9qs-66-nq9"/>
                         <outlet property="mediaButton" destination="LzJ-oa-rGY" id="tvp-S9-ZIp"/>
-                        <outlet property="profileButton" destination="lhy-8W-4VU" id="YXe-qV-lSm"/>
                         <outlet property="topContainerView" destination="77y-R9-8Qn" id="AgP-sc-2my"/>
                     </connections>
                 </viewController>
@@ -257,6 +261,5 @@
         <image name="captureButtonIcon" width="67" height="67"/>
         <image name="flash" width="15" height="22"/>
         <image name="mediaButtonIcon" width="29" height="29"/>
-        <image name="profile" width="22" height="22"/>
     </resources>
 </document>

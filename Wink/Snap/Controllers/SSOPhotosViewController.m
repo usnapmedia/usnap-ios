@@ -10,8 +10,6 @@
 #import <SSOSimpleCollectionViewProvider.h>
 #import <Masonry.h>
 
-NSString *const kPhotosCollectionViewCell = @"PhotosCollectionViewCell";
-NSString *const kPhotosNibNameCollectionViewCell = @"SSOPhotosCollectionViewCell";
 NSInteger const kPhotosCollectionViewMinimumInteritemSpacing = 1;
 NSInteger const kPhotosCollectionViewMinimumLineSpacing = 3;
 NSInteger const kPhotosNumberOfColumnsOfCollectionView = 4;

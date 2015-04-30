@@ -83,3 +83,5 @@ extern NSString *const kTopPhotosNib;
 extern NSString *const kTopPhotosReusableId;
 extern NSString *const kImageCollectionViewCell;
 extern NSString *const kImageCollectionViewCellNib;
+extern NSString *const kPhotosCollectionViewCell;
+extern NSString *const kPhotosNibNameCollectionViewCell;
