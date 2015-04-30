@@ -89,7 +89,6 @@
     // Add constraints
     [self.tabCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
       make.edges.equalTo(self.view);
-      make.height.equalTo(@50);
     }];
 
     // Reload the data
