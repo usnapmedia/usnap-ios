@@ -117,6 +117,8 @@
 		D830F4221ACDDBF1002A503D /* UIImage+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4151ACDDBF1002A503D /* UIImage+Tools.m */; };
 		D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4171ACDDBF1002A503D /* UIStoryboard+USnap.m */; };
 		D830F4241ACDDBF1002A503D /* UIView+WKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4191ACDDBF1002A503D /* UIView+WKAdditions.m */; };
+		D85B35391AF29F640011B26D /* SSOPhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85B35371AF29F640011B26D /* SSOPhotoDetailViewController.m */; };
+		D85B353A1AF29F640011B26D /* SSOPhotoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D85B35381AF29F640011B26D /* SSOPhotoDetailViewController.xib */; };
 		D86688191AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86688181AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m */; };
 		D86E08F01AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08EF1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m */; };
 		D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */; };
@@ -356,6 +358,9 @@
 		D830F4171ACDDBF1002A503D /* UIStoryboard+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStoryboard+USnap.m"; sourceTree = "<group>"; };
 		D830F4181ACDDBF1002A503D /* UIView+WKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WKAdditions.h"; sourceTree = "<group>"; };
 		D830F4191ACDDBF1002A503D /* UIView+WKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WKAdditions.m"; sourceTree = "<group>"; };
+		D85B35361AF29F640011B26D /* SSOPhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOPhotoDetailViewController.h; sourceTree = "<group>"; };
+		D85B35371AF29F640011B26D /* SSOPhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOPhotoDetailViewController.m; sourceTree = "<group>"; };
+		D85B35381AF29F640011B26D /* SSOPhotoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOPhotoDetailViewController.xib; sourceTree = "<group>"; };
 		D86688171AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOGrayBackgroundWithBorderView.h; sourceTree = "<group>"; };
 		D86688181AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOGrayBackgroundWithBorderView.m; sourceTree = "<group>"; };
 		D86E08EE1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -1174,6 +1179,9 @@
 				D8E677EC1AEEE5F6006B8CD8 /* SSOTopPhotosViewController.m */,
 				D8E678051AEEE649006B8CD8 /* SSORecentPhotosViewController.h */,
 				D8E678061AEEE649006B8CD8 /* SSORecentPhotosViewController.m */,
+				D85B35361AF29F640011B26D /* SSOPhotoDetailViewController.h */,
+				D85B35371AF29F640011B26D /* SSOPhotoDetailViewController.m */,
+				D85B35381AF29F640011B26D /* SSOPhotoDetailViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1400,6 +1408,7 @@
 				3398420D1AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.xib in Resources */,
 				D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */,
 				7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */,
+				D85B353A1AF29F640011B26D /* SSOPhotoDetailViewController.xib in Resources */,
 				335723DB1ACB097C000CC846 /* SettingsSocialCell.xib in Resources */,
 				D8D4F1811AE04B12002FDE38 /* Launch Screen.xib in Resources */,
 				D810B8EE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
@@ -1539,6 +1548,7 @@
 				D830F4221ACDDBF1002A503D /* UIImage+Tools.m in Sources */,
 				335723E01ACB097C000CC846 /* Constants.m in Sources */,
 				335723D61ACB097C000CC846 /* WKVideoEditor.m in Sources */,
+				D85B35391AF29F640011B26D /* SSOPhotoDetailViewController.m in Sources */,
 				D830F41D1ACDDBF1002A503D /* NSDictionary+WKAdditions.m in Sources */,
 				3316F2D01ADD6CC900C7ED24 /* NSUserDefaults+USnap.m in Sources */,
 				D810B8E31ADF506500B3AC11 /* SSOFadingContainerView.m in Sources */,
@@ -1585,7 +1595,6 @@
 				339841F81AEACF4F00605C67 /* SSOCampaignProvider.m in Sources */,
 				D898E1D91AF1622500C957DC /* SSOMyFeedCollectionViewCell.m in Sources */,
 				D810B8E91ADF506500B3AC11 /* SSOEditSideMenuView.m in Sources */,
-				FB0F33531AF1431300F6C735 /* SSOMyFeedCollectionViewCell.m in Sources */,
 				D810B8E11ADF506500B3AC11 /* SSOButtonsContainerView.m in Sources */,
 				03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */,
 				D898E1D31AF1622500C957DC /* SSOCampaignViewController.m in Sources */,
@@ -1594,7 +1603,6 @@
 				D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */,
 				D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */,
 				339841F21AEACC8600605C67 /* SSOCampaignTopViewControllerContainer.m in Sources */,
-				FB0F334F1AF1402400F6C735 /* SSOMyFeedViewController.m in Sources */,
 				D810B8E01ADF506500B3AC11 /* SSOAccessoryContainerView.m in Sources */,
 				D810B8DF1ADF506500B3AC11 /* SSOAdjustmentSliderContainerView.m in Sources */,
 				3303DDDA1AD86F66002B74F9 /* SSOCustomSignInButton.m in Sources */,
