@@ -11,12 +11,13 @@
 #import "SSOUSnapButton.h"
 #import "SSOGrayBackgroundWithBorderView.h"
 #import <Masonry.h>
+#import "SSOPhotoDetailViewController.h"
 
 NSInteger const kTopViewHeightConstraint = 40;
 NSInteger const kConstraintOffset = 10;
 NSInteger const kButtonWidthConstraint = 60;
 
-@interface SSORecentPhotosViewController ()
+@interface SSORecentPhotosViewController () <SSOProviderDelegate>
 
 @property(strong, nonatomic) UICollectionView *collectionView;
 @property(strong, nonatomic) UIView *overlayView;
@@ -57,13 +58,14 @@ NSInteger const kButtonWidthConstraint = 60;
 
     // Set the flow layout
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     // Initialize the view
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
     //@TODO Generic?
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.provider = [SSODynamicCellSizeCollectionViewProvider new];
+    self.provider.delegate = self;
     self.collectionView.delegate = self.provider;
     self.collectionView.dataSource = self.provider;
 
@@ -150,6 +152,16 @@ NSInteger const kButtonWidthConstraint = 60;
 - (void)hideLoadingOverlay {
     self.overlayView.hidden = YES;
     [self.loadingSpinner stopAnimating];
+}
+
+- (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
+      //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
+        SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc]initWithSnap:[self.provider.inputData objectAtIndex:indexPath.row]];
+
+
+        [self presentViewController:detailVC animated:YES completion:nil];
+    }
 }
 
 @end

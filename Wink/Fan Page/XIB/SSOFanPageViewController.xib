@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSOFanPageViewController">
@@ -48,7 +48,7 @@
                             <rect key="frame" x="0.0" y="40" width="375" height="627"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rQN-Rv-hNS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="640"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="650"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clJ-Wg-ftN" userLabel="Top campaign view">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
@@ -57,18 +57,18 @@
                                                 <constraint firstAttribute="height" constant="250" id="23G-ff-b4M"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FEL-hX-FE3" userLabel="Live photos container view">
+                                            <rect key="frame" x="0.0" y="450" width="375" height="200"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="200" id="7ok-5B-Nuh"/>
+                                            </constraints>
+                                        </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RB5-gd-VX2" userLabel="Top photos container view">
                                             <rect key="frame" x="0.0" y="250" width="375" height="200"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="200" id="Dad-Ua-Nk7"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FEL-hX-FE3" userLabel="Live photos container view">
-                                            <rect key="frame" x="0.0" y="450" width="375" height="150"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="150" id="7ok-5B-Nuh"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -83,7 +83,7 @@
                                         <constraint firstAttribute="trailing" secondItem="FEL-hX-FE3" secondAttribute="trailing" id="WS1-dq-Hob"/>
                                         <constraint firstItem="RB5-gd-VX2" firstAttribute="leading" secondItem="rQN-Rv-hNS" secondAttribute="leading" id="exC-h4-PPY"/>
                                         <constraint firstItem="FEL-hX-FE3" firstAttribute="leading" secondItem="rQN-Rv-hNS" secondAttribute="leading" id="qHM-qa-7Wy"/>
-                                        <constraint firstAttribute="bottom" secondItem="FEL-hX-FE3" secondAttribute="bottom" constant="40" id="urT-Ad-s44"/>
+                                        <constraint firstAttribute="bottom" secondItem="FEL-hX-FE3" secondAttribute="bottom" id="urT-Ad-s44"/>
                                     </constraints>
                                 </view>
                             </subviews>

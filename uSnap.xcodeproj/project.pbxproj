@@ -40,6 +40,7 @@
 		332E0A511AEE85AC00F77969 /* SSOTextFieldWithUnderline.m in Sources */ = {isa = PBXBuildFile; fileRef = 332E0A501AEE85AC00F77969 /* SSOTextFieldWithUnderline.m */; };
 		333F49AE1AE01BEC004B5CC3 /* SSOOrientationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 333F49AD1AE01BEC004B5CC3 /* SSOOrientationHelper.m */; };
 		3348EC9A1AEEECBB008F2916 /* SSORectangleSocialButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3348EC991AEEECBB008F2916 /* SSORectangleSocialButton.m */; };
+		334F54421AF2BAB600B40D31 /* SSORoundedBackgroundLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 334F54411AF2BAB600B40D31 /* SSORoundedBackgroundLabel.m */; };
 		335723B31ACB097C000CC846 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3357233E1ACB097C000CC846 /* Camera.storyboard */; };
 		335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723431ACB097C000CC846 /* SSOCameraViewController.m */; };
 		335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723741ACB097C000CC846 /* FacebookHelper.m */; };
@@ -215,6 +216,8 @@
 		333F49AD1AE01BEC004B5CC3 /* SSOOrientationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOOrientationHelper.m; sourceTree = "<group>"; };
 		3348EC981AEEECBB008F2916 /* SSORectangleSocialButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSORectangleSocialButton.h; path = Views/SSORectangleSocialButton.h; sourceTree = "<group>"; };
 		3348EC991AEEECBB008F2916 /* SSORectangleSocialButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSORectangleSocialButton.m; path = Views/SSORectangleSocialButton.m; sourceTree = "<group>"; };
+		334F54401AF2BAB600B40D31 /* SSORoundedBackgroundLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSORoundedBackgroundLabel.h; sourceTree = "<group>"; };
+		334F54411AF2BAB600B40D31 /* SSORoundedBackgroundLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSORoundedBackgroundLabel.m; sourceTree = "<group>"; };
 		3357233E1ACB097C000CC846 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		335723421ACB097C000CC846 /* SSOCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCameraViewController.h; sourceTree = "<group>"; };
 		335723431ACB097C000CC846 /* SSOCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCameraViewController.m; sourceTree = "<group>"; };
@@ -1230,6 +1233,8 @@
 				D8E677F91AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.h */,
 				D8E677FA1AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.m */,
 				D8E677FB1AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.xib */,
+				334F54401AF2BAB600B40D31 /* SSORoundedBackgroundLabel.h */,
+				334F54411AF2BAB600B40D31 /* SSORoundedBackgroundLabel.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1564,6 +1569,7 @@
 				D8E678001AEEE5F6006B8CD8 /* SSOImageCollectionViewCell.m in Sources */,
 				D810B8CF1ADF506500B3AC11 /* SSOAdjustementsHelper.m in Sources */,
 				D8E678031AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.m in Sources */,
+				334F54421AF2BAB600B40D31 /* SSORoundedBackgroundLabel.m in Sources */,
 				D8D4F17F1ADFFB52002FDE38 /* SSOThemeHelper.m in Sources */,
 				D810B8E71ADF506500B3AC11 /* SSOTextAccessoryContainerView.m in Sources */,
 				D8E677FE1AEEE5F6006B8CD8 /* SSOTopPhotosViewController.m in Sources */,

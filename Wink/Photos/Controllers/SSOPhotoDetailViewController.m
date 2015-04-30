@@ -7,19 +7,31 @@
 //
 
 #import "SSOPhotoDetailViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "SSORoundedBackgroundLabel.h"
+#import "SSOEditSideMenuView.h"
 
 @interface SSOPhotoDetailViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *textLabel;
-@property (weak, nonatomic) IBOutlet UIView *social8ss69;
+
+@property(strong, nonatomic) SSOSnap *snap;
+
+@property(weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property(weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property(weak, nonatomic) IBOutlet UILabel *textLabel;
+@property(weak, nonatomic) IBOutlet UIImageView *imageView;
+@property(weak, nonatomic) IBOutlet SSORoundedBackgroundLabel *circledLetter;
+//@property(weak, nonatomic) IBOutlet SSOEditSideMenuView *socialNetworksView;
 
 @end
 
 @implementation SSOPhotoDetailViewController
 
+#pragma mark - ViewLifeCycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [self setUI];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -28,14 +40,42 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+- (instancetype)initWithSnap:(SSOSnap *)snap {
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if (self = [super init]) {
+        self.snap = snap;
+    }
+    return self;
 }
-*/
+
+- (void)setUI {
+
+    if (self.navigationController) {
+        [self.navigationController setNavigationBarHidden:YES];
+    }
+    if (self.snap) {
+        NSString *firstLetter = [self.snap.email substringToIndex:1];
+        firstLetter = [firstLetter uppercaseString];
+        self.circledLetter.text = firstLetter;
+        if (self.snap.username) {
+            self.nameLabel.text = self.snap.username.uppercaseString;
+        } else {
+            self.nameLabel.text = self.snap.email.uppercaseString;
+        }
+#warning Waiting from the backend
+        self.dateLabel.hidden = YES;
+        self.textLabel.text = (NSString *)self.snap.text;
+        [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.snap.url]];
+        [self.imageView setClipsToBounds:YES];
+    }
+}
+
+#pragma mark - IBActions
+
+- (IBAction)touchedBackButton:(id)sender {
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
