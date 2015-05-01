@@ -58,6 +58,29 @@
 		335723E11ACB097C000CC846 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A01ACB097C000CC846 /* main.m */; };
 		335723E41ACB097C000CC846 /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A61ACB097C000CC846 /* WKAppDelegate.m */; };
 		335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */; };
+		335C7FCF1AF3EB43005C2B2E /* GothamHTF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 333ED4DC1AF3E8110013F7A3 /* GothamHTF.ttf */; };
+		335C7FD71AF404D6005C2B2E /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FD01AF404C1005C2B2E /* Futura.ttc */; };
+		335C7FEE1AF40687005C2B2E /* GothaHTFBla in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FD91AF40687005C2B2E /* GothaHTFBla */; };
+		335C7FEF1AF40687005C2B2E /* GothaHTFBlaIta in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FDA1AF40687005C2B2E /* GothaHTFBlaIta */; };
+		335C7FF01AF40687005C2B2E /* GothaHTFBol in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FDB1AF40687005C2B2E /* GothaHTFBol */; };
+		335C7FF11AF40687005C2B2E /* GothaHTFBolCon in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FDC1AF40687005C2B2E /* GothaHTFBolCon */; };
+		335C7FF21AF40687005C2B2E /* GothaHTFBolIta in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FDD1AF40687005C2B2E /* GothaHTFBolIta */; };
+		335C7FF31AF40687005C2B2E /* GothaHTFBoo in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FDE1AF40687005C2B2E /* GothaHTFBoo */; };
+		335C7FF41AF40687005C2B2E /* GothaHTFBooCon in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FDF1AF40687005C2B2E /* GothaHTFBooCon */; };
+		335C7FF51AF40687005C2B2E /* GothaHTFBooIta in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FE01AF40687005C2B2E /* GothaHTFBooIta */; };
+		335C7FF61AF40687005C2B2E /* GothaHTFLig in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FE11AF40687005C2B2E /* GothaHTFLig */; };
+		335C7FF71AF40687005C2B2E /* GothaHTFLigCon in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FE21AF40687005C2B2E /* GothaHTFLigCon */; };
+		335C7FF81AF40687005C2B2E /* GothaHTFLigIta in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FE31AF40687005C2B2E /* GothaHTFLigIta */; };
+		335C7FF91AF40687005C2B2E /* GothaHTFMed in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FE41AF40687005C2B2E /* GothaHTFMed */; };
+		335C7FFA1AF40687005C2B2E /* GothaHTFMedCon in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FE51AF40687005C2B2E /* GothaHTFMedCon */; };
+		335C7FFB1AF40687005C2B2E /* GothaHTFMedIta in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FE61AF40687005C2B2E /* GothaHTFMedIta */; };
+		335C7FFC1AF40687005C2B2E /* GothaHTFThi in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FE71AF40687005C2B2E /* GothaHTFThi */; };
+		335C7FFD1AF40687005C2B2E /* GothaHTFThiIta in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FE81AF40687005C2B2E /* GothaHTFThiIta */; };
+		335C7FFE1AF40687005C2B2E /* GothaHTFUlt in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FE91AF40687005C2B2E /* GothaHTFUlt */; };
+		335C7FFF1AF40687005C2B2E /* GothaHTFUltIta in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FEA1AF40687005C2B2E /* GothaHTFUltIta */; };
+		335C80001AF40687005C2B2E /* GothaHTFXLig in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FEB1AF40687005C2B2E /* GothaHTFXLig */; };
+		335C80011AF40687005C2B2E /* GothaHTFXLigIta in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FEC1AF40687005C2B2E /* GothaHTFXLigIta */; };
+		335C80021AF40687005C2B2E /* Gotham HTF in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FED1AF40687005C2B2E /* Gotham HTF */; };
 		336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */; };
 		339841D91AEAB41000605C67 /* SSOCountableItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 339841D81AEAB41000605C67 /* SSOCountableItems.m */; };
 		339841E71AEACC5C00605C67 /* SSOFanPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339841E01AEACC5C00605C67 /* SSOFanPageViewController.m */; };
@@ -217,6 +240,7 @@
 		332CF5AF1AEEB92400396746 /* SSOScreenSizeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOScreenSizeHelper.m; sourceTree = "<group>"; };
 		332E0A4F1AEE85AC00F77969 /* SSOTextFieldWithUnderline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOTextFieldWithUnderline.h; path = Views/SSOTextFieldWithUnderline.h; sourceTree = "<group>"; };
 		332E0A501AEE85AC00F77969 /* SSOTextFieldWithUnderline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOTextFieldWithUnderline.m; path = Views/SSOTextFieldWithUnderline.m; sourceTree = "<group>"; };
+		333ED4DC1AF3E8110013F7A3 /* GothamHTF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamHTF.ttf; sourceTree = "<group>"; };
 		333F49AC1AE01BEC004B5CC3 /* SSOOrientationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOOrientationHelper.h; sourceTree = "<group>"; };
 		333F49AD1AE01BEC004B5CC3 /* SSOOrientationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOOrientationHelper.m; sourceTree = "<group>"; };
 		3348EC981AEEECBB008F2916 /* SSORectangleSocialButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSORectangleSocialButton.h; path = Views/SSORectangleSocialButton.h; sourceTree = "<group>"; };
@@ -255,6 +279,34 @@
 		335723A61ACB097C000CC846 /* WKAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKAppDelegate.m; sourceTree = "<group>"; };
 		335723A81ACB097C000CC846 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		335C7FD01AF404C1005C2B2E /* Futura.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Futura.ttc; sourceTree = "<group>"; };
+		335C7FD11AF404C1005C2B2E /* Georgia.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Georgia.ttf; sourceTree = "<group>"; };
+		335C7FD21AF404C1005C2B2E /* HelveticaNeue.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeue.dfont; sourceTree = "<group>"; };
+		335C7FD31AF404C1005C2B2E /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
+		335C7FD41AF404C1005C2B2E /* OratorStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OratorStd.otf; sourceTree = "<group>"; };
+		335C7FD51AF404C1005C2B2E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		335C7FD61AF404C1005C2B2E /* YummyCupcakes.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YummyCupcakes.ttf; sourceTree = "<group>"; };
+		335C7FD91AF40687005C2B2E /* GothaHTFBla */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFBla; sourceTree = "<group>"; };
+		335C7FDA1AF40687005C2B2E /* GothaHTFBlaIta */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFBlaIta; sourceTree = "<group>"; };
+		335C7FDB1AF40687005C2B2E /* GothaHTFBol */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFBol; sourceTree = "<group>"; };
+		335C7FDC1AF40687005C2B2E /* GothaHTFBolCon */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFBolCon; sourceTree = "<group>"; };
+		335C7FDD1AF40687005C2B2E /* GothaHTFBolIta */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFBolIta; sourceTree = "<group>"; };
+		335C7FDE1AF40687005C2B2E /* GothaHTFBoo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFBoo; sourceTree = "<group>"; };
+		335C7FDF1AF40687005C2B2E /* GothaHTFBooCon */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFBooCon; sourceTree = "<group>"; };
+		335C7FE01AF40687005C2B2E /* GothaHTFBooIta */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFBooIta; sourceTree = "<group>"; };
+		335C7FE11AF40687005C2B2E /* GothaHTFLig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFLig; sourceTree = "<group>"; };
+		335C7FE21AF40687005C2B2E /* GothaHTFLigCon */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFLigCon; sourceTree = "<group>"; };
+		335C7FE31AF40687005C2B2E /* GothaHTFLigIta */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFLigIta; sourceTree = "<group>"; };
+		335C7FE41AF40687005C2B2E /* GothaHTFMed */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFMed; sourceTree = "<group>"; };
+		335C7FE51AF40687005C2B2E /* GothaHTFMedCon */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFMedCon; sourceTree = "<group>"; };
+		335C7FE61AF40687005C2B2E /* GothaHTFMedIta */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFMedIta; sourceTree = "<group>"; };
+		335C7FE71AF40687005C2B2E /* GothaHTFThi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFThi; sourceTree = "<group>"; };
+		335C7FE81AF40687005C2B2E /* GothaHTFThiIta */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFThiIta; sourceTree = "<group>"; };
+		335C7FE91AF40687005C2B2E /* GothaHTFUlt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFUlt; sourceTree = "<group>"; };
+		335C7FEA1AF40687005C2B2E /* GothaHTFUltIta */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFUltIta; sourceTree = "<group>"; };
+		335C7FEB1AF40687005C2B2E /* GothaHTFXLig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFXLig; sourceTree = "<group>"; };
+		335C7FEC1AF40687005C2B2E /* GothaHTFXLigIta */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GothaHTFXLigIta; sourceTree = "<group>"; };
+		335C7FED1AF40687005C2B2E /* Gotham HTF */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Gotham HTF"; sourceTree = "<group>"; };
 		336F913E1ACD963D003B0AA4 /* SSORoundedAnimatedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSORoundedAnimatedButton.h; path = Views/SSORoundedAnimatedButton.h; sourceTree = "<group>"; };
 		336F913F1ACD963D003B0AA4 /* SSORoundedAnimatedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSORoundedAnimatedButton.m; path = Views/SSORoundedAnimatedButton.m; sourceTree = "<group>"; };
 		339841D71AEAB41000605C67 /* SSOCountableItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOCountableItems.h; path = Model/SSOCountableItems.h; sourceTree = "<group>"; };
@@ -594,6 +646,22 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		333ED4B01AF3E7640013F7A3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				335C7FD81AF40687005C2B2E /* Gotham Font */,
+				335C7FD01AF404C1005C2B2E /* Futura.ttc */,
+				335C7FD11AF404C1005C2B2E /* Georgia.ttf */,
+				335C7FD21AF404C1005C2B2E /* HelveticaNeue.dfont */,
+				335C7FD31AF404C1005C2B2E /* Impact.ttf */,
+				335C7FD41AF404C1005C2B2E /* OratorStd.otf */,
+				335C7FD51AF404C1005C2B2E /* Roboto-Bold.ttf */,
+				335C7FD61AF404C1005C2B2E /* YummyCupcakes.ttf */,
+				333ED4DC1AF3E8110013F7A3 /* GothamHTF.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		3357233C1ACB097C000CC846 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
@@ -736,6 +804,7 @@
 		3357239D1ACB097C000CC846 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				333ED4B01AF3E7640013F7A3 /* Fonts */,
 				D8C83E9F1AE1C74C00F187F1 /* InfoPlist.strings */,
 				D8C83EA11AE1C74C00F187F1 /* Localizable.strings */,
 				3357239E1ACB097C000CC846 /* Constants.h */,
@@ -758,6 +827,34 @@
 				335723A91ACB097C000CC846 /* UIAlertView+Blocks.m */,
 			);
 			path = "UIAlertView+Blocks";
+			sourceTree = "<group>";
+		};
+		335C7FD81AF40687005C2B2E /* Gotham Font */ = {
+			isa = PBXGroup;
+			children = (
+				335C7FD91AF40687005C2B2E /* GothaHTFBla */,
+				335C7FDA1AF40687005C2B2E /* GothaHTFBlaIta */,
+				335C7FDB1AF40687005C2B2E /* GothaHTFBol */,
+				335C7FDC1AF40687005C2B2E /* GothaHTFBolCon */,
+				335C7FDD1AF40687005C2B2E /* GothaHTFBolIta */,
+				335C7FDE1AF40687005C2B2E /* GothaHTFBoo */,
+				335C7FDF1AF40687005C2B2E /* GothaHTFBooCon */,
+				335C7FE01AF40687005C2B2E /* GothaHTFBooIta */,
+				335C7FE11AF40687005C2B2E /* GothaHTFLig */,
+				335C7FE21AF40687005C2B2E /* GothaHTFLigCon */,
+				335C7FE31AF40687005C2B2E /* GothaHTFLigIta */,
+				335C7FE41AF40687005C2B2E /* GothaHTFMed */,
+				335C7FE51AF40687005C2B2E /* GothaHTFMedCon */,
+				335C7FE61AF40687005C2B2E /* GothaHTFMedIta */,
+				335C7FE71AF40687005C2B2E /* GothaHTFThi */,
+				335C7FE81AF40687005C2B2E /* GothaHTFThiIta */,
+				335C7FE91AF40687005C2B2E /* GothaHTFUlt */,
+				335C7FEA1AF40687005C2B2E /* GothaHTFUltIta */,
+				335C7FEB1AF40687005C2B2E /* GothaHTFXLig */,
+				335C7FEC1AF40687005C2B2E /* GothaHTFXLigIta */,
+				335C7FED1AF40687005C2B2E /* Gotham HTF */,
+			);
+			path = "Gotham Font";
 			sourceTree = "<group>";
 		};
 		336F913D1ACD95A7003B0AA4 /* VIews */ = {
@@ -1448,35 +1545,58 @@
 			buildActionMask = 2147483647;
 			files = (
 				3303DDCE1AD83E42002B74F9 /* SSORegisterContainerView.xib in Resources */,
+				335C7FF51AF40687005C2B2E /* GothaHTFBooIta in Resources */,
 				3398420D1AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.xib in Resources */,
+				335C7FFE1AF40687005C2B2E /* GothaHTFUlt in Resources */,
 				D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */,
 				7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */,
+				335C7FFF1AF40687005C2B2E /* GothaHTFUltIta in Resources */,
 				D85B353A1AF29F640011B26D /* SSOPhotoDetailViewController.xib in Resources */,
+				335C7FFD1AF40687005C2B2E /* GothaHTFThiIta in Resources */,
 				335723DB1ACB097C000CC846 /* SettingsSocialCell.xib in Resources */,
 				D8D4F1811AE04B12002FDE38 /* Launch Screen.xib in Resources */,
 				D810B8EE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
+				335C7FF01AF40687005C2B2E /* GothaHTFBol in Resources */,
 				D810B8EF1ADF506500B3AC11 /* SSOColorPickerContainerView.xib in Resources */,
 				335723DC1ACB097C000CC846 /* SettingsSocialFakeCell.xib in Resources */,
 				D898E1D61AF1622500C957DC /* SSOProfileViewController.xib in Resources */,
+				335C7FF71AF40687005C2B2E /* GothaHTFLigCon in Resources */,
 				D8C83EA31AE1C74C00F187F1 /* InfoPlist.strings in Resources */,
+				335C7FF81AF40687005C2B2E /* GothaHTFLigIta in Resources */,
 				D8C83EA41AE1C74C00F187F1 /* Localizable.strings in Resources */,
+				335C7FF41AF40687005C2B2E /* GothaHTFBooCon in Resources */,
+				335C7FCF1AF3EB43005C2B2E /* GothamHTF.ttf in Resources */,
 				FB0F335E1AF2A3F100F6C735 /* SSOSnapViewController.xib in Resources */,
 				335723DA1ACB097C000CC846 /* WKSettingsViewController.xib in Resources */,
 				335723B31ACB097C000CC846 /* Camera.storyboard in Resources */,
+				335C7FF31AF40687005C2B2E /* GothaHTFBoo in Resources */,
 				D810B8F01ADF506500B3AC11 /* SSODrawAccessoryContainerView.xib in Resources */,
+				335C7FF21AF40687005C2B2E /* GothaHTFBolIta in Resources */,
 				D898E1DA1AF1622500C957DC /* SSOMyFeedCollectionViewCell.xib in Resources */,
 				D898E1D81AF1622500C957DC /* SSOCampaignTableViewCell.xib in Resources */,
+				335C7FFB1AF40687005C2B2E /* GothaHTFMedIta in Resources */,
 				D810B8EA1ADF506500B3AC11 /* SSOEditSideMenuView.xib in Resources */,
 				D810B8F11ADF506500B3AC11 /* SSOFontCollectionViewCell.xib in Resources */,
 				3303DDD01AD84F19002B74F9 /* SSOLoginContainerView.xib in Resources */,
 				D810B8F21ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib in Resources */,
+				335C7FEF1AF40687005C2B2E /* GothaHTFBlaIta in Resources */,
 				FBF9D1CC1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.xib in Resources */,
+				335C80001AF40687005C2B2E /* GothaHTFXLig in Resources */,
+				335C80011AF40687005C2B2E /* GothaHTFXLigIta in Resources */,
 				D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */,
+				335C7FF91AF40687005C2B2E /* GothaHTFMed in Resources */,
+				335C7FD71AF404D6005C2B2E /* Futura.ttc in Resources */,
+				335C7FFA1AF40687005C2B2E /* GothaHTFMedCon in Resources */,
 				D8E678041AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.xib in Resources */,
 				339841E91AEACC5C00605C67 /* SSOFanPageViewController.xib in Resources */,
 				335723DE1ACB097C000CC846 /* WKShareViewController.xib in Resources */,
+				335C7FF11AF40687005C2B2E /* GothaHTFBolCon in Resources */,
 				270DFB0719AE71BE00067072 /* Images.xcassets in Resources */,
+				335C7FF61AF40687005C2B2E /* GothaHTFLig in Resources */,
 				D8E678011AEEE5F6006B8CD8 /* SSOImageCollectionViewCell.xib in Resources */,
+				335C7FEE1AF40687005C2B2E /* GothaHTFBla in Resources */,
+				335C80021AF40687005C2B2E /* Gotham HTF in Resources */,
+				335C7FFC1AF40687005C2B2E /* GothaHTFThi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

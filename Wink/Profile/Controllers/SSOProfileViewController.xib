@@ -51,7 +51,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9r-th-7xo">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9r-th-7xo" userLabel="TopView">
                     <rect key="frame" x="0.0" y="40" width="375" height="150"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GEJ-ZC-bhd">
@@ -162,14 +162,14 @@
                         <constraint firstItem="GEJ-ZC-bhd" firstAttribute="leading" secondItem="z9r-th-7xo" secondAttribute="leading" constant="20" id="qhG-ya-oRu"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hws-Bm-ZI2">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hws-Bm-ZI2" userLabel="ButtonsTopLineView">
                     <rect key="frame" x="0.0" y="190" width="375" height="1"/>
                     <color key="backgroundColor" red="0.68627450980392157" green="0.68627450980392157" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="egh-HI-kJ6"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T02-2N-lqb">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T02-2N-lqb" userLabel="buttonsView">
                     <rect key="frame" x="0.0" y="191" width="375" height="45"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8YF-2e-g47">
@@ -211,8 +211,15 @@
                         <constraint firstItem="CLe-Rv-vsy" firstAttribute="top" secondItem="T02-2N-lqb" secondAttribute="top" id="yoG-s5-saM"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPn-qo-edx" userLabel="ButtonsBottomLineView">
+                    <rect key="frame" x="0.0" y="236" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.68627450980000004" green="0.68627450980000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="ExU-J1-xVN"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O1s-Eb-HRW" userLabel="Contests view">
-                    <rect key="frame" x="0.0" y="236" width="375" height="431"/>
+                    <rect key="frame" x="0.0" y="237" width="375" height="430"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="S66-dy-CcB">
                             <rect key="frame" x="177" y="206" width="20" height="20"/>
@@ -224,11 +231,11 @@
                         <constraint firstAttribute="centerX" secondItem="S66-dy-CcB" secondAttribute="centerX" constant="0.5" id="xxw-qZ-beT"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ibo-h6-dS9">
-                    <rect key="frame" x="0.0" y="236" width="375" height="431"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ibo-h6-dS9" userLabel="MyFeed View">
+                    <rect key="frame" x="0.0" y="237" width="375" height="430"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QDm-33-YvC">
-                            <rect key="frame" x="177" y="206" width="20" height="20"/>
+                            <rect key="frame" x="177" y="205" width="20" height="20"/>
                         </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -243,6 +250,7 @@
                 <constraint firstAttribute="trailing" secondItem="z9r-th-7xo" secondAttribute="trailing" id="2jk-pV-VSr"/>
                 <constraint firstItem="T02-2N-lqb" firstAttribute="top" secondItem="Hws-Bm-ZI2" secondAttribute="bottom" id="3EL-Gm-Res"/>
                 <constraint firstAttribute="trailing" secondItem="Hws-Bm-ZI2" secondAttribute="trailing" id="5UW-XR-j1Q"/>
+                <constraint firstItem="YPn-qo-edx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="B2S-Pj-LHR"/>
                 <constraint firstItem="z9r-th-7xo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BR4-Cc-MNh"/>
                 <constraint firstAttribute="trailing" secondItem="T02-2N-lqb" secondAttribute="trailing" id="BV9-HB-hAU"/>
                 <constraint firstItem="Hws-Bm-ZI2" firstAttribute="top" secondItem="z9r-th-7xo" secondAttribute="bottom" id="Dvw-fz-L2p"/>
@@ -256,12 +264,22 @@
                 <constraint firstItem="z9r-th-7xo" firstAttribute="top" secondItem="uPB-ME-APc" secondAttribute="bottom" id="UF5-U8-NSV"/>
                 <constraint firstItem="ibo-h6-dS9" firstAttribute="leading" secondItem="O1s-Eb-HRW" secondAttribute="leading" id="dSc-D5-oA9"/>
                 <constraint firstItem="T02-2N-lqb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eYS-Gp-spp"/>
+                <constraint firstAttribute="trailing" secondItem="YPn-qo-edx" secondAttribute="trailing" id="f17-ge-4Kl"/>
                 <constraint firstItem="ibo-h6-dS9" firstAttribute="top" secondItem="O1s-Eb-HRW" secondAttribute="top" id="kLP-yv-dht"/>
+                <constraint firstItem="O1s-Eb-HRW" firstAttribute="top" secondItem="YPn-qo-edx" secondAttribute="bottom" id="mma-UX-IbI"/>
+                <constraint firstItem="YPn-qo-edx" firstAttribute="top" secondItem="T02-2N-lqb" secondAttribute="bottom" id="mrV-f4-2dd"/>
                 <constraint firstItem="O1s-Eb-HRW" firstAttribute="top" secondItem="T02-2N-lqb" secondAttribute="bottom" id="uy5-nH-Uu6"/>
                 <constraint firstItem="uPB-ME-APc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vgb-SM-4ot"/>
+                <constraint firstItem="ibo-h6-dS9" firstAttribute="top" secondItem="YPn-qo-edx" secondAttribute="bottom" id="wKb-Ez-1E4"/>
                 <constraint firstItem="O1s-Eb-HRW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zDI-F3-8aW"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="kLP-yv-dht"/>
+                    <exclude reference="uy5-nH-Uu6"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="506.5" y="416.5"/>
         </view>
     </objects>
