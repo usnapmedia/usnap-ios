@@ -21,7 +21,6 @@ DerivedData
 
 # CocoaPods
 Pods
-Podfile.lock
 
 # Compile commands
 compile_commands.json
