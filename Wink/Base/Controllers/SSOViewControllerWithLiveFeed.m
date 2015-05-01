@@ -77,6 +77,14 @@
 
     //  Make the view delegate for the provider to access the on select event
     self.childVc.provider.delegate = self;
+
+    // Overide the collectionView flow from superClass and set the desired spacing.
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    flowLayout.minimumLineSpacing = 5;
+    flowLayout.minimumInteritemSpacing = 5;
+    self.childVc.collectionView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
+    self.childVc.collectionView.collectionViewLayout = flowLayout;
 }
 
 /**

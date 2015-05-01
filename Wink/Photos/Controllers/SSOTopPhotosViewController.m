@@ -67,6 +67,13 @@ NSInteger const kButtonWidthConstraint = 60;
     [self.seeAllButton setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 2, 0, 2);
 
+    // Overide the collectionView flow from superClass and set the desired spacing.
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    flowLayout.minimumInteritemSpacing = 5;
+    flowLayout.minimumLineSpacing = 5;
+    self.collectionView.collectionViewLayout = flowLayout;
+
     // Create the constraints
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
       make.top.and.left.and.right.equalTo(self.view);
