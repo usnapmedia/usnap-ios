@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="containerView" destination="WXu-0h-nbr" id="hZm-ha-gKg"/>
                 <outlet property="customNavBar" destination="Bh9-KA-lrL" id="Ogr-SN-cYy"/>
+                <outlet property="segmentedControl" destination="82L-mq-c3C" id="iXn-TH-f3T"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

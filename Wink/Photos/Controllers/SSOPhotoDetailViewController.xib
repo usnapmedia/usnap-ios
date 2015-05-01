@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSOPhotoDetailViewController">
             <connections>
+                <outlet property="backButton" destination="HcI-bq-n3j" id="L2K-W7-qNm"/>
                 <outlet property="circledLetter" destination="PM0-0i-sXG" id="7i2-3k-sPU"/>
                 <outlet property="dateLabel" destination="57v-xt-hZX" id="ke5-Yf-PN1"/>
                 <outlet property="imageView" destination="Mkj-vf-u5B" id="Ibs-1K-kWg"/>
@@ -24,14 +25,14 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yfT-XF-n3a" userLabel="Top view">
                     <rect key="frame" x="0.0" y="40" width="375" height="70"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mvk-GF-kJi" userLabel="Name">
-                            <rect key="frame" x="53" y="17" width="45" height="22"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.70000000000000018" translatesAutoresizingMaskIntoConstraints="NO" id="Mvk-GF-kJi" userLabel="Name">
+                            <rect key="frame" x="69" y="15" width="45" height="20"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="N" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PM0-0i-sXG" customClass="SSORoundedBackgroundLabel">
-                            <rect key="frame" x="15" y="21" width="28" height="28"/>
+                            <rect key="frame" x="15" y="13" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="PM0-0i-sXG" secondAttribute="height" multiplier="1:1" id="16q-Py-PTU"/>
                             </constraints>
@@ -39,8 +40,8 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57v-xt-hZX" userLabel="Date">
-                            <rect key="frame" x="53" y="39" width="31" height="15"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="dateLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57v-xt-hZX" userLabel="Date">
+                            <rect key="frame" x="69" y="35" width="56" height="20"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -49,23 +50,24 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="Mvk-GF-kJi" firstAttribute="leading" secondItem="PM0-0i-sXG" secondAttribute="trailing" constant="10" id="3xg-gE-p2R"/>
-                        <constraint firstItem="PM0-0i-sXG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="yfT-XF-n3a" secondAttribute="top" constant="10" id="7Ke-Mf-aLj"/>
-                        <constraint firstItem="PM0-0i-sXG" firstAttribute="bottom" secondItem="57v-xt-hZX" secondAttribute="bottom" constant="-5" id="7LU-BT-kdG"/>
+                        <constraint firstItem="PM0-0i-sXG" firstAttribute="top" secondItem="yfT-XF-n3a" secondAttribute="top" constant="13" id="7Ke-Mf-aLj"/>
+                        <constraint firstItem="PM0-0i-sXG" firstAttribute="bottom" secondItem="57v-xt-hZX" secondAttribute="bottom" constant="2" id="7LU-BT-kdG"/>
                         <constraint firstItem="57v-xt-hZX" firstAttribute="leading" secondItem="PM0-0i-sXG" secondAttribute="trailing" constant="10" id="7f1-ly-ecp"/>
                         <constraint firstAttribute="height" constant="70" id="LLW-w0-B8z"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="57v-xt-hZX" secondAttribute="trailing" constant="20" symbolic="YES" id="N3T-iL-WgV"/>
-                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="PM0-0i-sXG" secondAttribute="bottom" constant="10" id="QJZ-dE-ssK"/>
-                        <constraint firstItem="PM0-0i-sXG" firstAttribute="top" secondItem="Mvk-GF-kJi" secondAttribute="top" constant="4" id="SwO-ax-rH6"/>
+                        <constraint firstAttribute="bottom" secondItem="PM0-0i-sXG" secondAttribute="bottom" constant="13" id="QJZ-dE-ssK"/>
+                        <constraint firstItem="PM0-0i-sXG" firstAttribute="top" secondItem="Mvk-GF-kJi" secondAttribute="top" constant="-2" id="SwO-ax-rH6"/>
                         <constraint firstItem="57v-xt-hZX" firstAttribute="top" secondItem="Mvk-GF-kJi" secondAttribute="bottom" id="VT0-GC-pME"/>
                         <constraint firstAttribute="centerY" secondItem="PM0-0i-sXG" secondAttribute="centerY" id="eib-b7-bE7"/>
                         <constraint firstItem="PM0-0i-sXG" firstAttribute="leading" secondItem="yfT-XF-n3a" secondAttribute="leading" constant="15" id="mE2-PV-keS"/>
+                        <constraint firstItem="Mvk-GF-kJi" firstAttribute="height" secondItem="57v-xt-hZX" secondAttribute="height" id="n9v-tR-ROf"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Mvk-GF-kJi" secondAttribute="trailing" constant="20" symbolic="YES" id="pmU-e5-wtR"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uf0-SL-nmC" userLabel="Bottom view">
                     <rect key="frame" x="0.0" y="587" width="375" height="80"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Gz-Lf-nzs" userLabel="Text">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.70000000000000018" translatesAutoresizingMaskIntoConstraints="NO" id="2Gz-Lf-nzs" userLabel="Text">
                             <rect key="frame" x="20" y="5" width="335" height="45"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -105,9 +107,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LXv-Xk-25O">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcI-bq-n3j">
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcI-bq-n3j">
                             <rect key="frame" x="5" y="5" width="35" height="30"/>
-                            <state key="normal" title="Back">
+                            <state key="normal" title="&lt;">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
