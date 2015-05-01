@@ -32,6 +32,7 @@
     [self.imageViewCampaign sd_setImageWithURL:imgURL placeholderImage:nil];
     // As the imageVIew mode is "aspect fill", we need to clip the imageView to the bounds of the view (forbid it to go behind the label too)
     [self.imageViewCampaign setClipsToBounds:YES];
+    self.labelCampaign.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
 }
 
 @end
