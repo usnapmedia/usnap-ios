@@ -62,7 +62,7 @@ CGFloat const kTabBarOpacity = 0.90;
 
     // Fan Page and Profile Page are on Navigation Controllers
 
-    self.viewControllers = @[fanPageNC, profilePageNC];
+    self.viewControllers = @[ fanPageNC, profilePageNC ];
 }
 
 /**
@@ -97,19 +97,19 @@ CGFloat const kTabBarOpacity = 0.90;
 
     // Create the buttons
     UIButton *homeButton = [UIButton new];
-    [homeButton setImage:[UIImage imageNamed:@"tab_bar_home_icon"] forState:UIControlStateNormal];
+    [homeButton setImage:[UIImage imageNamed:@"ic_home"] forState:UIControlStateNormal];
     [homeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [homeButton addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.customTabBar addSubview:homeButton];
 
     UIButton *cameraButton = [UIButton new];
-    [cameraButton setImage:[UIImage imageNamed:@"tab_bar_camera_icon"] forState:UIControlStateNormal];
+    [cameraButton setImage:[UIImage imageNamed:@"ic_camera"] forState:UIControlStateNormal];
     [cameraButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [cameraButton addTarget:self action:@selector(cameraButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.customTabBar addSubview:cameraButton];
 
     UIButton *profileButton = [UIButton new];
-    [profileButton setImage:[UIImage imageNamed:@"tab_bar_profile_icon"] forState:UIControlStateNormal];
+    [profileButton setImage:[UIImage imageNamed:@"ic_profile"] forState:UIControlStateNormal];
     [profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [profileButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.customTabBar addSubview:profileButton];
