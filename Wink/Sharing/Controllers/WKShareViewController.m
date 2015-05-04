@@ -30,7 +30,7 @@
 #import "SSOThemeHelper.h"
 
 #define kOverlayViewAlpha 0.75
-NSInteger const kMaxNumberOfCharacters = 140;
+NSInteger const kMaxNumberOfCharacters = 10;
 
 typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing, WKShareViewControllerModeShared } WKShareViewControllerMode;
 
@@ -568,9 +568,17 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     NSNumber *numberCharactersLeft = [NSNumber numberWithInteger:(self.numberCharactersLeft.integerValue - textView.text.length)];
 
-    self.labelCountCharacters.text =
+   
+    if (numberCharactersLeft.intValue <= 0) {
+        textView.text = [textView.text substringToIndex:[textView.text length] - abs(numberCharactersLeft.intValue)];
+        self.labelCountCharacters.text =
+        [NSString stringWithFormat: @"0 %@", NSLocalizedString(@"shareview.characterscount", nil)];
+    }
+    else {
+        self.labelCountCharacters.text =
         [NSString stringWithFormat:@"%li %@", numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
 
+    }
     NSLog(@"textView %li", textView.text.length);
 }
 

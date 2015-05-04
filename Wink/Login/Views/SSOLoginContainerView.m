@@ -130,17 +130,20 @@
  *  @return a BOOL
  */
 - (BOOL)areTextFieldsValid {
-    // Loop into all subviews
-    for (UIView *textFieldView in self.subviews) {
-        // Check if subview is a textField
-        if ([textFieldView isKindOfClass:[UITextField class]]) {
-            // Cast the view into a textField to access class methods
-            UITextField *textField = (UITextField *)textFieldView;
-            // Check if the textField is empty
-            if (textField.text.length == 0) {
-                // Display an alert if the textField is empty
-                [UIAlertView showWithTitle:@"Missing fields" message:@"Check the fields" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
-                return NO;
+
+    for (UIView *viewContainingTextFields in self.subviews) {
+        // Loop into all subviews
+        for (UIView *textFieldView in viewContainingTextFields.subviews) {
+            // Check if subview is a textField
+            if ([textFieldView isKindOfClass:[UITextField class]]) {
+                // Cast the view into a textField to access class methods
+                UITextField *textField = (UITextField *)textFieldView;
+                // Check if the textField is empty
+                if (textField.text.length == 0) {
+                    // Display an alert if the textField is empty
+                    [UIAlertView showWithTitle:@"Missing fields" message:@"Check the fields" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+                    return NO;
+                }
             }
         }
     }
