@@ -60,7 +60,7 @@
                                 <constraint firstAttribute="height" constant="47" id="HlP-6j-6Np"/>
                                 <constraint firstAttribute="width" constant="47" id="pXf-y2-BeW"/>
                             </constraints>
-                            <state key="normal" image="forwardButtonWhite">
+                            <state key="normal" image="ic_arrow-right">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <variation key="heightClass=regular-widthClass=compact">
@@ -73,13 +73,13 @@
                                 <action selector="postButtonTouched:" destination="-1" eventType="touchUpInside" id="HqB-Ri-t5t"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrZ-3G-dwT" userLabel="backButton">
-                            <rect key="frame" x="53" y="7" width="47" height="47"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrZ-3G-dwT" userLabel="backButton">
+                            <rect key="frame" x="5" y="7" width="47" height="47"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="47" id="EQw-ae-9TZ"/>
                                 <constraint firstAttribute="width" constant="47" id="dpN-x4-8HL"/>
                             </constraints>
-                            <state key="normal" image="backButtonWhite">
+                            <state key="normal" image="ic_arrow-left">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -94,6 +94,7 @@
                         <constraint firstAttribute="centerY" secondItem="xrZ-3G-dwT" secondAttribute="centerY" id="FSj-2T-n4B"/>
                         <constraint firstAttribute="trailing" secondItem="Cck-YF-TdY" secondAttribute="trailing" constant="15" id="apR-RZ-rcT"/>
                         <constraint firstAttribute="centerY" secondItem="Cck-YF-TdY" secondAttribute="centerY" id="jyC-TU-BMI"/>
+                        <constraint firstItem="xrZ-3G-dwT" firstAttribute="leading" secondItem="cPu-n7-xWr" secondAttribute="leading" constant="5" id="rD6-Ic-SFJ"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -165,8 +166,8 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="oBE-IV-jso"/>
                     <exclude reference="tKG-Vb-ere"/>
+                    <exclude reference="oBE-IV-jso"/>
                 </mask>
             </variation>
             <variation key="heightClass=compact">
@@ -186,23 +187,23 @@
                     <include reference="55r-Oa-hPu"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="ShL-64-mwn"/>
+                    <include reference="Yun-Dw-01m"/>
+                    <include reference="tKG-Vb-ere"/>
                     <include reference="hFK-WG-mWn"/>
                     <include reference="pO7-y4-NgO"/>
                     <include reference="tPV-lm-KzM"/>
                     <include reference="utu-uX-yb9"/>
                     <include reference="SQS-Uc-3eM"/>
                     <include reference="dXu-mJ-ctA"/>
-                    <include reference="ShL-64-mwn"/>
-                    <include reference="Yun-Dw-01m"/>
-                    <include reference="tKG-Vb-ere"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="268.5" y="474.5"/>
         </view>
     </objects>
     <resources>
-        <image name="backButtonWhite" width="27" height="27"/>
-        <image name="forwardButtonWhite" width="23" height="13"/>
+        <image name="ic_arrow-left" width="12" height="21"/>
+        <image name="ic_arrow-right" width="12" height="21"/>
         <image name="wink_watermark" width="101" height="78"/>
     </resources>
 </document>

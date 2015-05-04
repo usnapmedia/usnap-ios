@@ -7,10 +7,24 @@
 //
 
 #import "SSOAdjustmentAccessoryContainerView.h"
+#import "UIButton+VerticalLayout.h"
+
+@interface SSOAdjustmentAccessoryContainerView ()
+
+@property(weak, nonatomic) IBOutlet UIButton *brightnessButton;
+@property(weak, nonatomic) IBOutlet UIButton *contrastButton;
+
+@end
 
 @implementation SSOAdjustmentAccessoryContainerView
 
 #pragma mark - IBAction
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self.brightnessButton centerVertically];
+    [self.contrastButton centerVertically];
+}
 
 - (IBAction)doneButtonPressed:(id)sender {
     [self.delegate containerViewDoneButtonPressed:self];
