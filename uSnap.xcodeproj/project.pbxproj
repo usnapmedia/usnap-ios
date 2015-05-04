@@ -91,6 +91,8 @@
 		3398420C1AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 339842081AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.m */; };
 		3398420D1AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339842091AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.xib */; };
 		3399F6DA1AE5A0DB00835B13 /* SSOCustomSocialButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399F6D91AE5A0DB00835B13 /* SSOCustomSocialButton.m */; };
+		33B926CB1AF82C2E0007443C /* SSOButtonWithPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B926CA1AF82C2E0007443C /* SSOButtonWithPoint.m */; };
+		33B926CE1AF836990007443C /* UIButton+VerticalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B926CD1AF836990007443C /* UIButton+VerticalLayout.m */; };
 		33B991491AE4522F002A30F8 /* SSOAlignedButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B991481AE4522F002A30F8 /* SSOAlignedButtonsView.m */; };
 		33E8517C1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E8517B1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.m */; };
 		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
@@ -206,7 +208,7 @@
 		270DFAF419AE71BE00067072 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		270DFAF619AE71BE00067072 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		270DFAF819AE71BE00067072 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		270DFB0619AE71BE00067072 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		270DFB0619AE71BE00067072 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Wink/Images.xcassets; sourceTree = "<group>"; };
 		270DFB0C19AE71BE00067072 /* uSnapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = uSnapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		270DFB0D19AE71BE00067072 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		270DFB1519AE71BE00067072 /* uSnapTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "uSnapTests-Info.plist"; sourceTree = "<group>"; };
@@ -325,6 +327,10 @@
 		339842091AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOTopCampaignCollectionViewCell.xib; sourceTree = "<group>"; };
 		3399F6D81AE5A0DB00835B13 /* SSOCustomSocialButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSOCustomSocialButton.h; path = Views/SSOCustomSocialButton.h; sourceTree = "<group>"; };
 		3399F6D91AE5A0DB00835B13 /* SSOCustomSocialButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSOCustomSocialButton.m; path = Views/SSOCustomSocialButton.m; sourceTree = "<group>"; };
+		33B926C91AF82C2E0007443C /* SSOButtonWithPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOButtonWithPoint.h; sourceTree = "<group>"; };
+		33B926CA1AF82C2E0007443C /* SSOButtonWithPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOButtonWithPoint.m; sourceTree = "<group>"; };
+		33B926CC1AF836990007443C /* UIButton+VerticalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+VerticalLayout.h"; sourceTree = "<group>"; };
+		33B926CD1AF836990007443C /* UIButton+VerticalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+VerticalLayout.m"; sourceTree = "<group>"; };
 		33B991471AE4522F002A30F8 /* SSOAlignedButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOAlignedButtonsView.h; sourceTree = "<group>"; };
 		33B991481AE4522F002A30F8 /* SSOAlignedButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOAlignedButtonsView.m; sourceTree = "<group>"; };
 		33E8517A1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SSOSocialNetworkAPI+USnap.h"; sourceTree = "<group>"; };
@@ -541,6 +547,7 @@
 			isa = PBXGroup;
 			children = (
 				270DFAFA19AE71BE00067072 /* Wink */,
+				270DFB0619AE71BE00067072 /* Images.xcassets */,
 				270DFB1319AE71BE00067072 /* WinkTests */,
 				270DFAF319AE71BE00067072 /* Frameworks */,
 				270DFAF219AE71BE00067072 /* Products */,
@@ -607,7 +614,6 @@
 				3357239D1ACB097C000CC846 /* Supporting Files */,
 				335723A71ACB097C000CC846 /* UIAlertView+Blocks */,
 				D86E949F1ACF492000CFF801 /* Views */,
-				270DFB0619AE71BE00067072 /* Images.xcassets */,
 				D8D4F1801AE04B12002FDE38 /* Launch Screen.xib */,
 			);
 			path = Wink;
@@ -1037,6 +1043,8 @@
 				D810B8C11ADF506500B3AC11 /* SSOToolButton.m */,
 				D810B8C21ADF506500B3AC11 /* WKColorPickerView.h */,
 				D810B8C31ADF506500B3AC11 /* WKColorPickerView.m */,
+				33B926C91AF82C2E0007443C /* SSOButtonWithPoint.h */,
+				33B926CA1AF82C2E0007443C /* SSOButtonWithPoint.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1121,9 +1129,9 @@
 			isa = PBXGroup;
 			children = (
 				D810B8C61ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib */,
-				D810B8C71ADF506500B3AC11 /* SSOColorPickerContainerView.xib */,
 				D810B8C81ADF506500B3AC11 /* SSODrawAccessoryContainerView.xib */,
 				D810B8C91ADF506500B3AC11 /* SSOFontCollectionViewCell.xib */,
+				D810B8C71ADF506500B3AC11 /* SSOColorPickerContainerView.xib */,
 				D810B8CA1ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib */,
 				D810B8CB1ADF506500B3AC11 /* WKEditMediaViewController.xib */,
 			);
@@ -1159,6 +1167,8 @@
 				03AE7D391AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m */,
 				3316F2CE1ADD6CC900C7ED24 /* NSUserDefaults+USnap.h */,
 				3316F2CF1ADD6CC900C7ED24 /* NSUserDefaults+USnap.m */,
+				33B926CC1AF836990007443C /* UIButton+VerticalLayout.h */,
+				33B926CD1AF836990007443C /* UIButton+VerticalLayout.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1728,6 +1738,7 @@
 				D8E677FC1AEEE5F6006B8CD8 /* SSOFeedConnect.m in Sources */,
 				D8FBADAC1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.m in Sources */,
 				3303DDD41AD8547F002B74F9 /* SSOLoginContainerView.m in Sources */,
+				33B926CE1AF836990007443C /* UIButton+VerticalLayout.m in Sources */,
 				D8E678001AEEE5F6006B8CD8 /* SSOImageCollectionViewCell.m in Sources */,
 				D810B8CF1ADF506500B3AC11 /* SSOAdjustementsHelper.m in Sources */,
 				D8E678031AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.m in Sources */,
@@ -1757,6 +1768,7 @@
 				D810B8F71ADF508A00B3AC11 /* NSBundle+Wink.m in Sources */,
 				D8E6780A1AEEEEA0006B8CD8 /* SSODynamicCellSizeCollectionViewProvider.m in Sources */,
 				D8E677FF1AEEE5F6006B8CD8 /* SSOSnap.m in Sources */,
+				33B926CB1AF82C2E0007443C /* SSOButtonWithPoint.m in Sources */,
 				339841E81AEACC5C00605C67 /* SSOCampaign.m in Sources */,
 				D810B8DD1ADF506500B3AC11 /* SSOFontCollectionViewCell.m in Sources */,
 				D830F4211ACDDBF1002A503D /* UIImage+Resizing.m in Sources */,

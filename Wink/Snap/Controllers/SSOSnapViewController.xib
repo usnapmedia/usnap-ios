@@ -29,7 +29,7 @@
                                 <constraint firstAttribute="height" constant="40" id="5ET-Fi-H2x"/>
                                 <constraint firstAttribute="width" constant="40" id="jwk-in-Vk0"/>
                             </constraints>
-                            <state key="normal" image="backButtonWhite">
+                            <state key="normal" image="ic_arrow-left">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -37,7 +37,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="2rr-FU-mj7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Bh9-KA-lrL" secondAttribute="leading" constant="20" symbolic="YES" id="OBt-cy-WBF"/>
                         <constraint firstItem="ABn-Ij-j7W" firstAttribute="leading" secondItem="Bh9-KA-lrL" secondAttribute="leading" constant="10" id="VHT-4d-1eh"/>
@@ -84,7 +84,7 @@
         </view>
     </objects>
     <resources>
-        <image name="backButtonWhite" width="11" height="13"/>
         <image name="company_logo" width="39" height="29"/>
+        <image name="ic_arrow-left" width="12" height="21"/>
     </resources>
 </document>

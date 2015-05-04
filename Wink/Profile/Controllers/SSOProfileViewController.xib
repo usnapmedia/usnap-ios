@@ -276,8 +276,8 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="kLP-yv-dht"/>
                     <exclude reference="uy5-nH-Uu6"/>
+                    <exclude reference="kLP-yv-dht"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="506.5" y="416.5"/>

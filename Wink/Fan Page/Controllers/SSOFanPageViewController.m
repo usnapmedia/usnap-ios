@@ -66,9 +66,6 @@
     containerVC.delegate = self;
     // Add the child vc
     [self addChildViewController:containerVC];
-    // Set the frame
-    containerVC.view.frame = self.campaignViewControllerContainer.frame;
-    //
     [self.campaignViewControllerContainer addSubview:containerVC.view];
     [containerVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
       make.edges.equalTo(self.campaignViewControllerContainer);
@@ -84,8 +81,7 @@
     self.topPhotosVC = [SSOTopPhotosViewController new];
 
     [self addChildViewController:self.topPhotosVC];
-    // Set the frame
-    self.topPhotosVC.view.frame = self.topPhotosViewControllerContainer.frame;
+
     [self.topPhotosViewControllerContainer addSubview:self.topPhotosVC.view];
 
     [self.topPhotosVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -105,8 +101,7 @@
     self.recentPhotosVC = [SSORecentPhotosViewController new];
 
     [self addChildViewController:self.recentPhotosVC];
-    // Set the frame
-    self.recentPhotosVC.view.frame = self.recentPhotosViewControllerContainer.frame;
+
     [self.recentPhotosViewControllerContainer addSubview:self.recentPhotosVC.view];
 
     [self.recentPhotosVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
