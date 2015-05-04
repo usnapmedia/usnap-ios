@@ -122,7 +122,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     // Setup the text view
     //  self.placeholderTextView.layer.cornerRadius = 2.0f;
-    self.placeholderTextView.placeholderTextColor = [UIColor lightGreyTextColorWithAlpha:1.0f];
+    self.placeholderTextView.placeholderTextColor = [UIColor lightGrayColor];
     self.placeholderTextView.textColor = [UIColor blackColor];
     self.placeholderTextView.placeholder = NSLocalizedString(@"shareview.textview.placeholder.text", @"");
     self.placeholderTextView.fadeTime = 0.2;

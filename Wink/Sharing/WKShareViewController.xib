@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -31,9 +32,22 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guN-2m-LW0" userLabel="Back button">
                             <rect key="frame" x="35" y="20" width="27" height="27"/>
-                            <state key="normal" image="backButtonWhite">
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="guN-2m-LW0" secondAttribute="height" multiplier="1:1" id="hTW-r4-LXg"/>
+                            </constraints>
+                            <state key="normal" image="ic_arrow-left">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="hTW-r4-LXg"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="hTW-r4-LXg"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <action selector="backButtonTouched:" destination="-1" eventType="touchUpInside" id="fNg-T7-sd9"/>
                             </connections>
@@ -471,6 +485,6 @@
         </view>
     </objects>
     <resources>
-        <image name="backButtonWhite" width="11" height="13"/>
+        <image name="ic_arrow-left" width="12" height="21"/>
     </resources>
 </document>
