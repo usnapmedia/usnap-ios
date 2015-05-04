@@ -17,26 +17,14 @@
 
 @implementation SSORoundedAnimatedButton
 
-/**
- *  Overide init method
- *
- *  @return self
- */
-- (id)init {
-    self = [super init];
-    if (self) {
-        [self addLongTagGestureRecognizer];
-        self.alpha = 0.95;
-    }
-    return self;
-}
-
 - (id)initWithCoder:(NSCoder *)aDecoder {
 
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self addLongTagGestureRecognizer];
         self.alpha = 0.95;
+        self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+        self.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
     }
     return self;
 }
@@ -45,6 +33,7 @@
 
     [self.layer removeAllAnimations];
 }
+
 
 - (void)addLongTagGestureRecognizer {
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];

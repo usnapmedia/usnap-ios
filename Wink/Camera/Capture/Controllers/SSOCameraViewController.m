@@ -22,6 +22,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <SSCellViewItem.h>
 #import <SSCellViewSection.h>
+#import "SSOThemeHelper.h"
 
 #define kTotalVideoRecordingTime 30
 
@@ -38,6 +39,7 @@
 @property(weak, nonatomic) IBOutlet SSORoundedAnimatedButton *animatedCaptureButton;
 @property(weak, nonatomic) IBOutlet AVCamPreviewView *cameraPreviewView;
 @property(weak, nonatomic) IBOutlet UIButton *backButton;
+@property(weak, nonatomic) IBOutlet UIView *assetPreviewBackgroundView;
 // Used to display a blur on the preview
 @property(strong, nonatomic) UIVisualEffectView *effectView;
 @property(strong, nonatomic) UIView *blurEffectview;
@@ -110,9 +112,10 @@
  */
 - (void)initAnimatedButton {
     self.animatedCaptureButton.delegate = self;
-    self.animatedCaptureButton.circleColor = [UIColor blueColor];
+    self.animatedCaptureButton.alpha = 0.8;
+    self.animatedCaptureButton.circleColor = [SSOThemeHelper firstColor];
     self.animatedCaptureButton.circleOpacity = 0.8;
-    self.animatedCaptureButton.circleLineWidth = 20;
+    self.animatedCaptureButton.circleLineWidth = 5;
     [self.animatedCaptureButton resetAnimation];
 }
 
@@ -148,6 +151,8 @@
     self.profileButton.hidden = YES;
     self.isRotationAllowed = YES;
     self.isVideoRecording = NO;
+
+    self.assetPreviewBackgroundView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
 
     // Make the top container top constraint on the bottom of the feed controller.
     // Feed controller comes from the base class
@@ -283,13 +288,13 @@
  */
 - (void)initializeFlash {
     if (self.flashState == AVCaptureFlashModeOff) {
-        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconOFF"] forState:UIControlStateNormal];
+        [self.flashButton setImage:[UIImage imageNamed:@"ic_noflash"] forState:UIControlStateNormal];
 
     } else if (self.flashState == AVCaptureFlashModeOn) {
-        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconON"] forState:UIControlStateNormal];
+        [self.flashButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
 
     } else {
-        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconAUTO"] forState:UIControlStateNormal];
+        [self.flashButton setImage:[UIImage imageNamed:@"ic_flash_A"] forState:UIControlStateNormal];
     }
 }
 
@@ -299,18 +304,18 @@
 - (void)switchFlashState {
     // Change flash button icon
     if (self.flashState == AVCaptureFlashModeOff) {
-        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconON"] forState:UIControlStateNormal];
+        [self.flashButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
 
         self.flashState = AVCaptureFlashModeOn;
         self.torchState = AVCaptureTorchModeOn;
 
     } else if (self.flashState == AVCaptureFlashModeOn) {
-        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconAUTO"] forState:UIControlStateNormal];
+        [self.flashButton setImage:[UIImage imageNamed:@"ic_flash_A"] forState:UIControlStateNormal];
         self.flashState = AVCaptureFlashModeAuto;
         self.torchState = AVCaptureTorchModeAuto;
 
     } else {
-        [self.flashButton setImage:[UIImage imageNamed:@"flashButtonIconOFF"] forState:UIControlStateNormal];
+        [self.flashButton setImage:[UIImage imageNamed:@"ic_noflash"] forState:UIControlStateNormal];
         self.flashState = AVCaptureFlashModeOff;
         self.torchState = AVCaptureTorchModeOff;
     }
