@@ -52,6 +52,21 @@
     [self loadMyFeed];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    // Check if there is a user registered in the app and set the userFirstLetterLabel
+    // This has to be in viewWillAppear because maybe the user will login or logout after the view is loaded
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:kEmailLoggedString]) {
+        NSString *firstLetter = [[[NSUserDefaults standardUserDefaults] valueForKey:kEmailLoggedString] substringToIndex:1];
+        firstLetter = [firstLetter uppercaseString];
+        self.userFirstLetterLabel.text = firstLetter;
+    } else {
+
+        self.userFirstLetterLabel.text = @"?";
+    }
+}
+
 #pragma mark - Initialization
 
 /**
@@ -59,21 +74,58 @@
  */
 
 - (void)initializeUI {
+    //    self.settingsButton.titleLabel.text = NSLocalizedString(@"profile.settings-button", @"Settings button in profile");
     self.userAvatarView.layer.cornerRadius = 5;
     self.userAvatarView.layer.masksToBounds = YES;
-    self.userAvatarView.backgroundColor = [SSOThemeHelper firstColor];
     self.settingsButton.layer.cornerRadius = 5;
     self.settingsButton.layer.masksToBounds = YES;
     self.settingsButton.layer.borderWidth = 1;
     self.settingsButton.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.settingsButton.backgroundColor = [SSOThemeHelper secondColor];
-    self.numberSharesLabel.textColor = [SSOThemeHelper firstColor];
-    self.numberSharesLabel.textColor = [SSOThemeHelper firstColor];
+
     self.isContestsVisible = YES;
     self.myFeedView.hidden = YES;
-    self.contestsButton.backgroundColor = [SSOThemeHelper firstColor];
     //@FIXME
     self.customNavBar.backgroundColor = [UIColor blackColor];
+
+    [self setTexts];
+    [self setFontsAndColorsForLabels];
+}
+
+/**
+ *  Set the texts of the outlets with localized
+ */
+- (void)setTexts {
+
+    self.scoreLabel.text = NSLocalizedString(@"profile-page.campaign.score-label", nil);
+    self.sharesLabel.text = NSLocalizedString(@"profile-page.campaign.share-label-plural", nil);
+
+    [self.myFeedButton setTitle:NSLocalizedString(@"profile.myfeed-button", nil) forState:UIControlStateNormal];
+    [self.contestsButton setTitle:NSLocalizedString(@"profile.contests-button", nil) forState:UIControlStateNormal];
+    [self.settingsButton setTitle:NSLocalizedString(@"profile.settings-button", nil) forState:UIControlStateNormal];
+}
+
+/**
+ *  Set the fonts and textColor properties for the labels and buttons in the view
+ */
+- (void)setFontsAndColorsForLabels {
+    self.userAvatarView.backgroundColor = [SSOThemeHelper firstColor];
+
+    self.settingsButton.titleLabel.textColor = [UIColor darkGrayColor];
+
+    self.contestsButton.backgroundColor = [SSOThemeHelper firstColor];
+    self.contestsButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+
+    self.myFeedButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+    self.userFirstLetterLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:70];
+
+    self.sharesLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:14];
+    self.scoreLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:14];
+
+    self.numberScoreLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
+    self.numberScoreLabel.textColor = [SSOThemeHelper firstColor];
+
+    self.numberSharesLabel.textColor = [SSOThemeHelper firstColor];
+    self.numberSharesLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
 }
 
 /**

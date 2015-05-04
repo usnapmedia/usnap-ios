@@ -30,7 +30,7 @@
 #import "SSOThemeHelper.h"
 
 #define kOverlayViewAlpha 0.75
-NSInteger const kNumberOfCharacters = 140;
+NSInteger const kMaxNumberOfCharacters = 140;
 
 typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing, WKShareViewControllerModeShared } WKShareViewControllerMode;
 
@@ -52,6 +52,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 @property(weak, nonatomic) IBOutlet UIView *bottomView;
 @property(strong, nonatomic) IBOutlet UIView *overlayView;
 @property(weak, nonatomic) IBOutlet UILabel *labelCountCharacters;
+@property(weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 // Social buttons
 @property(weak, nonatomic) IBOutlet SSORectangleSocialButton *twitterButton;
@@ -69,13 +70,16 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.numberCharactersLeft = [NSNumber numberWithInteger:kNumberOfCharacters];
+    self.numberCharactersLeft = [NSNumber numberWithInteger:kMaxNumberOfCharacters];
     self.labelCountCharacters.text =
         [NSString stringWithFormat:@"%li %@", self.numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
+    [self.shareButton setTitle:NSLocalizedString(@"shareView.shareButton", nil) forState:UIControlStateNormal];
+    self.titleLabel.text = NSLocalizedString(@"shareview.title", nil);
     self.labelCountCharacters.textColor = [SSOThemeHelper firstColor];
 
     self.buttonsContainerView.layer.cornerRadius = 4.0;
     self.mediaContainerView.layer.cornerRadius = 4.0;
+    self.bottomView.layer.cornerRadius = 4.0;
     // Register for keyboard notifications
     //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];

@@ -10,16 +10,20 @@
 
 @interface SSOThemeHelper : NSObject
 
-+(UIColor *)firstColor;
++ (UIColor *)firstColor;
 
-+(UIColor *)firstSecondaryColor;
++ (UIColor *)firstSecondaryColor;
 
-+(UIColor *)secondColor;
++ (UIColor *)secondColor;
 
-+(UIColor *)secondSecondaryColor;
++ (UIColor *)secondSecondaryColor;
 
-+(UIColor *)thirdColor;
++ (UIColor *)thirdColor;
 
-+(UIColor *)thirdSecondaryColor;
++ (UIColor *)thirdSecondaryColor;
+
++ (UIFont *)avenirHeavyFontWithSize:(CGFloat)size;
+
++ (UIFont *)helveticaNeueFontWithSize:(CGFloat)size;
 
 @end

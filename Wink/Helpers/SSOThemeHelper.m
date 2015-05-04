@@ -34,4 +34,19 @@
     return [UIColor grayColor];
 }
 
++ (UIFont *)avenirHeavyFontWithSize:(CGFloat)size {
+
+    return [UIFont fontWithName:@"Avenir-Heavy" size:size];
+}
+
++ (UIFont *)helveticaNeueFontWithSize:(CGFloat)size {
+
+    return [UIFont fontWithName:@"HelveticaNeue" size:size];
+}
+
++ (UIFont *)yummyCupcakesFontWithSize:(CGFloat)size {
+
+    return [UIFont fontWithName:@"YummyCupcakes" size:size];
+}
+
 @end

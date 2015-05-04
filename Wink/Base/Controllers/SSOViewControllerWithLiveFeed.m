@@ -12,6 +12,7 @@
 #import "SSOFanPageViewController.h"
 #import "SSOCountableItems.h"
 #import "SSOSnap.h"
+#import "SSOPhotoDetailViewController.h"
 #import <SSOSimpleCollectionViewProvider.h>
 #import <Masonry.h>
 
@@ -77,6 +78,14 @@
 
     //  Make the view delegate for the provider to access the on select event
     self.childVc.provider.delegate = self;
+
+    // Overide the collectionView flow from superClass and set the desired spacing.
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    flowLayout.minimumLineSpacing = 5;
+    flowLayout.minimumInteritemSpacing = 5;
+    self.childVc.collectionView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
+    self.childVc.collectionView.collectionViewLayout = flowLayout;
 }
 
 /**
@@ -124,10 +133,12 @@
 #pragma mark - SSOProviderDelegate
 
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.displayFanPageDelegate respondsToSelector:@selector(userDidDismissCamera)]) {
-        [self.displayFanPageDelegate userDidDismissCamera];
+    SSOCustomCellSizeCollectionViewProvider *prov = provider;
+    if ([[prov.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
+        //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
+        SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc] initWithSnap:[prov.inputData objectAtIndex:indexPath.row]];
+        [self.navigationController pushViewController:detailVC animated:YES];
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -14,9 +14,10 @@
 #import "SSOFanPageViewController.h"
 #import <Masonry.h>
 #import "SSOPhotoDetailViewController.h"
+#import "SSOThemeHelper.h"
 
 NSInteger const kTopPhotosCellWidth = 100;
-NSInteger const kTopPhotosCellOffset = 10;
+NSInteger const kTopPhotosCellOffset = 5;
 NSInteger const kTopViewHeightConstraint = 40;
 NSInteger const kConstraintOffset = 10;
 NSInteger const kButtonWidthConstraint = 60;
@@ -64,6 +65,14 @@ NSInteger const kButtonWidthConstraint = 60;
     [self.topView addSubview:self.seeAllButton];
     // Set the see all button constraints
     [self.seeAllButton setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 2, 0, 2);
+
+    // Overide the collectionView flow from superClass and set the desired spacing.
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    flowLayout.minimumInteritemSpacing = 5;
+    flowLayout.minimumLineSpacing = 5;
+    self.collectionView.collectionViewLayout = flowLayout;
 
     // Create the constraints
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -71,14 +80,14 @@ NSInteger const kButtonWidthConstraint = 60;
       make.height.equalTo([NSNumber numberWithInt:kTopViewHeightConstraint]);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.centerY.equalTo(self.topView);
+      make.bottom.equalTo(self.topView.mas_bottom).with.offset(-5);
       make.left.equalTo(self.topView).with.offset(kConstraintOffset);
       make.right.equalTo(self.seeAllButton.mas_left).with.offset(-kConstraintOffset);
 
     }];
 
     [self.seeAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.centerY.equalTo(self.topView);
+      make.bottom.equalTo(self.topView.mas_bottom).with.offset(-5);
       make.right.equalTo(self.topView).with.offset(-kConstraintOffset);
       make.width.equalTo([NSNumber numberWithInt:kButtonWidthConstraint]);
     }];
@@ -87,6 +96,9 @@ NSInteger const kButtonWidthConstraint = 60;
       make.left.and.right.and.bottom.equalTo(self.view);
       make.top.equalTo(self.topView.mas_bottom);
     }];
+
+    self.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
+    self.seeAllButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:10];
 }
 
 #pragma mark - Getter
@@ -113,7 +125,7 @@ NSInteger const kButtonWidthConstraint = 60;
     if ([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
         //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
         SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc] initWithSnap:[self.provider.inputData objectAtIndex:indexPath.row]];
-        [self presentViewController:detailVC animated:YES completion:nil];
+        [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
 

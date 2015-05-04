@@ -12,11 +12,13 @@
 #import "SSOSnap.h"
 #import "SSOCountableItems.h"
 #import <Masonry.h>
+#import "SSOThemeHelper.h"
 
 @interface SSOSnapViewController ()
 
 @property(weak, nonatomic) IBOutlet UIView *customNavBar;
 @property(weak, nonatomic) IBOutlet UIView *containerView;
+@property(weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
 @property(strong, nonatomic) SSOPhotosViewController *photosVC;
 
@@ -43,6 +45,7 @@
 - (void)initializeUI {
     //@FIXME
     self.customNavBar.backgroundColor = [UIColor blackColor];
+    self.segmentedControl.tintColor = [SSOThemeHelper firstColor];
 }
 
 /**

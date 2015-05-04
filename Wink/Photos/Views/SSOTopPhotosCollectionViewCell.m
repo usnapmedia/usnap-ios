@@ -54,6 +54,8 @@
         }
 
         [self.pointsLabel setTextColor:[SSOThemeHelper firstColor]];
+        self.nameLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:11];
+        self.pointsLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:10];
     }
 }
 
