@@ -20,7 +20,7 @@ NSInteger const kTabBarHeight = 40;
 CGFloat const kTabBarButtonOffset = 5.0f;
 CGFloat const kTabBarOpacity = 0.90;
 
-@interface SSOViewControllerWithTabBar () <LiveFeedViewControllerDelegate>
+@interface SSOViewControllerWithTabBar ()
 
 @property(strong, nonatomic) UIView *customTabBar;
 
@@ -197,8 +197,6 @@ CGFloat const kTabBarOpacity = 0.90;
  */
 - (void)cameraButtonPressed:(id)sender {
     UINavigationController *cameraNavigationController = [[UIStoryboard cameraStoryboard] instantiateInitialViewController];
-    SSOViewControllerWithLiveFeed *liveFeed = [cameraNavigationController.viewControllers firstObject];
-    liveFeed.displayFanPageDelegate = self;
     [self presentViewController:cameraNavigationController animated:YES completion:nil];
 }
 /**
@@ -210,19 +208,6 @@ CGFloat const kTabBarOpacity = 0.90;
     if (self.selectedIndex != 1) {
         [self switchCurrentViewControllerToNewViewController:[self.viewControllers lastObject]];
         self.selectedIndex = 1;
-    }
-}
-
-#pragma mark - LiveFeedViewControllerDelegate
-
-/**
- *  This delegate is called when the user tap on a photo at collection view at the top of the camera view
- */
-
-- (void)userDidDismissCamera {
-    if (self.selectedIndex != 0) {
-        [self switchCurrentViewControllerToNewViewController:[self.viewControllers firstObject]];
-        self.selectedIndex = 0;
     }
 }
 
