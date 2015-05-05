@@ -108,7 +108,7 @@
     NSLog(@" orientation : %li", [[SSOOrientationHelper sharedInstance] orientation]);
 
     return UIDeviceOrientationPortrait;
-   // return [[SSOOrientationHelper sharedInstance] orientation];
+    // return [[SSOOrientationHelper sharedInstance] orientation];
 }
 
 /**
@@ -161,19 +161,19 @@
 - (void)setupEditButtons {
     //@TODO This should be generic
     UIButton *drawButton = [UIButton new];
-    [drawButton setImage:[UIImage imageNamed:@"drawIconBorder"] forState:UIControlStateNormal];
+    [drawButton setImage:[UIImage imageNamed:@"ic_brush"] forState:UIControlStateNormal];
     [drawButton addTarget:self action:@selector(drawButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
 
     UIButton *textButton = [UIButton new];
-    [textButton setImage:[UIImage imageNamed:@"textIcon"] forState:UIControlStateNormal];
+    [textButton setImage:[UIImage imageNamed:@"ic_text"] forState:UIControlStateNormal];
     [textButton addTarget:self action:@selector(textButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
 
     UIButton *adjustmentButton = [UIButton new];
-    [adjustmentButton setImage:[UIImage imageNamed:@"brightnessIcon"] forState:UIControlStateNormal];
+    [adjustmentButton setImage:[UIImage imageNamed:@"ic_brightness"] forState:UIControlStateNormal];
     [adjustmentButton addTarget:self action:@selector(adjustmentButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
 
     UIButton *cropButton = [UIButton new];
-    [cropButton setImage:[UIImage imageNamed:@"cropIcon"] forState:UIControlStateNormal];
+    [cropButton setImage:[UIImage imageNamed:@"ic_crop"] forState:UIControlStateNormal];
     [cropButton addTarget:self action:@selector(cropButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
 
     // Set the array of buttons for the side menu

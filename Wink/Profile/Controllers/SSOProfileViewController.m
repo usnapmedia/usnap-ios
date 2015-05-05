@@ -97,7 +97,7 @@
 - (void)setTexts {
 
     self.scoreLabel.text = NSLocalizedString(@"profile-page.campaign.score-label", nil);
-    self.sharesLabel.text = NSLocalizedString(@"profile-page.campaign.share-label-plural", nil);
+    self.sharesLabel.text = NSLocalizedString(@"profile-page.campaign.share-label", nil);
 
     [self.myFeedButton setTitle:NSLocalizedString(@"profile.myfeed-button", nil) forState:UIControlStateNormal];
     [self.contestsButton setTitle:NSLocalizedString(@"profile.contests-button", nil) forState:UIControlStateNormal];

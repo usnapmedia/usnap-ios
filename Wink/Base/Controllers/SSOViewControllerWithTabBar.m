@@ -97,19 +97,23 @@ CGFloat const kTabBarOpacity = 0.90;
 
     // Create the buttons
     UIButton *homeButton = [UIButton new];
+    homeButton.selected = YES;
     [homeButton setImage:[UIImage imageNamed:@"ic_home"] forState:UIControlStateNormal];
+    [homeButton setImage:[UIImage imageNamed:@"ic_home-selected"] forState:UIControlStateSelected];
     [homeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [homeButton addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.customTabBar addSubview:homeButton];
 
     UIButton *cameraButton = [UIButton new];
     [cameraButton setImage:[UIImage imageNamed:@"ic_camera"] forState:UIControlStateNormal];
+    [cameraButton setImage:[UIImage imageNamed:@"ic_camera-selected"] forState:UIControlStateSelected];
     [cameraButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [cameraButton addTarget:self action:@selector(cameraButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.customTabBar addSubview:cameraButton];
 
     UIButton *profileButton = [UIButton new];
     [profileButton setImage:[UIImage imageNamed:@"ic_profile"] forState:UIControlStateNormal];
+    [profileButton setImage:[UIImage imageNamed:@"ic_profile-selected"] forState:UIControlStateSelected];
     [profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [profileButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.customTabBar addSubview:profileButton];
@@ -179,6 +183,18 @@ CGFloat const kTabBarOpacity = 0.90;
 #pragma mark - Action
 
 /**
+ *  Loop through buttons in the tabBar. When we select one we want the others to be unselected
+ *
+ *  @param toButton <#toButton description#>
+ */
+- (void)unselectedButtonsTabBarWithSender:(UIButton *)toButton {
+
+    for (UIButton *button in self.customTabBar.subviews) {
+        button.selected = NO;
+    }
+}
+
+/**
  *  When the home button is pressed, switch the VC
  *
  *  @param sender the button
@@ -188,6 +204,9 @@ CGFloat const kTabBarOpacity = 0.90;
         [self switchCurrentViewControllerToNewViewController:[self.viewControllers firstObject]];
         self.selectedIndex = 0;
     }
+    UIButton *button = (UIButton *)sender;
+    [self unselectedButtonsTabBarWithSender:button];
+    button.selected = !button.isSelected;
 }
 
 /**
@@ -198,6 +217,10 @@ CGFloat const kTabBarOpacity = 0.90;
 - (void)cameraButtonPressed:(id)sender {
     UINavigationController *cameraNavigationController = [[UIStoryboard cameraStoryboard] instantiateInitialViewController];
     [self presentViewController:cameraNavigationController animated:YES completion:nil];
+
+    //  UIButton *button = (UIButton *)sender;
+    // [self unselectedButtonsTabBarWithSender:button];
+    //  button.selected = !button.isSelected;
 }
 /**
  *  When the profile button is pressed, simply switch the view
@@ -209,6 +232,12 @@ CGFloat const kTabBarOpacity = 0.90;
         [self switchCurrentViewControllerToNewViewController:[self.viewControllers lastObject]];
         self.selectedIndex = 1;
     }
+
+    UIButton *button = (UIButton *)sender;
+
+    [self unselectedButtonsTabBarWithSender:button];
+
+    button.selected = !button.isSelected;
 }
 
 @end

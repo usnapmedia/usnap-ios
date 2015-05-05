@@ -1,0 +1,22 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "scale" : "1x",
+      "filename" : "Wink_Images.xcassets_Edit_backButtonWhite.imageset_backButtonWhite_Before_15731725e5a840135267a488bec8db41d43212f6.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x",
+      "filename" : "Wink_Images.xcassets_Edit_backButtonWhite.imageset_backButtonWhite@2x_Before_15731725e5a840135267a488bec8db41d43212f6.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

@@ -17,7 +17,7 @@
 
 NSInteger const kTopViewHeightConstraint = 40;
 NSInteger const kConstraintOffset = 10;
-NSInteger const kButtonWidthConstraint = 60;
+NSInteger const kButtonWidthConstraint = 80;
 NSInteger const kRecentPhotosCellWidth = 25;
 NSInteger const kRecentPhotosCellOffset = 10;
 

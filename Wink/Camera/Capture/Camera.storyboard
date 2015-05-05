@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RAe-oX-1kT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RAe-oX-1kT">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -52,9 +52,6 @@
                                         <state key="normal" image="camera">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="261" y="8" width="55" height="55"/>
-                                        </variation>
                                         <connections>
                                             <action selector="cameraDeviceButtonTouched:" destination="KDe-mF-eVw" eventType="touchUpInside" id="Itd-If-Qvf"/>
                                         </connections>
@@ -62,9 +59,12 @@
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1C-vy-mwx">
                                         <rect key="frame" x="4" y="24" width="15" height="22"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                        <state key="normal" image="ic_back">
+                                        <state key="normal" image="closeButtonIcon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="4" y="8" width="55" height="55"/>
+                                        </variation>
                                         <connections>
                                             <action selector="backButtonTouched:" destination="KDe-mF-eVw" eventType="touchUpInside" id="sMG-fa-jJj"/>
                                         </connections>
@@ -74,9 +74,6 @@
                                         <state key="normal" image="flash">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="133" y="8" width="55" height="55"/>
-                                        </variation>
                                         <connections>
                                             <action selector="flashButtonTouched:" destination="KDe-mF-eVw" eventType="touchUpInside" id="l1W-IS-I9S"/>
                                         </connections>
@@ -87,7 +84,9 @@
                                     <constraint firstItem="lhy-8W-4VU" firstAttribute="height" secondItem="std-T3-Jlg" secondAttribute="height" id="09b-fb-9Ly"/>
                                     <constraint firstAttribute="centerY" secondItem="std-T3-Jlg" secondAttribute="centerY" id="EHQ-Eh-eMK"/>
                                     <constraint firstAttribute="centerY" secondItem="F1C-vy-mwx" secondAttribute="centerY" id="FAY-AU-LwQ"/>
-                                    <constraint firstItem="F1C-vy-mwx" firstAttribute="leading" secondItem="77y-R9-8Qn" secondAttribute="leading" constant="4" id="NAn-LP-C6f"/>
+                                    <constraint firstItem="F1C-vy-mwx" firstAttribute="leading" secondItem="77y-R9-8Qn" secondAttribute="leading" constant="4" id="NAn-LP-C6f">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                    </constraint>
                                     <constraint firstItem="lhy-8W-4VU" firstAttribute="width" secondItem="std-T3-Jlg" secondAttribute="width" id="OP9-47-HRK"/>
                                     <constraint firstAttribute="centerX" secondItem="lhy-8W-4VU" secondAttribute="centerX" id="V91-lx-UMw"/>
                                     <constraint firstAttribute="centerX" secondItem="lhy-8W-4VU" secondAttribute="centerX" id="Zn7-DI-A8c"/>
@@ -151,38 +150,89 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9G-9M-9NP" userLabel="Bottom View">
                                 <rect key="frame" x="0.0" y="468" width="320" height="100"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LzJ-oa-rGY">
-                                        <rect key="frame" x="8" y="43" width="49" height="49"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKV-op-02v" userLabel="Preview backgroundView">
+                                        <rect key="frame" x="-12" y="23" width="89" height="89"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LzJ-oa-rGY">
+                                                <rect key="frame" x="20" y="20" width="49" height="49"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="49" id="0A7-bi-aA8">
+                                                        <variation key="heightClass=regular-widthClass=compact" constant="55"/>
+                                                    </constraint>
+                                                    <constraint firstAttribute="width" secondItem="LzJ-oa-rGY" secondAttribute="height" multiplier="1:1" id="uiQ-pr-Hnw"/>
+                                                    <constraint firstAttribute="height" constant="29" id="wmw-pH-zJz"/>
+                                                </constraints>
+                                                <state key="normal" image="mediaButtonIcon">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="wmw-pH-zJz"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="mediaButtonTouched:" destination="KDe-mF-eVw" eventType="touchUpInside" id="ofE-SH-i6f"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="49" id="0A7-bi-aA8"/>
-                                            <constraint firstAttribute="width" secondItem="LzJ-oa-rGY" secondAttribute="height" multiplier="1:1" id="uiQ-pr-Hnw"/>
-                                            <constraint firstAttribute="height" constant="29" id="wmw-pH-zJz"/>
+                                            <constraint firstAttribute="bottom" secondItem="LzJ-oa-rGY" secondAttribute="bottom" constant="3" id="RmO-FN-7XV">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                            </constraint>
+                                            <constraint firstItem="LzJ-oa-rGY" firstAttribute="leading" secondItem="pKV-op-02v" secondAttribute="leading" constant="3" id="UHj-t9-sWe">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                            </constraint>
+                                            <constraint firstItem="LzJ-oa-rGY" firstAttribute="top" secondItem="pKV-op-02v" secondAttribute="top" constant="3" id="ai6-zj-XDs">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                            </constraint>
+                                            <constraint firstAttribute="trailing" secondItem="LzJ-oa-rGY" secondAttribute="trailing" constant="3" id="imO-Kf-lVQ">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                            </constraint>
                                         </constraints>
-                                        <state key="normal" image="mediaButtonIcon">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="wmw-pH-zJz"/>
+                                                <exclude reference="RmO-FN-7XV"/>
+                                                <exclude reference="UHj-t9-sWe"/>
+                                                <exclude reference="ai6-zj-XDs"/>
+                                                <exclude reference="imO-Kf-lVQ"/>
                                             </mask>
                                         </variation>
-                                        <connections>
-                                            <action selector="mediaButtonTouched:" destination="KDe-mF-eVw" eventType="touchUpInside" id="ofE-SH-i6f"/>
-                                        </connections>
-                                    </button>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="RmO-FN-7XV"/>
+                                                <include reference="UHj-t9-sWe"/>
+                                                <include reference="ai6-zj-XDs"/>
+                                                <include reference="imO-Kf-lVQ"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="LzJ-oa-rGY" firstAttribute="leading" secondItem="q9G-9M-9NP" secondAttribute="leading" constant="8" id="5tR-MT-YqZ"/>
-                                    <constraint firstAttribute="bottom" secondItem="LzJ-oa-rGY" secondAttribute="bottom" constant="8" id="IFP-NL-i3B"/>
+                                    <constraint firstItem="pKV-op-02v" firstAttribute="leading" secondItem="q9G-9M-9NP" secondAttribute="leading" constant="5" id="SAD-aW-qkG">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                    </constraint>
                                     <constraint firstAttribute="height" constant="100" id="r5R-i1-jEH"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="SAD-aW-qkG"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="SAD-aW-qkG"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nh-k5-MSM" userLabel="Capture button" customClass="SSORoundedAnimatedButton">
                                 <rect key="frame" x="-51" y="-46" width="77" height="77"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="3Nh-k5-MSM" secondAttribute="height" multiplier="1:1" id="iaa-DD-F95"/>
-                                    <constraint firstAttribute="height" constant="77" id="nrE-Cw-GkE"/>
+                                    <constraint firstAttribute="height" constant="77" id="nrE-Cw-GkE">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="90"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" image="captureButtonIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -203,6 +253,9 @@
                             <constraint firstAttribute="trailing" secondItem="77y-R9-8Qn" secondAttribute="trailing" id="Jyk-is-BI0"/>
                             <constraint firstAttribute="centerY" secondItem="3Nh-k5-MSM" secondAttribute="centerY" constant="-27" id="LjD-2w-Yu1"/>
                             <constraint firstItem="77y-R9-8Qn" firstAttribute="top" secondItem="ck7-Ge-pVp" secondAttribute="top" placeholder="YES" id="cZt-LQ-xfd"/>
+                            <constraint firstItem="pKV-op-02v" firstAttribute="bottom" secondItem="3Nh-k5-MSM" secondAttribute="bottom" constant="4" id="g0M-BW-9Yv">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstAttribute="centerX" secondItem="3Nh-k5-MSM" secondAttribute="centerX" id="giH-lV-OrN"/>
                             <constraint firstAttribute="trailing" secondItem="PI2-ch-fMg" secondAttribute="trailing" id="jIR-5C-Frm"/>
                             <constraint firstItem="77y-R9-8Qn" firstAttribute="top" secondItem="3Nh-k5-MSM" secondAttribute="bottom" id="k4c-nx-bvO"/>
@@ -218,6 +271,7 @@
                                 <exclude reference="LjD-2w-Yu1"/>
                                 <exclude reference="giH-lV-OrN"/>
                                 <exclude reference="uq7-3y-KZx"/>
+                                <exclude reference="g0M-BW-9Yv"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -238,6 +292,7 @@
                             <mask key="constraints">
                                 <include reference="giH-lV-OrN"/>
                                 <include reference="uq7-3y-KZx"/>
+                                <include reference="g0M-BW-9Yv"/>
                             </mask>
                         </variation>
                     </view>
@@ -245,6 +300,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="animatedCaptureButton" destination="3Nh-k5-MSM" id="Hrh-9X-wQM"/>
+                        <outlet property="assetPreviewBackgroundView" destination="pKV-op-02v" id="n5b-rJ-xi0"/>
                         <outlet property="backButton" destination="F1C-vy-mwx" id="Vg8-fp-azb"/>
                         <outlet property="bottomContainerView" destination="q9G-9M-9NP" id="hkM-Vk-PGs"/>
                         <outlet property="cameraPreviewView" destination="PI2-ch-fMg" id="nLD-mr-UKp"/>
@@ -256,14 +312,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dg9-to-G3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="729" y="182"/>
+            <point key="canvasLocation" x="883.5" y="181.5"/>
         </scene>
     </scenes>
     <resources>
-        <image name="camera" width="27" height="23"/>
+        <image name="camera" width="28" height="24"/>
         <image name="captureButtonIcon" width="67" height="67"/>
+        <image name="closeButtonIcon" width="27" height="27"/>
         <image name="flash" width="15" height="22"/>
-        <image name="ic_back" width="11" height="13"/>
         <image name="mediaButtonIcon" width="29" height="29"/>
     </resources>
 </document>

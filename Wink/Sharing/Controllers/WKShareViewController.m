@@ -74,6 +74,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     self.labelCountCharacters.text =
         [NSString stringWithFormat:@"%li %@", self.numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
     [self.shareButton setTitle:NSLocalizedString(@"shareView.shareButton", nil) forState:UIControlStateNormal];
+    self.shareButton.backgroundColor = [SSOThemeHelper firstColor];
     self.titleLabel.text = NSLocalizedString(@"shareview.title", nil);
     self.labelCountCharacters.textColor = [SSOThemeHelper firstColor];
 
@@ -122,7 +123,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     // Setup the text view
     //  self.placeholderTextView.layer.cornerRadius = 2.0f;
-    self.placeholderTextView.placeholderTextColor = [UIColor lightGreyTextColorWithAlpha:1.0f];
+    self.placeholderTextView.placeholderTextColor = [UIColor lightGrayColor];
     self.placeholderTextView.textColor = [UIColor blackColor];
     self.placeholderTextView.placeholder = NSLocalizedString(@"shareview.textview.placeholder.text", @"");
     self.placeholderTextView.fadeTime = 0.2;
@@ -209,7 +210,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                      animations:^{
                        self.shareButton.layer.borderColor = [UIColor clearColor].CGColor;
                        self.shareButton.layer.borderWidth = 0.0f;
-                       self.shareButton.backgroundColor = [UIColor purpleColorWithAlpha:1.0f];
+                       self.shareButton.backgroundColor = [SSOThemeHelper firstColor];
 
                        NSMutableAttributedString *shareButtonAttrString =
                            [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Share", @"").uppercaseString];
@@ -568,9 +569,14 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     NSNumber *numberCharactersLeft = [NSNumber numberWithInteger:(self.numberCharactersLeft.integerValue - textView.text.length)];
 
-    self.labelCountCharacters.text =
-        [NSString stringWithFormat:@"%li %@", numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
-
+    // Check if the user can still add characters. If he can't remove them
+    if (numberCharactersLeft.intValue <= 0) {
+        textView.text = [textView.text substringToIndex:[textView.text length] - abs(numberCharactersLeft.intValue)];
+        self.labelCountCharacters.text = [NSString stringWithFormat:@"0 %@", NSLocalizedString(@"shareview.characterscount", nil)];
+    } else {
+        self.labelCountCharacters.text =
+            [NSString stringWithFormat:@"%li %@", numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
+    }
     NSLog(@"textView %li", textView.text.length);
 }
 
