@@ -78,6 +78,12 @@ extern NSString *const kCameraContainerSegue;
 
 #define kScreenSize [UIScreen mainScreen].bounds.size
 
+#pragma mark - Photos
+
+extern NSInteger const kTopViewHeightConstraint;
+extern NSInteger const kConstraintOffset;
+extern NSInteger const kButtonWidthConstraint;
+
 #pragma mark - Cells
 extern NSString *const kTopPhotosNib;
 extern NSString *const kTopPhotosReusableId;

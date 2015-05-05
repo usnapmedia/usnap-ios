@@ -18,9 +18,6 @@
 
 NSInteger const kTopPhotosCellWidth = 100;
 NSInteger const kTopPhotosCellOffset = 5;
-NSInteger const kTopViewHeightConstraint = 40;
-NSInteger const kConstraintOffset = 10;
-NSInteger const kButtonWidthConstraint = 80;
 
 @interface SSOTopPhotosViewController () <SSOProviderDelegate>
 
