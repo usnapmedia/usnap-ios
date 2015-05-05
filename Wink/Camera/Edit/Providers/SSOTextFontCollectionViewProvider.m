@@ -26,7 +26,18 @@ NSString *const kFontCellReusableIdentifier = @"fontCollectionViewCellIdentifier
  */
 - (void)generateDefaultData {
     self.cellReusableIdentifier = kFontCellReusableIdentifier;
-    self.inputData = [[NSMutableArray alloc] initWithArray:@[ @{ @"font_name" : @"Arial" }, @{ @"font_name" : @"Times" }, @{ @"font_name" : @"Roboto" } ]];
+    self.inputData = [[NSMutableArray alloc] initWithArray:@[
+        @{ @"font_name" : @"Georgia" },
+        @{ @"font_name" : @"HelveticaNeue" },
+        @{ @"font_name" : @"Futura" },
+
+    ]];
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+                        layout:(UICollectionViewLayout *)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, 20, 0, 20);
 }
 
 @end

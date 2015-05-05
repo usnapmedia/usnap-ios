@@ -21,6 +21,7 @@ pod 'IQKeyboardManager'
 pod 'SZTextView'
 pod 'SDWebImage'
 pod 'SDiPhoneVersion'
+pod 'AutoScrollLabel'
 
 # Samsao libraries
 pod 'SSFacebookHelper', :git => 'git@gitlab.samsaodev.com:ios-development/ssfacebookhelper.git'

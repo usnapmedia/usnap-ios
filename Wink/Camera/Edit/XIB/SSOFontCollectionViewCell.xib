@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,33 +14,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Aa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9DY-vK-rp4" userLabel="Font example">
-                        <rect key="frame" x="0.0" y="0.0" width="50" height="35"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="Aa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9DY-vK-rp4" userLabel="Font example">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="33"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Font" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQ6-3X-4Pu" userLabel="Font name">
-                        <rect key="frame" x="0.0" y="35" width="50" height="15"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fXG-I6-ggZ" customClass="CBAutoScrollLabel">
+                        <rect key="frame" x="0.0" y="33" width="50" height="17"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="TQ6-3X-4Pu" firstAttribute="leading" secondItem="3Le-al-moZ" secondAttribute="leading" id="9AA-Ym-oWe"/>
                 <constraint firstItem="9DY-vK-rp4" firstAttribute="top" secondItem="3Le-al-moZ" secondAttribute="top" id="Eco-qZ-D7m"/>
-                <constraint firstAttribute="bottom" secondItem="TQ6-3X-4Pu" secondAttribute="bottom" id="VJJ-1b-kmL"/>
-                <constraint firstItem="TQ6-3X-4Pu" firstAttribute="top" secondItem="9DY-vK-rp4" secondAttribute="bottom" id="cIG-1o-nZT"/>
+                <constraint firstItem="fXG-I6-ggZ" firstAttribute="top" secondItem="9DY-vK-rp4" secondAttribute="bottom" id="YHH-hI-x1v"/>
+                <constraint firstItem="fXG-I6-ggZ" firstAttribute="height" secondItem="9DY-vK-rp4" secondAttribute="height" multiplier="0.5" id="bFO-us-iwk"/>
                 <constraint firstItem="9DY-vK-rp4" firstAttribute="leading" secondItem="3Le-al-moZ" secondAttribute="leading" id="dhD-9b-iee"/>
-                <constraint firstAttribute="trailing" secondItem="TQ6-3X-4Pu" secondAttribute="trailing" id="haM-1u-pkv"/>
+                <constraint firstItem="fXG-I6-ggZ" firstAttribute="leading" secondItem="3Le-al-moZ" secondAttribute="leading" id="ezt-wR-asP"/>
+                <constraint firstAttribute="bottom" secondItem="fXG-I6-ggZ" secondAttribute="bottom" id="f0G-X0-Crg"/>
+                <constraint firstAttribute="trailing" secondItem="fXG-I6-ggZ" secondAttribute="trailing" id="oqf-KX-X4I"/>
                 <constraint firstAttribute="trailing" secondItem="9DY-vK-rp4" secondAttribute="trailing" id="qHi-kJ-lMG"/>
             </constraints>
             <connections>
                 <outlet property="fontExampleLabel" destination="9DY-vK-rp4" id="mk8-QR-59i"/>
-                <outlet property="fontNameLabel" destination="TQ6-3X-4Pu" id="Kl4-Ue-aX6"/>
+                <outlet property="scrollLabel" destination="fXG-I6-ggZ" id="u3j-Qn-iXa"/>
             </connections>
             <point key="canvasLocation" x="211" y="166"/>
         </collectionViewCell>
