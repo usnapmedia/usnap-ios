@@ -97,6 +97,7 @@
     // delete password in Keychain
     [self deletePasswordForAccount:_username];
     // delete email in NSUserDefaults
+    
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kEmailLoggedString];
 
     // put user is logged to NO
