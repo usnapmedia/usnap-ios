@@ -206,13 +206,13 @@
 - (void)didLoginWithInfo:(NSDictionary *)info {
 
     // Login on the backend
-    [WKWinkConnect winkConnectLoginWithUsername:[info valueForKey:@"email"]
+    [WKWinkConnect winkConnectLoginWithUsername:[info valueForKey:@"username"]
         password:[info valueForKey:@"password"]
         meta:nil
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
           // Login the user
-          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"email"] andPassword:[info valueForKey:@"password"]];
+          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
 
           [self dismissViewControllerAnimated:YES
                                    completion:^{
@@ -236,7 +236,7 @@
 
 - (void)didRegisterWithInfo:(NSDictionary *)info andMeta:(NSDictionary *)meta {
 
-    [WKWinkConnect winkConnectRegisterWithEmail:[info valueForKey:@"email"]
+    [WKWinkConnect winkConnectRegisterWithEmail:[info valueForKey:@"username"]
         password:[info valueForKey:@"password"]
         username:[info valueForKey:@"username"]
         firstName:[info valueForKey:@"firstName"]
@@ -245,7 +245,7 @@
         meta:meta
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"email"] andPassword:[info valueForKey:@"password"]];
+          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
 
           [self dismissViewControllerAnimated:YES
                                    completion:^{

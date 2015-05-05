@@ -44,9 +44,9 @@
         NSNumber *numberOfShares = [NSNumber numberWithInt:0];
         //@FIXME numberOfShares
         if ([numberOfShares integerValue] > 1) {
-            self.numberSharesLabel.text = [NSString stringWithFormat:NSLocalizedString(@"profile-page.campaign.share-label-plural", nil), @"0"];
+            self.numberSharesLabel.text = [NSString stringWithFormat:NSLocalizedString(@"profile-page.campaign.share-label-plural", nil), numberOfShares];
         } else {
-            self.numberSharesLabel.text = [NSString stringWithFormat:NSLocalizedString(@"profile-page.campaign.share-label-singular", nil), @"0"];
+            self.numberSharesLabel.text = [NSString stringWithFormat:NSLocalizedString(@"profile-page.campaign.share-label-singular", nil), numberOfShares];
         }
     }
 }
