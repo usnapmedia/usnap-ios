@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RAe-oX-1kT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RAe-oX-1kT">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -59,9 +59,12 @@
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1C-vy-mwx">
                                         <rect key="frame" x="4" y="24" width="15" height="22"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                        <state key="normal" image="ic_arrow-left">
+                                        <state key="normal" image="closeButtonIcon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="4" y="8" width="55" height="55"/>
+                                        </variation>
                                         <connections>
                                             <action selector="backButtonTouched:" destination="KDe-mF-eVw" eventType="touchUpInside" id="sMG-fa-jJj"/>
                                         </connections>
@@ -81,7 +84,9 @@
                                     <constraint firstItem="lhy-8W-4VU" firstAttribute="height" secondItem="std-T3-Jlg" secondAttribute="height" id="09b-fb-9Ly"/>
                                     <constraint firstAttribute="centerY" secondItem="std-T3-Jlg" secondAttribute="centerY" id="EHQ-Eh-eMK"/>
                                     <constraint firstAttribute="centerY" secondItem="F1C-vy-mwx" secondAttribute="centerY" id="FAY-AU-LwQ"/>
-                                    <constraint firstItem="F1C-vy-mwx" firstAttribute="leading" secondItem="77y-R9-8Qn" secondAttribute="leading" constant="4" id="NAn-LP-C6f"/>
+                                    <constraint firstItem="F1C-vy-mwx" firstAttribute="leading" secondItem="77y-R9-8Qn" secondAttribute="leading" constant="4" id="NAn-LP-C6f">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                    </constraint>
                                     <constraint firstItem="lhy-8W-4VU" firstAttribute="width" secondItem="std-T3-Jlg" secondAttribute="width" id="OP9-47-HRK"/>
                                     <constraint firstAttribute="centerX" secondItem="lhy-8W-4VU" secondAttribute="centerX" id="V91-lx-UMw"/>
                                     <constraint firstAttribute="centerX" secondItem="lhy-8W-4VU" secondAttribute="centerX" id="Zn7-DI-A8c"/>
@@ -145,10 +150,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9G-9M-9NP" userLabel="Bottom View">
                                 <rect key="frame" x="0.0" y="468" width="320" height="100"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKV-op-02v" userLabel="Preview backgroundView">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKV-op-02v" userLabel="Preview backgroundView">
                                         <rect key="frame" x="-12" y="23" width="89" height="89"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LzJ-oa-rGY">
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LzJ-oa-rGY">
                                                 <rect key="frame" x="20" y="20" width="49" height="49"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="49" id="0A7-bi-aA8">
@@ -232,9 +237,6 @@
                                 <state key="normal" image="captureButtonIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="115" y="463" width="90" height="90"/>
-                                </variation>
                                 <connections>
                                     <action selector="captureButtonPushed:" destination="KDe-mF-eVw" eventType="touchUpInside" id="xzt-Fo-uAG"/>
                                     <action selector="captureButtonTouchedDown:" destination="KDe-mF-eVw" eventType="touchDown" id="kr3-OS-KoS"/>
@@ -265,11 +267,11 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="k4c-nx-bvO"/>
-                                <exclude reference="g0M-BW-9Yv"/>
                                 <exclude reference="EBs-Us-X8r"/>
                                 <exclude reference="LjD-2w-Yu1"/>
                                 <exclude reference="giH-lV-OrN"/>
                                 <exclude reference="uq7-3y-KZx"/>
+                                <exclude reference="g0M-BW-9Yv"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -288,9 +290,9 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="g0M-BW-9Yv"/>
                                 <include reference="giH-lV-OrN"/>
                                 <include reference="uq7-3y-KZx"/>
+                                <include reference="g0M-BW-9Yv"/>
                             </mask>
                         </variation>
                     </view>
@@ -316,8 +318,8 @@
     <resources>
         <image name="camera" width="28" height="24"/>
         <image name="captureButtonIcon" width="67" height="67"/>
+        <image name="closeButtonIcon" width="27" height="27"/>
         <image name="flash" width="15" height="22"/>
-        <image name="ic_arrow-left" width="12" height="21"/>
         <image name="mediaButtonIcon" width="29" height="29"/>
     </resources>
 </document>

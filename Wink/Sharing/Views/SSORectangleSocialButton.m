@@ -24,7 +24,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
 
     if (self = [super initWithCoder:aDecoder]) {
-        self.layer.cornerRadius = 4.0;
+        self.layer.cornerRadius = 2.0;
     }
     return self;
 }
