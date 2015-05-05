@@ -7,7 +7,6 @@
 //
 
 #import "SSOCameraViewController.h"
-#import "WKSettingsViewController.h"
 #import "WKNavigationController.h"
 #import "WKEditMediaViewController.h"
 #import "SSORoundedAnimatedButton.h"

@@ -48,10 +48,6 @@
 		335723D31ACB097C000CC846 /* WKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723831ACB097C000CC846 /* WKNavigationController.m */; };
 		335723D61ACB097C000CC846 /* WKVideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723891ACB097C000CC846 /* WKVideoEditor.m */; };
 		335723D71ACB097C000CC846 /* WKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3357238B1ACB097C000CC846 /* WKViewController.m */; };
-		335723D91ACB097C000CC846 /* WKSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723911ACB097C000CC846 /* WKSettingsViewController.m */; };
-		335723DA1ACB097C000CC846 /* WKSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 335723921ACB097C000CC846 /* WKSettingsViewController.xib */; };
-		335723DB1ACB097C000CC846 /* SettingsSocialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 335723951ACB097C000CC846 /* SettingsSocialCell.xib */; };
-		335723DC1ACB097C000CC846 /* SettingsSocialFakeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 335723961ACB097C000CC846 /* SettingsSocialFakeCell.xib */; };
 		335723DD1ACB097C000CC846 /* WKShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3357239A1ACB097C000CC846 /* WKShareViewController.m */; };
 		335723DE1ACB097C000CC846 /* WKShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3357239B1ACB097C000CC846 /* WKShareViewController.xib */; };
 		335723E01ACB097C000CC846 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3357239F1ACB097C000CC846 /* Constants.m */; };
@@ -185,6 +181,8 @@
 		FB0F335D1AF2A3F100F6C735 /* SSOSnapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0F335B1AF2A3F100F6C735 /* SSOSnapViewController.m */; };
 		FB0F335E1AF2A3F100F6C735 /* SSOSnapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0F335C1AF2A3F100F6C735 /* SSOSnapViewController.xib */; };
 		FB0F33611AF2B68B00F6C735 /* SSOPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0F33601AF2B68B00F6C735 /* SSOPhotosViewController.m */; };
+		FBBC950E1AF9238000203E48 /* SSOSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC950C1AF9238000203E48 /* SSOSettingsViewController.m */; };
+		FBBC950F1AF9238000203E48 /* SSOSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBC950D1AF9238000203E48 /* SSOSettingsViewController.xib */; };
 		FBF9D1CB1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF9D1C91AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.m */; };
 		FBF9D1CC1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBF9D1CA1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -262,11 +260,6 @@
 		335723891ACB097C000CC846 /* WKVideoEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKVideoEditor.m; sourceTree = "<group>"; };
 		3357238A1ACB097C000CC846 /* WKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKViewController.h; sourceTree = "<group>"; };
 		3357238B1ACB097C000CC846 /* WKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKViewController.m; sourceTree = "<group>"; };
-		335723901ACB097C000CC846 /* WKSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKSettingsViewController.h; sourceTree = "<group>"; };
-		335723911ACB097C000CC846 /* WKSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSettingsViewController.m; sourceTree = "<group>"; };
-		335723921ACB097C000CC846 /* WKSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKSettingsViewController.xib; sourceTree = "<group>"; };
-		335723951ACB097C000CC846 /* SettingsSocialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsSocialCell.xib; sourceTree = "<group>"; };
-		335723961ACB097C000CC846 /* SettingsSocialFakeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsSocialFakeCell.xib; sourceTree = "<group>"; };
 		335723991ACB097C000CC846 /* WKShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKShareViewController.h; sourceTree = "<group>"; };
 		3357239A1ACB097C000CC846 /* WKShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKShareViewController.m; sourceTree = "<group>"; };
 		3357239B1ACB097C000CC846 /* WKShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WKShareViewController.xib; sourceTree = "<group>"; };
@@ -498,6 +491,9 @@
 		FB0F335C1AF2A3F100F6C735 /* SSOSnapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOSnapViewController.xib; sourceTree = "<group>"; };
 		FB0F335F1AF2B68B00F6C735 /* SSOPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOPhotosViewController.h; sourceTree = "<group>"; };
 		FB0F33601AF2B68B00F6C735 /* SSOPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOPhotosViewController.m; sourceTree = "<group>"; };
+		FBBC950B1AF9238000203E48 /* SSOSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSettingsViewController.h; sourceTree = "<group>"; };
+		FBBC950C1AF9238000203E48 /* SSOSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSettingsViewController.m; sourceTree = "<group>"; };
+		FBBC950D1AF9238000203E48 /* SSOSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOSettingsViewController.xib; sourceTree = "<group>"; };
 		FBF9D1C81AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOPhotosCollectionViewCell.h; sourceTree = "<group>"; };
 		FBF9D1C91AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOPhotosCollectionViewCell.m; sourceTree = "<group>"; };
 		FBF9D1CA1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOPhotosCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -756,8 +752,6 @@
 			isa = PBXGroup;
 			children = (
 				3357238F1ACB097C000CC846 /* Controllers */,
-				335723921ACB097C000CC846 /* WKSettingsViewController.xib */,
-				335723931ACB097C000CC846 /* XIB */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -765,27 +759,11 @@
 		3357238F1ACB097C000CC846 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				335723901ACB097C000CC846 /* WKSettingsViewController.h */,
-				335723911ACB097C000CC846 /* WKSettingsViewController.m */,
+				FBBC950B1AF9238000203E48 /* SSOSettingsViewController.h */,
+				FBBC950C1AF9238000203E48 /* SSOSettingsViewController.m */,
+				FBBC950D1AF9238000203E48 /* SSOSettingsViewController.xib */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		335723931ACB097C000CC846 /* XIB */ = {
-			isa = PBXGroup;
-			children = (
-				335723941ACB097C000CC846 /* TableView Cells */,
-			);
-			path = XIB;
-			sourceTree = "<group>";
-		};
-		335723941ACB097C000CC846 /* TableView Cells */ = {
-			isa = PBXGroup;
-			children = (
-				335723951ACB097C000CC846 /* SettingsSocialCell.xib */,
-				335723961ACB097C000CC846 /* SettingsSocialFakeCell.xib */,
-			);
-			path = "TableView Cells";
 			sourceTree = "<group>";
 		};
 		335723971ACB097C000CC846 /* Sharing */ = {
@@ -1556,6 +1534,7 @@
 			files = (
 				3303DDCE1AD83E42002B74F9 /* SSORegisterContainerView.xib in Resources */,
 				335C7FF51AF40687005C2B2E /* GothaHTFBooIta in Resources */,
+				FBBC950F1AF9238000203E48 /* SSOSettingsViewController.xib in Resources */,
 				3398420D1AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.xib in Resources */,
 				335C7FFE1AF40687005C2B2E /* GothaHTFUlt in Resources */,
 				D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */,
@@ -1563,12 +1542,10 @@
 				335C7FFF1AF40687005C2B2E /* GothaHTFUltIta in Resources */,
 				D85B353A1AF29F640011B26D /* SSOPhotoDetailViewController.xib in Resources */,
 				335C7FFD1AF40687005C2B2E /* GothaHTFThiIta in Resources */,
-				335723DB1ACB097C000CC846 /* SettingsSocialCell.xib in Resources */,
 				D8D4F1811AE04B12002FDE38 /* Launch Screen.xib in Resources */,
 				D810B8EE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
 				335C7FF01AF40687005C2B2E /* GothaHTFBol in Resources */,
 				D810B8EF1ADF506500B3AC11 /* SSOColorPickerContainerView.xib in Resources */,
-				335723DC1ACB097C000CC846 /* SettingsSocialFakeCell.xib in Resources */,
 				D898E1D61AF1622500C957DC /* SSOProfileViewController.xib in Resources */,
 				335C7FF71AF40687005C2B2E /* GothaHTFLigCon in Resources */,
 				D8C83EA31AE1C74C00F187F1 /* InfoPlist.strings in Resources */,
@@ -1577,7 +1554,6 @@
 				335C7FF41AF40687005C2B2E /* GothaHTFBooCon in Resources */,
 				335C7FCF1AF3EB43005C2B2E /* GothamHTF.ttf in Resources */,
 				FB0F335E1AF2A3F100F6C735 /* SSOSnapViewController.xib in Resources */,
-				335723DA1ACB097C000CC846 /* WKSettingsViewController.xib in Resources */,
 				335723B31ACB097C000CC846 /* Camera.storyboard in Resources */,
 				335C7FF31AF40687005C2B2E /* GothaHTFBoo in Resources */,
 				D810B8F01ADF506500B3AC11 /* SSODrawAccessoryContainerView.xib in Resources */,
@@ -1782,6 +1758,7 @@
 				332E0A511AEE85AC00F77969 /* SSOTextFieldWithUnderline.m in Sources */,
 				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
 				D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */,
+				FBBC950E1AF9238000203E48 /* SSOSettingsViewController.m in Sources */,
 				D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */,
 				339841F21AEACC8600605C67 /* SSOCampaignTopViewControllerContainer.m in Sources */,
 				D810B8E01ADF506500B3AC11 /* SSOAccessoryContainerView.m in Sources */,
@@ -1790,7 +1767,6 @@
 				339841D91AEAB41000605C67 /* SSOCountableItems.m in Sources */,
 				D810B8D01ADF506500B3AC11 /* SSOTextFontCollectionViewProvider.m in Sources */,
 				D810B8E61ADF506500B3AC11 /* SSODrawAccessoryContainerView.m in Sources */,
-				335723D91ACB097C000CC846 /* WKSettingsViewController.m in Sources */,
 				3316F2D31ADD6D9F00C7ED24 /* SSSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
