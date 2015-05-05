@@ -74,6 +74,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     self.labelCountCharacters.text =
         [NSString stringWithFormat:@"%li %@", self.numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
     [self.shareButton setTitle:NSLocalizedString(@"shareView.shareButton", nil) forState:UIControlStateNormal];
+    self.shareButton.backgroundColor = [SSOThemeHelper firstColor];
     self.titleLabel.text = NSLocalizedString(@"shareview.title", nil);
     self.labelCountCharacters.textColor = [SSOThemeHelper firstColor];
 
@@ -209,7 +210,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                      animations:^{
                        self.shareButton.layer.borderColor = [UIColor clearColor].CGColor;
                        self.shareButton.layer.borderWidth = 0.0f;
-                       self.shareButton.backgroundColor = [UIColor purpleColorWithAlpha:1.0f];
+                       self.shareButton.backgroundColor = [SSOThemeHelper firstColor];
 
                        NSMutableAttributedString *shareButtonAttrString =
                            [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Share", @"").uppercaseString];
