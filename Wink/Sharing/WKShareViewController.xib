@@ -66,7 +66,9 @@
                         <constraint firstAttribute="height" constant="44" id="cCc-zM-Lja"/>
                         <constraint firstAttribute="centerX" secondItem="z9Z-nP-IfW" secondAttribute="centerX" id="nwz-cu-ZCM"/>
                         <constraint firstAttribute="centerY" secondItem="z9Z-nP-IfW" secondAttribute="centerY" id="tcf-ug-eY8"/>
-                        <constraint firstItem="guN-2m-LW0" firstAttribute="leading" secondItem="n45-rl-Wk4" secondAttribute="leading" constant="15" id="x3U-An-Rc6"/>
+                        <constraint firstItem="guN-2m-LW0" firstAttribute="leading" secondItem="n45-rl-Wk4" secondAttribute="leading" constant="15" id="x3U-An-Rc6">
+                            <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                        </constraint>
                     </constraints>
                     <variation key="default">
                         <mask key="subviews">
