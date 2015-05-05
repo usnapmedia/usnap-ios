@@ -18,7 +18,7 @@
 @interface SSOCampaignTopViewControllerContainer () <SSOCampaignProviderDelegate>
 
 @property(strong, nonatomic) UICollectionView *tabCollectionView;
-@property(strong, nonatomic) SSOSimpleCollectionViewProvider *provider;
+@property(strong, nonatomic) SSOCampaignProvider *provider;
 @property(nonatomic, strong) NSArray *arrayOfCampaigns;
 
 @end
@@ -69,6 +69,8 @@
     self.tabCollectionView.collectionViewLayout = flowLayout;
     // Initialize the view
     self.tabCollectionView.showsHorizontalScrollIndicator = NO;
+    // Remove bounce, else it creates problem with the willDisplayCell loading a cell it should not.
+    self.tabCollectionView.bounces = NO;
 
     // Init the provider with collectionViews and data
     self.provider = [[SSOCampaignProvider alloc] initWithTabCollectionView:self.tabCollectionView andInputData:self.arrayOfCampaigns.mutableCopy];

@@ -15,6 +15,8 @@
 @end
 
 @implementation SSOCampaignProvider
+// Delegate is redefined
+@dynamic delegate;
 
 - (instancetype)initWithTabCollectionView:(UICollectionView *)tabCollectionView
 
@@ -34,8 +36,8 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
-                    layout:(UICollectionViewLayout *)collectionViewLayout
-    sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return collectionView.frame.size;
 }
 
