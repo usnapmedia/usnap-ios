@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
@@ -10,8 +11,8 @@
             <rect key="frame" x="0.0" y="1" width="437" height="55"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xlw-mB-sRD" customClass="SSOButtonWithPoint">
-                    <rect key="frame" x="97" y="0.0" width="30" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xlw-mB-sRD" customClass="SSOButtonWithPoint">
+                    <rect key="frame" x="81" y="0.0" width="36" height="45"/>
                     <state key="normal" title="5 pt">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -20,16 +21,16 @@
                         <action selector="firstPointSizeButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="E4G-ay-nmv"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zW2-5u-vlr" userLabel="5 pt view">
-                    <rect key="frame" x="110" y="10" width="5" height="5"/>
-                    <color key="backgroundColor" red="0.02296040048" green="1" blue="0.24961644299999999" alpha="1" colorSpace="calibratedRGB"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zW2-5u-vlr" userLabel="5 pt view">
+                    <rect key="frame" x="97" y="10" width="5" height="5"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="5" id="XRk-H5-bky"/>
                         <constraint firstAttribute="width" constant="5" id="nRJ-Iw-Mhn"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTG-5H-ZAe" customClass="SSOButtonWithPoint">
-                    <rect key="frame" x="177" y="0.0" width="36" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTG-5H-ZAe" customClass="SSOButtonWithPoint">
+                    <rect key="frame" x="147" y="0.0" width="36" height="45"/>
                     <state key="normal" title="10 pt">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -38,16 +39,16 @@
                         <action selector="secondPointSizeButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="nob-AO-OHg"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Vf-m3-rrS" userLabel="10 pt view">
-                    <rect key="frame" x="190" y="8" width="10" height="10"/>
-                    <color key="backgroundColor" red="0.02296040048" green="1" blue="0.24961644299999999" alpha="1" colorSpace="calibratedRGB"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Vf-m3-rrS" userLabel="10 pt view">
+                    <rect key="frame" x="160" y="8" width="10" height="10"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="gXO-La-Bj2"/>
                         <constraint firstAttribute="width" constant="10" id="rkY-vP-1Un"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9db-gr-cqZ" customClass="SSOButtonWithPoint">
-                    <rect key="frame" x="263" y="0.0" width="36" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9db-gr-cqZ" customClass="SSOButtonWithPoint">
+                    <rect key="frame" x="213" y="0.0" width="36" height="45"/>
                     <state key="normal" title="15 pt">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -56,16 +57,16 @@
                         <action selector="thridPointSizeButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="yuK-t2-mxl"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lfu-9K-263" userLabel="15 pt view">
-                    <rect key="frame" x="274" y="5" width="15" height="15"/>
-                    <color key="backgroundColor" red="0.02296040048" green="1" blue="0.24961644299999999" alpha="1" colorSpace="calibratedRGB"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lfu-9K-263" userLabel="15 pt view">
+                    <rect key="frame" x="224" y="5" width="15" height="15"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="15" id="0NE-8Z-HFA"/>
                         <constraint firstAttribute="height" constant="15" id="qUt-jW-6M3"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VaV-n4-oqZ">
-                    <rect key="frame" x="20" y="13" width="37" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="753" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VaV-n4-oqZ">
+                    <rect key="frame" x="20" y="11" width="41" height="33"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Done">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -80,7 +81,7 @@
             <constraints>
                 <constraint firstItem="5Vf-m3-rrS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="09Q-md-tsz"/>
                 <constraint firstItem="VaV-n4-oqZ" firstAttribute="centerY" secondItem="Xlw-mB-sRD" secondAttribute="centerY" id="1KL-po-UHf"/>
-                <constraint firstItem="CTG-5H-ZAe" firstAttribute="leading" secondItem="Xlw-mB-sRD" secondAttribute="trailing" constant="50" id="68c-Uw-1ax"/>
+                <constraint firstItem="CTG-5H-ZAe" firstAttribute="leading" secondItem="Xlw-mB-sRD" secondAttribute="trailing" constant="30" id="68c-Uw-1ax"/>
                 <constraint firstItem="VaV-n4-oqZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="6OJ-j2-zWG"/>
                 <constraint firstItem="CTG-5H-ZAe" firstAttribute="centerY" secondItem="VaV-n4-oqZ" secondAttribute="centerY" id="7GQ-ml-xVw"/>
                 <constraint firstAttribute="bottom" secondItem="9db-gr-cqZ" secondAttribute="bottom" constant="10" id="By7-9s-hrP"/>
@@ -90,16 +91,18 @@
                 <constraint firstItem="9db-gr-cqZ" firstAttribute="centerY" secondItem="VaV-n4-oqZ" secondAttribute="centerY" id="M3s-CS-Bqb"/>
                 <constraint firstItem="9db-gr-cqZ" firstAttribute="centerX" secondItem="lfu-9K-263" secondAttribute="centerX" id="MZt-zF-Qa7"/>
                 <constraint firstItem="CTG-5H-ZAe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NEf-6K-iQ8"/>
+                <constraint firstItem="CTG-5H-ZAe" firstAttribute="width" secondItem="Xlw-mB-sRD" secondAttribute="width" id="UlS-hs-EwY"/>
                 <constraint firstItem="5Vf-m3-rrS" firstAttribute="centerY" secondItem="lfu-9K-263" secondAttribute="centerY" id="WNo-MM-TnZ"/>
                 <constraint firstItem="lfu-9K-263" firstAttribute="top" secondItem="5Vf-m3-rrS" secondAttribute="bottom" id="XOx-MT-Sez"/>
                 <constraint firstAttribute="centerY" secondItem="VaV-n4-oqZ" secondAttribute="centerY" id="b47-2x-tge"/>
                 <constraint firstAttribute="bottom" secondItem="Xlw-mB-sRD" secondAttribute="bottom" constant="10" id="bjN-ZA-ygb"/>
                 <constraint firstItem="9db-gr-cqZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gC1-B8-qk9"/>
-                <constraint firstItem="9db-gr-cqZ" firstAttribute="leading" secondItem="CTG-5H-ZAe" secondAttribute="trailing" constant="50" id="gG4-zv-XVj"/>
+                <constraint firstItem="9db-gr-cqZ" firstAttribute="leading" secondItem="CTG-5H-ZAe" secondAttribute="trailing" constant="30" id="gG4-zv-XVj"/>
+                <constraint firstItem="CTG-5H-ZAe" firstAttribute="width" secondItem="9db-gr-cqZ" secondAttribute="width" id="iMz-nC-pBT"/>
                 <constraint firstAttribute="bottom" secondItem="CTG-5H-ZAe" secondAttribute="bottom" constant="10" id="maI-iX-GNj"/>
                 <constraint firstItem="zW2-5u-vlr" firstAttribute="centerY" secondItem="lfu-9K-263" secondAttribute="centerY" id="oxR-7s-cyj"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9db-gr-cqZ" secondAttribute="trailing" constant="20" symbolic="YES" id="rVB-f9-T5g"/>
-                <constraint firstItem="Xlw-mB-sRD" firstAttribute="leading" secondItem="VaV-n4-oqZ" secondAttribute="trailing" constant="40" id="sYh-uq-Wgw"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9db-gr-cqZ" secondAttribute="trailing" constant="55" id="rVB-f9-T5g"/>
+                <constraint firstItem="Xlw-mB-sRD" firstAttribute="leading" secondItem="VaV-n4-oqZ" secondAttribute="trailing" constant="20" id="sYh-uq-Wgw"/>
                 <constraint firstItem="5Vf-m3-rrS" firstAttribute="centerX" secondItem="CTG-5H-ZAe" secondAttribute="centerX" id="tjd-5Y-dBO"/>
                 <constraint firstItem="lfu-9K-263" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="yGF-o7-nzL"/>
             </constraints>
@@ -119,7 +122,7 @@
                 <outlet property="viewFivePoints" destination="zW2-5u-vlr" id="F45-iM-mLz"/>
                 <outlet property="viewTenPoints" destination="5Vf-m3-rrS" id="xod-WR-5CU"/>
             </connections>
-            <point key="canvasLocation" x="-373.5" y="-441.5"/>
+            <point key="canvasLocation" x="-431.5" y="-166.5"/>
         </view>
     </objects>
 </document>
