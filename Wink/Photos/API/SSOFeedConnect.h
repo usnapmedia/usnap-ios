@@ -11,8 +11,6 @@
 
 @interface SSOFeedConnect : NSObject
 
-//@FIXME We need to adjust this to get the photos per campaign
-
 /**
  *  Get the latest live feed photos
  *
@@ -20,7 +18,7 @@
  *  @param failure failure block
  */
 + (void)getRecentPhotosWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 /**
  *  Get the top photos
  *
@@ -38,5 +36,26 @@
  */
 + (void)getMyFeedWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
+ *  Get the latest live feed photos
+ *
+ *  @param campaignID   the id of the campaign
+ *  @param success success block
+ *  @param failure failure block
+ */
++ (void)getRecentPhotosForCampaignId:(NSString *)campaignID
+                         withSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+/**
+ *  Get the top photos
+ *
+ *  @param campaignID   the id of the campaign
+ *  @param success success block
+ *  @param failure failure block
+ */
++ (void)getTopPhotosForCampaignId:(NSString *)campaignID
+                      withSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

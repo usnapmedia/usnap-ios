@@ -90,6 +90,12 @@
     self.accessoryContainerView.fontCollectionView.dataSource = self.provider;
     self.provider.delegate = self;
     // Register the XIB
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.accessoryContainerView.fontCollectionView.scrollEnabled = YES;
+
+    self.accessoryContainerView.fontCollectionView.collectionViewLayout = layout;
     [self.accessoryContainerView.fontCollectionView registerNib:[UINib nibWithNibName:@"SSOFontCollectionViewCell" bundle:nil]
                                      forCellWithReuseIdentifier:@"fontCollectionViewCellIdentifier"];
 
@@ -227,7 +233,7 @@
 
 #pragma mark - SSOBaseProviderDelegate
 
-- (void)provider:(id)provider didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSAssert([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[NSDictionary class]], @"Object data has to be of NSDictionary class");
     NSDictionary *objectData = (NSDictionary *)[self.provider.inputData objectAtIndex:indexPath.row];
     NSAssert([objectData objectForKey:@"font_name"], @"Object data must have the font name at the key font_name");

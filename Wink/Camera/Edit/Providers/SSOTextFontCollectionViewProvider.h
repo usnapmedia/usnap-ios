@@ -10,6 +10,8 @@
 
 @interface SSOTextFontCollectionViewProvider : SSOSimpleCollectionViewProvider
 
+@property(nonatomic) CGRect collectionViewFrame;
+
 /**
 *  Initialize the provider with the default data
 *

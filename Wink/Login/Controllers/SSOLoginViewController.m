@@ -245,7 +245,7 @@
         meta:meta
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"email"] andPassword:[info valueForKey:@"password"]];
+          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
 
           [self dismissViewControllerAnimated:YES
                                    completion:^{
