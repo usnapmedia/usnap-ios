@@ -125,7 +125,7 @@
 - (void)initializeData {
 
     self.cameraCaptureHelper = [[SSOCameraCaptureHelper alloc] initWithPreviewView:self.cameraPreviewView
-                                                                    andOrientation:[UIDevice currentDevice].orientation
+                                                                    andOrientation:UIDeviceOrientationPortrait
                                                                 withDevicePosition:self.devicePosition
                                                                     withFlashState:self.flashState];
     self.cameraCaptureHelper.delegate = self;
