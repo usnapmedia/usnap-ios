@@ -182,6 +182,11 @@ CGFloat const kTabBarOpacity = 0.90;
 
 #pragma mark - Action
 
+/**
+ *  Loop through buttons in the tabBar. When we select one we want the others to be unselected
+ *
+ *  @param toButton <#toButton description#>
+ */
 - (void)unselectedButtonsTabBarWithSender:(UIButton *)toButton {
 
     for (UIButton *button in self.customTabBar.subviews) {
@@ -202,7 +207,6 @@ CGFloat const kTabBarOpacity = 0.90;
     UIButton *button = (UIButton *)sender;
     [self unselectedButtonsTabBarWithSender:button];
     button.selected = !button.isSelected;
-
 }
 
 /**
@@ -214,10 +218,9 @@ CGFloat const kTabBarOpacity = 0.90;
     UINavigationController *cameraNavigationController = [[UIStoryboard cameraStoryboard] instantiateInitialViewController];
     [self presentViewController:cameraNavigationController animated:YES completion:nil];
 
-    UIButton *button = (UIButton *)sender;
-    [self unselectedButtonsTabBarWithSender:button];
-    button.selected = !button.isSelected;
-
+    //  UIButton *button = (UIButton *)sender;
+    // [self unselectedButtonsTabBarWithSender:button];
+    //  button.selected = !button.isSelected;
 }
 /**
  *  When the profile button is pressed, simply switch the view
