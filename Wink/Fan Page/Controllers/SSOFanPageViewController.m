@@ -19,13 +19,22 @@
 
 @interface SSOFanPageViewController () <TopContainerFanPageDelegate>
 
+/**
+ *  Container controller
+ */
 @property(strong, nonatomic) SSOCampaignTopViewControllerContainer *campaingTopVCContainer;
 @property(strong, nonatomic) SSOTopPhotosViewController *topPhotosVC;
 @property(strong, nonatomic) SSORecentPhotosViewController *recentPhotosVC;
+
+/**
+ *  IBOutlets
+ */
 @property(weak, nonatomic) IBOutlet UIView *campaignViewControllerContainer;
 @property(weak, nonatomic) IBOutlet UIView *topPhotosViewControllerContainer;
 @property(weak, nonatomic) IBOutlet UIView *recentPhotosViewControllerContainer;
 @property(weak, nonatomic) IBOutlet UIView *customNavigationBar;
+
+@property(strong, nonatomic) SSOCampaign *currentCampaign;
 
 @end
 
@@ -138,13 +147,15 @@
     // Display loading UI
     [self.topPhotosVC displayLoadingOverlay];
 
-    [SSOFeedConnect getTopPhotosWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
-      [self.topPhotosVC setData:items.response withCellNib:kTopPhotosNib andCellReusableIdentifier:kTopPhotosReusableId];
-      // Hide the loading overlay
-      [self.topPhotosVC hideLoadingOverlay];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-    }];
+    [SSOFeedConnect getTopPhotosForCampaignId:self.currentCampaign.id
+        withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+          SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
+          [self.topPhotosVC setData:items.response withCellNib:kTopPhotosNib andCellReusableIdentifier:kTopPhotosReusableId];
+          // Hide the loading overlay
+          [self.topPhotosVC hideLoadingOverlay];
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        }];
 }
 
 /**
@@ -154,14 +165,16 @@
     // Display loading UI
     [self.recentPhotosVC displayLoadingOverlay];
 
-    [SSOFeedConnect getRecentPhotosWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-      // Set the recent photos
-      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
-      [self.recentPhotosVC setInputData:items.response.mutableCopy];
-      // Hide the loading overlay
-      [self.recentPhotosVC hideLoadingOverlay];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-    }];
+    [SSOFeedConnect getRecentPhotosForCampaignId:self.currentCampaign.id
+        withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+          // Set the recent photos
+          SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
+          [self.recentPhotosVC setInputData:items.response.mutableCopy];
+          // Hide the loading overlay
+          [self.recentPhotosVC hideLoadingOverlay];
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        }];
 }
 
 #pragma mark - TopContainerFanPageDelegate
@@ -172,8 +185,10 @@
  *  @param newCampaign the new campaign displayed
  */
 - (void)topViewControllerDidChangeForNewCampaign:(SSOCampaign *)newCampaign {
-
-    NSLog(@" the new campaign is : %@", newCampaign);
+    self.currentCampaign = newCampaign;
+    // Load new photos
+    [self loadTopPhotos];
+    [self loadRecentPhotos];
 }
 
 @end
