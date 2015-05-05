@@ -79,7 +79,8 @@
                                 <constraint firstAttribute="height" constant="47" id="EQw-ae-9TZ"/>
                                 <constraint firstAttribute="width" constant="47" id="dpN-x4-8HL"/>
                             </constraints>
-                            <state key="normal" image="ic_arrow-left">
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <state key="normal" title="X">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -202,7 +203,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_arrow-left" width="12" height="21"/>
         <image name="ic_arrow-right" width="12" height="21"/>
         <image name="wink_watermark" width="101" height="78"/>
     </resources>
