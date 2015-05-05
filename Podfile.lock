@@ -21,6 +21,7 @@ PODS:
   - AFNetworking/UIKit (2.5.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - AutoScrollLabel (0.4.1)
   - Bolts (1.1.5):
     - Bolts/AppLinks (= 1.1.5)
     - Bolts/Tasks (= 1.1.5)
@@ -70,6 +71,7 @@ PODS:
 DEPENDENCIES:
   - ACEDrawingView
   - AFNetworking
+  - AutoScrollLabel
   - CWStatusBarNotification
   - Facebook-iOS-SDK
   - GoogleAnalytics-iOS-SDK
@@ -105,6 +107,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   ACEDrawingView: c16c424ab5cdafeb0952bd39b808007a69a960bd
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
+  AutoScrollLabel: afe272014f82c707c9203f1383f3fe4e32443fa2
   Bolts: aac24961496d504aa56fc267cde95162a71bac39
   CWStatusBarNotification: 24ea6215e9b4a0cea66f8377fb0130f313e0b3d4
   Facebook-iOS-SDK: 6d05532c97e9c542f8d87f94b7f6ee217493d00b
