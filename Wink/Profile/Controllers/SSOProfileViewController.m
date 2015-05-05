@@ -97,7 +97,11 @@
 - (void)setTexts {
 
     self.scoreLabel.text = NSLocalizedString(@"profile-page.campaign.score-label", nil);
-    self.sharesLabel.text = NSLocalizedString(@"profile-page.campaign.share-label", nil);
+    if (self.numberSharesLabel.text.integerValue == 0) {
+        self.sharesLabel.text = NSLocalizedString(@"profile-page.campaign.share-label", nil);
+    } else {
+        self.sharesLabel.text = NSLocalizedString(@"profile-page.campaign.share-label-plural", nil);
+    }
 
     [self.myFeedButton setTitle:NSLocalizedString(@"profile.myfeed-button", nil) forState:UIControlStateNormal];
     [self.contestsButton setTitle:NSLocalizedString(@"profile.contests-button", nil) forState:UIControlStateNormal];
