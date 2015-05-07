@@ -28,8 +28,6 @@
 - (void)awakeFromNib {
     //[self setupViewForAnimation];
     self.loginButton.layer.cornerRadius = 4;
-
-    self.bottomViewHeightConstraint.constant = [SSOScreenSizeHelper heightForRegisterBottomView].floatValue;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
