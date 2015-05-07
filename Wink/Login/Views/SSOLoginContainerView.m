@@ -119,7 +119,7 @@
     if (!_infoDic) {
         _infoDic = [[NSDictionary alloc] init];
     }
-    _infoDic = @{ @"email" : _textFieldEmail.text, @"password" : _textFieldPassword.text };
+    _infoDic = @{ @"username" : _textFieldEmail.text, @"password" : _textFieldPassword.text };
 
     return _infoDic;
 }
