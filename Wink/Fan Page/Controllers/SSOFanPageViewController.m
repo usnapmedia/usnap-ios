@@ -16,6 +16,7 @@
 #import "SSORecentPhotosViewController.h"
 #import "SSOFeedConnect.h"
 #import "SSOThemeHelper.h"
+#import "SSOScreenSizeHelper.h"
 #import <Masonry.h>
 
 @interface SSOFanPageViewController () <TopContainerFanPageDelegate>
@@ -51,13 +52,14 @@
     [self initializeRecentPhotosController];
 
     // Do any additional setup after loading the view.
+    // Load the campaigns
+    [self loadCampaigns];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
     // Load the data
-    [self loadCampaigns];
     [self loadTopPhotos];
     [self loadRecentPhotos];
 }
@@ -75,6 +77,11 @@
 }
 
 - (void)initializeCampaignTopViewControllerWithCampaigns:(NSArray *)campaigns {
+    // Set the height of
+    [self.campaignViewControllerContainer mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.height.equalTo([NSNumber numberWithFloat:[SSOScreenSizeHelper campaignViewControllerHeightConstraint]]);
+    }];
+
     // Set child VC
     SSOCampaignTopViewControllerContainer *containerVC = [[SSOCampaignTopViewControllerContainer alloc] initWithArrayOfCampaigns:campaigns];
     containerVC.delegate = self;
