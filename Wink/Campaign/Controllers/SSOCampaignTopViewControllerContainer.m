@@ -110,10 +110,13 @@
  */
 
 - (void)providerWillEndDragging:(id)provider scrollView:(UIScrollView *)scrollView targetContentOffset:(inout CGPoint *)targetContentOffset {
+    // Checks if the it's the collectionView who is scrolling
     if ([scrollView isKindOfClass:[UICollectionView class]]) {
         UICollectionView *collectionView = (UICollectionView *)scrollView;
         float width = collectionView.frame.size.width;
+        // Calculate if the target content offset is bigger than the width of the cell
         int item = round(targetContentOffset->x / width);
+        // Checks if the collectionView will display a different cell. This is to avoid to reload the data for the same cell
         if (self.index != item) {
             [self.delegate topViewControllerDidChangeForNewCampaign:[self.arrayOfCampaigns objectAtIndex:item]];
             self.index = item;
