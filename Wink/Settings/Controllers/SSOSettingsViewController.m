@@ -24,7 +24,7 @@
 @property(weak, nonatomic) IBOutlet UIView *socialTopBarView;
 @property(weak, nonatomic) IBOutlet SSORectangleSocialButton *twitterButton;
 @property(weak, nonatomic) IBOutlet SSORectangleSocialButton *facebookButton;
-@property (weak, nonatomic) IBOutlet SSORectangleSocialButton *googleButton;
+@property(weak, nonatomic) IBOutlet SSORectangleSocialButton *googleButton;
 @property(weak, nonatomic) IBOutlet UIView *supportTopBarView;
 @property(weak, nonatomic) IBOutlet UIButton *helpCenterButton;
 @property(weak, nonatomic) IBOutlet UIButton *reportProblemButton;
@@ -36,6 +36,8 @@
 
 @implementation SSOSettingsViewController
 
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -44,6 +46,12 @@
     [self setDatePicker];
     [self setupSocialButtons];
 }
+
+#pragma mark - Initialization
+
+/**
+ *  Initialize the UI
+ */
 
 - (void)initializeUI {
     self.personalTopBarView.backgroundColor = [SSOThemeHelper thirdColor];
@@ -66,8 +74,13 @@
     self.logoutButton.layer.cornerRadius = 2;
 }
 
-- (void)setData
-{
+#pragma mark - Data
+
+/**
+ *  Set the labels and textfields with user information
+ */
+
+- (void)setData {
     NSString *name = [[SSSessionManager sharedInstance] username];
     if (name) {
         NSString *firstLetter = [name substringToIndex:1];
@@ -75,10 +88,16 @@
         self.userFirstLetterLabel.text = firstLetter;
         self.userNameTextField.text = name;
     } else {
-        
+
         self.userFirstLetterLabel.text = @"?";
     }
 }
+
+#pragma mark - Social Buttons
+
+/**
+ *  Configure the social buttons
+ */
 
 - (void)setupSocialButtons {
     [self.facebookButton setState:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:facebookSocialNetwork]
@@ -94,7 +113,7 @@
     [self.twitterButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.googleButton setState:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:googleSocialNetwork]
                forSocialNetwork:googleSocialNetwork];
-    
+
     self.googleButton.tag = googleSocialNetwork;
     [self.googleButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -137,6 +156,14 @@
     [button setUserInteractionEnabled:YES];
 }
 
+#pragma mark - IBActions
+
+/**
+ *  Update the datepicker textfield information
+ *
+ *  @param sender the datepicker
+ */
+
 - (void)updateDatePicker:(id)sender {
     if ([self.birthdayTextField isFirstResponder]) {
         UIDatePicker *picker = (UIDatePicker *)self.birthdayTextField.inputView;
@@ -157,6 +184,12 @@
     }
 }
 
+/**
+ *  Return to the last VC
+ *
+ *  @param sender the button
+ */
+
 - (IBAction)backButtonAction:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -170,15 +203,36 @@
     }
 }
 
+/**
+ *  Open help center
+ *
+ *  @param sender the button
+ */
+
 - (IBAction)helpCenterAction:(UIButton *)sender {
+    //@TODO
 }
+
+/**
+ *  Open report a problem
+ *
+ *  @param sender the button
+ */
 
 - (IBAction)reportProblemAction:(UIButton *)sender {
+    //@TODO
 }
 
-- (IBAction)logoutAction:(UIButton *)sender
-{
+/**
+ *  log out and remove the user information
+ *
+ *  @param sender the button
+ */
+
+- (IBAction)logoutAction:(UIButton *)sender {
     [[SSSessionManager sharedInstance] logoutCurrentUser];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
 }
 
 @end
