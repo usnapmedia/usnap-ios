@@ -8,7 +8,6 @@
 
 #import "SSOViewControllerWithTabBar.h"
 #import "SSOFanPageViewController.h"
-#import "WKSettingsViewController.h"
 #import "SSOProfileViewController.h"
 #import "SSOFanPageViewController.h"
 #import "SSOProfileViewController.h"

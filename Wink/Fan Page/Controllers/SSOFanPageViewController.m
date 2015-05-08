@@ -8,6 +8,7 @@
 
 #import "SSOFanPageViewController.h"
 #import "SSOCampaignTopViewControllerContainer.h"
+#import "SSSessionManager.h"
 #import "WKWinkConnect.h"
 #import "SSOCountableItems.h"
 #import "SSOSnap.h"
@@ -49,12 +50,16 @@
     [self initializeTopPhotosController];
     [self initializeRecentPhotosController];
 
+    // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
     // Load the data
     [self loadCampaigns];
     [self loadTopPhotos];
     [self loadRecentPhotos];
-
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -185,6 +190,10 @@
  *  @param newCampaign the new campaign displayed
  */
 - (void)topViewControllerDidChangeForNewCampaign:(SSOCampaign *)newCampaign {
+
+    // Set the new campagin ID
+    [[SSSessionManager sharedInstance] setCampaignID:newCampaign.id];
+
     self.currentCampaign = newCampaign;
     // Load new photos
     [self loadTopPhotos];

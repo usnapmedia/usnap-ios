@@ -14,6 +14,7 @@
 #import "SSOSnap.h"
 #import "SSOCountableItems.h"
 #import "SSOFeedConnect.h"
+#import "SSOSettingsViewController.h"
 
 #import "SSOMyFeedViewController.h"
 
@@ -230,6 +231,17 @@
         [self changeButtonColor];
         [self loadMyFeed];
     }
+}
+
+/**
+ *  Go to settings view
+ *
+ *  @param sender the button
+ */
+
+- (IBAction)settingsAction:(UIButton *)sender {
+    SSOSettingsViewController *settingsVC = [SSOSettingsViewController new];
+    [self.navigationController pushViewController:settingsVC animated:YES];
 }
 
 #pragma mark - UI
