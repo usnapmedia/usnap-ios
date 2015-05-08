@@ -10,7 +10,6 @@
 #import "WKShareViewController.h"
 #import "WKMoviePlayerView.h"
 #import "WKWinkConnect.h"
-#import "WKSettingsViewController.h"
 #import "WKNavigationController.h"
 #import "WKVideoEditor.h"
 #import "CWStatusBarNotification.h"
