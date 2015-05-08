@@ -94,7 +94,7 @@ NSInteger const kRecentPhotosCellOffset = 10;
     // Create the constraints
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
       make.top.and.left.and.right.equalTo(self.view);
-      make.height.equalTo([NSNumber numberWithInt:kTopViewHeightConstraint]);
+      make.height.equalTo([NSNumber numberWithInteger:kTopViewHeightConstraint]);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
       make.bottom.equalTo(self.topView.mas_bottom).with.offset(-5);
@@ -106,7 +106,7 @@ NSInteger const kRecentPhotosCellOffset = 10;
     [self.seeAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
       make.bottom.equalTo(self.topView.mas_bottom).with.offset(-5);
       make.right.equalTo(self.topView).with.offset(-kConstraintOffset);
-      make.width.equalTo([NSNumber numberWithInt:kButtonWidthConstraint]);
+      make.width.equalTo([NSNumber numberWithInteger:kButtonWidthConstraint]);
     }];
 
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -346,52 +346,6 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 #pragma mark - Update UI
 
-#pragma mark - Save Post to Camera Roll
-
-- (void)savePostToCameraRoll {
-    // In case it's an image
-    if (self.image) {
-
-        // Add the overlay to the image and save it
-        UIImageWriteToSavedPhotosAlbum([self editedImage], nil, nil, nil);
-
-        // Create the notification
-        CWStatusBarNotification *notification = [[CWStatusBarNotification alloc] init];
-        [notification displayNotificationWithMessage:NSLocalizedString(@"Saved to your camera roll!", @"").uppercaseString forDuration:2.0f];
-    } else if (self.mediaURL) { // In case it's a video
-
-        // Create the notification
-        CWStatusBarNotification *notification = [[CWStatusBarNotification alloc] init];
-        [notification displayNotificationWithMessage:NSLocalizedString(@"Saving to camera roll...", @"").uppercaseString completion:nil];
-
-        AVAsset *asset = [AVAsset assetWithURL:self.mediaURL];
-        self.videoEditor = [[WKVideoEditor alloc] init];
-        [self.videoEditor exportVideo:asset
-                              overlay:self.overlayImage
-                            completed:^(BOOL success) {
-                              NSString *title = @"";
-                              if (success) {
-                                  // Share video here
-                                  title = NSLocalizedString(@"Saved to your camera roll!", @"").uppercaseString;
-
-                                  // The video with the overlay on
-                                  NSData *videoData = [NSData dataWithContentsOfURL:self.videoEditor.urlOfVideoInCameraRoll];
-                                  // Post the video on the social networks selected
-                                  // @TODO We could make this a bit cleaner
-                                  [self postVideoOnSelectedSocialNetworks:videoData];
-
-                              } else {
-                                  title = NSLocalizedString(@"Error saving the video to your camera roll", @"").uppercaseString;
-                              }
-                              // Display the notification for 2 seconds
-                              notification.notificationLabel.text = title;
-                              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                [notification dismissNotification];
-                              });
-                            }];
-    }
-}
-
 /**
  *  Return the image with the modifs made
  *
@@ -429,7 +383,6 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
  */
 - (void)post {
     [self.placeholderTextView resignFirstResponder];
-    [self savePostToCameraRoll];
 
     [SVProgressHUD showWithStatus:@"uploading"];
 
@@ -442,7 +395,9 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
           // @FIXME
           [SVProgressHUD showSuccessWithStatus:@"Image posted"];
-          [self.navigationController popToRootViewControllerAnimated:YES];
+          [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
+          [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+
           NSLog(@"shared with succcess");
 
         }

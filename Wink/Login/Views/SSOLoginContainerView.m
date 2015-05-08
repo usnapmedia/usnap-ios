@@ -28,8 +28,7 @@
 - (void)awakeFromNib {
     //[self setupViewForAnimation];
     self.loginButton.layer.cornerRadius = 4;
-
-    self.bottomViewHeightConstraint.constant = [SSOScreenSizeHelper heightForRegisterBottomView].floatValue;
+    self.textFieldEmail.placeholder = NSLocalizedString(@"shareview.email.textview.placeholder.text", nil);
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

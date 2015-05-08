@@ -29,7 +29,7 @@
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSString *url = [NSString stringWithFormat:@"login"];
     SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
-    [manager POST:url parameters:@{ @"email" : email, @"password" : password } success:success failure:failure];
+    [manager POST:url parameters:@{ @"username" : email, @"password" : password } success:success failure:failure];
 }
 
 + (void)winkConnectRegisterWithEmail:(NSString *)email
@@ -98,14 +98,12 @@
 
 + (void)getCampaignsWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    
+
     NSString *url = [NSString stringWithFormat:@"campaigns"];
-    
+
     SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
-    
+
     [manager GET:url parameters:nil success:success failure:failure];
 }
-
-
 
 @end

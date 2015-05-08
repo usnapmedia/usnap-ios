@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
@@ -10,8 +11,8 @@
             <rect key="frame" x="0.0" y="1" width="437" height="55"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VaV-n4-oqZ">
-                    <rect key="frame" x="20" y="12" width="41" height="33"/>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VaV-n4-oqZ">
+                    <rect key="frame" x="20" y="11" width="41" height="33"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Done">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -21,8 +22,9 @@
                         <action selector="doneButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="HWK-KU-XdY"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9db-gr-cqZ" userLabel="Contrast">
-                    <rect key="frame" x="262" y="16" width="94" height="24"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9db-gr-cqZ" userLabel="Contrast">
+                    <rect key="frame" x="214" y="-1" width="98" height="56"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" title="Contrast" image="ic_contrast">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -31,7 +33,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xlw-mB-sRD" userLabel="Brightness">
-                    <rect key="frame" x="101" y="0.0" width="111" height="55"/>
+                    <rect key="frame" x="86" y="0.0" width="98" height="55"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" title="Brightness" image="ic_brightness">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -43,19 +46,23 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="VaV-n4-oqZ" firstAttribute="centerY" secondItem="Xlw-mB-sRD" secondAttribute="centerY" id="1KL-po-UHf"/>
-                <constraint firstItem="9db-gr-cqZ" firstAttribute="leading" secondItem="Xlw-mB-sRD" secondAttribute="trailing" constant="50" id="52t-th-Cq6"/>
+                <constraint firstItem="9db-gr-cqZ" firstAttribute="leading" secondItem="Xlw-mB-sRD" secondAttribute="trailing" constant="30" id="52t-th-Cq6"/>
                 <constraint firstItem="VaV-n4-oqZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="6OJ-j2-zWG"/>
                 <constraint firstItem="Xlw-mB-sRD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="881-FE-7rK"/>
                 <constraint firstAttribute="bottom" secondItem="Xlw-mB-sRD" secondAttribute="bottom" id="E5f-aw-gA5"/>
                 <constraint firstItem="9db-gr-cqZ" firstAttribute="centerY" secondItem="VaV-n4-oqZ" secondAttribute="centerY" id="M3s-CS-Bqb"/>
+                <constraint firstItem="Xlw-mB-sRD" firstAttribute="height" secondItem="9db-gr-cqZ" secondAttribute="height" id="Mof-Yj-whs"/>
+                <constraint firstItem="Xlw-mB-sRD" firstAttribute="width" secondItem="9db-gr-cqZ" secondAttribute="width" id="PBY-7M-6ef"/>
                 <constraint firstAttribute="centerY" secondItem="VaV-n4-oqZ" secondAttribute="centerY" id="b47-2x-tge"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9db-gr-cqZ" secondAttribute="trailing" constant="20" symbolic="YES" id="rVB-f9-T5g"/>
-                <constraint firstItem="Xlw-mB-sRD" firstAttribute="leading" secondItem="VaV-n4-oqZ" secondAttribute="trailing" constant="40" id="sYh-uq-Wgw"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9db-gr-cqZ" secondAttribute="trailing" constant="55" id="rVB-f9-T5g"/>
+                <constraint firstItem="Xlw-mB-sRD" firstAttribute="leading" secondItem="VaV-n4-oqZ" secondAttribute="trailing" constant="25" id="sYh-uq-Wgw"/>
+                <constraint firstItem="Xlw-mB-sRD" firstAttribute="width" secondItem="9db-gr-cqZ" secondAttribute="width" id="t7Q-OA-AfC"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="1KL-po-UHf"/>
+                    <exclude reference="t7Q-OA-AfC"/>
                 </mask>
             </variation>
             <connections>
