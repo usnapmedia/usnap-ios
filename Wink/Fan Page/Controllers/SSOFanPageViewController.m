@@ -50,12 +50,16 @@
     [self initializeTopPhotosController];
     [self initializeRecentPhotosController];
 
+    // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
     // Load the data
     [self loadCampaigns];
     [self loadTopPhotos];
     [self loadRecentPhotos];
-
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
