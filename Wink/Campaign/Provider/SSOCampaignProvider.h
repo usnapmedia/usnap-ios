@@ -11,13 +11,13 @@
 @protocol SSOCampaignProviderDelegate <SSOProviderDelegate>
 
 /**
- *  Delegate method called when the provider will display a new cell
+ *  Delegate method called when the provider will end dragging the scrollView
  *
  *  @param provider  the provider
  *  @param cell      the new cell
  *  @param indexPath the indexPath
  */
-- (void)provider:(id)provider willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)providerWillEndDragging:(id)provider scrollView:(UIScrollView *)scrollView targetContentOffset:(inout CGPoint *)targetContentOffset;
 
 @end
 
