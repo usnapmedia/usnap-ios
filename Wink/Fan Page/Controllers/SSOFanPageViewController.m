@@ -8,6 +8,7 @@
 
 #import "SSOFanPageViewController.h"
 #import "SSOCampaignTopViewControllerContainer.h"
+#import "SSSessionManager.h"
 #import "WKWinkConnect.h"
 #import "SSOCountableItems.h"
 #import "SSOSnap.h"
@@ -185,6 +186,10 @@
  *  @param newCampaign the new campaign displayed
  */
 - (void)topViewControllerDidChangeForNewCampaign:(SSOCampaign *)newCampaign {
+
+    // Set the new campagin ID
+    [[SSSessionManager sharedInstance] setCampaignID:newCampaign.id];
+
     self.currentCampaign = newCampaign;
     // Load new photos
     [self loadTopPhotos];
