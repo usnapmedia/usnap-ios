@@ -396,7 +396,9 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
           // @FIXME
           [SVProgressHUD showSuccessWithStatus:@"Image posted"];
-          [self.navigationController popToRootViewControllerAnimated:YES];
+          [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
+          [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+
           NSLog(@"shared with succcess");
 
         }

@@ -28,6 +28,7 @@
 - (void)awakeFromNib {
     //[self setupViewForAnimation];
     self.loginButton.layer.cornerRadius = 4;
+    self.textFieldEmail.placeholder = NSLocalizedString(@"shareview.email.textview.placeholder.text", nil);
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
