@@ -9,7 +9,7 @@
 #import "SSOScreenSizeHelper.h"
 #import <SDiPhoneVersion.h>
 
-CGFloat const kImageWidthToHeightRatio = 0.33f;
+CGFloat const kImageWidthToHeightRatio = 0.4f;
 NSInteger const kCampaignCellLabelHeight = 40;
 
 @implementation SSOScreenSizeHelper
