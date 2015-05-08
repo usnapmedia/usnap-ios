@@ -1454,13 +1454,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3303DDCE1AD83E42002B74F9 /* SSORegisterContainerView.xib in Resources */,
-				335C7FF51AF40687005C2B2E /* GothaHTFBooIta in Resources */,
 				FBBC950F1AF9238000203E48 /* SSOSettingsViewController.xib in Resources */,
 				3398420D1AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.xib in Resources */,
 				D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */,
 				7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */,
 				D85B353A1AF29F640011B26D /* SSOPhotoDetailViewController.xib in Resources */,
-				335723DB1ACB097C000CC846 /* SettingsSocialCell.xib in Resources */,
 				D8D4F1811AE04B12002FDE38 /* Launch Screen.xib in Resources */,
 				D810B8EE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
 				D810B8EF1ADF506500B3AC11 /* SSOColorPickerContainerView.xib in Resources */,
@@ -1658,7 +1656,6 @@
 				D898E1D31AF1622500C957DC /* SSOCampaignViewController.m in Sources */,
 				332E0A511AEE85AC00F77969 /* SSOTextFieldWithUnderline.m in Sources */,
 				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
-				D86E94BC1ACF492000CFF801 /* SSCollectionViewCell.m in Sources */,
 				FBBC950E1AF9238000203E48 /* SSOSettingsViewController.m in Sources */,
 				D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */,
 				339841F21AEACC8600605C67 /* SSOCampaignTopViewControllerContainer.m in Sources */,
