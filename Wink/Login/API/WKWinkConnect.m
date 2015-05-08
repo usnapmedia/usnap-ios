@@ -89,6 +89,10 @@
     NSString *temporaryFileName = [NSString stringWithFormat:@"image%i.jpg", randomNumber];
     NSMutableDictionary *parameters = [[SSOSocialNetworkAPI sharedInstance] connectedSocialNetworkAPIParameters].mutableCopy;
     [parameters addEntriesFromDictionary:@{ @"text" : text, @"meta" : meta }];
+    // If the user participate in a campaign, send it
+    if ([SSSessionManager sharedInstance].campaignID) {
+        [parameters addEntriesFromDictionary:@{ @"campaign_id" : [SSSessionManager sharedInstance].campaignID }];
+    }
 
     [manager POST:url parameters:parameters
         constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {

@@ -27,8 +27,17 @@
     return [[[NSUserDefaults standardUserDefaults] objectForKey:kIsUserLoggedIn] boolValue];
 }
 
-+ (NSString *)loggedInUserEmail {
++ (NSString *)loggedInUsername {
     return [[NSUserDefaults standardUserDefaults] objectForKey:kEmailLoggedString];
+}
+
++ (void)setCurrentCampaign:(NSString *)campaignID {
+    [[NSUserDefaults standardUserDefaults] setObject:campaignID forKey:kCurrentCampaignID];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *)currentCampaignID {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:kCurrentCampaignID];
 }
 
 @end
