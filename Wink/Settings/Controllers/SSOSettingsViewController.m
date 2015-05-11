@@ -110,7 +110,7 @@
       if ([[items.response firstObject] isKindOfClass:[SSOUser class]]) {
           SSOUser *user = [items.response firstObject];
           [self setUserFirstLetter:user.firstName];
-          self.userNameTextField.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
+          self.userNameTextField.text = [NSString stringWithFormat:@"%@", user.username];
           NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
           [formatter setDateFormat:@"yyyy-MM-dd"];
           self.birthday = [formatter dateFromString:user.dob];
