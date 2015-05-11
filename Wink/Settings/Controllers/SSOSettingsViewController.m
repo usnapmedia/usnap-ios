@@ -12,6 +12,9 @@
 #import "SSOSocialNetworkAPI+USnap.h"
 #import "SSOCustomSocialButton.h"
 #import "SSSessionManager.h"
+#import "SSOUserConnect.h"
+#import "SSOCountableItems.h"
+#import "SSOUser.h"
 
 @interface SSOSettingsViewController ()
 
@@ -29,6 +32,7 @@
 @property(weak, nonatomic) IBOutlet UIButton *helpCenterButton;
 @property(weak, nonatomic) IBOutlet UIButton *reportProblemButton;
 @property(weak, nonatomic) IBOutlet UIButton *logoutButton;
+@property(weak, nonatomic) IBOutlet UIButton *saveButton;
 
 @property(strong, nonatomic) NSDate *birthday;
 
@@ -45,6 +49,7 @@
     [self setData];
     [self setDatePicker];
     [self setupSocialButtons];
+    [self initializeData];
 }
 
 #pragma mark - Initialization
@@ -72,6 +77,11 @@
     [self.reportProblemButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [self.logoutButton setBackgroundColor:[SSOThemeHelper firstColor]];
     self.logoutButton.layer.cornerRadius = 2;
+
+    //@FIXME: The user can't update his information on this version
+    self.userNameTextField.enabled = NO;
+    self.birthdayTextField.enabled = NO;
+    self.saveButton.hidden = YES;
 }
 
 #pragma mark - Data
@@ -91,6 +101,24 @@
 
         self.userFirstLetterLabel.text = @"?";
     }
+}
+
+- (void)initializeData {
+    [SSOUserConnect getUserInformationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOUser class]];
+      NSAssert([[items.response firstObject] isKindOfClass:[SSOUser class]], @"User data has to be a SSOUser class");
+      if ([[items.response firstObject] isKindOfClass:[SSOUser class]]) {
+          SSOUser *user = [items.response firstObject];
+          [self setUserFirstLetter:user.firstName];
+          self.userNameTextField.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
+          NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+          [formatter setDateFormat:@"yyyy-MM-dd"];
+          self.birthday = [formatter dateFromString:user.dob];
+          [self updateBirthday:nil];
+      }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+
+    }];
 }
 
 #pragma mark - Social Buttons
@@ -156,6 +184,15 @@
     [button setUserInteractionEnabled:YES];
 }
 
+- (void)setUserFirstLetter:(NSString *)sender {
+    if ([sender length]) {
+        unichar firstChar = [[sender uppercaseString] characterAtIndex:0];
+        if (firstChar >= 'A' && firstChar <= 'Z') {
+            self.userFirstLetterLabel.text = [NSString stringWithFormat:@"%@", [[sender substringToIndex:1] uppercaseString]];
+        }
+    }
+}
+
 #pragma mark - IBActions
 
 /**
@@ -169,15 +206,21 @@
         UIDatePicker *picker = (UIDatePicker *)self.birthdayTextField.inputView;
         self.birthday = picker.date;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"dd/MM/yyyy"];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
         self.birthdayTextField.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:self.birthday]];
     }
 }
 
+/**
+ *  Prevents the user to copy and paste a wrong information
+ *
+ *  @param sender the textfield
+ */
+
 - (IBAction)updateBirthday:(UITextField *)sender {
     if (self.birthday) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"dd/MM/yyyy"];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
         self.birthdayTextField.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:self.birthday]];
     } else {
         self.birthdayTextField.text = @"";
@@ -195,12 +238,7 @@
 }
 
 - (IBAction)userChangedName:(UITextField *)sender {
-    if ([sender.text length]) {
-        unichar firstChar = [[sender.text uppercaseString] characterAtIndex:0];
-        if (firstChar >= 'A' && firstChar <= 'Z') {
-            self.userFirstLetterLabel.text = [NSString stringWithFormat:@"%@", [[sender.text substringToIndex:1] uppercaseString]];
-        }
-    }
+    [self setUserFirstLetter:sender.text];
 }
 
 /**

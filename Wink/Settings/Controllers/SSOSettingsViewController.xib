@@ -16,6 +16,7 @@
                 <outlet property="logoutButton" destination="xi5-Sp-3ew" id="hWS-Ng-EQw"/>
                 <outlet property="personalTopBarView" destination="3Er-Zb-JHd" id="krH-sG-IX7"/>
                 <outlet property="reportProblemButton" destination="uLo-Ki-z2g" id="KzK-Vi-p5f"/>
+                <outlet property="saveButton" destination="VA3-Q2-8O2" id="9Ce-MO-B0b"/>
                 <outlet property="socialTopBarView" destination="4Vn-0h-GGS" id="bd9-cn-5Je"/>
                 <outlet property="supportTopBarView" destination="VYf-BB-4h0" id="ler-Eu-J7P"/>
                 <outlet property="twitterButton" destination="lfY-AJ-hpz" id="QCj-J9-WO7"/>
