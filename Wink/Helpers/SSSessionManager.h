@@ -21,6 +21,7 @@
 
 @property(strong, nonatomic, readonly) NSString *username;
 @property(strong, nonatomic, readonly) NSString *password;
+@property(strong, nonatomic, readonly) NSString *campaignID;
 
 #pragma mark - Session methods
 
@@ -35,7 +36,6 @@
  *  @return YES if the user logged in, NO otherwise
  */
 - (BOOL)isUserLoggedIn;
-
 
 /**
  *  Logout the current user. Will erase the data from the keychain
@@ -56,5 +56,12 @@
  *  @return the username
  */
 - (NSString *)currentUsername;
+
+/**
+ *  Set the current campaign ID
+ *
+ *  @param campaignID campaign ID
+ */
+- (void)setCampaignID:(NSString *)campaignID;
 
 @end

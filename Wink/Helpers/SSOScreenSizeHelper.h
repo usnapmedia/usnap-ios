@@ -24,4 +24,11 @@
  */
 + (NSNumber *)bottomMarginForTextField;
 
+/**
+ *  Get the height for the campaign VC based on the iphone
+ *
+ *  @return the height
+ */
++ (CGFloat)campaignViewControllerHeightConstraint;
+
 @end

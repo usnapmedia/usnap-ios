@@ -15,11 +15,13 @@
 #define kCollectionViewCellID @"campaignCell"
 #define kCollectionViewCellNIB @"SSOCampaignImageCellCollectionViewCell"
 
-@interface SSOCampaignTopViewControllerContainer () <SSOCampaignProviderDelegate>
+@interface SSOCampaignTopViewControllerContainer () <SSOCampaignProviderDelegate, UIScrollViewDelegate>
 
 @property(strong, nonatomic) UICollectionView *tabCollectionView;
 @property(strong, nonatomic) SSOCampaignProvider *provider;
 @property(nonatomic, strong) NSArray *arrayOfCampaigns;
+
+@property(nonatomic) NSInteger index;
 
 @end
 
@@ -38,6 +40,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initializeData];
+
+    self.index = 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,8 +101,27 @@
     [self.tabCollectionView reloadData];
 }
 
-- (void)provider:(id)provider willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self.delegate topViewControllerDidChangeForNewCampaign:[self.arrayOfCampaigns objectAtIndex:indexPath.row]];
+/**
+ *  It's called when the collection view will change the current cell
+ *
+ *  @param provider            provider
+ *  @param scrollView          scrollView
+ *  @param targetContentOffset targetContentOffset
+ */
+
+- (void)providerWillEndDragging:(id)provider scrollView:(UIScrollView *)scrollView targetContentOffset:(inout CGPoint *)targetContentOffset {
+    // Checks if the it's the collectionView who is scrolling
+    if ([scrollView isKindOfClass:[UICollectionView class]]) {
+        UICollectionView *collectionView = (UICollectionView *)scrollView;
+        float width = collectionView.frame.size.width;
+        // Calculate if the target content offset is bigger than the width of the cell
+        int item = round(targetContentOffset->x / width);
+        // Checks if the collectionView will display a different cell. This is to avoid to reload the data for the same cell
+        if (self.index != item) {
+            [self.delegate topViewControllerDidChangeForNewCampaign:[self.arrayOfCampaigns objectAtIndex:item]];
+            self.index = item;
+        }
+    }
 }
 
 @end
