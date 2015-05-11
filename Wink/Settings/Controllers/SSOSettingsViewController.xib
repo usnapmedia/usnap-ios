@@ -33,7 +33,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="company_logo" translatesAutoresizingMaskIntoConstraints="NO" id="WCv-rc-dY1">
-                            <rect key="frame" x="141" y="0.0" width="39" height="40"/>
+                            <rect key="frame" x="21" y="5" width="279" height="30"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBS-ts-diS">
                             <rect key="frame" x="10" y="0.0" width="40" height="40"/>
@@ -57,12 +57,12 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="WCv-rc-dY1" secondAttribute="bottom" id="Br7-Pl-GOt"/>
+                        <constraint firstAttribute="bottom" secondItem="WCv-rc-dY1" secondAttribute="bottom" constant="5" id="Br7-Pl-GOt"/>
                         <constraint firstAttribute="centerY" secondItem="VA3-Q2-8O2" secondAttribute="centerY" id="F9R-j0-hrF"/>
                         <constraint firstAttribute="centerY" secondItem="NBS-ts-diS" secondAttribute="centerY" id="HxZ-kF-bdg"/>
                         <constraint firstItem="WCv-rc-dY1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zrb-cK-Mfq" secondAttribute="leading" constant="20" symbolic="YES" id="K0b-Wi-1fy"/>
                         <constraint firstAttribute="trailing" secondItem="VA3-Q2-8O2" secondAttribute="trailing" constant="25" id="R0T-pB-6v6"/>
-                        <constraint firstItem="WCv-rc-dY1" firstAttribute="top" secondItem="Zrb-cK-Mfq" secondAttribute="top" id="ROT-w0-tFJ"/>
+                        <constraint firstItem="WCv-rc-dY1" firstAttribute="top" secondItem="Zrb-cK-Mfq" secondAttribute="top" constant="5" id="ROT-w0-tFJ"/>
                         <constraint firstAttribute="height" constant="40" id="Y7u-ph-leV"/>
                         <constraint firstAttribute="centerX" secondItem="WCv-rc-dY1" secondAttribute="centerX" id="e3a-jl-Jxu"/>
                         <constraint firstAttribute="centerX" secondItem="WCv-rc-dY1" secondAttribute="centerX" id="h2i-Jx-acS"/>
@@ -437,7 +437,7 @@
         </view>
     </objects>
     <resources>
-        <image name="company_logo" width="39" height="29"/>
+        <image name="company_logo" width="666" height="230"/>
         <image name="ic_arrow-left" width="12" height="21"/>
     </resources>
 </document>

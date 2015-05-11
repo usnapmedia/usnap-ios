@@ -37,6 +37,8 @@ CGFloat const kTabBarOpacity = 0.90;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
     [self setInitalViewControllers];
     [self setTabBar];
     [self startFirstViewController];
@@ -152,7 +154,8 @@ CGFloat const kTabBarOpacity = 0.90;
  */
 
 - (CGRect)containerViewFrame {
-    return CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - kTabBarHeight);
+    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    return CGRectMake(self.view.frame.origin.x, statusBarHeight, self.view.frame.size.width, self.view.frame.size.height - kTabBarHeight - statusBarHeight);
 }
 
 /**
@@ -237,11 +240,8 @@ CGFloat const kTabBarOpacity = 0.90;
 - (void)cameraButtonPressed:(id)sender {
     UINavigationController *cameraNavigationController = [[UIStoryboard cameraStoryboard] instantiateInitialViewController];
     [self presentViewController:cameraNavigationController animated:YES completion:nil];
-
-    //  UIButton *button = (UIButton *)sender;
-    // [self unselectedButtonsTabBarWithSender:button];
-    //  button.selected = !button.isSelected;
 }
+
 /**
  *  When the profile button is pressed, simply switch the view
  *
