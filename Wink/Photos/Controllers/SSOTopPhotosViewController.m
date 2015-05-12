@@ -17,7 +17,6 @@
 #import "SSOThemeHelper.h"
 
 NSInteger const kTopPhotosCellTextHeight = 40;
-// NSInteger const kTopPhotosCellOffset = 5;
 
 @interface SSOTopPhotosViewController () <SSOProviderDelegate>
 
@@ -78,7 +77,7 @@ NSInteger const kTopPhotosCellTextHeight = 40;
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
       make.bottom.equalTo(self.topView.mas_bottom).with.offset(-5);
-      make.left.equalTo(self.topView).with.offset(kConstraintOffset);
+      make.left.equalTo(self.topView);
       make.right.equalTo(self.seeAllButton.mas_left).with.offset(-kConstraintOffset);
 
     }];

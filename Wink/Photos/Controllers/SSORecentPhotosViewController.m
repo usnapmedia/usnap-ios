@@ -98,7 +98,7 @@ NSInteger const kRecentPhotosCellOffset = 10;
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
       make.bottom.equalTo(self.topView.mas_bottom).with.offset(-5);
-      make.left.equalTo(self.topView).with.offset(kConstraintOffset);
+      make.left.equalTo(self.topView);
       make.right.equalTo(self.seeAllButton.mas_left).with.offset(-kConstraintOffset);
 
     }];
@@ -169,7 +169,6 @@ NSInteger const kRecentPhotosCellOffset = 10;
 
 - (void)seeAllTopSnapsAction {
     SSOSnapViewController *snapVC = [SSOSnapViewController new];
-
     [self.navigationController pushViewController:snapVC animated:YES];
 }
 
