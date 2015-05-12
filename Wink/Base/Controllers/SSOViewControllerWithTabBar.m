@@ -12,12 +12,11 @@
 #import "SSOFanPageViewController.h"
 #import "SSOProfileViewController.h"
 #import "SSOViewControllerWithLiveFeed.h"
+#import "SSOThemeHelper.h"
 
 #import <Masonry.h>
 
 NSInteger const kTabBarHeight = 40;
-CGFloat const kTabBarButtonOffset = 5.0f;
-CGFloat const kTabBarOpacity = 0.90;
 
 @interface SSOViewControllerWithTabBar ()
 
@@ -36,6 +35,8 @@ CGFloat const kTabBarOpacity = 0.90;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
     [self setInitalViewControllers];
     [self setTabBar];
@@ -85,11 +86,11 @@ CGFloat const kTabBarOpacity = 0.90;
 /**
  *  Initialize the tab bar UI
  */
+
 - (void)setTabBar {
     self.customTabBar = [UIView new];
-    [self.customTabBar setAlpha:kTabBarOpacity];
     //@FIXME
-    [self.customTabBar setBackgroundColor:[UIColor blackColor]];
+    [self.customTabBar setBackgroundColor:[SSOThemeHelper tabBarColor]];
     [self.view addSubview:self.customTabBar];
     [self.customTabBar mas_makeConstraints:^(MASConstraintMaker *make) {
       make.left.and.right.and.bottom.equalTo(self.view);
@@ -98,9 +99,8 @@ CGFloat const kTabBarOpacity = 0.90;
 
     // Create the buttons
     UIButton *homeButton = [UIButton new];
-    homeButton.selected = YES;
+    [homeButton setBackgroundColor:[SSOThemeHelper tabBarSelectedColor]];
     [homeButton setImage:[UIImage imageNamed:@"ic_home"] forState:UIControlStateNormal];
-    [homeButton setImage:[UIImage imageNamed:@"ic_home-selected"] forState:UIControlStateSelected];
     [homeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [homeButton addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.customTabBar addSubview:homeButton];
@@ -108,14 +108,12 @@ CGFloat const kTabBarOpacity = 0.90;
 
     UIButton *cameraButton = [UIButton new];
     [cameraButton setImage:[UIImage imageNamed:@"ic_camera"] forState:UIControlStateNormal];
-    [cameraButton setImage:[UIImage imageNamed:@"ic_camera-selected"] forState:UIControlStateSelected];
     [cameraButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [cameraButton addTarget:self action:@selector(cameraButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.customTabBar addSubview:cameraButton];
 
     UIButton *profileButton = [UIButton new];
     [profileButton setImage:[UIImage imageNamed:@"ic_profile"] forState:UIControlStateNormal];
-    [profileButton setImage:[UIImage imageNamed:@"ic_profile-selected"] forState:UIControlStateSelected];
     [profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [profileButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.customTabBar addSubview:profileButton];
@@ -123,22 +121,22 @@ CGFloat const kTabBarOpacity = 0.90;
     // Set constraints for the button
     [cameraButton mas_makeConstraints:^(MASConstraintMaker *make) {
       make.centerX.equalTo(self.customTabBar);
-      make.top.equalTo(self.customTabBar).with.offset(kTabBarButtonOffset);
-      make.bottom.equalTo(self.customTabBar).with.offset(-kTabBarButtonOffset);
+      make.top.equalTo(self.customTabBar);
+      make.bottom.equalTo(self.customTabBar);
       make.width.equalTo([NSNumber numberWithFloat:kScreenSize.width / 3]);
     }];
 
     [homeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.top.equalTo(self.customTabBar).with.offset(kTabBarButtonOffset);
-      make.bottom.equalTo(self.customTabBar).with.offset(-kTabBarButtonOffset);
+      make.top.equalTo(self.customTabBar);
+      make.bottom.equalTo(self.customTabBar);
       make.right.equalTo(cameraButton.mas_left);
       make.width.equalTo(cameraButton);
 
     }];
 
     [profileButton mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.top.equalTo(self.customTabBar).with.offset(kTabBarButtonOffset);
-      make.bottom.equalTo(self.customTabBar).with.offset(-kTabBarButtonOffset);
+      make.top.equalTo(self.customTabBar);
+      make.bottom.equalTo(self.customTabBar);
       make.left.equalTo(cameraButton.mas_right);
       make.width.equalTo(cameraButton);
 
@@ -152,7 +150,8 @@ CGFloat const kTabBarOpacity = 0.90;
  */
 
 - (CGRect)containerViewFrame {
-    return CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - kTabBarHeight);
+    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    return CGRectMake(self.view.frame.origin.x, statusBarHeight, self.view.frame.size.width, self.view.frame.size.height - kTabBarHeight - statusBarHeight);
 }
 
 /**
@@ -205,12 +204,13 @@ CGFloat const kTabBarOpacity = 0.90;
 /**
  *  Loop through buttons in the tabBar. When we select one we want the others to be unselected
  *
- *  @param toButton <#toButton description#>
+ *  @param toButton the button
  */
+
 - (void)unselectedButtonsTabBarWithSender:(UIButton *)toButton {
 
     for (UIButton *button in self.customTabBar.subviews) {
-        button.selected = NO;
+        [button setBackgroundColor:[SSOThemeHelper tabBarColor]];
     }
 }
 
@@ -219,6 +219,7 @@ CGFloat const kTabBarOpacity = 0.90;
  *
  *  @param sender the button
  */
+
 - (void)homeButtonPressed:(id)sender {
     if (self.selectedIndex != 0) {
         [self switchCurrentViewControllerToNewViewController:[self.viewControllers firstObject]];
@@ -226,7 +227,7 @@ CGFloat const kTabBarOpacity = 0.90;
     }
     UIButton *button = (UIButton *)sender;
     [self unselectedButtonsTabBarWithSender:button];
-    button.selected = !button.isSelected;
+    [button setBackgroundColor:[SSOThemeHelper tabBarSelectedColor]];
 }
 
 /**
@@ -234,30 +235,26 @@ CGFloat const kTabBarOpacity = 0.90;
  *
  *  @param sender the button
  */
+
 - (void)cameraButtonPressed:(id)sender {
     UINavigationController *cameraNavigationController = [[UIStoryboard cameraStoryboard] instantiateInitialViewController];
     [self presentViewController:cameraNavigationController animated:YES completion:nil];
-
-    //  UIButton *button = (UIButton *)sender;
-    // [self unselectedButtonsTabBarWithSender:button];
-    //  button.selected = !button.isSelected;
 }
+
 /**
  *  When the profile button is pressed, simply switch the view
  *
  *  @param sender the button
  */
+
 - (void)profileButtonPressed:(id)sender {
     if (self.selectedIndex != 1) {
         [self switchCurrentViewControllerToNewViewController:[self.viewControllers lastObject]];
         self.selectedIndex = 1;
     }
-
     UIButton *button = (UIButton *)sender;
-
     [self unselectedButtonsTabBarWithSender:button];
-
-    button.selected = !button.isSelected;
+    [button setBackgroundColor:[SSOThemeHelper tabBarSelectedColor]];
 }
 
 @end

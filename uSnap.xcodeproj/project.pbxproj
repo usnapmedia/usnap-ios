@@ -158,6 +158,9 @@
 		FB0F335D1AF2A3F100F6C735 /* SSOSnapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0F335B1AF2A3F100F6C735 /* SSOSnapViewController.m */; };
 		FB0F335E1AF2A3F100F6C735 /* SSOSnapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0F335C1AF2A3F100F6C735 /* SSOSnapViewController.xib */; };
 		FB0F33611AF2B68B00F6C735 /* SSOPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0F33601AF2B68B00F6C735 /* SSOPhotosViewController.m */; };
+		FBB76FE81B00E20600FFAF9A /* SSOUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB76FE71B00E20600FFAF9A /* SSOUser.m */; };
+		FBB76FEC1B00E7D700FFAF9A /* SSOUserConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB76FEB1B00E7D700FFAF9A /* SSOUserConnect.m */; };
+		FBB76FEF1B02455300FFAF9A /* SSOUSnapLightButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB76FEE1B02455300FFAF9A /* SSOUSnapLightButton.m */; };
 		FBBC950E1AF9238000203E48 /* SSOSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC950C1AF9238000203E48 /* SSOSettingsViewController.m */; };
 		FBBC950F1AF9238000203E48 /* SSOSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBC950D1AF9238000203E48 /* SSOSettingsViewController.xib */; };
 		FBF9D1CB1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF9D1C91AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.m */; };
@@ -444,6 +447,12 @@
 		FB0F335C1AF2A3F100F6C735 /* SSOSnapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOSnapViewController.xib; sourceTree = "<group>"; };
 		FB0F335F1AF2B68B00F6C735 /* SSOPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOPhotosViewController.h; sourceTree = "<group>"; };
 		FB0F33601AF2B68B00F6C735 /* SSOPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOPhotosViewController.m; sourceTree = "<group>"; };
+		FBB76FE61B00E20600FFAF9A /* SSOUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOUser.h; sourceTree = "<group>"; };
+		FBB76FE71B00E20600FFAF9A /* SSOUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOUser.m; sourceTree = "<group>"; };
+		FBB76FEA1B00E7D700FFAF9A /* SSOUserConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOUserConnect.h; sourceTree = "<group>"; };
+		FBB76FEB1B00E7D700FFAF9A /* SSOUserConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOUserConnect.m; sourceTree = "<group>"; };
+		FBB76FED1B02455300FFAF9A /* SSOUSnapLightButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOUSnapLightButton.h; sourceTree = "<group>"; };
+		FBB76FEE1B02455300FFAF9A /* SSOUSnapLightButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOUSnapLightButton.m; sourceTree = "<group>"; };
 		FBBC950B1AF9238000203E48 /* SSOSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSettingsViewController.h; sourceTree = "<group>"; };
 		FBBC950C1AF9238000203E48 /* SSOSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSettingsViewController.m; sourceTree = "<group>"; };
 		FBBC950D1AF9238000203E48 /* SSOSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOSettingsViewController.xib; sourceTree = "<group>"; };
@@ -1119,6 +1128,8 @@
 		D898E1C31AF1622500C957DC /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				FBB76FE91B00E7A300FFAF9A /* API */,
+				FBB76FE51B00DEC100FFAF9A /* Model */,
 				D898E1C41AF1622500C957DC /* Controllers */,
 				D898E1CC1AF1622500C957DC /* View */,
 			);
@@ -1159,6 +1170,8 @@
 				D8E677E21AEED927006B8CD8 /* SSOUSnapButton.m */,
 				D86688171AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.h */,
 				D86688181AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m */,
+				FBB76FED1B02455300FFAF9A /* SSOUSnapLightButton.h */,
+				FBB76FEE1B02455300FFAF9A /* SSOUSnapLightButton.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1351,6 +1364,24 @@
 				FB0F33601AF2B68B00F6C735 /* SSOPhotosViewController.m */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FBB76FE51B00DEC100FFAF9A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FBB76FE61B00E20600FFAF9A /* SSOUser.h */,
+				FBB76FE71B00E20600FFAF9A /* SSOUser.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FBB76FE91B00E7A300FFAF9A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				FBB76FEA1B00E7D700FFAF9A /* SSOUserConnect.h */,
+				FBB76FEB1B00E7D700FFAF9A /* SSOUserConnect.m */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		FBF9D1C71AF2D3EC00FF5160 /* View */ = {
@@ -1587,6 +1618,7 @@
 				335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */,
 				335723DD1ACB097C000CC846 /* WKShareViewController.m in Sources */,
 				D86688191AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m in Sources */,
+				FBB76FE81B00E20600FFAF9A /* SSOUser.m in Sources */,
 				D830F41E1ACDDBF1002A503D /* UIColor+PickerColors.m in Sources */,
 				335723E41ACB097C000CC846 /* WKAppDelegate.m in Sources */,
 				D810B8E81ADF506500B3AC11 /* SSOEditMediaMovableTextView.m in Sources */,
@@ -1612,6 +1644,7 @@
 				D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */,
 				D8E677FC1AEEE5F6006B8CD8 /* SSOFeedConnect.m in Sources */,
 				D8FBADAC1AE93552005D6C18 /* SSOViewControllerWithLiveFeed.m in Sources */,
+				FBB76FEC1B00E7D700FFAF9A /* SSOUserConnect.m in Sources */,
 				3303DDD41AD8547F002B74F9 /* SSOLoginContainerView.m in Sources */,
 				33B926CE1AF836990007443C /* UIButton+VerticalLayout.m in Sources */,
 				D8E678001AEEE5F6006B8CD8 /* SSOImageCollectionViewCell.m in Sources */,
@@ -1621,6 +1654,7 @@
 				D8D4F17F1ADFFB52002FDE38 /* SSOThemeHelper.m in Sources */,
 				D810B8E71ADF506500B3AC11 /* SSOTextAccessoryContainerView.m in Sources */,
 				D8E677FE1AEEE5F6006B8CD8 /* SSOTopPhotosViewController.m in Sources */,
+				FBB76FEF1B02455300FFAF9A /* SSOUSnapLightButton.m in Sources */,
 				335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */,
 				D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */,
 				336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */,

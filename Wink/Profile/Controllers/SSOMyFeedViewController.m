@@ -16,7 +16,7 @@
 
 NSString *const kMyFeedCollectionViewCell = @"MyFeedCollectionViewCell";
 NSString *const kMyFeedNibNameCollectionViewCell = @"SSOMyFeedCollectionViewCell";
-NSInteger const kCollectionViewMinimumInteritemSpacing = 0;
+NSInteger const kCollectionViewMinimumInteritemSpacing = -2;
 NSInteger const kCollectionViewMinimumLineSpacing = 5;
 NSInteger const kNumberOfColumnsOfCollectionView = 3;
 NSInteger const KCollectionViewPadding = 5;

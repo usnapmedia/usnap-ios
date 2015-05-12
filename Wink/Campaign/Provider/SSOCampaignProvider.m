@@ -8,7 +8,7 @@
 
 #import "SSOCampaignProvider.h"
 
-@interface SSOCampaignProvider () <UICollectionViewDelegateFlowLayout>
+@interface SSOCampaignProvider () <UICollectionViewDelegateFlowLayout, UIScrollViewDelegate>
 
 @property(weak, nonatomic) UICollectionView *tabCollectionView;
 
@@ -31,14 +31,22 @@
     return self;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self.delegate provider:self willDisplayCell:cell forItemAtIndexPath:indexPath];
-}
-
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return collectionView.frame.size;
+}
+
+/**
+ *  ScrollView
+ *
+ *  @param scrollView          scrollView
+ *  @param velocity            velocity
+ *  @param targetContentOffset targetContentOffset
+ */
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    [self.delegate providerWillEndDragging:self scrollView:scrollView targetContentOffset:targetContentOffset];
 }
 
 @end

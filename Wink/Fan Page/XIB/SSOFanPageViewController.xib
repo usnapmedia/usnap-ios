@@ -26,15 +26,15 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="company_logo" translatesAutoresizingMaskIntoConstraints="NO" id="y4G-CS-eEm">
-                                    <rect key="frame" x="168" y="0.0" width="39" height="40"/>
+                                    <rect key="frame" x="20" y="5" width="335" height="30"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="centerX" secondItem="y4G-CS-eEm" secondAttribute="centerX" id="4lO-zY-0Xx"/>
                                 <constraint firstAttribute="centerX" secondItem="y4G-CS-eEm" secondAttribute="centerX" id="9p3-X9-47D"/>
-                                <constraint firstItem="y4G-CS-eEm" firstAttribute="top" secondItem="WQN-1J-hSa" secondAttribute="top" id="cM6-Fl-goe"/>
-                                <constraint firstAttribute="bottom" secondItem="y4G-CS-eEm" secondAttribute="bottom" id="hWh-Be-Wgi"/>
+                                <constraint firstItem="y4G-CS-eEm" firstAttribute="top" secondItem="WQN-1J-hSa" secondAttribute="top" constant="5" id="cM6-Fl-goe"/>
+                                <constraint firstAttribute="bottom" secondItem="y4G-CS-eEm" secondAttribute="bottom" constant="5" id="hWh-Be-Wgi"/>
                                 <constraint firstAttribute="height" constant="40" id="mP6-I9-N9d"/>
                                 <constraint firstItem="y4G-CS-eEm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WQN-1J-hSa" secondAttribute="leading" constant="20" symbolic="YES" id="tu5-5g-vor"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="y4G-CS-eEm" secondAttribute="trailing" constant="20" symbolic="YES" id="x92-TU-ily"/>
@@ -65,17 +65,17 @@
                                             </variation>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FEL-hX-FE3" userLabel="Live photos container view">
-                                            <rect key="frame" x="0.0" y="388" width="375" height="200"/>
+                                            <rect key="frame" x="5" y="368" width="370" height="220"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="200" id="7ok-5B-Nuh"/>
+                                                <constraint firstAttribute="height" constant="220" id="7ok-5B-Nuh"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RB5-gd-VX2" userLabel="Top photos container view">
-                                            <rect key="frame" x="0.0" y="188" width="375" height="200"/>
+                                            <rect key="frame" x="5" y="188" width="370" height="180"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="200" id="Dad-Ua-Nk7"/>
+                                                <constraint firstAttribute="height" constant="180" id="Dad-Ua-Nk7"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -88,8 +88,8 @@
                                         <constraint firstItem="FEL-hX-FE3" firstAttribute="top" secondItem="RB5-gd-VX2" secondAttribute="bottom" id="VEQ-WN-HVY"/>
                                         <constraint firstAttribute="trailing" secondItem="clJ-Wg-ftN" secondAttribute="trailing" id="W6w-J1-LPE"/>
                                         <constraint firstAttribute="trailing" secondItem="FEL-hX-FE3" secondAttribute="trailing" id="WS1-dq-Hob"/>
-                                        <constraint firstItem="RB5-gd-VX2" firstAttribute="leading" secondItem="rQN-Rv-hNS" secondAttribute="leading" id="exC-h4-PPY"/>
-                                        <constraint firstItem="FEL-hX-FE3" firstAttribute="leading" secondItem="rQN-Rv-hNS" secondAttribute="leading" id="qHM-qa-7Wy"/>
+                                        <constraint firstItem="RB5-gd-VX2" firstAttribute="leading" secondItem="rQN-Rv-hNS" secondAttribute="leading" constant="5" id="exC-h4-PPY"/>
+                                        <constraint firstItem="FEL-hX-FE3" firstAttribute="leading" secondItem="rQN-Rv-hNS" secondAttribute="leading" constant="5" id="qHM-qa-7Wy"/>
                                         <constraint firstAttribute="bottom" secondItem="FEL-hX-FE3" secondAttribute="bottom" id="urT-Ad-s44"/>
                                     </constraints>
                                 </view>
@@ -134,6 +134,6 @@
         </view>
     </objects>
     <resources>
-        <image name="company_logo" width="39" height="29"/>
+        <image name="company_logo" width="666" height="230"/>
     </resources>
 </document>

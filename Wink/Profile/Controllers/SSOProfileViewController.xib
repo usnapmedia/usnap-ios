@@ -32,18 +32,18 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="company_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ypa-pz-SD4">
-                            <rect key="frame" x="168" y="0.0" width="39" height="40"/>
+                            <rect key="frame" x="20" y="5" width="335" height="30"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="centerX" secondItem="Ypa-pz-SD4" secondAttribute="centerX" id="95D-lA-zV7"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ypa-pz-SD4" secondAttribute="trailing" constant="20" symbolic="YES" id="Gwq-32-cgA"/>
-                        <constraint firstAttribute="bottom" secondItem="Ypa-pz-SD4" secondAttribute="bottom" id="Hf3-Ve-mCh"/>
+                        <constraint firstAttribute="bottom" secondItem="Ypa-pz-SD4" secondAttribute="bottom" constant="5" id="Hf3-Ve-mCh"/>
                         <constraint firstAttribute="height" constant="40" id="QPf-5l-Dza"/>
                         <constraint firstItem="Ypa-pz-SD4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uPB-ME-APc" secondAttribute="leading" constant="20" symbolic="YES" id="Uqh-Ot-PdN"/>
                         <constraint firstAttribute="centerX" secondItem="Ypa-pz-SD4" secondAttribute="centerX" id="bEd-n8-uVO"/>
-                        <constraint firstItem="Ypa-pz-SD4" firstAttribute="top" secondItem="uPB-ME-APc" secondAttribute="top" id="eQ2-lS-T84"/>
+                        <constraint firstItem="Ypa-pz-SD4" firstAttribute="top" secondItem="uPB-ME-APc" secondAttribute="top" constant="5" id="eQ2-lS-T84"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -287,6 +287,6 @@
         </view>
     </objects>
     <resources>
-        <image name="company_logo" width="39" height="29"/>
+        <image name="company_logo" width="666" height="230"/>
     </resources>
 </document>

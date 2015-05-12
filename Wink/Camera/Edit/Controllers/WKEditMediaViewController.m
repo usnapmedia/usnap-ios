@@ -30,7 +30,7 @@
 #import <RSKImageCropViewController.h>
 
 @interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, SSOLoginRegisterDelegate, SSOEditToolDelegate,
-                                         RSKImageCropViewControllerDelegate>
+                                         RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource>
 
 // UI
 @property(weak, nonatomic) IBOutlet UIImageView *watermarkImageView;
@@ -245,8 +245,8 @@
     [cropperVC.cancelButton setTitle:NSLocalizedString(@"crop_cancel_button", nil) forState:UIControlStateNormal];
     [cropperVC.chooseButton setTitle:NSLocalizedString(@"crop_done_button", nil) forState:UIControlStateNormal];
     [cropperVC.moveAndScaleLabel setText:NSLocalizedString(@"crop_title", nil)];
-    // Set the crop rectangle to the image view
-    cropperVC.cropMode = RSKImageCropModeSquare;
+    cropperVC.cropMode = RSKImageCropModeCustom;
+    cropperVC.dataSource = self;
     [self presentViewController:cropperVC animated:YES completion:nil];
 }
 
@@ -350,6 +350,58 @@
                                    completion:^{
                                      self.imageView.image = croppedImage;
                                    }];
+}
+
+#pragma mark - RSKImageCropViewControllerDataSourceDelegate
+
+/**
+ *  Asks the data source a custom rect for the mask.
+ *
+ *  @param CGRect controller The crop view controller object to whom a rect is provided.
+ *
+ *  @return A custom rect for the mask.
+ */
+
+- (CGRect)imageCropViewControllerCustomMaskRect:(RSKImageCropViewController *)controller {
+    // This is to get the maximum size of the mask. It will be always less than 75% of the view
+    CGFloat witdh = self.imageView.image.size.width;
+    CGFloat height = self.imageView.image.size.height;
+    CGFloat maxWitdh = self.imageView.frame.size.width * 0.75;
+    CGFloat maxHeight = self.imageView.frame.size.height * 0.75;
+    do {
+        witdh = witdh / 2;
+        height = height / 2;
+    } while (witdh > maxWitdh && height > maxHeight);
+    CGSize maskSize = CGSizeMake(witdh, height);
+    CGFloat viewWidth = CGRectGetWidth(controller.view.frame);
+    CGFloat viewHeight = CGRectGetHeight(controller.view.frame);
+    // The image will always have the same aspect of the photo
+    return CGRectMake((viewWidth - maskSize.width) * 0.5f, (viewHeight - maskSize.height) * 0.5f, maskSize.width, maskSize.height);
+}
+
+/**
+ *  Asks the data source a custom path for the mask.
+ *
+ *  @param controller controller The crop view controller object to whom a path is provided.
+ *
+ *  @return A custom path for the mask.
+ */
+
+- (UIBezierPath *)imageCropViewControllerCustomMaskPath:(RSKImageCropViewController *)controller {
+    CGRect rect = controller.maskRect;
+    // All the points of the image
+    CGPoint point1 = CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
+    CGPoint point2 = CGPointMake(CGRectGetMaxX(rect), CGRectGetMinY(rect));
+    CGPoint point3 = CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
+    CGPoint point4 = CGPointMake(CGRectGetMinX(rect), CGRectGetMaxY(rect));
+    // Drawing the image
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:point1];
+    [path addLineToPoint:point2];
+    [path addLineToPoint:point3];
+    [path addLineToPoint:point4];
+    [path closePath];
+    return path;
 }
 
 #pragma mark - SSOEditViewControllerProtocol

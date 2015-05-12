@@ -8,7 +8,7 @@
 
 #import "SSORecentPhotosViewController.h"
 #import "SSODynamicCellSizeCollectionViewProvider.h"
-#import "SSOUSnapButton.h"
+#import "SSOUSnapLightButton.h"
 #import "SSOGrayBackgroundWithBorderView.h"
 #import <Masonry.h>
 #import "SSOPhotoDetailViewController.h"
@@ -24,9 +24,9 @@ NSInteger const kRecentPhotosCellOffset = 10;
 @property(strong, nonatomic) UIView *overlayView;
 @property(strong, nonatomic) UIActivityIndicatorView *loadingSpinner;
 @property(strong, nonatomic) SSODynamicCellSizeCollectionViewProvider *provider;
-@property(strong, nonatomic) SSOGrayBackgroundWithBorderView *topView;
+@property(strong, nonatomic) UIView *topView;
 @property(strong, nonatomic) UILabel *titleLabel;
-@property(strong, nonatomic) SSOUSnapButton *seeAllButton;
+@property(strong, nonatomic) SSOUSnapLightButton *seeAllButton;
 
 @end
 
@@ -51,11 +51,11 @@ NSInteger const kRecentPhotosCellOffset = 10;
  *  Initialize the data of the VC
  */
 - (void)initializeData {
-    self.topView = [SSOGrayBackgroundWithBorderView new];
+    self.topView = [UIView new];
     self.titleLabel = [UILabel new];
-    self.titleLabel.text = [NSLocalizedString(@"fan-page.recent-photos.title-label", @"Recent photos title") uppercaseString];
-    self.seeAllButton = [SSOUSnapButton new];
-    [self.seeAllButton setTitle:[NSLocalizedString(@"fan-page.see-all-button", @"See all button title") uppercaseString] forState:UIControlStateNormal];
+    self.titleLabel.text = NSLocalizedString(@"fan-page.recent-photos.title-label", @"Recent photos title");
+    self.seeAllButton = [SSOUSnapLightButton new];
+    [self.seeAllButton setTitle:NSLocalizedString(@"fan-page.see-all-button", @"See all button title") forState:UIControlStateNormal];
     [self.seeAllButton addTarget:self action:@selector(seeAllTopSnapsAction) forControlEvents:UIControlEventTouchUpInside];
 
     // Set the flow layout
@@ -98,13 +98,13 @@ NSInteger const kRecentPhotosCellOffset = 10;
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
       make.bottom.equalTo(self.topView.mas_bottom).with.offset(-5);
-      make.left.equalTo(self.topView).with.offset(kConstraintOffset);
+      make.left.equalTo(self.topView);
       make.right.equalTo(self.seeAllButton.mas_left).with.offset(-kConstraintOffset);
 
     }];
 
     [self.seeAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.bottom.equalTo(self.topView.mas_bottom).with.offset(-5);
+      make.bottom.equalTo(self.topView.mas_bottom).with.offset(-2);
       make.right.equalTo(self.topView).with.offset(-kConstraintOffset);
       make.width.equalTo([NSNumber numberWithInteger:kButtonWidthConstraint]);
     }];
@@ -114,8 +114,8 @@ NSInteger const kRecentPhotosCellOffset = 10;
       make.top.equalTo(self.topView.mas_bottom);
     }];
 
-    self.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
-    self.seeAllButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:10];
+    self.titleLabel.font = [SSOThemeHelper avenirLightFontWithSize:19];
+    self.seeAllButton.titleLabel.font = [SSOThemeHelper avenirLightFontWithSize:14];
 }
 
 /**
@@ -169,7 +169,6 @@ NSInteger const kRecentPhotosCellOffset = 10;
 
 - (void)seeAllTopSnapsAction {
     SSOSnapViewController *snapVC = [SSOSnapViewController new];
-
     [self.navigationController pushViewController:snapVC animated:YES];
 }
 
