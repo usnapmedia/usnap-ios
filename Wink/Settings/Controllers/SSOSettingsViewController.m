@@ -35,6 +35,11 @@
 @property(weak, nonatomic) IBOutlet UIButton *saveButton;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidthConstraint;
 
+@property (weak, nonatomic) IBOutlet UILabel *personalTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *socialTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *supportTitleLabel;
+
+
 @property(strong, nonatomic) NSDate *birthday;
 
 @end
@@ -47,6 +52,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self initializeUI];
+    [self setLabels];
+    [self setButtons];
     [self setData];
     [self setDatePicker];
     [self setupSocialButtons];
@@ -60,12 +67,9 @@
  */
 
 - (void)initializeUI {
-    self.personalTopBarView.backgroundColor = [SSOThemeHelper thirdColor];
     self.avatarView.backgroundColor = [SSOThemeHelper firstColor];
     self.avatarView.layer.cornerRadius = 5;
     self.avatarView.layer.masksToBounds = YES;
-    self.socialTopBarView.backgroundColor = [SSOThemeHelper thirdColor];
-    self.supportTopBarView.backgroundColor = [SSOThemeHelper thirdColor];
     [self.helpCenterButton setBackgroundColor:[SSOThemeHelper thirdColor]];
     self.helpCenterButton.layer.cornerRadius = 2;
     self.helpCenterButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
@@ -86,6 +90,24 @@
     self.userNameTextField.enabled = NO;
     self.birthdayTextField.enabled = NO;
     self.saveButton.hidden = YES;
+}
+
+- (void)setLabels
+{
+    self.personalTitleLabel.text = NSLocalizedString(@"settings.personal.title", nil);
+    self.socialTitleLabel.text = NSLocalizedString(@"settings.social.title", nil);
+    self.supportTitleLabel.text = NSLocalizedString(@"settings.support.title", nil);
+}
+
+- (void)setButtons
+{
+    [self.twitterButton setTitle:NSLocalizedString(@"settings.social.twitter.button", nil) forState:UIControlStateNormal];
+    [self.facebookButton setTitle:NSLocalizedString(@"settings.social.facebook.button", nil) forState:UIControlStateNormal];
+    [self.googleButton setTitle:NSLocalizedString(@"settings.social.google.button", nil) forState:UIControlStateNormal];
+    [self.helpCenterButton setTitle:NSLocalizedString(@"settings.support.help.button", nil) forState:UIControlStateNormal];
+    [self.reportProblemButton setTitle:NSLocalizedString(@"settings.support.report.button", nil) forState:UIControlStateNormal];
+    [self.logoutButton setTitle:NSLocalizedString(@"settings.support.logout.button", nil) forState:UIControlStateNormal];
+    [self.saveButton setTitle:NSLocalizedString(@"settings.support.save.button", nil) forState:UIControlStateNormal];
 }
 
 #pragma mark - Data

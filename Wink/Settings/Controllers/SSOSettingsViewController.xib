@@ -14,10 +14,13 @@
                 <outlet property="googleButton" destination="hGs-7f-piZ" id="gXi-qu-qOT"/>
                 <outlet property="helpCenterButton" destination="Yg2-Z5-RlD" id="0gW-r2-2Bl"/>
                 <outlet property="logoutButton" destination="xi5-Sp-3ew" id="hWS-Ng-EQw"/>
+                <outlet property="personalTitleLabel" destination="NOh-Bw-qhe" id="eHg-fW-SFw"/>
                 <outlet property="personalTopBarView" destination="3Er-Zb-JHd" id="krH-sG-IX7"/>
                 <outlet property="reportProblemButton" destination="uLo-Ki-z2g" id="KzK-Vi-p5f"/>
                 <outlet property="saveButton" destination="VA3-Q2-8O2" id="9Ce-MO-B0b"/>
+                <outlet property="socialTitleLabel" destination="Vp6-mC-Slf" id="n3L-Ez-YoF"/>
                 <outlet property="socialTopBarView" destination="4Vn-0h-GGS" id="bd9-cn-5Je"/>
+                <outlet property="supportTitleLabel" destination="na4-9v-fwy" id="Rlo-Io-Zjw"/>
                 <outlet property="supportTopBarView" destination="VYf-BB-4h0" id="ler-Eu-J7P"/>
                 <outlet property="twitterButton" destination="lfY-AJ-hpz" id="QCj-J9-WO7"/>
                 <outlet property="userFirstLetterLabel" destination="s6b-Ip-uVq" id="elz-bD-kC3"/>
@@ -106,7 +109,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="kuY-w5-vem" firstAttribute="leading" secondItem="3Er-Zb-JHd" secondAttribute="leading" id="0U5-2X-dHT"/>
                                                         <constraint firstAttribute="bottom" secondItem="kuY-w5-vem" secondAttribute="bottom" id="2Xz-uU-jmm"/>
@@ -234,7 +237,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="ycw-AP-kAl" secondAttribute="bottom" id="3qf-Tk-K5K"/>
                                                         <constraint firstAttribute="height" constant="44" id="Ajt-Se-WUy"/>
@@ -328,7 +331,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="na4-9v-fwy" firstAttribute="leading" secondItem="VYf-BB-4h0" secondAttribute="leading" constant="20" id="G4N-u3-kEg"/>
                                                         <constraint firstItem="QE4-qe-h2Z" firstAttribute="top" secondItem="VYf-BB-4h0" secondAttribute="top" id="J9A-pV-xhy"/>
