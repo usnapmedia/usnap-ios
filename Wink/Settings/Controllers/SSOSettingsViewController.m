@@ -33,6 +33,7 @@
 @property(weak, nonatomic) IBOutlet UIButton *reportProblemButton;
 @property(weak, nonatomic) IBOutlet UIButton *logoutButton;
 @property(weak, nonatomic) IBOutlet UIButton *saveButton;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidthConstraint;
 
 @property(strong, nonatomic) NSDate *birthday;
 
@@ -77,7 +78,10 @@
     [self.reportProblemButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [self.logoutButton setBackgroundColor:[SSOThemeHelper firstColor]];
     self.logoutButton.layer.cornerRadius = 2;
-
+    // The Scrollview needs a width. This will set the width to be the same width of the device
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    self.viewWidthConstraint.constant = screenWidth;
     //@FIXME: The user can't update his information on this version
     self.userNameTextField.enabled = NO;
     self.birthdayTextField.enabled = NO;
