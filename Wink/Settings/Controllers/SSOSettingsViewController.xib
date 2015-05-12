@@ -86,7 +86,7 @@
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N8s-Be-lsW">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cE3-Dt-bHk">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cE3-Dt-bHk" userLabel="Scroll content view">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="454"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PzD-D2-zCm">
@@ -422,6 +422,11 @@
                                         <constraint firstAttribute="trailing" secondItem="PzD-D2-zCm" secondAttribute="trailing" id="qlo-J3-keD"/>
                                         <constraint firstItem="PzD-D2-zCm" firstAttribute="leading" secondItem="cE3-Dt-bHk" secondAttribute="leading" id="sdM-Do-1zx"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="S5l-09-lcp"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                             </subviews>
                             <constraints>
@@ -434,6 +439,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="width" secondItem="cE3-Dt-bHk" secondAttribute="width" id="5p3-w0-Rlc"/>
                         <constraint firstAttribute="bottom" secondItem="N8s-Be-lsW" secondAttribute="bottom" id="bEj-aK-S6j"/>
                         <constraint firstAttribute="trailing" secondItem="N8s-Be-lsW" secondAttribute="trailing" id="hq6-6B-f85"/>
                         <constraint firstItem="N8s-Be-lsW" firstAttribute="leading" secondItem="pPd-hD-GFh" secondAttribute="leading" id="rbG-XD-N17"/>

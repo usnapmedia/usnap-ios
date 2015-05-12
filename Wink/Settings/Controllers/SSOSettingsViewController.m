@@ -33,12 +33,10 @@
 @property(weak, nonatomic) IBOutlet UIButton *reportProblemButton;
 @property(weak, nonatomic) IBOutlet UIButton *logoutButton;
 @property(weak, nonatomic) IBOutlet UIButton *saveButton;
-@property(weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidthConstraint;
 
-@property (weak, nonatomic) IBOutlet UILabel *personalTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *socialTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *supportTitleLabel;
-
+@property(weak, nonatomic) IBOutlet UILabel *personalTitleLabel;
+@property(weak, nonatomic) IBOutlet UILabel *socialTitleLabel;
+@property(weak, nonatomic) IBOutlet UILabel *supportTitleLabel;
 
 @property(strong, nonatomic) NSDate *birthday;
 
@@ -57,6 +55,10 @@
     [self setData];
     [self setDatePicker];
     [self setupSocialButtons];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self initializeData];
 }
 
@@ -67,40 +69,48 @@
  */
 
 - (void)initializeUI {
+    // Set the avatar view
     self.avatarView.backgroundColor = [SSOThemeHelper firstColor];
     self.avatarView.layer.cornerRadius = 5;
     self.avatarView.layer.masksToBounds = YES;
+
+    // Set the help center button
     [self.helpCenterButton setBackgroundColor:[SSOThemeHelper thirdColor]];
     self.helpCenterButton.layer.cornerRadius = 2;
     self.helpCenterButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.helpCenterButton.layer.borderWidth = 1;
     [self.helpCenterButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+
+    // Set the report problem button
     [self.reportProblemButton setBackgroundColor:[SSOThemeHelper thirdColor]];
     self.reportProblemButton.layer.cornerRadius = 2;
     self.reportProblemButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.reportProblemButton.layer.borderWidth = 1;
     [self.reportProblemButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+
+    // Set logout button
     [self.logoutButton setBackgroundColor:[SSOThemeHelper firstColor]];
     self.logoutButton.layer.cornerRadius = 2;
-    // The Scrollview needs a width. This will set the width to be the same width of the device
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    self.viewWidthConstraint.constant = screenWidth;
+
     //@FIXME: The user can't update his information on this version
     self.userNameTextField.enabled = NO;
     self.birthdayTextField.enabled = NO;
     self.saveButton.hidden = YES;
 }
 
-- (void)setLabels
-{
+/**
+ *  Set the labels text
+ */
+- (void)setLabels {
     self.personalTitleLabel.text = NSLocalizedString(@"settings.personal.title", nil);
     self.socialTitleLabel.text = NSLocalizedString(@"settings.social.title", nil);
     self.supportTitleLabel.text = NSLocalizedString(@"settings.support.title", nil);
 }
 
-- (void)setButtons
-{
+/**
+ *  Set the buttons text
+ */
+- (void)setButtons {
     [self.twitterButton setTitle:NSLocalizedString(@"settings.social.twitter.button", nil) forState:UIControlStateNormal];
     [self.facebookButton setTitle:NSLocalizedString(@"settings.social.facebook.button", nil) forState:UIControlStateNormal];
     [self.googleButton setTitle:NSLocalizedString(@"settings.social.google.button", nil) forState:UIControlStateNormal];
@@ -110,6 +120,17 @@
     [self.saveButton setTitle:NSLocalizedString(@"settings.support.save.button", nil) forState:UIControlStateNormal];
 }
 
+/**
+ *  Set the date picker for the birthday
+ */
+- (void)setDatePicker {
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    [datePicker setDate:[NSDate date]];
+    [datePicker addTarget:self action:@selector(updateDatePicker:) forControlEvents:UIControlEventValueChanged];
+    [self.birthdayTextField setInputView:datePicker];
+}
+
 #pragma mark - Data
 
 /**
@@ -117,25 +138,28 @@
  */
 
 - (void)setData {
+    // Get the username
     NSString *name = [[SSSessionManager sharedInstance] username];
+    // If the user is logged in, display their first letter
     if (name) {
-        NSString *firstLetter = [name substringToIndex:1];
-        firstLetter = [firstLetter uppercaseString];
-        self.userFirstLetterLabel.text = firstLetter;
-        self.userNameTextField.text = name;
+        [self setUserFirstLetter:name];
     } else {
-
-        self.userFirstLetterLabel.text = @"?";
+        // Set the name as ?
+        [self setUserFirstLetter:@"?"];
     }
 }
 
+/**
+ *  Initialize the data
+ */
 - (void)initializeData {
+    // Update the user information
     [SSOUserConnect getUserInformationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
       SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOUser class]];
       NSAssert([[items.response firstObject] isKindOfClass:[SSOUser class]], @"User data has to be a SSOUser class");
       if ([[items.response firstObject] isKindOfClass:[SSOUser class]]) {
           SSOUser *user = [items.response firstObject];
-          [self setUserFirstLetter:user.firstName];
+
           self.userNameTextField.text = [NSString stringWithFormat:@"%@", user.username];
           NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
           [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -154,6 +178,8 @@
  */
 
 - (void)setupSocialButtons {
+
+    //@TODO This should be generic
     [self.facebookButton setState:[[SSOSocialNetworkAPI sharedInstance] isUsnapConnectedToSocialNetwork:facebookSocialNetwork]
                  forSocialNetwork:facebookSocialNetwork];
     self.facebookButton.tag = facebookSocialNetwork;
@@ -170,14 +196,6 @@
 
     self.googleButton.tag = googleSocialNetwork;
     [self.googleButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void)setDatePicker {
-    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-    datePicker.datePickerMode = UIDatePickerModeDate;
-    [datePicker setDate:[NSDate date]];
-    [datePicker addTarget:self action:@selector(updateDatePicker:) forControlEvents:UIControlEventValueChanged];
-    [self.birthdayTextField setInputView:datePicker];
 }
 
 /**
