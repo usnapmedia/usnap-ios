@@ -8,6 +8,7 @@
 
 #import "SSOFanPageViewController.h"
 #import "SSOCampaignTopViewControllerContainer.h"
+#import "SSSessionManager.h"
 #import "WKWinkConnect.h"
 #import "SSOCountableItems.h"
 #import "SSOSnap.h"
@@ -15,6 +16,7 @@
 #import "SSORecentPhotosViewController.h"
 #import "SSOFeedConnect.h"
 #import "SSOThemeHelper.h"
+#import "SSOScreenSizeHelper.h"
 #import <Masonry.h>
 
 @interface SSOFanPageViewController () <TopContainerFanPageDelegate>
@@ -49,12 +51,17 @@
     [self initializeTopPhotosController];
     [self initializeRecentPhotosController];
 
-    // Load the data
+    // Do any additional setup after loading the view.
+    // Load the campaigns
     [self loadCampaigns];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    // Load the data
     [self loadTopPhotos];
     [self loadRecentPhotos];
-
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,6 +77,11 @@
 }
 
 - (void)initializeCampaignTopViewControllerWithCampaigns:(NSArray *)campaigns {
+    // Set the height of
+    [self.campaignViewControllerContainer mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.height.equalTo([NSNumber numberWithFloat:[SSOScreenSizeHelper campaignViewControllerHeightConstraint]]);
+    }];
+
     // Set child VC
     SSOCampaignTopViewControllerContainer *containerVC = [[SSOCampaignTopViewControllerContainer alloc] initWithArrayOfCampaigns:campaigns];
     containerVC.delegate = self;
@@ -185,6 +197,10 @@
  *  @param newCampaign the new campaign displayed
  */
 - (void)topViewControllerDidChangeForNewCampaign:(SSOCampaign *)newCampaign {
+
+    // Set the new campagin ID
+    [[SSSessionManager sharedInstance] setCampaignID:newCampaign.id];
+
     self.currentCampaign = newCampaign;
     // Load new photos
     [self loadTopPhotos];

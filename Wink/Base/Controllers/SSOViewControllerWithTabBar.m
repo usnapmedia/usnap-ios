@@ -8,7 +8,6 @@
 
 #import "SSOViewControllerWithTabBar.h"
 #import "SSOFanPageViewController.h"
-#import "WKSettingsViewController.h"
 #import "SSOProfileViewController.h"
 #import "SSOFanPageViewController.h"
 #import "SSOProfileViewController.h"
@@ -23,6 +22,7 @@ CGFloat const kTabBarOpacity = 0.90;
 @interface SSOViewControllerWithTabBar ()
 
 @property(strong, nonatomic) UIView *customTabBar;
+@property(strong, nonatomic) UIButton *homeButton;
 
 @property(strong, nonatomic) NSArray *viewControllers;
 @property(nonatomic) NSInteger selectedIndex;
@@ -37,9 +37,12 @@ CGFloat const kTabBarOpacity = 0.90;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
     [self setInitalViewControllers];
     [self setTabBar];
     [self startFirstViewController];
+    [self setNotification];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,6 +106,7 @@ CGFloat const kTabBarOpacity = 0.90;
     [homeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [homeButton addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.customTabBar addSubview:homeButton];
+    self.homeButton = homeButton;
 
     UIButton *cameraButton = [UIButton new];
     [cameraButton setImage:[UIImage imageNamed:@"ic_camera"] forState:UIControlStateNormal];
@@ -150,7 +154,8 @@ CGFloat const kTabBarOpacity = 0.90;
  */
 
 - (CGRect)containerViewFrame {
-    return CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - kTabBarHeight);
+    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    return CGRectMake(self.view.frame.origin.x, statusBarHeight, self.view.frame.size.width, self.view.frame.size.height - kTabBarHeight - statusBarHeight);
 }
 
 /**
@@ -178,6 +183,24 @@ CGFloat const kTabBarOpacity = 0.90;
           [oldVC removeFromParentViewController];
           [newVC didMoveToParentViewController:self];
         }];
+}
+
+/**
+ *  Set a notification to return to the fanpage VC when the user shares a content
+ */
+
+- (void)setNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToFanPageVC) name:kReturnToFanPageVC object:nil];
+}
+
+/**
+ *  Return to Fan Page
+ */
+
+- (void)returnToFanPageVC {
+    [self homeButtonPressed:self.homeButton];
+    UINavigationController *navigationVC = [self.viewControllers firstObject];
+    [navigationVC popToRootViewControllerAnimated:NO];
 }
 
 #pragma mark - Action
@@ -217,11 +240,8 @@ CGFloat const kTabBarOpacity = 0.90;
 - (void)cameraButtonPressed:(id)sender {
     UINavigationController *cameraNavigationController = [[UIStoryboard cameraStoryboard] instantiateInitialViewController];
     [self presentViewController:cameraNavigationController animated:YES completion:nil];
-
-    //  UIButton *button = (UIButton *)sender;
-    // [self unselectedButtonsTabBarWithSender:button];
-    //  button.selected = !button.isSelected;
 }
+
 /**
  *  When the profile button is pressed, simply switch the view
  *

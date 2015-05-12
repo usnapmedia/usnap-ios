@@ -35,6 +35,8 @@
 
     [self setUI];
     // Do any additional setup after loading the view from its nib.
+    
+    self.dateLabel.hidden = YES;//@FIXME 
 }
 
 - (void)didReceiveMemoryWarning {

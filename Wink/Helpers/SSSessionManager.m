@@ -16,6 +16,7 @@
 @property(nonatomic) BOOL isUserLoggedIn;
 @property(strong, nonatomic, readwrite) NSString *username;
 @property(strong, nonatomic, readwrite) NSString *password;
+@property(strong, nonatomic, readwrite) NSString *campaignID;
 
 @end
 
@@ -70,6 +71,11 @@
     return [SSKeychain deletePasswordForService:kUSnapKeychainServiceKey account:email];
 }
 
+- (void)setCampaignID:(NSString *)campaignID {
+    _campaignID = campaignID;
+    [NSUserDefaults setCurrentCampaign:campaignID];
+}
+
 #pragma mark - Getters
 
 - (BOOL)isUserLoggedIn {
@@ -83,10 +89,13 @@
 #pragma mark - Session methods
 
 - (void)initializeData {
+    // Set the current campaign ID
+    _campaignID = [NSUserDefaults currentCampaignID];
+
     // Initialize the data from the user default and  keychain
     if ([NSUserDefaults isUserLoggedIn]) {
         _isUserLoggedIn = YES;
-        _username = [NSUserDefaults loggedInUserEmail];
+        _username = [NSUserDefaults loggedInUsername];
         _password = [self getSecuredPasswordForAccount:self.username];
     } else {
         _isUserLoggedIn = NO;
@@ -97,7 +106,7 @@
     // delete password in Keychain
     [self deletePasswordForAccount:_username];
     // delete email in NSUserDefaults
-    
+
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kEmailLoggedString];
 
     // put user is logged to NO

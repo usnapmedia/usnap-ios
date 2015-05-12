@@ -9,6 +9,9 @@
 #import "SSOScreenSizeHelper.h"
 #import <SDiPhoneVersion.h>
 
+CGFloat const kImageWidthToHeightRatio = 0.4f;
+NSInteger const kCampaignCellLabelHeight = 40;
+
 @implementation SSOScreenSizeHelper
 
 + (NSNumber *)bottomMarginForTextField {
@@ -47,6 +50,15 @@
     }
 
     return height;
+}
+
++ (CGFloat)campaignViewControllerHeightConstraint {
+    // Get the screen size
+    CGSize screenSize = kScreenSize;
+    // Calculate the image height based on the given ratio
+    CGFloat imageHeight = screenSize.width * kImageWidthToHeightRatio;
+    // Add the size of the label to get the total height
+    return kCampaignCellLabelHeight + imageHeight;
 }
 
 @end

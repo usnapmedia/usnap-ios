@@ -58,6 +58,7 @@ NSString *const kUSnapKeychainServiceKey = @"kUSnapKeychainServiceKey";
 
 NSString *const kIsUserLoggedIn = @"kIsUserLoggedIn";
 NSString *const kEmailLoggedString = @"kEmailLoggedString";
+NSString *const kCurrentCampaignID = @"kCurrentCampaignID";
 
 #pragma mark - Storyboard
 
@@ -80,3 +81,7 @@ NSString *const kImageCollectionViewCell = @"imageCollectionViewCell";
 NSString *const kImageCollectionViewCellNib = @"SSOImageCollectionViewCell";
 NSString *const kPhotosCollectionViewCell = @"PhotosCollectionViewCell";
 NSString *const kPhotosNibNameCollectionViewCell = @"SSOPhotosCollectionViewCell";
+
+#pragma mark - Notifications
+
+NSString *const kReturnToFanPageVC = @"ReturnToFanPageVC";

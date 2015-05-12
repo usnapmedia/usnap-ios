@@ -29,7 +29,7 @@
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSString *url = [NSString stringWithFormat:@"login"];
     SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
-    [manager POST:url parameters:@{ @"email" : email, @"password" : password } success:success failure:failure];
+    [manager POST:url parameters:@{ @"username" : email, @"password" : password } success:success failure:failure];
 }
 
 + (void)winkConnectRegisterWithEmail:(NSString *)email
@@ -89,6 +89,10 @@
     NSString *temporaryFileName = [NSString stringWithFormat:@"image%i.jpg", randomNumber];
     NSMutableDictionary *parameters = [[SSOSocialNetworkAPI sharedInstance] connectedSocialNetworkAPIParameters].mutableCopy;
     [parameters addEntriesFromDictionary:@{ @"text" : text, @"meta" : meta }];
+    // If the user participate in a campaign, send it
+    if ([SSSessionManager sharedInstance].campaignID) {
+        [parameters addEntriesFromDictionary:@{ @"campaign_id" : [SSSessionManager sharedInstance].campaignID }];
+    }
 
     [manager POST:url parameters:parameters
         constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -98,14 +102,12 @@
 
 + (void)getCampaignsWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    
+
     NSString *url = [NSString stringWithFormat:@"campaigns"];
-    
+
     SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
-    
+
     [manager GET:url parameters:nil success:success failure:failure];
 }
-
-
 
 @end

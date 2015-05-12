@@ -58,6 +58,7 @@ extern NSString *const kIsFirstLogin;
 extern NSString *const kIsFirstLoginDate;
 extern NSString *const kIsUserLoggedIn;
 extern NSString *const kEmailLoggedString;
+extern NSString *const kCurrentCampaignID;
 
 // Keychain
 extern NSString *const kUSnapKeychainServiceKey;
@@ -91,3 +92,7 @@ extern NSString *const kImageCollectionViewCell;
 extern NSString *const kImageCollectionViewCellNib;
 extern NSString *const kPhotosCollectionViewCell;
 extern NSString *const kPhotosNibNameCollectionViewCell;
+
+#pragma mark - Notifications
+
+extern NSString *const kReturnToFanPageVC;

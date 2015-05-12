@@ -35,9 +35,6 @@
 
     [self setUpPickerViewForBirthday];
     self.buttonSignUp.layer.cornerRadius = 4;
-    self.bottomViewHeightConstraint.constant = [SSOScreenSizeHelper heightForRegisterBottomView].floatValue;
-
-    NSLog(@"%f", self.bottomViewHeightConstraint.constant);
 }
 
 /**

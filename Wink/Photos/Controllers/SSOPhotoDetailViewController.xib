@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -121,7 +121,7 @@
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="company_logo" translatesAutoresizingMaskIntoConstraints="NO" id="OxN-hD-8yB">
-                            <rect key="frame" x="168" y="0.0" width="39" height="40"/>
+                            <rect key="frame" x="43" y="5" width="289" height="30"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -130,10 +130,10 @@
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OxN-hD-8yB" secondAttribute="trailing" constant="20" symbolic="YES" id="HPM-jw-vkF"/>
                         <constraint firstAttribute="bottom" secondItem="HcI-bq-n3j" secondAttribute="bottom" constant="5" id="Nrf-5y-n3Z"/>
                         <constraint firstItem="HcI-bq-n3j" firstAttribute="top" secondItem="LXv-Xk-25O" secondAttribute="top" constant="5" id="TZH-L6-emd"/>
-                        <constraint firstItem="OxN-hD-8yB" firstAttribute="top" secondItem="LXv-Xk-25O" secondAttribute="top" id="k3J-6G-1vg"/>
+                        <constraint firstItem="OxN-hD-8yB" firstAttribute="top" secondItem="LXv-Xk-25O" secondAttribute="top" constant="5" id="k3J-6G-1vg"/>
                         <constraint firstAttribute="centerX" secondItem="OxN-hD-8yB" secondAttribute="centerX" id="oCY-ah-QtZ"/>
                         <constraint firstItem="OxN-hD-8yB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HcI-bq-n3j" secondAttribute="trailing" constant="8" symbolic="YES" id="ph3-E4-d2U"/>
-                        <constraint firstAttribute="bottom" secondItem="OxN-hD-8yB" secondAttribute="bottom" id="tua-Bu-Yvc"/>
+                        <constraint firstAttribute="bottom" secondItem="OxN-hD-8yB" secondAttribute="bottom" constant="5" id="tua-Bu-Yvc"/>
                         <constraint firstItem="HcI-bq-n3j" firstAttribute="leading" secondItem="LXv-Xk-25O" secondAttribute="leading" constant="5" id="zjd-Kg-5kY"/>
                     </constraints>
                 </view>
@@ -160,7 +160,7 @@
         </view>
     </objects>
     <resources>
-        <image name="company_logo" width="39" height="29"/>
+        <image name="company_logo" width="666" height="230"/>
         <image name="ic_arrow-left" width="12" height="21"/>
     </resources>
 </document>
