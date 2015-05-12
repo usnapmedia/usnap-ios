@@ -136,6 +136,13 @@
 
 #pragma mark - SSOProviderDelegate
 
+/**
+ *  When the user tap on the photo, it will display the details of the photo
+ *
+ *  @param provider  provider
+ *  @param indexPath index of the row
+ */
+
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SSOCustomCellSizeCollectionViewProvider *prov = provider;
     if ([[prov.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
