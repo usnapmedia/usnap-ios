@@ -39,9 +39,19 @@
     return [UIFont fontWithName:@"Avenir-Heavy" size:size];
 }
 
++ (UIFont *)avenirLightFontWithSize:(CGFloat)size {
+
+    return [UIFont fontWithName:@"Avenir-Light" size:size];
+}
+
 + (UIFont *)helveticaNeueFontWithSize:(CGFloat)size {
 
     return [UIFont fontWithName:@"HelveticaNeue" size:size];
+}
+
++ (UIFont *)helveticaNeueLightFontWithSize:(CGFloat)size {
+
+    return [UIFont fontWithName:@"HelveticaNeue-Light" size:size];
 }
 
 + (UIFont *)yummyCupcakesFontWithSize:(CGFloat)size {

@@ -65,17 +65,17 @@
                                             </variation>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FEL-hX-FE3" userLabel="Live photos container view">
-                                            <rect key="frame" x="0.0" y="388" width="375" height="200"/>
+                                            <rect key="frame" x="0.0" y="368" width="375" height="220"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="200" id="7ok-5B-Nuh"/>
+                                                <constraint firstAttribute="height" constant="220" id="7ok-5B-Nuh"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RB5-gd-VX2" userLabel="Top photos container view">
-                                            <rect key="frame" x="0.0" y="188" width="375" height="200"/>
+                                            <rect key="frame" x="0.0" y="188" width="375" height="180"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="200" id="Dad-Ua-Nk7"/>
+                                                <constraint firstAttribute="height" constant="180" id="Dad-Ua-Nk7"/>
                                             </constraints>
                                         </view>
                                     </subviews>

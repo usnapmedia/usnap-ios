@@ -8,7 +8,7 @@
 
 #import "SSOTopPhotosViewController.h"
 #import "SSOCustomCellSizeCollectionViewProvider.h"
-#import "SSOUSnapButton.h"
+#import "SSOUSnapLightButton.h"
 #import "SSOGrayBackgroundWithBorderView.h"
 #import "SSOSnapViewController.h"
 #import "SSOFanPageViewController.h"
@@ -16,14 +16,14 @@
 #import "SSOPhotoDetailViewController.h"
 #import "SSOThemeHelper.h"
 
-NSInteger const kTopPhotosCellWidth = 100;
+NSInteger const kTopPhotosCellTextHeight = 40;
 // NSInteger const kTopPhotosCellOffset = 5;
 
 @interface SSOTopPhotosViewController () <SSOProviderDelegate>
 
 @property(strong, nonatomic) UIView *topView;
 @property(strong, nonatomic) UILabel *titleLabel;
-@property(strong, nonatomic) SSOUSnapButton *seeAllButton;
+@property(strong, nonatomic) SSOUSnapLightButton *seeAllButton;
 
 @end
 
@@ -46,7 +46,7 @@ NSInteger const kTopPhotosCellWidth = 100;
     self.topView = [UIView new];
     self.titleLabel = [UILabel new];
     self.titleLabel.text = NSLocalizedString(@"fan-page.top-photos.title-label", @"Top 10 title");
-    self.seeAllButton = [SSOUSnapButton new];
+    self.seeAllButton = [SSOUSnapLightButton new];
     [self.seeAllButton setTitle:NSLocalizedString(@"fan-page.see-all-button", @"See all button title") forState:UIControlStateNormal];
     self.provider.delegate = self;
     [self.seeAllButton addTarget:self action:@selector(seeAllTopSnapsAction) forControlEvents:UIControlEventTouchUpInside];
@@ -84,7 +84,7 @@ NSInteger const kTopPhotosCellWidth = 100;
     }];
 
     [self.seeAllButton mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.bottom.equalTo(self.topView.mas_bottom).with.offset(-5);
+      make.bottom.equalTo(self.topView.mas_bottom).with.offset(-2);
       make.right.equalTo(self.topView).with.offset(-kConstraintOffset);
       make.width.equalTo([NSNumber numberWithInteger:kButtonWidthConstraint]);
     }];
@@ -94,16 +94,15 @@ NSInteger const kTopPhotosCellWidth = 100;
       make.top.equalTo(self.topView.mas_bottom);
     }];
 
-    self.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
-    self.seeAllButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:10];
+    self.titleLabel.font = [SSOThemeHelper avenirLightFontWithSize:19];
+    self.seeAllButton.titleLabel.font = [SSOThemeHelper avenirLightFontWithSize:14];
 }
 
 #pragma mark - Getter
 
 - (CGSize)cellSize {
-    CGFloat viewWidth = (self.view.frame.size.width / 3);
-
-    return CGSizeMake(viewWidth, self.collectionView.frame.size.height);
+    CGFloat cellWidth = self.collectionView.frame.size.height - kTopPhotosCellTextHeight;
+    return CGSizeMake(cellWidth, self.collectionView.frame.size.height);
 }
 
 #pragma mark - IBActions

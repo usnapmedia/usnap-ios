@@ -10,7 +10,6 @@
 #import <SDiPhoneVersion.h>
 
 CGFloat const kImageWidthToHeightRatio = 0.4f;
-NSInteger const kCampaignCellLabelHeight = 40;
 
 @implementation SSOScreenSizeHelper
 
@@ -58,7 +57,7 @@ NSInteger const kCampaignCellLabelHeight = 40;
     // Calculate the image height based on the given ratio
     CGFloat imageHeight = screenSize.width * kImageWidthToHeightRatio;
     // Add the size of the label to get the total height
-    return kCampaignCellLabelHeight + imageHeight;
+    return imageHeight;
 }
 
 @end

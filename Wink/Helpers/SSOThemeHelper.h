@@ -24,6 +24,10 @@
 
 + (UIFont *)avenirHeavyFontWithSize:(CGFloat)size;
 
++ (UIFont *)avenirLightFontWithSize:(CGFloat)size;
+
 + (UIFont *)helveticaNeueFontWithSize:(CGFloat)size;
+
++ (UIFont *)helveticaNeueLightFontWithSize:(CGFloat)size;
 
 @end
