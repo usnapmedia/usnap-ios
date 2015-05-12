@@ -22,6 +22,10 @@
 
 + (UIColor *)thirdSecondaryColor;
 
++ (UIColor *)tabBarColor;
+
++ (UIColor *)tabBarSelectedColor;
+
 + (UIFont *)avenirHeavyFontWithSize:(CGFloat)size;
 
 + (UIFont *)avenirLightFontWithSize:(CGFloat)size;

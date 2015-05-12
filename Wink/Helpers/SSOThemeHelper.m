@@ -34,6 +34,14 @@
     return [UIColor grayColor];
 }
 
++ (UIColor *)tabBarColor {
+    return [UIColor colorWithRed:30.0f / 255.f green:30.0f / 255.f blue:30.0f / 255.f alpha:0.9f];
+}
+
++ (UIColor *)tabBarSelectedColor {
+    return [UIColor colorWithRed:0 green:0 blue:0 alpha:0.9f];
+}
+
 + (UIFont *)avenirHeavyFontWithSize:(CGFloat)size {
 
     return [UIFont fontWithName:@"Avenir-Heavy" size:size];
