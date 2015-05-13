@@ -11,7 +11,7 @@
 #import <Masonry.h>
 #import "SSOPhotoDetailViewController.h"
 
-NSInteger const kPhotosCollectionViewMinimumInteritemSpacing = 0;
+NSInteger const kPhotosCollectionViewMinimumInteritemSpacing = -1;
 NSInteger const kPhotosCollectionViewMinimumLineSpacing = 5;
 NSInteger const kPhotosNumberOfColumnsOfCollectionView = 4;
 NSInteger const KPhotosCollectionViewPadding = 5;
