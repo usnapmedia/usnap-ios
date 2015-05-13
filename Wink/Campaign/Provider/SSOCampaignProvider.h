@@ -17,6 +17,7 @@
  *  @param cell      the new cell
  *  @param indexPath the indexPath
  */
+
 - (void)providerWillEndDragging:(id)provider scrollView:(UIScrollView *)scrollView targetContentOffset:(inout CGPoint *)targetContentOffset;
 
 @end
