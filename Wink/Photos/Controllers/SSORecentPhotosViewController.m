@@ -56,6 +56,7 @@ NSInteger const kRecentPhotosCellOffset = 10;
     self.titleLabel.text = NSLocalizedString(@"fan-page.recent-photos.title-label", @"Recent photos title");
     self.seeAllButton = [SSOUSnapLightButton new];
     [self.seeAllButton setTitle:NSLocalizedString(@"fan-page.see-all-button", @"See all button title") forState:UIControlStateNormal];
+    [self.seeAllButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     [self.seeAllButton addTarget:self action:@selector(seeAllTopSnapsAction) forControlEvents:UIControlEventTouchUpInside];
 
     // Set the flow layout

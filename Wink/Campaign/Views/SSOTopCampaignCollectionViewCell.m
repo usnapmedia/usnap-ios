@@ -13,7 +13,6 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SSOTopCampaignCollectionViewCell () <SSBaseViewCellProtocol>
-@property(weak, nonatomic) IBOutlet UILabel *labelCampaign;
 @property(weak, nonatomic) IBOutlet UIImageView *imageViewCampaign;
 
 @end
@@ -26,13 +25,9 @@
     SSOCampaign *campaign = (SSOCampaign *)cellData;
     // Set the campaign URL object
     NSURL *imgURL = [NSURL URLWithString:campaign.bannerImgUrl];
-
-    self.labelCampaign.text = campaign.name;
-    self.labelCampaign.backgroundColor = [SSOThemeHelper thirdColor];
     [self.imageViewCampaign sd_setImageWithURL:imgURL placeholderImage:nil];
     // As the imageVIew mode is "aspect fill", we need to clip the imageView to the bounds of the view (forbid it to go behind the label too)
     [self.imageViewCampaign setClipsToBounds:YES];
-    self.labelCampaign.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
 }
 
 @end

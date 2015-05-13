@@ -9,6 +9,7 @@
 #import "SSOCampaignTopViewControllerContainer.h"
 #import "WKWinkConnect.h"
 #import "SSOCampaignProvider.h"
+#import "SSOCampaignDetailViewController.h"
 #import <Masonry.h>
 
 #define kTabCollectionViewCellNib @"SSOTopCampaignCollectionViewCell"
@@ -122,6 +123,11 @@
             self.index = item;
         }
     }
+}
+
+- (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SSOCampaignDetailViewController *detailVC = [[SSOCampaignDetailViewController alloc] initWithCampaign:[self.provider.inputData objectAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 @end
