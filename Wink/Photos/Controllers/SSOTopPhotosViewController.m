@@ -61,6 +61,7 @@ NSInteger const kTopPhotosCellTextHeight = 40;
     [self.topView addSubview:self.seeAllButton];
     // Set the see all button constraints
     [self.seeAllButton setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.seeAllButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 2, 0, 2);
 
     // Overide the collectionView flow from superClass and set the desired spacing.
