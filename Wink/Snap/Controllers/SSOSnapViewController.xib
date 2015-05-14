@@ -56,11 +56,11 @@
                     </variation>
                 </view>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="82L-mq-c3C">
-                    <rect key="frame" x="56" y="50" width="209" height="29"/>
+                    <rect key="frame" x="74" y="50" width="173" height="29"/>
                     <segments>
-                        <segment title="PHOTOS"/>
-                        <segment title="VIDEOS"/>
-                        <segment title="ALL"/>
+                        <segment title="Photos"/>
+                        <segment title="Videos"/>
+                        <segment title="All"/>
                     </segments>
                 </segmentedControl>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WXu-0h-nbr">
