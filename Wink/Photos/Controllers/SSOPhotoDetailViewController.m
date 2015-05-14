@@ -23,6 +23,7 @@
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
 @property(weak, nonatomic) IBOutlet SSORoundedBackgroundLabel *circledLetter;
 //@property(weak, nonatomic) IBOutlet SSOEditSideMenuView *socialNetworksView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -35,8 +36,8 @@
 
     [self setUI];
     // Do any additional setup after loading the view from its nib.
-    
-    self.dateLabel.hidden = YES;//@FIXME 
+
+    self.dateLabel.hidden = YES; //@FIXME
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,8 +80,14 @@
         }
 
         self.textLabel.text = (NSString *)self.snap.text;
-        [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.snap.url]];
+        [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
+        
+        
+        [self.activityIndicator startAnimating];
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.snap.watermarkUrl]
+                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                          [self.activityIndicator stopAnimating];
+                                      }];
         [self.imageView setClipsToBounds:YES];
     }
 }

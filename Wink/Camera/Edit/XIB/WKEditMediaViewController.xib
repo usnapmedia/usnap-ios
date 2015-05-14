@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKEditMediaViewController">
@@ -12,7 +12,6 @@
                 <outlet property="sideMenuView" destination="55r-Oa-hPu" id="ZUQ-01-loo"/>
                 <outlet property="topView" destination="cPu-n7-xWr" id="9Xh-na-gNw"/>
                 <outlet property="view" destination="oum-iL-jh4" id="eOR-tD-W8p"/>
-                <outlet property="watermarkImageView" destination="n4j-Ox-gRh" id="fZz-yd-xbj"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -22,34 +21,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ViG-Cy-T47" userLabel="overlay view">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="company_logo" translatesAutoresizingMaskIntoConstraints="NO" id="n4j-Ox-gRh">
-                            <rect key="frame" x="315" y="616" width="40" height="31"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="31" id="XrR-gl-zKf"/>
-                                <constraint firstAttribute="width" constant="40" id="cae-hk-6ps"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="n4j-Ox-gRh" secondAttribute="trailing" constant="20" id="AYL-1V-Poq"/>
-                        <constraint firstAttribute="bottom" secondItem="n4j-Ox-gRh" secondAttribute="bottom" constant="20" id="zTs-1Q-kON"/>
-                    </constraints>
-                    <variation key="heightClass=compact">
-                        <mask key="subviews">
-                            <include reference="n4j-Ox-gRh"/>
-                        </mask>
-                    </variation>
-                    <variation key="heightClass=regular-widthClass=compact">
-                        <mask key="subviews">
-                            <include reference="n4j-Ox-gRh"/>
-                        </mask>
-                        <mask key="constraints">
-                            <include reference="AYL-1V-Poq"/>
-                            <include reference="zTs-1Q-kON"/>
-                        </mask>
-                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPu-n7-xWr" userLabel="topView" customClass="SSOFadingContainerView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -203,7 +175,6 @@
         </view>
     </objects>
     <resources>
-        <image name="company_logo" width="39" height="29"/>
         <image name="ic_arrow-left" width="12" height="21"/>
         <image name="ic_arrow-right" width="12" height="21"/>
     </resources>

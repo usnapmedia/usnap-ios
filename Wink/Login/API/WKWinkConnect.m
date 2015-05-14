@@ -76,7 +76,8 @@
 
     NSString *url = [NSString stringWithFormat:@"share"];
 
-    NSData *imageData = UIImageJPEGRepresentation(imageToPost, 0.5);
+    //@FIXME: Image should be more compressed
+    NSData *imageData = UIImagePNGRepresentation(imageToPost);
 
     SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
     AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
@@ -86,7 +87,7 @@
 
     // TODO: Temporary fix because problem with backend
     int randomNumber = arc4random_uniform(1000);
-    NSString *temporaryFileName = [NSString stringWithFormat:@"image%i.jpg", randomNumber];
+    NSString *temporaryFileName = [NSString stringWithFormat:@"image%i.png", randomNumber];
     NSMutableDictionary *parameters = [[SSOSocialNetworkAPI sharedInstance] connectedSocialNetworkAPIParameters].mutableCopy;
     [parameters addEntriesFromDictionary:@{ @"text" : text, @"meta" : meta }];
     // If the user participate in a campaign, send it

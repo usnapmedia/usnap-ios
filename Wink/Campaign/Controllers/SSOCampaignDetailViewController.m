@@ -10,6 +10,7 @@
 #import "SSOUSnapLightButton.h"
 #import "SSOThemeHelper.h"
 #import "SSOScreenSizeHelper.h"
+#import "SSSessionManager.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Masonry.h>
 
@@ -40,6 +41,13 @@
     [self initializeUI];
     [self setLabels];
     [self initializeData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //This might cause a problem if the user goes back to the fan page VC
+    [[SSSessionManager sharedInstance] setCampaignID:self.campaign.id];
 }
 
 - (instancetype)initWithCampaign:(SSOCampaign *)campaign {

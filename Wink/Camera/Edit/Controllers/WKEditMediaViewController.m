@@ -33,7 +33,6 @@
                                          RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource>
 
 // UI
-@property(weak, nonatomic) IBOutlet UIImageView *watermarkImageView;
 @property(weak, nonatomic) IBOutlet UIButton *postButton;
 @property(weak, nonatomic) IBOutlet UIButton *backButton;
 @property(weak, nonatomic) IBOutlet SSOEditSideMenuView *sideMenuView;
@@ -440,7 +439,6 @@
     if (!_textView) {
         // Setup the text view
         _textView = [[SSOEditMediaMovableTextView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.overlayView.frame.size.width, 70.0f)];
-        [self.overlayView insertSubview:_textView belowSubview:self.watermarkImageView];
     }
     return _textView;
 }

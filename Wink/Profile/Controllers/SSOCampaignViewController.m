@@ -7,6 +7,8 @@
 //
 
 #import "SSOCampaignViewController.h"
+#import "SSOCampaign.h"
+#import "SSOCampaignDetailViewController.h"
 #import <SSOSimpleTableViewProvider.h>
 #import <Masonry.h>
 
@@ -14,7 +16,7 @@ NSString *const kCampaignTableViewCell = @"CampaignTableViewCell";
 NSString *const kCampaignNibNameTableViewCell = @"SSOCampaignTableViewCell";
 CGFloat const kTableViewCellHeight = 125.0f;
 
-@interface SSOCampaignViewController ()
+@interface SSOCampaignViewController () <SSOProviderDelegate>
 
 @property(strong, nonatomic) UITableView *tableView;
 @property(strong, nonatomic) SSOSimpleTableViewProvider *provider;
@@ -54,6 +56,7 @@ CGFloat const kTableViewCellHeight = 125.0f;
     self.provider.cellReusableIdentifier = kCampaignTableViewCell;
     self.tableView.delegate = self.provider;
     self.tableView.dataSource = self.provider;
+    self.provider.delegate = self;
 }
 
 #pragma mark - UI
@@ -65,6 +68,17 @@ CGFloat const kTableViewCellHeight = 125.0f;
 - (void)setCampaignData:(NSArray *)data {
     self.provider.inputData = [NSMutableArray arrayWithArray:data];
     [self.tableView reloadData];
+}
+
+#pragma mark - SSOProviderDelegate
+
+- (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOCampaign class]]) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        SSOCampaignDetailViewController *detailVC =
+            [[SSOCampaignDetailViewController alloc] initWithCampaign:[self.provider.inputData objectAtIndex:indexPath.row]];
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSOPhotoDetailViewController">
             <connections>
+                <outlet property="activityIndicator" destination="pZM-yw-qwd" id="l14-8K-CEg"/>
                 <outlet property="backButton" destination="HcI-bq-n3j" id="L2K-W7-qNm"/>
                 <outlet property="circledLetter" destination="PM0-0i-sXG" id="7i2-3k-sPU"/>
                 <outlet property="dateLabel" destination="57v-xt-hZX" id="ke5-Yf-PN1"/>
@@ -101,8 +102,8 @@
                         </mask>
                     </variation>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mkj-vf-u5B">
-                    <rect key="frame" x="0.0" y="110" width="375" height="477"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mkj-vf-u5B">
+                    <rect key="frame" x="10" y="110" width="355" height="477"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LXv-Xk-25O">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
@@ -137,6 +138,9 @@
                         <constraint firstItem="HcI-bq-n3j" firstAttribute="leading" secondItem="LXv-Xk-25O" secondAttribute="leading" constant="5" id="zjd-Kg-5kY"/>
                     </constraints>
                 </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pZM-yw-qwd">
+                    <rect key="frame" x="177" y="339" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -148,10 +152,12 @@
                 <constraint firstItem="LXv-Xk-25O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="X03-NE-5d3"/>
                 <constraint firstItem="Uf0-SL-nmC" firstAttribute="top" secondItem="Mkj-vf-u5B" secondAttribute="bottom" id="feX-eS-Lwy"/>
                 <constraint firstItem="Mkj-vf-u5B" firstAttribute="top" secondItem="yfT-XF-n3a" secondAttribute="bottom" id="gzr-bA-bYk"/>
-                <constraint firstItem="Mkj-vf-u5B" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iCP-mX-e6Y"/>
+                <constraint firstItem="Mkj-vf-u5B" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="iCP-mX-e6Y"/>
                 <constraint firstAttribute="trailing" secondItem="yfT-XF-n3a" secondAttribute="trailing" id="mKp-yn-Xvr"/>
                 <constraint firstAttribute="trailing" secondItem="Uf0-SL-nmC" secondAttribute="trailing" id="obJ-lk-tp4"/>
-                <constraint firstAttribute="trailing" secondItem="Mkj-vf-u5B" secondAttribute="trailing" id="q47-Ly-jxL"/>
+                <constraint firstItem="Mkj-vf-u5B" firstAttribute="centerY" secondItem="pZM-yw-qwd" secondAttribute="centerY" constant="-0.5" id="ok9-84-KdC"/>
+                <constraint firstAttribute="trailing" secondItem="Mkj-vf-u5B" secondAttribute="trailing" constant="10" id="q47-Ly-jxL"/>
+                <constraint firstItem="Mkj-vf-u5B" firstAttribute="centerX" secondItem="pZM-yw-qwd" secondAttribute="centerX" constant="0.5" id="svU-do-CDX"/>
                 <constraint firstItem="yfT-XF-n3a" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vaJ-HX-bZx"/>
                 <constraint firstItem="yfT-XF-n3a" firstAttribute="top" secondItem="LXv-Xk-25O" secondAttribute="bottom" id="xpg-2Z-vW9"/>
             </constraints>

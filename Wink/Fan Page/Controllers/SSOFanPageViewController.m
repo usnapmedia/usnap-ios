@@ -58,6 +58,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if (![[SSSessionManager sharedInstance].campaignID isEqualToString:self.currentCampaign.id]) {
+        self.currentCampaign = [self.campaingTopVCContainer setAndScrollToCampaignWithCampaignID:[SSSessionManager sharedInstance].campaignID];
+    }
 
     // Load the data
     [self loadTopPhotos];
@@ -93,6 +96,8 @@
     }];
     // Call delegate
     [containerVC didMoveToParentViewController:self];
+
+    self.campaingTopVCContainer = containerVC;
 }
 
 /**
