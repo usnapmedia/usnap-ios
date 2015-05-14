@@ -24,7 +24,11 @@
  *
  *  @return the controller
  */
+
 - (instancetype)initWithArrayOfCampaigns:(NSArray *)campaigns;
+
+- (SSOCampaign *)setAndScrollToCampaignWithCampaignID:(NSString *)campaignID;
+
 @end
 
 @protocol TopContainerFanPageDelegate <NSObject>
@@ -34,6 +38,7 @@
  *
  *  @param newCampaign the new campaign
  */
+
 - (void)topViewControllerDidChangeForNewCampaign:(SSOCampaign *)newCampaign;
 
 @end

@@ -2,23 +2,17 @@
 
 @interface SSOSnap : NSObject
 
-@property(nonatomic, strong) NSString *appId;
-@property(nonatomic, strong) NSString *username;
-@property(nonatomic, strong) NSString *email;
-@property(nonatomic, strong) NSString *fb;
-@property(nonatomic, strong) NSObject *fbImageId;
-@property(nonatomic, strong) NSNumber *fbLikes;
-@property(nonatomic, strong) NSString *filename;
-@property(nonatomic, strong) NSObject *gp;
-@property(nonatomic, strong) NSString *id;
-@property(nonatomic, strong) NSString *imageData;
-@property(nonatomic, strong) NSString *meta;
-@property(nonatomic, strong) NSString *status;
-@property(nonatomic, strong) NSObject *text;
-@property(nonatomic, strong) NSObject *tw;
-@property(nonatomic, strong) NSString *url;
+@property (nonatomic, strong) NSString * campaignId;
+@property (nonatomic, strong) NSString * email;
+@property (nonatomic, strong) NSString * fbLikes;
+@property (nonatomic, strong) NSString * text;
+@property (nonatomic, strong) NSObject * thumbUrl;
+@property (nonatomic, strong) NSString * url;
+@property (nonatomic, strong) NSString * username;
+@property (nonatomic, strong) NSObject * usnapScore;
+@property (nonatomic, strong) NSString * watermarkUrl;
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+-(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
-- (NSDictionary *)toDictionary;
+-(NSDictionary *)toDictionary;
 @end

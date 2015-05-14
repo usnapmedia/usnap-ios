@@ -371,7 +371,11 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         [view.layer renderInContext:UIGraphicsGetCurrentContext()];
         UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return snapshot;
+
+        // Change image to PNG
+
+        NSData *pngdata = UIImagePNGRepresentation(snapshot); // PNG wrap
+        return [UIImage imageWithData:pngdata];
     }
     return nil;
 }

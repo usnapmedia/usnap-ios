@@ -102,6 +102,20 @@
     [self.tabCollectionView reloadData];
 }
 
+- (SSOCampaign *)setAndScrollToCampaignWithCampaignID:(NSString *)campaignID {
+    for (SSOCampaign *campaign in self.arrayOfCampaigns) {
+        if ([campaign.id isEqualToString:campaignID]) {
+            [self.tabCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.arrayOfCampaigns indexOfObject:campaign] inSection:0]
+                                           atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                                   animated:NO];
+            return campaign;
+        }
+    }
+    return nil;
+}
+
+#pragma mark - SSOCampaignProviderDelegate
+
 /**
  *  It's called when the collection view will change the current cell
  *
@@ -126,7 +140,8 @@
 }
 
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SSOCampaignDetailViewController *detailVC = [[SSOCampaignDetailViewController alloc] initWithCampaign:[self.provider.inputData objectAtIndex:indexPath.row]];
+    SSOCampaignDetailViewController *detailVC =
+        [[SSOCampaignDetailViewController alloc] initWithCampaign:[self.provider.inputData objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

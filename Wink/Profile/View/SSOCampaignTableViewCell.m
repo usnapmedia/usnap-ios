@@ -40,7 +40,7 @@
                                         [self.activityIndicator stopAnimating];
                                       }];
         self.titleLabel.text = campaign.name;
-        self.descriptionLabel.text = campaign.descriptionCampaign;
+        self.descriptionLabel.text = campaign.prize;
         NSNumber *numberOfShares = [NSNumber numberWithInt:0];
         //@FIXME numberOfShares
         if ([numberOfShares integerValue] > 1) {
