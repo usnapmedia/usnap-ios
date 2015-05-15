@@ -34,7 +34,7 @@
         SSOSnap *snap = (SSOSnap *)cellData;
         [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
         [self.imageView sd_setImageWithURL:[NSURL URLWithString:snap.url]];
-        [self.nameLabel setText:snap.email];
+        [self.nameLabel setText:snap.username];
         //@FIXME
         // Set the usnap points button
         if ([snap.fbLikes integerValue] > 1) {
