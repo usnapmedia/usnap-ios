@@ -89,7 +89,10 @@
     [self.reportProblemButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
 
     // Set logout button
-    [self.logoutButton setBackgroundColor:[SSOThemeHelper firstColor]];
+    [self.logoutButton setBackgroundColor:[SSOThemeHelper thirdColor]];
+    [self.logoutButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    self.logoutButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.logoutButton.layer.borderWidth = 1;
     self.logoutButton.layer.cornerRadius = 2;
 
     //@FIXME: The user can't update his information on this version
