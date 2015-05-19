@@ -232,9 +232,18 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
 - (void)snapStillImage {
     dispatch_async([self sessionQueue], ^{
+      AVCaptureVideoOrientation orientation;
+      if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
+          orientation = AVCaptureVideoOrientationLandscapeRight;
+      } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
+          orientation = AVCaptureVideoOrientationLandscapeLeft;
+
+      } else {
+          orientation = AVCaptureVideoOrientationPortrait;
+      }
+
       // Update the orientation on the still image output video connection before capturing.
-      [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo]
-          setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] videoOrientation]];
+      [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:orientation];
 
       // Capture a still image.
       [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo]
