@@ -91,17 +91,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
                   });
               }
 
-              AVCaptureDevice *audioDevice = [[AVCaptureDevice devicesWithMediaType:AVMediaTypeAudio] firstObject];
-              AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
-
-              if (error) {
-                  NSLog(@"%@", error);
-              }
-
-              if ([session canAddInput:audioDeviceInput]) {
-                  [session addInput:audioDeviceInput];
-              }
-
               AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
               if ([session canAddOutput:movieFileOutput]) {
                   [session addOutput:movieFileOutput];
@@ -132,6 +121,12 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
         }
     }
     return self;
+}
+
+- (void)removeObservers
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput] device]];
+    [[NSNotificationCenter defaultCenter] removeObserver:[self runtimeErrorHandlingObserver]];
 }
 
 - (void)dealloc {
@@ -174,7 +169,14 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 #pragma mark Actions
 
 - (void)toggleMovieRecording {
-
+    //@FIXME: This removed the red bar on the status bar, but It's not good when the user starts to record a video
+       NSError *error = nil;
+    AVCaptureDevice *audioDevice = [[AVCaptureDevice devicesWithMediaType:AVMediaTypeAudio] firstObject];
+    AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
+    
+    if ([self.session canAddInput:audioDeviceInput]) {
+        [self.session addInput:audioDeviceInput];
+    }
     dispatch_async([self sessionQueue], ^{
       if (![[self movieFileOutput] isRecording]) {
 
@@ -260,6 +262,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
                                                                  [library saveImage:image
                                                                                  toAlbum:appName
                                                                      withCompletionBlock:^(NSError *error) {
+                                                                         [self removeObservers];
                                                                        [self.delegate didFinishCapturingImage:image withError:error];
                                                                      }];
                                                              }
@@ -302,6 +305,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     [library addAssetURL:outputFileURL
                     toAlbum:appName
         withCompletionBlock:^(NSError *error) {
+            [self removeObservers];
           [self.delegate didFinishCapturingVideo:outputFileURL withError:error];
         }];
 }
