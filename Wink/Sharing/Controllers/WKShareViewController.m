@@ -81,9 +81,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     self.mediaContainerView.layer.cornerRadius = 4.0;
     self.bottomView.layer.cornerRadius = 4.0;
     // Register for keyboard notifications
-    //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
 
@@ -126,13 +125,14 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     self.placeholderTextView.textColor = [UIColor blackColor];
     self.placeholderTextView.placeholder = NSLocalizedString(@"shareview.textview.placeholder.text", @"");
     self.placeholderTextView.fadeTime = 0.2;
+    self.placeholderTextView.backgroundColor = [UIColor whiteColor];
 
     // Setup the share button
     self.shareButton.layer.cornerRadius = 2.0f;
 
     [SSOSocialNetworkAPI sharedInstance].delegate = self;
 
-    [self.view insertSubview:self.overlayView belowSubview:self.bottomView];
+    [self.view insertSubview:self.overlayView belowSubview:self.mediaContainerView];
 
     // Update UI
     // [self updateUI];
@@ -332,16 +332,11 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 #pragma mark - Keyboard Methods
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-
-    CGSize keyboardFrameBegin = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-
-    [self animatedViewForKeyboardWithSize:keyboardFrameBegin shouldSlideUp:YES];
+    self.overlayView.alpha = 0.4;
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    CGSize keyboardFrameBegin = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-
-    [self animatedViewForKeyboardWithSize:keyboardFrameBegin shouldSlideUp:NO];
+    self.overlayView.alpha = 0;
 }
 
 #pragma mark - Update UI
