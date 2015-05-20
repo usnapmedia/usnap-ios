@@ -49,12 +49,13 @@
         self.sizeOfView = CGSizeMake(self.bounds.size.width, self.bounds.size.height);
     }
     [self addViewWithBlur];
-    UIDeviceOrientation deviceOrientation = [[SSOOrientationHelper sharedInstance] orientation];
-    if (deviceOrientation == UIDeviceOrientationFaceUp || deviceOrientation == UIDeviceOrientationPortrait ||
-        deviceOrientation == UIDeviceOrientationPortraitUpsideDown || deviceOrientation == UIDeviceOrientationFaceDown ||
-        deviceOrientation == UIDeviceOrientationUnknown) {
+    //This is the code if the client decide to work with different orientations
+//    UIDeviceOrientation deviceOrientation = [[SSOOrientationHelper sharedInstance] orientation];
+//    if (deviceOrientation == UIDeviceOrientationFaceUp || deviceOrientation == UIDeviceOrientationPortrait ||
+//        deviceOrientation == UIDeviceOrientationPortraitUpsideDown || deviceOrientation == UIDeviceOrientationFaceDown ||
+//        deviceOrientation == UIDeviceOrientationUnknown) {
         [self addButtonsToViewPortraitMode];
-    }
+//    }
     //    } else {
     //        [self addButtonsToViewLandscapeMode];
     //    }
