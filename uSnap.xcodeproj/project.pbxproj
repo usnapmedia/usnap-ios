@@ -1456,7 +1456,7 @@
 				ORGANIZATIONNAME = Samsao;
 				TargetAttributes = {
 					270DFAF019AE71BE00067072 = {
-						DevelopmentTeam = 8UQUNTB23H;
+						DevelopmentTeam = 6WH26365Q4;
 					};
 					270DFB0B19AE71BE00067072 = {
 						DevelopmentTeam = 8UQUNTB23H;
