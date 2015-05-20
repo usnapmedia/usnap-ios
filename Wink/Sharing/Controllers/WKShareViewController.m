@@ -68,26 +68,20 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.numberCharactersLeft = [NSNumber numberWithInteger:kMaxNumberOfCharacters];
-    self.labelCountCharacters.text =
-        [NSString stringWithFormat:@"%li %@", self.numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
+    self.labelCountCharacters.text = [NSString stringWithFormat:@"%li %@", self.numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
     [self.shareButton setTitle:NSLocalizedString(@"shareView.shareButton", nil) forState:UIControlStateNormal];
     self.shareButton.backgroundColor = [SSOThemeHelper firstColor];
     self.titleLabel.text = NSLocalizedString(@"shareview.title", nil);
     self.labelCountCharacters.textColor = [SSOThemeHelper firstColor];
-
     self.buttonsContainerView.layer.cornerRadius = 4.0;
     self.mediaContainerView.layer.cornerRadius = 4.0;
     self.bottomView.layer.cornerRadius = 4.0;
     // Register for keyboard notifications
-      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-
     [self.view addGestureRecognizer:tapGesture];
-
     // Setup the imageview
     if (self.image || self.modifiedImage) {
         self.imageView = [UIImageView new];
@@ -101,14 +95,17 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     // Setup the movie player view
     else {
         self.moviePlayerView = [WKMoviePlayerView moviePlayerViewWithPath:self.mediaURL];
+        self.moviePlayerView.delegate = self;
+        self.moviePlayerView.frame = self.view.bounds;
+        self.moviePlayerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.moviePlayerView.clipsToBounds = YES;
+        [self.view insertSubview:self.moviePlayerView atIndex:0];
         [self.previewImageContainerView addSubview:self.moviePlayerView];
         [self.moviePlayerView mas_makeConstraints:^(MASConstraintMaker *make) {
           make.edges.equalTo(self.previewImageContainerView);
         }];
-
         [self.moviePlayerView.player pause];
     }
-
     // Setup the overlay image view
     if (self.overlayImage) {
         self.overlayImageView = [UIImageView new];
@@ -118,7 +115,6 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
           make.edges.equalTo(self.previewImageContainerView);
         }];
     }
-
     // Setup the text view
     //  self.placeholderTextView.layer.cornerRadius = 2.0f;
     self.placeholderTextView.placeholderTextColor = [UIColor lightGrayColor];
@@ -126,14 +122,10 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     self.placeholderTextView.placeholder = NSLocalizedString(@"shareview.textview.placeholder.text", @"");
     self.placeholderTextView.fadeTime = 0.2;
     self.placeholderTextView.backgroundColor = [UIColor whiteColor];
-
     // Setup the share button
     self.shareButton.layer.cornerRadius = 2.0f;
-
     [SSOSocialNetworkAPI sharedInstance].delegate = self;
-
     [self.view insertSubview:self.overlayView belowSubview:self.mediaContainerView];
-
     // Update UI
     // [self updateUI];
 }
