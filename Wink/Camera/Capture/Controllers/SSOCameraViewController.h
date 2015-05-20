@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+#import <CoreMedia/CMTime.h>
 #import "SSOViewControllerWithLiveFeed.h"
 
-@interface SSOCameraViewController : SSOViewControllerWithLiveFeed
+@interface SSOCameraViewController : SSOViewControllerWithLiveFeed {
+    AVAssetExportSession *exporter;
+}
+
 @end
