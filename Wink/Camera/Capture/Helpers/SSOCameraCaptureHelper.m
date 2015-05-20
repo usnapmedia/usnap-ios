@@ -166,11 +166,13 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     }
 }
 
+
+
 #pragma mark Actions
 
 - (void)toggleMovieRecording {
     //@FIXME: This removed the red bar on the status bar, but It's not good when the user starts to record a video
-       NSError *error = nil;
+    NSError *error = nil;
     AVCaptureDevice *audioDevice = [[AVCaptureDevice devicesWithMediaType:AVMediaTypeAudio] firstObject];
     AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
     

@@ -63,8 +63,10 @@
     }
 
     // Load the data
-    [self loadTopPhotos];
-    [self loadRecentPhotos];
+    if (self.currentCampaign) {
+        [self loadTopPhotos];
+        [self loadRecentPhotos];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -123,17 +125,12 @@
  *  Initialize the recent photos controller
  */
 - (void)initializeRecentPhotosController {
-
     self.recentPhotosVC = [SSORecentPhotosViewController new];
-
     [self addChildViewController:self.recentPhotosVC];
-
     [self.recentPhotosViewControllerContainer addSubview:self.recentPhotosVC.view];
-
     [self.recentPhotosVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
       make.edges.equalTo(self.recentPhotosViewControllerContainer);
     }];
-
     [self.recentPhotosVC didMoveToParentViewController:self];
     // Display the loading overlay before the data loads
     [self.recentPhotosVC displayLoadingOverlay];
@@ -147,11 +144,14 @@
 - (void)loadCampaigns {
 
     [WKWinkConnect getCampaignsWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOCampaign class]];
-      // self.campaingTopVCContainer = [[SSOCampaignTopViewControllerContainer alloc] initWithArrayOfCampaigns:items.response];
-      [self initializeCampaignTopViewControllerWithCampaigns:items.response];
-
+        SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOCampaign class]];
+        [self initializeCampaignTopViewControllerWithCampaigns:items.response];
+        NSAssert([[items.response firstObject] isKindOfClass:[SSOCampaign class]], @"Need to pass a campaign object here");
+        //Set current campaign to be the first campaign
+        self.currentCampaign = [items.response firstObject];
+        //Load top photos and recent photos
+        [self loadTopPhotos];
+        [self loadRecentPhotos];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){
 
     }];
