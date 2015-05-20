@@ -20,6 +20,8 @@
 @property(strong, nonatomic) SSOColorPickerContainerView *colorPickerContainerView;
 @property(weak, nonatomic) ACEDrawingView *drawView;
 
+@property (weak, nonatomic) UIView *actualButtonView;
+
 @end
 
 @implementation SSODrawToolController
@@ -71,6 +73,7 @@
     }];
 
     self.accessoryContainerView.delegate = self;
+    self.actualButtonView = self.accessoryContainerView.viewFivePoints;
 
     NSAssert([parent respondsToSelector:@selector(drawView)], @"Parent view controller should have a draw view to draw on");
     // Set the container to the draw view delegate
@@ -105,13 +108,24 @@
 
 - (void)colorPickerDidChangeColor:(SSOColorPickerContainerView *)colorPickerContainerView withColor:(UIColor *)color {
     self.drawView.lineColor = color;
+    self.actualButtonView.backgroundColor = color;
 }
+
 
 #pragma mark - SSODrawContainerViewDelegate
 
-- (void)drawContainer:(UIView *)view didChangePointSize:(CGFloat)lineSize {
-    [self.drawView setLineWidth:lineSize];
+- (void)drawContainer:(UIView *)view getViewFivePoints:(UIView *)buttonView
+{
+    self.actualButtonView = buttonView;
 }
+
+- (void)drawContainer:(UIView *)view didChangePointSize:(CGFloat)lineSize withButtonView:(UIView *)buttonView
+{
+    [self.drawView setLineWidth:lineSize];
+    self.actualButtonView = buttonView;
+    self.actualButtonView.backgroundColor = self.drawView.lineColor;
+}
+
 
 - (void)containerViewDoneButtonPressed:(UIView *)view {
     [self.delegate editToolWillEndEditing:self];

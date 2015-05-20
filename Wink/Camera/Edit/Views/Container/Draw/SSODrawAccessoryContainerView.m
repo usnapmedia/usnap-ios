@@ -15,7 +15,6 @@
 
 @interface SSODrawAccessoryContainerView ()
 
-@property(weak, nonatomic) IBOutlet UIView *viewFivePoints;
 @property(weak, nonatomic) IBOutlet UIView *viewTenPoints;
 @property(weak, nonatomic) IBOutlet UIView *viewFifteenPoints;
 
@@ -38,8 +37,18 @@
     self.viewTenPoints.layer.cornerRadius = self.viewTenPoints.frame.size.width/2;
     self.viewFivePoints.layer.cornerRadius = self.viewFivePoints.frame.size.width/2;
     self.viewFifteenPoints.layer.cornerRadius = self.viewFifteenPoints.frame.size.width/2;
-    
+}
 
+/**
+ *  Reset the colors of all views
+ *
+ */
+
+- (void)resetColors
+{
+    self.viewFivePoints.backgroundColor = [UIColor blackColor];
+    self.viewTenPoints.backgroundColor = [UIColor blackColor];
+    self.viewFifteenPoints.backgroundColor = [UIColor blackColor];
 }
 
 #pragma mark - IBAction
@@ -58,7 +67,8 @@
  *  @param sender the button
  */
 - (IBAction)firstPointSizeButtonPressed:(id)sender {
-    [self.delegate drawContainer:self didChangePointSize:kFirstPointSize];
+    [self resetColors];
+    [self.delegate drawContainer:self didChangePointSize:kFirstPointSize withButtonView:self.viewFivePoints];
 }
 
 /**
@@ -67,7 +77,8 @@
  *  @param sender the button
  */
 - (IBAction)secondPointSizeButtonPressed:(id)sender {
-    [self.delegate drawContainer:self didChangePointSize:kSecondPointSize];
+    [self resetColors];
+    [self.delegate drawContainer:self didChangePointSize:kSecondPointSize withButtonView:self.viewTenPoints];
 }
 
 /**
@@ -76,7 +87,8 @@
  *  @param sender the button
  */
 - (IBAction)thridPointSizeButtonPressed:(id)sender {
-    [self.delegate drawContainer:self didChangePointSize:kThirdPointSize];
+    [self resetColors];
+    [self.delegate drawContainer:self didChangePointSize:kThirdPointSize withButtonView:self.viewFifteenPoints];
 }
 
 @end

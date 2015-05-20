@@ -19,6 +19,10 @@
 @property(nonatomic) float widthOfVC;
 
 - (void)setSizeOfView:(CGSize)sizeOfView;
+
+/**
+ *  Setup the UI
+ */
 - (void)setupUI;
 
 @end

@@ -13,6 +13,7 @@
 
 @interface SSODrawAccessoryContainerView : UIView
 
+@property(weak, nonatomic) IBOutlet UIView *viewFivePoints;
 @property(weak, nonatomic) id<SSODrawContainerViewDelegate> delegate;
 
 @end
@@ -25,6 +26,5 @@
  *  @param view     the view it is called from
  *  @param lineSize the size of the line
  */
-- (void)drawContainer:(UIView *)view didChangePointSize:(CGFloat)lineSize;
-
+- (void)drawContainer:(UIView *)view didChangePointSize:(CGFloat)lineSize withButtonView:(UIView *)buttonView;
 @end
