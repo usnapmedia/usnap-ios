@@ -12,6 +12,7 @@
 #import "SSOFanPageViewController.h"
 #import "SSOProfileViewController.h"
 #import "SSOViewControllerWithLiveFeed.h"
+#import <SEGAnalytics.h>
 #import "SSOThemeHelper.h"
 
 #import <Masonry.h>
@@ -41,8 +42,7 @@ NSInteger const kTabBarHeight = 40;
     [self setNotification];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
@@ -241,6 +241,7 @@ NSInteger const kTabBarHeight = 40;
 
 - (void)cameraButtonPressed:(id)sender {
     UINavigationController *cameraNavigationController = [[UIStoryboard cameraStoryboard] instantiateInitialViewController];
+    [[SEGAnalytics sharedAnalytics] track:@"Camera Started"];
     [self presentViewController:cameraNavigationController animated:YES completion:nil];
 }
 
