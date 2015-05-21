@@ -11,7 +11,7 @@
 #import "GAI.h"
 #import "SSOSocialNetworkAPI.h"
 #import "SSOViewControllerWithTabBar.h"
-
+#import <SEGAnalytics.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <TwitterKit/TwitterKit.h>
@@ -26,7 +26,14 @@
 #pragma mark - App Delegate Methods
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Initialize the Analytics instance with the
+    // write key for pblondin/cafemtl
+    [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:kSegmentIoKey]];
 
+    // Enable analytics
+    [[SEGAnalytics sharedAnalytics] enable];
+
+    [[SEGAnalytics sharedAnalytics] track:@"App Started"];
     [[Twitter sharedInstance] startWithConsumerKey:kTwitterConsumerKey consumerSecret:kTwitterConsumerSecret];
     //     Setup crashlytics
     [Fabric with:@[ CrashlyticsKit, TwitterKit ]];
@@ -46,11 +53,10 @@
 
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[WKShareViewController class]];
     [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[WKShareViewController class]];
-    
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
     self.window.rootViewController = [SSOViewControllerWithTabBar new];
-
 
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
