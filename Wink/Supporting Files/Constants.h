@@ -20,6 +20,7 @@ extern NSString *const kTwitterMediaUploadURL;
 extern NSString *const kTwitterTweetUploadURL;
 extern NSString *const kGoogleClientId;
 extern NSString *const kAPIUrl;
+extern NSString *const kSegmentIoKey;
 
 #pragma mark - Notifications
 
