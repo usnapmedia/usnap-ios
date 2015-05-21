@@ -248,26 +248,25 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
       [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:orientation];
 
       // Capture a still image.
-      [[self stillImageOutput]
-          captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo]
-                                      completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+      [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo]
+                                                           completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
 
-                                        if (imageDataSampleBuffer) {
-                                            NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-                                            UIImage *tempImg = [[UIImage alloc] initWithData:imageData];
-                                            UIImage *image =
-                                                [self squareImageWithImage:tempImg scaledToSize:CGSizeMake(tempImg.size.width, tempImg.size.height)];
-                                            ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-                                            NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+                                                             if (imageDataSampleBuffer) {
+                                                                 NSData *imageData =
+                                                                     [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+                                                                 UIImage *tempImg = [[UIImage alloc] initWithData:imageData];
+                                                                 UIImage *image = [self squareImageWithImage:tempImg];
+                                                                 ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+                                                                 NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
 
-                                            [library saveImage:image
-                                                            toAlbum:appName
-                                                withCompletionBlock:^(NSError *error) {
-                                                  [self removeObservers];
-                                                  [self.delegate didFinishCapturingImage:image withError:error];
-                                                }];
-                                        }
-                                      }];
+                                                                 [library saveImage:image
+                                                                                 toAlbum:appName
+                                                                     withCompletionBlock:^(NSError *error) {
+                                                                       [self removeObservers];
+                                                                       [self.delegate didFinishCapturingImage:image withError:error];
+                                                                     }];
+                                                             }
+                                                           }];
     });
 }
 
@@ -381,19 +380,42 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
  *  Make the photo took by the user square
  *
  *  @param image  image from the camera
- *  @param newSize the size of the image
  *
  *  @return the squared photo
  */
 
-- (UIImage *)squareImageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    NSInteger lowestSide;
-    UIImage *scaledImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFill
-                                                       bounds:CGSizeMake(image.size.width, image.size.width)
-                                         interpolationQuality:kCGInterpolationHigh];
-    // Crop the image to a square (yikes, fancy!)
-    return [scaledImage croppedImage:CGRectMake((scaledImage.size.width - image.size.width) / 2, (scaledImage.size.height - image.size.height) / 2,
-                                                image.size.width, image.size.height)];
+- (UIImage *)squareImageWithImage:(UIImage *)image {
+    // Set the size of the image to be the smallest side of the photo
+    CGFloat newSize = MIN(image.size.width, image.size.height);
+    CGAffineTransform scaleTransform;
+    CGPoint origin;
+    // figure out if the picture is landscape or portrait, then calculate scale factor and offset
+    if (image.size.width > image.size.height) {
+        CGFloat scaleRatio = newSize / image.size.height;
+        scaleTransform = CGAffineTransformMakeScale(scaleRatio, scaleRatio);
+
+        origin = CGPointMake(-(image.size.width - image.size.height) / 2.0f, 0);
+    } else {
+        CGFloat scaleRatio = newSize / image.size.width;
+        scaleTransform = CGAffineTransformMakeScale(scaleRatio, scaleRatio);
+
+        origin = CGPointMake(0, -(image.size.height - image.size.width) / 2.0f);
+    }
+    // start a new context, with scale factor 0.0 so retina displays get high quality image
+    CGSize size = CGSizeMake(newSize, newSize);
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        UIGraphicsBeginImageContextWithOptions(size, YES, 0);
+    } else {
+        UIGraphicsBeginImageContext(size);
+    }
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextConcatCTM(context, scaleTransform);
+    [image drawAtPoint:origin];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return image;
 }
 
 #pragma mark UI
