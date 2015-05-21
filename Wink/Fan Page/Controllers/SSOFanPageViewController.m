@@ -144,14 +144,14 @@
 - (void)loadCampaigns {
 
     [WKWinkConnect getCampaignsWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOCampaign class]];
-        [self initializeCampaignTopViewControllerWithCampaigns:items.response];
-        NSAssert([[items.response firstObject] isKindOfClass:[SSOCampaign class]], @"Need to pass a campaign object here");
-        //Set current campaign to be the first campaign
-        self.currentCampaign = [items.response firstObject];
-        //Load top photos and recent photos
-        [self loadTopPhotos];
-        [self loadRecentPhotos];
+      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOCampaign class]];
+      [self initializeCampaignTopViewControllerWithCampaigns:items.response];
+      NSAssert([[items.response firstObject] isKindOfClass:[SSOCampaign class]], @"Need to pass a campaign object here");
+      // Set current campaign to be the first campaign
+      self.currentCampaign = [items.response firstObject];
+      // Load top photos and recent photos
+      [self loadTopPhotos];
+      [self loadRecentPhotos];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){
 
     }];

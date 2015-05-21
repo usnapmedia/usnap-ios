@@ -7,11 +7,9 @@
 //
 
 #import "SSOCameraCaptureHelper.h"
-
+#import "UIImage+Resize.h"
 #import <AVFoundation/AVFoundation.h>
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
-
-#define kImageSize 2000
 
 static void *CapturingStillImageContext = &CapturingStillImageContext;
 static void *RecordingContext = &RecordingContext;
@@ -126,8 +124,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     return self;
 }
 
-- (void)removeObservers
-{
+- (void)removeObservers {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput] device]];
     [[NSNotificationCenter defaultCenter] removeObserver:[self runtimeErrorHandlingObserver]];
 }
@@ -169,8 +166,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     }
 }
 
-
-
 #pragma mark Actions
 
 - (void)toggleMovieRecording {
@@ -178,7 +173,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     NSError *error = nil;
     AVCaptureDevice *audioDevice = [[AVCaptureDevice devicesWithMediaType:AVMediaTypeAudio] firstObject];
     AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
-    
+
     if ([self.session canAddInput:audioDeviceInput]) {
         [self.session addInput:audioDeviceInput];
     }
@@ -253,28 +248,26 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
       [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:orientation];
 
       // Capture a still image.
-      [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo]
-                                                           completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+      [[self stillImageOutput]
+          captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo]
+                                      completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
 
-                                                             if (imageDataSampleBuffer) {
-                                                                 NSData *imageData =
-                                                                     [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-                                                                 UIImage *image = [self squareImageWithImage:[[UIImage alloc] initWithData:imageData] scaledToSize:CGSizeMake(kImageSize, kImageSize)];
-                                                                 
-                                                                 
-                                                                 
-                                                                 ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+                                        if (imageDataSampleBuffer) {
+                                            NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+                                            UIImage *tempImg = [[UIImage alloc] initWithData:imageData];
+                                            UIImage *image =
+                                                [self squareImageWithImage:tempImg scaledToSize:CGSizeMake(tempImg.size.width, tempImg.size.height)];
+                                            ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+                                            NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
 
-                                                                 NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-
-                                                                 [library saveImage:image
-                                                                                 toAlbum:appName
-                                                                     withCompletionBlock:^(NSError *error) {
-                                                                         [self removeObservers];
-                                                                       [self.delegate didFinishCapturingImage:image withError:error];
-                                                                     }];
-                                                             }
-                                                           }];
+                                            [library saveImage:image
+                                                            toAlbum:appName
+                                                withCompletionBlock:^(NSError *error) {
+                                                  [self removeObservers];
+                                                  [self.delegate didFinishCapturingImage:image withError:error];
+                                                }];
+                                        }
+                                      }];
     });
 }
 
@@ -313,7 +306,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     [library addAssetURL:outputFileURL
                     toAlbum:appName
         withCompletionBlock:^(NSError *error) {
-            [self removeObservers];
+          [self removeObservers];
           [self.delegate didFinishCapturingVideo:outputFileURL withError:error];
         }];
 }
@@ -394,44 +387,13 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
  */
 
 - (UIImage *)squareImageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    double ratio;
-    double delta;
-    CGPoint offset;
-    
-    //make a new square size, that is the resized imaged width
-    CGSize sz = CGSizeMake(newSize.width, newSize.width);
-    
-    //figure out if the picture is landscape or portrait, then
-    //calculate scale factor and offset
-    if (image.size.width > image.size.height) {
-        ratio = newSize.width / image.size.width;
-        delta = (ratio*image.size.width - ratio*image.size.height);
-        offset = CGPointMake(delta/2, 0);
-    } else {
-        ratio = newSize.width / image.size.height;
-        delta = (ratio*image.size.height - ratio*image.size.width);
-        offset = CGPointMake(0, delta/2);
-    }
-    
-    //make the final clipping rect based on the calculated values
-    CGRect clipRect = CGRectMake(-offset.x, -offset.y,
-                                 (ratio * image.size.width) + delta,
-                                 (ratio * image.size.height) + delta);
-    
-    
-    //start a new context, with scale factor 0.0 so retina displays get
-    //high quality image
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        UIGraphicsBeginImageContextWithOptions(sz, YES, 0.0);
-    } else {
-        UIGraphicsBeginImageContext(sz);
-    }
-    UIRectClip(clipRect);
-    [image drawInRect:clipRect];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
+    NSInteger lowestSide;
+    UIImage *scaledImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFill
+                                                       bounds:CGSizeMake(image.size.width, image.size.width)
+                                         interpolationQuality:kCGInterpolationHigh];
+    // Crop the image to a square (yikes, fancy!)
+    return [scaledImage croppedImage:CGRectMake((scaledImage.size.width - image.size.width) / 2, (scaledImage.size.height - image.size.height) / 2,
+                                                image.size.width, image.size.height)];
 }
 
 #pragma mark UI
