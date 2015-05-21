@@ -7,11 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+#import <CoreMedia/CMTime.h>
 #import "AVCamPreviewView.h"
 
 @protocol SSOCameraDelegate;
 
-@interface SSOCameraCaptureHelper : NSObject
+@interface SSOCameraCaptureHelper : NSObject {
+    AVAssetExportSession *exporter;
+}
 
 /**
  *  Need access to the video device input to use flash

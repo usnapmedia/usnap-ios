@@ -308,7 +308,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
                     toAlbum:appName
         withCompletionBlock:^(NSError *error) {
           [self removeObservers];
-          [self.delegate didFinishCapturingVideo:outputFileURL withError:error];
+          [self cropVideoSquare:outputFileURL];
         }];
 }
 
@@ -418,6 +418,126 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     UIGraphicsEndImageContext();
 
     return image;
+}
+
+#pragma mark - Cropping the video to square
+
+/**
+ *  Get the orientation of the device on the moment of the photo
+ *
+ *  @return the image orientation
+ */
+
+- (UIImageOrientation)getVideoOrientationFromDeviceOrientation {
+    UIImageOrientation orientation;
+    if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
+        orientation = UIImageOrientationRight;
+    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
+        orientation = UIImageOrientationLeft;
+
+    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
+        orientation = UIImageOrientationUp;
+
+    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
+        orientation = UIImageOrientationDown;
+
+    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationFaceUp) {
+        orientation = UIImageOrientationUp;
+
+    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationFaceDown) {
+        orientation = UIImageOrientationUp;
+    }
+    return orientation;
+}
+
+/**
+ *  This method will receive the video URL and crop the video square
+ *
+ *  @param url video URL
+ */
+
+- (void)cropVideoSquare:(NSURL *)url {
+
+    // load our movie Asset
+    AVAsset *asset = [AVAsset assetWithURL:url];
+    // create an avassetrack with our asset
+    AVAssetTrack *clipVideoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+
+    CGFloat newSize = MIN(clipVideoTrack.naturalSize.width, clipVideoTrack.naturalSize.height);
+    UIImageOrientation videoOrientation = [self getVideoOrientationFromDeviceOrientation];
+
+    CGFloat cropOffX = 0;
+    CGFloat cropOffY = 0;
+    CGFloat cropWidth = newSize;
+    CGFloat cropHeight = newSize;
+    if (videoOrientation == UIImageOrientationLeft || videoOrientation == UIImageOrientationRight || videoOrientation == UIImageOrientationLeftMirrored ||
+        videoOrientation == UIImageOrientationRightMirrored) {
+        cropOffX = -(clipVideoTrack.naturalSize.height - clipVideoTrack.naturalSize.width) / 2.0f;
+    } else {
+        cropOffY = -(clipVideoTrack.naturalSize.height - clipVideoTrack.naturalSize.width) / 2.0f;
+    }
+
+    // create a video composition and preset some settings
+    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
+    videoComposition.frameDuration = CMTimeMake(1, 30);
+
+    videoComposition.renderSize = CGSizeMake(cropWidth, cropHeight);
+
+    // create a video instruction
+    AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30));
+
+    AVMutableVideoCompositionLayerInstruction *transformer =
+        [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:clipVideoTrack];
+
+    CGAffineTransform t1 = CGAffineTransformIdentity;
+    CGAffineTransform t2 = CGAffineTransformIdentity;
+
+    switch (videoOrientation) {
+    case UIImageOrientationUp:
+        t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height - cropOffX, 0 - cropOffY);
+        t2 = CGAffineTransformRotate(t1, M_PI_2);
+        break;
+    case UIImageOrientationDown:
+        t1 = CGAffineTransformMakeTranslation(0 - cropOffX, clipVideoTrack.naturalSize.width - cropOffY); // not fixed width is the real height in upside down
+        t2 = CGAffineTransformRotate(t1, -M_PI_2);
+        break;
+    case UIImageOrientationRight:
+        t1 = CGAffineTransformMakeTranslation(0 - cropOffX, 0);
+        t2 = CGAffineTransformRotate(t1, 0);
+        break;
+    case UIImageOrientationLeft:
+        t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.width - cropOffX, clipVideoTrack.naturalSize.height);
+        t2 = CGAffineTransformRotate(t1, M_PI);
+        break;
+    default:
+        NSLog(@"no supported orientation has been found in this video");
+        break;
+    }
+
+    CGAffineTransform finalTransform = t2;
+    [transformer setTransform:finalTransform atTime:kCMTimeZero];
+
+    // add the transformer layer instructions, then add to video composition
+    instruction.layerInstructions = [NSArray arrayWithObject:transformer];
+    videoComposition.instructions = [NSArray arrayWithObject:instruction];
+
+    NSString *exportPath = [NSTemporaryDirectory() stringByAppendingPathComponent:[@"croppedMovie" stringByAppendingPathExtension:@"mp4"]];
+    NSURL *exportUrl = [NSURL fileURLWithPath:exportPath];
+
+    // Remove any prevouis videos at that path
+    [[NSFileManager defaultManager] removeItemAtURL:exportUrl error:nil];
+    // Export
+    exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
+    exporter.videoComposition = videoComposition;
+    exporter.outputURL = exportUrl;
+    exporter.outputFileType = AVFileTypeQuickTimeMovie;
+    [exporter exportAsynchronouslyWithCompletionHandler:^{
+      dispatch_async(dispatch_get_main_queue(), ^{
+        // Call when finished
+        [self.delegate didFinishCapturingVideo:exportUrl withError:nil];
+      });
+    }];
 }
 
 #pragma mark UI

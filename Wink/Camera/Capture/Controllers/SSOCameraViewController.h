@@ -12,8 +12,6 @@
 #import <CoreMedia/CMTime.h>
 #import "SSOViewControllerWithLiveFeed.h"
 
-@interface SSOCameraViewController : SSOViewControllerWithLiveFeed {
-    AVAssetExportSession *exporter;
-}
+@interface SSOCameraViewController : SSOViewControllerWithLiveFeed
 
 @end
