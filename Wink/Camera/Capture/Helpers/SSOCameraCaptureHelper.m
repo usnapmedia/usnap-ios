@@ -7,7 +7,6 @@
 //
 
 #import "SSOCameraCaptureHelper.h"
-#import "UIImage+Resize.h"
 #import <AVFoundation/AVFoundation.h>
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 

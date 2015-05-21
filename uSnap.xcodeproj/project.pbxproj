@@ -158,9 +158,6 @@
 		FB0F335D1AF2A3F100F6C735 /* SSOSnapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0F335B1AF2A3F100F6C735 /* SSOSnapViewController.m */; };
 		FB0F335E1AF2A3F100F6C735 /* SSOSnapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0F335C1AF2A3F100F6C735 /* SSOSnapViewController.xib */; };
 		FB0F33611AF2B68B00F6C735 /* SSOPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0F33601AF2B68B00F6C735 /* SSOPhotosViewController.m */; };
-		FB3E55C91B0E156300CE32F7 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3E55C81B0E156300CE32F7 /* UIImage+Resize.m */; };
-		FB3E55CC1B0E163200CE32F7 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3E55CB1B0E163200CE32F7 /* UIImage+RoundedCorner.m */; };
-		FB3E55CF1B0E168900CE32F7 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3E55CE1B0E168900CE32F7 /* UIImage+Alpha.m */; };
 		FB832F5D1B0392FB0067A4FB /* SSOCampaignDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB832F5B1B0392FB0067A4FB /* SSOCampaignDetailViewController.m */; };
 		FB832F5E1B0392FB0067A4FB /* SSOCampaignDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB832F5C1B0392FB0067A4FB /* SSOCampaignDetailViewController.xib */; };
 		FBB76FE81B00E20600FFAF9A /* SSOUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB76FE71B00E20600FFAF9A /* SSOUser.m */; };
@@ -452,12 +449,6 @@
 		FB0F335C1AF2A3F100F6C735 /* SSOSnapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOSnapViewController.xib; sourceTree = "<group>"; };
 		FB0F335F1AF2B68B00F6C735 /* SSOPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOPhotosViewController.h; sourceTree = "<group>"; };
 		FB0F33601AF2B68B00F6C735 /* SSOPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOPhotosViewController.m; sourceTree = "<group>"; };
-		FB3E55C71B0E156300CE32F7 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
-		FB3E55C81B0E156300CE32F7 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
-		FB3E55CA1B0E163200CE32F7 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
-		FB3E55CB1B0E163200CE32F7 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
-		FB3E55CD1B0E168900CE32F7 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
-		FB3E55CE1B0E168900CE32F7 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		FB832F5A1B0392FB0067A4FB /* SSOCampaignDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCampaignDetailViewController.h; sourceTree = "<group>"; };
 		FB832F5B1B0392FB0067A4FB /* SSOCampaignDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCampaignDetailViewController.m; sourceTree = "<group>"; };
 		FB832F5C1B0392FB0067A4FB /* SSOCampaignDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOCampaignDetailViewController.xib; sourceTree = "<group>"; };
@@ -1084,12 +1075,6 @@
 				D830F4111ACDDBF1002A503D /* UIFont+WKAdditions.m */,
 				D830F4121ACDDBF1002A503D /* UIImage+Resizing.h */,
 				D830F4131ACDDBF1002A503D /* UIImage+Resizing.m */,
-				FB3E55C71B0E156300CE32F7 /* UIImage+Resize.h */,
-				FB3E55C81B0E156300CE32F7 /* UIImage+Resize.m */,
-				FB3E55CA1B0E163200CE32F7 /* UIImage+RoundedCorner.h */,
-				FB3E55CB1B0E163200CE32F7 /* UIImage+RoundedCorner.m */,
-				FB3E55CD1B0E168900CE32F7 /* UIImage+Alpha.h */,
-				FB3E55CE1B0E168900CE32F7 /* UIImage+Alpha.m */,
 				D830F4141ACDDBF1002A503D /* UIImage+Tools.h */,
 				D830F4151ACDDBF1002A503D /* UIImage+Tools.m */,
 				D830F4161ACDDBF1002A503D /* UIStoryboard+USnap.h */,
@@ -1679,7 +1664,6 @@
 				335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */,
 				D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */,
 				336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */,
-				FB3E55CC1B0E163200CE32F7 /* UIImage+RoundedCorner.m in Sources */,
 				D810B8DE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.m in Sources */,
 				333F49AE1AE01BEC004B5CC3 /* SSOOrientationHelper.m in Sources */,
 				3303DDDD1AD87361002B74F9 /* SSORegisterContainerView.m in Sources */,
@@ -1700,7 +1684,6 @@
 				D8E6780A1AEEEEA0006B8CD8 /* SSODynamicCellSizeCollectionViewProvider.m in Sources */,
 				D8E677FF1AEEE5F6006B8CD8 /* SSOSnap.m in Sources */,
 				33B926CB1AF82C2E0007443C /* SSOButtonWithPoint.m in Sources */,
-				FB3E55C91B0E156300CE32F7 /* UIImage+Resize.m in Sources */,
 				339841E81AEACC5C00605C67 /* SSOCampaign.m in Sources */,
 				D810B8DD1ADF506500B3AC11 /* SSOFontCollectionViewCell.m in Sources */,
 				D830F4211ACDDBF1002A503D /* UIImage+Resizing.m in Sources */,
@@ -1712,7 +1695,6 @@
 				03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */,
 				D898E1D31AF1622500C957DC /* SSOCampaignViewController.m in Sources */,
 				332E0A511AEE85AC00F77969 /* SSOTextFieldWithUnderline.m in Sources */,
-				FB3E55CF1B0E168900CE32F7 /* UIImage+Alpha.m in Sources */,
 				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
 				FBBC950E1AF9238000203E48 /* SSOSettingsViewController.m in Sources */,
 				D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */,
