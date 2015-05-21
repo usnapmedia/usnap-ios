@@ -239,6 +239,9 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
       } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
           orientation = AVCaptureVideoOrientationLandscapeLeft;
 
+      } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
+          orientation = AVCaptureVideoOrientationPortraitUpsideDown;
+
       } else {
           orientation = AVCaptureVideoOrientationPortrait;
       }
