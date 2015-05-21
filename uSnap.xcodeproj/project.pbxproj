@@ -119,6 +119,9 @@
 		D830F4241ACDDBF1002A503D /* UIView+WKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4191ACDDBF1002A503D /* UIView+WKAdditions.m */; };
 		D85B35391AF29F640011B26D /* SSOPhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85B35371AF29F640011B26D /* SSOPhotoDetailViewController.m */; };
 		D85B353A1AF29F640011B26D /* SSOPhotoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D85B35381AF29F640011B26D /* SSOPhotoDetailViewController.xib */; };
+		D8621E2B1B0E9BA700489AC9 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = D8621E281B0E9BA700489AC9 /* Appfile */; };
+		D8621E2C1B0E9BA700489AC9 /* Deliverfile in Resources */ = {isa = PBXBuildFile; fileRef = D8621E291B0E9BA700489AC9 /* Deliverfile */; };
+		D8621E2D1B0E9BA700489AC9 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = D8621E2A1B0E9BA700489AC9 /* Fastfile */; };
 		D86688191AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86688181AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m */; };
 		D86E08F01AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08EF1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m */; };
 		D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */; };
@@ -380,6 +383,9 @@
 		D85B35361AF29F640011B26D /* SSOPhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOPhotoDetailViewController.h; sourceTree = "<group>"; };
 		D85B35371AF29F640011B26D /* SSOPhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOPhotoDetailViewController.m; sourceTree = "<group>"; };
 		D85B35381AF29F640011B26D /* SSOPhotoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOPhotoDetailViewController.xib; sourceTree = "<group>"; };
+		D8621E281B0E9BA700489AC9 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
+		D8621E291B0E9BA700489AC9 /* Deliverfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Deliverfile; sourceTree = "<group>"; };
+		D8621E2A1B0E9BA700489AC9 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		D86688171AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOGrayBackgroundWithBorderView.h; sourceTree = "<group>"; };
 		D86688181AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOGrayBackgroundWithBorderView.m; sourceTree = "<group>"; };
 		D86E08EE1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -511,6 +517,7 @@
 			children = (
 				270DFAFA19AE71BE00067072 /* Wink */,
 				270DFB0619AE71BE00067072 /* Images.xcassets */,
+				D8621E271B0E9BA700489AC9 /* fastlane */,
 				270DFB1319AE71BE00067072 /* WinkTests */,
 				270DFAF319AE71BE00067072 /* Frameworks */,
 				270DFAF219AE71BE00067072 /* Products */,
@@ -1091,6 +1098,16 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		D8621E271B0E9BA700489AC9 /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				D8621E281B0E9BA700489AC9 /* Appfile */,
+				D8621E291B0E9BA700489AC9 /* Deliverfile */,
+				D8621E2A1B0E9BA700489AC9 /* Fastfile */,
+			);
+			path = fastlane;
+			sourceTree = "<group>";
+		};
 		D86E08ED1AE6BDEA00711579 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -1500,6 +1517,7 @@
 				D898E1D61AF1622500C957DC /* SSOProfileViewController.xib in Resources */,
 				D8C83EA31AE1C74C00F187F1 /* InfoPlist.strings in Resources */,
 				FB832F5E1B0392FB0067A4FB /* SSOCampaignDetailViewController.xib in Resources */,
+				D8621E2D1B0E9BA700489AC9 /* Fastfile in Resources */,
 				D8C83EA41AE1C74C00F187F1 /* Localizable.strings in Resources */,
 				FB0F335E1AF2A3F100F6C735 /* SSOSnapViewController.xib in Resources */,
 				335723B31ACB097C000CC846 /* Camera.storyboard in Resources */,
@@ -1510,11 +1528,13 @@
 				D810B8F11ADF506500B3AC11 /* SSOFontCollectionViewCell.xib in Resources */,
 				3303DDD01AD84F19002B74F9 /* SSOLoginContainerView.xib in Resources */,
 				D810B8F21ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib in Resources */,
+				D8621E2C1B0E9BA700489AC9 /* Deliverfile in Resources */,
 				FBF9D1CC1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.xib in Resources */,
 				D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */,
 				335C7FD71AF404D6005C2B2E /* Futura.ttc in Resources */,
 				D8E678041AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.xib in Resources */,
 				339841E91AEACC5C00605C67 /* SSOFanPageViewController.xib in Resources */,
+				D8621E2B1B0E9BA700489AC9 /* Appfile in Resources */,
 				335723DE1ACB097C000CC846 /* WKShareViewController.xib in Resources */,
 				270DFB0719AE71BE00067072 /* Images.xcassets in Resources */,
 				D8E678011AEEE5F6006B8CD8 /* SSOImageCollectionViewCell.xib in Resources */,
@@ -1773,6 +1793,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1811,7 +1832,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1835,6 +1857,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 20;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1847,6 +1870,7 @@
 				PRODUCT_NAME = uSnap;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1857,8 +1881,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 20;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1871,6 +1896,7 @@
 				PRODUCT_NAME = uSnap;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
