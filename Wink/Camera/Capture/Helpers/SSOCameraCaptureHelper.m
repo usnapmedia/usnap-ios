@@ -23,6 +23,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 @property(nonatomic) AVCaptureSession *session;
 @property(nonatomic) AVCaptureMovieFileOutput *movieFileOutput;
 @property(nonatomic) AVCaptureStillImageOutput *stillImageOutput;
+@property(nonatomic) AVCaptureDevicePosition devicePosition;
 
 // Utilities.
 @property(nonatomic) UIBackgroundTaskIdentifier backgroundRecordingID;
@@ -68,6 +69,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
               AVCaptureDevice *videoDevice = [SSOCameraCaptureHelper deviceWithMediaType:AVMediaTypeVideo preferringPosition:AVCaptureDevicePositionBack];
               AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
+              self.devicePosition = devicePosition;
 
               if (error) {
                   NSLog(@"%@", error);
@@ -266,17 +268,14 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
  */
 - (void)changeCameraWithDevicePosition:(AVCaptureDevicePosition)devicePosition {
     AVCaptureDevice *currentVideoDevice = [[self videoDeviceInput] device];
-
+    self.devicePosition = devicePosition;
     AVCaptureDevice *videoDevice = [SSOCameraCaptureHelper deviceWithMediaType:AVMediaTypeVideo preferringPosition:devicePosition];
     AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
 
     [[self session] beginConfiguration];
 
-    // Check if the new input can be used, else, do nothing and keep using the old configuration
+    [[self session] removeInput:[self videoDeviceInput]];
     if ([[self session] canAddInput:videoDeviceInput]) {
-        // Remove input first
-        [[self session] removeInput:[self videoDeviceInput]];
-        // Set the camera and it's observers
         [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
 
         [SSOCameraCaptureHelper setFlashMode:AVCaptureFlashModeAuto forDevice:videoDevice];
@@ -287,6 +286,8 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
         [[self session] addInput:videoDeviceInput];
         [self setVideoDeviceInput:videoDeviceInput];
+    } else {
+        [[self session] addInput:[self videoDeviceInput]];
     }
 
     [[self session] commitConfiguration];
@@ -529,26 +530,27 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     CGAffineTransform t2 = CGAffineTransformIdentity;
 
     // Set the transforms based on the orientation
-    switch (videoOrientation) {
-    case UIImageOrientationUp:
+    if (videoOrientation == UIImageOrientationUp) {
         t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height - cropOffX, 0 - cropOffY);
         t2 = CGAffineTransformRotate(t1, M_PI_2);
-        break;
-    case UIImageOrientationDown:
+    } else if (videoOrientation == UIImageOrientationDown) {
         t1 = CGAffineTransformMakeTranslation(0 - cropOffX, clipVideoTrack.naturalSize.width - cropOffY); // not fixed width is the real height in upside down
         t2 = CGAffineTransformRotate(t1, -M_PI_2);
-        break;
-    case UIImageOrientationRight:
+    } else if (videoOrientation == UIImageOrientationRight && self.devicePosition == AVCaptureDevicePositionBack) {
         t1 = CGAffineTransformMakeTranslation(0 - cropOffX, 0);
         t2 = CGAffineTransformRotate(t1, 0);
-        break;
-    case UIImageOrientationLeft:
+    } else if (videoOrientation == UIImageOrientationRight && self.devicePosition == AVCaptureDevicePositionFront) {
         t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.width - cropOffX, clipVideoTrack.naturalSize.height);
         t2 = CGAffineTransformRotate(t1, M_PI);
-        break;
-    default:
+    } else if (videoOrientation == UIImageOrientationLeft && self.devicePosition == AVCaptureDevicePositionFront) {
+        t1 = CGAffineTransformMakeTranslation(0 - cropOffX, 0);
+        t2 = CGAffineTransformRotate(t1, 0);
+    } else if (videoOrientation == UIImageOrientationLeft && self.devicePosition == AVCaptureDevicePositionBack) {
+        t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.width - cropOffX, clipVideoTrack.naturalSize.height);
+        t2 = CGAffineTransformRotate(t1, M_PI);
+    } else {
         NSLog(@"no supported orientation has been found in this video");
-        break;
+        return;
     }
 
     CGAffineTransform finalTransform = t2;
