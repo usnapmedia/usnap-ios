@@ -32,9 +32,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
 @implementation SSOCameraCaptureHelper
 
-- (BOOL)isSessionRunningAndDeviceAuthorized {
-    return [[self session] isRunning];
-}
+#pragma mark - Initialization
 
 - (instancetype)initWithPreviewView:(AVCamPreviewView *)previewView
                      andOrientation:(UIDeviceOrientation)orientation
@@ -60,7 +58,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
             // -[AVCaptureSession startRunning] is a blocking call which can take a long time. We dispatch session setup to the sessionQueue so that the main
             // queue
             // isn't blocked (which keeps the UI responsive).
-
             dispatch_queue_t sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
             [self setSessionQueue:sessionQueue];
 
@@ -123,16 +120,8 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     return self;
 }
 
-- (void)removeObservers {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput] device]];
-    [[NSNotificationCenter defaultCenter] removeObserver:[self runtimeErrorHandlingObserver]];
-}
-
 - (void)dealloc {
-
-    //          [[self session] stopRunning];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput] device]];
-    [[NSNotificationCenter defaultCenter] removeObserver:[self runtimeErrorHandlingObserver]];
+    [self removeObservers];
     // dispatch_async([self sessionQueue], ^{
     //      [[self session] stopRunning];
 
@@ -148,15 +137,20 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     //                   });
 }
 
+#pragma mark - Orientation
+
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
 
     [[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] setVideoOrientation:(AVCaptureVideoOrientation)toInterfaceOrientation];
 }
 
+#pragma mark - Observer
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    // Called when the photo is being taken
     if (context == CapturingStillImageContext) {
         BOOL isCapturingStillImage = [change[NSKeyValueChangeNewKey] boolValue];
-
+        // If the image is being taken, display the animation
         if (isCapturingStillImage) {
             [self runStillImageCaptureAnimation];
         }
@@ -165,7 +159,20 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     }
 }
 
+/**
+ *  Remove Observers
+ */
+
+- (void)removeObservers {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput] device]];
+    [[NSNotificationCenter defaultCenter] removeObserver:[self runtimeErrorHandlingObserver]];
+}
+
 #pragma mark Actions
+
+/**
+ *  This method is called when the user start a long gesture and is called again when the long gesture is done
+ */
 
 - (void)toggleMovieRecording {
     //@FIXME: This removed the red bar on the status bar, but It's not good when the user starts to record a video
@@ -204,35 +211,13 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     });
 }
 
-- (void)changeCameraWithDevicePosition:(AVCaptureDevicePosition)devicePosition {
-    AVCaptureDevice *currentVideoDevice = [[self videoDeviceInput] device];
-
-    AVCaptureDevice *videoDevice = [SSOCameraCaptureHelper deviceWithMediaType:AVMediaTypeVideo preferringPosition:devicePosition];
-    AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
-
-    [[self session] beginConfiguration];
-
-    [[self session] removeInput:[self videoDeviceInput]];
-    if ([[self session] canAddInput:videoDeviceInput]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
-
-        [SSOCameraCaptureHelper setFlashMode:AVCaptureFlashModeAuto forDevice:videoDevice];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(subjectAreaDidChange:)
-                                                     name:AVCaptureDeviceSubjectAreaDidChangeNotification
-                                                   object:videoDevice];
-
-        [[self session] addInput:videoDeviceInput];
-        [self setVideoDeviceInput:videoDeviceInput];
-    } else {
-        [[self session] addInput:[self videoDeviceInput]];
-    }
-
-    [[self session] commitConfiguration];
-}
+/**
+ *  Take the photo
+ */
 
 - (void)snapStillImage {
     dispatch_async([self sessionQueue], ^{
+      // Set the photo orientation based on the device orientation
       AVCaptureVideoOrientation orientation;
       if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
           orientation = AVCaptureVideoOrientationLandscapeRight;
@@ -272,11 +257,59 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     });
 }
 
-- (IBAction)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer {
+#pragma mark - Camera
+
+/**
+ *  Flipping the camera
+ *
+ *  @param devicePosition orientation of the capture device
+ */
+- (void)changeCameraWithDevicePosition:(AVCaptureDevicePosition)devicePosition {
+    AVCaptureDevice *currentVideoDevice = [[self videoDeviceInput] device];
+
+    AVCaptureDevice *videoDevice = [SSOCameraCaptureHelper deviceWithMediaType:AVMediaTypeVideo preferringPosition:devicePosition];
+    AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
+
+    [[self session] beginConfiguration];
+
+    // Check if the new input can be used, else, do nothing and keep using the old configuration
+    if ([[self session] canAddInput:videoDeviceInput]) {
+        // Remove input first
+        [[self session] removeInput:[self videoDeviceInput]];
+        // Set the camera and it's observers
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
+
+        [SSOCameraCaptureHelper setFlashMode:AVCaptureFlashModeAuto forDevice:videoDevice];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(subjectAreaDidChange:)
+                                                     name:AVCaptureDeviceSubjectAreaDidChangeNotification
+                                                   object:videoDevice];
+
+        [[self session] addInput:videoDeviceInput];
+        [self setVideoDeviceInput:videoDeviceInput];
+    }
+
+    [[self session] commitConfiguration];
+}
+
+/**
+ *  Focus and expose of the camera on the tap gesture. We get the focus point based on the gesture
+ *
+ *  @param gestureRecognizer tap gesture
+ */
+
+//@FIXME: This is not being used
+- (void)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer {
     CGPoint devicePoint = [(AVCaptureVideoPreviewLayer *)[[self previewView] layer]
         captureDevicePointOfInterestForPoint:[gestureRecognizer locationInView:[gestureRecognizer view]]];
     [self focusWithMode:AVCaptureFocusModeAutoFocus exposeWithMode:AVCaptureExposureModeAutoExpose atDevicePoint:devicePoint monitorSubjectAreaChange:YES];
 }
+
+/**
+ *  Called when the focus object of the camera change. We will focus after
+ *
+ *  @param notification the notification
+ */
 
 - (void)subjectAreaDidChange:(NSNotification *)notification {
     CGPoint devicePoint = CGPointMake(.5, .5);
@@ -286,33 +319,14 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
         monitorSubjectAreaChange:NO];
 }
 
-#pragma mark File Output Delegate
-
-- (void)captureOutput:(AVCaptureFileOutput *)captureOutput
-    didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
-                        fromConnections:(NSArray *)connections
-                                  error:(NSError *)error {
-    if (error)
-        NSLog(@"%@", error);
-
-    // Note the backgroundRecordingID for use in the ALAssetsLibrary completion handler to end the background task associated with this recording. This allows a
-    // new recording to be started, associated with a new UIBackgroundTaskIdentifier, once the movie file output's -isRecording is back to NO — which happens
-    // sometime after this method returns.
-    [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
-
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-
-    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-
-    [library addAssetURL:outputFileURL
-                    toAlbum:appName
-        withCompletionBlock:^(NSError *error) {
-          [self removeObservers];
-          [self cropVideoSquare:outputFileURL];
-        }];
-}
-
-#pragma mark Device Configuration
+/**
+ *  Changing the focus mode
+ *
+ *  @param focusMode                focusMode
+ *  @param exposureMode             exposureMode
+ *  @param point                    point in the view
+ *  @param monitorSubjectAreaChange YES if you want to track the subject changes
+ */
 
 - (void)focusWithMode:(AVCaptureFocusMode)focusMode
               exposeWithMode:(AVCaptureExposureMode)exposureMode
@@ -338,6 +352,13 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     });
 }
 
+/**
+ *  Changing the flash mode of the device
+ *
+ *  @param flashMode flashMode
+ *  @param device    device
+ */
+
 + (void)setFlashMode:(AVCaptureFlashMode)flashMode forDevice:(AVCaptureDevice *)device {
     if ([device hasFlash] && [device isFlashModeSupported:flashMode]) {
         NSError *error = nil;
@@ -350,6 +371,13 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     }
 }
 
+/**
+ *  Setting the torch mode
+ *
+ *  @param torchMode torchMode
+ *  @param device    device
+ */
+
 + (void)setTorchMode:(AVCaptureTorchMode)torchMode forDevice:(AVCaptureDevice *)device {
     if ([device hasTorch] && [device isTorchModeSupported:torchMode]) {
         NSError *error = nil;
@@ -361,6 +389,15 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
         }
     }
 }
+
+/**
+ *  Get the capture device based on the type
+ *
+ *  @param mediaType mediaType
+ *  @param position  position
+ *
+ *  @return return the capture device
+ */
 
 + (AVCaptureDevice *)deviceWithMediaType:(NSString *)mediaType preferringPosition:(AVCaptureDevicePosition)position {
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:mediaType];
@@ -376,8 +413,33 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     return captureDevice;
 }
 
-#pragma mark Camera Photo Tools
+#pragma mark - AVCaptureFileOutputRecordingDelegate
 
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput
+    didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
+                        fromConnections:(NSArray *)connections
+                                  error:(NSError *)error {
+    if (error)
+        NSLog(@"%@", error);
+
+    // Note the backgroundRecordingID for use in the ALAssetsLibrary completion handler to end the background task associated with this recording. This allows a
+    // new recording to be started, associated with a new UIBackgroundTaskIdentifier, once the movie file output's -isRecording is back to NO — which happens
+    // sometime after this method returns.
+    [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
+
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+
+    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+
+    [library addAssetURL:outputFileURL
+                    toAlbum:appName
+        withCompletionBlock:^(NSError *error) {
+          [self removeObservers];
+          [self cropVideoSquare:outputFileURL];
+        }];
+}
+
+#pragma mark - Utilities
 /**
  *  Make the photo took by the user square
  *
@@ -420,36 +482,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     return image;
 }
 
-#pragma mark - Cropping the video to square
-
-/**
- *  Get the orientation of the device on the moment of the photo
- *
- *  @return the image orientation
- */
-
-- (UIImageOrientation)getVideoOrientationFromDeviceOrientation {
-    UIImageOrientation orientation;
-    if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
-        orientation = UIImageOrientationRight;
-    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
-        orientation = UIImageOrientationLeft;
-
-    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
-        orientation = UIImageOrientationUp;
-
-    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
-        orientation = UIImageOrientationDown;
-
-    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationFaceUp) {
-        orientation = UIImageOrientationUp;
-
-    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationFaceDown) {
-        orientation = UIImageOrientationUp;
-    }
-    return orientation;
-}
-
 /**
  *  This method will receive the video URL and crop the video square
  *
@@ -470,10 +502,13 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     CGFloat cropOffY = 0;
     CGFloat cropWidth = newSize;
     CGFloat cropHeight = newSize;
+
+    // If it's landscape, crop the X
     if (videoOrientation == UIImageOrientationLeft || videoOrientation == UIImageOrientationRight || videoOrientation == UIImageOrientationLeftMirrored ||
         videoOrientation == UIImageOrientationRightMirrored) {
         cropOffX = -(clipVideoTrack.naturalSize.height - clipVideoTrack.naturalSize.width) / 2.0f;
     } else {
+        // Else crop the Y
         cropOffY = -(clipVideoTrack.naturalSize.height - clipVideoTrack.naturalSize.width) / 2.0f;
     }
 
@@ -487,12 +522,13 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30));
 
+    // Create the transform to change the video output
     AVMutableVideoCompositionLayerInstruction *transformer =
         [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:clipVideoTrack];
-
     CGAffineTransform t1 = CGAffineTransformIdentity;
     CGAffineTransform t2 = CGAffineTransformIdentity;
 
+    // Set the transforms based on the orientation
     switch (videoOrientation) {
     case UIImageOrientationUp:
         t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height - cropOffX, 0 - cropOffY);
@@ -540,7 +576,39 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     }];
 }
 
+/**
+ *  Get the orientation of the device on the moment of the photo
+ *
+ *  @return the image orientation
+ */
+
+- (UIImageOrientation)getVideoOrientationFromDeviceOrientation {
+    UIImageOrientation orientation;
+    if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
+        orientation = UIImageOrientationRight;
+    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
+        orientation = UIImageOrientationLeft;
+
+    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
+        orientation = UIImageOrientationUp;
+
+    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
+        orientation = UIImageOrientationDown;
+
+    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationFaceUp) {
+        orientation = UIImageOrientationUp;
+
+    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationFaceDown) {
+        orientation = UIImageOrientationUp;
+    }
+    return orientation;
+}
+
 #pragma mark UI
+
+/**
+ *  Fading effect of the action of taking a photo
+ */
 
 - (void)runStillImageCaptureAnimation {
     dispatch_async(dispatch_get_main_queue(), ^{
