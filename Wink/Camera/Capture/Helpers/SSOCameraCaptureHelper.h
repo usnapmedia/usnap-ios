@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMedia/CMTime.h>
 #import "AVCamPreviewView.h"

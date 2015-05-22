@@ -16,6 +16,7 @@
 #import "UINavigationController+SSOLockedNavigationController.h"
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 #import "SSOProfileViewController.h"
+#import "SSOCameraStateHelper.h"
 #import <Masonry.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <SVProgressHUD/SVProgressHUD.h>
@@ -46,9 +47,6 @@
 @property(strong, nonatomic) UIImage *libraryImage;
 
 // Data
-@property(nonatomic) AVCaptureFlashMode flashState;
-@property(nonatomic) AVCaptureTorchMode torchState;
-@property(nonatomic) AVCaptureDevicePosition devicePosition;
 @property(nonatomic) BOOL isVideoRecording;
 @property(nonatomic) BOOL isRotationAllowed;
 @property(strong, nonatomic) SSOCameraCaptureHelper *cameraCaptureHelper;
@@ -64,9 +62,6 @@
     [super viewWillAppear:animated];
 
     [self initializeData];
-
-    // Initialize state of camera to setup UI
-    [self initializeStateOfCamera];
 
     [self showBlurForDuration:0.5];
 
@@ -125,20 +120,9 @@
 
     self.cameraCaptureHelper = [[SSOCameraCaptureHelper alloc] initWithPreviewView:self.cameraPreviewView
                                                                     andOrientation:UIDeviceOrientationPortrait
-                                                                withDevicePosition:self.devicePosition
-                                                                    withFlashState:self.flashState];
+                                                                withDevicePosition:[[SSOCameraStateHelper sharedInstance] devicePosition]
+                                                                    withFlashState:[[SSOCameraStateHelper sharedInstance] flashState]];
     self.cameraCaptureHelper.delegate = self;
-}
-
-/**
- *  The state of the camera is if the flash is on or not, the video is on or not, is the camera rear facing
- */
-- (void)initializeStateOfCamera {
-    self.flashState = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kFlashState];
-
-    self.torchState = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kTorchState];
-
-    self.devicePosition = [[NSUserDefaults standardUserDefaults] integerForKey:kDevicePosition];
 }
 
 /**
@@ -275,7 +259,7 @@
  *  Update the UI for the camera device depending if it's rear facing or front facing
  */
 - (void)initializeUICameraDevice {
-    if (self.devicePosition == AVCaptureDevicePositionFront) {
+    if ([[SSOCameraStateHelper sharedInstance] devicePosition] == AVCaptureDevicePositionFront) {
         self.flashButton.hidden = YES;
     } else {
         self.flashButton.hidden = NO;
@@ -286,10 +270,10 @@
  *  Intialize flash
  */
 - (void)initializeFlash {
-    if (self.flashState == AVCaptureFlashModeOff) {
+    if ([[SSOCameraStateHelper sharedInstance] flashState] == AVCaptureFlashModeOff) {
         [self.flashButton setImage:[UIImage imageNamed:@"ic_noflash"] forState:UIControlStateNormal];
 
-    } else if (self.flashState == AVCaptureFlashModeOn) {
+    } else if ([[SSOCameraStateHelper sharedInstance] flashState] == AVCaptureFlashModeOn) {
         [self.flashButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
 
     } else {
@@ -302,28 +286,21 @@
  */
 - (void)switchFlashState {
     // Change flash button icon
-    if (self.flashState == AVCaptureFlashModeOff) {
+    if ([[SSOCameraStateHelper sharedInstance] flashState] == AVCaptureFlashModeOff) {
         [self.flashButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
-
-        self.flashState = AVCaptureFlashModeOn;
-        self.torchState = AVCaptureTorchModeOn;
-
-    } else if (self.flashState == AVCaptureFlashModeOn) {
+        [[SSOCameraStateHelper sharedInstance] setFlashState:AVCaptureFlashModeOn];
+        [[SSOCameraStateHelper sharedInstance] setTorchState:AVCaptureTorchModeOn];
+    } else if ([[SSOCameraStateHelper sharedInstance] flashState] == AVCaptureFlashModeOn) {
         [self.flashButton setImage:[UIImage imageNamed:@"ic_flash_A"] forState:UIControlStateNormal];
-        self.flashState = AVCaptureFlashModeAuto;
-        self.torchState = AVCaptureTorchModeAuto;
-
+        [[SSOCameraStateHelper sharedInstance] setFlashState:AVCaptureFlashModeAuto];
+        [[SSOCameraStateHelper sharedInstance] setTorchState:AVCaptureTorchModeAuto];
     } else {
         [self.flashButton setImage:[UIImage imageNamed:@"ic_noflash"] forState:UIControlStateNormal];
-        self.flashState = AVCaptureFlashModeOff;
-        self.torchState = AVCaptureTorchModeOff;
+        [[SSOCameraStateHelper sharedInstance] setFlashState:AVCaptureFlashModeOff];
+        [[SSOCameraStateHelper sharedInstance] setTorchState:AVCaptureTorchModeOff];
     }
 
-    [SSOCameraCaptureHelper setFlashMode:self.flashState forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
-
-    [[NSUserDefaults standardUserDefaults] setInteger:self.torchState forKey:kTorchState];
-    [[NSUserDefaults standardUserDefaults] setInteger:self.flashState forKey:kFlashState];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [SSOCameraCaptureHelper setFlashMode:[[SSOCameraStateHelper sharedInstance] flashState] forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
 }
 
 /**
@@ -340,25 +317,18 @@
 
     // Remove flash button
     // Send a message to the photo/video controller to change camera direction
-    if (self.devicePosition == AVCaptureDevicePositionFront) {
+    if ([[SSOCameraStateHelper sharedInstance] devicePosition] == AVCaptureDevicePositionFront) {
         self.flashButton.hidden = NO;
-
-        self.devicePosition = AVCaptureDevicePositionBack;
-
+        [[SSOCameraStateHelper sharedInstance] setDevicePosition:AVCaptureDevicePositionBack];
         [self.cameraCaptureHelper changeCameraWithDevicePosition:AVCaptureDevicePositionBack];
 
     } else {
         self.flashButton.hidden = YES;
-
-        self.devicePosition = AVCaptureDevicePositionFront;
-
+        [[SSOCameraStateHelper sharedInstance] setDevicePosition:AVCaptureDevicePositionFront];
         [self.cameraCaptureHelper changeCameraWithDevicePosition:AVCaptureDevicePositionFront];
     }
 
-    [SSOCameraCaptureHelper setFlashMode:self.flashState forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
-
-    [[NSUserDefaults standardUserDefaults] setInteger:self.devicePosition forKey:kDevicePosition];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [SSOCameraCaptureHelper setFlashMode:[[SSOCameraStateHelper sharedInstance] flashState] forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
 }
 
 /**
@@ -480,7 +450,7 @@
 - (void)didStartLongPressGesture:(SSORoundedAnimatedButton *)button {
 
     // Enable torch state when recording video
-    [SSOCameraCaptureHelper setTorchMode:self.torchState forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
+    [SSOCameraCaptureHelper setTorchMode:[[SSOCameraStateHelper sharedInstance] torchState] forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
 
     // Disable interaction with flash and other corner icons
     self.flashButton.userInteractionEnabled = NO;
