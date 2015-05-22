@@ -347,7 +347,9 @@
 - (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage usingCropRect:(CGRect)cropRect {
     [controller dismissViewControllerAnimated:YES
                                    completion:^{
+                                     self.image = croppedImage;
                                      self.imageView.image = croppedImage;
+                                     self.modifiedImageView.image = croppedImage;
                                    }];
 }
 
