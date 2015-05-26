@@ -168,6 +168,7 @@
 		FBB76FEF1B02455300FFAF9A /* SSOUSnapLightButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB76FEE1B02455300FFAF9A /* SSOUSnapLightButton.m */; };
 		FBBC950E1AF9238000203E48 /* SSOSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC950C1AF9238000203E48 /* SSOSettingsViewController.m */; };
 		FBBC950F1AF9238000203E48 /* SSOSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBC950D1AF9238000203E48 /* SSOSettingsViewController.xib */; };
+		FBC5404B1B0FAD3000766739 /* SSOCameraStateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC5404A1B0FAD3000766739 /* SSOCameraStateHelper.m */; };
 		FBF9D1CB1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF9D1C91AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.m */; };
 		FBF9D1CC1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBF9D1CA1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -467,6 +468,8 @@
 		FBBC950B1AF9238000203E48 /* SSOSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSettingsViewController.h; sourceTree = "<group>"; };
 		FBBC950C1AF9238000203E48 /* SSOSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSettingsViewController.m; sourceTree = "<group>"; };
 		FBBC950D1AF9238000203E48 /* SSOSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOSettingsViewController.xib; sourceTree = "<group>"; };
+		FBC540491B0FAD3000766739 /* SSOCameraStateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCameraStateHelper.h; sourceTree = "<group>"; };
+		FBC5404A1B0FAD3000766739 /* SSOCameraStateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCameraStateHelper.m; sourceTree = "<group>"; };
 		FBF9D1C81AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOPhotosCollectionViewCell.h; sourceTree = "<group>"; };
 		FBF9D1C91AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOPhotosCollectionViewCell.m; sourceTree = "<group>"; };
 		FBF9D1CA1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOPhotosCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -670,6 +673,8 @@
 			children = (
 				CB8F0ABB1ADDDCB100C18263 /* SSOCameraCaptureHelper.h */,
 				CB8F0ABC1ADDDCB100C18263 /* SSOCameraCaptureHelper.m */,
+				FBC540491B0FAD3000766739 /* SSOCameraStateHelper.h */,
+				FBC5404A1B0FAD3000766739 /* SSOCameraStateHelper.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1700,6 +1705,7 @@
 				D86E08F01AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m in Sources */,
 				D830F41A1ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				D8E678021AEEE5F6006B8CD8 /* SSOCustomCellSizeCollectionViewProvider.m in Sources */,
+				FBC5404B1B0FAD3000766739 /* SSOCameraStateHelper.m in Sources */,
 				D810B8F71ADF508A00B3AC11 /* NSBundle+Wink.m in Sources */,
 				D8E6780A1AEEEEA0006B8CD8 /* SSODynamicCellSizeCollectionViewProvider.m in Sources */,
 				D8E677FF1AEEE5F6006B8CD8 /* SSOSnap.m in Sources */,
