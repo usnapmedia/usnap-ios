@@ -22,7 +22,7 @@ pod 'SZTextView'
 pod 'SDWebImage'
 pod 'SDiPhoneVersion'
 pod 'AutoScrollLabel'
-pod 'Analytics'
+pod 'Analytics/Segmentio'
 
 # Samsao libraries
 pod 'SSFacebookHelper', :git => 'git@gitlab.samsaodev.com:ios-development/ssfacebookhelper.git'
