@@ -394,12 +394,22 @@
 
 #pragma mark - Blur
 
+/**
+ *  Display a blur view for a certain duration
+ *
+ *  @param duration the duration
+ */
 - (void)showBlurForDuration:(double)duration {
 
     [self showBluredView];
     [self performSelector:@selector(removeBlurredViewWithDuration:) withObject:[NSNumber numberWithDouble:duration] afterDelay:1];
 }
 
+/**
+ *  Remove the blurred view
+ *
+ *  @param duration the duration of the animation
+ */
 - (void)removeBlurredViewWithDuration:(NSNumber *)duration {
 
     [UIView animateWithDuration:[duration doubleValue]
@@ -413,6 +423,9 @@
         }];
 }
 
+/**
+ *  Show the blurred view
+ */
 - (void)showBluredView {
     self.blurEffectview = [[UIView alloc] initWithFrame:self.view.bounds];
     self.blurEffectview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
