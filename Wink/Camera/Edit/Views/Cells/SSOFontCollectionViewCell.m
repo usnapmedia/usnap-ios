@@ -52,4 +52,10 @@
     self.scrollLabel.scrollDirection = CBAutoScrollDirectionLeft;
 }
 
+- (void)setFontColorWithColor:(UIColor *)color {
+    self.fontExampleLabel.textColor = color;
+    self.fontNameLabel.textColor = color;
+    self.scrollLabel.textColor = color;
+}
+
 @end

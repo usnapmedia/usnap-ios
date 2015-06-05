@@ -49,13 +49,14 @@
     [super viewDidLoad];
     [self initializeUI];
     [self setChildVC];
-    [self loadCampaigns];
-    [self loadMyFeed];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+    [self loadCampaigns];
+    [self loadMyFeed];
+    
     // Check if there is a user registered in the app and set the userFirstLetterLabel
     // This has to be in viewWillAppear because maybe the user will login or logout after the view is loaded
     if ([[NSUserDefaults standardUserDefaults] valueForKey:kEmailLoggedString]) {

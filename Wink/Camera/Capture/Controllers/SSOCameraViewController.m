@@ -188,6 +188,7 @@
         image = [mediaDic objectForKey:UIImagePickerControllerEditedImage];
         if (image == nil) {
             image = [mediaDic objectForKey:UIImagePickerControllerOriginalImage];
+//            controller.image = [self.cameraCaptureHelper squareImageWithImage:image];
             controller.image = image;
         }
     } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {

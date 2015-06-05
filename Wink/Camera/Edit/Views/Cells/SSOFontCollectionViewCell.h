@@ -11,4 +11,6 @@
 
 @interface SSOFontCollectionViewCell : UICollectionViewCell <SSBaseViewCellProtocol>
 
+- (void)setFontColorWithColor:(UIColor *)color;
+
 @end

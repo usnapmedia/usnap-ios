@@ -11,6 +11,7 @@
 #import "SSOFeedConnect.h"
 #import "SSOSnap.h"
 #import "SSOCountableItems.h"
+#import "SSSessionManager.h"
 #import <Masonry.h>
 #import "SSOThemeHelper.h"
 
@@ -72,7 +73,8 @@
 
 - (void)loadPhotos {
     //@FIXME should be all photos, not ony the top ones
-    [SSOFeedConnect getTopPhotosWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [SSOFeedConnect getTopPhotosForCampaignId:[SSSessionManager sharedInstance].campaignID
+                                  withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
       SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
       [self.photosVC setPhotosData:items.response];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){

@@ -205,14 +205,14 @@
 
 - (void)didLoginWithInfo:(NSDictionary *)info {
 
+    // Login the user
+    [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
+
     // Login on the backend
     [WKWinkConnect winkConnectLoginWithUsername:[info valueForKey:@"username"]
         password:[info valueForKey:@"password"]
         meta:nil
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-          // Login the user
-          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
 
           [self dismissViewControllerAnimated:YES
                                    completion:^{
@@ -236,6 +236,8 @@
 
 - (void)didRegisterWithInfo:(NSDictionary *)info andMeta:(NSDictionary *)meta {
 
+    [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
+
     [WKWinkConnect winkConnectRegisterWithEmail:[info valueForKey:@"email"]
         password:[info valueForKey:@"password"]
         username:[info valueForKey:@"username"]
@@ -244,8 +246,6 @@
         birthday:[info valueForKey:@"birthday"]
         meta:meta
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
 
           [self dismissViewControllerAnimated:YES
                                    completion:^{
@@ -267,6 +267,10 @@
           [[SSSessionManager sharedInstance] logoutCurrentUser];
 
         }];
+}
+
+- (void)didNotFillAllFields {
+    [UIAlertView showWithTitle:@"Missing fields" message:@"Check the fields" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
 }
 
 @end

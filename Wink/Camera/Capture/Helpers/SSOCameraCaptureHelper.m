@@ -243,8 +243,9 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
                                                              if (imageDataSampleBuffer) {
                                                                  NSData *imageData =
                                                                      [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-                                                                 UIImage *tempImg = [[UIImage alloc] initWithData:imageData];
-                                                                 UIImage *image = [self squareImageWithImage:tempImg];
+                                                                 UIImage *image = [[UIImage alloc] initWithData:imageData];
+                                                                 //                                                                 UIImage *image = [self
+                                                                 //                                                                 squareImageWithImage:tempImg];
                                                                  ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
                                                                  NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
 
@@ -436,7 +437,8 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
                     toAlbum:appName
         withCompletionBlock:^(NSError *error) {
           [self removeObservers];
-          [self cropVideoSquare:outputFileURL];
+          [self.delegate didFinishCapturingVideo:outputFileURL withError:nil];
+          //          [self cropVideoSquare:outputFileURL];
         }];
 }
 

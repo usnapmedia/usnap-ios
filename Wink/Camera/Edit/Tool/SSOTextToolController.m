@@ -9,6 +9,7 @@
 #import "SSOTextToolController.h"
 #import "SSOTextAccessoryContainerView.h"
 #import "SSOTextFontCollectionViewProvider.h"
+#import "SSOFontCollectionViewCell.h"
 #import "UIColor+PickerColors.h"
 #import <Masonry.h>
 
@@ -22,6 +23,9 @@
 @property(strong, nonatomic) SSOTextFontCollectionViewProvider *provider;
 @property(weak, nonatomic) UITextView *textView;
 
+@property(strong, nonatomic) UIColor *currentColor;
+@property(strong, nonatomic) SSOFontCollectionViewCell *cell;
+
 @property(nonatomic) float keyBoardHeight;
 
 @end
@@ -32,6 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.currentColor = [UIColor whiteColor];
     // Initialize the VC to the parent VC
     [self initializeContainerViewToParentVC];
     // Initialize the text view
@@ -146,6 +151,11 @@
 
 - (void)colorPickerDidChangeColor:(SSOColorPickerContainerView *)colorPickerContainerView withColor:(UIColor *)color {
     [self.textView setTextColor:color];
+    self.currentColor = color;
+    if (!self.cell) {
+        self.cell = [[self.accessoryContainerView.fontCollectionView visibleCells] firstObject];
+    }
+    [self.cell setFontColorWithColor:color];
 }
 
 #pragma mark - SSODrawContainerViewDelegate
@@ -202,6 +212,11 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
 
+    if (!self.cell) {
+        self.cell = [[self.accessoryContainerView.fontCollectionView visibleCells] firstObject];
+    }
+    [self.cell setFontColorWithColor:self.currentColor];
+    
     CGPoint center = self.textView.center;
     CGSize size =
         [self.textView sizeThatFits:CGSizeMake(self.textView.superview.bounds.size.width, self.textView.superview.bounds.size.height - self.keyBoardHeight)];
@@ -235,6 +250,12 @@
 
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSAssert([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[NSDictionary class]], @"Object data has to be of NSDictionary class");
+    NSArray *cells = [self.accessoryContainerView.fontCollectionView visibleCells];
+    for (SSOFontCollectionViewCell *cell in cells) {
+        [cell setFontColorWithColor:[UIColor whiteColor]];
+    }
+    self.cell = (SSOFontCollectionViewCell *)[self.accessoryContainerView.fontCollectionView cellForItemAtIndexPath:indexPath];
+    [self.cell setFontColorWithColor:self.currentColor];
     NSDictionary *objectData = (NSDictionary *)[self.provider.inputData objectAtIndex:indexPath.row];
     NSAssert([objectData objectForKey:@"font_name"], @"Object data must have the font name at the key font_name");
     [self.textView setFont:[UIFont fontWithName:[objectData objectForKey:@"font_name"] size:kTextViewFontSize]];

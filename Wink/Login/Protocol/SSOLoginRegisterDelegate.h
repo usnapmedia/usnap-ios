@@ -30,4 +30,10 @@
  *  EditMediaVC needs a return when the user finished to log in in order to push the next VC
  */
 - (void)didFinishAuthProcess;
+
+/**
+ *  If the user don't fill all the field, it will call this method
+ */
+- (void)didNotFillAllFields;
+
 @end
