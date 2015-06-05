@@ -36,22 +36,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-ch-fMg" customClass="AVCamPreviewView">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-ch-fMg" customClass="AVCamPreviewView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="PI2-ch-fMg" secondAttribute="height" multiplier="50:50" id="Ru8-op-f45"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Ru8-op-f45"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Ru8-op-f45"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77y-R9-8Qn" userLabel="Top View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
@@ -260,8 +247,6 @@
                         <constraints>
                             <constraint firstItem="77y-R9-8Qn" firstAttribute="leading" secondItem="ck7-Ge-pVp" secondAttribute="leading" id="5mS-Zt-La2"/>
                             <constraint firstAttribute="trailing" secondItem="q9G-9M-9NP" secondAttribute="trailing" id="7Jb-xl-XWX"/>
-                            <constraint firstAttribute="centerX" secondItem="PI2-ch-fMg" secondAttribute="centerX" id="Al1-uf-v50"/>
-                            <constraint firstAttribute="centerY" secondItem="PI2-ch-fMg" secondAttribute="centerY" id="DUW-YZ-G0I"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3Nh-k5-MSM" secondAttribute="trailing" constant="10" id="EBs-Us-X8r"/>
                             <constraint firstItem="PI2-ch-fMg" firstAttribute="leading" secondItem="ck7-Ge-pVp" secondAttribute="leading" id="HRr-UF-yGk"/>
                             <constraint firstAttribute="trailing" secondItem="77y-R9-8Qn" secondAttribute="trailing" id="Jyk-is-BI0"/>
@@ -273,20 +258,26 @@
                             <constraint firstAttribute="centerX" secondItem="3Nh-k5-MSM" secondAttribute="centerX" id="giH-lV-OrN"/>
                             <constraint firstAttribute="trailing" secondItem="PI2-ch-fMg" secondAttribute="trailing" id="jIR-5C-Frm"/>
                             <constraint firstItem="77y-R9-8Qn" firstAttribute="top" secondItem="3Nh-k5-MSM" secondAttribute="bottom" id="k4c-nx-bvO"/>
+                            <constraint firstItem="PI2-ch-fMg" firstAttribute="top" secondItem="Fbn-qC-7He" secondAttribute="bottom" constant="104" id="o3o-5E-bAK">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstItem="doZ-ra-0Jc" firstAttribute="top" secondItem="q9G-9M-9NP" secondAttribute="bottom" id="pk8-XG-6aV"/>
                             <constraint firstAttribute="bottomMargin" secondItem="3Nh-k5-MSM" secondAttribute="bottom" constant="15" id="uq7-3y-KZx"/>
                             <constraint firstItem="q9G-9M-9NP" firstAttribute="leading" secondItem="ck7-Ge-pVp" secondAttribute="leading" id="wpA-U9-GYX"/>
+                            <constraint firstItem="doZ-ra-0Jc" firstAttribute="top" secondItem="PI2-ch-fMg" secondAttribute="bottom" constant="124" id="xqT-if-mNR">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="k4c-nx-bvO"/>
-                                <exclude reference="Al1-uf-v50"/>
-                                <exclude reference="DUW-YZ-G0I"/>
+                                <exclude reference="o3o-5E-bAK"/>
                                 <exclude reference="EBs-Us-X8r"/>
                                 <exclude reference="LjD-2w-Yu1"/>
                                 <exclude reference="giH-lV-OrN"/>
                                 <exclude reference="uq7-3y-KZx"/>
                                 <exclude reference="g0M-BW-9Yv"/>
+                                <exclude reference="xqT-if-mNR"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -305,11 +296,11 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="Al1-uf-v50"/>
-                                <include reference="DUW-YZ-G0I"/>
+                                <include reference="o3o-5E-bAK"/>
                                 <include reference="giH-lV-OrN"/>
                                 <include reference="uq7-3y-KZx"/>
                                 <include reference="g0M-BW-9Yv"/>
+                                <include reference="xqT-if-mNR"/>
                             </mask>
                         </variation>
                     </view>

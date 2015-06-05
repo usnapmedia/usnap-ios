@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKEditMediaViewController">
@@ -21,11 +20,8 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ViG-Cy-T47" userLabel="overlay view">
-                    <rect key="frame" x="0.0" y="146" width="375" height="375"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="ViG-Cy-T47" secondAttribute="height" multiplier="50:50" id="Nx6-s8-Njk"/>
-                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPu-n7-xWr" userLabel="topView" customClass="SSOFadingContainerView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -128,17 +124,17 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="ViG-Cy-T47" secondAttribute="centerX" id="90z-f3-toQ"/>
                 <constraint firstItem="cPu-n7-xWr" firstAttribute="top" secondItem="oum-iL-jh4" secondAttribute="top" placeholder="YES" id="GFH-QF-EJD"/>
                 <constraint firstAttribute="trailing" secondItem="cPu-n7-xWr" secondAttribute="trailing" id="SQS-Uc-3eM"/>
                 <constraint firstAttribute="bottom" secondItem="55r-Oa-hPu" secondAttribute="bottom" id="ShL-64-mwn"/>
-                <constraint firstAttribute="centerY" secondItem="ViG-Cy-T47" secondAttribute="centerY" id="VQ1-DY-Vcq"/>
                 <constraint firstAttribute="trailing" secondItem="55r-Oa-hPu" secondAttribute="trailing" id="XHV-sp-VhC"/>
+                <constraint firstAttribute="bottom" secondItem="ViG-Cy-T47" secondAttribute="bottom" id="Xnw-pt-dzS"/>
                 <constraint firstItem="55r-Oa-hPu" firstAttribute="leading" secondItem="oum-iL-jh4" secondAttribute="leading" id="Yun-Dw-01m"/>
                 <constraint firstItem="cPu-n7-xWr" firstAttribute="leading" secondItem="oum-iL-jh4" secondAttribute="leading" id="dXu-mJ-ctA"/>
                 <constraint firstItem="ViG-Cy-T47" firstAttribute="leading" secondItem="oum-iL-jh4" secondAttribute="leading" id="hFK-WG-mWn"/>
                 <constraint firstItem="xrZ-3G-dwT" firstAttribute="leading" secondItem="55r-Oa-hPu" secondAttribute="trailing" constant="5" id="oBE-IV-jso"/>
                 <constraint firstAttribute="trailing" secondItem="ViG-Cy-T47" secondAttribute="trailing" id="pO7-y4-NgO"/>
+                <constraint firstItem="ViG-Cy-T47" firstAttribute="top" secondItem="oum-iL-jh4" secondAttribute="top" id="riS-nI-F9y"/>
                 <constraint firstAttribute="trailing" secondItem="55r-Oa-hPu" secondAttribute="trailing" id="tKG-Vb-ere"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -146,8 +142,8 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="tKG-Vb-ere"/>
                     <exclude reference="oBE-IV-jso"/>
+                    <exclude reference="tKG-Vb-ere"/>
                 </mask>
             </variation>
             <variation key="heightClass=compact">
@@ -167,13 +163,13 @@
                     <include reference="55r-Oa-hPu"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="ShL-64-mwn"/>
-                    <include reference="Yun-Dw-01m"/>
-                    <include reference="tKG-Vb-ere"/>
                     <include reference="SQS-Uc-3eM"/>
                     <include reference="dXu-mJ-ctA"/>
                     <include reference="hFK-WG-mWn"/>
                     <include reference="pO7-y4-NgO"/>
+                    <include reference="ShL-64-mwn"/>
+                    <include reference="Yun-Dw-01m"/>
+                    <include reference="tKG-Vb-ere"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="268.5" y="474.5"/>

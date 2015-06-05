@@ -205,14 +205,14 @@
 
 - (void)didLoginWithInfo:(NSDictionary *)info {
 
+    // Login the user
+    [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
+    
     // Login on the backend
     [WKWinkConnect winkConnectLoginWithUsername:[info valueForKey:@"username"]
         password:[info valueForKey:@"password"]
         meta:nil
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-          // Login the user
-          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
 
           [self dismissViewControllerAnimated:YES
                                    completion:^{
@@ -267,6 +267,11 @@
           [[SSSessionManager sharedInstance] logoutCurrentUser];
 
         }];
+}
+
+- (void)didNotFillAllFields
+{
+    [UIAlertView showWithTitle:@"Missing fields" message:@"Check the fields" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
 }
 
 @end

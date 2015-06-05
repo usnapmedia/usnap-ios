@@ -228,6 +228,10 @@
     SSOTextToolController *childVC = [SSOTextToolController new];
     childVC.delegate = self;
     [self animateToChildViewController:childVC];
+    
+    if ([self.textView.text isEqualToString:@""]) {
+        [self.textView setFrame:CGRectMake(0.0f, self.overlayView.frame.size.height/2 - 45.0f, self.overlayView.frame.size.width, 70.0f)];
+    }
 }
 
 - (void)adjustmentButtonTouched:(id)sender {

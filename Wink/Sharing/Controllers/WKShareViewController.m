@@ -243,6 +243,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     self.googleButton.tag = googleSocialNetwork;
     [self.googleButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
 
+    self.googleButton.hidden = YES;
     //    SSOCustomSocialButton *facebookButton =
     //        [[SSOCustomSocialButton alloc] initWithSocialNetwork:facebookSocialNetwork
     //                                                       state:[[SSOSocialNetworkAPI sharedInstance]
@@ -376,7 +377,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 - (void)post {
     [self.placeholderTextView resignFirstResponder];
 
-    [SVProgressHUD showWithStatus:@"uploading"];
+    [SVProgressHUD showWithStatus:@"uploading" maskType:SVProgressHUDMaskTypeBlack];
 
     [WKWinkConnect winkConnectPostImageToBackend:[self editedImage]
         withText:self.placeholderTextView.text

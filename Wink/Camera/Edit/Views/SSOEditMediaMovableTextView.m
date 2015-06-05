@@ -70,8 +70,19 @@
     }
     // Drag the view
     CGPoint translation = [self.panGesture translationInView:self.superview];
-    self.panGesture.view.center = CGPointMake(self.panGesture.view.center.x + translation.x, self.panGesture.view.center.y + translation.y);
-    [self.panGesture setTranslation:CGPointMake(0, 0) inView:self.superview];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    NSLog(@"%f, %f", translation.x, self.panGesture.view.frame.origin.x + self.panGesture.view.frame.size.width);
+    if ((self.panGesture.view.frame.origin.x > 0 || translation.x > self.panGesture.view.frame.origin.x) &&
+        (self.panGesture.view.frame.origin.x + self.panGesture.view.frame.size.width < screenWidth ||
+         translation.x < 0) &&
+        (self.panGesture.view.frame.origin.y > 75 || translation.y > self.panGesture.view.frame.origin.y) &&
+        (self.panGesture.view.frame.origin.y + self.panGesture.view.frame.size.height < screenHeight - 110 ||
+         translation.y < 0)) {
+        self.panGesture.view.center = CGPointMake(self.panGesture.view.center.x + translation.x, self.panGesture.view.center.y + translation.y);
+        [self.panGesture setTranslation:CGPointMake(0, 0) inView:self.superview];
+    }
 }
 
 /**
