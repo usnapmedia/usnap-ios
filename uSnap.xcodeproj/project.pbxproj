@@ -43,7 +43,6 @@
 		334F54421AF2BAB600B40D31 /* SSORoundedBackgroundLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 334F54411AF2BAB600B40D31 /* SSORoundedBackgroundLabel.m */; };
 		335723B31ACB097C000CC846 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3357233E1ACB097C000CC846 /* Camera.storyboard */; };
 		335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723431ACB097C000CC846 /* SSOCameraViewController.m */; };
-		335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723741ACB097C000CC846 /* FacebookHelper.m */; };
 		335723D21ACB097C000CC846 /* WKMoviePlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723811ACB097C000CC846 /* WKMoviePlayerView.m */; };
 		335723D31ACB097C000CC846 /* WKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723831ACB097C000CC846 /* WKNavigationController.m */; };
 		335723D61ACB097C000CC846 /* WKVideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723891ACB097C000CC846 /* WKVideoEditor.m */; };
@@ -235,8 +234,6 @@
 		3357233E1ACB097C000CC846 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		335723421ACB097C000CC846 /* SSOCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCameraViewController.h; sourceTree = "<group>"; };
 		335723431ACB097C000CC846 /* SSOCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCameraViewController.m; sourceTree = "<group>"; };
-		335723731ACB097C000CC846 /* FacebookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookHelper.h; sourceTree = "<group>"; };
-		335723741ACB097C000CC846 /* FacebookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookHelper.m; sourceTree = "<group>"; };
 		335723801ACB097C000CC846 /* WKMoviePlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKMoviePlayerView.h; sourceTree = "<group>"; };
 		335723811ACB097C000CC846 /* WKMoviePlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKMoviePlayerView.m; sourceTree = "<group>"; };
 		335723821ACB097C000CC846 /* WKNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKNavigationController.h; sourceTree = "<group>"; };
@@ -700,8 +697,6 @@
 				333F49AD1AE01BEC004B5CC3 /* SSOOrientationHelper.m */,
 				3316F2D11ADD6D9F00C7ED24 /* SSSessionManager.h */,
 				3316F2D21ADD6D9F00C7ED24 /* SSSessionManager.m */,
-				335723731ACB097C000CC846 /* FacebookHelper.h */,
-				335723741ACB097C000CC846 /* FacebookHelper.m */,
 				D8D4F17D1ADFFB52002FDE38 /* SSOThemeHelper.h */,
 				D8D4F17E1ADFFB52002FDE38 /* SSOThemeHelper.m */,
 				332CF5AE1AEEB92400396746 /* SSOScreenSizeHelper.h */,
@@ -1657,7 +1652,6 @@
 				D810B8EB1ADF506500B3AC11 /* SSOToolButton.m in Sources */,
 				33B991491AE4522F002A30F8 /* SSOAlignedButtonsView.m in Sources */,
 				D810B8E41ADF506500B3AC11 /* SSOSlidingContainerView.m in Sources */,
-				335723CA1ACB097C000CC846 /* FacebookHelper.m in Sources */,
 				D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */,
 				D830F4221ACDDBF1002A503D /* UIImage+Tools.m in Sources */,
 				335723E01ACB097C000CC846 /* Constants.m in Sources */,
@@ -1868,6 +1862,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Wink",
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wink/Supporting Files/uSnap-Prefix.pch";
@@ -1894,6 +1889,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Wink",
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wink/Supporting Files/uSnap-Prefix.pch";
