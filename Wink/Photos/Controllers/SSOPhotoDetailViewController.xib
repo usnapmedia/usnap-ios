@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -11,9 +11,11 @@
                 <outlet property="activityIndicator" destination="pZM-yw-qwd" id="l14-8K-CEg"/>
                 <outlet property="backButton" destination="HcI-bq-n3j" id="L2K-W7-qNm"/>
                 <outlet property="circledLetter" destination="PM0-0i-sXG" id="7i2-3k-sPU"/>
+                <outlet property="confirmReportButton" destination="SPJ-Fp-UZs" id="IMm-QP-HE0"/>
                 <outlet property="dateLabel" destination="57v-xt-hZX" id="ke5-Yf-PN1"/>
                 <outlet property="imageView" destination="Mkj-vf-u5B" id="Ibs-1K-kWg"/>
                 <outlet property="nameLabel" destination="Mvk-GF-kJi" id="Fl5-Fl-uGi"/>
+                <outlet property="reportImageView" destination="NyQ-hn-wCI" id="sfy-Jv-rTA"/>
                 <outlet property="textLabel" destination="2Gz-Lf-nzs" id="jLy-zR-SKC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -81,14 +83,27 @@
                                 <constraint firstAttribute="height" constant="30" id="0hk-lk-rsY"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cl9-0U-ybD">
+                            <rect key="frame" x="273" y="50" width="82" height="28"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="Report Image">
+                                <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="reportImageAction:" destination="-1" eventType="touchUpInside" id="QjU-59-aFc"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="TEc-5g-LnO" secondAttribute="bottom" id="E4T-bs-8bt"/>
+                        <constraint firstItem="cl9-0U-ybD" firstAttribute="top" secondItem="2Gz-Lf-nzs" secondAttribute="bottom" id="J7n-8L-PPA"/>
                         <constraint firstItem="TEc-5g-LnO" firstAttribute="top" secondItem="2Gz-Lf-nzs" secondAttribute="bottom" id="PXx-Vs-gGO"/>
                         <constraint firstAttribute="trailing" secondItem="2Gz-Lf-nzs" secondAttribute="trailing" constant="20" symbolic="YES" id="U4p-5P-XBM"/>
                         <constraint firstAttribute="width" constant="80" id="Vvu-eM-MNT"/>
                         <constraint firstItem="TEc-5g-LnO" firstAttribute="width" secondItem="Uf0-SL-nmC" secondAttribute="width" multiplier="0.3" id="WP5-Lv-K5h"/>
+                        <constraint firstAttribute="trailing" secondItem="cl9-0U-ybD" secondAttribute="trailing" constant="20" id="a1I-O3-N8h"/>
                         <constraint firstAttribute="trailing" secondItem="TEc-5g-LnO" secondAttribute="trailing" id="hOP-A1-frt"/>
                         <constraint firstItem="2Gz-Lf-nzs" firstAttribute="top" secondItem="Uf0-SL-nmC" secondAttribute="top" constant="5" id="lFW-Kf-IWA"/>
                         <constraint firstItem="TEc-5g-LnO" firstAttribute="leading" secondItem="Uf0-SL-nmC" secondAttribute="leading" id="m7o-M4-jYH"/>
@@ -141,19 +156,44 @@
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pZM-yw-qwd">
                     <rect key="frame" x="177" y="339" width="20" height="20"/>
                 </activityIndicatorView>
+                <view hidden="YES" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NyQ-hn-wCI">
+                    <rect key="frame" x="0.0" y="40" width="375" height="627"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPJ-Fp-UZs">
+                    <rect key="frame" x="56" y="317" width="262" height="33"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="33" id="VdF-cw-CHI"/>
+                        <constraint firstAttribute="width" constant="262" id="mHp-ho-zhK"/>
+                    </constraints>
+                    <state key="normal" title="Report this Image?">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="confirmReportImageAction:" destination="-1" eventType="touchUpInside" id="PJN-n9-OVN"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Mkj-vf-u5B" firstAttribute="centerY" secondItem="SPJ-Fp-UZs" secondAttribute="centerY" constant="15" id="2Qg-PJ-Hwk"/>
+                <constraint firstItem="Mkj-vf-u5B" firstAttribute="centerX" secondItem="SPJ-Fp-UZs" secondAttribute="centerX" constant="0.5" id="AmN-V8-cEJ"/>
                 <constraint firstItem="Uf0-SL-nmC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BOq-Rx-Jj7"/>
                 <constraint firstAttribute="trailing" secondItem="LXv-Xk-25O" secondAttribute="trailing" id="GIY-et-l9v"/>
                 <constraint firstItem="LXv-Xk-25O" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Hru-eJ-0Xo"/>
+                <constraint firstAttribute="trailing" secondItem="NyQ-hn-wCI" secondAttribute="trailing" id="Ii6-dT-OQM"/>
                 <constraint firstAttribute="bottom" secondItem="Uf0-SL-nmC" secondAttribute="bottom" id="LI4-K7-Wu7"/>
                 <constraint firstAttribute="centerX" secondItem="Mkj-vf-u5B" secondAttribute="centerX" id="SAL-rD-5Di"/>
                 <constraint firstItem="LXv-Xk-25O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="X03-NE-5d3"/>
                 <constraint firstItem="Uf0-SL-nmC" firstAttribute="top" secondItem="Mkj-vf-u5B" secondAttribute="bottom" id="feX-eS-Lwy"/>
                 <constraint firstItem="Mkj-vf-u5B" firstAttribute="top" secondItem="yfT-XF-n3a" secondAttribute="bottom" id="gzr-bA-bYk"/>
+                <constraint firstItem="NyQ-hn-wCI" firstAttribute="top" secondItem="LXv-Xk-25O" secondAttribute="bottom" id="hkh-fH-Vba"/>
                 <constraint firstItem="Mkj-vf-u5B" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="iCP-mX-e6Y"/>
+                <constraint firstAttribute="bottom" secondItem="NyQ-hn-wCI" secondAttribute="bottom" id="joM-EP-EFy"/>
                 <constraint firstAttribute="trailing" secondItem="yfT-XF-n3a" secondAttribute="trailing" id="mKp-yn-Xvr"/>
+                <constraint firstItem="NyQ-hn-wCI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nue-q0-BPT"/>
                 <constraint firstAttribute="trailing" secondItem="Uf0-SL-nmC" secondAttribute="trailing" id="obJ-lk-tp4"/>
                 <constraint firstItem="Mkj-vf-u5B" firstAttribute="centerY" secondItem="pZM-yw-qwd" secondAttribute="centerY" constant="-0.5" id="ok9-84-KdC"/>
                 <constraint firstAttribute="trailing" secondItem="Mkj-vf-u5B" secondAttribute="trailing" constant="10" id="q47-Ly-jxL"/>
