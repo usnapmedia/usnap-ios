@@ -104,8 +104,6 @@
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    NSLog(@" orientation : %li", [[SSOOrientationHelper sharedInstance] orientation]);
-
     return UIDeviceOrientationPortrait;
     // return [[SSOOrientationHelper sharedInstance] orientation];
 }
@@ -130,7 +128,7 @@
 
     // Setup the imageview
     if (self.image) {
-        self.imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.overlayView.frame.origin.x, self.self.overlayView.frame.origin.y, self.overlayView.frame.size.width, self.overlayView.frame.size.height)];
         self.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         self.imageView.clipsToBounds = YES;
@@ -141,7 +139,7 @@
     else {
         self.moviePlayerView = [WKMoviePlayerView moviePlayerViewWithPath:self.mediaURL];
         self.moviePlayerView.delegate = self;
-        self.moviePlayerView.frame = self.view.bounds;
+        self.moviePlayerView.frame = self.overlayView.bounds;
         self.moviePlayerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.moviePlayerView.clipsToBounds = YES;
         [self.view insertSubview:self.moviePlayerView atIndex:0];
@@ -417,7 +415,7 @@
 - (ACEDrawingView *)drawView {
     if (!_drawView) {
         // Setup view
-        _drawView = [[ACEDrawingView alloc] initWithFrame:self.view.frame];
+        _drawView = [[ACEDrawingView alloc] initWithFrame:self.overlayView.frame];
         _drawView.backgroundColor = [UIColor clearColor];
         _drawView.lineWidth = 4.0f;
 
@@ -426,7 +424,7 @@
 
         // Set constraints
         [_drawView mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.edges.equalTo(self.view);
+          make.edges.equalTo(self.overlayView);
         }];
     }
     return _drawView;

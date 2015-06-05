@@ -188,12 +188,13 @@
         image = [mediaDic objectForKey:UIImagePickerControllerEditedImage];
         if (image == nil) {
             image = [mediaDic objectForKey:UIImagePickerControllerOriginalImage];
-            controller.image = image;
+            controller.image = [self.cameraCaptureHelper squareImageWithImage:image];
         }
     } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
         mediaURL = [mediaDic objectForKey:UIImagePickerControllerMediaURL];
         if (mediaURL == nil) {
             mediaURL = [mediaDic objectForKey:UIImagePickerControllerReferenceURL];
+//            controller.mediaURL = [self.cameraCaptureHelper cropVideoSquare:mediaURL]; @FIXME
             controller.mediaURL = mediaURL;
         }
     }

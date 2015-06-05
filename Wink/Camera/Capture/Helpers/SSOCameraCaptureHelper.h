@@ -75,6 +75,23 @@
  */
 + (void)setTorchMode:(AVCaptureTorchMode)torchMode forDevice:(AVCaptureDevice *)device;
 
+/**
+ *  Make the photo took by the user square
+ *
+ *  @param image  image from the camera
+ *
+ *  @return the squared photo
+ */
+- (UIImage *)squareImageWithImage:(UIImage *)image;
+
+/**
+ *  This method will receive the video URL and crop the video square
+ *
+ *  @param url video URL
+ */
+
+- (void)cropVideoSquare:(NSURL *)url;
+
 @end
 
 @protocol SSOCameraDelegate
