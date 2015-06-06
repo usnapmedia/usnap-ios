@@ -58,4 +58,14 @@
     }
 }
 
++ (void)reportImageWithImageID:(NSString *)imageID
+                      userName:(NSString *)userName
+                        apiKey:(NSString *)apiKey
+                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSString *url = [NSString stringWithFormat:@"feed/report"];
+    SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
+    [manager POST:url parameters:@{ @"image_id" : imageID, @"username" : userName, @"api_key" : apiKey } success:success failure:failure];
+}
+
 @end

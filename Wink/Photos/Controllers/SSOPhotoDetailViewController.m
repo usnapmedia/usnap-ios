@@ -10,6 +10,8 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SSORoundedBackgroundLabel.h"
 #import "SSOEditSideMenuView.h"
+#import "SSOFeedConnect.h"
+#import "SSSessionManager.h"
 #import "SSOThemeHelper.h"
 
 @interface SSOPhotoDetailViewController ()
@@ -23,7 +25,9 @@
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
 @property(weak, nonatomic) IBOutlet SSORoundedBackgroundLabel *circledLetter;
 //@property(weak, nonatomic) IBOutlet SSOEditSideMenuView *socialNetworksView;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property(weak, nonatomic) IBOutlet UIView *reportImageView;
+@property (weak, nonatomic) IBOutlet UIButton *confirmReportButton;
 
 @end
 
@@ -81,13 +85,12 @@
 
         self.textLabel.text = (NSString *)self.snap.text;
         [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        
-        
+
         [self.activityIndicator startAnimating];
         [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.snap.watermarkUrl]
-                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                          [self.activityIndicator stopAnimating];
-                                      }];
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                   [self.activityIndicator stopAnimating];
+                                 }];
         [self.imageView setClipsToBounds:YES];
     }
 }
@@ -113,6 +116,29 @@
  */
 - (IBAction)touchedBackButton:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)reportImageAction:(UIButton *)sender {
+    self.reportImageView.hidden = NO;
+    self.confirmReportButton.hidden = NO;
+}
+
+- (IBAction)confirmReportImageAction:(UIButton *)sender {
+    NSString *user = [[SSSessionManager sharedInstance] username];
+    if (!user) {
+        user = @"";
+    }
+    [SSOFeedConnect reportImageWithImageID:self.snap.url userName:user apiKey:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        self.reportImageView.hidden = YES;
+        self.confirmReportButton.hidden = YES;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"%ld", (long)error.code] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [errorAlert show];
+        self.reportImageView.hidden = YES;
+        self.confirmReportButton.hidden = YES;
+        
+    }];
 }
 
 @end
