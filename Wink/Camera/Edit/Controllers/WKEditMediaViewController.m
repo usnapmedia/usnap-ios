@@ -52,6 +52,7 @@
 @property(nonatomic, strong) WKMoviePlayerView *moviePlayerView;
 
 @property(strong, nonatomic) SSOEditToolController *childViewController;
+@property(strong, nonatomic) NSArray *buttonsToSwitch;
 
 @end
 
@@ -63,6 +64,7 @@
     [super viewDidLoad];
     // Setup UI
     [self setUI];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceChangedOrientation:) name:kDeviceOrientationNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -91,6 +93,10 @@
     [self.textView resignFirstResponder];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Orientation
 
 /**
@@ -106,6 +112,38 @@
 - (NSUInteger)supportedInterfaceOrientations {
     return UIDeviceOrientationPortrait;
     // return [[SSOOrientationHelper sharedInstance] orientation];
+}
+
+- (void)deviceChangedOrientation:(NSNotification *)notification {
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    switch (orientation) {
+    case UIDeviceOrientationPortrait: {
+        [self rotateButtons:0];
+        break;
+    }
+
+    case UIDeviceOrientationLandscapeLeft: {
+        [self rotateButtons:M_PI_2];
+        break;
+    }
+    case UIDeviceOrientationLandscapeRight: {
+        [self rotateButtons:-M_PI_2];
+        break;
+    }
+    default: { break; }
+    }
+}
+
+- (void)rotateButtons:(CGFloat)rotation {
+    [UIView animateWithDuration:0.25f
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                       for (UIView *viewToRotate in self.buttonsToSwitch) {
+                           viewToRotate.transform = CGAffineTransformMakeRotation(rotation);
+                       }
+                     }
+                     completion:nil];
 }
 
 /**
@@ -128,7 +166,8 @@
 
     // Setup the imageview
     if (self.image) {
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.overlayView.frame.origin.x, self.self.overlayView.frame.origin.y, self.overlayView.frame.size.width, self.overlayView.frame.size.height)];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.overlayView.frame.origin.x, self.self.overlayView.frame.origin.y,
+                                                                       self.overlayView.frame.size.width, self.overlayView.frame.size.height)];
         self.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         self.imageView.clipsToBounds = YES;
@@ -165,17 +204,25 @@
     [textButton setImage:[UIImage imageNamed:@"ic_text"] forState:UIControlStateNormal];
     [textButton addTarget:self action:@selector(textButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
 
-    UIButton *adjustmentButton = [UIButton new];
-    [adjustmentButton setImage:[UIImage imageNamed:@"ic_brightness"] forState:UIControlStateNormal];
-    [adjustmentButton addTarget:self action:@selector(adjustmentButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    if (self.imageView.image) {
+        UIButton *adjustmentButton = [UIButton new];
+        [adjustmentButton setImage:[UIImage imageNamed:@"ic_brightness"] forState:UIControlStateNormal];
+        [adjustmentButton addTarget:self action:@selector(adjustmentButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
 
-    UIButton *cropButton = [UIButton new];
-    [cropButton setImage:[UIImage imageNamed:@"ic_crop"] forState:UIControlStateNormal];
-    [cropButton addTarget:self action:@selector(cropButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *cropButton = [UIButton new];
+        [cropButton setImage:[UIImage imageNamed:@"ic_crop"] forState:UIControlStateNormal];
+        [cropButton addTarget:self action:@selector(cropButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
 
-    // Set the array of buttons for the side menu
-    self.sideMenuView.arrayButtons = @[ drawButton, textButton, adjustmentButton, cropButton ];
+        self.buttonsToSwitch = @[ drawButton, textButton, adjustmentButton, cropButton ];
 
+        // Set the array of buttons for the side menu
+        self.sideMenuView.arrayButtons = @[ drawButton, textButton, adjustmentButton, cropButton ];
+    } else {
+        self.buttonsToSwitch = @[ drawButton, textButton ];
+
+        // Set the array of buttons for the side menu
+        self.sideMenuView.arrayButtons = @[ drawButton, textButton ];
+    }
     [self.sideMenuView setSizeOfView:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - self.feedContainerView.frame.size.height)];
 }
 
@@ -228,9 +275,9 @@
     SSOTextToolController *childVC = [SSOTextToolController new];
     childVC.delegate = self;
     [self animateToChildViewController:childVC];
-    
+
     if ([self.textView.text isEqualToString:@""]) {
-        [self.textView setFrame:CGRectMake(0.0f, self.overlayView.frame.size.height/2 - 45.0f, self.overlayView.frame.size.width, 70.0f)];
+        [self.textView setFrame:CGRectMake(0.0f, self.overlayView.frame.size.height / 2 - 45.0f, self.overlayView.frame.size.width, 70.0f)];
     }
 }
 
@@ -471,7 +518,8 @@
  */
 - (UIView *)subtoolContainerView {
     if (!_subtoolContainerView) {
-        // Initialize the view with the bottom view size. We also need to push it at the bottom of the view completely as it's initial position for the scroll
+        // Initialize the view with the bottom view size. We also need to push it at the bottom of the view completely as it's initial position for the
+        // scroll
         // effect.
         //@FIXME Orientation will be problematic
         _subtoolContainerView =

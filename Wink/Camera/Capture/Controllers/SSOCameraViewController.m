@@ -51,12 +51,18 @@
 @property(nonatomic) BOOL isRotationAllowed;
 @property(strong, nonatomic) SSOCameraCaptureHelper *cameraCaptureHelper;
 @property(strong, nonatomic) NSMutableArray *arrayImages;
+@property(strong, nonatomic) NSArray *buttonsToSwitch;
 
 @end
 
 @implementation SSOCameraViewController
 
 #pragma mark - View Controller Life Cycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceChangedOrientation:) name:kDeviceOrientationNotification object:nil];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -86,17 +92,8 @@
     self.cameraRotationButton.userInteractionEnabled = YES;
     self.mediaButton.userInteractionEnabled = YES;
 }
-
-#pragma mark - Orientation
-
-/**
- *  View controller method telling us what the orientation of the device is
- *
- *  @param toInterfaceOrientation
- *  @param duration
- */
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [self.cameraCaptureHelper willRotateToInterfaceOrientation:toInterfaceOrientation];
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Initialization
@@ -123,6 +120,8 @@
                                                                 withDevicePosition:[[SSOCameraStateHelper sharedInstance] devicePosition]
                                                                     withFlashState:[[SSOCameraStateHelper sharedInstance] flashState]];
     self.cameraCaptureHelper.delegate = self;
+
+    self.buttonsToSwitch = @[ self.cameraRotationButton, self.mediaButton, self.flashButton ];
 }
 
 /**
@@ -150,9 +149,36 @@
     [self.view bringSubviewToFront:self.animatedCaptureButton];
 }
 
-- (BOOL)shouldAutorotate {
+- (void)deviceChangedOrientation:(NSNotification *)notification {
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    switch (orientation) {
+    case UIDeviceOrientationPortrait: {
+        [self rotateButtons:0];
+        break;
+    }
 
-    return self.isRotationAllowed;
+    case UIDeviceOrientationLandscapeLeft: {
+        [self rotateButtons:M_PI_2];
+        break;
+    }
+    case UIDeviceOrientationLandscapeRight: {
+        [self rotateButtons:-M_PI_2];
+        break;
+    }
+    default: { break; }
+    }
+}
+
+- (void)rotateButtons:(CGFloat)rotation {
+    [UIView animateWithDuration:0.25f
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                       for (UIView *viewToRotate in self.buttonsToSwitch) {
+                           viewToRotate.transform = CGAffineTransformMakeRotation(rotation);
+                       }
+                     }
+                     completion:nil];
 }
 
 #pragma mark - Navigation
@@ -188,7 +214,7 @@
         image = [mediaDic objectForKey:UIImagePickerControllerEditedImage];
         if (image == nil) {
             image = [mediaDic objectForKey:UIImagePickerControllerOriginalImage];
-//            controller.image = [self.cameraCaptureHelper squareImageWithImage:image];
+            //            controller.image = [self.cameraCaptureHelper squareImageWithImage:image];
             controller.image = image;
         }
     } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {

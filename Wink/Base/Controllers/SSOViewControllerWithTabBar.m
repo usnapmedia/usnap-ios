@@ -266,8 +266,7 @@ NSInteger const kTabBarHeight = 40;
         UIButton *button = (UIButton *)sender;
         [self unselectedButtonsTabBarWithSender:button];
         [button setBackgroundColor:[SSOThemeHelper tabBarSelectedColor]];
-    }
-    else {
+    } else {
         SSOLoginViewController *loginVC = [SSOLoginViewController new];
         loginVC.delegate = self;
         // Present VC
