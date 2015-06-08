@@ -16,6 +16,7 @@
 #import "SSORecentPhotosViewController.h"
 #import "SSOFeedConnect.h"
 #import "SSOThemeHelper.h"
+#import "SSSessionManager.h"
 #import "SSOScreenSizeHelper.h"
 #import <SEGAnalytics.h>
 #import <Masonry.h>
@@ -150,6 +151,7 @@
       NSAssert([[items.response firstObject] isKindOfClass:[SSOCampaign class]], @"Need to pass a campaign object here");
       // Set current campaign to be the first campaign
       self.currentCampaign = [items.response firstObject];
+      [[SSSessionManager sharedInstance] setCampaignID:self.currentCampaign.id];
       // Load top photos and recent photos
       [self loadTopPhotos];
       [self loadRecentPhotos];
