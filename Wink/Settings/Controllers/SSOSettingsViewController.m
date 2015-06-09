@@ -105,8 +105,11 @@
  *  Set the labels text
  */
 - (void)setLabels {
+    self.personalTitleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:16];
     self.personalTitleLabel.text = NSLocalizedString(@"settings.personal.title", nil);
+    self.socialTitleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:16];
     self.socialTitleLabel.text = NSLocalizedString(@"settings.social.title", nil);
+    self.supportTitleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:16];
     self.supportTitleLabel.text = NSLocalizedString(@"settings.support.title", nil);
 }
 
