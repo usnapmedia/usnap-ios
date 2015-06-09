@@ -38,7 +38,56 @@
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-ch-fMg" customClass="AVCamPreviewView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5D8-Kp-giY">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="qDb-EP-9NY">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="80"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" secondItem="5D8-Kp-giY" secondAttribute="height" multiplier="50:50" id="wtn-ZD-xNS"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="qDb-EP-9NY"/>
+                                                <exclude reference="wtn-ZD-xNS"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="121" y="446" width="80" height="80"/>
+                                            <mask key="constraints">
+                                                <include reference="qDb-EP-9NY"/>
+                                                <include reference="wtn-ZD-xNS"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="5D8-Kp-giY" secondAttribute="centerX" constant="-0.5" id="eEt-mq-8t6">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                    </constraint>
+                                    <constraint firstAttribute="bottom" secondItem="5D8-Kp-giY" secondAttribute="bottom" constant="22" id="qv2-D8-xHV"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="5D8-Kp-giY"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="eEt-mq-8t6"/>
+                                        <exclude reference="qv2-D8-xHV"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="5D8-Kp-giY"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="eEt-mq-8t6"/>
+                                        <include reference="qv2-D8-xHV"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77y-R9-8Qn" userLabel="Top View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
@@ -62,9 +111,6 @@
                                         <state key="normal" image="closeButtonIcon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="4" y="8" width="55" height="55"/>
-                                        </variation>
                                         <connections>
                                             <action selector="backButtonTouched:" destination="KDe-mF-eVw" eventType="touchUpInside" id="sMG-fa-jJj"/>
                                         </connections>
@@ -234,7 +280,7 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="90"/>
                                     </constraint>
                                 </constraints>
-                                <state key="normal" image="captureButtonIcon">
+                                <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -311,6 +357,7 @@
                         <outlet property="assetPreviewBackgroundView" destination="pKV-op-02v" id="n5b-rJ-xi0"/>
                         <outlet property="backButton" destination="F1C-vy-mwx" id="Vg8-fp-azb"/>
                         <outlet property="bottomContainerView" destination="q9G-9M-9NP" id="hkM-Vk-PGs"/>
+                        <outlet property="cameraButtonView" destination="5D8-Kp-giY" id="dma-dC-pXi"/>
                         <outlet property="cameraPreviewView" destination="PI2-ch-fMg" id="nLD-mr-UKp"/>
                         <outlet property="cameraRotationButton" destination="std-T3-Jlg" id="O5Z-RY-eAd"/>
                         <outlet property="flashButton" destination="lhy-8W-4VU" id="9qs-66-nq9"/>
@@ -325,7 +372,6 @@
     </scenes>
     <resources>
         <image name="camera" width="28" height="24"/>
-        <image name="captureButtonIcon" width="67" height="67"/>
         <image name="closeButtonIcon" width="27" height="27"/>
         <image name="flash" width="15" height="22"/>
         <image name="mediaButtonIcon" width="29" height="29"/>

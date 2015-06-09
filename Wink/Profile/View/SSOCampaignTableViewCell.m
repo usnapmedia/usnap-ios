@@ -8,6 +8,7 @@
 
 #import "SSOCampaignTableViewCell.h"
 #import <SSBaseViewCellProtocol.h>
+#import "SSOThemeHelper.h"
 #import "SSOCampaign.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
@@ -33,6 +34,7 @@
     NSAssert([cellData isKindOfClass:[SSOCampaign class]], @"Cell data has to be a SSOCampaign class");
     if ([cellData isKindOfClass:[SSOCampaign class]]) {
         SSOCampaign *campaign = cellData;
+        self.numberSharesLabel.textColor = [SSOThemeHelper firstColor];
         [self.activityIndicator startAnimating];
         [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:campaign.bannerImgUrl]
                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

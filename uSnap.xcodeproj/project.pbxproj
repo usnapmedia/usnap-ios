@@ -327,6 +327,7 @@
 		FBB76FEF1B02455300FFAF9A /* SSOUSnapLightButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB76FEE1B02455300FFAF9A /* SSOUSnapLightButton.m */; };
 		FBBC950E1AF9238000203E48 /* SSOSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBBC950C1AF9238000203E48 /* SSOSettingsViewController.m */; };
 		FBBC950F1AF9238000203E48 /* SSOSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBC950D1AF9238000203E48 /* SSOSettingsViewController.xib */; };
+		FBBF47411B2734BB00511182 /* NeoMedia-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBBF47401B2734BB00511182 /* NeoMedia-Info.plist */; };
 		FBC5404B1B0FAD3000766739 /* SSOCameraStateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC5404A1B0FAD3000766739 /* SSOCameraStateHelper.m */; };
 		FBF9D1CB1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF9D1C91AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.m */; };
 		FBF9D1CC1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBF9D1CA1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.xib */; };
@@ -570,7 +571,6 @@
 		D898E1D11AF1622500C957DC /* SSOMyFeedCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOMyFeedCollectionViewCell.m; sourceTree = "<group>"; };
 		D898E1D21AF1622500C957DC /* SSOMyFeedCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOMyFeedCollectionViewCell.xib; sourceTree = "<group>"; };
 		D8BD7E071B25F4550007DD36 /* Neomedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neomedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8BD7E081B25F4550007DD36 /* uSnap copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "uSnap copy-Info.plist"; path = "/Users/gabrielcartier/workspace/wink-talent-ios/uSnap copy-Info.plist"; sourceTree = "<absolute>"; };
 		D8BD7E0B1B25F9390007DD36 /* Launch Screen Neomedia.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen Neomedia.xib"; sourceTree = "<group>"; };
 		D8BD7E101B26079A0007DD36 /* Neomedia.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Neomedia.xcassets; path = Wink/Neomedia.xcassets; sourceTree = "<group>"; };
 		D8BD7E121B2608B30007DD36 /* Base.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base.xcassets; path = Wink/Base.xcassets; sourceTree = "<group>"; };
@@ -630,6 +630,7 @@
 		FBBC950B1AF9238000203E48 /* SSOSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSettingsViewController.h; sourceTree = "<group>"; };
 		FBBC950C1AF9238000203E48 /* SSOSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSettingsViewController.m; sourceTree = "<group>"; };
 		FBBC950D1AF9238000203E48 /* SSOSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOSettingsViewController.xib; sourceTree = "<group>"; };
+		FBBF47401B2734BB00511182 /* NeoMedia-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "NeoMedia-Info.plist"; sourceTree = "<group>"; };
 		FBC540491B0FAD3000766739 /* SSOCameraStateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCameraStateHelper.h; sourceTree = "<group>"; };
 		FBC5404A1B0FAD3000766739 /* SSOCameraStateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCameraStateHelper.m; sourceTree = "<group>"; };
 		FBF9D1C81AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOPhotosCollectionViewCell.h; sourceTree = "<group>"; };
@@ -715,7 +716,6 @@
 				270DFAF319AE71BE00067072 /* Frameworks */,
 				270DFAF219AE71BE00067072 /* Products */,
 				ED65896723BCE61EECA4D660 /* Pods */,
-				D8BD7E081B25F4550007DD36 /* uSnap copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -964,6 +964,7 @@
 				335723A01ACB097C000CC846 /* main.m */,
 				335723A11ACB097C000CC846 /* SSStoryboardConstants.h */,
 				335723A21ACB097C000CC846 /* SSStoryboardConstants.m */,
+				FBBF47401B2734BB00511182 /* NeoMedia-Info.plist */,
 				335723A31ACB097C000CC846 /* uSnap-Info.plist */,
 				335723A41ACB097C000CC846 /* uSnap-Prefix.pch */,
 				335723A51ACB097C000CC846 /* WKAppDelegate.h */,
@@ -1802,6 +1803,7 @@
 				D8BD7DF81B25F4550007DD36 /* Deliverfile in Resources */,
 				D8BD7DF91B25F4550007DD36 /* SSOPhotosCollectionViewCell.xib in Resources */,
 				D8BD7DFA1B25F4550007DD36 /* SSOLoginViewController.xib in Resources */,
+				FBBF47411B2734BB00511182 /* NeoMedia-Info.plist in Resources */,
 				D8BD7DFB1B25F4550007DD36 /* Futura.ttc in Resources */,
 				D8BD7E0C1B25F9390007DD36 /* Launch Screen Neomedia.xib in Resources */,
 				D8BD7DFC1B25F4550007DD36 /* SSOTopPhotosCollectionViewCell.xib in Resources */,
@@ -2402,7 +2404,7 @@
 					"ANALYTICS_VERSION=1.11.9",
 					"NEOMEDIA=1",
 				);
-				INFOPLIST_FILE = "uSnap copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Wink/Supporting Files/NeoMedia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = Neomedia;
 				PROVISIONING_PROFILE = "";
@@ -2435,7 +2437,7 @@
 					"ANALYTICS_VERSION=1.11.9",
 					"NEOMEDIA=1",
 				);
-				INFOPLIST_FILE = "uSnap copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Wink/Supporting Files/NeoMedia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = Neomedia;
 				PROVISIONING_PROFILE = "";

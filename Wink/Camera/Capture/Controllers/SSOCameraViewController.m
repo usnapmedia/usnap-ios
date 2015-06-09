@@ -45,6 +45,7 @@
 @property(strong, nonatomic) UIView *blurEffectview;
 // Preview image
 @property(strong, nonatomic) UIImage *libraryImage;
+@property (weak, nonatomic) IBOutlet UIView *cameraButtonView;
 
 // Data
 @property(nonatomic) BOOL isVideoRecording;
@@ -56,6 +57,17 @@
 @end
 
 @implementation SSOCameraViewController
+
+- (void)setCameraButtonView:(UIView *)cameraButtonView
+{
+    _cameraButtonView = cameraButtonView;
+    _cameraButtonView.alpha = 0.8;
+    _cameraButtonView.layer.cornerRadius = 37;
+    _cameraButtonView.layer.masksToBounds = YES;
+    _cameraButtonView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    _cameraButtonView.layer.borderWidth = 5;
+    _cameraButtonView.backgroundColor = [SSOThemeHelper firstColor];
+}
 
 #pragma mark - View Controller Life Cycle
 
