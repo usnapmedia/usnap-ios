@@ -35,6 +35,7 @@
 
     [self setUpPickerViewForBirthday];
     self.buttonSignUp.layer.cornerRadius = 4;
+    [self.buttonSignUp setBackgroundColor:[SSOThemeHelper firstColor]];
 }
 
 /**
