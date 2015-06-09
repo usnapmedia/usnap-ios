@@ -7,6 +7,7 @@
 //
 
 #import "SSORoundedAnimatedButton.h"
+#import "SSOThemeHelper.h"
 
 @interface SSORoundedAnimatedButton ()
 
@@ -34,6 +35,33 @@
     [self.layer removeAllAnimations];
 }
 
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+    CGRect borderRect = CGRectInset(rect, 8, 8);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
+    UIColor *defaultColor = [SSOThemeHelper firstColor];
+    CGFloat red;
+    CGFloat green;
+    CGFloat blue;
+    CGFloat alpha;
+    if ([defaultColor respondsToSelector:@selector(getRed:green:blue:alpha:)]) {
+        [defaultColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    } else {
+        const CGFloat *components = CGColorGetComponents(defaultColor.CGColor);
+        red = components[0];
+        green = components[1];
+        blue = components[2];
+        alpha = components[3];
+    }
+    CGContextSetRGBFillColor(context, red, green, blue, alpha);
+    CGContextSetLineWidth(context, 3.0);
+    CGContextFillEllipseInRect(context, borderRect);
+    CGContextStrokeEllipseInRect(context, borderRect);
+    CGContextFillPath(context);
+    
+}
 
 - (void)addLongTagGestureRecognizer {
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
