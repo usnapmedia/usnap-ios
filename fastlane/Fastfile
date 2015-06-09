@@ -57,6 +57,30 @@ platform :ios do
    )
   end
 
+desc "Submit a new Beta Build to Apple TestFlight"
+desc "This will also make sure the profile is up to date"
+lane :'beta neomedia' do
+# snapshot
+cert
+sigh(
+force: true
+)
+# Build
+ipa(
+workspace: "uSnap.xcworkspace",
+configuration: "Release",
+scheme: "Neomedia",
+clean: false,
+)
+resign(
+signing_identity: "iPhone Distribution: uSnap Media Inc. (6WH26365Q4)",
+)
+deliver(
+skip_deploy: true,
+beta: true
+)
+end
+
   desc "Deploy a new version to the App Store"
   desc "** Full Markdown** Support: `code`"
   lane :deploy do

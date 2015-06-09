@@ -26,18 +26,8 @@
 @implementation SSOLoginContainerView
 
 - (void)awakeFromNib {
-    //[self setupViewForAnimation];
-    self.loginButton.layer.cornerRadius = 4;
-    self.textFieldEmail.placeholder = NSLocalizedString(@"shareview.email.textview.placeholder.text", nil);
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-
-    if (self == [super initWithCoder:aDecoder]) {
-        [self setupUI];
-    }
-
-    return self;
+    [super awakeFromNib];
+    [self setupUI];
 }
 
 #pragma mark - Initialization
@@ -46,6 +36,9 @@
  *  Setup the view UI
  */
 - (void)setupUI {
+    //[self setupViewForAnimation];
+    self.loginButton.layer.cornerRadius = 4;
+    self.textFieldEmail.placeholder = NSLocalizedString(@"shareview.email.textview.placeholder.text", nil);
     [self setBackgroundColor:[SSOThemeHelper thirdColor]];
     [self.loginButton setBackgroundColor:[SSOThemeHelper firstColor]];
 }

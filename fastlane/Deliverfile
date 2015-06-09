@@ -16,6 +16,11 @@
 # If you want to have even more control, check out the documentation
 # https://github.com/KrauseFx/deliver/blob/master/Deliverfile.md
 
+for_lane 'beta' do
 app_identifier "com.usnap.usnap" # The bundle identifier of your app
+end
+for_lane 'beta neomedia' do
+app_identifier "com.usnap.neomedia"
+end
 #apple_id "902026228" # This is NOT your Apple login ID, but the App ID of your app
 email "usnap@samsaodev.com"

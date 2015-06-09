@@ -32,9 +32,9 @@
 @implementation SSORegisterContainerView
 
 - (void)awakeFromNib {
-
-    [self setUpPickerViewForBirthday];
-    self.buttonSignUp.layer.cornerRadius = 4;
+    [super awakeFromNib];
+    [self setupUI];
+    
 }
 
 /**
@@ -66,6 +66,8 @@
  *  Setup the view UI
  */
 - (void)setupUI {
+    [self setUpPickerViewForBirthday];
+    self.buttonSignUp.layer.cornerRadius = 4;
     [self setBackgroundColor:[SSOThemeHelper thirdColor]];
     [self.buttonSignUp setBackgroundColor:[SSOThemeHelper firstColor]];
 }

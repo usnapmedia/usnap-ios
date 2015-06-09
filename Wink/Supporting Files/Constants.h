@@ -11,15 +11,13 @@ extern NSString *const kCurrentUserStatusChanged;
 
 extern NSString *const kSchemeFacebook;
 extern NSString *const kSchemeGooglePlus;
-
-#pragma mark - API constants
-
 extern NSString *const kTwitterConsumerSecret;
 extern NSString *const kTwitterConsumerKey;
 extern NSString *const kTwitterMediaUploadURL;
 extern NSString *const kTwitterTweetUploadURL;
 extern NSString *const kGoogleClientId;
 extern NSString *const kAPIUrl;
+extern NSString *const kAPIKey;
 extern NSString *const kSegmentIoKey;
 
 #pragma mark - Notifications
