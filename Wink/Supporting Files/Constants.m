@@ -22,6 +22,12 @@ NSString *const kTwitterTweetUploadURL = @"https://api.twitter.com/1.1/statuses/
 NSString *const kGoogleClientId = @"705787939641-q7u2cb9tbrd04ku4jc99h4bd5c1cs7bk.apps.googleusercontent.com";
 NSString *const kAPIUrl = @"http://api.usnap.com/v1";
 NSString *const kSegmentIoKey = @"GmFy6M3KXxHnHSKsIysy4QHHa3aIJL4Z";
+NSString *const kAPIkey = @"api_key";
+
+// usnap: joey1234
+// neomedia : psy02co49nais
+
+NSString *const kAPIValue = @"joey1234";
 
 #pragma mark - Notifications
 
@@ -87,4 +93,3 @@ NSString *const kPhotosNibNameCollectionViewCell = @"SSOPhotosCollectionViewCell
 
 NSString *const kReturnToFanPageVC = @"ReturnToFanPageVC";
 NSString *const kDeviceOrientationNotification = @"kDeviceOrientationNotification";
-
