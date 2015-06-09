@@ -15,8 +15,9 @@
 #import "SSOUserConnect.h"
 #import "SSOCountableItems.h"
 #import "SSOUser.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface SSOSettingsViewController ()
+@interface SSOSettingsViewController () <MFMailComposeViewControllerDelegate>
 
 @property(weak, nonatomic) IBOutlet UIView *customNavBar;
 @property(weak, nonatomic) IBOutlet UIView *personalTopBarView;
@@ -307,7 +308,7 @@
  */
 
 - (IBAction)helpCenterAction:(UIButton *)sender {
-    //@TODO
+    [self openMail:sender.titleLabel.text];
 }
 
 /**
@@ -317,7 +318,7 @@
  */
 
 - (IBAction)reportProblemAction:(UIButton *)sender {
-    //@TODO
+    [self openMail:sender.titleLabel.text];
 }
 
 /**
@@ -330,6 +331,18 @@
     [[SSSessionManager sharedInstance] logoutCurrentUser];
     [self.navigationController popToRootViewControllerAnimated:NO];
     [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)openMail:(NSString *)title {
+    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+    mailController.mailComposeDelegate = self;
+    [mailController setToRecipients:@[ @"support@usnap.com" ]];
+    [mailController setSubject:[NSString stringWithFormat:@"%@ (iOS)", title]];
+    [self presentViewController:mailController animated:YES completion:nil];
 }
 
 @end
