@@ -97,7 +97,9 @@
 
     //@FIXME: The user can't update his information on this version
     self.userNameTextField.enabled = NO;
+    self.userNameTextField.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
     self.birthdayTextField.enabled = NO;
+    self.birthdayTextField.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
     self.saveButton.hidden = YES;
 }
 
@@ -118,12 +120,19 @@
  */
 - (void)setButtons {
     [self.twitterButton setTitle:NSLocalizedString(@"settings.social.twitter.button", nil) forState:UIControlStateNormal];
+    self.twitterButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
     [self.facebookButton setTitle:NSLocalizedString(@"settings.social.facebook.button", nil) forState:UIControlStateNormal];
+    self.facebookButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
     [self.googleButton setTitle:NSLocalizedString(@"settings.social.google.button", nil) forState:UIControlStateNormal];
+    self.googleButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
     [self.helpCenterButton setTitle:NSLocalizedString(@"settings.support.help.button", nil) forState:UIControlStateNormal];
+    self.helpCenterButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
     [self.reportProblemButton setTitle:NSLocalizedString(@"settings.support.report.button", nil) forState:UIControlStateNormal];
+    self.reportProblemButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
     [self.logoutButton setTitle:NSLocalizedString(@"settings.support.logout.button", nil) forState:UIControlStateNormal];
+    self.logoutButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
     [self.saveButton setTitle:NSLocalizedString(@"settings.support.save.button", nil) forState:UIControlStateNormal];
+    self.saveButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
 }
 
 /**
