@@ -20,6 +20,7 @@
 
 @property(strong, nonatomic) UICollectionView *tabCollectionView;
 @property(strong, nonatomic) SSOCampaignProvider *provider;
+@property(strong, nonatomic) UIPageControl *pageControl;
 @property(nonatomic, strong) NSArray *arrayOfCampaigns;
 
 @property(nonatomic) NSInteger index;
@@ -100,6 +101,7 @@
 
     // Reload the data
     [self.tabCollectionView reloadData];
+    [self configurePageControl];
 }
 
 - (SSOCampaign *)setAndScrollToCampaignWithCampaignID:(NSString *)campaignID {
@@ -135,8 +137,21 @@
         if (self.index != item) {
             [self.delegate topViewControllerDidChangeForNewCampaign:[self.arrayOfCampaigns objectAtIndex:item]];
             self.index = item;
+            self.pageControl.currentPage = item;
         }
     }
+}
+
+- (void)configurePageControl
+{
+    self.pageControl = [[UIPageControl alloc] init];
+    [self.view addSubview:self.pageControl];
+    [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(5);
+    }];
+    self.pageControl.numberOfPages = [self.provider.inputData count];
+    self.pageControl.currentPage = 0;
 }
 
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
