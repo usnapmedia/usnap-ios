@@ -16,6 +16,7 @@
 #import "SSOCountableItems.h"
 #import "SSOUser.h"
 #import <MessageUI/MFMailComposeViewController.h>
+#import <SVProgressHUD.h>
 
 @interface SSOSettingsViewController () <MFMailComposeViewControllerDelegate>
 
@@ -342,7 +343,14 @@
     mailController.mailComposeDelegate = self;
     [mailController setToRecipients:@[ @"support@usnap.com" ]];
     [mailController setSubject:[NSString stringWithFormat:@"%@ (iOS)", title]];
-    [self presentViewController:mailController animated:YES completion:nil];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        mailController.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    if ([MFMailComposeViewController canSendMail]) {
+        [self presentViewController:mailController animated:YES completion:nil];
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"Error trying to compose an email"];
+    }
 }
 
 @end
