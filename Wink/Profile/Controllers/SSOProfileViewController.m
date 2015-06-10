@@ -56,7 +56,7 @@
 
     [self loadCampaigns];
     [self loadMyFeed];
-    
+
     // Check if there is a user registered in the app and set the userFirstLetterLabel
     // This has to be in viewWillAppear because maybe the user will login or logout after the view is loaded
     if ([[NSUserDefaults standardUserDefaults] valueForKey:kEmailLoggedString]) {
@@ -83,6 +83,7 @@
     self.settingsButton.layer.masksToBounds = YES;
     self.settingsButton.layer.borderWidth = 1;
     self.settingsButton.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.settingsButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
 
     self.isContestsVisible = YES;
     self.myFeedView.hidden = YES;

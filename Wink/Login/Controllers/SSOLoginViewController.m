@@ -270,7 +270,7 @@
 }
 
 - (void)didNotFillAllFields {
-    [UIAlertView showWithTitle:@"Missing fields" message:@"Check the fields" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+    [SVProgressHUD showErrorWithStatus:@"Missing fields. Check the fields"];
 }
 
 @end

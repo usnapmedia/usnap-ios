@@ -68,6 +68,7 @@
 - (void)setupUI {
     [self setUpPickerViewForBirthday];
     self.buttonSignUp.layer.cornerRadius = 4;
+    [self.buttonSignUp setBackgroundColor:[SSOThemeHelper firstColor]];
     [self setBackgroundColor:[SSOThemeHelper thirdColor]];
     [self.buttonSignUp setBackgroundColor:[SSOThemeHelper firstColor]];
 }
@@ -174,7 +175,7 @@
                 // Check if the textField is empty
                 if (textField.text.length == 0) {
                     // Display an alert if the textField is empty
-                    [UIAlertView showWithTitle:@"Missing fields" message:@"Check the fields" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+                    [self.delegate didNotFillAllFields];
                     return NO;
                 }
             }

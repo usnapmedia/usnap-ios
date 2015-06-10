@@ -10,6 +10,7 @@
 #import <SSBaseViewCellProtocol.h>
 #import "SSOThemeHelper.h"
 #import "SSOCampaign.h"
+#import "SSOThemeHelper.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SSOCampaignTableViewCell () <SSBaseViewCellProtocol>
@@ -33,6 +34,10 @@
 - (void)configureCell:(id)cellData {
     NSAssert([cellData isKindOfClass:[SSOCampaign class]], @"Cell data has to be a SSOCampaign class");
     if ([cellData isKindOfClass:[SSOCampaign class]]) {
+        self.numberSharesLabel.textColor = [SSOThemeHelper firstColor];
+        self.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
+        self.numberSharesLabel.font = [SSOThemeHelper avenirLightFontWithSize:14];
+        self.descriptionLabel.font = [SSOThemeHelper avenirLightFontWithSize:13];
         SSOCampaign *campaign = cellData;
         self.numberSharesLabel.textColor = [SSOThemeHelper firstColor];
         [self.activityIndicator startAnimating];

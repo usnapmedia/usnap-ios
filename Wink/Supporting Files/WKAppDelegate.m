@@ -19,6 +19,7 @@
 #import <GooglePlus/GooglePlus.h>
 #import <IQKeyboardManager.h>
 #import "WKShareViewController.h"
+#import "SSSessionManager.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation WKAppDelegate
