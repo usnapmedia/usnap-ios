@@ -79,6 +79,9 @@
                                         <exclude reference="qv2-D8-xHV"/>
                                     </mask>
                                 </variation>
+                                <variation key="widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="568" height="568"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="5D8-Kp-giY"/>

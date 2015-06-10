@@ -23,7 +23,7 @@
     NSURL *baseURL = [NSURL URLWithString:kAPIUrl];
     if (self = [super initWithBaseURL:baseURL]) {
         self.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
-        [self.requestSerializer setValue:kAPIValue forHTTPHeaderField:kAPIkey];
+        [self.requestSerializer setValue:kAPIValue forHTTPHeaderField:kAPIKey];
 
         // Check if the user is already logged in
         if ([[SSSessionManager sharedInstance] isUserLoggedIn]) {

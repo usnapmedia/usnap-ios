@@ -27,11 +27,12 @@ NSString *const kTwitterConsumerKey = @"xWN8D23Qr6E0gJJFpthMXjbKX";
 NSString *const kTwitterMediaUploadURL = @"https://upload.twitter.com/1.1/media/upload.json";
 NSString *const kTwitterTweetUploadURL = @"https://api.twitter.com/1.1/statuses/update.json";
 NSString *const kGoogleClientId = @"705787939641-q7u2cb9tbrd04ku4jc99h4bd5c1cs7bk.apps.googleusercontent.com";
+NSString *const kAPIValue = @"joey1234";
 NSString *const kSegmentIoKey = @"GmFy6M3KXxHnHSKsIysy4QHHa3aIJL4Z";
 #endif
 
 NSString *const kAPIUrl = @"http://api.usnap.com/v1";
-NSString *const kAPIkey = @"api_key";
+NSString *const kAPIKey = @"api_key";
 
 #pragma mark - Notifications
 
