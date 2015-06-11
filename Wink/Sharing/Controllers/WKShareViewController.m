@@ -71,6 +71,13 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     self.numberCharactersLeft = [NSNumber numberWithInteger:kMaxNumberOfCharacters];
     self.labelCountCharacters.text =
         [NSString stringWithFormat:@"%li %@", self.numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
+    self.labelCountCharacters.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
+    self.twitterButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+    self.facebookButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+    self.googleButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+    self.shareButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+    self.placeholderTextView.font = [SSOThemeHelper avenirLightFontWithSize:14];
     [self.shareButton setTitle:NSLocalizedString(@"shareView.shareButton", nil) forState:UIControlStateNormal];
     self.shareButton.backgroundColor = [SSOThemeHelper firstColor];
     self.titleLabel.text = NSLocalizedString(@"shareview.title", nil);
