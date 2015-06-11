@@ -38,8 +38,11 @@
 - (void)setupUI {
     //[self setupViewForAnimation];
     self.loginButton.layer.cornerRadius = 4;
+    self.loginButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
     [self.loginButton setBackgroundColor:[SSOThemeHelper firstColor]];
     self.textFieldEmail.placeholder = NSLocalizedString(@"shareview.email.textview.placeholder.text", nil);
+    self.textFieldEmail.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.textFieldPassword.font = [SSOThemeHelper avenirLightFontWithSize:14];
     [self setBackgroundColor:[SSOThemeHelper thirdColor]];
     [self.loginButton setBackgroundColor:[SSOThemeHelper firstColor]];
 }

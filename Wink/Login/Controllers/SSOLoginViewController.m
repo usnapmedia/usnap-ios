@@ -17,6 +17,7 @@
 #import "SSSessionManager.h"
 #import "UINavigationController+SSOLockedNavigationController.h"
 #import <SVProgressHUD.h>
+#import "SSOThemeHelper.h"
 
 @interface SSOLoginViewController ()
 @property(weak, nonatomic) IBOutlet UIView *loginContainerView;
@@ -77,7 +78,9 @@
     self.registerContainerView.hidden = YES;
 
     self.loginButton.selected = YES;
+    self.loginButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
     self.signUpButton.selected = NO;
+    self.signUpButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
 }
 
 /**
