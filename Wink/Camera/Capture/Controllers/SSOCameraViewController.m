@@ -52,6 +52,7 @@
 @property(strong, nonatomic) SSOCameraCaptureHelper *cameraCaptureHelper;
 @property(strong, nonatomic) NSMutableArray *arrayImages;
 @property(strong, nonatomic) NSArray *buttonsToSwitch;
+@property(assign, nonatomic) BOOL operationDidFinish;
 
 @end
 
@@ -66,7 +67,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    self.operationDidFinish = NO;
     [self initializeData];
 
     [self showBlurForDuration:0.5];
@@ -356,6 +357,14 @@
     }
 
     [SSOCameraCaptureHelper setFlashMode:[[SSOCameraStateHelper sharedInstance] flashState] forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
+    
+    NSInteger count = 0;
+    for (UIView *view in self.view.subviews) {
+//        if ([view isKindOfClass:[AVCamPreviewView class]]) {
+            count++;
+//        }
+    }
+    NSLog(@"%ld", (long)count);
 }
 
 /**
@@ -566,8 +575,8 @@
 #pragma mark - SSOCameraDelegate
 
 - (void)didFinishCapturingImage:(UIImage *)image withError:(NSError *)error {
-
-    if (!error) {
+    if (!error && !self.operationDidFinish) {
+        self.operationDidFinish = YES;
         // Edit the selected media
         WKEditMediaViewController *controller = [WKEditMediaViewController new];
         controller.image = image;
@@ -579,7 +588,8 @@
 
 - (void)didFinishCapturingVideo:(NSURL *)video withError:(NSError *)error {
 
-    if (!error) {
+    if (!error && !self.operationDidFinish) {
+        self.operationDidFinish = YES;
         // Edit the selected media
         WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
         controller.mediaURL = video;

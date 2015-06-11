@@ -146,6 +146,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     self.facebookButton.alpha = 0;
     self.twitterButton.alpha = 0;
     self.googleButton.alpha = 0;
@@ -180,7 +182,10 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     if (!_overlayView) {
         // Set the overlay view
-        _overlayView = [[UIView alloc] initWithFrame:self.view.frame];
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenWidth = screenRect.size.width;
+        CGFloat screenHeight = screenRect.size.height;
+        _overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
         _overlayView.backgroundColor = [UIColor blackColor];
         _overlayView.alpha = 0;
         // Add tap recognizer to dismiss the keyboard
@@ -435,6 +440,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [self post];
 }
 - (IBAction)backButtonTouched:(id)sender {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
