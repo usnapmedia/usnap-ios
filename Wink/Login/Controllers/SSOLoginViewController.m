@@ -27,6 +27,7 @@
 @property(weak, nonatomic) IBOutlet SSOCustomSignInButton *loginButton;
 @property(weak, nonatomic) IBOutlet SSOCustomSignInButton *signUpButton;
 @property(weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UILabel *registrationLabel;
 
 @end
 
@@ -70,6 +71,7 @@
  */
 - (void)setUI {
 
+    self.registrationLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
     self.loginView.backgroundColor = [UIColor clearColor];
     self.loginContainerView.backgroundColor = [UIColor clearColor];
 

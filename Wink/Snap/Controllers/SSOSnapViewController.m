@@ -47,6 +47,8 @@
     //@FIXME
     self.customNavBar.backgroundColor = [UIColor blackColor];
     self.segmentedControl.tintColor = [SSOThemeHelper firstColor];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:[SSOThemeHelper avenirLightFontWithSize:14] forKey:NSFontAttributeName];
+    [self.segmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
 }
 
 /**
@@ -74,12 +76,13 @@
 - (void)loadPhotos {
     //@FIXME should be all photos, not ony the top ones
     [SSOFeedConnect getTopPhotosForCampaignId:[SSSessionManager sharedInstance].campaignID
-                                  withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
-      [self.photosVC setPhotosData:items.response];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+          SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
+          [self.photosVC setPhotosData:items.response];
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error){
 
-    }];
+        }];
 }
 
 #pragma mark - IBActions

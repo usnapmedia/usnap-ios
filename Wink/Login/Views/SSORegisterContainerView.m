@@ -66,6 +66,7 @@
  */
 - (void)setupUI {
     [self setUpPickerViewForBirthday];
+    [self.buttonSignUp setTitle:@"Sign up" forState:UIControlStateNormal];
     self.buttonSignUp.layer.cornerRadius = 4;
     [self.buttonSignUp setBackgroundColor:[SSOThemeHelper firstColor]];
     [self setBackgroundColor:[SSOThemeHelper thirdColor]];
