@@ -135,6 +135,7 @@
 		D898E1D81AF1622500C957DC /* SSOCampaignTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D898E1CF1AF1622500C957DC /* SSOCampaignTableViewCell.xib */; };
 		D898E1D91AF1622500C957DC /* SSOMyFeedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D898E1D11AF1622500C957DC /* SSOMyFeedCollectionViewCell.m */; };
 		D898E1DA1AF1622500C957DC /* SSOMyFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D898E1D21AF1622500C957DC /* SSOMyFeedCollectionViewCell.xib */; };
+		D8A035BF1B2A126400833E4A /* Neomedia-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8BD7E151B27E5EA0007DD36 /* Neomedia-Info.plist */; };
 		D8BD7D621B25F4550007DD36 /* SSOViewControllerWithTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D817BECC1AEF1CDC0038DF8E /* SSOViewControllerWithTabBar.m */; };
 		D8BD7D631B25F4550007DD36 /* SSOSocialNetworkAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C7B1AD4281B008D2A37 /* SSOSocialNetworkAPI.m */; };
 		D8BD7D641B25F4550007DD36 /* SSOMyFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D898E1C81AF1622500C957DC /* SSOMyFeedViewController.m */; };
@@ -271,7 +272,6 @@
 		D8BD7DEA1B25F4550007DD36 /* SSOProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D898E1CB1AF1622500C957DC /* SSOProfileViewController.xib */; };
 		D8BD7DEB1B25F4550007DD36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8C83E9F1AE1C74C00F187F1 /* InfoPlist.strings */; };
 		D8BD7DEC1B25F4550007DD36 /* SSOCampaignDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB832F5C1B0392FB0067A4FB /* SSOCampaignDetailViewController.xib */; };
-		D8BD7DED1B25F4550007DD36 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = D8621E2A1B0E9BA700489AC9 /* Fastfile */; };
 		D8BD7DEE1B25F4550007DD36 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8C83EA11AE1C74C00F187F1 /* Localizable.strings */; };
 		D8BD7DEF1B25F4550007DD36 /* SSOSnapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0F335C1AF2A3F100F6C735 /* SSOSnapViewController.xib */; };
 		D8BD7DF01B25F4550007DD36 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3357233E1ACB097C000CC846 /* Camera.storyboard */; };
@@ -282,13 +282,11 @@
 		D8BD7DF51B25F4550007DD36 /* SSOFontCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8C91ADF506500B3AC11 /* SSOFontCollectionViewCell.xib */; };
 		D8BD7DF61B25F4550007DD36 /* SSOLoginContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3303DDCF1AD84F19002B74F9 /* SSOLoginContainerView.xib */; };
 		D8BD7DF71B25F4550007DD36 /* SSOTextAccessoryContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8CA1ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib */; };
-		D8BD7DF81B25F4550007DD36 /* Deliverfile in Resources */ = {isa = PBXBuildFile; fileRef = D8621E291B0E9BA700489AC9 /* Deliverfile */; };
 		D8BD7DF91B25F4550007DD36 /* SSOPhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBF9D1CA1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.xib */; };
 		D8BD7DFA1B25F4550007DD36 /* SSOLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA5C871AD4287C008D2A37 /* SSOLoginViewController.xib */; };
 		D8BD7DFB1B25F4550007DD36 /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 335C7FD01AF404C1005C2B2E /* Futura.ttc */; };
 		D8BD7DFC1B25F4550007DD36 /* SSOTopPhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E677FB1AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.xib */; };
 		D8BD7DFD1B25F4550007DD36 /* SSOFanPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339841E61AEACC5C00605C67 /* SSOFanPageViewController.xib */; };
-		D8BD7DFE1B25F4550007DD36 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = D8621E281B0E9BA700489AC9 /* Appfile */; };
 		D8BD7DFF1B25F4550007DD36 /* WKShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3357239B1ACB097C000CC846 /* WKShareViewController.xib */; };
 		D8BD7E001B25F4550007DD36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 270DFB0619AE71BE00067072 /* Images.xcassets */; };
 		D8BD7E011B25F4550007DD36 /* SSOImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E677F41AEEE5F6006B8CD8 /* SSOImageCollectionViewCell.xib */; };
@@ -296,7 +294,6 @@
 		D8BD7E111B26079A0007DD36 /* Neomedia.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8BD7E101B26079A0007DD36 /* Neomedia.xcassets */; };
 		D8BD7E131B2608B30007DD36 /* Base.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8BD7E121B2608B30007DD36 /* Base.xcassets */; };
 		D8BD7E141B27E55C0007DD36 /* uSnap-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335723A31ACB097C000CC846 /* uSnap-Info.plist */; };
-		D8BD7E161B27E5EA0007DD36 /* Neomedia-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8BD7E151B27E5EA0007DD36 /* Neomedia-Info.plist */; };
 		D8C83EA31AE1C74C00F187F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8C83E9F1AE1C74C00F187F1 /* InfoPlist.strings */; };
 		D8C83EA41AE1C74C00F187F1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8C83EA11AE1C74C00F187F1 /* Localizable.strings */; };
 		D8D4F17F1ADFFB52002FDE38 /* SSOThemeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D4F17E1ADFFB52002FDE38 /* SSOThemeHelper.m */; };
@@ -1791,7 +1788,6 @@
 				D8BD7DEA1B25F4550007DD36 /* SSOProfileViewController.xib in Resources */,
 				D8BD7DEB1B25F4550007DD36 /* InfoPlist.strings in Resources */,
 				D8BD7DEC1B25F4550007DD36 /* SSOCampaignDetailViewController.xib in Resources */,
-				D8BD7DED1B25F4550007DD36 /* Fastfile in Resources */,
 				D8BD7DEE1B25F4550007DD36 /* Localizable.strings in Resources */,
 				D8BD7DEF1B25F4550007DD36 /* SSOSnapViewController.xib in Resources */,
 				D8BD7DF01B25F4550007DD36 /* Camera.storyboard in Resources */,
@@ -1802,15 +1798,13 @@
 				D8BD7DF51B25F4550007DD36 /* SSOFontCollectionViewCell.xib in Resources */,
 				D8BD7DF61B25F4550007DD36 /* SSOLoginContainerView.xib in Resources */,
 				D8BD7DF71B25F4550007DD36 /* SSOTextAccessoryContainerView.xib in Resources */,
-				D8BD7DF81B25F4550007DD36 /* Deliverfile in Resources */,
 				D8BD7DF91B25F4550007DD36 /* SSOPhotosCollectionViewCell.xib in Resources */,
-				D8BD7E161B27E5EA0007DD36 /* Neomedia-Info.plist in Resources */,
+				D8A035BF1B2A126400833E4A /* Neomedia-Info.plist in Resources */,
 				D8BD7DFA1B25F4550007DD36 /* SSOLoginViewController.xib in Resources */,
 				D8BD7DFB1B25F4550007DD36 /* Futura.ttc in Resources */,
 				D8BD7E0C1B25F9390007DD36 /* Launch Screen Neomedia.xib in Resources */,
 				D8BD7DFC1B25F4550007DD36 /* SSOTopPhotosCollectionViewCell.xib in Resources */,
 				D8BD7DFD1B25F4550007DD36 /* SSOFanPageViewController.xib in Resources */,
-				D8BD7DFE1B25F4550007DD36 /* Appfile in Resources */,
 				D8BD7DFF1B25F4550007DD36 /* WKShareViewController.xib in Resources */,
 				D8BD7E001B25F4550007DD36 /* Images.xcassets in Resources */,
 				D8BD7E011B25F4550007DD36 /* SSOImageCollectionViewCell.xib in Resources */,
@@ -2296,10 +2290,9 @@
 			baseConfigurationReference = EAE311565BE99D01341CE159 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 30;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2323,10 +2316,9 @@
 			baseConfigurationReference = 4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 30;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2387,11 +2379,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EAE311565BE99D01341CE159 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 30;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2420,11 +2411,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 30;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
