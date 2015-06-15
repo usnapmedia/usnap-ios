@@ -101,6 +101,33 @@
         } success:success failure:failure];
 }
 
++ (void)winkConnectPostVideoToBackend:(NSURL *)URLOfVideoToPost
+                             withText:(NSString *)text
+                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSString *url = [NSString stringWithFormat:@"share/video"];
+    NSData *videoData = [NSData dataWithContentsOfURL:URLOfVideoToPost];
+
+    SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
+    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    // We need to reset the contentTypes here as we are setting a new responseSerializer
+    responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    manager.responseSerializer = responseSerializer;
+
+    // TODO: Temporary fix because problem with backend
+    NSMutableDictionary *parameters = [[SSOSocialNetworkAPI sharedInstance] connectedSocialNetworkAPIParameters].mutableCopy;
+    [parameters addEntriesFromDictionary:@{ @"text" : text }];
+    // If the user participate in a campaign, send it
+    if ([SSSessionManager sharedInstance].campaignID) {
+        [parameters addEntriesFromDictionary:@{ @"campaign_id" : [SSSessionManager sharedInstance].campaignID }];
+    }
+
+    [manager POST:url parameters:parameters
+        constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+          [formData appendPartWithFileData:videoData name:@"video_data" fileName:@"video.mov" mimeType:@"video/quicktime"];
+        } success:success failure:failure];
+}
+
 + (void)getCampaignsWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
 

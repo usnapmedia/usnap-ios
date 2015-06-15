@@ -388,30 +388,48 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
  */
 - (void)post {
     [self.placeholderTextView resignFirstResponder];
-
     [SVProgressHUD showWithStatus:@"uploading" maskType:SVProgressHUDMaskTypeBlack];
 
-    [WKWinkConnect winkConnectPostImageToBackend:[self editedImage]
-        withText:self.placeholderTextView.text
-        andMeta:@{
-            @"something" : @"here"
-        }
-        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    if (!self.mediaURL) {
+        [WKWinkConnect winkConnectPostImageToBackend:[self editedImage]
+            withText:self.placeholderTextView.text
+            //@TODO
+            andMeta:@{
+                @"something" : @"here"
+            }
+            success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-          // @FIXME
-          [SVProgressHUD showSuccessWithStatus:@"Image posted"];
-          [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
-          [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+              // @FIXME
+              [SVProgressHUD showSuccessWithStatus:@"Image posted"];
+              [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
+              [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
-          NSLog(@"shared with succcess");
+              NSLog(@"shared with succcess");
 
-        }
-        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          //@FIXME
-          //@TODO: Should be handled generally
-          [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+            }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              //@FIXME
+              //@TODO: Should be handled generally
+              [SVProgressHUD showErrorWithStatus:error.localizedDescription];
 
-        }];
+            }];
+    } else {
+        [WKWinkConnect winkConnectPostVideoToBackend:self.mediaURL
+            withText:self.placeholderTextView.text
+            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              // @FIXME
+              [SVProgressHUD showSuccessWithStatus:@"Video posted"];
+              [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
+              [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+
+              NSLog(@"shared with succcess");
+            }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              //@FIXME
+              //@TODO: Should be handled generally
+              [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+            }];
+    }
 }
 
 #pragma mark - Social networks
