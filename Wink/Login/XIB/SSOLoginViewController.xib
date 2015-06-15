@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -11,6 +11,7 @@
                 <outlet property="loginButton" destination="L9d-i3-B4P" id="9ne-ZQ-lQc"/>
                 <outlet property="loginContainerView" destination="1jz-yV-PGL" id="WAv-Lu-G4u"/>
                 <outlet property="registerContainerView" destination="6G7-MO-4dZ" id="WB5-9z-bN2"/>
+                <outlet property="registrationLabel" destination="wUI-xz-kfY" id="N7t-DF-srk"/>
                 <outlet property="signUpButton" destination="Bm5-bk-NTn" id="6jt-f7-hkb"/>
                 <outlet property="view" destination="RMS-1K-AQe" id="HpM-ev-9G4"/>
             </connections>
@@ -69,9 +70,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0V0-PS-IOt">
-                            <rect key="frame" x="5" y="13" width="34" height="34"/>
+                            <rect key="frame" x="0.0" y="25" width="35" height="35"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="0V0-PS-IOt" secondAttribute="height" multiplier="1:1" id="ZRT-Ez-csv"/>
+                                <constraint firstAttribute="width" secondItem="0V0-PS-IOt" secondAttribute="height" multiplier="1:1" id="duL-qw-c2l"/>
+                                <constraint firstAttribute="width" constant="35" id="qt4-BW-s5j"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="X">
@@ -82,7 +84,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REGISTRATION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUI-xz-kfY">
-                            <rect key="frame" x="126" y="20" width="122" height="21"/>
+                            <rect key="frame" x="126" y="32" width="122" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -90,13 +92,11 @@
                     </subviews>
                     <color key="backgroundColor" red="0.16250394570707072" green="0.16250394570707072" blue="0.16250394570707072" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="centerY" secondItem="wUI-xz-kfY" secondAttribute="centerY" id="5Vg-Oa-sI3"/>
-                        <constraint firstItem="0V0-PS-IOt" firstAttribute="top" secondItem="o5n-4U-eEK" secondAttribute="top" constant="13" id="Cj9-nP-8Vp"/>
+                        <constraint firstItem="0V0-PS-IOt" firstAttribute="leading" secondItem="o5n-4U-eEK" secondAttribute="leading" id="2QY-xb-vCA"/>
                         <constraint firstAttribute="height" constant="60" id="GkM-GN-MJg"/>
-                        <constraint firstAttribute="centerX" secondItem="wUI-xz-kfY" secondAttribute="centerX" id="N7V-TL-B30"/>
-                        <constraint firstAttribute="bottom" secondItem="0V0-PS-IOt" secondAttribute="bottom" constant="13" id="o3x-Jp-R8C"/>
-                        <constraint firstItem="wUI-xz-kfY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0V0-PS-IOt" secondAttribute="trailing" id="sks-PH-ksO"/>
-                        <constraint firstItem="0V0-PS-IOt" firstAttribute="leading" secondItem="o5n-4U-eEK" secondAttribute="leading" constant="5" id="ugt-ab-peg"/>
+                        <constraint firstItem="wUI-xz-kfY" firstAttribute="centerY" secondItem="0V0-PS-IOt" secondAttribute="centerY" id="LxL-rs-v6Y"/>
+                        <constraint firstAttribute="bottom" secondItem="0V0-PS-IOt" secondAttribute="bottom" id="MVj-ZU-5RQ"/>
+                        <constraint firstAttribute="centerX" secondItem="wUI-xz-kfY" secondAttribute="centerX" id="dTA-NH-u5m"/>
                     </constraints>
                 </view>
             </subviews>

@@ -17,6 +17,7 @@
 #import "SSSessionManager.h"
 #import "UINavigationController+SSOLockedNavigationController.h"
 #import <SVProgressHUD.h>
+#import "SSOThemeHelper.h"
 
 @interface SSOLoginViewController ()
 @property(weak, nonatomic) IBOutlet UIView *loginContainerView;
@@ -26,6 +27,7 @@
 @property(weak, nonatomic) IBOutlet SSOCustomSignInButton *loginButton;
 @property(weak, nonatomic) IBOutlet SSOCustomSignInButton *signUpButton;
 @property(weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UILabel *registrationLabel;
 
 @end
 
@@ -69,6 +71,7 @@
  */
 - (void)setUI {
 
+    self.registrationLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
     self.loginView.backgroundColor = [UIColor clearColor];
     self.loginContainerView.backgroundColor = [UIColor clearColor];
 
@@ -77,7 +80,9 @@
     self.registerContainerView.hidden = YES;
 
     self.loginButton.selected = YES;
+    self.loginButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
     self.signUpButton.selected = NO;
+    self.signUpButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
 }
 
 /**

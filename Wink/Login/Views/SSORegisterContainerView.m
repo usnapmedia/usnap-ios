@@ -34,7 +34,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self setupUI];
-    
 }
 
 /**
@@ -67,10 +66,18 @@
  */
 - (void)setupUI {
     [self setUpPickerViewForBirthday];
+    [self.buttonSignUp setTitle:@"Sign up" forState:UIControlStateNormal];
     self.buttonSignUp.layer.cornerRadius = 4;
     [self.buttonSignUp setBackgroundColor:[SSOThemeHelper firstColor]];
     [self setBackgroundColor:[SSOThemeHelper thirdColor]];
     [self.buttonSignUp setBackgroundColor:[SSOThemeHelper firstColor]];
+    self.buttonSignUp.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
+    self.textFieldFirstName.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.textFieldLastName.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.textFieldEmail.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.textFieldUsername.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.textFieldPassword.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.textFieldBirthday.font = [SSOThemeHelper avenirLightFontWithSize:14];
 }
 
 #pragma mark - Animations
