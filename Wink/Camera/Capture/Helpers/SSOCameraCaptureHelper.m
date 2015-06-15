@@ -222,17 +222,17 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     dispatch_async([self sessionQueue], ^{
       // Set the photo orientation based on the device orientation
       AVCaptureVideoOrientation orientation;
-      if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
-          orientation = AVCaptureVideoOrientationLandscapeRight;
-      } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
-          orientation = AVCaptureVideoOrientationLandscapeLeft;
-
-      } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
-          orientation = AVCaptureVideoOrientationPortraitUpsideDown;
-
-      } else {
+//      if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
+//          orientation = AVCaptureVideoOrientationLandscapeRight;
+//      } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
+//          orientation = AVCaptureVideoOrientationLandscapeLeft;
+//
+//      } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
+//          orientation = AVCaptureVideoOrientationPortraitUpsideDown;
+//
+//      } else {
           orientation = AVCaptureVideoOrientationPortrait;
-      }
+//      }
 
       // Update the orientation on the still image output video connection before capturing.
       [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:orientation];
