@@ -9,7 +9,7 @@
 #import "SSODynamicCellSizeCollectionViewProvider.h"
 #import "SSOSnap.h"
 
-NSInteger const kNumberOfSmallCellsPerRow = 2.0f;
+NSInteger const kNumberOfSmallCellsPerRow = 5.0f;
 NSInteger const kCellSpacing = 5;
 
 @implementation SSODynamicCellSizeCollectionViewProvider
@@ -51,7 +51,8 @@ NSInteger const kCellSpacing = 5;
 
     // The width of a cell equals to the collection frame divided by the number of cells. We substract the spacing times the number of cells - 1 to get the
     // padding
-    CGFloat smallCellWidth = (collectionView.frame.size.height / kNumberOfSmallCellsPerRow) - (kCellSpacing * (kNumberOfSmallCellsPerRow - 1));
+    CGFloat smallCellWidth = collectionView.frame.size.height / kNumberOfSmallCellsPerRow - kCellSpacing;
+    
     // Cell size has a ration of 1:1
     CGSize smallCellSize = CGSizeMake(smallCellWidth, smallCellWidth);
     // The size if based on the liked

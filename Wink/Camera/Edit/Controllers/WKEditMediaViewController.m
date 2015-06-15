@@ -169,7 +169,7 @@
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.overlayView.frame.origin.x, self.self.overlayView.frame.origin.y,
                                                                        self.overlayView.frame.size.width, self.overlayView.frame.size.height)];
         self.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.imageView.clipsToBounds = YES;
         self.imageView.image = self.image;
         [self.view insertSubview:self.imageView atIndex:0];
@@ -179,6 +179,7 @@
         self.moviePlayerView = [WKMoviePlayerView moviePlayerViewWithPath:self.mediaURL];
         self.moviePlayerView.delegate = self;
         self.moviePlayerView.frame = self.overlayView.bounds;
+        self.moviePlayerView.contentMode = UIViewContentModeScaleAspectFill;
         self.moviePlayerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.moviePlayerView.clipsToBounds = YES;
         [self.view insertSubview:self.moviePlayerView atIndex:0];
