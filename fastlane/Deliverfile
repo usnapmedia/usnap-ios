@@ -17,6 +17,5 @@
 # https://github.com/KrauseFx/deliver/blob/master/Deliverfile.md
 
 
-app_identifier "com.usnap.neomedia"
 apple_id "998731879" # This is NOT your Apple login ID, but the App ID of your app
 email "usnap@samsaodev.com"
