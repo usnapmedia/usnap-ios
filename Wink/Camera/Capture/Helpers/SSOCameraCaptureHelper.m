@@ -9,6 +9,7 @@
 #import "SSOCameraCaptureHelper.h"
 #import <AVFoundation/AVFoundation.h>
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
+#import "SSSessionManager.h"
 
 static void *CapturingStillImageContext = &CapturingStillImageContext;
 static void *RecordingContext = &RecordingContext;
@@ -208,6 +209,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
           NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[@"movie" stringByAppendingPathExtension:@"mov"]];
           [[self movieFileOutput] startRecordingToOutputFileURL:[NSURL fileURLWithPath:outputFilePath] recordingDelegate:self];
       } else {
+          [[SSSessionManager sharedInstance] setLastPhotoOrientation:[UIDevice currentDevice].orientation];
           [[self movieFileOutput] stopRecording];
       }
 
@@ -222,17 +224,19 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     dispatch_async([self sessionQueue], ^{
       // Set the photo orientation based on the device orientation
       AVCaptureVideoOrientation orientation;
-//      if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
-//          orientation = AVCaptureVideoOrientationLandscapeRight;
-//      } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
-//          orientation = AVCaptureVideoOrientationLandscapeLeft;
-//
-//      } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
-//          orientation = AVCaptureVideoOrientationPortraitUpsideDown;
-//
-//      } else {
-          orientation = AVCaptureVideoOrientationPortrait;
-//      }
+      //      if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
+      //          orientation = AVCaptureVideoOrientationLandscapeRight;
+      //      } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
+      //          orientation = AVCaptureVideoOrientationLandscapeLeft;
+      //
+      //      } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
+      //          orientation = AVCaptureVideoOrientationPortraitUpsideDown;
+      //
+      //      } else {
+      [[SSSessionManager sharedInstance] setLastPhotoOrientation:[UIDevice currentDevice].orientation];
+
+      orientation = AVCaptureVideoOrientationPortrait;
+      //      }
 
       // Update the orientation on the still image output video connection before capturing.
       [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:orientation];
@@ -438,6 +442,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
                     toAlbum:appName
         withCompletionBlock:^(NSError *error) {
           [self removeObservers];
+          [self rotateVideo:outputFileURL];
           [self.delegate didFinishCapturingVideo:outputFileURL withError:nil];
           //          [self cropVideoSquare:outputFileURL];
         }];
@@ -579,6 +584,84 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
         [self.delegate didFinishCapturingVideo:exportUrl withError:nil];
       });
     }];
+}
+
+- (void)rotateVideo:(NSURL *)url {
+    UIImageOrientation videoOrientation = [self getVideoOrientationFromDeviceOrientation];
+    if (videoOrientation == UIImageOrientationLeft || videoOrientation == UIImageOrientationRight || videoOrientation == UIImageOrientationLeftMirrored ||
+        videoOrientation == UIImageOrientationRightMirrored) {
+        // load our movie Asset
+        AVAsset *asset = [AVAsset assetWithURL:url];
+        // create an avassetrack with our asset
+        AVAssetTrack *clipVideoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+        // create a video composition and preset some settings
+        AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
+        videoComposition.frameDuration = CMTimeMake(1, 30);
+        NSLog(@"witdh: %f, height: %f", clipVideoTrack.naturalSize.height, clipVideoTrack.naturalSize.width);
+        videoComposition.renderSize = CGSizeMake(clipVideoTrack.naturalSize.width, clipVideoTrack.naturalSize.height);
+        // create a video instruction
+        AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+        instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30));
+        // Create the transform to change the video output
+        AVMutableVideoCompositionLayerInstruction *transformer =
+            [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:clipVideoTrack];
+        CGAffineTransform t1 = CGAffineTransformIdentity;
+        CGAffineTransform t2 = CGAffineTransformIdentity;
+
+        // Set the transforms based on the orientation
+        if (videoOrientation == UIImageOrientationRight && self.devicePosition == AVCaptureDevicePositionBack) {
+            t1 = CGAffineTransformMakeTranslation(0, 0);
+            t2 = CGAffineTransformRotate(t1, 0);
+        } else if (videoOrientation == UIImageOrientationRight && self.devicePosition == AVCaptureDevicePositionFront) {
+            t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.width, clipVideoTrack.naturalSize.height);
+            t2 = CGAffineTransformRotate(t1, M_PI);
+        } else if (videoOrientation == UIImageOrientationLeft && self.devicePosition == AVCaptureDevicePositionFront) {
+            t1 = CGAffineTransformMakeTranslation(0, 0);
+            t2 = CGAffineTransformRotate(t1, 0);
+        } else if (videoOrientation == UIImageOrientationLeft && self.devicePosition == AVCaptureDevicePositionBack) {
+            t1 = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.width, clipVideoTrack.naturalSize.height);
+            t2 = CGAffineTransformRotate(t1, M_PI);
+        } else {
+            NSLog(@"no supported orientation has been found in this video");
+            return;
+        }
+
+        CGAffineTransform finalTransform = t2;
+        [transformer setTransform:finalTransform atTime:kCMTimeZero];
+
+        // add the transformer layer instructions, then add to video composition
+        instruction.layerInstructions = [NSArray arrayWithObject:transformer];
+        videoComposition.instructions = [NSArray arrayWithObject:instruction];
+
+        NSString *exportPath = [NSTemporaryDirectory() stringByAppendingPathComponent:[@"croppedMovie" stringByAppendingPathExtension:@"mp4"]];
+        NSURL *exportUrl = [NSURL fileURLWithPath:exportPath];
+
+        // Remove any prevouis videos at that path
+        [[NSFileManager defaultManager] removeItemAtURL:exportUrl error:nil];
+        // Export
+        exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
+        exporter.videoComposition = videoComposition;
+        exporter.outputURL = exportUrl;
+        exporter.outputFileType = AVFileTypeQuickTimeMovie;
+        [exporter exportAsynchronouslyWithCompletionHandler:^{
+          dispatch_async(dispatch_get_main_queue(), ^{
+            // Call when finished
+
+            AVAsset *asset2 = [AVAsset assetWithURL:exportUrl];
+            // create an avassetrack with our asset
+            AVAssetTrack *clipVideoTrack2 = [[asset2 tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+            // create a video composition and preset some settings
+            AVMutableVideoComposition *videoComposition2 = [AVMutableVideoComposition videoComposition];
+            videoComposition2.frameDuration = CMTimeMake(1, 30);
+            NSLog(@"new witdh: %f, new height: %f", clipVideoTrack2.naturalSize.width, clipVideoTrack2.naturalSize.height);
+
+            [[SSSessionManager sharedInstance] setLastVideoURL:exportUrl];
+          });
+        }];
+
+    } else {
+        [[SSSessionManager sharedInstance] setLastVideoURL:url];
+    }
 }
 
 /**

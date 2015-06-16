@@ -103,10 +103,12 @@
 
 + (void)winkConnectPostVideoToBackend:(NSURL *)URLOfVideoToPost
                              withText:(NSString *)text
+                         overlayImage:(UIImage *)overlayImage
                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSString *url = [NSString stringWithFormat:@"share/video"];
     NSData *videoData = [NSData dataWithContentsOfURL:URLOfVideoToPost];
+    NSData *imageData = UIImagePNGRepresentation(overlayImage);
 
     SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
     AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
@@ -121,10 +123,12 @@
     if ([SSSessionManager sharedInstance].campaignID) {
         [parameters addEntriesFromDictionary:@{ @"campaign_id" : [SSSessionManager sharedInstance].campaignID }];
     }
-
     [manager POST:url parameters:parameters
         constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-          [formData appendPartWithFileData:videoData name:@"video_data" fileName:@"video.mov" mimeType:@"video/quicktime"];
+          [formData appendPartWithFileData:videoData name:@"video_data" fileName:@"video.mp4" mimeType:@"video/mp4"];
+          if (overlayImage) {
+              [formData appendPartWithFileData:imageData name:@"image_data" fileName:@"overlay.png" mimeType:@"image/png"];
+          }
         } success:success failure:failure];
 }
 

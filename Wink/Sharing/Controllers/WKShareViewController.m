@@ -94,7 +94,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     if (self.image || self.modifiedImage) {
         self.imageView = [UIImageView new];
         UIImage *image = (self.modifiedImage) ? self.modifiedImage : self.image;
-        self.imageView.image = image;
+        self.imageView.image = [self rotateImage:image];
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.previewImageContainerView addSubview:self.imageView];
         [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
           make.edges.equalTo(self.previewImageContainerView);
@@ -102,23 +103,27 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     }
     // Setup the movie player view
     else {
+        NSLog(@"%@", [SSSessionManager sharedInstance].lastVideoURL);
+        self.mediaURL = [SSSessionManager sharedInstance].lastVideoURL;
         self.moviePlayerView = [WKMoviePlayerView moviePlayerViewWithPath:self.mediaURL];
         self.moviePlayerView.delegate = self;
-        self.moviePlayerView.frame = self.view.bounds;
+        self.moviePlayerView.frame = self.previewImageContainerView.bounds;
         self.moviePlayerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.moviePlayerView.clipsToBounds = YES;
-        [self.view insertSubview:self.moviePlayerView atIndex:0];
         [self.previewImageContainerView addSubview:self.moviePlayerView];
         [self.moviePlayerView mas_makeConstraints:^(MASConstraintMaker *make) {
           make.edges.equalTo(self.previewImageContainerView);
         }];
-        [self.moviePlayerView.player pause];
+        [self.moviePlayerView.player play];
     }
     // Setup the overlay image view
     if (self.overlayImage) {
         self.overlayImageView = [UIImageView new];
-        self.overlayImageView.image = self.overlayImage;
+        self.overlayImageView.image = [self rotateImage:self.overlayImage];
+        self.overlayImage = self.overlayImageView.image;
+        self.overlayImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.previewImageContainerView addSubview:self.overlayImageView];
+        NSLog(@"%@", self.previewImageContainerView);
         [self.overlayImageView mas_makeConstraints:^(MASConstraintMaker *make) {
           make.edges.equalTo(self.previewImageContainerView);
         }];
@@ -136,6 +141,26 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     [self.view insertSubview:self.overlayView belowSubview:self.mediaContainerView];
     // Update UI
     // [self updateUI];
+}
+
+- (void)moviePlayerViewDidFinishPlayingToEndTime:(WKMoviePlayerView *)moviePlayer {
+    [self.moviePlayerView.player play];
+}
+
+- (UIImage *)rotateImage:(UIImage *)image {
+
+    UIImage *newImage;
+    if ([SSSessionManager sharedInstance].lastPhotoOrientation == 2) {
+        newImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:1.0 orientation:UIImageOrientationDown];
+    } else if ([SSSessionManager sharedInstance].lastPhotoOrientation == 3) {
+        newImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:1.0 orientation:UIImageOrientationLeft];
+    } else if ([SSSessionManager sharedInstance].lastPhotoOrientation == 4) {
+        newImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:1.0 orientation:UIImageOrientationRight];
+    } else {
+        newImage = image;
+    }
+
+    return newImage;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -355,16 +380,16 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 - (UIImage *)editedImage {
 
     if (self.image) {
-        UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
+        UIView *view = [[UIView alloc] initWithFrame:self.imageView.bounds];
         view.backgroundColor = [UIColor blackColor];
 
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.bounds];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.image = (self.modifiedImage) ? self.modifiedImage : self.image;
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.imageView.bounds];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.image = self.imageView.image;
         [view addSubview:imageView];
 
         UIImageView *overlayImageView = [[UIImageView alloc] initWithFrame:view.bounds];
-        overlayImageView.contentMode = UIViewContentModeScaleAspectFill;
+        overlayImageView.contentMode = UIViewContentModeScaleAspectFit;
         overlayImageView.image = self.overlayImage;
         [view addSubview:overlayImageView];
 
@@ -416,6 +441,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     } else {
         [WKWinkConnect winkConnectPostVideoToBackend:self.mediaURL
             withText:self.placeholderTextView.text
+            overlayImage:self.overlayImageView.image
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
               // @FIXME
               [SVProgressHUD showSuccessWithStatus:@"Video posted"];
@@ -423,6 +449,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
               [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
               NSLog(@"shared with succcess");
+
             }
             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               //@FIXME

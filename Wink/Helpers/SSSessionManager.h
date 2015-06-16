@@ -23,6 +23,9 @@
 @property(strong, nonatomic, readonly) NSString *password;
 @property(strong, nonatomic, readonly) NSString *campaignID;
 
+@property(assign, nonatomic, readonly) UIDeviceOrientation lastPhotoOrientation;
+@property(strong, nonatomic, readonly) NSURL *lastVideoURL;
+
 #pragma mark - Session methods
 
 /**
@@ -63,5 +66,9 @@
  *  @param campaignID campaign ID
  */
 - (void)setCampaignID:(NSString *)campaignID;
+
+- (void)setLastPhotoOrientation:(UIDeviceOrientation)lastPhotoOrientation;
+
+- (void)setLastVideoURL:(NSURL *)lastVideoURL;
 
 @end

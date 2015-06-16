@@ -85,6 +85,7 @@
  */
 + (void)winkConnectPostVideoToBackend:(NSURL *)URLOfVideoToPost
                              withText:(NSString *)text
+                         overlayImage:(UIImage *)overlayImage
                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 

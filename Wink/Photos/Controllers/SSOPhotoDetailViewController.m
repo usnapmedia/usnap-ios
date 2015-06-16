@@ -99,10 +99,9 @@
 - (void)displayVideoWithPath:(NSURL *)path {
     self.moviePlayerView = [WKMoviePlayerView moviePlayerViewWithPath:path];
     self.moviePlayerView.delegate = self;
-    self.moviePlayerView.frame = self.view.bounds;
+    self.moviePlayerView.frame = self.contentView.bounds;
     self.moviePlayerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.moviePlayerView.clipsToBounds = YES;
-    [self.view insertSubview:self.moviePlayerView atIndex:0];
     [self.contentView addSubview:self.moviePlayerView];
     [self.moviePlayerView mas_makeConstraints:^(MASConstraintMaker *make) {
       make.edges.equalTo(self.contentView);
