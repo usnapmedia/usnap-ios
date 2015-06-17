@@ -380,10 +380,16 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 - (UIImage *)editedImage {
 
     if (self.image) {
-        UIView *view = [[UIView alloc] initWithFrame:self.imageView.bounds];
+        CGRect bounds;
+        if (self.imageView.image.size.width > self.imageView.image.size.height) {
+            bounds = CGRectMake(0, 0, self.imageView.image.size.height, self.imageView.image.size.width);
+        } else {
+            bounds = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
+        }
+        UIView *view = [[UIView alloc] initWithFrame:bounds];
         view.backgroundColor = [UIColor blackColor];
 
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.imageView.bounds];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.bounds];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = self.imageView.image;
         [view addSubview:imageView];
@@ -429,7 +435,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
               [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
               [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
-              NSLog(@"shared with succcess");
+              NSLog(@"%@", responseObject);
 
             }
             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
