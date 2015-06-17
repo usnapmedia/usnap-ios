@@ -136,19 +136,19 @@
 
 - (void)longPress:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"Long Press began");
+//        NSLog(@"Long Press began");
         [self startAnimation];
         [self.delegate didStartLongPressGesture:self];
     }
 
     if (gesture.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"Long Press");
+//        NSLog(@"Long Press");
 
         [self.delegate didFinishLongPressGesture:self];
     }
 
     if (gesture.state == UIGestureRecognizerStateChanged) {
-        NSLog(@"Gesture changed");
+//        NSLog(@"Gesture changed");
     }
 }
 

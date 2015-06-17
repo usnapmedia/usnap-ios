@@ -597,7 +597,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
         // create a video composition and preset some settings
         AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
         videoComposition.frameDuration = CMTimeMake(1, 30);
-        NSLog(@"witdh: %f, height: %f", clipVideoTrack.naturalSize.height, clipVideoTrack.naturalSize.width);
+//        NSLog(@"witdh: %f, height: %f", clipVideoTrack.naturalSize.height, clipVideoTrack.naturalSize.width);
         videoComposition.renderSize = CGSizeMake(clipVideoTrack.naturalSize.width, clipVideoTrack.naturalSize.height);
         // create a video instruction
         AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
@@ -646,15 +646,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
         [exporter exportAsynchronouslyWithCompletionHandler:^{
           dispatch_async(dispatch_get_main_queue(), ^{
             // Call when finished
-
-            AVAsset *asset2 = [AVAsset assetWithURL:exportUrl];
-            // create an avassetrack with our asset
-            AVAssetTrack *clipVideoTrack2 = [[asset2 tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
-            // create a video composition and preset some settings
-            AVMutableVideoComposition *videoComposition2 = [AVMutableVideoComposition videoComposition];
-            videoComposition2.frameDuration = CMTimeMake(1, 30);
-            NSLog(@"new witdh: %f, new height: %f", clipVideoTrack2.naturalSize.width, clipVideoTrack2.naturalSize.height);
-
             [[SSSessionManager sharedInstance] setLastVideoURL:exportUrl];
           });
         }];

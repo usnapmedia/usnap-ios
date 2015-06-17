@@ -357,14 +357,6 @@
     }
 
     [SSOCameraCaptureHelper setFlashMode:[[SSOCameraStateHelper sharedInstance] flashState] forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
-    
-    NSInteger count = 0;
-    for (UIView *view in self.view.subviews) {
-//        if ([view isKindOfClass:[AVCamPreviewView class]]) {
-            count++;
-//        }
-    }
-    NSLog(@"%ld", (long)count);
 }
 
 /**

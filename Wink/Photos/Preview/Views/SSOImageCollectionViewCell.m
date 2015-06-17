@@ -46,9 +46,9 @@
             }];
         }
 
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.data.url]];
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.data.thumbUrl]];
 
-        NSLog(@" %@", NSStringFromCGRect(self.imageView.frame));
+//        NSLog(@" %@", NSStringFromCGRect(self.imageView.frame));
     }
 }
 
