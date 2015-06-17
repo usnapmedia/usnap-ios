@@ -377,17 +377,12 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
  *
  *  @return <#return value description#>
  */
+
 - (UIImage *)editedImage {
 
     if (self.image) {
-        CGRect bounds;
-        if (self.imageView.image.size.width > self.imageView.image.size.height) {
-            bounds = CGRectMake(0, 0, self.imageView.image.size.height, self.imageView.image.size.width);
-        } else {
-            bounds = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
-        }
-        UIView *view = [[UIView alloc] initWithFrame:bounds];
-        view.backgroundColor = [UIColor blackColor];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height)];
+        view.backgroundColor = [UIColor whiteColor];
 
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.bounds];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -407,9 +402,47 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         // Change image to PNG
 
         NSData *pngdata = UIImagePNGRepresentation(snapshot); // PNG wrap
-        return [UIImage imageWithData:pngdata];
+        UIImage *pngImage = [UIImage imageWithData:pngdata];
+
+        CGFloat maxSize = MAX(pngImage.size.height, pngImage.size.width);
+        CGFloat witdh = pngImage.size.width;
+        CGFloat height = pngImage.size.height;
+        if (maxSize > 1000) {
+            CGFloat percentage = maxSize / 1000;
+            witdh = witdh / percentage;
+            height = height / percentage;
+            pngImage = [self resizeImage:pngImage resizeSize:CGSizeMake(witdh, height)];
+        }
+        return pngImage;
     }
     return nil;
+}
+
+- (UIImage *)resizeImage:(UIImage *)orginalImage resizeSize:(CGSize)size {
+    CGFloat actualHeight = orginalImage.size.height;
+    CGFloat actualWidth = orginalImage.size.width;
+    //  if(actualWidth <= size.width && actualHeight<=size.height)
+    //  {
+    //      return orginalImage;
+    //  }
+    float oldRatio = actualWidth / actualHeight;
+    float newRatio = size.width / size.height;
+    if (oldRatio < newRatio) {
+        oldRatio = size.height / actualHeight;
+        actualWidth = oldRatio * actualWidth;
+        actualHeight = size.height;
+    } else {
+        oldRatio = size.width / actualWidth;
+        actualHeight = oldRatio * actualHeight;
+        actualWidth = size.width;
+    }
+
+    CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
+    UIGraphicsBeginImageContext(rect.size);
+    [orginalImage drawInRect:rect];
+    orginalImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return orginalImage;
 }
 
 #pragma mark - Post
