@@ -17,8 +17,8 @@ NSInteger const kCellSpacing = 5;
 #pragma mark - UICollectionViewDelegateFlowLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
-                    layout:(UICollectionViewLayout *)collectionViewLayout
-    sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return [self cellSizeHeightAtIndexPath:indexPath forCollectionView:collectionView];
 }
 
@@ -47,21 +47,21 @@ NSInteger const kCellSpacing = 5;
 - (CGSize)cellSizeHeightAtIndexPath:(NSIndexPath *)indexPath forCollectionView:(UICollectionView *)collectionView {
     NSAssert([self.inputData objectAtIndex:indexPath.row], @"There should be an object at the index path");
     NSAssert([[self.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]], @"Object should be of SSOSnap kind");
-    SSOSnap *snap = (SSOSnap *)[self.inputData objectAtIndex:indexPath.row];
+    //    SSOSnap *snap = (SSOSnap *)[self.inputData objectAtIndex:indexPath.row];
 
     // The width of a cell equals to the collection frame divided by the number of cells. We substract the spacing times the number of cells - 1 to get the
     // padding
     CGFloat smallCellWidth = collectionView.frame.size.height / kNumberOfSmallCellsPerRow - kCellSpacing;
-    
+
     // Cell size has a ration of 1:1
     CGSize smallCellSize = CGSizeMake(smallCellWidth, smallCellWidth);
     // The size if based on the liked
-    if ([snap.fbLikes integerValue] < 1) {
-        return smallCellSize;
-    } else { // Bigger cells are twice as big
-        smallCellSize = CGSizeMake(smallCellWidth * 2 + kCellSpacing, smallCellWidth * 2 + kCellSpacing);
-        return smallCellSize;
-    }
+    //    if ([snap.fbLikes integerValue] < 1) {
+    return smallCellSize;
+    //    } else { // Bigger cells are twice as big
+    //        smallCellSize = CGSizeMake(smallCellWidth * 2 + kCellSpacing, smallCellWidth * 2 + kCellSpacing);
+    //        return smallCellSize;
+    //    }
 }
 
 @end
