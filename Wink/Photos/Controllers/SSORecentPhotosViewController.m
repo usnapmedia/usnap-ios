@@ -170,6 +170,7 @@ NSInteger const kRecentPhotosCellOffset = 10;
 
 - (void)seeAllTopSnapsAction {
     SSOSnapViewController *snapVC = [SSOSnapViewController new];
+    snapVC.isTopPhotos = NO;
     [self.navigationController pushViewController:snapVC animated:YES];
 }
 

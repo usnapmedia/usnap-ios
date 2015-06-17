@@ -10,4 +10,6 @@
 
 @interface SSOSnapViewController : UIViewController
 
+@property(assign, nonatomic) BOOL isTopPhotos;
+
 @end

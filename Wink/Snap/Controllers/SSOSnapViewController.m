@@ -33,7 +33,12 @@
     [super viewDidLoad];
     [self initializeUI];
     [self setChildVC];
-    [self loadPhotos];
+
+    if (self.isTopPhotos) {
+        [self loadTopPhotos];
+    } else {
+        [self loadLatestPhotos];
+    }
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -73,9 +78,20 @@
 
 #pragma mark - Data
 
-- (void)loadPhotos {
+- (void)loadTopPhotos {
     //@FIXME should be all photos, not ony the top ones
     [SSOFeedConnect getTopPhotosForCampaignId:[SSSessionManager sharedInstance].campaignID
+        withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+          SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
+          [self.photosVC setPhotosData:items.response];
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error){
+
+        }];
+}
+
+- (void)loadLatestPhotos {
+    [SSOFeedConnect getRecentPhotosForCampaignId:[SSSessionManager sharedInstance].campaignID
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
           [self.photosVC setPhotosData:items.response];

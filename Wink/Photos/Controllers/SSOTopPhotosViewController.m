@@ -113,6 +113,7 @@ NSInteger const kTopPhotosCellTextHeight = 40;
 
 - (void)seeAllTopSnapsAction {
     SSOSnapViewController *snapVC = [SSOSnapViewController new];
+    snapVC.isTopPhotos = YES;
     [self.navigationController pushViewController:snapVC animated:YES];
 }
 
