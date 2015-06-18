@@ -30,8 +30,8 @@ NSString *const kGoogleClientId = @"705787939641-q7u2cb9tbrd04ku4jc99h4bd5c1cs7b
 NSString *const kAPIValue = @"joey1234";
 NSString *const kSegmentIoKey = @"GmFy6M3KXxHnHSKsIysy4QHHa3aIJL4Z";
 #endif
-
-NSString *const kAPIUrl = @"http://api.usnap.com/v1";
+NSString *const kAPIUrl = @"http://api-stage.usnap.com/v1";
+// NSString *const kAPIUrl = @"http://api.usnap.com/v1";
 NSString *const kAPIKey = @"api_key";
 
 #pragma mark - Notifications
