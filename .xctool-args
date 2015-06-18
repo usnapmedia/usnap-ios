@@ -1,0 +1,4 @@
+[
+  "-workspace", "uSnap.xcworkspace",
+  "-scheme", "uSnap",
+]

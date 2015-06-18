@@ -22,7 +22,3 @@ pod 'SSKeychain'
 pod 'pop'
 pod 'IQKeyboardManager'
 
-# Samsao libraries
-pod 'SSFacebookHelper'
-pod 'SSOBaseProvider'
-

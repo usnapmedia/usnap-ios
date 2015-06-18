@@ -41,17 +41,17 @@
         // Log the user in
         if (theSwitch.on) {
 
-            [SSFacebookHelper login:^(FBSDKLoginManagerLoginResult *result) {
-                CLS_LOG(@"Facebook connected");
-
-            } onFailure:^(NSError *error) {
-                // Set the switch back to no
-                [theSwitch setOn:NO animated:YES];
-                CLS_LOG(@"Facebook connection error: %@", error.description);
-
-            } onCancellation:^{
-
-            }];
+//            [SSFacebookHelper login:^(FBSDKLoginManagerLoginResult *result) {
+//                CLS_LOG(@"Facebook connected");
+//
+//            } onFailure:^(NSError *error) {
+//                // Set the switch back to no
+//                [theSwitch setOn:NO animated:YES];
+//                CLS_LOG(@"Facebook connection error: %@", error.description);
+//
+//            } onCancellation:^{
+//
+//            }];
 
         } else {
             // Logout

@@ -33,21 +33,21 @@
 
     if (socialNetwork == facebookSocialNetwork) {
 
-        [SSFacebookHelper login:^(FBSDKLoginManagerLoginResult *result) {
-            [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:nil];
-            // TODO: See what to do exactly with the token
-            //            NSString *tokenFB = [[FBSession activeSession] accessTokenData].accessToken;
-            //            [[NSUserDefaults standardUserDefaults] setObject:tokenFB forKey:kTokenFacebookString];
-            //            [[NSUserDefaults standardUserDefaults] synchronize];
-
-        } onFailure:^(NSError *error) {
-            [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:error];
-
-            CLS_LOG(@"error FB login :%@", error);
-
-        } onCancellation:^{
-
-        }];
+//        [SSFacebookHelper login:^(FBSDKLoginManagerLoginResult *result) {
+//            [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:nil];
+//            // TODO: See what to do exactly with the token
+//            //            NSString *tokenFB = [[FBSession activeSession] accessTokenData].accessToken;
+//            //            [[NSUserDefaults standardUserDefaults] setObject:tokenFB forKey:kTokenFacebookString];
+//            //            [[NSUserDefaults standardUserDefaults] synchronize];
+//
+//        } onFailure:^(NSError *error) {
+//            [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:error];
+//
+//            CLS_LOG(@"error FB login :%@", error);
+//
+//        } onCancellation:^{
+//
+//        }];
 
     } else if (socialNetwork == twitterSocialNetwork) {
 
