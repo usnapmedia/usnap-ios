@@ -13,6 +13,7 @@
 #import "SSSessionManager.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Masonry.h>
+#import <TOWebViewController/TOWebViewController.h>
 
 @interface SSOCampaignDetailViewController ()
 
@@ -43,10 +44,9 @@
     [self initializeData];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //This might cause a problem if the user goes back to the fan page VC
+    // This might cause a problem if the user goes back to the fan page VC
     [[SSSessionManager sharedInstance] setCampaignID:self.campaign.id];
 }
 
@@ -135,6 +135,21 @@
 
 - (IBAction)backButtonAction:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+/**
+ *  When the campaign button is predded
+ *
+ *  @param sender the button
+ */
+- (IBAction)campaignButtonAction:(id)sender {
+    TOWebViewController *webVC = [[TOWebViewController alloc] initWithURLString:self.campaign.rules];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:webVC];
+    [navVC.navigationBar setBarTintColor:[UIColor blackColor]];
+    [navVC.navigationBar setTintColor:[UIColor whiteColor]];
+    navVC.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+
+    [self presentViewController:navVC animated:YES completion:NULL];
 }
 
 @end

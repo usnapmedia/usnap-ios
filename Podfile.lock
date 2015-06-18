@@ -70,6 +70,7 @@ PODS:
   - SSOBaseProvider (0.2.1)
   - SVProgressHUD (1.1.3)
   - SZTextView (1.2.1)
+  - TOWebViewController (2.0.17)
   - TRVSDictionaryWithCaseInsensitivity (0.0.2)
   - YKImageCropper (0.0.4)
 
@@ -94,6 +95,7 @@ DEPENDENCIES:
   - SSOBaseProvider (from `git@gitlab.samsaodev.com:ios-development/SSOBaseProvider.git`)
   - SVProgressHUD
   - SZTextView
+  - TOWebViewController
   - YKImageCropper
 
 EXTERNAL SOURCES:
@@ -133,6 +135,7 @@ SPEC CHECKSUMS:
   SSOBaseProvider: 3cf5553142f3be32b4ccc7d1d7fc16b00d2487b1
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SZTextView: 906df45afd3c1b24fc5252088d5ef8061513c238
+  TOWebViewController: aada427e7eba199bbaee77ddee3243c8172f4053
   TRVSDictionaryWithCaseInsensitivity: 51d2ccf52c6d645d27b63467a98fa02c556e01b0
   YKImageCropper: 2ebfda611f9d13f252a12694ab0d42fb48cadb5f
 
