@@ -193,7 +193,7 @@
 - (IBAction)confirmReportImageAction:(UIButton *)sender {
     NSString *user = [[SSSessionManager sharedInstance] username];
     if (!user) {
-        user = @"";
+        user = @"Not Logged In";
     }
     [SSOFeedConnect reportImageWithImageID:self.snap.url
         userName:user
