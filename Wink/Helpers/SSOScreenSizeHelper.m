@@ -28,6 +28,9 @@ CGFloat const kImageWidthToHeightRatio = 0.4f;
 
         margin = @1;
     }
+    else {
+        margin = @5;
+    }
 
     return margin;
 }
@@ -47,7 +50,6 @@ CGFloat const kImageWidthToHeightRatio = 0.4f;
 
         height = @80;
     }
-
     return height;
 }
 
