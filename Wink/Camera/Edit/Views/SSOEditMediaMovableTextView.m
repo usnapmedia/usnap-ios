@@ -68,20 +68,39 @@
     if (self.isFirstResponder) {
         [self resignFirstResponder];
     }
+
     // Drag the view
     CGPoint translation = [self.panGesture translationInView:self.superview];
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
-//    NSLog(@"%f, %f", translation.x, self.panGesture.view.frame.origin.x + self.panGesture.view.frame.size.width);
-    if ((self.panGesture.view.frame.origin.x > 0 || translation.x > self.panGesture.view.frame.origin.x) &&
-        (self.panGesture.view.frame.origin.x + self.panGesture.view.frame.size.width < screenWidth ||
-         translation.x < 0) &&
-        (self.panGesture.view.frame.origin.y > 75 || translation.y > self.panGesture.view.frame.origin.y) &&
-        (self.panGesture.view.frame.origin.y + self.panGesture.view.frame.size.height < screenHeight - 110 ||
-         translation.y < 0)) {
-        self.panGesture.view.center = CGPointMake(self.panGesture.view.center.x + translation.x, self.panGesture.view.center.y + translation.y);
-        [self.panGesture setTranslation:CGPointMake(0, 0) inView:self.superview];
+    CGFloat screenWidth = screenRect.size.width;
+
+    self.panGesture.view.center = CGPointMake(self.panGesture.view.center.x + translation.x, self.panGesture.view.center.y + translation.y);
+    [self.panGesture setTranslation:CGPointMake(0, 0) inView:self.superview];
+    //    NSLog(@"%f, %f", translation.x, self.panGesture.view.frame.origin.x + self.panGesture.view.frame.size.width);
+    // All fingers are lifted.
+    if (self.panGesture.state == UIGestureRecognizerStateEnded) {
+        // Animate the view back in the center
+        [UIView animateWithDuration:0.3f
+                              delay:0.0f
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                           if (self.frame.origin.x < 0) {
+                               self.frame = CGRectMake(0, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+                           }
+                           if (self.frame.origin.x > (screenWidth - self.frame.size.width)) {
+                               self.frame =
+                                   CGRectMake((screenWidth - self.frame.size.width), self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+                           }
+                           if (self.frame.origin.y < 80) {
+                               self.frame = CGRectMake(self.frame.origin.x, 80, self.frame.size.width, self.frame.size.height);
+                           }
+                           if (self.frame.origin.y > (screenHeight - self.frame.size.height - 120)) {
+                               self.frame = CGRectMake(self.frame.origin.x, (screenHeight - self.frame.size.height - 120), self.frame.size.width,
+                                                       self.frame.size.height);
+                           }
+                         }
+                         completion:nil];
     }
 }
 
