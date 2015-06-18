@@ -15,6 +15,7 @@
 
 #define kPaddingKeyboardAndTextView 20
 #define kTextViewFontSize 40.0f
+NSInteger const kMaxNumberOfCharForTextfield = 100;
 
 @interface SSOTextToolController () <SSOColorPickerContainerViewDelegate, SSOProviderDelegate, SSOContainerViewDelegate, UITextViewDelegate>
 
@@ -216,7 +217,7 @@
         self.cell = [[self.accessoryContainerView.fontCollectionView visibleCells] firstObject];
     }
     [self.cell setFontColorWithColor:self.currentColor];
-    
+
     CGPoint center = self.textView.center;
     CGSize size =
         [self.textView sizeThatFits:CGSizeMake(self.textView.superview.bounds.size.width, self.textView.superview.bounds.size.height - self.keyBoardHeight)];
@@ -242,6 +243,17 @@
             textView.text = [textView.text stringByReplacingCharactersInRange:range withString:@""];
             return NO;
         }
+    }
+    // Max text size
+    if (textView.text.length > kMaxNumberOfCharForTextfield) {
+        NSRange stringRange = {0, MIN([textView.text length], kMaxNumberOfCharForTextfield)};
+
+        // adjust the range to include dependent chars
+        stringRange = [textView.text rangeOfComposedCharacterSequencesForRange:stringRange];
+
+        // Now you can create the short string
+        textView.text = [textView.text substringWithRange:stringRange];
+        return NO;
     }
     return YES;
 }
