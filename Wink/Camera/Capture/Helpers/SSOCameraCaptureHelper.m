@@ -223,23 +223,9 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 - (void)snapStillImage {
     dispatch_async([self sessionQueue], ^{
       // Set the photo orientation based on the device orientation
-      AVCaptureVideoOrientation orientation;
-      //      if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
-      //          orientation = AVCaptureVideoOrientationLandscapeRight;
-      //      } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
-      //          orientation = AVCaptureVideoOrientationLandscapeLeft;
-      //
-      //      } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
-      //          orientation = AVCaptureVideoOrientationPortraitUpsideDown;
-      //
-      //      } else {
       [[SSSessionManager sharedInstance] setLastPhotoOrientation:[UIDevice currentDevice].orientation];
-
-      orientation = AVCaptureVideoOrientationPortrait;
-      //      }
-
       // Update the orientation on the still image output video connection before capturing.
-      [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:orientation];
+      [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:AVCaptureVideoOrientationPortrait];
 
       // Capture a still image.
       [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo]
@@ -597,7 +583,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
         // create a video composition and preset some settings
         AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
         videoComposition.frameDuration = CMTimeMake(1, 30);
-//        NSLog(@"witdh: %f, height: %f", clipVideoTrack.naturalSize.height, clipVideoTrack.naturalSize.width);
+        //        NSLog(@"witdh: %f, height: %f", clipVideoTrack.naturalSize.height, clipVideoTrack.naturalSize.width);
         videoComposition.renderSize = CGSizeMake(clipVideoTrack.naturalSize.width, clipVideoTrack.naturalSize.height);
         // create a video instruction
         AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];

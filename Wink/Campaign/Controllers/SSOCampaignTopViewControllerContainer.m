@@ -110,6 +110,7 @@
             [self.tabCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[self.arrayOfCampaigns indexOfObject:campaign] inSection:0]
                                            atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
                                                    animated:NO];
+            self.pageControl.currentPage = [self.arrayOfCampaigns indexOfObject:campaign];
             return campaign;
         }
     }
@@ -136,19 +137,18 @@
         // Checks if the collectionView will display a different cell. This is to avoid to reload the data for the same cell
         if (self.index != item) {
             [self.delegate topViewControllerDidChangeForNewCampaign:[self.arrayOfCampaigns objectAtIndex:item]];
-            self.index = item;
-            self.pageControl.currentPage = item;
         }
+        self.index = item;
+        self.pageControl.currentPage = item;
     }
 }
 
-- (void)configurePageControl
-{
+- (void)configurePageControl {
     self.pageControl = [[UIPageControl alloc] init];
     [self.view addSubview:self.pageControl];
     [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(5);
+      make.centerX.equalTo(self.view);
+      make.bottom.equalTo(self.view.mas_bottom).with.offset(5);
     }];
     self.pageControl.numberOfPages = [self.provider.inputData count];
     self.pageControl.currentPage = 0;

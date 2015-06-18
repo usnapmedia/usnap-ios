@@ -17,6 +17,7 @@
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 #import "SSOProfileViewController.h"
 #import "SSOCameraStateHelper.h"
+#import "SSSessionManager.h"
 #import <Masonry.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <SVProgressHUD/SVProgressHUD.h>
@@ -216,6 +217,20 @@
         if (image == nil) {
             image = [mediaDic objectForKey:UIImagePickerControllerOriginalImage];
             //            controller.image = [self.cameraCaptureHelper squareImageWithImage:image];
+
+            UIImageOrientation orientation = image.imageOrientation;
+            UIDeviceOrientation devOrientation;
+        
+            if (orientation == UIImageOrientationUp || orientation == UIImageOrientationUpMirrored) {
+                devOrientation = UIDeviceOrientationPortrait;
+            } else if (orientation == UIImageOrientationDown || orientation == UIImageOrientationDownMirrored) {
+                devOrientation = UIDeviceOrientationPortraitUpsideDown;
+            } else if (orientation == UIImageOrientationLeft || orientation == UIImageOrientationLeftMirrored) {
+                devOrientation = UIDeviceOrientationLandscapeLeft;
+            } else if (orientation == UIImageOrientationRight || orientation == UIImageOrientationRightMirrored) {
+                devOrientation = UIDeviceOrientationLandscapeRight;
+            }
+            [[SSSessionManager sharedInstance] setLastPhotoOrientation:devOrientation];
             controller.image = image;
         }
     } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
@@ -544,6 +559,7 @@
         }
     }
     // Pass the dictionary in order to push to editMediaVC
+
     [self pushToEditVCWithMedia:info];
 
     [picker dismissViewControllerAnimated:YES completion:nil];

@@ -268,6 +268,9 @@
 
 - (void)drawButtonTouched:(id)sender {
     SSODrawToolController *childVC = [SSODrawToolController new];
+    
+    [self.overlayView bringSubviewToFront:self.drawView];
+    
     childVC.delegate = self;
     [self animateToChildViewController:childVC];
 }
@@ -277,7 +280,7 @@
     SSOTextToolController *childVC = [SSOTextToolController new];
     childVC.delegate = self;
     [self animateToChildViewController:childVC];
-
+    [self.overlayView bringSubviewToFront:self.textView];
     if ([self.textView.text isEqualToString:@""]) {
         [self.textView setFrame:CGRectMake(0.0f, self.overlayView.frame.size.height / 2 - 45.0f, self.overlayView.frame.size.width, 70.0f)];
     }
@@ -286,6 +289,8 @@
 - (void)adjustmentButtonTouched:(id)sender {
     SSOAdjustmentToolController *childVC = [SSOAdjustmentToolController new];
     childVC.delegate = self;
+    self.adjustementHelper.imageToEdit = self.image;
+    self.adjustementHelper.imageViewToEdit = self.imageView;
     [self animateToChildViewController:childVC];
 }
 
@@ -322,40 +327,39 @@
     controller.mediaURL = self.mediaURL;
     if (self.modifiedImageView.image) {
         controller.modifiedImage = [self.modifiedImageView snapshotImage];
-    }
-    else {
-//    if (self.image) {
+    } else {
+        //    if (self.image) {
         controller.overlayImage = [self.overlayView snapshotImage];
     }
-//    } else {
-//
-//        // Scale the overlay image to the same size as the video while keeping the aspect ratio
-//        UIImage *overlayImage = [self.overlayView snapshotImage];
-//        CGSize videoSize = self.moviePlayerView.videoSize;
-//
-//        // Get appropriate scale factor
-//        CGFloat videoRatio = videoSize.width / videoSize.height;
-//        CGFloat overlayRatio = overlayImage.size.width / overlayImage.size.height;
-//        CGFloat scaleFactor = videoSize.height / overlayImage.size.height;
-//        if (overlayRatio > videoRatio) {
-//            scaleFactor = videoSize.width / overlayImage.size.width;
-//        }
-//
-//        // Scale the width and height of the overlay
-//        CGFloat newWidth = floorf(overlayImage.size.width * scaleFactor);
-//        if ((int)newWidth % 2 != 0) {
-//            newWidth -= 1;
-//        }
-//        CGFloat newHeight = floorf(overlayImage.size.height * scaleFactor);
-//        if ((int)newHeight % 2 != 0) {
-//            newHeight -= 1;
-//        }
-//
-//        UIGraphicsBeginImageContextWithOptions(CGSizeMake(newWidth, newHeight), NO, 1.0f);
-//        [overlayImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
-//        controller.overlayImage = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-//    }
+    //    } else {
+    //
+    //        // Scale the overlay image to the same size as the video while keeping the aspect ratio
+    //        UIImage *overlayImage = [self.overlayView snapshotImage];
+    //        CGSize videoSize = self.moviePlayerView.videoSize;
+    //
+    //        // Get appropriate scale factor
+    //        CGFloat videoRatio = videoSize.width / videoSize.height;
+    //        CGFloat overlayRatio = overlayImage.size.width / overlayImage.size.height;
+    //        CGFloat scaleFactor = videoSize.height / overlayImage.size.height;
+    //        if (overlayRatio > videoRatio) {
+    //            scaleFactor = videoSize.width / overlayImage.size.width;
+    //        }
+    //
+    //        // Scale the width and height of the overlay
+    //        CGFloat newWidth = floorf(overlayImage.size.width * scaleFactor);
+    //        if ((int)newWidth % 2 != 0) {
+    //            newWidth -= 1;
+    //        }
+    //        CGFloat newHeight = floorf(overlayImage.size.height * scaleFactor);
+    //        if ((int)newHeight % 2 != 0) {
+    //            newHeight -= 1;
+    //        }
+    //
+    //        UIGraphicsBeginImageContextWithOptions(CGSizeMake(newWidth, newHeight), NO, 1.0f);
+    //        [overlayImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+    //        controller.overlayImage = UIGraphicsGetImageFromCurrentImageContext();
+    //        UIGraphicsEndImageContext();
+    //    }
     [self.navigationController pushViewController:controller animated:YES];
 }
 
