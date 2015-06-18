@@ -34,7 +34,7 @@
 
 - (void)signIn {
     if ([GPPSignIn sharedInstance].clientID == nil) {
-        NSLog(@"No Client ID is set");
+//        NSLog(@"No Client ID is set");
         return;
     }
     [[GPPSignIn sharedInstance] authenticate];

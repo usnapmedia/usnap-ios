@@ -78,7 +78,7 @@
 
         // add blur to an effect view
         self.effectView = [[UIVisualEffectView alloc] initWithEffect:blur];
-        NSLog(@"frame %f", self.frame.size.height);
+//        NSLog(@"frame %f", self.frame.size.height);
 
         self.effectView.frame = CGRectMake(0, 0, self.sizeOfView.width, self.sizeOfView.height);
 
@@ -119,7 +119,7 @@
                 float ratio = ((float)buttonNumber / numberItems);
                 // Get the height of the view
                 float viewHeight = self.effectView.frame.size.height;
-                NSLog(@"effectView %f   viewWidht %f", viewHeight, self.sizeOfView.height);
+//                NSLog(@"effectView %f   viewWidht %f", viewHeight, self.sizeOfView.height);
 
                 // Place the button on the view with the good ratio
                 float topPadding = viewHeight * ratio;
@@ -171,7 +171,7 @@
                 float ratio = ((float)buttonNumber / numberItems);
                 // Get the height of the view
                 float viewWidth = self.sizeOfView.width;
-                NSLog(@" %f", viewWidth);
+//                NSLog(@" %f", viewWidth);
 
                 // Place the button on the view with the good ratio
                 float leftPadding = viewWidth * ratio;

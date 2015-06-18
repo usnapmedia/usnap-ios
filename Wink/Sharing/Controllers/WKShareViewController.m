@@ -103,7 +103,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     }
     // Setup the movie player view
     else {
-        NSLog(@"%@", [SSSessionManager sharedInstance].lastVideoURL);
+//        NSLog(@"%@", [SSSessionManager sharedInstance].lastVideoURL);
         self.mediaURL = [SSSessionManager sharedInstance].lastVideoURL;
         self.moviePlayerView = [WKMoviePlayerView moviePlayerViewWithPath:self.mediaURL];
         self.moviePlayerView.delegate = self;
@@ -123,7 +123,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         self.overlayImage = self.overlayImageView.image;
         self.overlayImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.previewImageContainerView addSubview:self.overlayImageView];
-        NSLog(@"%@", self.previewImageContainerView);
+//        NSLog(@"%@", self.previewImageContainerView);
         [self.overlayImageView mas_makeConstraints:^(MASConstraintMaker *make) {
           make.edges.equalTo(self.previewImageContainerView);
         }];
@@ -487,7 +487,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
               [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
               [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
-              NSLog(@"shared with succcess");
+              NSLog(@"%@", responseObject);
 
             }
             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -621,7 +621,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         self.labelCountCharacters.text =
             [NSString stringWithFormat:@"%li %@", numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
     }
-    NSLog(@"textView %li", textView.text.length);
+//    NSLog(@"textView %li", textView.text.length);
 }
 
 @end

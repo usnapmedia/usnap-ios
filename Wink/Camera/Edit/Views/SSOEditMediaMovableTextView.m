@@ -73,7 +73,7 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
-    NSLog(@"%f, %f", translation.x, self.panGesture.view.frame.origin.x + self.panGesture.view.frame.size.width);
+//    NSLog(@"%f, %f", translation.x, self.panGesture.view.frame.origin.x + self.panGesture.view.frame.size.width);
     if ((self.panGesture.view.frame.origin.x > 0 || translation.x > self.panGesture.view.frame.origin.x) &&
         (self.panGesture.view.frame.origin.x + self.panGesture.view.frame.size.width < screenWidth ||
          translation.x < 0) &&

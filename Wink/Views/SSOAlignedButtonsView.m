@@ -108,7 +108,7 @@
                 float ratio = ((float)buttonNumber / numberItems);
                 // Get the height of the view
                 float viewWidth = self.frame.size.width;
-                NSLog(@" %f", viewWidth);
+//                NSLog(@" %f", viewWidth);
 
                 // Place the button on the view with the good ratio
                 float leftPadding = viewWidth * ratio;
