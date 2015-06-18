@@ -61,9 +61,10 @@ NSInteger const kRecentPhotosCellOffset = 10;
 
     // Set the flow layout
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     // Initialize the view
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
+    [self.collectionView setScrollEnabled:NO];
     // Add pagging on top and bottom
     self.collectionView.contentInset = UIEdgeInsetsMake(2.5, 2, 2.5, 2);
     //@TODO Generic?
