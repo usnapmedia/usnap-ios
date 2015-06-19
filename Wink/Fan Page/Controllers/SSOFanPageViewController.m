@@ -11,6 +11,7 @@
 #import "SSSessionManager.h"
 #import "WKWinkConnect.h"
 #import "SSOCountableItems.h"
+#import "Constants.h"
 #import "SSOSnap.h"
 #import "SSOTopPhotosViewController.h"
 #import "SSORecentPhotosViewController.h"
@@ -81,6 +82,14 @@
 - (void)initializeUI {
     //@FIXME
     self.customNavigationBar.backgroundColor = [UIColor blackColor];
+    //    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    //    CGFloat screenHeight = screenRect.size.height;
+    //    CGFloat viewsHeight = kTabBarHeight + self.customNavigationBar.frame.size.height + self.campaignViewControllerContainer.frame.size.height +
+    //    self.topPhotosViewControllerContainer.frame.size.height;
+    //    CGFloat recentPhotosHeight = screenHeight - viewsHeight;
+    [self.recentPhotosViewControllerContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+      make.bottom.equalTo(self.view);
+    }];
 }
 
 - (void)initializeCampaignTopViewControllerWithCampaigns:(NSArray *)campaigns {

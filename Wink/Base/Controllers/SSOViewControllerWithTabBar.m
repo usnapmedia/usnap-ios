@@ -19,8 +19,6 @@
 
 #import <Masonry.h>
 
-NSInteger const kTabBarHeight = 40;
-
 @interface SSOViewControllerWithTabBar () <SSOLoginRegisterDelegate>
 
 @property(strong, nonatomic) UIView *customTabBar;

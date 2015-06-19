@@ -76,6 +76,7 @@ extern NSString *const kCameraContainerSegue;
 #define kSliderMinimumValue 0.0f
 #define kSliderMaximumValue 1.0f
 #define kSliderDefaultValue 0.5f
+#define kTabBarHeight 40
 
 #define kScreenSize [UIScreen mainScreen].bounds.size
 
