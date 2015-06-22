@@ -19,7 +19,7 @@
 - (id)initWithPath:(NSURL *)path {
     if ((self = [super init])) {
         
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor whiteColor];
         self.clipsToBounds = YES;
         
         // Setup the audio session so the volume respects the silent switch
