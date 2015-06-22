@@ -24,6 +24,7 @@
 #import <SSCellViewItem.h>
 #import <SSCellViewSection.h>
 #import "SSOThemeHelper.h"
+#import "UIImage+Tools.h"
 
 #define kTotalVideoRecordingTime 30
 
@@ -216,11 +217,11 @@
         image = [mediaDic objectForKey:UIImagePickerControllerEditedImage];
         if (image == nil) {
             image = [mediaDic objectForKey:UIImagePickerControllerOriginalImage];
-            //            controller.image = [self.cameraCaptureHelper squareImageWithImage:image];
+            image = [image fixOrientation];
 
             UIImageOrientation orientation = image.imageOrientation;
             UIDeviceOrientation devOrientation;
-        
+
             if (orientation == UIImageOrientationUp || orientation == UIImageOrientationUpMirrored) {
                 devOrientation = UIDeviceOrientationPortrait;
             } else if (orientation == UIImageOrientationDown || orientation == UIImageOrientationDownMirrored) {
@@ -235,6 +236,7 @@
         }
     } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
         mediaURL = [mediaDic objectForKey:UIImagePickerControllerMediaURL];
+        controller.mediaURL = mediaURL;
         if (mediaURL == nil) {
             mediaURL = [mediaDic objectForKey:UIImagePickerControllerReferenceURL];
             controller.mediaURL = mediaURL;
@@ -549,17 +551,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    NSURL *mediaURL = nil;
-
-    if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
-        mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
-        if (mediaURL == nil) {
-            mediaURL = [info objectForKey:UIImagePickerControllerReferenceURL];
-        }
-    }
     // Pass the dictionary in order to push to editMediaVC
-
     [self pushToEditVCWithMedia:info];
 
     [picker dismissViewControllerAnimated:YES completion:nil];
