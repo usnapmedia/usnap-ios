@@ -170,22 +170,30 @@
  *  Initialize the data
  */
 - (void)initializeData {
-    // Update the user information
-    [SSOUserConnect getUserInformationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOUser class]];
-      NSAssert([[items.response firstObject] isKindOfClass:[SSOUser class]], @"User data has to be a SSOUser class");
-      if ([[items.response firstObject] isKindOfClass:[SSOUser class]]) {
-          SSOUser *user = [items.response firstObject];
+    if (!self.currentUser) {
+        // Update the user information
+        [SSOUserConnect getUserInformationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+          SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOUser class]];
+          NSAssert([[items.response firstObject] isKindOfClass:[SSOUser class]], @"User data has to be a SSOUser class");
+          if ([[items.response firstObject] isKindOfClass:[SSOUser class]]) {
+              self.currentUser = [items.response firstObject];
 
-          self.userNameTextField.text = [NSString stringWithFormat:@"%@", user.username];
-          NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-          [formatter setDateFormat:@"yyyy-MM-dd"];
-          self.birthday = [formatter dateFromString:user.dob];
-          [self updateBirthday:nil];
-      }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+              self.userNameTextField.text = [NSString stringWithFormat:@"%@", self.currentUser.username];
+              NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+              [formatter setDateFormat:@"yyyy-MM-dd"];
+              self.birthday = [formatter dateFromString:self.currentUser.dob];
+              [self updateBirthday:nil];
+          }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error){
 
-    }];
+        }];
+    } else {
+        self.userNameTextField.text = [NSString stringWithFormat:@"%@", self.currentUser.username];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        self.birthday = [formatter dateFromString:self.currentUser.dob];
+        [self updateBirthday:nil];
+    }
 }
 
 #pragma mark - Social Buttons

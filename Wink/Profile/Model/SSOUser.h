@@ -16,6 +16,8 @@
 @property(nonatomic, strong) NSString *lastName;
 @property(nonatomic, strong) NSObject *profilePic;
 @property(nonatomic, strong) NSString *username;
+@property(nonatomic, strong) NSString *score;
+@property(nonatomic, strong) NSString *contribution;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

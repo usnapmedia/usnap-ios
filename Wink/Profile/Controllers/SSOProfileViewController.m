@@ -15,7 +15,8 @@
 #import "SSOCountableItems.h"
 #import "SSOFeedConnect.h"
 #import "SSOSettingsViewController.h"
-
+#import "SSOUserConnect.h"
+#import "SSOUser.h"
 #import "SSOMyFeedViewController.h"
 
 @interface SSOProfileViewController ()
@@ -36,6 +37,7 @@
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *myFeedActivityIndicator;
 
 @property(nonatomic) BOOL isContestsVisible;
+@property(strong, nonatomic) SSOUser *currentUser;
 @property(strong, nonatomic) SSOCampaignViewController *campaignVC;
 @property(strong, nonatomic) SSOMyFeedViewController *myFeedVC;
 
@@ -54,6 +56,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+    [self loadUser];
     [self loadCampaigns];
     [self loadMyFeed];
 
@@ -175,6 +178,24 @@
 #pragma mark - Data
 
 /**
+ *  Load the current user
+ */
+- (void)loadUser {
+    // Update the user information
+    [SSOUserConnect getUserInformationWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOUser class]];
+      NSAssert([[items.response firstObject] isKindOfClass:[SSOUser class]], @"User data has to be a SSOUser class");
+      if ([[items.response firstObject] isKindOfClass:[SSOUser class]]) {
+          self.currentUser = [items.response firstObject];
+          self.numberScoreLabel.text = self.currentUser.score;
+          self.numberSharesLabel.text = self.currentUser.contribution;
+      }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+
+    }];
+}
+
+/**
  *  It loads the information of the contest table view
  */
 
@@ -244,6 +265,7 @@
 
 - (IBAction)settingsAction:(UIButton *)sender {
     SSOSettingsViewController *settingsVC = [SSOSettingsViewController new];
+    settingsVC.currentUser = self.currentUser;
     [self.navigationController pushViewController:settingsVC animated:YES];
 }
 
