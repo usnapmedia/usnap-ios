@@ -33,6 +33,7 @@
 }
 
 + (void)getRecentPhotosForCampaignId:(NSString *)campaignID
+                      withParameters:(NSDictionary *)param
                          withSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     // Check if there is a campaign ID, else simple call the default route
@@ -41,11 +42,12 @@
     } else {
         NSString *url = [NSString stringWithFormat:@"feed/live/%@", campaignID];
         SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
-        [manager GET:url parameters:nil success:success failure:failure];
+        [manager GET:url parameters:param success:success failure:failure];
     }
 }
 
 + (void)getTopPhotosForCampaignId:(NSString *)campaignID
+                   withParameters:(NSDictionary *)param
                       withSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     // Check if there is a campaign ID, else simple call the default route
@@ -54,7 +56,7 @@
     } else {
         NSString *url = [NSString stringWithFormat:@"feed/top/%@", campaignID];
         SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
-        [manager GET:url parameters:nil success:success failure:failure];
+        [manager GET:url parameters:param success:success failure:failure];
     }
 }
 

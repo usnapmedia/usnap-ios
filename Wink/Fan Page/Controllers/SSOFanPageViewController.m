@@ -87,9 +87,9 @@
     //    CGFloat viewsHeight = kTabBarHeight + self.customNavigationBar.frame.size.height + self.campaignViewControllerContainer.frame.size.height +
     //    self.topPhotosViewControllerContainer.frame.size.height;
     //    CGFloat recentPhotosHeight = screenHeight - viewsHeight;
-    [self.recentPhotosViewControllerContainer mas_updateConstraints:^(MASConstraintMaker *make) {
-      make.bottom.equalTo(self.view);
-    }];
+    //    [self.recentPhotosViewControllerContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+    //      make.bottom.equalTo(self.view);
+    //    }];
 }
 
 - (void)initializeCampaignTopViewControllerWithCampaigns:(NSArray *)campaigns {
@@ -177,6 +177,7 @@
     [self.topPhotosVC displayLoadingOverlay];
 
     [SSOFeedConnect getTopPhotosForCampaignId:self.currentCampaign.id
+        withParameters:nil
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
           [self.topPhotosVC setData:items.response withCellNib:kTopPhotosNib andCellReusableIdentifier:kTopPhotosReusableId];
@@ -195,10 +196,26 @@
     [self.recentPhotosVC displayLoadingOverlay];
 
     [SSOFeedConnect getRecentPhotosForCampaignId:self.currentCampaign.id
+        withParameters:nil
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           // Set the recent photos
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
           [self.recentPhotosVC setInputData:items.response.mutableCopy];
+          NSInteger padding = 0;
+          if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+              padding = 5;
+          } else {
+              padding = 5;
+          }
+          NSInteger numberOfRows = ceil([items.response count] / 5.0f);
+          NSInteger cellHeight = ([[UIScreen mainScreen] bounds].size.width / 5.0f) - 1.f;
+          CGFloat size = numberOfRows * cellHeight + kTopViewHeightConstraint;
+          //              ((round([items.response count] * 2.0) / 2.0) / 5.0) * ([[UIScreen mainScreen] bounds].size.width / 5 + padding) +
+          //              kTopViewHeightConstraint;
+          [self.recentPhotosViewControllerContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo([NSNumber numberWithFloat:size]);
+          }];
+          [self.view layoutIfNeeded];
           // Hide the loading overlay
           [self.recentPhotosVC hideLoadingOverlay];
         }

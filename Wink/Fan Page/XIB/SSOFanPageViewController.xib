@@ -45,10 +45,10 @@
                                 </mask>
                             </variation>
                         </view>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9AO-yf-beS">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9AO-yf-beS">
                             <rect key="frame" x="0.0" y="40" width="375" height="627"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rQN-Rv-hNS">
+                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rQN-Rv-hNS">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="788"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clJ-Wg-ftN" userLabel="Top campaign view">
@@ -64,30 +64,35 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FEL-hX-FE3" userLabel="Live photos container view">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RB5-gd-VX2" userLabel="Top photos container view">
+                                            <rect key="frame" x="5" y="188" width="365" height="180"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="180" id="Dad-Ua-Nk7"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FEL-hX-FE3" userLabel="Live photos container view">
                                             <rect key="frame" x="5" y="368" width="370" height="420"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="420" id="7ok-5B-Nuh"/>
                                             </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RB5-gd-VX2" userLabel="Top photos container view">
-                                            <rect key="frame" x="5" y="188" width="370" height="180"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="180" id="Dad-Ua-Nk7"/>
-                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="7ok-5B-Nuh"/>
+                                                </mask>
+                                            </variation>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="clJ-Wg-ftN" firstAttribute="top" secondItem="rQN-Rv-hNS" secondAttribute="top" id="9Xu-kG-sMQ"/>
                                         <constraint firstItem="clJ-Wg-ftN" firstAttribute="leading" secondItem="rQN-Rv-hNS" secondAttribute="leading" id="H57-FZ-qEp"/>
-                                        <constraint firstAttribute="trailing" secondItem="RB5-gd-VX2" secondAttribute="trailing" id="LaV-sA-gan"/>
+                                        <constraint firstAttribute="trailing" secondItem="RB5-gd-VX2" secondAttribute="trailing" constant="5" id="LaV-sA-gan"/>
                                         <constraint firstItem="RB5-gd-VX2" firstAttribute="top" secondItem="clJ-Wg-ftN" secondAttribute="bottom" id="Urx-Ia-ych"/>
                                         <constraint firstItem="FEL-hX-FE3" firstAttribute="top" secondItem="RB5-gd-VX2" secondAttribute="bottom" id="VEQ-WN-HVY"/>
                                         <constraint firstAttribute="trailing" secondItem="clJ-Wg-ftN" secondAttribute="trailing" id="W6w-J1-LPE"/>
-                                        <constraint firstAttribute="trailing" secondItem="FEL-hX-FE3" secondAttribute="trailing" id="WS1-dq-Hob"/>
+                                        <constraint firstAttribute="trailing" secondItem="FEL-hX-FE3" secondAttribute="trailing" constant="5" id="WS1-dq-Hob"/>
                                         <constraint firstItem="RB5-gd-VX2" firstAttribute="leading" secondItem="rQN-Rv-hNS" secondAttribute="leading" constant="5" id="exC-h4-PPY"/>
                                         <constraint firstItem="FEL-hX-FE3" firstAttribute="leading" secondItem="rQN-Rv-hNS" secondAttribute="leading" constant="5" id="qHM-qa-7Wy"/>
                                         <constraint firstAttribute="bottom" secondItem="FEL-hX-FE3" secondAttribute="bottom" id="urT-Ad-s44"/>
@@ -123,6 +128,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Szn-Rq-uVZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="37G-HK-mQ2"/>
                 <constraint firstItem="Szn-Rq-uVZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ADp-Mk-WSx"/>
                 <constraint firstAttribute="bottom" secondItem="Szn-Rq-uVZ" secondAttribute="bottom" id="ClI-ES-1dt"/>
                 <constraint firstItem="Szn-Rq-uVZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nKC-Xn-CN0"/>
@@ -130,6 +136,11 @@
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="nKC-Xn-CN0"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="389.5" y="440.5"/>
         </view>
     </objects>

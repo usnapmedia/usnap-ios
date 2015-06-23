@@ -20,6 +20,7 @@
 @property(weak, nonatomic) IBOutlet UIView *customNavBar;
 @property(weak, nonatomic) IBOutlet UIView *containerView;
 @property(weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property(strong, nonatomic) NSDictionary *queryParam;
 
 @property(strong, nonatomic) SSOPhotosViewController *photosVC;
 
@@ -33,16 +34,16 @@
     [super viewDidLoad];
     [self initializeUI];
     [self setChildVC];
-
-    if (self.isTopPhotos) {
-        [self loadTopPhotos];
-    } else {
-        [self loadLatestPhotos];
-    }
+    [self initializeData];
+    [self refreshData];
     // Do any additional setup after loading the view from its nib.
 }
 
 #pragma mark - Initialization
+
+- (void)initializeData {
+    self.queryParam = @{ @"type" : @"image" };
+}
 
 /**
  *  Initialize the UI
@@ -78,9 +79,18 @@
 
 #pragma mark - Data
 
+- (void)refreshData {
+    if (self.isTopPhotos) {
+        [self loadTopPhotos];
+    } else {
+        [self loadLatestPhotos];
+    }
+}
+
 - (void)loadTopPhotos {
-    //@FIXME should be all photos, not ony the top ones
+    //@FIXME should be all photos, not ony the top ones]
     [SSOFeedConnect getTopPhotosForCampaignId:[SSSessionManager sharedInstance].campaignID
+        withParameters:self.queryParam
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
           [self.photosVC setPhotosData:items.response];
@@ -92,6 +102,7 @@
 
 - (void)loadLatestPhotos {
     [SSOFeedConnect getRecentPhotosForCampaignId:[SSSessionManager sharedInstance].campaignID
+        withParameters:self.queryParam
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
           [self.photosVC setPhotosData:items.response];
@@ -113,9 +124,22 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)filterValueHasChanged:(UISegmentedControl *)sender {
+    switch (sender.selectedSegmentIndex) {
+    case 0:
+        self.queryParam = @{ @"type" : @"image" };
+        break;
+    case 1:
+        self.queryParam = @{ @"type" : @"video" };
+
+        break;
+    case 2:
+        self.queryParam = nil;
+        break;
+    default:
+        break;
+    }
+    [self refreshData];
 }
 
 @end

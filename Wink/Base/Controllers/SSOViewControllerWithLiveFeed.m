@@ -85,7 +85,8 @@
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     flowLayout.minimumLineSpacing = 5;
     flowLayout.minimumInteritemSpacing = 5;
-    self.childVc.collectionView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
+    self.childVc.collectionView.contentInset = UIEdgeInsetsMake(0, 2, 0, 2);
+
     self.childVc.collectionView.collectionViewLayout = flowLayout;
 }
 
@@ -124,10 +125,11 @@
 - (void)fetchLatestImagesAndSendToController {
     // If there is no campaign, the default route is used
     [SSOFeedConnect getRecentPhotosForCampaignId:[SSSessionManager sharedInstance].campaignID
+        withParameters:nil
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
           // Set the data of the VC
-          [self.childVc setData:items.response withCellNib:kImageCollectionViewCellNib andCellReusableIdentifier:kImageCollectionViewCell];
+          [self.childVc setData:items.response withCellNib:kPhotosNibNameCollectionViewCell andCellReusableIdentifier:kPhotosCollectionViewCell];
           [self.childVc hideLoadingOverlay];
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error){

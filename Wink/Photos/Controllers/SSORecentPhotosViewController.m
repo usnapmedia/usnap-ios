@@ -64,7 +64,7 @@ NSInteger const kRecentPhotosCellOffset = 10;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     // Initialize the view
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
-    [self.collectionView setScrollEnabled:YES];
+    [self.collectionView setScrollEnabled:NO];
     // Add pagging on top and bottom
     self.collectionView.contentInset = UIEdgeInsetsMake(2.5, 2, 2.5, 2);
     //@TODO Generic?
@@ -112,8 +112,7 @@ NSInteger const kRecentPhotosCellOffset = 10;
     }];
 
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.left.and.bottom.equalTo(self.view);
-      make.right.equalTo(self.view).with.offset(-5);
+      make.left.and.bottom.and.right.equalTo(self.view);
       make.top.equalTo(self.topView.mas_bottom);
     }];
 
