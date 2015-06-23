@@ -183,6 +183,8 @@
         self.moviePlayerView.contentMode = UIViewContentModeScaleAspectFill;
         self.moviePlayerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.moviePlayerView.clipsToBounds = YES;
+        // Force a black background here
+        self.moviePlayerView.backgroundColor = [UIColor blackColor];
         [self.view insertSubview:self.moviePlayerView atIndex:0];
     }
 
@@ -268,9 +270,9 @@
 
 - (void)drawButtonTouched:(id)sender {
     SSODrawToolController *childVC = [SSODrawToolController new];
-    
+
     [self.overlayView bringSubviewToFront:self.drawView];
-    
+
     childVC.delegate = self;
     [self animateToChildViewController:childVC];
 }

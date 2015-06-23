@@ -81,9 +81,5 @@ CGFloat const kTableViewCellHeight = 125.0f;
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

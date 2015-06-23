@@ -73,7 +73,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
               self.devicePosition = devicePosition;
 
               if (error) {
-                  NSLog(@"%@", error);
+                  NSLog(@"error on loading camera %@", error);
               }
 
               if ([session canAddInput:videoDeviceInput]) {
@@ -125,19 +125,21 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
 - (void)dealloc {
     [self removeObservers];
-    // dispatch_async([self sessionQueue], ^{
+    //    dispatch_async([self sessionQueue], ^{
     //      [[self session] stopRunning];
-
+    //
     //      self.session = nil;
-
-    //      [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self
-    //      videoDeviceInput] device]];
+    //
+    //      [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput]
+    //      device]];
     //      [[NSNotificationCenter defaultCenter] removeObserver:[self runtimeErrorHandlingObserver]];
     //
     //      [self removeObserver:self forKeyPath:@"sessionRunningAndDeviceAuthorized" context:SessionRunningAndDeviceAuthorizedContext];
     //      [self removeObserver:self forKeyPath:@"stillImageOutput.capturingStillImage" context:CapturingStillImageContext];
     //      [self removeObserver:self forKeyPath:@"movieFileOutput.recording" context:RecordingContext];
-    //                   });
+    //      [
+    //
+    //    });
 }
 
 #pragma mark - Orientation
@@ -415,8 +417,10 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     if (error)
         NSLog(@"%@", error);
 
-    // Note the backgroundRecordingID for use in the ALAssetsLibrary completion handler to end the background task associated with this recording. This allows a
-    // new recording to be started, associated with a new UIBackgroundTaskIdentifier, once the movie file output's -isRecording is back to NO — which happens
+    // Note the backgroundRecordingID for use in the ALAssetsLibrary completion handler to end the background task associated with this recording. This
+    // allows a
+    // new recording to be started, associated with a new UIBackgroundTaskIdentifier, once the movie file output's -isRecording is back to NO — which
+    // happens
     // sometime after this method returns.
     [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
 
@@ -648,7 +652,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
  */
 
 - (UIImageOrientation)getVideoOrientationFromDeviceOrientation {
-    UIImageOrientation orientation;
+    UIImageOrientation orientation = UIImageOrientationUp;
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
         orientation = UIImageOrientationRight;
     } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
