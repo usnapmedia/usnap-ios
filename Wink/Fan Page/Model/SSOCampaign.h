@@ -1,4 +1,4 @@
-    //
+//
 //  SSOCampaign.h
 //  uSnap
 //
@@ -19,6 +19,8 @@
 @property(nonatomic, strong) NSString *prize;
 @property(nonatomic, strong) NSString *rules;
 @property(nonatomic, strong) NSString *startDate;
+@property(nonatomic, strong) NSString *participants;
+@property(nonatomic, strong) NSString *mediaShared;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

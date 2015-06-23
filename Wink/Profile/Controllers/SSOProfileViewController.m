@@ -99,11 +99,12 @@
  */
 - (void)setTexts {
 
-    self.scoreLabel.text = NSLocalizedString(@"profile-page.campaign.score-label", nil);
-    if (self.numberSharesLabel.text.integerValue == 0) {
-        self.sharesLabel.text = NSLocalizedString(@"profile-page.campaign.share-label", nil);
+    self.scoreLabel.text = [NSLocalizedString(@"profile-page.campaign.score-label", nil) uppercaseString];
+
+    if (self.numberSharesLabel.text.integerValue > 1) {
+        self.sharesLabel.text = [NSLocalizedString(@"profile-page.campaign.share-label.plural", nil) uppercaseString];
     } else {
-        self.sharesLabel.text = NSLocalizedString(@"profile-page.campaign.share-label-plural", nil);
+        self.sharesLabel.text = [NSLocalizedString(@"profile-page.campaign.share-label.singular", nil) uppercaseString];
     }
 
     [self.myFeedButton setTitle:NSLocalizedString(@"profile.myfeed-button", nil) forState:UIControlStateNormal];

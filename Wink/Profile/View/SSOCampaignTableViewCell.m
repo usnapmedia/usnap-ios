@@ -48,7 +48,11 @@
                                       }];
         self.titleLabel.text = campaign.name;
         self.descriptionLabel.text = campaign.prize;
-        NSNumber *numberOfShares = [NSNumber numberWithInt:0];
+
+        // Convert media shared to display properly
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber *numberOfShares = [f numberFromString:campaign.mediaShared];
         //@FIXME numberOfShares
         if ([numberOfShares integerValue] > 1) {
             self.numberSharesLabel.text = [NSString stringWithFormat:NSLocalizedString(@"profile-page.campaign.share-label-plural", nil), numberOfShares];
