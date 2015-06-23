@@ -86,6 +86,11 @@ extern NSInteger const kTopViewHeightConstraint;
 extern NSInteger const kConstraintOffset;
 extern NSInteger const kButtonWidthConstraint;
 
+#pragma mark - Video
+
+extern NSInteger const kDefaultAnimationDuration;
+
+
 #pragma mark - Cells
 extern NSString *const kTopPhotosNib;
 extern NSString *const kTopPhotosReusableId;

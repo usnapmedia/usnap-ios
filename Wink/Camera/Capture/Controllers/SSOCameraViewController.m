@@ -26,15 +26,12 @@
 #import "SSOThemeHelper.h"
 #import "UIImage+Tools.h"
 
-#define kTotalVideoRecordingTime 30
-
 @interface SSOCameraViewController () <UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SSORoundedAnimatedButtonProtocol,
                                        SSOCameraDelegate>
 
 // IBOutlets
 @property(weak, nonatomic) IBOutlet UIButton *flashButton;
 @property(weak, nonatomic) IBOutlet UIButton *cameraRotationButton;
-@property(weak, nonatomic) IBOutlet UIButton *profileButton;
 @property(weak, nonatomic) IBOutlet UIButton *mediaButton;
 @property(weak, nonatomic) IBOutlet UIView *topContainerView;
 @property(weak, nonatomic) IBOutlet UIView *bottomContainerView;
@@ -133,7 +130,6 @@
 - (void)initializeUI {
 
     // Allow the user to rotate the screen when the view just appeared
-    self.profileButton.hidden = YES;
     self.isRotationAllowed = YES;
     self.isVideoRecording = NO;
 
@@ -265,11 +261,6 @@
 
 - (IBAction)cameraDeviceButtonTouched:(id)sender {
     [self switchDeviceCameraState];
-}
-
-- (IBAction)profileButtonTouched:(id)sender {
-    SSOProfileViewController *profileVC = [SSOProfileViewController new];
-    [self presentViewController:profileVC animated:YES completion:nil];
 }
 
 - (IBAction)backButtonTouched:(id)sender {
@@ -522,27 +513,20 @@
 
 - (void)didFinishLongPressGesture:(SSORoundedAnimatedButton *)button {
     [button setUserInteractionEnabled:NO];
+    // Make sure to do it once, we check if VC is visible.
+    if (self.isViewLoaded && self.view.window) {
+        [SSOCameraCaptureHelper setTorchMode:AVCaptureTorchModeOff forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
 
-    [SSOCameraCaptureHelper setTorchMode:AVCaptureTorchModeOff forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
+        [button pauseAnimation];
 
-    [button pauseAnimation];
-
-    [self.cameraCaptureHelper toggleMovieRecording];
-    self.isVideoRecording = NO;
+        [self.cameraCaptureHelper toggleMovieRecording];
+        self.isVideoRecording = NO;
+    }
 }
 
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-
-    // Open library of photos and videos
-    BOOL allowsEditing = NO;
-    NSArray *mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
-
-    if (buttonIndex == 0) {
-        allowsEditing = YES;
-        mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, nil];
-    }
 
     [self displayCamerallRollPickerVC];
 }

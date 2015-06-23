@@ -87,6 +87,9 @@ NSInteger const kTopViewHeightConstraint = 40;
 NSInteger const kConstraintOffset = 10;
 NSInteger const kButtonWidthConstraint = 80;
 
+#pragma mark - Video
+NSInteger const kDefaultAnimationDuration = 15;
+
 #pragma mark - Cells
 NSString *const kTopPhotosNib = @"SSOTopPhotosCollectionViewCell";
 NSString *const kTopPhotosReusableId = @"topPhotosCell";
