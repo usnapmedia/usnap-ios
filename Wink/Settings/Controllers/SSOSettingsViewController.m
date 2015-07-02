@@ -17,6 +17,7 @@
 #import "SSOUser.h"
 #import <MessageUI/MFMailComposeViewController.h>
 #import <SVProgressHUD.h>
+#import <TOWebViewController/TOWebViewController.h>
 
 @interface SSOSettingsViewController () <MFMailComposeViewControllerDelegate>
 
@@ -35,10 +36,12 @@
 @property(weak, nonatomic) IBOutlet UIButton *reportProblemButton;
 @property(weak, nonatomic) IBOutlet UIButton *logoutButton;
 @property(weak, nonatomic) IBOutlet UIButton *saveButton;
+@property(weak, nonatomic) IBOutlet UIButton *TOUButton;
 
 @property(weak, nonatomic) IBOutlet UILabel *personalTitleLabel;
 @property(weak, nonatomic) IBOutlet UILabel *socialTitleLabel;
 @property(weak, nonatomic) IBOutlet UILabel *supportTitleLabel;
+@property(weak, nonatomic) IBOutlet UILabel *aboutTitleLabel;
 
 @property(strong, nonatomic) NSDate *birthday;
 
@@ -115,6 +118,8 @@
     self.socialTitleLabel.text = NSLocalizedString(@"settings.social.title", nil);
     self.supportTitleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:16];
     self.supportTitleLabel.text = NSLocalizedString(@"settings.support.title", nil);
+    self.aboutTitleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:16];
+    self.aboutTitleLabel.text = NSLocalizedString(@"settings.about.title", nil);
 }
 
 /**
@@ -135,6 +140,10 @@
     self.logoutButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
     [self.saveButton setTitle:NSLocalizedString(@"settings.support.save.button", nil) forState:UIControlStateNormal];
     self.saveButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+    self.TOUButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+    [self.TOUButton setBackgroundColor:[UIColor clearColor]];
+    [self.TOUButton setTitleColor:[SSOThemeHelper firstColor] forState:UIControlStateNormal];
+    [self.TOUButton setTitle:NSLocalizedString(@"settings.about.terms-of-service.button.title", @"Title for the TOU button") forState:UIControlStateNormal];
 }
 
 /**
@@ -357,8 +366,18 @@
     if ([MFMailComposeViewController canSendMail]) {
         [self presentViewController:mailController animated:YES completion:nil];
     } else {
-        [SVProgressHUD showErrorWithStatus:@"Error trying to compose an email"];
+        // No ned to display error, Apple takes care of it
     }
+}
+
+- (IBAction)TOUButtonPressed:(id)sender {
+    TOWebViewController *webVC = [[TOWebViewController alloc] initWithURLString:@"http://www.usnap.com/terms-of-service/"];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:webVC];
+    [navVC.navigationBar setBarTintColor:[UIColor blackColor]];
+    [navVC.navigationBar setTintColor:[UIColor whiteColor]];
+    navVC.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+
+    [self presentViewController:navVC animated:YES completion:NULL];
 }
 
 @end
