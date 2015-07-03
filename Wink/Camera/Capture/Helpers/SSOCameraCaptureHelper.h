@@ -75,6 +75,8 @@
  */
 + (void)setTorchMode:(AVCaptureTorchMode)torchMode forDevice:(AVCaptureDevice *)device;
 
++ (void)setZoom:(CGFloat)zoomFactor forDevice:(AVCaptureDevice *)device;
+
 /**
  *  Make the photo took by the user square
  *

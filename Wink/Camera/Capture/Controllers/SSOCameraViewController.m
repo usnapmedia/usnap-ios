@@ -122,6 +122,7 @@
     self.cameraCaptureHelper.delegate = self;
 
     self.buttonsToSwitch = @[ self.cameraRotationButton, self.mediaButton, self.flashButton ];
+    [self.cameraPreviewView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(zoomInCamera:)]];
 }
 
 /**
@@ -426,6 +427,12 @@
 
         [self performSelector:@selector(animateCameraRollImageChange) withObject:nil afterDelay:0.2];
     }
+}
+
+- (void)zoomInCamera:(UIPinchGestureRecognizer *)gestureRecognizer {
+
+    CGFloat zoom = [[self.cameraCaptureHelper videoDeviceInput] device].videoZoomFactor + gestureRecognizer.velocity / 5.0f;
+    [SSOCameraCaptureHelper setZoom:zoom forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
 }
 
 #pragma mark - Blur

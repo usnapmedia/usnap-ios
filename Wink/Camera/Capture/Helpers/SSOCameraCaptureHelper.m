@@ -366,6 +366,18 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     }
 }
 
++ (void)setZoom:(CGFloat)zoomFactor forDevice:(AVCaptureDevice *)device {
+    if (zoomFactor >= 1.0 && zoomFactor <= device.activeFormat.videoMaxZoomFactor) {
+        NSError *error = nil;
+        if ([device lockForConfiguration:&error]) {
+            [device setVideoZoomFactor:zoomFactor];
+            [device unlockForConfiguration];
+        } else {
+            NSLog(@"%@", error);
+        }
+    }
+}
+
 /**
  *  Setting the torch mode
  *
