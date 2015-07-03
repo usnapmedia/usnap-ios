@@ -162,7 +162,7 @@
                                                                 <constraint firstAttribute="bottom" secondItem="eB1-2b-HZc" secondAttribute="bottom" constant="1" id="kii-CW-Fhr"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xfw-Wx-si2" userLabel="DOB view">
+                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xfw-Wx-si2" userLabel="DOB view">
                                                             <rect key="frame" x="126" y="60" width="273" height="36"/>
                                                             <subviews>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4VY-tB-VDB" userLabel="DOB text">

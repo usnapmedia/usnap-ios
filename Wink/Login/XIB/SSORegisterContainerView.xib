@@ -13,38 +13,38 @@
                 <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CK0-qI-ht9">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="430"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="first name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h8Q-vg-S0c" customClass="SSOTextFieldWithUnderline">
-                            <rect key="frame" x="10" y="20" width="300" height="51"/>
+                        <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="first name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h8Q-vg-S0c" customClass="SSOTextFieldWithUnderline">
+                            <rect key="frame" x="10" y="10" width="300" height="51"/>
                             <constraints>
                                 <constraint firstAttribute="height" priority="900" constant="51" id="DBE-h0-rro"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="etf-Z7-4LN" customClass="SSOTextFieldWithUnderline">
-                            <rect key="frame" x="10" y="86" width="300" height="51"/>
+                        <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="etf-Z7-4LN" customClass="SSOTextFieldWithUnderline">
+                            <rect key="frame" x="10" y="76" width="300" height="51"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IPt-Ir-r0r" customClass="SSOTextFieldWithUnderline">
-                            <rect key="frame" x="10" y="152" width="300" height="51"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
-                        </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rvu-bG-AW6" customClass="SSOTextFieldWithUnderline">
-                            <rect key="frame" x="10" y="218" width="300" height="51"/>
+                            <rect key="frame" x="10" y="76" width="300" height="51"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rzj-Tn-Aa9" customClass="SSOTextFieldWithUnderline">
-                            <rect key="frame" x="10" y="284" width="300" height="51"/>
+                            <rect key="frame" x="10" y="142" width="300" height="51"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="birthday" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ej8-YV-oT3" customClass="SSOTextFieldWithUnderline">
-                            <rect key="frame" x="10" y="350" width="300" height="51"/>
+                        <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="birthday" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ej8-YV-oT3" customClass="SSOTextFieldWithUnderline">
+                            <rect key="frame" x="10" y="208" width="300" height="51"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IPt-Ir-r0r" customClass="SSOTextFieldWithUnderline">
+                            <rect key="frame" x="10" y="10" width="300" height="51"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -68,6 +68,7 @@
                         <constraint firstItem="IPt-Ir-r0r" firstAttribute="top" secondItem="etf-Z7-4LN" secondAttribute="bottom" constant="15" id="am4-Q5-in5"/>
                         <constraint firstItem="Rzj-Tn-Aa9" firstAttribute="leading" secondItem="CK0-qI-ht9" secondAttribute="leading" constant="10" id="bPa-7o-7kY"/>
                         <constraint firstItem="IPt-Ir-r0r" firstAttribute="leading" secondItem="CK0-qI-ht9" secondAttribute="leading" constant="10" id="bi0-He-OqE"/>
+                        <constraint firstItem="IPt-Ir-r0r" firstAttribute="top" secondItem="CK0-qI-ht9" secondAttribute="top" constant="10" id="f40-r0-ZSq"/>
                         <constraint firstItem="h8Q-vg-S0c" firstAttribute="width" secondItem="rvu-bG-AW6" secondAttribute="width" id="fLj-gs-65z"/>
                         <constraint firstItem="h8Q-vg-S0c" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CK0-qI-ht9" secondAttribute="top" constant="10" id="gNg-z7-IoZ"/>
                         <constraint firstAttribute="trailing" secondItem="h8Q-vg-S0c" secondAttribute="trailing" constant="10" id="ghU-if-l0W"/>
@@ -80,6 +81,12 @@
                         <constraint firstItem="h8Q-vg-S0c" firstAttribute="height" secondItem="rvu-bG-AW6" secondAttribute="height" id="z2Q-Dc-9NC"/>
                         <constraint firstAttribute="trailing" secondItem="Rzj-Tn-Aa9" secondAttribute="trailing" constant="10" id="zFn-9m-cg1"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="am4-Q5-in5"/>
+                            <exclude reference="2GR-hf-EZM"/>
+                        </mask>
+                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XA3-2F-n05">
                     <rect key="frame" x="0.0" y="430" width="320" height="50"/>
