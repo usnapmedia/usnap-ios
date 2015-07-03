@@ -175,8 +175,8 @@
     for (UIView *viewContainingTextFields in self.subviews) {
         // Loop into all subviews
         for (UIView *textFieldView in viewContainingTextFields.subviews) {
-            // Check if subview is a textField
-            if ([textFieldView isKindOfClass:[UITextField class]]) {
+            // Check if subview is a textField and not hidden (we hide the useless fields for Apple)
+            if ([textFieldView isKindOfClass:[UITextField class]] && !textFieldView.hidden) {
                 // Cast the view into a textField to access class methods
                 UITextField *textField = (UITextField *)textFieldView;
                 // Check if the textField is empty

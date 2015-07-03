@@ -431,7 +431,7 @@
 
 - (void)zoomInCamera:(UIPinchGestureRecognizer *)gestureRecognizer {
 
-    CGFloat zoom = [[self.cameraCaptureHelper videoDeviceInput] device].videoZoomFactor + gestureRecognizer.velocity / 5.0f;
+    CGFloat zoom = [[self.cameraCaptureHelper videoDeviceInput] device].videoZoomFactor + atan(gestureRecognizer.velocity / 5.0f);
     [SSOCameraCaptureHelper setZoom:zoom forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
 }
 

@@ -27,7 +27,7 @@
 @property(weak, nonatomic) IBOutlet SSOCustomSignInButton *loginButton;
 @property(weak, nonatomic) IBOutlet SSOCustomSignInButton *signUpButton;
 @property(weak, nonatomic) IBOutlet UIButton *cancelButton;
-@property (weak, nonatomic) IBOutlet UILabel *registrationLabel;
+@property(weak, nonatomic) IBOutlet UILabel *registrationLabel;
 
 @end
 

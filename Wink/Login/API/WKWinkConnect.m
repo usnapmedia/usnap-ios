@@ -50,9 +50,9 @@
             @"email" : email,
             @"password" : password,
             @"username" : username,
-            @"first_name" : firstName,
-            @"last_name" : lastName,
-            @"dob" : birthday,
+            //            @"first_name" : firstName,
+            //            @"last_name" : lastName,
+            //            @"dob" : birthday,
             @"meta" : meta
         } success:success
            failure:failure];
