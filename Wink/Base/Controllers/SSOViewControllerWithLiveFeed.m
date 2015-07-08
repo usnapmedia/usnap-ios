@@ -42,9 +42,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    self.childVc.provider.inputData = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self fetchLatestImagesAndSendToController];
 }
 
@@ -129,7 +131,9 @@
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
           // Set the data of the VC
-          [self.childVc setData:items.response withCellNib:kPhotosNibNameCollectionViewCell andCellReusableIdentifier:kPhotosCollectionViewCell];
+          NSUInteger maxPhotos = MIN(kNumberOfTopPhotos, [items.response count]);
+          NSArray *subrangeOfArray = [items.response subarrayWithRange:NSMakeRange(0, maxPhotos)];
+          [self.childVc setData:subrangeOfArray withCellNib:kPhotosNibNameCollectionViewCell andCellReusableIdentifier:kPhotosCollectionViewCell];
           [self.childVc hideLoadingOverlay];
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error){

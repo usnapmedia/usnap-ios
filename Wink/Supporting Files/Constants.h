@@ -85,11 +85,11 @@ extern NSString *const kCameraContainerSegue;
 extern NSInteger const kTopViewHeightConstraint;
 extern NSInteger const kConstraintOffset;
 extern NSInteger const kButtonWidthConstraint;
+extern NSInteger const kNumberOfTopPhotos;
 
 #pragma mark - Video
 
 extern NSInteger const kDefaultAnimationDuration;
-
 
 #pragma mark - Cells
 extern NSString *const kTopPhotosNib;

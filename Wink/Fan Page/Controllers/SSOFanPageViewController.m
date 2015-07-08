@@ -200,9 +200,11 @@
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           // Set the recent photos
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
-          [self.recentPhotosVC setInputData:items.response.mutableCopy];
+          NSUInteger maxPhotos = MIN(kNumberOfTopPhotos, [items.response count]);
+          NSMutableArray *subarray = [[items.response subarrayWithRange:NSMakeRange(0, maxPhotos)] mutableCopy];
+          [self.recentPhotosVC setInputData:subarray];
 
-          NSInteger numberOfRows = ceil([items.response count] / 5.0f);
+          NSInteger numberOfRows = ceil([subarray count] / 5.0f);
           NSInteger cellHeight = ([[UIScreen mainScreen] bounds].size.width / 5.0f) - 1.f;
           CGFloat size = numberOfRows * cellHeight + kTopViewHeightConstraint;
           //              ((round([items.response count] * 2.0) / 2.0) / 5.0) * ([[UIScreen mainScreen] bounds].size.width / 5 + padding) +

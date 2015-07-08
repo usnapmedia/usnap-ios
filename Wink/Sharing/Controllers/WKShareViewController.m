@@ -46,6 +46,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 @property(weak, nonatomic) IBOutlet UIView *buttonsContainerView;
 @property(weak, nonatomic) IBOutlet UIView *mediaContainerView;
 
+@property(weak, nonatomic) IBOutlet UIButton *OKButton;
 @property(weak, nonatomic) IBOutlet SZTextView *placeholderTextView;
 @property(weak, nonatomic) IBOutlet UIButton *shareButton;
 @property(weak, nonatomic) IBOutlet UIView *bottomView;
@@ -85,6 +86,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     self.buttonsContainerView.layer.cornerRadius = 4.0;
     self.mediaContainerView.layer.cornerRadius = 4.0;
     self.bottomView.layer.cornerRadius = 4.0;
+    self.OKButton.tintColor = [SSOThemeHelper firstColor];
     // Register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -103,7 +105,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     }
     // Setup the movie player view
     else {
-//        NSLog(@"%@", [SSSessionManager sharedInstance].lastVideoURL);
+        //        NSLog(@"%@", [SSSessionManager sharedInstance].lastVideoURL);
         self.mediaURL = [SSSessionManager sharedInstance].lastVideoURL;
         self.moviePlayerView = [WKMoviePlayerView moviePlayerViewWithPath:self.mediaURL];
         self.moviePlayerView.delegate = self;
@@ -123,7 +125,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         self.overlayImage = self.overlayImageView.image;
         self.overlayImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.previewImageContainerView addSubview:self.overlayImageView];
-//        NSLog(@"%@", self.previewImageContainerView);
+        //        NSLog(@"%@", self.previewImageContainerView);
         [self.overlayImageView mas_makeConstraints:^(MASConstraintMaker *make) {
           make.edges.equalTo(self.previewImageContainerView);
         }];
@@ -363,11 +365,25 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 #pragma mark - Keyboard Methods
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    self.overlayView.alpha = 0.4;
+    [UIView animateWithDuration:0.5f
+        animations:^{
+          self.overlayView.alpha = 0.4;
+          self.OKButton.alpha = 1.0f;
+        }
+        completion:^(BOOL finished) {
+          [self.OKButton setUserInteractionEnabled:YES];
+        }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    self.overlayView.alpha = 0;
+    [UIView animateWithDuration:0.5f
+        animations:^{
+          self.overlayView.alpha = 0;
+          self.OKButton.alpha = 0;
+        }
+        completion:^(BOOL finished) {
+          [self.OKButton setUserInteractionEnabled:NO];
+        }];
 }
 
 #pragma mark - Update UI
@@ -525,6 +541,11 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 }
 
 #pragma mark - Button Actions
+- (IBAction)OKButtonTouched:(id)sender {
+    if ([self.placeholderTextView isFirstResponder]) {
+        [self.placeholderTextView resignFirstResponder];
+    }
+}
 
 - (IBAction)shareButtonTouched:(id)sender {
 
@@ -621,7 +642,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         self.labelCountCharacters.text =
             [NSString stringWithFormat:@"%li %@", numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
     }
-//    NSLog(@"textView %li", textView.text.length);
+    //    NSLog(@"textView %li", textView.text.length);
 }
 
 @end

@@ -141,9 +141,14 @@
         [self.navigationController setNavigationBarHidden:YES];
     }
     if (self.snap) {
-        NSString *firstLetter = [self.snap.email substringToIndex:1];
-        firstLetter = [firstLetter uppercaseString];
-        self.circledLetter.text = firstLetter;
+        if (self.snap.username) {
+            NSString *firstLetter = [self.snap.username substringToIndex:1];
+            firstLetter = [firstLetter uppercaseString];
+            self.circledLetter.text = firstLetter;
+        } else {
+            [self.circledLetter setHidden:YES];
+        }
+
         // Check if there is a username. If not display the email (shouldn't happen because on account creation we force the username I guess)
         if (self.snap.username) {
             self.nameLabel.text = self.snap.username.uppercaseString;

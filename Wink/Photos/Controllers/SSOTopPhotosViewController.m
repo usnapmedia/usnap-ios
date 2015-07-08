@@ -36,6 +36,9 @@ NSInteger const kTopPhotosCellTextHeight = 40;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    // Remove the images as they can be reloade anyway
+    NSLog(@"Clearing the images");
+    self.provider.inputData = nil;
 }
 
 #pragma mark - Initialization

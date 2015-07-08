@@ -86,6 +86,7 @@ NSString *const kCameraContainerSegue = @"CAMERA_CONTAINER_SEGUE";
 NSInteger const kTopViewHeightConstraint = 40;
 NSInteger const kConstraintOffset = 10;
 NSInteger const kButtonWidthConstraint = 80;
+NSInteger const kNumberOfTopPhotos = 50;
 
 #pragma mark - Video
 NSInteger const kDefaultAnimationDuration = 15;

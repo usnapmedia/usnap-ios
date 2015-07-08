@@ -457,7 +457,7 @@
 
     [UIView animateWithDuration:[duration doubleValue]
         animations:^{
-          self.effectView.alpha = 0;
+          self.effectView.hidden = YES;
         }
         completion:^(BOOL finished) {
           [self.effectView removeFromSuperview];

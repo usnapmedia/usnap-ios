@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WKShareViewController">
             <connections>
+                <outlet property="OKButton" destination="ZkT-lx-lFt" id="FlS-w3-Emu"/>
                 <outlet property="bottomView" destination="lS4-6t-jQm" id="WWM-Hw-I3v"/>
                 <outlet property="buttonsContainerView" destination="Y73-hv-hXD" id="AnX-GB-Tc6"/>
                 <outlet property="facebookButton" destination="6WE-co-vhT" id="5nV-8C-tpk"/>
@@ -47,7 +48,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sharing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9Z-nP-IfW">
-                            <rect key="frame" x="178" y="32" width="59" height="21"/>
+                            <rect key="frame" x="178" y="32" width="59" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -158,7 +159,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWS-5c-DtB">
-                            <rect key="frame" x="186" y="10" width="36" height="17"/>
+                            <rect key="frame" x="186" y="10" width="35.5" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -173,20 +174,41 @@
                                 <outlet property="delegate" destination="-1" id="J1z-eH-Qjm"/>
                             </connections>
                         </textView>
+                        <button opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZkT-lx-lFt">
+                            <rect key="frame" x="229.5" y="3" width="152.5" height="30"/>
+                            <state key="normal" title="OK">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="OKButtonTouched:" destination="-1" eventType="touchUpInside" id="18C-Cd-w7G"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="JWS-5c-DtB" firstAttribute="top" secondItem="SSl-Nr-kNb" secondAttribute="top" id="2mz-F3-kys"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JWS-5c-DtB" secondAttribute="trailing" id="3oY-Ii-NQj"/>
+                        <constraint firstAttribute="trailing" secondItem="ZkT-lx-lFt" secondAttribute="trailing" constant="12" id="B2P-h0-fNO"/>
                         <constraint firstItem="SSl-Nr-kNb" firstAttribute="top" secondItem="XvS-Jf-a6c" secondAttribute="top" constant="10" id="BOy-l6-nYk"/>
+                        <constraint firstItem="ZkT-lx-lFt" firstAttribute="top" secondItem="XvS-Jf-a6c" secondAttribute="top" id="DWp-Re-lj1"/>
                         <constraint firstAttribute="bottom" secondItem="aDp-Id-cQH" secondAttribute="bottom" constant="5" id="Fd0-VP-oe5"/>
+                        <constraint firstItem="ZkT-lx-lFt" firstAttribute="top" secondItem="JWS-5c-DtB" secondAttribute="top" id="JVO-El-Beg"/>
                         <constraint firstItem="SSl-Nr-kNb" firstAttribute="leading" secondItem="XvS-Jf-a6c" secondAttribute="leading" constant="10" id="NWI-2u-EdL"/>
                         <constraint firstItem="aDp-Id-cQH" firstAttribute="leading" secondItem="SSl-Nr-kNb" secondAttribute="trailing" constant="20" id="PmJ-xy-HMT"/>
+                        <constraint firstItem="JWS-5c-DtB" firstAttribute="baseline" secondItem="ZkT-lx-lFt" secondAttribute="baseline" id="RKT-i0-YRI"/>
                         <constraint firstItem="JWS-5c-DtB" firstAttribute="leading" secondItem="aDp-Id-cQH" secondAttribute="leading" id="RuQ-Jn-LJC"/>
+                        <constraint firstItem="ZkT-lx-lFt" firstAttribute="leading" secondItem="JWS-5c-DtB" secondAttribute="trailing" constant="8" symbolic="YES" id="Xn4-Kc-jjg"/>
                         <constraint firstAttribute="trailing" secondItem="aDp-Id-cQH" secondAttribute="trailing" constant="5" id="Z5i-zR-oeH"/>
                         <constraint firstAttribute="bottom" secondItem="SSl-Nr-kNb" secondAttribute="bottom" constant="10" id="nS0-Mr-Yb7"/>
                         <constraint firstItem="aDp-Id-cQH" firstAttribute="top" secondItem="JWS-5c-DtB" secondAttribute="bottom" constant="5" id="qXj-6q-Dxa"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="3oY-Ii-NQj"/>
+                            <exclude reference="DWp-Re-lj1"/>
+                            <exclude reference="JVO-El-Beg"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>

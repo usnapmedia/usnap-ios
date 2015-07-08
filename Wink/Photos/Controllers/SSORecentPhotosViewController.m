@@ -43,6 +43,9 @@ NSInteger const kRecentPhotosCellOffset = 10;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    // Remove the images as they can be reloade anyway
+    NSLog(@"Clearing the images");
+    self.provider.inputData = nil;
 }
 
 #pragma mark - Initialization
@@ -147,6 +150,7 @@ NSInteger const kRecentPhotosCellOffset = 10;
  *  @param data the data
  */
 - (void)setInputData:(NSMutableArray *)data {
+
     self.provider.inputData = data;
     [self.collectionView reloadData];
 }

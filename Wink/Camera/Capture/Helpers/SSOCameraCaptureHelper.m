@@ -426,8 +426,10 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
     didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
                         fromConnections:(NSArray *)connections
                                   error:(NSError *)error {
-    if (error)
+    if (error) {
         NSLog(@"%@", error);
+        return;
+    }
 
     // Note the backgroundRecordingID for use in the ALAssetsLibrary completion handler to end the background task associated with this recording. This
     // allows a
