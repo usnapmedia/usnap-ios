@@ -127,6 +127,7 @@
 		D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m */; };
 		D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */; };
 		D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */; };
+		D879F68D1B4B182D009E2C16 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D879F68A1B4B182D009E2C16 /* TwitterCore.framework */; };
 		D898E1D31AF1622500C957DC /* SSOCampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D898E1C61AF1622500C957DC /* SSOCampaignViewController.m */; };
 		D898E1D41AF1622500C957DC /* SSOMyFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D898E1C81AF1622500C957DC /* SSOMyFeedViewController.m */; };
 		D898E1D51AF1622500C957DC /* SSOProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D898E1CA1AF1622500C957DC /* SSOProfileViewController.m */; };
@@ -555,6 +556,7 @@
 		D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSettingSocialTableViewCell.m; sourceTree = "<group>"; };
 		D86E94AB1ACF492000CFF801 /* SSBaseCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseCollectionView.h; sourceTree = "<group>"; };
 		D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBaseCollectionView.m; sourceTree = "<group>"; };
+		D879F68A1B4B182D009E2C16 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		D898E1C51AF1622500C957DC /* SSOCampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCampaignViewController.h; sourceTree = "<group>"; };
 		D898E1C61AF1622500C957DC /* SSOCampaignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCampaignViewController.m; sourceTree = "<group>"; };
 		D898E1C71AF1622500C957DC /* SSOMyFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMyFeedViewController.h; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				CB57186B1AC0C3020078740E /* CoreMedia.framework in Frameworks */,
 				7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */,
 				2747B0A119E5DE9A00C3D779 /* libz.dylib in Frameworks */,
+				D879F68D1B4B182D009E2C16 /* TwitterCore.framework in Frameworks */,
 				2747B09F19E5DE9500C3D779 /* SystemConfiguration.framework in Frameworks */,
 				2747B09D19E5DE8F00C3D779 /* CoreData.framework in Frameworks */,
 				2743319719B760CC003334BB /* CoreImage.framework in Frameworks */,
@@ -739,6 +742,7 @@
 				1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */,
 				1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */,
 				2747B09E19E5DE9500C3D779 /* SystemConfiguration.framework */,
+				D879F68A1B4B182D009E2C16 /* TwitterCore.framework */,
 				2747B09C19E5DE8F00C3D779 /* CoreData.framework */,
 				2743319619B760CB003334BB /* CoreImage.framework */,
 				2743319419B760C7003334BB /* QuartzCore.framework */,
