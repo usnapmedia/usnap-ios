@@ -1,0 +1,1 @@
+../../../SSOBaseProvider/Classes/Providers/Base/SSOBaseTableViewProvider.h

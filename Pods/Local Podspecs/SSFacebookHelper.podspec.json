@@ -1,0 +1,32 @@
+{
+  "name": "SSFacebookHelper",
+  "version": "0.2.6",
+  "summary": "Methods to easily use the Facebook SDK.",
+  "license": {
+    "type": "Apache License, Version 2.0",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Samsao": "dev@samsaodev.com"
+  },
+  "social_media_url": "http://twitter.com/SamsaoDev",
+  "homepage": "http://www.samsaodev.com",
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source": {
+    "git": "https://gitlab.samsaodev.com/ios-development/ssfacebookhelper.git",
+    "tag": "0.2.6"
+  },
+  "source_files": [
+    "Classes",
+    "Classes/**/*.{h,m}"
+  ],
+  "exclude_files": "Classes/Exclude",
+  "requires_arc": true,
+  "dependencies": {
+    "Facebook-iOS-SDK": [
+      "~> 4.x"
+    ]
+  }
+}

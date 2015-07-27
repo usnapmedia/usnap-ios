@@ -1,0 +1,1 @@
+../../../SSOBaseProvider/Classes/Providers/Simple/SSOSimpleCollectionViewProvider.h

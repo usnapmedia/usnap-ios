@@ -18,13 +18,3 @@ profile
 DerivedData
 *.hmap
 *.ipa
-
-# CocoaPods
-Pods
-
-# Compile commands
-compile_commands.json
-
-# Fastlane
-fastlane/report.xml
-fastlane/screenshots
