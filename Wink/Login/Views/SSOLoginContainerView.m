@@ -26,18 +26,8 @@
 @implementation SSOLoginContainerView
 
 - (void)awakeFromNib {
-    //[self setupViewForAnimation];
-    self.loginButton.layer.cornerRadius = 4;
-    self.textFieldEmail.placeholder = NSLocalizedString(@"shareview.email.textview.placeholder.text", nil);
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-
-    if (self == [super initWithCoder:aDecoder]) {
-        [self setupUI];
-    }
-
-    return self;
+    [super awakeFromNib];
+    [self setupUI];
 }
 
 #pragma mark - Initialization
@@ -46,6 +36,13 @@
  *  Setup the view UI
  */
 - (void)setupUI {
+    //[self setupViewForAnimation];
+    self.loginButton.layer.cornerRadius = 4;
+    self.loginButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
+    [self.loginButton setBackgroundColor:[SSOThemeHelper firstColor]];
+    self.textFieldEmail.placeholder = NSLocalizedString(@"shareview.email.textview.placeholder.text", nil);
+    self.textFieldEmail.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.textFieldPassword.font = [SSOThemeHelper avenirLightFontWithSize:14];
     [self setBackgroundColor:[SSOThemeHelper thirdColor]];
     [self.loginButton setBackgroundColor:[SSOThemeHelper firstColor]];
 }
@@ -140,7 +137,7 @@
                 // Check if the textField is empty
                 if (textField.text.length == 0) {
                     // Display an alert if the textField is empty
-                    [UIAlertView showWithTitle:@"Missing fields" message:@"Check the fields" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+                    [self.delegate didNotFillAllFields];
                     return NO;
                 }
             }

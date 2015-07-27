@@ -13,7 +13,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import <GooglePlus.h>
 #import "SSOGooglePlusHelper.h"
-#import <SSFacebookHelper.h>
+#import "SSFacebookHelper.h"
 
 @implementation SSOSocialNetworkAPI
 

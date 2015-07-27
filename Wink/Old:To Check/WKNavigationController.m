@@ -8,6 +8,7 @@
 
 #import "WKNavigationController.h"
 #import "WKShareViewController.h"
+#import "Constants.h"
 
 @implementation WKNavigationController
 
@@ -43,6 +44,7 @@
 }
 
 - (BOOL)shouldAutorotate {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDeviceOrientationNotification object:nil];
     return YES;
 }
 

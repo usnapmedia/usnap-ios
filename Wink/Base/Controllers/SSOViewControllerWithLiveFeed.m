@@ -14,7 +14,7 @@
 #import "SSOSnap.h"
 #import "SSOPhotoDetailViewController.h"
 #import "SSSessionManager.h"
-#import <SSOSimpleCollectionViewProvider.h>
+#import "SSOSimpleCollectionViewProvider.h"
 #import <Masonry.h>
 
 #define kFeedContainerHeight 55
@@ -42,9 +42,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    self.childVc.provider.inputData = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self fetchLatestImagesAndSendToController];
 }
 
@@ -85,7 +87,8 @@
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     flowLayout.minimumLineSpacing = 5;
     flowLayout.minimumInteritemSpacing = 5;
-    self.childVc.collectionView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
+    self.childVc.collectionView.contentInset = UIEdgeInsetsMake(0, 2, 0, 2);
+
     self.childVc.collectionView.collectionViewLayout = flowLayout;
 }
 
@@ -124,10 +127,13 @@
 - (void)fetchLatestImagesAndSendToController {
     // If there is no campaign, the default route is used
     [SSOFeedConnect getRecentPhotosForCampaignId:[SSSessionManager sharedInstance].campaignID
+        withParameters:nil
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
           // Set the data of the VC
-          [self.childVc setData:items.response withCellNib:kImageCollectionViewCellNib andCellReusableIdentifier:kImageCollectionViewCell];
+          NSUInteger maxPhotos = MIN(kNumberOfTopPhotos, [items.response count]);
+          NSArray *subrangeOfArray = [items.response subarrayWithRange:NSMakeRange(0, maxPhotos)];
+          [self.childVc setData:subrangeOfArray withCellNib:kPhotosNibNameCollectionViewCell andCellReusableIdentifier:kPhotosCollectionViewCell];
           [self.childVc hideLoadingOverlay];
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error){

@@ -35,6 +35,12 @@
     if (![dictionary[@"username"] isKindOfClass:[NSNull class]]) {
         self.username = dictionary[@"username"];
     }
+    if (![dictionary[@"contribution"] isKindOfClass:[NSNull class]]) {
+        self.contribution = dictionary[@"contribution"];
+    }
+    if (![dictionary[@"score"] isKindOfClass:[NSNull class]]) {
+        self.score = dictionary[@"score"];
+    }
     return self;
 }
 
@@ -61,6 +67,12 @@
     }
     if (self.username != nil) {
         dictionary[@"username"] = self.username;
+    }
+    if (self.username != nil) {
+        dictionary[@"contribution"] = self.contribution;
+    }
+    if (self.username != nil) {
+        dictionary[@"score"] = self.score;
     }
     return dictionary;
 }

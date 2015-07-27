@@ -16,14 +16,15 @@
 #import "UINavigationController+SSOLockedNavigationController.h"
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 #import "SSOProfileViewController.h"
+#import "SSOCameraStateHelper.h"
+#import "SSSessionManager.h"
 #import <Masonry.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <SVProgressHUD/SVProgressHUD.h>
-#import <SSCellViewItem.h>
-#import <SSCellViewSection.h>
+#import "SSCellViewItem.h"
+#import "SSCellViewSection.h"
 #import "SSOThemeHelper.h"
-
-#define kTotalVideoRecordingTime 30
+#import "UIImage+Tools.h"
 
 @interface SSOCameraViewController () <UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SSORoundedAnimatedButtonProtocol,
                                        SSOCameraDelegate>
@@ -31,7 +32,6 @@
 // IBOutlets
 @property(weak, nonatomic) IBOutlet UIButton *flashButton;
 @property(weak, nonatomic) IBOutlet UIButton *cameraRotationButton;
-@property(weak, nonatomic) IBOutlet UIButton *profileButton;
 @property(weak, nonatomic) IBOutlet UIButton *mediaButton;
 @property(weak, nonatomic) IBOutlet UIView *topContainerView;
 @property(weak, nonatomic) IBOutlet UIView *bottomContainerView;
@@ -46,13 +46,12 @@
 @property(strong, nonatomic) UIImage *libraryImage;
 
 // Data
-@property(nonatomic) AVCaptureFlashMode flashState;
-@property(nonatomic) AVCaptureTorchMode torchState;
-@property(nonatomic) AVCaptureDevicePosition devicePosition;
 @property(nonatomic) BOOL isVideoRecording;
 @property(nonatomic) BOOL isRotationAllowed;
 @property(strong, nonatomic) SSOCameraCaptureHelper *cameraCaptureHelper;
 @property(strong, nonatomic) NSMutableArray *arrayImages;
+@property(strong, nonatomic) NSArray *buttonsToSwitch;
+@property(assign, nonatomic) BOOL operationDidFinish;
 
 @end
 
@@ -60,13 +59,15 @@
 
 #pragma mark - View Controller Life Cycle
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceChangedOrientation:) name:kDeviceOrientationNotification object:nil];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    self.operationDidFinish = NO;
     [self initializeData];
-
-    // Initialize state of camera to setup UI
-    [self initializeStateOfCamera];
 
     [self showBlurForDuration:0.5];
 
@@ -91,17 +92,8 @@
     self.cameraRotationButton.userInteractionEnabled = YES;
     self.mediaButton.userInteractionEnabled = YES;
 }
-
-#pragma mark - Orientation
-
-/**
- *  View controller method telling us what the orientation of the device is
- *
- *  @param toInterfaceOrientation
- *  @param duration
- */
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [self.cameraCaptureHelper willRotateToInterfaceOrientation:toInterfaceOrientation];
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Initialization
@@ -125,20 +117,12 @@
 
     self.cameraCaptureHelper = [[SSOCameraCaptureHelper alloc] initWithPreviewView:self.cameraPreviewView
                                                                     andOrientation:UIDeviceOrientationPortrait
-                                                                withDevicePosition:self.devicePosition
-                                                                    withFlashState:self.flashState];
+                                                                withDevicePosition:[[SSOCameraStateHelper sharedInstance] devicePosition]
+                                                                    withFlashState:[[SSOCameraStateHelper sharedInstance] flashState]];
     self.cameraCaptureHelper.delegate = self;
-}
 
-/**
- *  The state of the camera is if the flash is on or not, the video is on or not, is the camera rear facing
- */
-- (void)initializeStateOfCamera {
-    self.flashState = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kFlashState];
-
-    self.torchState = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kTorchState];
-
-    self.devicePosition = [[NSUserDefaults standardUserDefaults] integerForKey:kDevicePosition];
+    self.buttonsToSwitch = @[ self.cameraRotationButton, self.mediaButton, self.flashButton ];
+    [self.cameraPreviewView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(zoomInCamera:)]];
 }
 
 /**
@@ -147,7 +131,6 @@
 - (void)initializeUI {
 
     // Allow the user to rotate the screen when the view just appeared
-    self.profileButton.hidden = YES;
     self.isRotationAllowed = YES;
     self.isVideoRecording = NO;
 
@@ -166,9 +149,36 @@
     [self.view bringSubviewToFront:self.animatedCaptureButton];
 }
 
-- (BOOL)shouldAutorotate {
+- (void)deviceChangedOrientation:(NSNotification *)notification {
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    switch (orientation) {
+    case UIDeviceOrientationPortrait: {
+        [self rotateButtons:0];
+        break;
+    }
 
-    return self.isRotationAllowed;
+    case UIDeviceOrientationLandscapeLeft: {
+        [self rotateButtons:M_PI_2];
+        break;
+    }
+    case UIDeviceOrientationLandscapeRight: {
+        [self rotateButtons:-M_PI_2];
+        break;
+    }
+    default: { break; }
+    }
+}
+
+- (void)rotateButtons:(CGFloat)rotation {
+    [UIView animateWithDuration:0.25f
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                       for (UIView *viewToRotate in self.buttonsToSwitch) {
+                           viewToRotate.transform = CGAffineTransformMakeRotation(rotation);
+                       }
+                     }
+                     completion:nil];
 }
 
 #pragma mark - Navigation
@@ -204,10 +214,26 @@
         image = [mediaDic objectForKey:UIImagePickerControllerEditedImage];
         if (image == nil) {
             image = [mediaDic objectForKey:UIImagePickerControllerOriginalImage];
+            image = [image fixOrientation];
+
+            UIImageOrientation orientation = image.imageOrientation;
+            UIDeviceOrientation devOrientation;
+
+            if (orientation == UIImageOrientationUp || orientation == UIImageOrientationUpMirrored) {
+                devOrientation = UIDeviceOrientationPortrait;
+            } else if (orientation == UIImageOrientationDown || orientation == UIImageOrientationDownMirrored) {
+                devOrientation = UIDeviceOrientationPortraitUpsideDown;
+            } else if (orientation == UIImageOrientationLeft || orientation == UIImageOrientationLeftMirrored) {
+                devOrientation = UIDeviceOrientationLandscapeLeft;
+            } else if (orientation == UIImageOrientationRight || orientation == UIImageOrientationRightMirrored) {
+                devOrientation = UIDeviceOrientationLandscapeRight;
+            }
+            [[SSSessionManager sharedInstance] setLastPhotoOrientation:devOrientation];
             controller.image = image;
         }
     } else if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
         mediaURL = [mediaDic objectForKey:UIImagePickerControllerMediaURL];
+        controller.mediaURL = mediaURL;
         if (mediaURL == nil) {
             mediaURL = [mediaDic objectForKey:UIImagePickerControllerReferenceURL];
             controller.mediaURL = mediaURL;
@@ -236,11 +262,6 @@
 
 - (IBAction)cameraDeviceButtonTouched:(id)sender {
     [self switchDeviceCameraState];
-}
-
-- (IBAction)profileButtonTouched:(id)sender {
-    SSOProfileViewController *profileVC = [SSOProfileViewController new];
-    [self presentViewController:profileVC animated:YES completion:nil];
 }
 
 - (IBAction)backButtonTouched:(id)sender {
@@ -275,7 +296,7 @@
  *  Update the UI for the camera device depending if it's rear facing or front facing
  */
 - (void)initializeUICameraDevice {
-    if (self.devicePosition == AVCaptureDevicePositionFront) {
+    if ([[SSOCameraStateHelper sharedInstance] devicePosition] == AVCaptureDevicePositionFront) {
         self.flashButton.hidden = YES;
     } else {
         self.flashButton.hidden = NO;
@@ -286,10 +307,10 @@
  *  Intialize flash
  */
 - (void)initializeFlash {
-    if (self.flashState == AVCaptureFlashModeOff) {
+    if ([[SSOCameraStateHelper sharedInstance] flashState] == AVCaptureFlashModeOff) {
         [self.flashButton setImage:[UIImage imageNamed:@"ic_noflash"] forState:UIControlStateNormal];
 
-    } else if (self.flashState == AVCaptureFlashModeOn) {
+    } else if ([[SSOCameraStateHelper sharedInstance] flashState] == AVCaptureFlashModeOn) {
         [self.flashButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
 
     } else {
@@ -302,28 +323,21 @@
  */
 - (void)switchFlashState {
     // Change flash button icon
-    if (self.flashState == AVCaptureFlashModeOff) {
+    if ([[SSOCameraStateHelper sharedInstance] flashState] == AVCaptureFlashModeOff) {
         [self.flashButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
-
-        self.flashState = AVCaptureFlashModeOn;
-        self.torchState = AVCaptureTorchModeOn;
-
-    } else if (self.flashState == AVCaptureFlashModeOn) {
+        [[SSOCameraStateHelper sharedInstance] setFlashState:AVCaptureFlashModeOn];
+        [[SSOCameraStateHelper sharedInstance] setTorchState:AVCaptureTorchModeOn];
+    } else if ([[SSOCameraStateHelper sharedInstance] flashState] == AVCaptureFlashModeOn) {
         [self.flashButton setImage:[UIImage imageNamed:@"ic_flash_A"] forState:UIControlStateNormal];
-        self.flashState = AVCaptureFlashModeAuto;
-        self.torchState = AVCaptureTorchModeAuto;
-
+        [[SSOCameraStateHelper sharedInstance] setFlashState:AVCaptureFlashModeAuto];
+        [[SSOCameraStateHelper sharedInstance] setTorchState:AVCaptureTorchModeAuto];
     } else {
         [self.flashButton setImage:[UIImage imageNamed:@"ic_noflash"] forState:UIControlStateNormal];
-        self.flashState = AVCaptureFlashModeOff;
-        self.torchState = AVCaptureTorchModeOff;
+        [[SSOCameraStateHelper sharedInstance] setFlashState:AVCaptureFlashModeOff];
+        [[SSOCameraStateHelper sharedInstance] setTorchState:AVCaptureTorchModeOff];
     }
 
-    [SSOCameraCaptureHelper setFlashMode:self.flashState forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
-
-    [[NSUserDefaults standardUserDefaults] setInteger:self.torchState forKey:kTorchState];
-    [[NSUserDefaults standardUserDefaults] setInteger:self.flashState forKey:kFlashState];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [SSOCameraCaptureHelper setFlashMode:[[SSOCameraStateHelper sharedInstance] flashState] forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
 }
 
 /**
@@ -340,25 +354,18 @@
 
     // Remove flash button
     // Send a message to the photo/video controller to change camera direction
-    if (self.devicePosition == AVCaptureDevicePositionFront) {
+    if ([[SSOCameraStateHelper sharedInstance] devicePosition] == AVCaptureDevicePositionFront) {
         self.flashButton.hidden = NO;
-
-        self.devicePosition = AVCaptureDevicePositionBack;
-
+        [[SSOCameraStateHelper sharedInstance] setDevicePosition:AVCaptureDevicePositionBack];
         [self.cameraCaptureHelper changeCameraWithDevicePosition:AVCaptureDevicePositionBack];
 
     } else {
         self.flashButton.hidden = YES;
-
-        self.devicePosition = AVCaptureDevicePositionFront;
-
+        [[SSOCameraStateHelper sharedInstance] setDevicePosition:AVCaptureDevicePositionFront];
         [self.cameraCaptureHelper changeCameraWithDevicePosition:AVCaptureDevicePositionFront];
     }
 
-    [SSOCameraCaptureHelper setFlashMode:self.flashState forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
-
-    [[NSUserDefaults standardUserDefaults] setInteger:self.devicePosition forKey:kDevicePosition];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [SSOCameraCaptureHelper setFlashMode:[[SSOCameraStateHelper sharedInstance] flashState] forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
 }
 
 /**
@@ -422,19 +429,35 @@
     }
 }
 
+- (void)zoomInCamera:(UIPinchGestureRecognizer *)gestureRecognizer {
+
+    CGFloat zoom = [[self.cameraCaptureHelper videoDeviceInput] device].videoZoomFactor + atan(gestureRecognizer.velocity / 5.0f);
+    [SSOCameraCaptureHelper setZoom:zoom forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
+}
+
 #pragma mark - Blur
 
+/**
+ *  Display a blur view for a certain duration
+ *
+ *  @param duration the duration
+ */
 - (void)showBlurForDuration:(double)duration {
 
     [self showBluredView];
     [self performSelector:@selector(removeBlurredViewWithDuration:) withObject:[NSNumber numberWithDouble:duration] afterDelay:1];
 }
 
+/**
+ *  Remove the blurred view
+ *
+ *  @param duration the duration of the animation
+ */
 - (void)removeBlurredViewWithDuration:(NSNumber *)duration {
 
     [UIView animateWithDuration:[duration doubleValue]
         animations:^{
-          self.effectView.alpha = 0;
+          self.effectView.hidden = YES;
         }
         completion:^(BOOL finished) {
           [self.effectView removeFromSuperview];
@@ -443,6 +466,9 @@
         }];
 }
 
+/**
+ *  Show the blurred view
+ */
 - (void)showBluredView {
     self.blurEffectview = [[UIView alloc] initWithFrame:self.view.bounds];
     self.blurEffectview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
@@ -480,7 +506,7 @@
 - (void)didStartLongPressGesture:(SSORoundedAnimatedButton *)button {
 
     // Enable torch state when recording video
-    [SSOCameraCaptureHelper setTorchMode:self.torchState forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
+    [SSOCameraCaptureHelper setTorchMode:[[SSOCameraStateHelper sharedInstance] torchState] forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
 
     // Disable interaction with flash and other corner icons
     self.flashButton.userInteractionEnabled = NO;
@@ -494,27 +520,20 @@
 
 - (void)didFinishLongPressGesture:(SSORoundedAnimatedButton *)button {
     [button setUserInteractionEnabled:NO];
+    // Make sure to do it once, we check if VC is visible.
+    if (self.isViewLoaded && self.view.window) {
+        [SSOCameraCaptureHelper setTorchMode:AVCaptureTorchModeOff forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
 
-    [SSOCameraCaptureHelper setTorchMode:AVCaptureTorchModeOff forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
+        [button pauseAnimation];
 
-    [button pauseAnimation];
-
-    [self.cameraCaptureHelper toggleMovieRecording];
-    self.isVideoRecording = NO;
+        [self.cameraCaptureHelper toggleMovieRecording];
+        self.isVideoRecording = NO;
+    }
 }
 
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-
-    // Open library of photos and videos
-    BOOL allowsEditing = NO;
-    NSArray *mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
-
-    if (buttonIndex == 0) {
-        allowsEditing = YES;
-        mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, nil];
-    }
 
     [self displayCamerallRollPickerVC];
 }
@@ -523,15 +542,6 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    NSURL *mediaURL = nil;
-
-    if (UTTypeConformsTo((__bridge CFStringRef)mediaType, kUTTypeMovie)) {
-        mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
-        if (mediaURL == nil) {
-            mediaURL = [info objectForKey:UIImagePickerControllerReferenceURL];
-        }
-    }
     // Pass the dictionary in order to push to editMediaVC
     [self pushToEditVCWithMedia:info];
 
@@ -556,8 +566,8 @@
 #pragma mark - SSOCameraDelegate
 
 - (void)didFinishCapturingImage:(UIImage *)image withError:(NSError *)error {
-
-    if (!error) {
+    if (!error && !self.operationDidFinish) {
+        self.operationDidFinish = YES;
         // Edit the selected media
         WKEditMediaViewController *controller = [WKEditMediaViewController new];
         controller.image = image;
@@ -569,7 +579,8 @@
 
 - (void)didFinishCapturingVideo:(NSURL *)video withError:(NSError *)error {
 
-    if (!error) {
+    if (!error && !self.operationDidFinish) {
+        self.operationDidFinish = YES;
         // Edit the selected media
         WKEditMediaViewController *controller = [[WKEditMediaViewController alloc] initWithNibName:@"WKEditMediaViewController" bundle:nil];
         controller.mediaURL = video;

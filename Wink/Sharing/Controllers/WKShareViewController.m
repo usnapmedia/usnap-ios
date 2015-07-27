@@ -46,6 +46,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 @property(weak, nonatomic) IBOutlet UIView *buttonsContainerView;
 @property(weak, nonatomic) IBOutlet UIView *mediaContainerView;
 
+@property(weak, nonatomic) IBOutlet UIButton *OKButton;
 @property(weak, nonatomic) IBOutlet SZTextView *placeholderTextView;
 @property(weak, nonatomic) IBOutlet UIButton *shareButton;
 @property(weak, nonatomic) IBOutlet UIView *bottomView;
@@ -69,7 +70,15 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.numberCharactersLeft = [NSNumber numberWithInteger:kMaxNumberOfCharacters];
-    self.labelCountCharacters.text = [NSString stringWithFormat:@"%li %@", self.numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
+    self.labelCountCharacters.text =
+        [NSString stringWithFormat:@"%li %@", self.numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
+    self.labelCountCharacters.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
+    self.twitterButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+    self.facebookButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+    self.googleButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+    self.shareButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+    self.placeholderTextView.font = [SSOThemeHelper avenirLightFontWithSize:14];
     [self.shareButton setTitle:NSLocalizedString(@"shareView.shareButton", nil) forState:UIControlStateNormal];
     self.shareButton.backgroundColor = [SSOThemeHelper firstColor];
     self.titleLabel.text = NSLocalizedString(@"shareview.title", nil);
@@ -77,6 +86,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     self.buttonsContainerView.layer.cornerRadius = 4.0;
     self.mediaContainerView.layer.cornerRadius = 4.0;
     self.bottomView.layer.cornerRadius = 4.0;
+    self.OKButton.tintColor = [SSOThemeHelper firstColor];
     // Register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -86,7 +96,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     if (self.image || self.modifiedImage) {
         self.imageView = [UIImageView new];
         UIImage *image = (self.modifiedImage) ? self.modifiedImage : self.image;
-        self.imageView.image = image;
+        self.imageView.image = [self rotateImage:image];
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.previewImageContainerView addSubview:self.imageView];
         [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
           make.edges.equalTo(self.previewImageContainerView);
@@ -94,23 +105,27 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     }
     // Setup the movie player view
     else {
+        //        NSLog(@"%@", [SSSessionManager sharedInstance].lastVideoURL);
+        self.mediaURL = [SSSessionManager sharedInstance].lastVideoURL;
         self.moviePlayerView = [WKMoviePlayerView moviePlayerViewWithPath:self.mediaURL];
         self.moviePlayerView.delegate = self;
-        self.moviePlayerView.frame = self.view.bounds;
+        self.moviePlayerView.frame = self.previewImageContainerView.bounds;
         self.moviePlayerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.moviePlayerView.clipsToBounds = YES;
-        [self.view insertSubview:self.moviePlayerView atIndex:0];
         [self.previewImageContainerView addSubview:self.moviePlayerView];
         [self.moviePlayerView mas_makeConstraints:^(MASConstraintMaker *make) {
           make.edges.equalTo(self.previewImageContainerView);
         }];
-        [self.moviePlayerView.player pause];
+        [self.moviePlayerView.player play];
     }
     // Setup the overlay image view
     if (self.overlayImage) {
         self.overlayImageView = [UIImageView new];
-        self.overlayImageView.image = self.overlayImage;
+        self.overlayImageView.image = [self rotateImage:self.overlayImage];
+        self.overlayImage = self.overlayImageView.image;
+        self.overlayImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.previewImageContainerView addSubview:self.overlayImageView];
+        //        NSLog(@"%@", self.previewImageContainerView);
         [self.overlayImageView mas_makeConstraints:^(MASConstraintMaker *make) {
           make.edges.equalTo(self.previewImageContainerView);
         }];
@@ -130,6 +145,26 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     // [self updateUI];
 }
 
+- (void)moviePlayerViewDidFinishPlayingToEndTime:(WKMoviePlayerView *)moviePlayer {
+    [self.moviePlayerView.player play];
+}
+
+- (UIImage *)rotateImage:(UIImage *)image {
+
+    UIImage *newImage;
+    if ([SSSessionManager sharedInstance].lastPhotoOrientation == 2) {
+        newImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:1.0 orientation:UIImageOrientationDown];
+    } else if ([SSSessionManager sharedInstance].lastPhotoOrientation == 3) {
+        newImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:1.0 orientation:UIImageOrientationLeft];
+    } else if ([SSSessionManager sharedInstance].lastPhotoOrientation == 4) {
+        newImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:1.0 orientation:UIImageOrientationRight];
+    } else {
+        newImage = image;
+    }
+
+    return newImage;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
@@ -145,6 +180,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     self.facebookButton.alpha = 0;
     self.twitterButton.alpha = 0;
     self.googleButton.alpha = 0;
@@ -179,7 +216,10 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
     if (!_overlayView) {
         // Set the overlay view
-        _overlayView = [[UIView alloc] initWithFrame:self.view.frame];
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenWidth = screenRect.size.width;
+        CGFloat screenHeight = screenRect.size.height;
+        _overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
         _overlayView.backgroundColor = [UIColor blackColor];
         _overlayView.alpha = 0;
         // Add tap recognizer to dismiss the keyboard
@@ -242,6 +282,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     self.googleButton.tag = googleSocialNetwork;
     [self.googleButton addTarget:self action:@selector(touchedSocialNetworkButton:) forControlEvents:UIControlEventTouchUpInside];
 
+    self.googleButton.hidden = YES;
     //    SSOCustomSocialButton *facebookButton =
     //        [[SSOCustomSocialButton alloc] initWithSocialNetwork:facebookSocialNetwork
     //                                                       state:[[SSOSocialNetworkAPI sharedInstance]
@@ -324,11 +365,25 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 #pragma mark - Keyboard Methods
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    self.overlayView.alpha = 0.4;
+    [UIView animateWithDuration:0.5f
+        animations:^{
+          self.overlayView.alpha = 0.4;
+          self.OKButton.alpha = 1.0f;
+        }
+        completion:^(BOOL finished) {
+          [self.OKButton setUserInteractionEnabled:YES];
+        }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    self.overlayView.alpha = 0;
+    [UIView animateWithDuration:0.5f
+        animations:^{
+          self.overlayView.alpha = 0;
+          self.OKButton.alpha = 0;
+        }
+        completion:^(BOOL finished) {
+          [self.OKButton setUserInteractionEnabled:NO];
+        }];
 }
 
 #pragma mark - Update UI
@@ -338,19 +393,20 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
  *
  *  @return <#return value description#>
  */
+
 - (UIImage *)editedImage {
 
     if (self.image) {
-        UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
-        view.backgroundColor = [UIColor blackColor];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height)];
+        view.backgroundColor = [UIColor whiteColor];
 
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.bounds];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.image = (self.modifiedImage) ? self.modifiedImage : self.image;
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.image = self.imageView.image;
         [view addSubview:imageView];
 
         UIImageView *overlayImageView = [[UIImageView alloc] initWithFrame:view.bounds];
-        overlayImageView.contentMode = UIViewContentModeScaleAspectFill;
+        overlayImageView.contentMode = UIViewContentModeScaleAspectFit;
         overlayImageView.image = self.overlayImage;
         [view addSubview:overlayImageView];
 
@@ -362,9 +418,47 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         // Change image to PNG
 
         NSData *pngdata = UIImagePNGRepresentation(snapshot); // PNG wrap
-        return [UIImage imageWithData:pngdata];
+        UIImage *pngImage = [UIImage imageWithData:pngdata];
+
+        CGFloat maxSize = MAX(pngImage.size.height, pngImage.size.width);
+        CGFloat witdh = pngImage.size.width;
+        CGFloat height = pngImage.size.height;
+        if (maxSize > 1000) {
+            CGFloat percentage = maxSize / 1000;
+            witdh = witdh / percentage;
+            height = height / percentage;
+            pngImage = [self resizeImage:pngImage resizeSize:CGSizeMake(witdh, height)];
+        }
+        return pngImage;
     }
     return nil;
+}
+
+- (UIImage *)resizeImage:(UIImage *)orginalImage resizeSize:(CGSize)size {
+    CGFloat actualHeight = orginalImage.size.height;
+    CGFloat actualWidth = orginalImage.size.width;
+    //  if(actualWidth <= size.width && actualHeight<=size.height)
+    //  {
+    //      return orginalImage;
+    //  }
+    float oldRatio = actualWidth / actualHeight;
+    float newRatio = size.width / size.height;
+    if (oldRatio < newRatio) {
+        oldRatio = size.height / actualHeight;
+        actualWidth = oldRatio * actualWidth;
+        actualHeight = size.height;
+    } else {
+        oldRatio = size.width / actualWidth;
+        actualHeight = oldRatio * actualHeight;
+        actualWidth = size.width;
+    }
+
+    CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
+    UIGraphicsBeginImageContext(rect.size);
+    [orginalImage drawInRect:rect];
+    orginalImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return orginalImage;
 }
 
 #pragma mark - Post
@@ -374,30 +468,50 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
  */
 - (void)post {
     [self.placeholderTextView resignFirstResponder];
+    [SVProgressHUD showWithStatus:@"uploading" maskType:SVProgressHUDMaskTypeBlack];
 
-    [SVProgressHUD showWithStatus:@"uploading"];
+    if (!self.mediaURL) {
+        [WKWinkConnect winkConnectPostImageToBackend:[self editedImage]
+            withText:self.placeholderTextView.text
+            //@TODO
+            andMeta:@{
+                @"something" : @"here"
+            }
+            success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-    [WKWinkConnect winkConnectPostImageToBackend:[self editedImage]
-        withText:self.placeholderTextView.text
-        andMeta:@{
-            @"something" : @"here"
-        }
-        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              // @FIXME
+              [SVProgressHUD showSuccessWithStatus:@"Image posted"];
+              [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
+              [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
-          // @FIXME
-          [SVProgressHUD showSuccessWithStatus:@"Image posted"];
-          [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
-          [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+              NSLog(@"%@", responseObject);
 
-          NSLog(@"shared with succcess");
+            }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              //@FIXME
+              //@TODO: Should be handled generally
+              [SVProgressHUD showErrorWithStatus:error.localizedDescription];
 
-        }
-        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          //@FIXME
-          //@TODO: Should be handled generally
-          [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+            }];
+    } else {
+        [WKWinkConnect winkConnectPostVideoToBackend:self.mediaURL
+            withText:self.placeholderTextView.text
+            overlayImage:self.overlayImageView.image
+            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              // @FIXME
+              [SVProgressHUD showSuccessWithStatus:@"Video posted"];
+              [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
+              [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
-        }];
+              NSLog(@"%@", responseObject);
+
+            }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              //@FIXME
+              //@TODO: Should be handled generally
+              [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+            }];
+    }
 }
 
 #pragma mark - Social networks
@@ -427,12 +541,18 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 }
 
 #pragma mark - Button Actions
+- (IBAction)OKButtonTouched:(id)sender {
+    if ([self.placeholderTextView isFirstResponder]) {
+        [self.placeholderTextView resignFirstResponder];
+    }
+}
 
 - (IBAction)shareButtonTouched:(id)sender {
 
     [self post];
 }
 - (IBAction)backButtonTouched:(id)sender {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -522,7 +642,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
         self.labelCountCharacters.text =
             [NSString stringWithFormat:@"%li %@", numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
     }
-    NSLog(@"textView %li", textView.text.length);
+    //    NSLog(@"textView %li", textView.text.length);
 }
 
 @end

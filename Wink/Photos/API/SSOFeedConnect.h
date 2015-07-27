@@ -45,6 +45,7 @@
  *  @param failure failure block
  */
 + (void)getRecentPhotosForCampaignId:(NSString *)campaignID
+                      withParameters:(NSDictionary *)param
                          withSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 /**
@@ -55,7 +56,14 @@
  *  @param failure failure block
  */
 + (void)getTopPhotosForCampaignId:(NSString *)campaignID
+                   withParameters:(NSDictionary *)param
                       withSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
++ (void)reportImageWithImageID:(NSString *)imageID
+                      userName:(NSString *)userName
+                        apiKey:(NSString *)apiKey
+                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

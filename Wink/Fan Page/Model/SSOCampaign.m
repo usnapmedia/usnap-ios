@@ -41,6 +41,12 @@
     if (![dictionary[@"start_date"] isKindOfClass:[NSNull class]]) {
         self.startDate = dictionary[@"start_date"];
     }
+    if (![dictionary[@"participants"] isKindOfClass:[NSNull class]]) {
+        self.participants = dictionary[@"participants"];
+    }
+    if (![dictionary[@"media_shared"] isKindOfClass:[NSNull class]]) {
+        self.mediaShared = dictionary[@"media_shared"];
+    }
     return self;
 }
 
@@ -76,6 +82,12 @@
     }
     if (self.startDate != nil) {
         dictionary[@"start_date"] = self.startDate;
+    }
+    if (self.startDate != nil) {
+        dictionary[@"participants"] = self.participants;
+    }
+    if (self.startDate != nil) {
+        dictionary[@"media_shared"] = self.mediaShared;
     }
     return dictionary;
 }

@@ -18,6 +18,9 @@
 @property(strong, nonatomic, readwrite) NSString *password;
 @property(strong, nonatomic, readwrite) NSString *campaignID;
 
+@property(assign, nonatomic, readwrite) UIDeviceOrientation lastPhotoOrientation;
+@property(assign, nonatomic, readwrite) NSURL *lastVideoURL;
+
 @end
 
 @implementation SSSessionManager
@@ -133,6 +136,14 @@
 
     // Synchronize the UserDefaults
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setLastPhotoOrientation:(UIDeviceOrientation)lastPhotoOrientation {
+    _lastPhotoOrientation = lastPhotoOrientation;
+}
+
+- (void)setLastVideoURL:(NSURL *)lastVideoURL {
+    _lastVideoURL = lastVideoURL;
 }
 
 @end

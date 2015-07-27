@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+#import <CoreMedia/CMTime.h>
 #import "AVCamPreviewView.h"
 
 @protocol SSOCameraDelegate;
 
-@interface SSOCameraCaptureHelper : NSObject
+@interface SSOCameraCaptureHelper : NSObject {
+    AVAssetExportSession *exporter;
+}
 
 /**
  *  Need access to the video device input to use flash
@@ -70,6 +74,25 @@
  *  @param device
  */
 + (void)setTorchMode:(AVCaptureTorchMode)torchMode forDevice:(AVCaptureDevice *)device;
+
++ (void)setZoom:(CGFloat)zoomFactor forDevice:(AVCaptureDevice *)device;
+
+/**
+ *  Make the photo took by the user square
+ *
+ *  @param image  image from the camera
+ *
+ *  @return the squared photo
+ */
+- (UIImage *)squareImageWithImage:(UIImage *)image;
+
+/**
+ *  This method will receive the video URL and crop the video square
+ *
+ *  @param url video URL
+ */
+
+- (void)cropVideoSquare:(NSURL *)url;
 
 @end
 

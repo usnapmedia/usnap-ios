@@ -17,6 +17,7 @@
 #import "SSSessionManager.h"
 #import "UINavigationController+SSOLockedNavigationController.h"
 #import <SVProgressHUD.h>
+#import "SSOThemeHelper.h"
 
 @interface SSOLoginViewController ()
 @property(weak, nonatomic) IBOutlet UIView *loginContainerView;
@@ -26,6 +27,7 @@
 @property(weak, nonatomic) IBOutlet SSOCustomSignInButton *loginButton;
 @property(weak, nonatomic) IBOutlet SSOCustomSignInButton *signUpButton;
 @property(weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property(weak, nonatomic) IBOutlet UILabel *registrationLabel;
 
 @end
 
@@ -69,6 +71,7 @@
  */
 - (void)setUI {
 
+    self.registrationLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
     self.loginView.backgroundColor = [UIColor clearColor];
     self.loginContainerView.backgroundColor = [UIColor clearColor];
 
@@ -77,7 +80,9 @@
     self.registerContainerView.hidden = YES;
 
     self.loginButton.selected = YES;
+    self.loginButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
     self.signUpButton.selected = NO;
+    self.signUpButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
 }
 
 /**
@@ -205,14 +210,14 @@
 
 - (void)didLoginWithInfo:(NSDictionary *)info {
 
+    // Login the user
+    [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
+
     // Login on the backend
     [WKWinkConnect winkConnectLoginWithUsername:[info valueForKey:@"username"]
         password:[info valueForKey:@"password"]
         meta:nil
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-          // Login the user
-          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
 
           [self dismissViewControllerAnimated:YES
                                    completion:^{
@@ -236,6 +241,8 @@
 
 - (void)didRegisterWithInfo:(NSDictionary *)info andMeta:(NSDictionary *)meta {
 
+    [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
+
     [WKWinkConnect winkConnectRegisterWithEmail:[info valueForKey:@"email"]
         password:[info valueForKey:@"password"]
         username:[info valueForKey:@"username"]
@@ -244,8 +251,6 @@
         birthday:[info valueForKey:@"birthday"]
         meta:meta
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-          [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
 
           [self dismissViewControllerAnimated:YES
                                    completion:^{
@@ -267,6 +272,10 @@
           [[SSSessionManager sharedInstance] logoutCurrentUser];
 
         }];
+}
+
+- (void)didNotFillAllFields {
+    [SVProgressHUD showErrorWithStatus:@"Missing fields. Check the fields"];
 }
 
 @end

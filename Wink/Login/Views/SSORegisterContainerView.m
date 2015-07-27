@@ -32,9 +32,8 @@
 @implementation SSORegisterContainerView
 
 - (void)awakeFromNib {
-
-    [self setUpPickerViewForBirthday];
-    self.buttonSignUp.layer.cornerRadius = 4;
+    [super awakeFromNib];
+    [self setupUI];
 }
 
 /**
@@ -66,8 +65,19 @@
  *  Setup the view UI
  */
 - (void)setupUI {
+    [self setUpPickerViewForBirthday];
+    [self.buttonSignUp setTitle:@"Sign up" forState:UIControlStateNormal];
+    self.buttonSignUp.layer.cornerRadius = 4;
+    [self.buttonSignUp setBackgroundColor:[SSOThemeHelper firstColor]];
     [self setBackgroundColor:[SSOThemeHelper thirdColor]];
     [self.buttonSignUp setBackgroundColor:[SSOThemeHelper firstColor]];
+    self.buttonSignUp.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
+    self.textFieldFirstName.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.textFieldLastName.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.textFieldEmail.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.textFieldUsername.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.textFieldPassword.font = [SSOThemeHelper avenirLightFontWithSize:14];
+    self.textFieldBirthday.font = [SSOThemeHelper avenirLightFontWithSize:14];
 }
 
 #pragma mark - Animations
@@ -165,14 +175,14 @@
     for (UIView *viewContainingTextFields in self.subviews) {
         // Loop into all subviews
         for (UIView *textFieldView in viewContainingTextFields.subviews) {
-            // Check if subview is a textField
-            if ([textFieldView isKindOfClass:[UITextField class]]) {
+            // Check if subview is a textField and not hidden (we hide the useless fields for Apple)
+            if ([textFieldView isKindOfClass:[UITextField class]] && !textFieldView.hidden) {
                 // Cast the view into a textField to access class methods
                 UITextField *textField = (UITextField *)textFieldView;
                 // Check if the textField is empty
                 if (textField.text.length == 0) {
                     // Display an alert if the textField is empty
-                    [UIAlertView showWithTitle:@"Missing fields" message:@"Check the fields" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:nil];
+                    [self.delegate didNotFillAllFields];
                     return NO;
                 }
             }

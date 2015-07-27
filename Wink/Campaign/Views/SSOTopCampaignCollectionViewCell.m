@@ -7,7 +7,7 @@
 //
 
 #import "SSOTopCampaignCollectionViewCell.h"
-#import <SSBaseViewCellProtocol.h>
+#import "SSBaseViewCellProtocol.h"
 #import "SSOCampaign.h"
 #import "SSOThemeHelper.h"
 #import <SDWebImage/UIImageView+WebCache.h>

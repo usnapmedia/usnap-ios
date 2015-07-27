@@ -7,8 +7,10 @@
 //
 
 #import "SSOCampaignTableViewCell.h"
-#import <SSBaseViewCellProtocol.h>
+#import "SSBaseViewCellProtocol.h"
+#import "SSOThemeHelper.h"
 #import "SSOCampaign.h"
+#import "SSOThemeHelper.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SSOCampaignTableViewCell () <SSBaseViewCellProtocol>
@@ -32,7 +34,12 @@
 - (void)configureCell:(id)cellData {
     NSAssert([cellData isKindOfClass:[SSOCampaign class]], @"Cell data has to be a SSOCampaign class");
     if ([cellData isKindOfClass:[SSOCampaign class]]) {
+        self.numberSharesLabel.textColor = [SSOThemeHelper firstColor];
+        self.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
+        self.numberSharesLabel.font = [SSOThemeHelper avenirLightFontWithSize:14];
+        self.descriptionLabel.font = [SSOThemeHelper avenirLightFontWithSize:13];
         SSOCampaign *campaign = cellData;
+        self.numberSharesLabel.textColor = [SSOThemeHelper firstColor];
         [self.activityIndicator startAnimating];
         [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:campaign.bannerImgUrl]
                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -41,7 +48,11 @@
                                       }];
         self.titleLabel.text = campaign.name;
         self.descriptionLabel.text = campaign.prize;
-        NSNumber *numberOfShares = [NSNumber numberWithInt:0];
+
+        // Convert media shared to display properly
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber *numberOfShares = [f numberFromString:campaign.mediaShared];
         //@FIXME numberOfShares
         if ([numberOfShares integerValue] > 1) {
             self.numberSharesLabel.text = [NSString stringWithFormat:NSLocalizedString(@"profile-page.campaign.share-label-plural", nil), numberOfShares];

@@ -19,17 +19,6 @@
 
 @implementation SSOImageCollectionViewCell
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        self.imageView = [[UIImageView alloc] init];
-        [self.contentView addSubview:self.imageView];
-        [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [self.imageView setClipsToBounds:YES];
-    }
-
-    return self;
-}
-
 - (void)configureCell:(id)cellData {
     NSAssert([cellData isKindOfClass:[SSOSnap class]], @"Celldata has to be of SSOSnap type");
 
@@ -46,9 +35,9 @@
             }];
         }
 
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.data.url]];
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.data.thumbUrl]];
 
-        NSLog(@" %@", NSStringFromCGRect(self.imageView.frame));
+        //        NSLog(@" %@", NSStringFromCGRect(self.imageView.frame));
     }
 }
 

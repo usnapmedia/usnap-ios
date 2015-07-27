@@ -11,15 +11,15 @@ extern NSString *const kCurrentUserStatusChanged;
 
 extern NSString *const kSchemeFacebook;
 extern NSString *const kSchemeGooglePlus;
-
-#pragma mark - API constants
-
 extern NSString *const kTwitterConsumerSecret;
 extern NSString *const kTwitterConsumerKey;
 extern NSString *const kTwitterMediaUploadURL;
 extern NSString *const kTwitterTweetUploadURL;
 extern NSString *const kGoogleClientId;
+extern NSString *const kSegmentIoKey;
 extern NSString *const kAPIUrl;
+extern NSString *const kAPIKey;
+extern NSString *const kAPIValue;
 
 #pragma mark - Notifications
 
@@ -76,6 +76,7 @@ extern NSString *const kCameraContainerSegue;
 #define kSliderMinimumValue 0.0f
 #define kSliderMaximumValue 1.0f
 #define kSliderDefaultValue 0.5f
+#define kTabBarHeight 40
 
 #define kScreenSize [UIScreen mainScreen].bounds.size
 
@@ -84,6 +85,11 @@ extern NSString *const kCameraContainerSegue;
 extern NSInteger const kTopViewHeightConstraint;
 extern NSInteger const kConstraintOffset;
 extern NSInteger const kButtonWidthConstraint;
+extern NSInteger const kNumberOfTopPhotos;
+
+#pragma mark - Video
+
+extern NSInteger const kDefaultAnimationDuration;
 
 #pragma mark - Cells
 extern NSString *const kTopPhotosNib;
@@ -96,3 +102,4 @@ extern NSString *const kPhotosNibNameCollectionViewCell;
 #pragma mark - Notifications
 
 extern NSString *const kReturnToFanPageVC;
+extern NSString *const kDeviceOrientationNotification;

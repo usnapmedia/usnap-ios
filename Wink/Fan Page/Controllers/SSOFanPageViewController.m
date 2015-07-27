@@ -11,12 +11,15 @@
 #import "SSSessionManager.h"
 #import "WKWinkConnect.h"
 #import "SSOCountableItems.h"
+#import "Constants.h"
 #import "SSOSnap.h"
 #import "SSOTopPhotosViewController.h"
 #import "SSORecentPhotosViewController.h"
 #import "SSOFeedConnect.h"
 #import "SSOThemeHelper.h"
+#import "SSSessionManager.h"
 #import "SSOScreenSizeHelper.h"
+#import <SEGAnalytics.h>
 #import <Masonry.h>
 
 @interface SSOFanPageViewController () <TopContainerFanPageDelegate>
@@ -79,6 +82,14 @@
 - (void)initializeUI {
     //@FIXME
     self.customNavigationBar.backgroundColor = [UIColor blackColor];
+    //    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    //    CGFloat screenHeight = screenRect.size.height;
+    //    CGFloat viewsHeight = kTabBarHeight + self.customNavigationBar.frame.size.height + self.campaignViewControllerContainer.frame.size.height +
+    //    self.topPhotosViewControllerContainer.frame.size.height;
+    //    CGFloat recentPhotosHeight = screenHeight - viewsHeight;
+    //    [self.recentPhotosViewControllerContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+    //      make.bottom.equalTo(self.view);
+    //    }];
 }
 
 - (void)initializeCampaignTopViewControllerWithCampaigns:(NSArray *)campaigns {
@@ -144,14 +155,15 @@
 - (void)loadCampaigns {
 
     [WKWinkConnect getCampaignsWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOCampaign class]];
-        [self initializeCampaignTopViewControllerWithCampaigns:items.response];
-        NSAssert([[items.response firstObject] isKindOfClass:[SSOCampaign class]], @"Need to pass a campaign object here");
-        //Set current campaign to be the first campaign
-        self.currentCampaign = [items.response firstObject];
-        //Load top photos and recent photos
-        [self loadTopPhotos];
-        [self loadRecentPhotos];
+      SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOCampaign class]];
+      [self initializeCampaignTopViewControllerWithCampaigns:items.response];
+      NSAssert([[items.response firstObject] isKindOfClass:[SSOCampaign class]], @"Need to pass a campaign object here");
+      // Set current campaign to be the first campaign
+      self.currentCampaign = [items.response firstObject];
+      [[SSSessionManager sharedInstance] setCampaignID:self.currentCampaign.id];
+      // Load top photos and recent photos
+      [self loadTopPhotos];
+      [self loadRecentPhotos];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){
 
     }];
@@ -165,6 +177,7 @@
     [self.topPhotosVC displayLoadingOverlay];
 
     [SSOFeedConnect getTopPhotosForCampaignId:self.currentCampaign.id
+        withParameters:nil
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
           [self.topPhotosVC setData:items.response withCellNib:kTopPhotosNib andCellReusableIdentifier:kTopPhotosReusableId];
@@ -183,10 +196,23 @@
     [self.recentPhotosVC displayLoadingOverlay];
 
     [SSOFeedConnect getRecentPhotosForCampaignId:self.currentCampaign.id
+        withParameters:nil
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           // Set the recent photos
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
-          [self.recentPhotosVC setInputData:items.response.mutableCopy];
+          NSUInteger maxPhotos = MIN(kNumberOfTopPhotos, [items.response count]);
+          NSMutableArray *subarray = [[items.response subarrayWithRange:NSMakeRange(0, maxPhotos)] mutableCopy];
+          [self.recentPhotosVC setInputData:subarray];
+
+          NSInteger numberOfRows = ceil([subarray count] / 5.0f);
+          NSInteger cellHeight = ([[UIScreen mainScreen] bounds].size.width / 5.0f) - 1.f;
+          CGFloat size = numberOfRows * cellHeight + kTopViewHeightConstraint;
+          //              ((round([items.response count] * 2.0) / 2.0) / 5.0) * ([[UIScreen mainScreen] bounds].size.width / 5 + padding) +
+          //              kTopViewHeightConstraint;
+          [self.recentPhotosViewControllerContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo([NSNumber numberWithFloat:size]);
+          }];
+          [self.view layoutIfNeeded];
           // Hide the loading overlay
           [self.recentPhotosVC hideLoadingOverlay];
         }
@@ -205,7 +231,7 @@
 
     // Set the new campagin ID
     [[SSSessionManager sharedInstance] setCampaignID:newCampaign.id];
-
+    [[SEGAnalytics sharedAnalytics] track:@"Viewed Campaign" properties:@{ @"New Campaign ID" : newCampaign.id }];
     self.currentCampaign = newCampaign;
     // Load new photos
     [self loadTopPhotos];

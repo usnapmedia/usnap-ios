@@ -9,7 +9,7 @@
 #import "SSOCampaignViewController.h"
 #import "SSOCampaign.h"
 #import "SSOCampaignDetailViewController.h"
-#import <SSOSimpleTableViewProvider.h>
+#import "SSOSimpleTableViewProvider.h"
 #import <Masonry.h>
 
 NSString *const kCampaignTableViewCell = @"CampaignTableViewCell";
@@ -81,9 +81,5 @@ CGFloat const kTableViewCellHeight = 125.0f;
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

@@ -43,6 +43,9 @@ NSInteger const kRecentPhotosCellOffset = 10;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    // Remove the images as they can be reloade anyway
+    NSLog(@"Clearing the images");
+    self.provider.inputData = nil;
 }
 
 #pragma mark - Initialization
@@ -61,9 +64,10 @@ NSInteger const kRecentPhotosCellOffset = 10;
 
     // Set the flow layout
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     // Initialize the view
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
+    [self.collectionView setScrollEnabled:NO];
     // Add pagging on top and bottom
     self.collectionView.contentInset = UIEdgeInsetsMake(2.5, 2, 2.5, 2);
     //@TODO Generic?
@@ -111,7 +115,7 @@ NSInteger const kRecentPhotosCellOffset = 10;
     }];
 
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.left.and.right.and.bottom.equalTo(self.view);
+      make.left.and.bottom.and.right.equalTo(self.view);
       make.top.equalTo(self.topView.mas_bottom);
     }];
 
@@ -146,6 +150,7 @@ NSInteger const kRecentPhotosCellOffset = 10;
  *  @param data the data
  */
 - (void)setInputData:(NSMutableArray *)data {
+
     self.provider.inputData = data;
     [self.collectionView reloadData];
 }
@@ -170,6 +175,7 @@ NSInteger const kRecentPhotosCellOffset = 10;
 
 - (void)seeAllTopSnapsAction {
     SSOSnapViewController *snapVC = [SSOSnapViewController new];
+    snapVC.isTopPhotos = NO;
     [self.navigationController pushViewController:snapVC animated:YES];
 }
 

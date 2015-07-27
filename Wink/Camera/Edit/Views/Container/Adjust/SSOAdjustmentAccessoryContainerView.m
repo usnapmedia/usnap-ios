@@ -22,6 +22,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    [self.brightnessButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.contrastButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.brightnessButton centerVertically];
     [self.contrastButton centerVertically];
 }
@@ -31,10 +33,14 @@
 }
 
 - (IBAction)brightnessButtonPressed:(id)sender {
+    [self.brightnessButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.contrastButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.delegate adjustmentContainerDidPressBrightness:self];
 }
 
 - (IBAction)contrastButtonPressed:(id)sender {
+    [self.brightnessButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [self.contrastButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.delegate adjustmentContainerDidPressContrast:self];
 }
 

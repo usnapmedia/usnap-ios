@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SSOUser.h"
 
 @interface SSOSettingsViewController : UIViewController
+
+@property(strong, nonatomic) SSOUser *currentUser;
 
 @end

@@ -76,6 +76,20 @@
                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
+ *  Post a video to the backend with multipart form data
+ *
+ *  @param URLOfVideoToPost The URL of the video to post
+ *  @param text        the text that goes with the video
+ *  @param success     success block
+ *  @param failure     failure block
+ */
++ (void)winkConnectPostVideoToBackend:(NSURL *)URLOfVideoToPost
+                             withText:(NSString *)text
+                         overlayImage:(UIImage *)overlayImage
+                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
  *  Get the current campaigns from backend
  *
  *  @param success success block

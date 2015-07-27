@@ -37,6 +37,7 @@
     self.viewTenPoints.layer.cornerRadius = self.viewTenPoints.frame.size.width/2;
     self.viewFivePoints.layer.cornerRadius = self.viewFivePoints.frame.size.width/2;
     self.viewFifteenPoints.layer.cornerRadius = self.viewFifteenPoints.frame.size.width/2;
+    self.viewFivePoints.backgroundColor = [UIColor redColor];
 }
 
 /**

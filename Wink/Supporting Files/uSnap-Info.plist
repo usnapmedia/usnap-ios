@@ -30,23 +30,13 @@
 				<string>fb465899996898725</string>
 			</array>
 		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>com.samsao.winktalent</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.samsao.winktalent</string>
-			</array>
-		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>16</string>
+	<string>45</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
-		<string>369cc275b13fc2a69f58dc6067c6ceb6fb776650</string>
+		<string>2a095b85365a5eaa245c88f0af9d08379dc72ee7</string>
 		<key>Kits</key>
 		<array>
 			<dict>
@@ -59,10 +49,16 @@
 				<key>KitInfo</key>
 				<dict>
 					<key>consumerKey</key>
-					<string>2KxV5xnKkYn2X2jkxRLANgpAG</string>
+					<string>gM1Npf5NXKWUYfvZS6fmKB99O</string>
 					<key>consumerSecret</key>
-					<string>wzXlY5X2VNP2HA14pSVWxxj0XCTxVL6MRnPm8BYGIs3JesI1Ef</string>
+					<string>O3MJMuO1dSRVfjHbYQH9fGkg5XuhUHcigEGmKUxEmagiLowXpa</string>
 				</dict>
+				<key>KitName</key>
+				<string>Digits</string>
+			</dict>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
 				<key>KitName</key>
 				<string>Twitter</string>
 			</dict>
@@ -71,7 +67,7 @@
 	<key>FacebookAppID</key>
 	<string>465899996898725</string>
 	<key>FacebookDisplayName</key>
-	<string>Wink Talent</string>
+	<string>uSnap</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

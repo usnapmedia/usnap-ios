@@ -12,16 +12,18 @@
 #import "SSOFanPageViewController.h"
 #import "SSOProfileViewController.h"
 #import "SSOViewControllerWithLiveFeed.h"
+#import "SSSessionManager.h"
+#import "SSOLoginViewController.h"
+#import <SEGAnalytics.h>
 #import "SSOThemeHelper.h"
 
 #import <Masonry.h>
 
-NSInteger const kTabBarHeight = 40;
-
-@interface SSOViewControllerWithTabBar ()
+@interface SSOViewControllerWithTabBar () <SSOLoginRegisterDelegate>
 
 @property(strong, nonatomic) UIView *customTabBar;
 @property(strong, nonatomic) UIButton *homeButton;
+@property(strong, nonatomic) UIButton *profileButton;
 
 @property(strong, nonatomic) NSArray *viewControllers;
 @property(nonatomic) NSInteger selectedIndex;
@@ -41,8 +43,7 @@ NSInteger const kTabBarHeight = 40;
     [self setNotification];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
@@ -105,6 +106,7 @@ NSInteger const kTabBarHeight = 40;
     [homeButton setBackgroundColor:[SSOThemeHelper tabBarSelectedColor]];
     [homeButton setImage:[UIImage imageNamed:@"ic_home"] forState:UIControlStateNormal];
     [homeButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [homeButton setExclusiveTouch:YES];
     [homeButton addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.customTabBar addSubview:homeButton];
     self.homeButton = homeButton;
@@ -120,6 +122,7 @@ NSInteger const kTabBarHeight = 40;
     [profileButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [profileButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.customTabBar addSubview:profileButton];
+    self.profileButton = profileButton;
 
     // Set constraints for the button
     [cameraButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -163,11 +166,12 @@ NSInteger const kTabBarHeight = 40;
  *  @param newVC the view to be displayed
  */
 
-- (void)switchCurrentViewControllerToNewViewController:(UIViewController *)newVC {
+- (void)switchCurrentViewControllerToNewViewController:(UINavigationController *)newVC {
     UIViewController *oldVC = [self.viewControllers objectAtIndex:self.selectedIndex];
     [oldVC willMoveToParentViewController:nil];
     [self addChildViewController:newVC];
     newVC.view.frame = [self containerViewFrame];
+    [newVC popToRootViewControllerAnimated:NO];
 
     // It does the transition from one view to the other
 
@@ -241,6 +245,7 @@ NSInteger const kTabBarHeight = 40;
 
 - (void)cameraButtonPressed:(id)sender {
     UINavigationController *cameraNavigationController = [[UIStoryboard cameraStoryboard] instantiateInitialViewController];
+    [[SEGAnalytics sharedAnalytics] track:@"Camera Started"];
     [self presentViewController:cameraNavigationController animated:YES completion:nil];
 }
 
@@ -251,13 +256,29 @@ NSInteger const kTabBarHeight = 40;
  */
 
 - (void)profileButtonPressed:(id)sender {
-    if (self.selectedIndex != 1) {
-        [self switchCurrentViewControllerToNewViewController:[self.viewControllers lastObject]];
-        self.selectedIndex = 1;
+    if ([[SSSessionManager sharedInstance] isUserLoggedIn]) {
+        if (self.selectedIndex != 1) {
+            [self switchCurrentViewControllerToNewViewController:[self.viewControllers lastObject]];
+            self.selectedIndex = 1;
+        }
+        UIButton *button = (UIButton *)sender;
+        [self unselectedButtonsTabBarWithSender:button];
+        [button setBackgroundColor:[SSOThemeHelper tabBarSelectedColor]];
+    } else {
+        SSOLoginViewController *loginVC = [SSOLoginViewController new];
+        loginVC.delegate = self;
+        // Present VC
+        [self presentViewController:loginVC animated:YES completion:nil];
     }
-    UIButton *button = (UIButton *)sender;
-    [self unselectedButtonsTabBarWithSender:button];
-    [button setBackgroundColor:[SSOThemeHelper tabBarSelectedColor]];
+}
+
+#pragma mark - SSOLoginRegisterDelegate
+
+/**
+ *  Called when the loginVC is dismissed
+ */
+- (void)didFinishAuthProcess {
+    [self profileButtonPressed:self.profileButton];
 }
 
 @end

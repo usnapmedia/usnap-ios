@@ -50,9 +50,9 @@
             @"email" : email,
             @"password" : password,
             @"username" : username,
-            @"first_name" : firstName,
-            @"last_name" : lastName,
-            @"dob" : birthday,
+            //            @"first_name" : firstName,
+            //            @"last_name" : lastName,
+            //            @"dob" : birthday,
             @"meta" : meta
         } success:success
            failure:failure];
@@ -98,6 +98,37 @@
     [manager POST:url parameters:parameters
         constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
           [formData appendPartWithFileData:imageData name:@"image_data" fileName:temporaryFileName mimeType:@"image/jpg"];
+        } success:success failure:failure];
+}
+
++ (void)winkConnectPostVideoToBackend:(NSURL *)URLOfVideoToPost
+                             withText:(NSString *)text
+                         overlayImage:(UIImage *)overlayImage
+                              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSString *url = [NSString stringWithFormat:@"share/video"];
+    NSData *videoData = [NSData dataWithContentsOfURL:URLOfVideoToPost];
+    NSData *imageData = UIImagePNGRepresentation(overlayImage);
+
+    SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
+    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    // We need to reset the contentTypes here as we are setting a new responseSerializer
+    responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    manager.responseSerializer = responseSerializer;
+
+    // TODO: Temporary fix because problem with backend
+    NSMutableDictionary *parameters = [[SSOSocialNetworkAPI sharedInstance] connectedSocialNetworkAPIParameters].mutableCopy;
+    [parameters addEntriesFromDictionary:@{ @"text" : text }];
+    // If the user participate in a campaign, send it
+    if ([SSSessionManager sharedInstance].campaignID) {
+        [parameters addEntriesFromDictionary:@{ @"campaign_id" : [SSSessionManager sharedInstance].campaignID }];
+    }
+    [manager POST:url parameters:parameters
+        constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+          [formData appendPartWithFileData:videoData name:@"video_data" fileName:@"video.mp4" mimeType:@"video/mp4"];
+          if (overlayImage) {
+              [formData appendPartWithFileData:imageData name:@"image_data" fileName:@"overlay.png" mimeType:@"image/png"];
+          }
         } success:success failure:failure];
 }
 

@@ -8,7 +8,7 @@
 
 #import "SSOPhotosCollectionViewCell.h"
 #import "SSOSnap.h"
-#import <SSBaseViewCellProtocol.h>
+#import "SSBaseViewCellProtocol.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SSOPhotosCollectionViewCell () <SSBaseViewCellProtocol>
@@ -20,6 +20,16 @@
 
 @implementation SSOPhotosCollectionViewCell
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceChangedOrientation:) name:kDeviceOrientationNotification object:nil];
+    }
+    return self;
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 /**
  *  Fill the cell with all the information needed
  *
@@ -31,11 +41,43 @@
     if ([cellData isKindOfClass:[SSOSnap class]]) {
         SSOSnap *snap = cellData;
         [self.activityIndicator startAnimating];
-        [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:snap.url]
+        [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:snap.thumbUrl]
                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                         [self.activityIndicator stopAnimating];
                                       }];
     }
+}
+
+- (void)deviceChangedOrientation:(NSNotification *)notification {
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    switch (orientation) {
+    case UIDeviceOrientationPortrait: {
+        [self rotateButtons:0];
+        break;
+    }
+
+    case UIDeviceOrientationLandscapeLeft: {
+        [self rotateButtons:M_PI_2];
+        break;
+    }
+    case UIDeviceOrientationLandscapeRight: {
+        [self rotateButtons:-M_PI_2];
+        break;
+    }
+    default: { break; }
+    }
+}
+
+- (void)rotateButtons:(CGFloat)rotation {
+    [UIView animateWithDuration:0.25f
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+
+                       self.transform = CGAffineTransformMakeRotation(rotation);
+
+                     }
+                     completion:nil];
 }
 
 @end

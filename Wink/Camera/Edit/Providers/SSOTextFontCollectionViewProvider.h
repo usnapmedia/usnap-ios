@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
-#import <SSOSimpleCollectionViewProvider.h>
+#import "SSOSimpleCollectionViewProvider.h"
 
 @interface SSOTextFontCollectionViewProvider : SSOSimpleCollectionViewProvider
 

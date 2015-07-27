@@ -7,6 +7,8 @@
 //
 
 #import "SSORoundedAnimatedButton.h"
+#import "SSOThemeHelper.h"
+#import "Constants.h"
 
 @interface SSORoundedAnimatedButton ()
 
@@ -14,6 +16,8 @@
 @property(strong, nonatomic) NSMutableArray *layersArray;
 
 @end
+
+CGFloat const kMinimumLongPressTime = 0.5f;
 
 @implementation SSORoundedAnimatedButton
 
@@ -34,6 +38,32 @@
     [self.layer removeAllAnimations];
 }
 
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+
+    CGRect borderRect = CGRectInset(rect, 8, 8);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
+    UIColor *defaultColor = [SSOThemeHelper firstColor];
+    CGFloat red;
+    CGFloat green;
+    CGFloat blue;
+    CGFloat alpha;
+    if ([defaultColor respondsToSelector:@selector(getRed:green:blue:alpha:)]) {
+        [defaultColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    } else {
+        const CGFloat *components = CGColorGetComponents(defaultColor.CGColor);
+        red = components[0];
+        green = components[1];
+        blue = components[2];
+        alpha = components[3];
+    }
+    CGContextSetRGBFillColor(context, red, green, blue, alpha);
+    CGContextSetLineWidth(context, 3.0);
+    CGContextFillEllipseInRect(context, borderRect);
+    CGContextStrokeEllipseInRect(context, borderRect);
+    CGContextFillPath(context);
+}
 
 - (void)addLongTagGestureRecognizer {
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
@@ -67,9 +97,9 @@
 
     // Configure animation
     CABasicAnimation *drawAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    drawAnimation.delegate = self;
 
     drawAnimation.duration = self.animationDuration;
-
     drawAnimation.repeatCount = 1.0; // Animate only once
 
     // Animate from no part of the stroke being drawn to the entire stroke being
@@ -108,20 +138,26 @@
 
 - (void)longPress:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"Long Press began");
+        //        NSLog(@"Long Press began");
         [self startAnimation];
         [self.delegate didStartLongPressGesture:self];
     }
 
     if (gesture.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"Long Press");
-
+        //        NSLog(@"Long Press");
         [self.delegate didFinishLongPressGesture:self];
     }
 
     if (gesture.state == UIGestureRecognizerStateChanged) {
-        NSLog(@"Gesture changed");
+        //        NSLog(@"Gesture changed");
     }
+}
+
+#pragma mark - CAAnimationDelegate
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    // Call the delegate when the animation is done
+    [self.delegate didFinishLongPressGesture:self];
 }
 
 #pragma mark - Lazy instantiations
@@ -162,7 +198,7 @@
 - (float)animationDuration {
 
     if (!_animationDuration) {
-        _animationDuration = 6;
+        _animationDuration = kDefaultAnimationDuration;
     }
 
     return _animationDuration;
@@ -171,7 +207,7 @@
 - (float)minimumPressDuration {
 
     if (!_minimumPressDuration) {
-        _minimumPressDuration = 0.5;
+        _minimumPressDuration = kMinimumLongPressTime;
     }
 
     return _minimumPressDuration;

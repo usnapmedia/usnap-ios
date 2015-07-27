@@ -11,7 +11,11 @@
 @implementation SSOThemeHelper
 
 + (UIColor *)firstColor {
+#ifdef NEOMEDIA
+    return [UIColor colorWithRed:235.f / 255.f green:0.f / 255.f blue:40.f / 255.f alpha:1];
+#else
     return [UIColor colorWithRed:62.f / 255.f green:75.f / 255.f blue:199.f / 255.f alpha:1];
+#endif
 }
 
 + (UIColor *)firstSecondaryColor {
