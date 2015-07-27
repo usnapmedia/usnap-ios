@@ -119,9 +119,6 @@
 		D830F4241ACDDBF1002A503D /* UIView+WKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4191ACDDBF1002A503D /* UIView+WKAdditions.m */; };
 		D85B35391AF29F640011B26D /* SSOPhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85B35371AF29F640011B26D /* SSOPhotoDetailViewController.m */; };
 		D85B353A1AF29F640011B26D /* SSOPhotoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D85B35381AF29F640011B26D /* SSOPhotoDetailViewController.xib */; };
-		D8621E2B1B0E9BA700489AC9 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = D8621E281B0E9BA700489AC9 /* Appfile */; };
-		D8621E2C1B0E9BA700489AC9 /* Deliverfile in Resources */ = {isa = PBXBuildFile; fileRef = D8621E291B0E9BA700489AC9 /* Deliverfile */; };
-		D8621E2D1B0E9BA700489AC9 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = D8621E2A1B0E9BA700489AC9 /* Fastfile */; };
 		D86688191AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86688181AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m */; };
 		D86E08F01AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08EF1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.m */; };
 		D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A21ACF492000CFF801 /* SSOFacebookLoginButton.m */; };
@@ -129,6 +126,17 @@
 		D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */; };
 		D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */; };
 		D879F68D1B4B182D009E2C16 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D879F68A1B4B182D009E2C16 /* TwitterCore.framework */; };
+		D8849AE21B66838000382D13 /* SSFacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8849AC61B66838000382D13 /* SSFacebookHelper.m */; };
+		D8849AE31B66838000382D13 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D8849AC71B66838000382D13 /* LICENSE */; };
+		D8849AE41B66838000382D13 /* SSCellViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D8849ACC1B66838000382D13 /* SSCellViewItem.m */; };
+		D8849AE51B66838000382D13 /* SSCellViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = D8849ACE1B66838000382D13 /* SSCellViewSection.m */; };
+		D8849AE61B66838000382D13 /* SSOBaseCollectionViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D8849AD51B66838000382D13 /* SSOBaseCollectionViewProvider.m */; };
+		D8849AE71B66838000382D13 /* SSOBaseProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D8849AD71B66838000382D13 /* SSOBaseProvider.m */; };
+		D8849AE81B66838000382D13 /* SSOBaseTableViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D8849AD91B66838000382D13 /* SSOBaseTableViewProvider.m */; };
+		D8849AE91B66838000382D13 /* SSOSimpleCollectionViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D8849ADC1B66838000382D13 /* SSOSimpleCollectionViewProvider.m */; };
+		D8849AEA1B66838000382D13 /* SSOSimpleProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D8849ADE1B66838000382D13 /* SSOSimpleProvider.m */; };
+		D8849AEB1B66838000382D13 /* SSOSimpleTableViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D8849AE01B66838000382D13 /* SSOSimpleTableViewProvider.m */; };
+		D8849AEC1B66838000382D13 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D8849AE11B66838000382D13 /* LICENSE */; };
 		D898E1D31AF1622500C957DC /* SSOCampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D898E1C61AF1622500C957DC /* SSOCampaignViewController.m */; };
 		D898E1D41AF1622500C957DC /* SSOMyFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D898E1C81AF1622500C957DC /* SSOMyFeedViewController.m */; };
 		D898E1D51AF1622500C957DC /* SSOProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D898E1CA1AF1622500C957DC /* SSOProfileViewController.m */; };
@@ -542,9 +550,6 @@
 		D85B35361AF29F640011B26D /* SSOPhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOPhotoDetailViewController.h; sourceTree = "<group>"; };
 		D85B35371AF29F640011B26D /* SSOPhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOPhotoDetailViewController.m; sourceTree = "<group>"; };
 		D85B35381AF29F640011B26D /* SSOPhotoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOPhotoDetailViewController.xib; sourceTree = "<group>"; };
-		D8621E281B0E9BA700489AC9 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
-		D8621E291B0E9BA700489AC9 /* Deliverfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Deliverfile; sourceTree = "<group>"; };
-		D8621E2A1B0E9BA700489AC9 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		D86688171AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOGrayBackgroundWithBorderView.h; sourceTree = "<group>"; };
 		D86688181AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOGrayBackgroundWithBorderView.m; sourceTree = "<group>"; };
 		D86E08EE1AE6BDEA00711579 /* SSOHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -558,6 +563,28 @@
 		D86E94AB1ACF492000CFF801 /* SSBaseCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseCollectionView.h; sourceTree = "<group>"; };
 		D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBaseCollectionView.m; sourceTree = "<group>"; };
 		D879F68A1B4B182D009E2C16 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
+		D8849AC51B66838000382D13 /* SSFacebookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookHelper.h; sourceTree = "<group>"; };
+		D8849AC61B66838000382D13 /* SSFacebookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFacebookHelper.m; sourceTree = "<group>"; };
+		D8849AC71B66838000382D13 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D8849ACB1B66838000382D13 /* SSCellViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewItem.h; sourceTree = "<group>"; };
+		D8849ACC1B66838000382D13 /* SSCellViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewItem.m; sourceTree = "<group>"; };
+		D8849ACD1B66838000382D13 /* SSCellViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewSection.h; sourceTree = "<group>"; };
+		D8849ACE1B66838000382D13 /* SSCellViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewSection.m; sourceTree = "<group>"; };
+		D8849AD01B66838000382D13 /* SSBaseViewCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseViewCellProtocol.h; sourceTree = "<group>"; };
+		D8849AD11B66838000382D13 /* SSOProviderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOProviderDelegate.h; sourceTree = "<group>"; };
+		D8849AD41B66838000382D13 /* SSOBaseCollectionViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseCollectionViewProvider.h; sourceTree = "<group>"; };
+		D8849AD51B66838000382D13 /* SSOBaseCollectionViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseCollectionViewProvider.m; sourceTree = "<group>"; };
+		D8849AD61B66838000382D13 /* SSOBaseProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseProvider.h; sourceTree = "<group>"; };
+		D8849AD71B66838000382D13 /* SSOBaseProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseProvider.m; sourceTree = "<group>"; };
+		D8849AD81B66838000382D13 /* SSOBaseTableViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseTableViewProvider.h; sourceTree = "<group>"; };
+		D8849AD91B66838000382D13 /* SSOBaseTableViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseTableViewProvider.m; sourceTree = "<group>"; };
+		D8849ADB1B66838000382D13 /* SSOSimpleCollectionViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSimpleCollectionViewProvider.h; sourceTree = "<group>"; };
+		D8849ADC1B66838000382D13 /* SSOSimpleCollectionViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSimpleCollectionViewProvider.m; sourceTree = "<group>"; };
+		D8849ADD1B66838000382D13 /* SSOSimpleProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSimpleProvider.h; sourceTree = "<group>"; };
+		D8849ADE1B66838000382D13 /* SSOSimpleProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSimpleProvider.m; sourceTree = "<group>"; };
+		D8849ADF1B66838000382D13 /* SSOSimpleTableViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOSimpleTableViewProvider.h; sourceTree = "<group>"; };
+		D8849AE01B66838000382D13 /* SSOSimpleTableViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOSimpleTableViewProvider.m; sourceTree = "<group>"; };
+		D8849AE11B66838000382D13 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D898E1C51AF1622500C957DC /* SSOCampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOCampaignViewController.h; sourceTree = "<group>"; };
 		D898E1C61AF1622500C957DC /* SSOCampaignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOCampaignViewController.m; sourceTree = "<group>"; };
 		D898E1C71AF1622500C957DC /* SSOMyFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOMyFeedViewController.h; sourceTree = "<group>"; };
@@ -714,7 +741,6 @@
 				270DFB0619AE71BE00067072 /* Images.xcassets */,
 				D8BD7E121B2608B30007DD36 /* Base.xcassets */,
 				D8BD7E101B26079A0007DD36 /* Neomedia.xcassets */,
-				D8621E271B0E9BA700489AC9 /* fastlane */,
 				270DFB1319AE71BE00067072 /* WinkTests */,
 				270DFAF319AE71BE00067072 /* Frameworks */,
 				270DFAF219AE71BE00067072 /* Products */,
@@ -764,6 +790,8 @@
 		270DFAFA19AE71BE00067072 /* Wink */ = {
 			isa = PBXGroup;
 			children = (
+				D8849AC31B66838000382D13 /* SSFacebookHelper */,
+				D8849AC81B66838000382D13 /* SSOBaseProvider */,
 				D86E08ED1AE6BDEA00711579 /* API */,
 				D8FBADA81AE933C8005D6C18 /* Base */,
 				3357233C1ACB097C000CC846 /* Camera */,
@@ -1299,16 +1327,6 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		D8621E271B0E9BA700489AC9 /* fastlane */ = {
-			isa = PBXGroup;
-			children = (
-				D8621E281B0E9BA700489AC9 /* Appfile */,
-				D8621E291B0E9BA700489AC9 /* Deliverfile */,
-				D8621E2A1B0E9BA700489AC9 /* Fastfile */,
-			);
-			path = fastlane;
-			sourceTree = "<group>";
-		};
 		D86E08ED1AE6BDEA00711579 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -1349,6 +1367,98 @@
 				D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		D8849AC31B66838000382D13 /* SSFacebookHelper */ = {
+			isa = PBXGroup;
+			children = (
+				D8849AC41B66838000382D13 /* Classes */,
+				D8849AC71B66838000382D13 /* LICENSE */,
+			);
+			path = SSFacebookHelper;
+			sourceTree = "<group>";
+		};
+		D8849AC41B66838000382D13 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D8849AC51B66838000382D13 /* SSFacebookHelper.h */,
+				D8849AC61B66838000382D13 /* SSFacebookHelper.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		D8849AC81B66838000382D13 /* SSOBaseProvider */ = {
+			isa = PBXGroup;
+			children = (
+				D8849AC91B66838000382D13 /* Classes */,
+				D8849AE11B66838000382D13 /* LICENSE */,
+			);
+			path = SSOBaseProvider;
+			sourceTree = "<group>";
+		};
+		D8849AC91B66838000382D13 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D8849ACA1B66838000382D13 /* Model */,
+				D8849ACF1B66838000382D13 /* Protocols */,
+				D8849AD21B66838000382D13 /* Providers */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		D8849ACA1B66838000382D13 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D8849ACB1B66838000382D13 /* SSCellViewItem.h */,
+				D8849ACC1B66838000382D13 /* SSCellViewItem.m */,
+				D8849ACD1B66838000382D13 /* SSCellViewSection.h */,
+				D8849ACE1B66838000382D13 /* SSCellViewSection.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D8849ACF1B66838000382D13 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D8849AD01B66838000382D13 /* SSBaseViewCellProtocol.h */,
+				D8849AD11B66838000382D13 /* SSOProviderDelegate.h */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D8849AD21B66838000382D13 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				D8849AD31B66838000382D13 /* Base */,
+				D8849ADA1B66838000382D13 /* Simple */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		D8849AD31B66838000382D13 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				D8849AD41B66838000382D13 /* SSOBaseCollectionViewProvider.h */,
+				D8849AD51B66838000382D13 /* SSOBaseCollectionViewProvider.m */,
+				D8849AD61B66838000382D13 /* SSOBaseProvider.h */,
+				D8849AD71B66838000382D13 /* SSOBaseProvider.m */,
+				D8849AD81B66838000382D13 /* SSOBaseTableViewProvider.h */,
+				D8849AD91B66838000382D13 /* SSOBaseTableViewProvider.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		D8849ADA1B66838000382D13 /* Simple */ = {
+			isa = PBXGroup;
+			children = (
+				D8849ADB1B66838000382D13 /* SSOSimpleCollectionViewProvider.h */,
+				D8849ADC1B66838000382D13 /* SSOSimpleCollectionViewProvider.m */,
+				D8849ADD1B66838000382D13 /* SSOSimpleProvider.h */,
+				D8849ADE1B66838000382D13 /* SSOSimpleProvider.m */,
+				D8849ADF1B66838000382D13 /* SSOSimpleTableViewProvider.h */,
+				D8849AE01B66838000382D13 /* SSOSimpleTableViewProvider.m */,
+			);
+			path = Simple;
 			sourceTree = "<group>";
 		};
 		D898E1C31AF1622500C957DC /* Profile */ = {
@@ -1740,12 +1850,12 @@
 				D85B353A1AF29F640011B26D /* SSOPhotoDetailViewController.xib in Resources */,
 				D8BD7E141B27E55C0007DD36 /* uSnap-Info.plist in Resources */,
 				D8D4F1811AE04B12002FDE38 /* Launch Screen.xib in Resources */,
+				D8849AEC1B66838000382D13 /* LICENSE in Resources */,
 				D810B8EE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
 				D810B8EF1ADF506500B3AC11 /* SSOColorPickerContainerView.xib in Resources */,
 				D898E1D61AF1622500C957DC /* SSOProfileViewController.xib in Resources */,
 				D8C83EA31AE1C74C00F187F1 /* InfoPlist.strings in Resources */,
 				FB832F5E1B0392FB0067A4FB /* SSOCampaignDetailViewController.xib in Resources */,
-				D8621E2D1B0E9BA700489AC9 /* Fastfile in Resources */,
 				D8C83EA41AE1C74C00F187F1 /* Localizable.strings in Resources */,
 				FB0F335E1AF2A3F100F6C735 /* SSOSnapViewController.xib in Resources */,
 				335723B31ACB097C000CC846 /* Camera.storyboard in Resources */,
@@ -1757,13 +1867,12 @@
 				D810B8F11ADF506500B3AC11 /* SSOFontCollectionViewCell.xib in Resources */,
 				3303DDD01AD84F19002B74F9 /* SSOLoginContainerView.xib in Resources */,
 				D810B8F21ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib in Resources */,
-				D8621E2C1B0E9BA700489AC9 /* Deliverfile in Resources */,
 				FBF9D1CC1AF2D3EC00FF5160 /* SSOPhotosCollectionViewCell.xib in Resources */,
 				D8EA5C8C1AD4287C008D2A37 /* SSOLoginViewController.xib in Resources */,
 				335C7FD71AF404D6005C2B2E /* Futura.ttc in Resources */,
+				D8849AE31B66838000382D13 /* LICENSE in Resources */,
 				D8E678041AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.xib in Resources */,
 				339841E91AEACC5C00605C67 /* SSOFanPageViewController.xib in Resources */,
-				D8621E2B1B0E9BA700489AC9 /* Appfile in Resources */,
 				335723DE1ACB097C000CC846 /* WKShareViewController.xib in Resources */,
 				270DFB0719AE71BE00067072 /* Images.xcassets in Resources */,
 				D8E678011AEEE5F6006B8CD8 /* SSOImageCollectionViewCell.xib in Resources */,
@@ -1952,23 +2061,30 @@
 				D817BECD1AEF1CDC0038DF8E /* SSOViewControllerWithTabBar.m in Sources */,
 				D8EA5C7C1AD4281B008D2A37 /* SSOSocialNetworkAPI.m in Sources */,
 				D898E1D41AF1622500C957DC /* SSOMyFeedViewController.m in Sources */,
+				D8849AE41B66838000382D13 /* SSCellViewItem.m in Sources */,
 				D830F4201ACDDBF1002A503D /* UIFont+WKAdditions.m in Sources */,
 				D810B8DA1ADF506500B3AC11 /* SSODrawToolController.m in Sources */,
 				FB0F33611AF2B68B00F6C735 /* SSOPhotosViewController.m in Sources */,
 				3398420C1AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.m in Sources */,
 				FB832F5D1B0392FB0067A4FB /* SSOCampaignDetailViewController.m in Sources */,
 				D898E1D71AF1622500C957DC /* SSOCampaignTableViewCell.m in Sources */,
+				D8849AE91B66838000382D13 /* SSOSimpleCollectionViewProvider.m in Sources */,
 				335723D21ACB097C000CC846 /* WKMoviePlayerView.m in Sources */,
 				D830F4241ACDDBF1002A503D /* UIView+WKAdditions.m in Sources */,
 				D8E677FD1AEEE5F6006B8CD8 /* SSOFeedViewController.m in Sources */,
 				339841E71AEACC5C00605C67 /* SSOFanPageViewController.m in Sources */,
 				D8E677E31AEED927006B8CD8 /* SSOUSnapButton.m in Sources */,
+				D8849AEB1B66838000382D13 /* SSOSimpleTableViewProvider.m in Sources */,
 				D8E678071AEEE649006B8CD8 /* SSORecentPhotosViewController.m in Sources */,
 				D810B8EC1ADF506500B3AC11 /* WKColorPickerView.m in Sources */,
 				D86E94B41ACF492000CFF801 /* SSOFacebookLoginButton.m in Sources */,
+				D8849AE61B66838000382D13 /* SSOBaseCollectionViewProvider.m in Sources */,
+				D8849AE81B66838000382D13 /* SSOBaseTableViewProvider.m in Sources */,
 				3399F6DA1AE5A0DB00835B13 /* SSOCustomSocialButton.m in Sources */,
 				D830F41B1ACDDBF1002A503D /* AVAssetTrack+WKAdditions.m in Sources */,
+				D8849AE71B66838000382D13 /* SSOBaseProvider.m in Sources */,
 				D810B8E51ADF506500B3AC11 /* SSOSubtoolContainerView.m in Sources */,
+				D8849AE21B66838000382D13 /* SSFacebookHelper.m in Sources */,
 				D810B8CD1ADF506500B3AC11 /* WKEditMediaViewController.m in Sources */,
 				335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */,
 				335723DD1ACB097C000CC846 /* WKShareViewController.m in Sources */,
@@ -2041,9 +2157,11 @@
 				D898E1D91AF1622500C957DC /* SSOMyFeedCollectionViewCell.m in Sources */,
 				D810B8E91ADF506500B3AC11 /* SSOEditSideMenuView.m in Sources */,
 				D810B8E11ADF506500B3AC11 /* SSOButtonsContainerView.m in Sources */,
+				D8849AE51B66838000382D13 /* SSCellViewSection.m in Sources */,
 				03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */,
 				D898E1D31AF1622500C957DC /* SSOCampaignViewController.m in Sources */,
 				332E0A511AEE85AC00F77969 /* SSOTextFieldWithUnderline.m in Sources */,
+				D8849AEA1B66838000382D13 /* SSOSimpleProvider.m in Sources */,
 				D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */,
 				FBBC950E1AF9238000203E48 /* SSOSettingsViewController.m in Sources */,
 				D8EA5C901AD428D3008D2A37 /* SSOGooglePlusHelper.m in Sources */,

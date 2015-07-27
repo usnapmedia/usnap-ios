@@ -25,7 +25,3 @@ pod 'AutoScrollLabel'
 pod 'Analytics/Segmentio'
 pod 'TOWebViewController'
 
-# Samsao libraries
-pod 'SSFacebookHelper', :git => 'git@gitlab.samsaodev.com:ios-development/ssfacebookhelper.git'
-pod 'SSOBaseProvider', :git => 'git@gitlab.samsaodev.com:ios-development/SSOBaseProvider.git'
-
