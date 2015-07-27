@@ -14,7 +14,7 @@
 #import "SSOSnap.h"
 #import "SSOPhotoDetailViewController.h"
 #import "SSSessionManager.h"
-#import <SSOSimpleCollectionViewProvider.h>
+#import "SSOSimpleCollectionViewProvider.h"
 #import <Masonry.h>
 
 #define kFeedContainerHeight 55

@@ -7,7 +7,7 @@
 //
 
 #import "SSOPhotosViewController.h"
-#import <SSOSimpleCollectionViewProvider.h>
+#import "SSOSimpleCollectionViewProvider.h"
 #import <Masonry.h>
 #import "SSOPhotoDetailViewController.h"
 

@@ -1,1 +1,0 @@
-../../../SSOBaseProvider/Classes/Providers/Simple/SSOSimpleTableViewProvider.h

@@ -21,8 +21,8 @@
 #import <Masonry.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <SVProgressHUD/SVProgressHUD.h>
-#import <SSCellViewItem.h>
-#import <SSCellViewSection.h>
+#import "SSCellViewItem.h"
+#import "SSCellViewSection.h"
 #import "SSOThemeHelper.h"
 #import "UIImage+Tools.h"
 

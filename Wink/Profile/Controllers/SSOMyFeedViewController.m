@@ -7,7 +7,7 @@
 //
 
 #import "SSOMyFeedViewController.h"
-#import <SSOSimpleCollectionViewProvider.h>
+#import "SSOSimpleCollectionViewProvider.h"
 #import "SSOMyFeedViewController.h"
 #import "SSOMyFeedCollectionViewCell.h"
 #import <Masonry.h>

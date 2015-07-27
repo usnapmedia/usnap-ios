@@ -8,7 +8,7 @@
 
 #import "SSOPhotosCollectionViewCell.h"
 #import "SSOSnap.h"
-#import <SSBaseViewCellProtocol.h>
+#import "SSBaseViewCellProtocol.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SSOPhotosCollectionViewCell () <SSBaseViewCellProtocol>

@@ -1,1 +1,0 @@
-../../../SSOBaseProvider/Classes/Protocols/SSBaseViewCellProtocol.h

@@ -7,7 +7,7 @@
 //
 
 #import "SSOCampaignTableViewCell.h"
-#import <SSBaseViewCellProtocol.h>
+#import "SSBaseViewCellProtocol.h"
 #import "SSOThemeHelper.h"
 #import "SSOCampaign.h"
 #import "SSOThemeHelper.h"

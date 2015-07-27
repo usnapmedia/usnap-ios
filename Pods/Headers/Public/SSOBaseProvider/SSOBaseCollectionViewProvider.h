@@ -1,1 +1,0 @@
-../../../SSOBaseProvider/Classes/Providers/Base/SSOBaseCollectionViewProvider.h

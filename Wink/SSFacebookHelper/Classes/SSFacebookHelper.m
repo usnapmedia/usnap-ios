@@ -6,7 +6,7 @@
 //
 
 #import "SSFacebookHelper.h"
-#import "FBSDKLoginUtility.h"
+#import <FBSDKLoginKit/FBSDKLoginManager.h>
 
 @implementation SSFacebookHelper
 
@@ -18,37 +18,37 @@
               onCancellation:(void (^)(void))cancellation {
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
 
-    if ([FBSDKLoginUtility areAllPermissionsReadPermissions:permissionsArray]) {
-        [login logInWithReadPermissions:permissionsArray
-                                handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                  if (error) {
-                                      // Process error
-                                      failure(error);
-                                  } else if (result.isCancelled) {
-                                      // Handle cancellations
-                                      cancellation();
-                                  } else {
-                                      success(result);
-                                  }
-                                }];
-    } else if ([FBSDKLoginUtility areAllPermissionsPublishPermissions:permissionsArray]) {
+    //    if ([FBSDKLoginUtility areAllPermissionsReadPermissions:permissionsArray]) {
+    //        [login logInWithReadPermissions:permissionsArray
+    //                                handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    //                                  if (error) {
+    //                                      // Process error
+    //                                      failure(error);
+    //                                  } else if (result.isCancelled) {
+    //                                      // Handle cancellations
+    //                                      cancellation();
+    //                                  } else {
+    //                                      success(result);
+    //                                  }
+    //                                }];
+    //    } else if ([FBSDKLoginUtility areAllPermissionsPublishPermissions:permissionsArray]) {
 
-        [login logInWithPublishPermissions:permissionsArray
-                                   handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                     if (error) {
-                                         // Process error
-                                         failure(error);
-                                     } else if (result.isCancelled) {
-                                         // Handle cancellations
-                                         cancellation();
-                                     } else {
-                                         success(result);
-                                     }
+    [login logInWithPublishPermissions:permissionsArray
+                               handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                 if (error) {
+                                     // Process error
+                                     failure(error);
+                                 } else if (result.isCancelled) {
+                                     // Handle cancellations
+                                     cancellation();
+                                 } else {
+                                     success(result);
+                                 }
 
-                                   }];
-    } else {
-        NSAssert(NO, @"You need to use publish OR read permissions for Facebook");
-    }
+                               }];
+    //    } else {
+    //        NSAssert(NO, @"You need to use publish OR read permissions for Facebook");
+    //    }
 }
 
 + (void)logout {

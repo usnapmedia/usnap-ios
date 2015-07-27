@@ -9,7 +9,7 @@
 #import "SSOCampaignViewController.h"
 #import "SSOCampaign.h"
 #import "SSOCampaignDetailViewController.h"
-#import <SSOSimpleTableViewProvider.h>
+#import "SSOSimpleTableViewProvider.h"
 #import <Masonry.h>
 
 NSString *const kCampaignTableViewCell = @"CampaignTableViewCell";
