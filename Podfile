@@ -26,4 +26,6 @@ pod 'SDiPhoneVersion'
 pod 'AutoScrollLabel'
 pod 'Analytics/Segmentio'
 pod 'TOWebViewController'
+pod 'Crashlytics'
+pod 'TwitterKit'
 
