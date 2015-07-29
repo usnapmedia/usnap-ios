@@ -68,7 +68,6 @@
 		33B926CE1AF836990007443C /* UIButton+VerticalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B926CD1AF836990007443C /* UIButton+VerticalLayout.m */; };
 		33B991491AE4522F002A30F8 /* SSOAlignedButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B991481AE4522F002A30F8 /* SSOAlignedButtonsView.m */; };
 		33E8517C1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E8517B1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.m */; };
-		7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
 		CB57186B1AC0C3020078740E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB57186A1AC0C3020078740E /* CoreMedia.framework */; };
@@ -266,7 +265,6 @@
 		D8BD7DD81B25F4550007DD36 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2743319019B760B7003334BB /* AssetsLibrary.framework */; };
 		D8BD7DD91B25F4550007DD36 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2743318E19B760B2003334BB /* Accelerate.framework */; };
 		D8BD7DDA1B25F4550007DD36 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2743316719B64257003334BB /* MobileCoreServices.framework */; };
-		D8BD7DDB1B25F4550007DD36 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */; };
 		D8BD7DDC1B25F4550007DD36 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */; };
 		D8BD7DDD1B25F4550007DD36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270DFAF819AE71BE00067072 /* UIKit.framework */; };
 		D8BD7DDE1B25F4550007DD36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270DFAF419AE71BE00067072 /* Foundation.framework */; };
@@ -458,8 +456,9 @@
 		33B991481AE4522F002A30F8 /* SSOAlignedButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOAlignedButtonsView.m; sourceTree = "<group>"; };
 		33E8517A1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SSOSocialNetworkAPI+USnap.h"; sourceTree = "<group>"; };
 		33E8517B1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SSOSocialNetworkAPI+USnap.m"; sourceTree = "<group>"; };
+		3F076CA41B66A31E00F9DFB7 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		3F076CA71B66A42400F9DFB7 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		7B964EB71A8ABC3C00E181C2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		AB9ECEFEEE6F33C8F8962807 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -671,6 +670,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2747B09D19E5DE8F00C3D779 /* CoreData.framework in Frameworks */,
 				270DFAF719AE71BE00067072 /* CoreGraphics.framework in Frameworks */,
 				CB57186D1AC0C3090078740E /* CoreVideo.framework in Frameworks */,
 				CB57186B1AC0C3020078740E /* CoreMedia.framework in Frameworks */,
@@ -678,7 +678,6 @@
 				2747B0A119E5DE9A00C3D779 /* libz.dylib in Frameworks */,
 				D879F68D1B4B182D009E2C16 /* TwitterCore.framework in Frameworks */,
 				2747B09F19E5DE9500C3D779 /* SystemConfiguration.framework in Frameworks */,
-				2747B09D19E5DE8F00C3D779 /* CoreData.framework in Frameworks */,
 				2743319719B760CC003334BB /* CoreImage.framework in Frameworks */,
 				2743319519B760C7003334BB /* QuartzCore.framework in Frameworks */,
 				2743319319B760C0003334BB /* ImageIO.framework in Frameworks */,
@@ -686,7 +685,6 @@
 				2743319119B760B7003334BB /* AssetsLibrary.framework in Frameworks */,
 				2743318F19B760B2003334BB /* Accelerate.framework in Frameworks */,
 				2743316819B64257003334BB /* MobileCoreServices.framework in Frameworks */,
-				7B964EB51A8AA6DD00E181C2 /* TwitterKit.framework in Frameworks */,
 				1F7F85AC1A8A743900BBC5D5 /* Fabric.framework in Frameworks */,
 				270DFAF919AE71BE00067072 /* UIKit.framework in Frameworks */,
 				270DFAF519AE71BE00067072 /* Foundation.framework in Frameworks */,
@@ -723,7 +721,6 @@
 				D8BD7DD81B25F4550007DD36 /* AssetsLibrary.framework in Frameworks */,
 				D8BD7DD91B25F4550007DD36 /* Accelerate.framework in Frameworks */,
 				D8BD7DDA1B25F4550007DD36 /* MobileCoreServices.framework in Frameworks */,
-				D8BD7DDB1B25F4550007DD36 /* TwitterKit.framework in Frameworks */,
 				D8BD7DDC1B25F4550007DD36 /* Fabric.framework in Frameworks */,
 				D8BD7DDD1B25F4550007DD36 /* UIKit.framework in Frameworks */,
 				D8BD7DDE1B25F4550007DD36 /* Foundation.framework in Frameworks */,
@@ -761,12 +758,13 @@
 		270DFAF319AE71BE00067072 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F076CA41B66A31E00F9DFB7 /* Twitter.framework */,
 				CB57186C1AC0C3090078740E /* CoreVideo.framework */,
 				CB57186A1AC0C3020078740E /* CoreMedia.framework */,
 				7B964EB71A8ABC3C00E181C2 /* Accounts.framework */,
-				7B964EB31A8AA6DD00E181C2 /* TwitterKit.framework */,
 				7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */,
 				2747B0A019E5DE9A00C3D779 /* libz.dylib */,
+				3F076CA71B66A42400F9DFB7 /* TwitterKit.framework */,
 				1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */,
 				1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */,
 				2747B09E19E5DE9500C3D779 /* SystemConfiguration.framework */,
@@ -1805,7 +1803,7 @@
 				ORGANIZATIONNAME = Samsao;
 				TargetAttributes = {
 					270DFAF019AE71BE00067072 = {
-						DevelopmentTeam = 6WH26365Q4;
+						DevelopmentTeam = 648L7A4BL2;
 					};
 					270DFB0B19AE71BE00067072 = {
 						DevelopmentTeam = 8UQUNTB23H;
@@ -2421,7 +2419,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Wink",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wink/Supporting Files/uSnap-Prefix.pch";
@@ -2440,19 +2437,19 @@
 			baseConfigurationReference = 4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 45;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Wink",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wink/Supporting Files/uSnap-Prefix.pch";
 				INFOPLIST_FILE = "Wink/Supporting Files/uSnap-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = uSnap;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

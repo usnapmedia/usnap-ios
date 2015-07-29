@@ -41,6 +41,7 @@
     if ([cellData isKindOfClass:[SSOSnap class]]) {
         SSOSnap *snap = cellData;
         [self.activityIndicator startAnimating];
+        NSLog(@"snap.thumbUrl : %@", snap.thumbUrl);
         [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:snap.thumbUrl]
                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                         [self.activityIndicator stopAnimating];
@@ -49,6 +50,7 @@
 }
 
 - (void)deviceChangedOrientation:(NSNotification *)notification {
+    return;
     UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
     switch (orientation) {
     case UIDeviceOrientationPortrait: {

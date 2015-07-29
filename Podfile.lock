@@ -32,6 +32,7 @@ PODS:
   - Bolts/AppLinks (1.2.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.2.0)
+  - Crashlytics (3.1.0)
   - CWStatusBarNotification (2.2.4)
   - FBSDKCoreKit (4.4.0):
     - Bolts (~> 1.1)
@@ -66,6 +67,7 @@ PODS:
   - SZTextView (1.2.1)
   - TOWebViewController (2.0.17)
   - TRVSDictionaryWithCaseInsensitivity (0.0.2)
+  - TwitterKit (1.8.1)
   - YKImageCropper (0.0.4)
 
 DEPENDENCIES:
@@ -73,6 +75,7 @@ DEPENDENCIES:
   - AFNetworking
   - Analytics/Segmentio
   - AutoScrollLabel
+  - Crashlytics
   - CWStatusBarNotification
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -90,6 +93,7 @@ DEPENDENCIES:
   - SVProgressHUD
   - SZTextView
   - TOWebViewController
+  - TwitterKit
   - YKImageCropper
 
 SPEC CHECKSUMS:
@@ -98,6 +102,7 @@ SPEC CHECKSUMS:
   Analytics: e0633a6f0cb89a27265d94b4c8f94a4c1054f39d
   AutoScrollLabel: afe272014f82c707c9203f1383f3fe4e32443fa2
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  Crashlytics: ef9a58a4e806b316a1748c06432f6f847ba09ac6
   CWStatusBarNotification: 24ea6215e9b4a0cea66f8377fb0130f313e0b3d4
   FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474
   FBSDKLoginKit: 02a9254a4c132412fa03577b0d53e936d068a7fb
@@ -117,6 +122,7 @@ SPEC CHECKSUMS:
   SZTextView: 906df45afd3c1b24fc5252088d5ef8061513c238
   TOWebViewController: aada427e7eba199bbaee77ddee3243c8172f4053
   TRVSDictionaryWithCaseInsensitivity: 51d2ccf52c6d645d27b63467a98fa02c556e01b0
+  TwitterKit: 88daaebdb8bfb5847d76d8ae159841248427931d
   YKImageCropper: 2ebfda611f9d13f252a12694ab0d42fb48cadb5f
 
-COCOAPODS: 0.38.0
+COCOAPODS: 0.37.2
