@@ -69,6 +69,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "TOWebViewController/TOWebViewController/pl.lproj"
   install_resource "TOWebViewController/TOWebViewController/zh-Hans.lproj"
   install_resource "TOWebViewController/TOWebViewController/zh-Hant.lproj"
+  install_resource "TwitterKit/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle"
   install_resource "googleplus-ios-sdk/google-plus-ios-sdk-1.7.1/GooglePlus.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -83,6 +84,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "TOWebViewController/TOWebViewController/pl.lproj"
   install_resource "TOWebViewController/TOWebViewController/zh-Hans.lproj"
   install_resource "TOWebViewController/TOWebViewController/zh-Hant.lproj"
+  install_resource "TwitterKit/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle"
   install_resource "googleplus-ios-sdk/google-plus-ios-sdk-1.7.1/GooglePlus.bundle"
 fi
 
