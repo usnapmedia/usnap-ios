@@ -61,7 +61,7 @@
 
 - (NSUInteger)supportedInterfaceOrientations {
 
-    return UIDeviceOrientationPortrait;
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark - Utilities

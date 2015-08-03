@@ -64,13 +64,11 @@
     [super viewDidLoad];
     // Setup UI
     [self setUI];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceChangedOrientation:) name:kDeviceOrientationNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setupEditButtons];
-    [self deviceChangedOrientation:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -113,26 +111,6 @@
 - (NSUInteger)supportedInterfaceOrientations {
     return UIDeviceOrientationPortrait;
     // return [[SSOOrientationHelper sharedInstance] orientation];
-}
-
-- (void)deviceChangedOrientation:(NSNotification *)notification {
-    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-    switch (orientation) {
-    case UIDeviceOrientationPortrait: {
-        [self rotateButtons:0];
-        break;
-    }
-
-    case UIDeviceOrientationLandscapeLeft: {
-        [self rotateButtons:M_PI_2];
-        break;
-    }
-    case UIDeviceOrientationLandscapeRight: {
-        [self rotateButtons:-M_PI_2];
-        break;
-    }
-    default: { break; }
-    }
 }
 
 - (void)rotateButtons:(CGFloat)rotation {
@@ -362,7 +340,10 @@
     //        controller.overlayImage = UIGraphicsGetImageFromCurrentImageContext();
     //        UIGraphicsEndImageContext();
     //    }
-    [self.navigationController pushViewController:controller animated:YES];
+    
+    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    controller.parentCameraNavigationController = self.navigationController;
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)presentLoginVC {

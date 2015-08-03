@@ -102,4 +102,3 @@ extern NSString *const kPhotosNibNameCollectionViewCell;
 #pragma mark - Notifications
 
 extern NSString *const kReturnToFanPageVC;
-extern NSString *const kDeviceOrientationNotification;

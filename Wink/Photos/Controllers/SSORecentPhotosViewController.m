@@ -48,6 +48,10 @@ NSInteger const kRecentPhotosCellOffset = 10;
     self.provider.inputData = nil;
 }
 
+-(NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 #pragma mark - Initialization
 
 /**

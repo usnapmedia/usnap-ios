@@ -95,8 +95,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     // Setup the imageview
     if (self.image || self.modifiedImage) {
         self.imageView = [UIImageView new];
-        UIImage *image = (self.modifiedImage) ? self.modifiedImage : self.image;
-        self.imageView.image = [self rotateImage:image];
+        self.imageView.image = (self.modifiedImage) ? self.modifiedImage : self.image;
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.previewImageContainerView addSubview:self.imageView];
         [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,7 +120,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     // Setup the overlay image view
     if (self.overlayImage) {
         self.overlayImageView = [UIImageView new];
-        self.overlayImageView.image = [self rotateImage:self.overlayImage];
+        self.overlayImageView.image = self.overlayImage;
         self.overlayImage = self.overlayImageView.image;
         self.overlayImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.previewImageContainerView addSubview:self.overlayImageView];
@@ -145,24 +144,15 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     // [self updateUI];
 }
 
-- (void)moviePlayerViewDidFinishPlayingToEndTime:(WKMoviePlayerView *)moviePlayer {
-    [self.moviePlayerView.player play];
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
 }
 
-- (UIImage *)rotateImage:(UIImage *)image {
-
-    UIImage *newImage;
-    if ([SSSessionManager sharedInstance].lastPhotoOrientation == 2) {
-        newImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:1.0 orientation:UIImageOrientationDown];
-    } else if ([SSSessionManager sharedInstance].lastPhotoOrientation == 3) {
-        newImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:1.0 orientation:UIImageOrientationLeft];
-    } else if ([SSSessionManager sharedInstance].lastPhotoOrientation == 4) {
-        newImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:1.0 orientation:UIImageOrientationRight];
-    } else {
-        newImage = image;
-    }
-
-    return newImage;
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+- (void)moviePlayerViewDidFinishPlayingToEndTime:(WKMoviePlayerView *)moviePlayer {
+    [self.moviePlayerView.player play];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -482,10 +472,10 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
               // @FIXME
               [SVProgressHUD showSuccessWithStatus:@"Image posted"];
               [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
-              [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-
+             [self dismissViewControllerAnimated:YES completion:^{
+                 [self.parentCameraNavigationController dismissViewControllerAnimated:YES completion:nil];
+             }];
               NSLog(@"%@", responseObject);
-
             }
             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               //@FIXME
@@ -501,7 +491,9 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
               // @FIXME
               [SVProgressHUD showSuccessWithStatus:@"Video posted"];
               [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
-              [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [self.parentCameraNavigationController dismissViewControllerAnimated:YES completion:nil];
+                }];
 
               NSLog(@"%@", responseObject);
 
@@ -553,7 +545,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 }
 - (IBAction)backButtonTouched:(id)sender {
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 /**

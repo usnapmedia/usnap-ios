@@ -102,4 +102,3 @@ NSString *const kPhotosNibNameCollectionViewCell = @"SSOPhotosCollectionViewCell
 #pragma mark - Notifications
 
 NSString *const kReturnToFanPageVC = @"ReturnToFanPageVC";
-NSString *const kDeviceOrientationNotification = @"kDeviceOrientationNotification";

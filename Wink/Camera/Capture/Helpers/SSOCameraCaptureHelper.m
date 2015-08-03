@@ -43,6 +43,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
     if (self = [super init]) {
 
+        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)  name:UIDeviceOrientationDidChangeNotification  object:nil];
         // Check if there is a AVCapture session. Allow the app to launch with simulator
         if ([AVCaptureDevice devices].count) {
 
@@ -87,7 +88,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
                     // connection with other session manipulation.
 
                     [[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] setVideoOrientation:(AVCaptureVideoOrientation)orientation];
-                    [(AVCaptureVideoPreviewLayer *)[self.previewView layer] setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+                    //[(AVCaptureVideoPreviewLayer *)[self.previewView layer] setVideoGravity:AVLayerVideoGravityResizeAspectFill];
                   });
               }
 
@@ -144,9 +145,19 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
 #pragma mark - Orientation
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-
-    [[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] setVideoOrientation:(AVCaptureVideoOrientation)toInterfaceOrientation];
+- (void)orientationChanged:(NSNotification *)notification {
+    AVCaptureVideoPreviewLayer * cameraPreview = (AVCaptureVideoPreviewLayer *)[[self previewView] layer];
+    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (cameraPreview) {
+        if (toInterfaceOrientation==UIInterfaceOrientationPortrait) {
+            cameraPreview.connection.videoOrientation = AVCaptureVideoOrientationPortrait;
+        } else if (toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft) {
+            cameraPreview.connection.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+        } else if (toInterfaceOrientation==UIInterfaceOrientationLandscapeRight) {
+            cameraPreview.connection.videoOrientation = AVCaptureVideoOrientationLandscapeRight;
+        }
+        cameraPreview.frame =  [[UIScreen mainScreen] bounds];
+    }
 }
 
 #pragma mark - Observer
@@ -201,8 +212,8 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
           }
 
           // Update the orientation on the movie file output video connection before starting recording.
-          [[[self movieFileOutput] connectionWithMediaType:AVMediaTypeVideo]
-              setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] videoOrientation]];
+          AVCaptureVideoOrientation videoOrientation = [[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] videoOrientation];
+          [[[self movieFileOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:videoOrientation];
 
           // Turning OFF flash for video recording
           //          [SSOCameraCaptureHelper setFlashMode:AVCaptureFlashModeOff forDevice:[[self videoDeviceInput] device]];
@@ -227,7 +238,8 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
       // Set the photo orientation based on the device orientation
       [[SSSessionManager sharedInstance] setLastPhotoOrientation:[UIDevice currentDevice].orientation];
       // Update the orientation on the still image output video connection before capturing.
-      [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:AVCaptureVideoOrientationPortrait];
+        AVCaptureVideoOrientation videoOrientation = [[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] videoOrientation];
+        [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:videoOrientation];
 
       // Capture a still image.
       [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo]

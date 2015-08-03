@@ -61,7 +61,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceChangedOrientation:) name:kDeviceOrientationNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,6 +78,10 @@
     [self initializeAssetsLibrary];
 
     [self animateCameraRollImageChange];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -110,6 +113,9 @@
     [self.animatedCaptureButton resetAnimation];
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    NSString * str = @"";
+}
 /**
  *  Intialize data
  */
@@ -147,38 +153,6 @@
     [self initializeUICameraDevice];
 
     [self.view bringSubviewToFront:self.animatedCaptureButton];
-}
-
-- (void)deviceChangedOrientation:(NSNotification *)notification {
-    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-    switch (orientation) {
-    case UIDeviceOrientationPortrait: {
-        [self rotateButtons:0];
-        break;
-    }
-
-    case UIDeviceOrientationLandscapeLeft: {
-        [self rotateButtons:M_PI_2];
-        break;
-    }
-    case UIDeviceOrientationLandscapeRight: {
-        [self rotateButtons:-M_PI_2];
-        break;
-    }
-    default: { break; }
-    }
-}
-
-- (void)rotateButtons:(CGFloat)rotation {
-    [UIView animateWithDuration:0.25f
-                          delay:0
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                       for (UIView *viewToRotate in self.buttonsToSwitch) {
-                           viewToRotate.transform = CGAffineTransformMakeRotation(rotation);
-                       }
-                     }
-                     completion:nil];
 }
 
 #pragma mark - Navigation
@@ -552,11 +526,6 @@
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
-}
-
-- (BOOL)prefersStatusBarHidden // iOS8 definitely needs this one. checked.
-{
-    return YES;
 }
 
 - (UIViewController *)childViewControllerForStatusBarHidden {

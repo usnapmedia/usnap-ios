@@ -57,6 +57,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 - (instancetype)initWithSnap:(SSOSnap *)snap {
 
     if (self = [super init]) {

@@ -43,6 +43,10 @@ NSInteger const kTopPhotosCellTextHeight = 40;
 
 #pragma mark - Initialization
 
+-(NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)initializeData {
     [super initializeData];
     self.topView = [UIView new];

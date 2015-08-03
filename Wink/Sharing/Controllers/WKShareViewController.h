@@ -19,4 +19,5 @@
 @property(nonatomic, strong) UIImage *modifiedImage;
 @property(nonatomic, strong) UIImage *overlayImage;
 
+@property (nonatomic, strong) UINavigationController * parentCameraNavigationController;
 @end

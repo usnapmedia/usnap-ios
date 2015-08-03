@@ -48,6 +48,18 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -137,7 +149,6 @@
       make.bottom.equalTo(self.customTabBar);
       make.right.equalTo(cameraButton.mas_left);
       make.width.equalTo(cameraButton);
-
     }];
 
     [profileButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -145,7 +156,6 @@
       make.bottom.equalTo(self.customTabBar);
       make.left.equalTo(cameraButton.mas_right);
       make.width.equalTo(cameraButton);
-
     }];
 }
 
