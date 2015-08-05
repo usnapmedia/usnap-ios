@@ -19,7 +19,20 @@ NSString *const kTwitterTweetUploadURL = @"https://api.twitter.com/1.1/statuses/
 NSString *const kGoogleClientId = @"705787939641-q7u2cb9tbrd04ku4jc99h4bd5c1cs7bk.apps.googleusercontent.com";
 NSString *const kAPIValue = @"psy02co49nais";
 NSString *const kSegmentIoKey = @"GmFy6M3KXxHnHSKsIysy4QHHa3aIJL4Z";
+#elif LIBERAL
+
+NSString *const kSchemeFacebook = @"fb702889569857409";
+NSString *const kSchemeGooglePlus = @"com.samsao.winktalent";
+NSString *const kTwitterConsumerSecret = @"Rd4jFcvO5EMlvQFUrLizWZGOSiLDpOKwpy9BZDMbhH6Hmp6vc4";
+NSString *const kTwitterConsumerKey = @"TQAZ27uQLXoKcRcpMuFLZA3HI";
+NSString *const kTwitterMediaUploadURL = @"https://upload.twitter.com/1.1/media/upload.json";
+NSString *const kTwitterTweetUploadURL = @"https://api.twitter.com/1.1/statuses/update.json";
+NSString *const kGoogleClientId = @"705787939641-q7u2cb9tbrd04ku4jc99h4bd5c1cs7bk.apps.googleusercontent.com";
+NSString *const kAPIValue = @"fcvry62Nf4n18411yl3tyaqH4C4wdcyj";
+NSString *const kSegmentIoKey = @"BLefGGB5JLTvQIxZR7cDj5xKXo3zoiuj";
+
 #else
+
 NSString *const kSchemeFacebook = @"fb465899996898725";
 NSString *const kSchemeGooglePlus = @"com.samsao.winktalent";
 NSString *const kTwitterConsumerSecret = @"CJy9NakTiTNlfFkKByYg2YJe1UzmWw43PN7qrKEixJOWFV2MYM";

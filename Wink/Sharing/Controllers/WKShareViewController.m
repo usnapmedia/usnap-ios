@@ -424,6 +424,37 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     return nil;
 }
 
+- (UIImage *)editedVideoImage {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height)];
+    view.backgroundColor = [UIColor whiteColor];
+    UIImageView *overlayImageView = [[UIImageView alloc] initWithFrame:view.bounds];
+    overlayImageView.contentMode = UIViewContentModeScaleAspectFit;
+    overlayImageView.image = self.overlayImage;
+    [view addSubview:overlayImageView];
+    
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Change image to PNG
+    
+    NSData *pngdata = UIImagePNGRepresentation(snapshot); // PNG wrap
+    UIImage *pngImage = [UIImage imageWithData:pngdata];
+    
+    CGFloat maxSize = MAX(pngImage.size.height, pngImage.size.width);
+    CGFloat witdh = pngImage.size.width;
+    CGFloat height = pngImage.size.height;
+    if (maxSize > 1000) {
+        CGFloat percentage = maxSize / 1000;
+        witdh = witdh / percentage;
+        height = height / percentage;
+        pngImage = [self resizeImage:pngImage resizeSize:CGSizeMake(witdh, height)];
+    }
+    return pngImage;
+    
+}
+
 - (UIImage *)resizeImage:(UIImage *)orginalImage resizeSize:(CGSize)size {
     CGFloat actualHeight = orginalImage.size.height;
     CGFloat actualWidth = orginalImage.size.width;
@@ -484,9 +515,10 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 
             }];
     } else {
+        UIImage * overlayForVideo = [self editedVideoImage];
         [WKWinkConnect winkConnectPostVideoToBackend:self.mediaURL
             withText:self.placeholderTextView.text
-            overlayImage:self.overlayImageView.image
+            overlayImage:overlayForVideo
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
               // @FIXME
               [SVProgressHUD showSuccessWithStatus:@"Video posted"];

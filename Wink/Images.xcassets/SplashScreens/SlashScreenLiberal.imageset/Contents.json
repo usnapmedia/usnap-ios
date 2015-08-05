@@ -2,13 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "ic_camera-selected.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "ic_camera-selected@2x.png"
+      "filename" : "thumbnail.jpg"
     },
     {
       "idiom" : "universal",

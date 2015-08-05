@@ -185,6 +185,7 @@
           [self.topPhotosVC hideLoadingOverlay];
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error){
+            NSLog(@"error %@", error);
         }];
 }
 
