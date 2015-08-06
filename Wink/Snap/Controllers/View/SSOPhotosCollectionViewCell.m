@@ -45,7 +45,6 @@
         SSOSnap *snap = cellData;
         [self.activityIndicator startAnimating];
         NSString * thumbUrl = [snap thumbUrl:self.frame.size.width height:self.frame.size.height];
-        NSLog(@"snap.thumbUrl : %@", thumbUrl);
         [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:thumbUrl]
                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                           [self.activityIndicator stopAnimating];

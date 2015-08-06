@@ -63,7 +63,7 @@
     if ([cellData isKindOfClass:[SSOSnap class]]) {
         SSOSnap *snap = (SSOSnap *)cellData;
         [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:[snap thumbUrl:self.imageView.frame.size.width height:self.imageView.frame.size.height]]];
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:[snap thumbUrl:self.frame.size.width height:self.frame.size.height]]];
     }
 }
 
