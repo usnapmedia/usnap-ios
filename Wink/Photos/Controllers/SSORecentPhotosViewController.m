@@ -83,7 +83,7 @@ NSInteger const kRecentPhotosCellOffset = 10;
     self.collectionView.dataSource = self.provider;
 
     // Register and set the reusable ID
-    [self.collectionView registerNib:[UINib nibWithNibName:kPhotosNibNameCollectionViewCell bundle:[NSBundle mainBundle]]
+    [self.collectionView registerNib:[UINib nibWithNibName:@"SSOPhotosCollectionViewCell" bundle:[NSBundle mainBundle]]
           forCellWithReuseIdentifier:kPhotosCollectionViewCell];
     self.provider.cellReusableIdentifier = kPhotosCollectionViewCell;
 }

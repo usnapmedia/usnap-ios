@@ -60,7 +60,7 @@ CGFloat const kPhotosPercentageHeightWitdhCell = 1;
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
       make.edges.equalTo(self.view);
     }];
-    [self.collectionView registerNib:[UINib nibWithNibName:kPhotosNibNameCollectionViewCell bundle:nil] forCellWithReuseIdentifier:kPhotosCollectionViewCell];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"SSOPhotosCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:kPhotosCollectionViewCell];
 }
 
 - (void)initializeData {
@@ -80,11 +80,6 @@ CGFloat const kPhotosPercentageHeightWitdhCell = 1;
 - (void)setPhotosData:(NSArray *)data {
     self.provider.inputData = [NSMutableArray arrayWithArray:data];
     [self.collectionView reloadData];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -110,7 +110,6 @@ NSString *const kTopPhotosReusableId = @"topPhotosCell";
 NSString *const kImageCollectionViewCell = @"imageCollectionViewCell";
 NSString *const kImageCollectionViewCellNib = @"SSOImageCollectionViewCell";
 NSString *const kPhotosCollectionViewCell = @"PhotosCollectionViewCell";
-NSString *const kPhotosNibNameCollectionViewCell = @"SSOPhotosCollectionViewCell";
 
 #pragma mark - Notifications
 

@@ -133,7 +133,7 @@
           // Set the data of the VC
           NSUInteger maxPhotos = MIN(kNumberOfTopPhotos, [items.response count]);
           NSArray *subrangeOfArray = [items.response subarrayWithRange:NSMakeRange(0, maxPhotos)];
-          [self.childVc setData:subrangeOfArray withCellNib:kPhotosNibNameCollectionViewCell andCellReusableIdentifier:kPhotosCollectionViewCell];
+          [self.childVc setData:subrangeOfArray withCellNib:@"SSOPhotosCollectionViewCell" andCellReusableIdentifier:kPhotosCollectionViewCell];
           [self.childVc hideLoadingOverlay];
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error){

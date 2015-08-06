@@ -47,4 +47,13 @@
         [self.delegate provider:self didDeselectRowAtIndexPath:indexPath];
     }
 }
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath  {
+    NSLog(@"cell did appear %f", cell.frame.size.width);
+    if ([cell respondsToSelector:@selector(willDisplayCell:)]) {
+        UICollectionViewCell<SSBaseViewCellProtocol> *cellProtocol = (UICollectionViewCell<SSBaseViewCellProtocol> *)cell;
+        [cellProtocol willDisplayCell:[self.inputData objectAtIndex:indexPath.row]];
+    }
+    
+}
 @end

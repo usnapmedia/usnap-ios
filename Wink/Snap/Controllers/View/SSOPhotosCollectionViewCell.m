@@ -36,14 +36,19 @@
  */
 
 - (void)configureCell:(id)cellData {
+
+}
+
+- (void) willDisplayCell:(id)cellData {
     NSAssert([cellData isKindOfClass:[SSOSnap class]], @"Cell data has to be a SSOSnap class");
     if ([cellData isKindOfClass:[SSOSnap class]]) {
         SSOSnap *snap = cellData;
         [self.activityIndicator startAnimating];
-        NSLog(@"snap.thumbUrl : %@", snap.thumbUrl);
-        [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:snap.thumbUrl]
+        NSString * thumbUrl = [snap thumbUrl:self.frame.size.width height:self.frame.size.height];
+        NSLog(@"snap.thumbUrl : %@", thumbUrl);
+        [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:thumbUrl]
                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                        [self.activityIndicator stopAnimating];
+                                          [self.activityIndicator stopAnimating];
                                       }];
     }
 }

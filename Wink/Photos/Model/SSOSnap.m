@@ -32,6 +32,9 @@
     if (![dictionary[@"thumb_url"] isKindOfClass:[NSNull class]]) {
         self.thumbUrl = dictionary[@"thumb_url"];
     }
+    if (![dictionary[@"cloud_url"] isKindOfClass:[NSNull class]]) {
+        self.cloudUrl = dictionary[@"cloud_url"];
+    }
     if (![dictionary[@"url"] isKindOfClass:[NSNull class]]) {
         self.url = dictionary[@"url"];
     }
@@ -75,6 +78,9 @@
     if (self.thumbUrl != nil) {
         dictionary[@"thumb_url"] = self.thumbUrl;
     }
+    if (self.cloudUrl != nil) {
+        dictionary[@"cloud_url"] = self.cloudUrl;
+    }
     if (self.url != nil) {
         dictionary[@"url"] = self.url;
     }
@@ -91,6 +97,23 @@
         dictionary[@"watermark_url"] = self.watermarkUrl;
     }
     return dictionary;
+}
+
+- (NSString *) thumbUrl:(long) width height:(long) height {
+    NSString * url = self.cloudUrl;
+    if ([url containsString:@".mp4"]) {
+        url = [url stringByReplacingOccurrencesOfString:@".mp4" withString:@".jpg"];
+    }
+    
+    width = (width>0?width:300);
+    height = (height>0?height:300);
+    if (IS_RETINA) {
+        width = width * [UIScreen mainScreen].scale;
+        height = height * [UIScreen mainScreen].scale;
+    }
+    
+    return [url stringByReplacingOccurrencesOfString:@"upload/"
+                                          withString:[NSString stringWithFormat:@"upload/w_%ld,h_%ld,c_fill,g_face/", width, height]];
 }
 
 @end

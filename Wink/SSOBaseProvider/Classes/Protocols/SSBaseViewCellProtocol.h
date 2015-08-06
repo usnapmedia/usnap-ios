@@ -10,6 +10,9 @@
 
 @protocol SSBaseViewCellProtocol
 
+@optional
+- (void)willDisplayCell:(id)cellData;
+
 @required
 - (void)configureCell:(id)cellData;
 

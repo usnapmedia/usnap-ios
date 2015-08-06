@@ -35,9 +35,14 @@
             }];
         }
 
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.data.thumbUrl]];
-
-        //        NSLog(@" %@", NSStringFromCGRect(self.imageView.frame));
+    }
+}
+- (void)willDisplayCell:(id)cellData {
+    NSAssert([cellData isKindOfClass:[SSOSnap class]], @"Celldata has to be of SSOSnap type");
+    
+    if ([cellData isKindOfClass:[SSOSnap class]]) {
+        self.data = (SSOSnap *)cellData;
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:[self.data thumbUrl:self.frame.size.width height:self.frame.size.height]]];
     }
 }
 

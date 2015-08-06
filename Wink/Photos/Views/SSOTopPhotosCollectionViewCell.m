@@ -33,7 +33,6 @@
     if ([cellData isKindOfClass:[SSOSnap class]]) {
         SSOSnap *snap = (SSOSnap *)cellData;
         [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:snap.thumbUrl]];
         [self.nameLabel setText:snap.username];
         //@FIXME
         // Set the usnap points button
@@ -58,5 +57,15 @@
         self.pointsLabel.font = [SSOThemeHelper avenirLightFontWithSize:10];
     }
 }
+
+- (void)willDisplayCell:(id)cellData {
+    NSAssert([cellData isKindOfClass:[SSOSnap class]], @"Cell data has to be of SSOSnap class");
+    if ([cellData isKindOfClass:[SSOSnap class]]) {
+        SSOSnap *snap = (SSOSnap *)cellData;
+        [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:[snap thumbUrl:self.imageView.frame.size.width height:self.imageView.frame.size.height]]];
+    }
+}
+
 
 @end

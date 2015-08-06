@@ -25,4 +25,6 @@
     #import "SSStoryboardConstants.h"
     #import "NSBundle+Wink.h"
 
+    #define IS_RETINA ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && ([UIScreen mainScreen].scale >= 2.0))
+
 #endif
