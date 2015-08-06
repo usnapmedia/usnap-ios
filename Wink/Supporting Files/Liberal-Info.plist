@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>57</string>
+	<string>58</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -50,7 +50,7 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>1053518941326361</string>
+	<string>702889569857409</string>
 	<key>FacebookDisplayName</key>
 	<string>Liberal</string>
 	<key>LSRequiresIPhoneOS</key>
