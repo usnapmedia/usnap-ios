@@ -148,7 +148,7 @@
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.overlayView.frame.origin.x, self.self.overlayView.frame.origin.y,
                                                                        self.overlayView.frame.size.width, self.overlayView.frame.size.height)];
         self.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         self.imageView.clipsToBounds = YES;
         self.imageView.image = self.image;
         [self.view insertSubview:self.imageView atIndex:0];
