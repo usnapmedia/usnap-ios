@@ -113,9 +113,6 @@
     [self.animatedCaptureButton resetAnimation];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    NSString * str = @"";
-}
 /**
  *  Intialize data
  */

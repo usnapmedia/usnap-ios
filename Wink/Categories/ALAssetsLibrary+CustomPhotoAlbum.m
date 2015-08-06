@@ -25,8 +25,23 @@
                           [self addAssetURL: assetURL 
                                     toAlbum:albumName 
                         withCompletionBlock:completionBlock];
-                          
                       }];
+}
+
+- (void) saveVideo:(NSURL *) videoAssetURL toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock
+{
+    [self writeVideoAtPathToSavedPhotosAlbum:videoAssetURL completionBlock:^(NSURL *assetURL, NSError *error) {
+        //error handling
+        if (error!=nil) {
+            completionBlock(error);
+            return;
+        }
+        
+        //add the asset to the custom photo album
+        [self addAssetURL: assetURL
+                  toAlbum:albumName
+      withCompletionBlock:completionBlock];
+    }];
 }
 
 -(void)addAssetURL:(NSURL*)assetURL toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock

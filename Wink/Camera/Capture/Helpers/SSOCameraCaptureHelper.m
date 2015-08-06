@@ -454,14 +454,12 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
     NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
 
-    [library addAssetURL:outputFileURL
-                    toAlbum:appName
-        withCompletionBlock:^(NSError *error) {
-          [self removeObservers];
-          [self rotateVideo:outputFileURL];
-          [self.delegate didFinishCapturingVideo:outputFileURL withError:nil];
-          //          [self cropVideoSquare:outputFileURL];
-        }];
+    [library saveVideo:outputFileURL toAlbum:appName withCompletionBlock:^(NSError *error) {
+        [self removeObservers];
+        [self rotateVideo:outputFileURL];
+        [self.delegate didFinishCapturingVideo:outputFileURL withError:nil];
+        //          [self cropVideoSquare:outputFileURL];
+    }];    
 }
 
 #pragma mark - Utilities
