@@ -118,6 +118,8 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
               // Set the position of the camera on initialization
               [self changeCameraWithDevicePosition:devicePosition];
               [SSOCameraCaptureHelper setFlashMode:flashState forDevice:[[self videoDeviceInput] device]];
+                
+                [self orientationChanged:nil];
             });
         }
     }

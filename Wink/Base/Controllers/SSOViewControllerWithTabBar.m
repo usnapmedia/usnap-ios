@@ -55,10 +55,9 @@
 
 - (BOOL)shouldAutorotate
 {
-    return NO;
+    [self setTabBar];
+    return YES;
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -104,8 +103,10 @@
  */
 
 - (void)setTabBar {
+    if (self.customTabBar) {
+        [self.customTabBar removeFromSuperview];
+    }
     self.customTabBar = [UIView new];
-    //@FIXME
     [self.customTabBar setBackgroundColor:[SSOThemeHelper tabBarColor]];
     [self.view addSubview:self.customTabBar];
     [self.customTabBar mas_makeConstraints:^(MASConstraintMaker *make) {

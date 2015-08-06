@@ -538,7 +538,6 @@
         WKEditMediaViewController *controller = [WKEditMediaViewController new];
         controller.image = image;
         [self.navigationController pushViewController:controller animated:YES];
-
     } else {
     }
 }
