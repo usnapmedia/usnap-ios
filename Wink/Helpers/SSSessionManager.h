@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SSOCampaign.h"
 
 @interface SSSessionManager : NSObject
 
@@ -21,7 +22,7 @@
 
 @property(strong, nonatomic, readonly) NSString *username;
 @property(strong, nonatomic, readonly) NSString *password;
-@property(strong, nonatomic, readonly) NSString *campaignID;
+@property(strong, nonatomic, readonly) SSOCampaign *campaign;
 
 @property(assign, nonatomic, readonly) UIDeviceOrientation lastPhotoOrientation;
 @property(strong, nonatomic, readonly) NSURL *lastVideoURL;
@@ -65,7 +66,7 @@
  *
  *  @param campaignID campaign ID
  */
-- (void)setCampaignID:(NSString *)campaignID;
+- (void)setCampaign:(SSOCampaign *)campaign;
 
 - (void)setLastPhotoOrientation:(UIDeviceOrientation)lastPhotoOrientation;
 

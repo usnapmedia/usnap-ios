@@ -31,13 +31,14 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:kEmailLoggedString];
 }
 
-+ (void)setCurrentCampaign:(NSString *)campaignID {
-    [[NSUserDefaults standardUserDefaults] setObject:campaignID forKey:kCurrentCampaignID];
++ (void)setCurrentCampaign:(SSOCampaign *)campaign {
+    [[NSUserDefaults standardUserDefaults] setObject:campaign.toDictionary forKey:kCurrentCampaign];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (NSString *)currentCampaignID {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:kCurrentCampaignID];
++ (SSOCampaign *)currentCampaign {
+    NSDictionary * campaign = [[NSUserDefaults standardUserDefaults] objectForKey:kCurrentCampaign];
+    return campaign?[[SSOCampaign alloc] initWithDictionary:campaign]:nil;
 }
 
 @end

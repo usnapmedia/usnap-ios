@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SSOCampaign.h"
 
 @interface NSUserDefaults (USnap)
 
@@ -40,7 +41,7 @@
  *
  *  @param campaignID the campaign ID
  */
-+(void)setCurrentCampaign:(NSString *)campaignID;
++(void)setCurrentCampaign:(SSOCampaign *)campaign;
 
 
 /**
@@ -48,7 +49,7 @@
  *
  *  @return the campaign ID
  */
-+(NSString *)currentCampaignID;
++(SSOCampaign *)currentCampaign;
 
 @end
 

@@ -91,8 +91,8 @@
     NSMutableDictionary *parameters = [[SSOSocialNetworkAPI sharedInstance] connectedSocialNetworkAPIParameters].mutableCopy;
     [parameters addEntriesFromDictionary:@{ @"text" : text, @"meta" : meta }];
     // If the user participate in a campaign, send it
-    if ([SSSessionManager sharedInstance].campaignID) {
-        [parameters addEntriesFromDictionary:@{ @"campaign_id" : [SSSessionManager sharedInstance].campaignID }];
+    if ([SSSessionManager sharedInstance].campaign.id) {
+        [parameters addEntriesFromDictionary:@{ @"campaign_id" : [SSSessionManager sharedInstance].campaign.id }];
     }
 
     [manager POST:url parameters:parameters
@@ -120,8 +120,8 @@
     NSMutableDictionary *parameters = [[SSOSocialNetworkAPI sharedInstance] connectedSocialNetworkAPIParameters].mutableCopy;
     [parameters addEntriesFromDictionary:@{ @"text" : text }];
     // If the user participate in a campaign, send it
-    if ([SSSessionManager sharedInstance].campaignID) {
-        [parameters addEntriesFromDictionary:@{ @"campaign_id" : [SSSessionManager sharedInstance].campaignID }];
+    if ([SSSessionManager sharedInstance].campaign.id) {
+        [parameters addEntriesFromDictionary:@{ @"campaign_id" : [SSSessionManager sharedInstance].campaign.id }];
     }
     [manager POST:url parameters:parameters
         constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {

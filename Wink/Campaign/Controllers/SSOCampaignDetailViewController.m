@@ -47,7 +47,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     // This might cause a problem if the user goes back to the fan page VC
-    [[SSSessionManager sharedInstance] setCampaignID:self.campaign.id];
+    [[SSSessionManager sharedInstance] setCampaign:self.campaign];
 }
 
 - (instancetype)initWithCampaign:(SSOCampaign *)campaign {

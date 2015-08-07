@@ -126,7 +126,7 @@
  */
 - (void)fetchLatestImagesAndSendToController {
     // If there is no campaign, the default route is used
-    [SSOFeedConnect getRecentPhotosForCampaignId:[SSSessionManager sharedInstance].campaignID
+    [SSOFeedConnect getRecentPhotosForCampaignId:[SSSessionManager sharedInstance].campaign.id
         withParameters:nil
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];

@@ -58,7 +58,7 @@ extern NSString *const kIsFirstLogin;
 extern NSString *const kIsFirstLoginDate;
 extern NSString *const kIsUserLoggedIn;
 extern NSString *const kEmailLoggedString;
-extern NSString *const kCurrentCampaignID;
+extern NSString *const kCurrentCampaign;
 
 // Keychain
 extern NSString *const kUSnapKeychainServiceKey;

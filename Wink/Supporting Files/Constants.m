@@ -84,7 +84,7 @@ NSString *const kUSnapKeychainServiceKey = @"kUSnapKeychainServiceKey";
 
 NSString *const kIsUserLoggedIn = @"kIsUserLoggedIn";
 NSString *const kEmailLoggedString = @"kEmailLoggedString";
-NSString *const kCurrentCampaignID = @"kCurrentCampaignID";
+NSString *const kCurrentCampaign = @"kCurrentCampaign";
 
 #pragma mark - Storyboard
 

@@ -136,6 +136,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     self.placeholderTextView.placeholder = NSLocalizedString(@"shareview.textview.placeholder.text", @"");
     self.placeholderTextView.fadeTime = 0.2;
     self.placeholderTextView.backgroundColor = [UIColor whiteColor];
+    self.placeholderTextView.text = [SSSessionManager sharedInstance].campaign.hashTags;
+    
     // Setup the share button
     self.shareButton.layer.cornerRadius = 2.0f;
     [SSOSocialNetworkAPI sharedInstance].delegate = self;

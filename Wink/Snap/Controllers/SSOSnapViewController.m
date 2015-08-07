@@ -89,7 +89,7 @@
 
 - (void)loadTopPhotos {
     //@FIXME should be all photos, not ony the top ones]
-    [SSOFeedConnect getTopPhotosForCampaignId:[SSSessionManager sharedInstance].campaignID
+    [SSOFeedConnect getTopPhotosForCampaignId:[SSSessionManager sharedInstance].campaign.id
         withParameters:self.queryParam
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];
@@ -101,7 +101,7 @@
 }
 
 - (void)loadLatestPhotos {
-    [SSOFeedConnect getRecentPhotosForCampaignId:[SSSessionManager sharedInstance].campaignID
+    [SSOFeedConnect getRecentPhotosForCampaignId:[SSSessionManager sharedInstance].campaign.id
         withParameters:self.queryParam
         withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
           SSOCountableItems *items = [[SSOCountableItems alloc] initWithDictionary:responseObject andClass:[SSOSnap class]];

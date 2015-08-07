@@ -26,6 +26,9 @@
     if (![dictionary[@"end_date"] isKindOfClass:[NSNull class]]) {
         self.endDate = dictionary[@"end_date"];
     }
+    if (![dictionary[@"hashtags"] isKindOfClass:[NSNull class]]) {
+        self.hashTags = dictionary[@"hashtags"];
+    }
     if (![dictionary[@"id"] isKindOfClass:[NSNull class]]) {
         self.id = dictionary[@"id"];
     }
@@ -67,6 +70,9 @@
     }
     if (self.endDate != nil) {
         dictionary[@"end_date"] = self.endDate;
+    }
+    if (self.hashTags != nil) {
+        dictionary[@"hashtags"] = self.hashTags;
     }
     if (self.id != nil) {
         dictionary[@"id"] = self.id;

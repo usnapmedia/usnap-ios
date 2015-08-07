@@ -16,10 +16,9 @@
 @property(nonatomic) BOOL isUserLoggedIn;
 @property(strong, nonatomic, readwrite) NSString *username;
 @property(strong, nonatomic, readwrite) NSString *password;
-@property(strong, nonatomic, readwrite) NSString *campaignID;
+@property(strong, nonatomic, readwrite) SSOCampaign * campaign;
 
 @property(assign, nonatomic, readwrite) UIDeviceOrientation lastPhotoOrientation;
-@property(assign, nonatomic, readwrite) NSURL *lastVideoURL;
 
 @end
 
@@ -74,9 +73,9 @@
     return [SSKeychain deletePasswordForService:kUSnapKeychainServiceKey account:email];
 }
 
-- (void)setCampaignID:(NSString *)campaignID {
-    _campaignID = campaignID;
-    [NSUserDefaults setCurrentCampaign:campaignID];
+- (void)setCampaign:(SSOCampaign *)campaign {
+    _campaign = campaign;
+    [NSUserDefaults setCurrentCampaign:campaign];
 }
 
 #pragma mark - Getters
@@ -93,7 +92,7 @@
 
 - (void)initializeData {
     // Set the current campaign ID
-    _campaignID = [NSUserDefaults currentCampaignID];
+    _campaign = [NSUserDefaults currentCampaign];
 
     // Initialize the data from the user default and  keychain
     if ([NSUserDefaults isUserLoggedIn]) {

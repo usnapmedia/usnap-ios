@@ -21,6 +21,7 @@
 @property(nonatomic, strong) NSString *startDate;
 @property(nonatomic, strong) NSString *participants;
 @property(nonatomic, strong) NSString *mediaShared;
+@property(nonatomic, strong) NSString *hashTags;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

@@ -61,8 +61,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (![[SSSessionManager sharedInstance].campaignID isEqualToString:self.currentCampaign.id]) {
-        self.currentCampaign = [self.campaingTopVCContainer setAndScrollToCampaignWithCampaignID:[SSSessionManager sharedInstance].campaignID];
+    if (![[SSSessionManager sharedInstance].campaign.id isEqualToString:self.currentCampaign.id]) {
+        self.currentCampaign = [self.campaingTopVCContainer setAndScrollToCampaignWithCampaignID:[SSSessionManager sharedInstance].campaign.id];
     }
 
     // Load the data
@@ -155,7 +155,7 @@
       NSAssert([[items.response firstObject] isKindOfClass:[SSOCampaign class]], @"Need to pass a campaign object here");
       // Set current campaign to be the first campaign
       self.currentCampaign = [items.response firstObject];
-      [[SSSessionManager sharedInstance] setCampaignID:self.currentCampaign.id];
+      [[SSSessionManager sharedInstance] setCampaign:self.currentCampaign];
       // Load top photos and recent photos
       [self loadTopPhotos];
       [self loadRecentPhotos];
@@ -226,7 +226,7 @@
 - (void)topViewControllerDidChangeForNewCampaign:(SSOCampaign *)newCampaign {
 
     // Set the new campagin ID
-    [[SSSessionManager sharedInstance] setCampaignID:newCampaign.id];
+    [[SSSessionManager sharedInstance] setCampaign:newCampaign];
     [[SEGAnalytics sharedAnalytics] track:@"Viewed Campaign" properties:@{ @"New Campaign ID" : newCampaign.id }];
     self.currentCampaign = newCampaign;
     // Load new photos
