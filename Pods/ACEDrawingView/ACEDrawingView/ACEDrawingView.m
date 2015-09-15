@@ -34,6 +34,7 @@
 
 // experimental code
 #define PARTIAL_REDRAW          0
+#define IOS8_OR_ABOVE [[[UIDevice currentDevice] systemVersion] integerValue] >= 8.0
 
 @interface ACEDrawingView () {
     CGPoint currentPoint;
@@ -81,6 +82,8 @@
     self.lineColor = kDefaultLineColor;
     self.lineWidth = kDefaultLineWidth;
     self.lineAlpha = kDefaultLineAlpha;
+
+    self.drawMode = ACEDrawingModeOriginalSize;
     
     // set the transparent background
     self.backgroundColor = [UIColor clearColor];
@@ -99,9 +102,22 @@
     // TODO: draw only the updated part of the image
     [self drawPath];
 #else
-    [self.image drawInRect:self.bounds];
+    switch (self.drawMode) {
+        case ACEDrawingModeOriginalSize:
+            [self.image drawAtPoint:CGPointZero];
+            break;
+        case ACEDrawingModeScale:
+            [self.image drawInRect:self.bounds];
+            break;
+    }
     [self.currentTool draw];
 #endif
+}
+
+- (void)commitAndDiscardToolStack {
+    [self updateCacheImage:YES];
+    self.prev_image = self.image;
+    [self.pathArray removeAllObjects];
 }
 
 - (void)updateCacheImage:(BOOL)redraw
@@ -114,7 +130,14 @@
         self.image = nil;
         
         // load previous image (if returning to screen)
-        [[self.prev_image copy] drawInRect:self.bounds];
+        switch (self.drawMode) {
+            case ACEDrawingModeOriginalSize:
+                [[self.prev_image copy] drawAtPoint:CGPointZero];
+                break;
+            case ACEDrawingModeScale:
+                [[self.prev_image copy] drawInRect:self.bounds];
+                break;
+        }
         
         // I need to redraw all the lines
         for (id<ACEDrawingTool> tool in self.pathArray) {
@@ -167,7 +190,12 @@
         {
             return ACE_AUTORELEASE([ACEDrawingTextTool new]);
         }
-            
+
+        case ACEDrawingToolTypeMultilineText:
+        {
+            return ACE_AUTORELEASE([ACEDrawingMultilineTextTool new]);
+        }
+
         case ACEDrawingToolTypeRectagleStroke:
         {
             ACEDrawingRectangleTool *tool = ACE_AUTORELEASE([ACEDrawingRectangleTool new]);
@@ -224,10 +252,11 @@
     self.currentTool.lineColor = self.lineColor;
     self.currentTool.lineAlpha = self.lineAlpha;
     
-    if ([self.currentTool isKindOfClass:[ACEDrawingTextTool class]]) {
-        [self initializeTextBox: currentPoint];
-    }
-    else {
+    if ([self.currentTool class] == [ACEDrawingTextTool class]) {
+        [self initializeTextBox:currentPoint WithMultiline:NO];
+    } else if([self.currentTool class] == [ACEDrawingMultilineTextTool class]) {
+        [self initializeTextBox:currentPoint WithMultiline:YES];
+    } else {
         [self.pathArray addObject:self.currentTool];
         
         [self.currentTool setInitialPoint:currentPoint];
@@ -290,12 +319,13 @@
 
 #pragma mark - Text Entry
 
-- (void) initializeTextBox: (CGPoint)startingPoint {
-    
+- (void)initializeTextBox:(CGPoint)startingPoint WithMultiline:(BOOL)multiline {
     if (!self.textView) {
         self.textView = [[UITextView alloc] init];
         self.textView.delegate = self;
-        self.textView.returnKeyType = UIReturnKeyDone;
+        if(!multiline) {
+            self.textView.returnKeyType = UIReturnKeyDone;
+        }
         self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
         self.textView.backgroundColor = [UIColor clearColor];
         self.textView.layer.borderWidth = 1.0f;
@@ -332,7 +362,7 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if([text isEqualToString:@"\n"]) {
+    if(([self.currentTool class] == [ACEDrawingTextTool  class]) && [text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         return NO;
     }
@@ -417,10 +447,17 @@
 
 - (void)keyboardDidShow:(NSNotification *)notification
 {
-    if ( UIInterfaceOrientationIsLandscape([[UIDevice currentDevice] orientation])) {
-        [self landscapeChanges:notification];
-    } else {
-        [self portraitChanges:notification];
+    self.originalFrameYPos = self.frame.origin.y;
+
+    if (IOS8_OR_ABOVE) {
+        [self adjustFramePosition:notification];
+    }
+    else {
+        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+            [self landscapeChanges:notification];
+        } else {
+            [self adjustFramePosition:notification];
+        }
     }
 }
 
@@ -439,7 +476,7 @@
 
     }
 }
-- (void)portraitChanges:(NSNotification *)notification {
+- (void)adjustFramePosition:(NSNotification *)notification {
     CGPoint textViewBottomPoint = [self convertPoint:self.textView.frame.origin toView:nil];
     textViewBottomPoint.y += self.textView.frame.size.height;
 

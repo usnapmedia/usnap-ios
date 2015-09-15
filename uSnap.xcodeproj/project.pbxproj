@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00EFFE1B1BA8488300795C7D /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A61ACB097C000CC846 /* WKAppDelegate.m */; };
+		00EFFE1C1BA8488400795C7D /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A61ACB097C000CC846 /* WKAppDelegate.m */; };
+		00EFFE1E1BA84E1A00795C7D /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00EFFE1D1BA84E1A00795C7D /* Twitter.framework */; };
 		03AE7D3A1AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03AE7D391AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m */; };
 		1F7F85AB1A8A743900BBC5D5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */; };
 		1F7F85AC1A8A743900BBC5D5 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */; };
@@ -101,7 +104,6 @@
 		3FABF4301B70F88C00894872 /* SSOGrayBackgroundWithBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86688181AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m */; };
 		3FABF4311B70F88C00894872 /* SSOUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB76FE71B00E20600FFAF9A /* SSOUser.m */; };
 		3FABF4321B70F88C00894872 /* UIColor+PickerColors.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F40D1ACDDBF1002A503D /* UIColor+PickerColors.m */; };
-		3FABF4331B70F88C00894872 /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A61ACB097C000CC846 /* WKAppDelegate.m */; };
 		3FABF4341B70F88C00894872 /* SSOEditMediaMovableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8BC1ADF506500B3AC11 /* SSOEditMediaMovableTextView.m */; };
 		3FABF4351B70F88C00894872 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A01ACB097C000CC846 /* main.m */; };
 		3FABF4361B70F88C00894872 /* SSOToolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8C11ADF506500B3AC11 /* SSOToolButton.m */; };
@@ -189,7 +191,6 @@
 		3FABF48A1B70F88C00894872 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB57186A1AC0C3020078740E /* CoreMedia.framework */; };
 		3FABF48B1B70F88C00894872 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
 		3FABF48C1B70F88C00894872 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2747B0A019E5DE9A00C3D779 /* libz.dylib */; };
-		3FABF48D1B70F88C00894872 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D879F68A1B4B182D009E2C16 /* TwitterCore.framework */; };
 		3FABF48E1B70F88C00894872 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2747B09E19E5DE9500C3D779 /* SystemConfiguration.framework */; };
 		3FABF48F1B70F88C00894872 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2743319619B760CB003334BB /* CoreImage.framework */; };
 		3FABF4901B70F88C00894872 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2743319419B760C7003334BB /* QuartzCore.framework */; };
@@ -206,7 +207,6 @@
 		3FABF49C1B70F88C00894872 /* SSOSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBC950D1AF9238000203E48 /* SSOSettingsViewController.xib */; };
 		3FABF49D1B70F88C00894872 /* SSOTopCampaignCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339842091AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.xib */; };
 		3FABF49E1B70F88C00894872 /* WKEditMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8CB1ADF506500B3AC11 /* WKEditMediaViewController.xib */; };
-		3FABF49F1B70F88C00894872 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		3FABF4A01B70F88C00894872 /* SSOPhotoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D85B35381AF29F640011B26D /* SSOPhotoDetailViewController.xib */; };
 		3FABF4A11B70F88C00894872 /* uSnap-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335723A31ACB097C000CC846 /* uSnap-Info.plist */; };
 		3FABF4A31B70F88C00894872 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D8849AE11B66838000382D13 /* LICENSE */; };
@@ -235,9 +235,7 @@
 		3FABF4BB1B70F88C00894872 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 270DFB0619AE71BE00067072 /* Images.xcassets */; };
 		3FABF4BC1B70F88C00894872 /* SSOImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E677F41AEEE5F6006B8CD8 /* SSOImageCollectionViewCell.xib */; };
 		3FABF4C51B70F94100894872 /* Liberal.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FABF4C41B70F94100894872 /* Liberal.xcassets */; };
-		3FABF4C71B7115CC00894872 /* Liberal-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FABF4C61B7115CC00894872 /* Liberal-Info.plist */; };
 		3FABF4C91B7115FA00894872 /* Launch Screen Liberal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FABF4C81B7115FA00894872 /* Launch Screen Liberal.xib */; };
-		7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B964EB71A8ABC3C00E181C2 /* Accounts.framework */; };
 		CB57186B1AC0C3020078740E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB57186A1AC0C3020078740E /* CoreMedia.framework */; };
 		CB57186D1AC0C3090078740E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB57186C1AC0C3090078740E /* CoreVideo.framework */; };
@@ -273,7 +271,6 @@
 		D810B8F21ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8CA1ADF506500B3AC11 /* SSOTextAccessoryContainerView.xib */; };
 		D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8CB1ADF506500B3AC11 /* WKEditMediaViewController.xib */; };
 		D810B8F71ADF508A00B3AC11 /* NSBundle+Wink.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8F61ADF508A00B3AC11 /* NSBundle+Wink.m */; };
-		D815A8281B4CBEA50089CCAC /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D879F68A1B4B182D009E2C16 /* TwitterCore.framework */; };
 		D817BECD1AEF1CDC0038DF8E /* SSOViewControllerWithTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D817BECC1AEF1CDC0038DF8E /* SSOViewControllerWithTabBar.m */; };
 		D830F41A1ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4051ACDDBF1002A503D /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
 		D830F41B1ACDDBF1002A503D /* AVAssetTrack+WKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F4071ACDDBF1002A503D /* AVAssetTrack+WKAdditions.m */; };
@@ -293,7 +290,6 @@
 		D86E94B51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A51ACF492000CFF801 /* SSOSettingsSocialFakeTableViewCell.m */; };
 		D86E94B61ACF492000CFF801 /* WKSettingSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */; };
 		D86E94B91ACF492000CFF801 /* SSBaseCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */; };
-		D879F68D1B4B182D009E2C16 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D879F68A1B4B182D009E2C16 /* TwitterCore.framework */; };
 		D8849AE21B66838000382D13 /* SSFacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8849AC61B66838000382D13 /* SSFacebookHelper.m */; };
 		D8849AE31B66838000382D13 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D8849AC71B66838000382D13 /* LICENSE */; };
 		D8849AE41B66838000382D13 /* SSCellViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D8849ACC1B66838000382D13 /* SSCellViewItem.m */; };
@@ -313,7 +309,6 @@
 		D898E1D81AF1622500C957DC /* SSOCampaignTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D898E1CF1AF1622500C957DC /* SSOCampaignTableViewCell.xib */; };
 		D898E1D91AF1622500C957DC /* SSOMyFeedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D898E1D11AF1622500C957DC /* SSOMyFeedCollectionViewCell.m */; };
 		D898E1DA1AF1622500C957DC /* SSOMyFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D898E1D21AF1622500C957DC /* SSOMyFeedCollectionViewCell.xib */; };
-		D8A035BF1B2A126400833E4A /* Neomedia-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8BD7E151B27E5EA0007DD36 /* Neomedia-Info.plist */; };
 		D8BD7D621B25F4550007DD36 /* SSOViewControllerWithTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D817BECC1AEF1CDC0038DF8E /* SSOViewControllerWithTabBar.m */; };
 		D8BD7D631B25F4550007DD36 /* SSOSocialNetworkAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C7B1AD4281B008D2A37 /* SSOSocialNetworkAPI.m */; };
 		D8BD7D641B25F4550007DD36 /* SSOMyFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D898E1C81AF1622500C957DC /* SSOMyFeedViewController.m */; };
@@ -340,7 +335,6 @@
 		D8BD7D791B25F4550007DD36 /* SSOGrayBackgroundWithBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86688181AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m */; };
 		D8BD7D7A1B25F4550007DD36 /* SSOUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB76FE71B00E20600FFAF9A /* SSOUser.m */; };
 		D8BD7D7B1B25F4550007DD36 /* UIColor+PickerColors.m in Sources */ = {isa = PBXBuildFile; fileRef = D830F40D1ACDDBF1002A503D /* UIColor+PickerColors.m */; };
-		D8BD7D7C1B25F4550007DD36 /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A61ACB097C000CC846 /* WKAppDelegate.m */; };
 		D8BD7D7D1B25F4550007DD36 /* SSOEditMediaMovableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8BC1ADF506500B3AC11 /* SSOEditMediaMovableTextView.m */; };
 		D8BD7D7E1B25F4550007DD36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 335723A01ACB097C000CC846 /* main.m */; };
 		D8BD7D7F1B25F4550007DD36 /* SSOToolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D810B8C11ADF506500B3AC11 /* SSOToolButton.m */; };
@@ -442,7 +436,6 @@
 		D8BD7DE21B25F4550007DD36 /* SSOSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBC950D1AF9238000203E48 /* SSOSettingsViewController.xib */; };
 		D8BD7DE31B25F4550007DD36 /* SSOTopCampaignCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339842091AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.xib */; };
 		D8BD7DE41B25F4550007DD36 /* WKEditMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8CB1ADF506500B3AC11 /* WKEditMediaViewController.xib */; };
-		D8BD7DE51B25F4550007DD36 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */; };
 		D8BD7DE61B25F4550007DD36 /* SSOPhotoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D85B35381AF29F640011B26D /* SSOPhotoDetailViewController.xib */; };
 		D8BD7DE81B25F4550007DD36 /* SSOAdjustmentAccessoryContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8C61ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib */; };
 		D8BD7DE91B25F4550007DD36 /* SSOColorPickerContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D810B8C71ADF506500B3AC11 /* SSOColorPickerContainerView.xib */; };
@@ -470,7 +463,6 @@
 		D8BD7E0C1B25F9390007DD36 /* Launch Screen Neomedia.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8BD7E0B1B25F9390007DD36 /* Launch Screen Neomedia.xib */; };
 		D8BD7E111B26079A0007DD36 /* Neomedia.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8BD7E101B26079A0007DD36 /* Neomedia.xcassets */; };
 		D8BD7E131B2608B30007DD36 /* Base.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8BD7E121B2608B30007DD36 /* Base.xcassets */; };
-		D8BD7E141B27E55C0007DD36 /* uSnap-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335723A31ACB097C000CC846 /* uSnap-Info.plist */; };
 		D8C83EA31AE1C74C00F187F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8C83E9F1AE1C74C00F187F1 /* InfoPlist.strings */; };
 		D8C83EA41AE1C74C00F187F1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8C83EA11AE1C74C00F187F1 /* Localizable.strings */; };
 		D8D4F17F1ADFFB52002FDE38 /* SSOThemeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D4F17E1ADFFB52002FDE38 /* SSOThemeHelper.m */; };
@@ -519,6 +511,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00EFFE1D1BA84E1A00795C7D /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		03AE7D381AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+SSOLockedNavigationController.h"; sourceTree = "<group>"; };
 		03AE7D391AD736CF00060FC5 /* UINavigationController+SSOLockedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SSOLockedNavigationController.m"; sourceTree = "<group>"; };
 		1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -625,15 +618,12 @@
 		33B991481AE4522F002A30F8 /* SSOAlignedButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOAlignedButtonsView.m; sourceTree = "<group>"; };
 		33E8517A1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SSOSocialNetworkAPI+USnap.h"; sourceTree = "<group>"; };
 		33E8517B1AE5C95E008A9E9E /* SSOSocialNetworkAPI+USnap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SSOSocialNetworkAPI+USnap.m"; sourceTree = "<group>"; };
-		3F076CA41B66A31E00F9DFB7 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
-		3F076CA71B66A42400F9DFB7 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		3F3C2BE01B6FBA5A00332506 /* uSnap-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "uSnap-Bridging-Header.h"; sourceTree = "<group>"; };
 		3FABF4C21B70F88C00894872 /* Liberal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Liberal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FABF4C41B70F94100894872 /* Liberal.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Liberal.xcassets; sourceTree = "<group>"; };
 		3FABF4C61B7115CC00894872 /* Liberal-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Liberal-Info.plist"; sourceTree = "<group>"; };
 		3FABF4C81B7115FA00894872 /* Launch Screen Liberal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen Liberal.xib"; sourceTree = "<group>"; };
 		4A7C45E968DF2A0D182AC3BA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		7B964EB71A8ABC3C00E181C2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		AB9ECEFEEE6F33C8F8962807 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB57186A1AC0C3020078740E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -735,7 +725,6 @@
 		D86E94A71ACF492000CFF801 /* WKSettingSocialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKSettingSocialTableViewCell.m; sourceTree = "<group>"; };
 		D86E94AB1ACF492000CFF801 /* SSBaseCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseCollectionView.h; sourceTree = "<group>"; };
 		D86E94AC1ACF492000CFF801 /* SSBaseCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBaseCollectionView.m; sourceTree = "<group>"; };
-		D879F68A1B4B182D009E2C16 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		D8849AC51B66838000382D13 /* SSFacebookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookHelper.h; sourceTree = "<group>"; };
 		D8849AC61B66838000382D13 /* SSFacebookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFacebookHelper.m; sourceTree = "<group>"; };
 		D8849AC71B66838000382D13 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -844,13 +833,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00EFFE1E1BA84E1A00795C7D /* Twitter.framework in Frameworks */,
 				2747B09D19E5DE8F00C3D779 /* CoreData.framework in Frameworks */,
 				270DFAF719AE71BE00067072 /* CoreGraphics.framework in Frameworks */,
 				CB57186D1AC0C3090078740E /* CoreVideo.framework in Frameworks */,
 				CB57186B1AC0C3020078740E /* CoreMedia.framework in Frameworks */,
 				7B964EB81A8ABC3C00E181C2 /* Accounts.framework in Frameworks */,
 				2747B0A119E5DE9A00C3D779 /* libz.dylib in Frameworks */,
-				D879F68D1B4B182D009E2C16 /* TwitterCore.framework in Frameworks */,
 				2747B09F19E5DE9500C3D779 /* SystemConfiguration.framework in Frameworks */,
 				2743319719B760CC003334BB /* CoreImage.framework in Frameworks */,
 				2743319519B760C7003334BB /* QuartzCore.framework in Frameworks */,
@@ -886,7 +875,6 @@
 				3FABF48A1B70F88C00894872 /* CoreMedia.framework in Frameworks */,
 				3FABF48B1B70F88C00894872 /* Accounts.framework in Frameworks */,
 				3FABF48C1B70F88C00894872 /* libz.dylib in Frameworks */,
-				3FABF48D1B70F88C00894872 /* TwitterCore.framework in Frameworks */,
 				3FABF48E1B70F88C00894872 /* SystemConfiguration.framework in Frameworks */,
 				3FABF48F1B70F88C00894872 /* CoreImage.framework in Frameworks */,
 				3FABF4901B70F88C00894872 /* QuartzCore.framework in Frameworks */,
@@ -911,7 +899,6 @@
 				D8BD7DCF1B25F4550007DD36 /* CoreMedia.framework in Frameworks */,
 				D8BD7DD01B25F4550007DD36 /* Accounts.framework in Frameworks */,
 				D8BD7DD11B25F4550007DD36 /* libz.dylib in Frameworks */,
-				D815A8281B4CBEA50089CCAC /* TwitterCore.framework in Frameworks */,
 				D8BD7DD21B25F4550007DD36 /* SystemConfiguration.framework in Frameworks */,
 				D8BD7DD31B25F4550007DD36 /* CoreData.framework in Frameworks */,
 				D8BD7DD41B25F4550007DD36 /* CoreImage.framework in Frameworks */,
@@ -960,17 +947,14 @@
 		270DFAF319AE71BE00067072 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3F076CA41B66A31E00F9DFB7 /* Twitter.framework */,
+				00EFFE1D1BA84E1A00795C7D /* Twitter.framework */,
 				CB57186C1AC0C3090078740E /* CoreVideo.framework */,
 				CB57186A1AC0C3020078740E /* CoreMedia.framework */,
 				7B964EB71A8ABC3C00E181C2 /* Accounts.framework */,
-				7B964EB41A8AA6DD00E181C2 /* TwitterKitResources.bundle */,
 				2747B0A019E5DE9A00C3D779 /* libz.dylib */,
-				3F076CA71B66A42400F9DFB7 /* TwitterKit.framework */,
 				1F7F85A91A8A743900BBC5D5 /* Crashlytics.framework */,
 				1F7F85AA1A8A743900BBC5D5 /* Fabric.framework */,
 				2747B09E19E5DE9500C3D779 /* SystemConfiguration.framework */,
-				D879F68A1B4B182D009E2C16 /* TwitterCore.framework */,
 				2747B09C19E5DE8F00C3D779 /* CoreData.framework */,
 				2743319619B760CB003334BB /* CoreImage.framework */,
 				2743319419B760C7003334BB /* QuartzCore.framework */,
@@ -1947,7 +1931,7 @@
 				270DFAEE19AE71BE00067072 /* Frameworks */,
 				270DFAEF19AE71BE00067072 /* Resources */,
 				AB49050F8230D381E24E774E /* Copy Pods Resources */,
-				1F7F85A81A8A741600BBC5D5 /* Run Fabric */,
+				00EFFE191BA8419C00795C7D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2025,7 +2009,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SSO;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Samsao;
 				TargetAttributes = {
 					270DFAF019AE71BE00067072 = {
@@ -2074,9 +2058,7 @@
 				FBBC950F1AF9238000203E48 /* SSOSettingsViewController.xib in Resources */,
 				3398420D1AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.xib in Resources */,
 				D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */,
-				7B964EB61A8AA6DD00E181C2 /* TwitterKitResources.bundle in Resources */,
 				D85B353A1AF29F640011B26D /* SSOPhotoDetailViewController.xib in Resources */,
-				D8BD7E141B27E55C0007DD36 /* uSnap-Info.plist in Resources */,
 				D8D4F1811AE04B12002FDE38 /* Launch Screen.xib in Resources */,
 				D8849AEC1B66838000382D13 /* LICENSE in Resources */,
 				D810B8EE1ADF506500B3AC11 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
@@ -2123,7 +2105,6 @@
 				3FABF49C1B70F88C00894872 /* SSOSettingsViewController.xib in Resources */,
 				3FABF49D1B70F88C00894872 /* SSOTopCampaignCollectionViewCell.xib in Resources */,
 				3FABF49E1B70F88C00894872 /* WKEditMediaViewController.xib in Resources */,
-				3FABF49F1B70F88C00894872 /* TwitterKitResources.bundle in Resources */,
 				3FABF4A01B70F88C00894872 /* SSOPhotoDetailViewController.xib in Resources */,
 				3FABF4A11B70F88C00894872 /* uSnap-Info.plist in Resources */,
 				3FABF4A31B70F88C00894872 /* LICENSE in Resources */,
@@ -2131,7 +2112,6 @@
 				3FABF4A51B70F88C00894872 /* SSOColorPickerContainerView.xib in Resources */,
 				3FABF4A61B70F88C00894872 /* SSOProfileViewController.xib in Resources */,
 				3FABF4A71B70F88C00894872 /* InfoPlist.strings in Resources */,
-				3FABF4C71B7115CC00894872 /* Liberal-Info.plist in Resources */,
 				3FABF4A81B70F88C00894872 /* SSOCampaignDetailViewController.xib in Resources */,
 				3FABF4A91B70F88C00894872 /* Localizable.strings in Resources */,
 				3FABF4AA1B70F88C00894872 /* SSOSnapViewController.xib in Resources */,
@@ -2165,7 +2145,6 @@
 				D8BD7DE21B25F4550007DD36 /* SSOSettingsViewController.xib in Resources */,
 				D8BD7DE31B25F4550007DD36 /* SSOTopCampaignCollectionViewCell.xib in Resources */,
 				D8BD7DE41B25F4550007DD36 /* WKEditMediaViewController.xib in Resources */,
-				D8BD7DE51B25F4550007DD36 /* TwitterKitResources.bundle in Resources */,
 				D8BD7DE61B25F4550007DD36 /* SSOPhotoDetailViewController.xib in Resources */,
 				D8BD7DE81B25F4550007DD36 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
 				D8BD7E111B26079A0007DD36 /* Neomedia.xcassets in Resources */,
@@ -2184,7 +2163,6 @@
 				D8BD7DF61B25F4550007DD36 /* SSOLoginContainerView.xib in Resources */,
 				D8BD7DF71B25F4550007DD36 /* SSOTextAccessoryContainerView.xib in Resources */,
 				D8BD7DF91B25F4550007DD36 /* SSOPhotosCollectionViewCell.xib in Resources */,
-				D8A035BF1B2A126400833E4A /* Neomedia-Info.plist in Resources */,
 				D8BD7DFA1B25F4550007DD36 /* SSOLoginViewController.xib in Resources */,
 				D8BD7DFB1B25F4550007DD36 /* Futura.ttc in Resources */,
 				D8BD7E0C1B25F9390007DD36 /* Launch Screen Neomedia.xib in Resources */,
@@ -2199,19 +2177,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1F7F85A81A8A741600BBC5D5 /* Run Fabric */ = {
+		00EFFE191BA8419C00795C7D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Run Fabric";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 2a095b85365a5eaa245c88f0af9d08379dc72ee7 f02ae98baa51fc8d9604b4f7286619a355a39c400686640bb7782e81e9e343bd";
+			shellScript = "./Fabric.framework/run 30171b647fe07aff3ea9ac7c1f8c8328ceeb2d5e f43ab94d206a09c897f6345704b175c01f4e50ade89f027457a867b3ee8af3a0";
 		};
 		21D7DD86B8C55E58ECC8127E /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2537,6 +2514,7 @@
 				3FABF4211B70F88C00894872 /* SSOUSnapButton.m in Sources */,
 				3FABF4221B70F88C00894872 /* SSOSimpleTableViewProvider.m in Sources */,
 				3FABF4231B70F88C00894872 /* SSORecentPhotosViewController.m in Sources */,
+				00EFFE1C1BA8488400795C7D /* WKAppDelegate.m in Sources */,
 				3FABF4241B70F88C00894872 /* WKColorPickerView.m in Sources */,
 				3FABF4251B70F88C00894872 /* SSOFacebookLoginButton.m in Sources */,
 				3FABF4261B70F88C00894872 /* SSOBaseCollectionViewProvider.m in Sources */,
@@ -2552,7 +2530,6 @@
 				3FABF4301B70F88C00894872 /* SSOGrayBackgroundWithBorderView.m in Sources */,
 				3FABF4311B70F88C00894872 /* SSOUser.m in Sources */,
 				3FABF4321B70F88C00894872 /* UIColor+PickerColors.m in Sources */,
-				3FABF4331B70F88C00894872 /* WKAppDelegate.m in Sources */,
 				3FABF4341B70F88C00894872 /* SSOEditMediaMovableTextView.m in Sources */,
 				3FABF4351B70F88C00894872 /* main.m in Sources */,
 				3FABF4361B70F88C00894872 /* SSOToolButton.m in Sources */,
@@ -2665,9 +2642,9 @@
 				D8BD7D771B25F4550007DD36 /* UIAlertView+Blocks.m in Sources */,
 				D8BD7D781B25F4550007DD36 /* WKShareViewController.m in Sources */,
 				D8BD7D791B25F4550007DD36 /* SSOGrayBackgroundWithBorderView.m in Sources */,
+				00EFFE1B1BA8488300795C7D /* WKAppDelegate.m in Sources */,
 				D8BD7D7A1B25F4550007DD36 /* SSOUser.m in Sources */,
 				D8BD7D7B1B25F4550007DD36 /* UIColor+PickerColors.m in Sources */,
-				D8BD7D7C1B25F4550007DD36 /* WKAppDelegate.m in Sources */,
 				D8BD7D7D1B25F4550007DD36 /* SSOEditMediaMovableTextView.m in Sources */,
 				D8BD7D7E1B25F4550007DD36 /* main.m in Sources */,
 				D8BD7D7F1B25F4550007DD36 /* SSOToolButton.m in Sources */,

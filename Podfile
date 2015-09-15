@@ -28,4 +28,5 @@ pod 'Analytics/Segmentio'
 pod 'TOWebViewController'
 pod 'Crashlytics'
 pod 'TwitterKit'
-
+pod 'TwitterCore'
+pod 'Fabric'

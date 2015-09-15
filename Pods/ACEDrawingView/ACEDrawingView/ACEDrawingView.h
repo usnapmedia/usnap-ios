@@ -35,8 +35,14 @@ typedef enum {
     ACEDrawingToolTypeEllipseStroke,
     ACEDrawingToolTypeEllipseFill,
     ACEDrawingToolTypeEraser,
-    ACEDrawingToolTypeText
+    ACEDrawingToolTypeText,
+    ACEDrawingToolTypeMultilineText
 } ACEDrawingToolType;
+
+typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
+    ACEDrawingModeScale,
+    ACEDrawingModeOriginalSize
+};
 
 @protocol ACEDrawingViewDelegate, ACEDrawingTool;
 
@@ -49,6 +55,7 @@ typedef enum {
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat lineAlpha;
+@property (nonatomic, assign) ACEDrawingMode drawMode;
 
 // get the current drawing
 @property (nonatomic, strong, readonly) UIImage *image;
@@ -68,6 +75,12 @@ typedef enum {
 
 - (BOOL)canRedo;
 - (void)redoLatestStep;
+
+/**
+ @discussion Discards the tool stack and renders them to prev_image, making the current state the 'start' state.
+ (Can be called before resize to make content more predictable)
+ */
+- (void)commitAndDiscardToolStack;
 
 @end
 
