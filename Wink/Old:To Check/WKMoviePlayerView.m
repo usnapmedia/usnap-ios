@@ -17,6 +17,7 @@
 #pragma mark - Initializers
 
 - (id)initWithPath:(NSURL *)path {
+    
     if ((self = [super init])) {
         
         self.backgroundColor = [UIColor whiteColor];

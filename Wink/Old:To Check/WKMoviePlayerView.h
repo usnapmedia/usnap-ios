@@ -11,7 +11,7 @@
 
 @protocol WKMoviePlayerDelegate;
 
-@interface WKMoviePlayerView : UIView {
+@interface WKMoviePlayerView : UIView <UITextFieldDelegate>{
     
 }
 

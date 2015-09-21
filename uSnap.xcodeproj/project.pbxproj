@@ -2013,7 +2013,7 @@
 				ORGANIZATIONNAME = Samsao;
 				TargetAttributes = {
 					270DFAF019AE71BE00067072 = {
-						DevelopmentTeam = 6WH26365Q4;
+						DevelopmentTeam = 9U538J87YX;
 					};
 					270DFB0B19AE71BE00067072 = {
 						DevelopmentTeam = 8UQUNTB23H;
@@ -2848,6 +2848,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 64;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2856,7 +2857,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wink/Supporting Files/uSnap-Prefix.pch";
 				INFOPLIST_FILE = "Wink/Supporting Files/uSnap-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = uSnap;
 				PROVISIONING_PROFILE = "";
@@ -2877,6 +2878,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 64;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2885,7 +2887,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wink/Supporting Files/uSnap-Prefix.pch";
 				INFOPLIST_FILE = "Wink/Supporting Files/uSnap-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = uSnap;

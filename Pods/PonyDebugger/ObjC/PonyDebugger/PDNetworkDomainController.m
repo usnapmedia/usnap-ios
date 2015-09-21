@@ -18,7 +18,6 @@
 #import <objc/message.h>
 #import <dispatch/queue.h>
 
-
 // For reference from the private class dump
 //@interface __NSCFURLSessionConnection : NSObject
 //

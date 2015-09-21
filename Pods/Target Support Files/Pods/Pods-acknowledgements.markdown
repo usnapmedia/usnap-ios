@@ -410,9 +410,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 Fabric: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. OSS: http://get.fabric.io/terms/opensource.txt
 
-## GoogleAnalytics-iOS-SDK
+## GoogleAnalytics
 
-Copyright 2009 - 2015 Google, Inc. All rights reserved.
+Copyright 2015 Google Inc.
 
 ## IQKeyboardManager
 

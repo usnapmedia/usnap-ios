@@ -1,5 +1,5 @@
 PODS:
-  - ACEDrawingView (1.3.5)
+  - ACEDrawingView (1.3.6)
   - AFNetworking (2.6.0):
     - AFNetworking/NSURLConnection (= 2.6.0)
     - AFNetworking/NSURLSession (= 2.6.0)
@@ -21,9 +21,9 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Analytics/Core-iOS (2.0.8):
+  - Analytics/Core-iOS (2.0.9):
     - TRVSDictionaryWithCaseInsensitivity (= 0.0.2)
-  - Analytics/Segmentio (2.0.8):
+  - Analytics/Segmentio (2.0.9):
     - Analytics/Core-iOS
   - AutoScrollLabel (0.4.2)
   - Bolts (1.2.2):
@@ -50,9 +50,7 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.6.0):
     - FBSDKCoreKit
-  - GoogleAnalytics-iOS-SDK (3.12):
-    - GoogleAnalytics-iOS-SDK/Core (= 3.12)
-  - GoogleAnalytics-iOS-SDK/Core (3.12)
+  - GoogleAnalytics (3.13.0)
   - googleplus-ios-sdk (1.7.1)
   - IQKeyboardManager (3.3.1)
   - Masonry (0.6.2)
@@ -85,7 +83,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
-  - GoogleAnalytics-iOS-SDK
+  - GoogleAnalytics
   - googleplus-ios-sdk
   - IQKeyboardManager
   - Masonry
@@ -103,9 +101,9 @@ DEPENDENCIES:
   - YKImageCropper
 
 SPEC CHECKSUMS:
-  ACEDrawingView: d951dd5588ece23ad300bcadfdc488c80fa3861b
+  ACEDrawingView: 69e52f4fa4190d643bf6d63af0413cca3b99b6af
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
-  Analytics: a927e695c29b9b06b38137bb6608e9924ccc94cb
+  Analytics: 37606c7303786f6c8734e5ba1115c295435e95ba
   AutoScrollLabel: 661f3f33042db40e495cb4ebe599b903c8bf80cd
   Bolts: 20a2bd788273360cb1e31530dc19b8544eef2544
   Crashlytics: 0e61bdda9def51f1e99720f804eebe94865442b2
@@ -114,7 +112,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 9954492d90c5fd65ae831395697a1660360d61f1
   FBSDKLoginKit: 3d07febbfa884b9878cacba54f705bb41f07d4b6
   FBSDKShareKit: f474f1123791e215d0299b98b3ee92ddd9187d86
-  GoogleAnalytics-iOS-SDK: 13241762fa4aea845eb75bef6c0da3427a26e7b3
+  GoogleAnalytics: fcf1f1cad57ae1a9a53520018f0f680ceeeb8b49
   googleplus-ios-sdk: 065d9135061a5f84c07656a68ced48336408fe35
   IQKeyboardManager: 860a5b9df32cc1435a3e967a08ed87de3e59c12e
   Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be

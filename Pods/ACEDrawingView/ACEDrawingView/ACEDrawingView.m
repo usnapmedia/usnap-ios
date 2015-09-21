@@ -93,6 +93,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
 
+- (UIImage *)prev_image {
+    return self.backgroundImage;
+}
+
+- (void)setPrev_image:(UIImage *)prev_image {
+    [self setBackgroundImage:prev_image];
+}
+
 
 #pragma mark - Drawing
 
@@ -106,6 +114,7 @@
         case ACEDrawingModeOriginalSize:
             [self.image drawAtPoint:CGPointZero];
             break;
+            
         case ACEDrawingModeScale:
             [self.image drawInRect:self.bounds];
             break;
@@ -114,9 +123,10 @@
 #endif
 }
 
-- (void)commitAndDiscardToolStack {
+- (void)commitAndDiscardToolStack
+{
     [self updateCacheImage:YES];
-    self.prev_image = self.image;
+    self.backgroundImage = self.image;
     [self.pathArray removeAllObjects];
 }
 
@@ -130,12 +140,13 @@
         self.image = nil;
         
         // load previous image (if returning to screen)
+        
         switch (self.drawMode) {
             case ACEDrawingModeOriginalSize:
-                [[self.prev_image copy] drawAtPoint:CGPointZero];
+                [[self.backgroundImage copy] drawAtPoint:CGPointZero];
                 break;
             case ACEDrawingModeScale:
-                [[self.prev_image copy] drawInRect:self.bounds];
+                [[self.backgroundImage copy] drawInRect:self.bounds];
                 break;
         }
         
@@ -172,6 +183,14 @@
     self.currentTool = nil;
 }
 
+- (void)setCustomDrawTool:(id<ACEDrawingTool>)customDrawTool
+{
+    _customDrawTool = customDrawTool;
+    
+    if (customDrawTool != nil) {
+        self.drawTool = ACEDrawingToolTypeCustom;
+    }
+}
 
 - (id<ACEDrawingTool>)toolWithCurrentSettings
 {
@@ -227,6 +246,11 @@
         case ACEDrawingToolTypeEraser:
         {
             return ACE_AUTORELEASE([ACEDrawingEraserTool new]);
+        }
+            
+        case ACEDrawingToolTypeCustom:
+        {
+            return self.customDrawTool;
         }
     }
 }
@@ -506,7 +530,7 @@
     self.image = image;
     
     //save the loaded image to persist after an undo step
-    self.prev_image = [image copy];
+    self.backgroundImage = [image copy];
     
     // when loading an external image, I'm cleaning all the paths and the undo buffer
     [self.bufferArray removeAllObjects];
@@ -545,7 +569,7 @@
     [self resetTool];
     [self.bufferArray removeAllObjects];
     [self.pathArray removeAllObjects];
-    self.prev_image = nil;
+    self.backgroundImage = nil;
     [self updateCacheImage:YES];
     [self setNeedsDisplay];
 }
@@ -599,7 +623,8 @@
     self.bufferArray = nil;
     self.currentTool = nil;
     self.image = nil;
-    self.prev_image = nil;
+    self.backgroundImage = nil;
+    self.customDrawTool = nil;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
