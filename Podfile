@@ -4,7 +4,7 @@ platform :ios, '8.0'
 
 inhibit_all_warnings!
 
-pod 'GoogleAnalytics-iOS-SDK'
+pod 'GoogleAnalytics'
 pod 'AFNetworking'
 pod 'YKImageCropper'
 pod 'ACEDrawingView'
@@ -28,4 +28,5 @@ pod 'Analytics/Segmentio'
 pod 'TOWebViewController'
 pod 'Crashlytics'
 pod 'TwitterKit'
-
+pod 'TwitterCore'
+pod 'Fabric'

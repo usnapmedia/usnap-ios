@@ -24,7 +24,7 @@
 }
 
 - (void)usnapDisconnectToSocialNetwork:(SelectedSocialNetwork)socialNetwork {
-
+//    [self logoutFromSocialFramework:socialNetwork];
     [self setNSUserDefaultWithValue:NO andSocialNetwork:socialNetwork];
 }
 

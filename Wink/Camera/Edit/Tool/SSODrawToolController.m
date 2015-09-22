@@ -79,6 +79,7 @@
     // Set the container to the draw view delegate
     self.drawView = [parent drawView];
     self.drawView.delegate = self;
+    self.drawView.drawTool = ACEDrawingToolTypePen;
     // Set the draw view
     self.drawView.userInteractionEnabled = YES;
     self.drawView.lineColor = self.colorPickerContainerView.colorPickerView.color;

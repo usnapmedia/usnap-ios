@@ -35,9 +35,12 @@
     [[SEGAnalytics sharedAnalytics] enable];
 
     [[SEGAnalytics sharedAnalytics] track:@"App Started"];
-    [[Twitter sharedInstance] startWithConsumerKey:kTwitterConsumerKey consumerSecret:kTwitterConsumerSecret];
+
+    
     //     Setup crashlytics
-    [Fabric with:@[ CrashlyticsKit, TwitterKit ]];
+    [Fabric with:@[ CrashlyticsKit, TwitterKit]];
+    [[Twitter sharedInstance] startWithConsumerKey:kTwitterConsumerKey consumerSecret:kTwitterConsumerSecret];
+
 
 #ifdef DEBUG
     // Initialize PonyDebugger

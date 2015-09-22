@@ -1,73 +1,75 @@
 PODS:
-  - ACEDrawingView (1.3.2)
-  - AFNetworking (2.5.3):
-    - AFNetworking/NSURLConnection (= 2.5.3)
-    - AFNetworking/NSURLSession (= 2.5.3)
-    - AFNetworking/Reachability (= 2.5.3)
-    - AFNetworking/Security (= 2.5.3)
-    - AFNetworking/Serialization (= 2.5.3)
-    - AFNetworking/UIKit (= 2.5.3)
-  - AFNetworking/NSURLConnection (2.5.3):
+  - ACEDrawingView (1.3.6)
+  - AFNetworking (2.6.0):
+    - AFNetworking/NSURLConnection (= 2.6.0)
+    - AFNetworking/NSURLSession (= 2.6.0)
+    - AFNetworking/Reachability (= 2.6.0)
+    - AFNetworking/Security (= 2.6.0)
+    - AFNetworking/Serialization (= 2.6.0)
+    - AFNetworking/UIKit (= 2.6.0)
+  - AFNetworking/NSURLConnection (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.3):
+  - AFNetworking/NSURLSession (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.3)
-  - AFNetworking/Security (2.5.3)
-  - AFNetworking/Serialization (2.5.3)
-  - AFNetworking/UIKit (2.5.3):
+  - AFNetworking/Reachability (2.6.0)
+  - AFNetworking/Security (2.6.0)
+  - AFNetworking/Serialization (2.6.0)
+  - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Analytics/Core-iOS (1.11.9):
+  - Analytics/Core-iOS (2.0.9):
     - TRVSDictionaryWithCaseInsensitivity (= 0.0.2)
-  - Analytics/Segmentio (1.11.9):
+  - Analytics/Segmentio (2.0.9):
     - Analytics/Core-iOS
-  - AutoScrollLabel (0.4.1)
-  - Bolts (1.2.0):
-    - Bolts/AppLinks (= 1.2.0)
-    - Bolts/Tasks (= 1.2.0)
-  - Bolts/AppLinks (1.2.0):
+  - AutoScrollLabel (0.4.2)
+  - Bolts (1.2.2):
+    - Bolts/AppLinks (= 1.2.2)
+    - Bolts/Tasks (= 1.2.2)
+  - Bolts/AppLinks (1.2.2):
     - Bolts/Tasks
-  - Bolts/Tasks (1.2.0)
-  - Crashlytics (3.1.0)
-  - CWStatusBarNotification (2.2.4)
-  - FBSDKCoreKit (4.4.0):
+  - Bolts/Tasks (1.2.2)
+  - Crashlytics (3.3.1)
+  - CWStatusBarNotification (2.3.3)
+  - Fabric (1.5.1):
+    - Fabric/Base (= 1.5.1)
+  - Fabric/Base (1.5.1)
+  - FBSDKCoreKit (4.6.0):
     - Bolts (~> 1.1)
-    - FBSDKCoreKit/arc (= 4.4.0)
-    - FBSDKCoreKit/no-arc (= 4.4.0)
-  - FBSDKCoreKit/arc (4.4.0):
+    - FBSDKCoreKit/arc (= 4.6.0)
+    - FBSDKCoreKit/no-arc (= 4.6.0)
+  - FBSDKCoreKit/arc (4.6.0):
     - Bolts (~> 1.1)
-  - FBSDKCoreKit/no-arc (4.4.0):
+  - FBSDKCoreKit/no-arc (4.6.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc
-  - FBSDKLoginKit (4.4.0):
+  - FBSDKLoginKit (4.6.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.4.0):
+  - FBSDKShareKit (4.6.0):
     - FBSDKCoreKit
-  - GoogleAnalytics-iOS-SDK (3.10):
-    - GoogleAnalytics-iOS-SDK/Core (= 3.10)
-  - GoogleAnalytics-iOS-SDK/Core (3.10)
+  - GoogleAnalytics (3.13.0)
   - googleplus-ios-sdk (1.7.1)
-  - IQKeyboardManager (3.2.3)
-  - Masonry (0.6.1)
-  - PonyDebugger (0.4.3):
+  - IQKeyboardManager (3.3.1)
+  - Masonry (0.6.2)
+  - PonyDebugger (0.4.5):
     - SocketRocket
   - pop (1.0.7)
-  - RSKImageCropper (1.1.3)
+  - RSKImageCropper (1.3.1)
   - SDiPhoneVersion (1.1.2)
-  - SDWebImage (3.7.2):
-    - SDWebImage/Core (= 3.7.2)
-  - SDWebImage/Core (3.7.2)
-  - SocketRocket (0.2.0)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
+  - SocketRocket (0.4.1)
   - SSKeychain (1.2.3)
   - SVProgressHUD (1.1.3)
   - SZTextView (1.2.1)
   - TOWebViewController (2.0.17)
   - TRVSDictionaryWithCaseInsensitivity (0.0.2)
-  - TwitterKit (1.8.1)
+  - TwitterCore (1.10.1)
+  - TwitterKit (1.10.1)
   - YKImageCropper (0.0.4)
 
 DEPENDENCIES:
@@ -77,10 +79,11 @@ DEPENDENCIES:
   - AutoScrollLabel
   - Crashlytics
   - CWStatusBarNotification
+  - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
-  - GoogleAnalytics-iOS-SDK
+  - GoogleAnalytics
   - googleplus-ios-sdk
   - IQKeyboardManager
   - Masonry
@@ -93,36 +96,39 @@ DEPENDENCIES:
   - SVProgressHUD
   - SZTextView
   - TOWebViewController
+  - TwitterCore
   - TwitterKit
   - YKImageCropper
 
 SPEC CHECKSUMS:
-  ACEDrawingView: c16c424ab5cdafeb0952bd39b808007a69a960bd
-  AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
-  Analytics: e0633a6f0cb89a27265d94b4c8f94a4c1054f39d
-  AutoScrollLabel: afe272014f82c707c9203f1383f3fe4e32443fa2
-  Bolts: d176cb1e0012175589e389a9db49b85e27787576
-  Crashlytics: 93e2f86363d53c002c6366a9d87e41f2eaee87c3
-  CWStatusBarNotification: 24ea6215e9b4a0cea66f8377fb0130f313e0b3d4
-  FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474
-  FBSDKLoginKit: 02a9254a4c132412fa03577b0d53e936d068a7fb
-  FBSDKShareKit: a42865f20ba2d1cc548c4d0f73ad22cff6377ddb
-  GoogleAnalytics-iOS-SDK: 4f98a376c1d61e6ac4ca47951655820314856eef
+  ACEDrawingView: 69e52f4fa4190d643bf6d63af0413cca3b99b6af
+  AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  Analytics: 37606c7303786f6c8734e5ba1115c295435e95ba
+  AutoScrollLabel: 661f3f33042db40e495cb4ebe599b903c8bf80cd
+  Bolts: 20a2bd788273360cb1e31530dc19b8544eef2544
+  Crashlytics: 0e61bdda9def51f1e99720f804eebe94865442b2
+  CWStatusBarNotification: 2349142e97c9f16fb8247ed3c00308cd355d334b
+  Fabric: 03c3b3fe77e11a2bc31421b989a9c7adaa4779a5
+  FBSDKCoreKit: 9954492d90c5fd65ae831395697a1660360d61f1
+  FBSDKLoginKit: 3d07febbfa884b9878cacba54f705bb41f07d4b6
+  FBSDKShareKit: f474f1123791e215d0299b98b3ee92ddd9187d86
+  GoogleAnalytics: fcf1f1cad57ae1a9a53520018f0f680ceeeb8b49
   googleplus-ios-sdk: 065d9135061a5f84c07656a68ced48336408fe35
-  IQKeyboardManager: 6ca5c54e3776eb54af4c7caf515833f3cd761d59
-  Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
-  PonyDebugger: 52f96f501df018dc2b7153fa18464b82553e700c
+  IQKeyboardManager: 860a5b9df32cc1435a3e967a08ed87de3e59c12e
+  Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
+  PonyDebugger: 1c60f7c876bdb6a8b6bf0f0269087f8a234fafa7
   pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
-  RSKImageCropper: 283bb4f39ced96cc9023ad3b7bc7bc68755845bb
+  RSKImageCropper: b4993121db4f6679a7f7ed1305050ef970764e3f
   SDiPhoneVersion: c52245ccaab8142701e2e7fb8f0391ba3f255b76
-  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
-  SocketRocket: 54a4ac2f354c4e8c51ef5dcd4a13bc556d4f2b7c
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  SocketRocket: ee0b5c34182d37bb4f1f8d628bbe737718126daa
   SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SZTextView: 906df45afd3c1b24fc5252088d5ef8061513c238
   TOWebViewController: aada427e7eba199bbaee77ddee3243c8172f4053
   TRVSDictionaryWithCaseInsensitivity: 51d2ccf52c6d645d27b63467a98fa02c556e01b0
-  TwitterKit: 88daaebdb8bfb5847d76d8ae159841248427931d
+  TwitterCore: 632e809318be9ea2b6f38cc21611033367681adc
+  TwitterKit: b3f09aaef09ae9339f02a48f6c0adb1b09156079
   YKImageCropper: 2ebfda611f9d13f252a12694ab0d42fb48cadb5f
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.2

@@ -232,7 +232,7 @@
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           NSLog(@"Login failed");
           //@FIXME Should be handled generally
-          [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"login.error.alert.message", @"Error when the login is wrong")];
+          [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"login.error.alert.message", @"Error when the login is wrong") maskType:SVProgressHUDMaskTypeClear];
 
           // Logout when errors
           [[SSSessionManager sharedInstance] logoutCurrentUser];
@@ -266,7 +266,7 @@
 
           NSLog(@"Register failure");
           //@FIXME Should be handled generally
-          [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"register.error.alert.title", @"Error when the login is wrong")];
+          [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"register.error.alert.title", @"Error when the login is wrong") maskType:SVProgressHUDMaskTypeClear];
 
           // Logout when errors
           [[SSSessionManager sharedInstance] logoutCurrentUser];
@@ -275,7 +275,7 @@
 }
 
 - (void)didNotFillAllFields {
-    [SVProgressHUD showErrorWithStatus:@"Missing fields. Check the fields"];
+    [SVProgressHUD showErrorWithStatus:@"Missing fields. Check the fields" maskType:SVProgressHUDMaskTypeClear];
 }
 
 @end

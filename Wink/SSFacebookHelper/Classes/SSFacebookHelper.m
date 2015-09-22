@@ -33,22 +33,51 @@
     //                                }];
     //    } else if ([FBSDKLoginUtility areAllPermissionsPublishPermissions:permissionsArray]) {
 
-    [login logInWithPublishPermissions:permissionsArray
-                               handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                 if (error) {
-                                     // Process error
-                                     failure(error);
-                                 } else if (result.isCancelled) {
-                                     // Handle cancellations
-                                     cancellation();
-                                 } else {
-                                     success(result);
-                                 }
+    
+    
+    [FBSDKLoginManager renewSystemCredentials:^(ACAccountCredentialRenewResult result, NSError *error) {
+        
+        [login logInWithPublishPermissions:permissionsArray fromViewController:nil handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+            
+            if (error) {
+                // Handle error
+            } else if (result.isCancelled) {
+                // Handle cancellations
+            } else {
+                // If you ask for multiple permissions at once, you
+                // should check if specific permissions missing
+                if ([result.grantedPermissions containsObject:@"email"]) {
+                    // Do work
+                }
+                
+                NSLog(@"TEST:");
+            }
+        }];
+    }];
+    
+    
+    
 
-                               }];
-    //    } else {
-    //        NSAssert(NO, @"You need to use publish OR read permissions for Facebook");
-    //    }
+//    
+//    
+//    
+//    
+//    [login logInWithPublishPermissions:permissionsArray
+//                               handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+//                                 if (error) {
+//                                     // Process error
+//                                     failure(error);
+//                                 } else if (result.isCancelled) {
+//                                     // Handle cancellations
+//                                     cancellation();
+//                                 } else {
+//                                     success(result);
+//                                 }
+//
+//                               }];
+//    //    } else {
+//    //        NSAssert(NO, @"You need to use publish OR read permissions for Facebook");
+//    //    }
 }
 
 + (void)logout {

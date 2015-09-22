@@ -28,6 +28,7 @@
 #define ACEDrawingViewVersion   1.0.0
 
 typedef enum {
+    ACEDrawingToolTypeCustom,
     ACEDrawingToolTypePen,
     ACEDrawingToolTypeLine,
     ACEDrawingToolTypeRectagleStroke,
@@ -35,24 +36,32 @@ typedef enum {
     ACEDrawingToolTypeEllipseStroke,
     ACEDrawingToolTypeEllipseFill,
     ACEDrawingToolTypeEraser,
-    ACEDrawingToolTypeText
+    ACEDrawingToolTypeText,
+    ACEDrawingToolTypeMultilineText
 } ACEDrawingToolType;
+
+typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
+    ACEDrawingModeScale,
+    ACEDrawingModeOriginalSize
+};
 
 @protocol ACEDrawingViewDelegate, ACEDrawingTool;
 
 @interface ACEDrawingView : UIView<UITextViewDelegate>
 
 @property (nonatomic, assign) ACEDrawingToolType drawTool;
+@property (nonatomic, strong) id<ACEDrawingTool> customDrawTool;
 @property (nonatomic, assign) id<ACEDrawingViewDelegate> delegate;
 
 // public properties
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat lineAlpha;
+@property (nonatomic, assign) ACEDrawingMode drawMode;
 
 // get the current drawing
 @property (nonatomic, strong, readonly) UIImage *image;
-@property (nonatomic, strong) UIImage *prev_image;
+@property (nonatomic, strong) UIImage *backgroundImage;
 @property (nonatomic, readonly) NSUInteger undoSteps;
 
 // load external image
@@ -69,6 +78,18 @@ typedef enum {
 - (BOOL)canRedo;
 - (void)redoLatestStep;
 
+/**
+ @discussion Discards the tool stack and renders them to prev_image, making the current state the 'start' state.
+ (Can be called before resize to make content more predictable)
+ */
+- (void)commitAndDiscardToolStack;
+
+@end
+
+#pragma mark - 
+
+@interface ACEDrawingView (Deprecated)
+@property (nonatomic, strong) UIImage *prev_image DEPRECATED_MSG_ATTRIBUTE("Use 'backgroundImage' instead.");
 @end
 
 #pragma mark -
