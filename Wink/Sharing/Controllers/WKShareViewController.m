@@ -70,8 +70,6 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.numberCharactersLeft = [NSNumber numberWithInteger:kMaxNumberOfCharacters];
-    self.labelCountCharacters.text =
-        [NSString stringWithFormat:@"%li %@", self.numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
     self.labelCountCharacters.font = [SSOThemeHelper avenirLightFontWithSize:14];
     self.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:17];
     self.twitterButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
@@ -177,6 +175,12 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
     self.facebookButton.alpha = 0;
     self.twitterButton.alpha = 0;
     self.googleButton.alpha = 0;
+    
+    NSNumber *numberCharactersLeft = [NSNumber numberWithInteger:(self.numberCharactersLeft.integerValue - self.placeholderTextView.text.length)];
+
+    self.labelCountCharacters.text =
+    [NSString stringWithFormat:@"%li %@", numberCharactersLeft.integerValue, NSLocalizedString(@"shareview.characterscount", nil)];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -503,7 +507,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
               // @FIXME
-              [SVProgressHUD showSuccessWithStatus:@"Image posted"];
+              [SVProgressHUD showSuccessWithStatus:@"Image posted" maskType:SVProgressHUDMaskTypeClear];
               [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
              [self dismissViewControllerAnimated:YES completion:^{
                  [self.parentCameraNavigationController dismissViewControllerAnimated:YES completion:nil];
@@ -523,7 +527,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
             overlayImage:overlayForVideo
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
               // @FIXME
-              [SVProgressHUD showSuccessWithStatus:@"Video posted"];
+              [SVProgressHUD showSuccessWithStatus:@"Video posted" maskType:SVProgressHUDMaskTypeClear];
               [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
                 [self dismissViewControllerAnimated:YES completion:^{
                     [self.parentCameraNavigationController dismissViewControllerAnimated:YES completion:nil];
@@ -535,7 +539,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               //@FIXME
               //@TODO: Should be handled generally
-              [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+              [SVProgressHUD showErrorWithStatus:error.localizedDescription maskType:SVProgressHUDMaskTypeClear];
             }];
     }
 }
@@ -624,7 +628,7 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
                 [socialButton setUserInteractionEnabled:YES];
                 if (error) {
                     NSLog(@"%@", error.localizedDescription);
-                    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+                    [SVProgressHUD showErrorWithStatus:error.localizedDescription maskType:SVProgressHUDMaskTypeClear];
                     // Disconnect the social network to reset it's value
                     [[SSOSocialNetworkAPI sharedInstance] usnapDisconnectToSocialNetwork:socialButton.socialNetwork];
                     socialButton.selected = NO;

@@ -14,6 +14,8 @@
 #import <GooglePlus.h>
 #import "SSOGooglePlusHelper.h"
 #import "SSFacebookHelper.h"
+#import "FBSDKProfile.h"
+#import "FBSDKAccessToken.h"
 
 @implementation SSOSocialNetworkAPI
 
@@ -35,7 +37,6 @@
 - (void)loginWithSocialFramework:(SelectedSocialNetwork)socialNetwork {
 
     if (socialNetwork == facebookSocialNetwork) {
-
         [SSFacebookHelper loginWithPermissions:self.facebookPermissions
             onSuccess:^(FBSDKLoginManagerLoginResult *result) {
               [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:nil];
@@ -78,7 +79,12 @@
 - (void)logoutFromSocialFramework:(SelectedSocialNetwork)socialNetwork {
 
     if (socialNetwork == facebookSocialNetwork) {
-
+        
+        if([FBSDKAccessToken currentAccessToken] != nil) {
+            [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me/permissions" parameters:nil tokenString:[FBSDKAccessToken currentAccessToken].tokenString version:@"v2.0" HTTPMethod:@"DELETE"] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                NSLog(@"Test... : %@", error);
+            }];
+        }
         [SSFacebookHelper logout];
     }
 
