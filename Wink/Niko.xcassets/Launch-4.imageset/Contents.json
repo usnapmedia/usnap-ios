@@ -2,15 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Wink_Images.xcassets_Custom navigation bar_company_logo.imageset_Usnap Logo v2 White_Before_472e38ce8f2f3b65c7193b4b0a0ed56f3d562aee.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Default-568h@2x~iphone_640x1136.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Default-1242@3x~iphone6s-portrait_1242x2208.png",
       "scale" : "3x"
     }
   ],

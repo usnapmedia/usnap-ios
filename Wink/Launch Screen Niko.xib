@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SlashScreenLiberal" translatesAutoresizingMaskIntoConstraints="NO" id="xtF-eL-cpZ">
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SlashScreenNiko" translatesAutoresizingMaskIntoConstraints="NO" id="xtF-eL-cpZ">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
             </subviews>
@@ -28,6 +28,6 @@
         </view>
     </objects>
     <resources>
-        <image name="SlashScreenLiberal" width="197" height="350"/>
+        <image name="SlashScreenNiko" width="320" height="480"/>
     </resources>
 </document>
