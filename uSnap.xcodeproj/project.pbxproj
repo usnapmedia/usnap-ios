@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0090E3191BB436EE004F4597 /* SSOOnboarding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0090E3181BB436EE004F4597 /* SSOOnboarding.m */; settings = {ASSET_TAGS = (); }; };
+		0090E31A1BB4381C004F4597 /* SSOOnboarding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0090E3181BB436EE004F4597 /* SSOOnboarding.m */; settings = {ASSET_TAGS = (); }; };
+		0090E31B1BB4381E004F4597 /* SSOOnboarding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0090E3181BB436EE004F4597 /* SSOOnboarding.m */; settings = {ASSET_TAGS = (); }; };
+		0090E31C1BB4381E004F4597 /* SSOOnboarding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0090E3181BB436EE004F4597 /* SSOOnboarding.m */; settings = {ASSET_TAGS = (); }; };
+		0090E31F1BB49719004F4597 /* SNApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0090E31E1BB49719004F4597 /* SNApplication.m */; settings = {ASSET_TAGS = (); }; };
+		0090E3201BB49819004F4597 /* SNApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0090E31E1BB49719004F4597 /* SNApplication.m */; settings = {ASSET_TAGS = (); }; };
+		0090E3211BB4981A004F4597 /* SNApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0090E31E1BB49719004F4597 /* SNApplication.m */; settings = {ASSET_TAGS = (); }; };
+		0090E3221BB4981A004F4597 /* SNApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0090E31E1BB49719004F4597 /* SNApplication.m */; settings = {ASSET_TAGS = (); }; };
+		0090E3241BB5C1C0004F4597 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0090E3231BB5C1BF004F4597 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		0090E3251BB5C1C0004F4597 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0090E3231BB5C1BF004F4597 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		0090E3261BB5C1C0004F4597 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0090E3231BB5C1BF004F4597 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		0090E3271BB5C1C0004F4597 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0090E3231BB5C1BF004F4597 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 		00DA013E1BB1D34C00EAF4E3 /* SSOViewControllerWithTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D817BECC1AEF1CDC0038DF8E /* SSOViewControllerWithTabBar.m */; };
 		00DA013F1BB1D34C00EAF4E3 /* SSOSocialNetworkAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA5C7B1AD4281B008D2A37 /* SSOSocialNetworkAPI.m */; };
 		00DA01401BB1D34C00EAF4E3 /* SSOMyFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D898E1C81AF1622500C957DC /* SSOMyFeedViewController.m */; };
@@ -170,7 +182,6 @@
 		00DA01E11BB1D34C00EAF4E3 /* SSOTopPhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E677FB1AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.xib */; };
 		00DA01E21BB1D34C00EAF4E3 /* SSOFanPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339841E61AEACC5C00605C67 /* SSOFanPageViewController.xib */; };
 		00DA01E31BB1D34C00EAF4E3 /* WKShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3357239B1ACB097C000CC846 /* WKShareViewController.xib */; };
-		00DA01E41BB1D34C00EAF4E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 270DFB0619AE71BE00067072 /* Images.xcassets */; };
 		00DA01E51BB1D34C00EAF4E3 /* SSOImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E677F41AEEE5F6006B8CD8 /* SSOImageCollectionViewCell.xib */; };
 		00DA01EF1BB1D4D600EAF4E3 /* uSnap-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335723A31ACB097C000CC846 /* uSnap-Info.plist */; settings = {ASSET_TAGS = (); }; };
 		00DA01F31BB1D68400EAF4E3 /* Launch Screen Niko.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DA01F21BB1D68400EAF4E3 /* Launch Screen Niko.xib */; settings = {ASSET_TAGS = (); }; };
@@ -184,7 +195,6 @@
 		270DFAF519AE71BE00067072 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270DFAF419AE71BE00067072 /* Foundation.framework */; };
 		270DFAF719AE71BE00067072 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270DFAF619AE71BE00067072 /* CoreGraphics.framework */; };
 		270DFAF919AE71BE00067072 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270DFAF819AE71BE00067072 /* UIKit.framework */; };
-		270DFB0719AE71BE00067072 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 270DFB0619AE71BE00067072 /* Images.xcassets */; };
 		270DFB0E19AE71BE00067072 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270DFB0D19AE71BE00067072 /* XCTest.framework */; };
 		270DFB0F19AE71BE00067072 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270DFAF419AE71BE00067072 /* Foundation.framework */; };
 		270DFB1019AE71BE00067072 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270DFAF819AE71BE00067072 /* UIKit.framework */; };
@@ -399,7 +409,6 @@
 		3FABF4B81B70F88C00894872 /* SSOTopPhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E677FB1AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.xib */; };
 		3FABF4B91B70F88C00894872 /* SSOFanPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339841E61AEACC5C00605C67 /* SSOFanPageViewController.xib */; };
 		3FABF4BA1B70F88C00894872 /* WKShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3357239B1ACB097C000CC846 /* WKShareViewController.xib */; };
-		3FABF4BB1B70F88C00894872 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 270DFB0619AE71BE00067072 /* Images.xcassets */; };
 		3FABF4BC1B70F88C00894872 /* SSOImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E677F41AEEE5F6006B8CD8 /* SSOImageCollectionViewCell.xib */; };
 		3FABF4C51B70F94100894872 /* Liberal.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FABF4C41B70F94100894872 /* Liberal.xcassets */; };
 		3FABF4C91B7115FA00894872 /* Launch Screen Liberal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FABF4C81B7115FA00894872 /* Launch Screen Liberal.xib */; };
@@ -625,7 +634,6 @@
 		D8BD7DFC1B25F4550007DD36 /* SSOTopPhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E677FB1AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.xib */; };
 		D8BD7DFD1B25F4550007DD36 /* SSOFanPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339841E61AEACC5C00605C67 /* SSOFanPageViewController.xib */; };
 		D8BD7DFF1B25F4550007DD36 /* WKShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3357239B1ACB097C000CC846 /* WKShareViewController.xib */; };
-		D8BD7E001B25F4550007DD36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 270DFB0619AE71BE00067072 /* Images.xcassets */; };
 		D8BD7E011B25F4550007DD36 /* SSOImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E677F41AEEE5F6006B8CD8 /* SSOImageCollectionViewCell.xib */; };
 		D8BD7E0C1B25F9390007DD36 /* Launch Screen Neomedia.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8BD7E0B1B25F9390007DD36 /* Launch Screen Neomedia.xib */; };
 		D8BD7E111B26079A0007DD36 /* Neomedia.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8BD7E101B26079A0007DD36 /* Neomedia.xcassets */; };
@@ -678,6 +686,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0090E3171BB436EE004F4597 /* SSOOnboarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOOnboarding.h; sourceTree = "<group>"; };
+		0090E3181BB436EE004F4597 /* SSOOnboarding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOOnboarding.m; sourceTree = "<group>"; };
+		0090E31D1BB49719004F4597 /* SNApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNApplication.h; sourceTree = "<group>"; };
+		0090E31E1BB49719004F4597 /* SNApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNApplication.m; sourceTree = "<group>"; };
+		0090E3231BB5C1BF004F4597 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Wink/Images.xcassets; sourceTree = "<group>"; };
 		00DA01EB1BB1D34C00EAF4E3 /* Niko Artist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Niko Artist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00DA01EC1BB1D34D00EAF4E3 /* uSnap copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "uSnap copy-Info.plist"; path = "/Users/501336North/usnap-ios/uSnap copy-Info.plist"; sourceTree = "<absolute>"; };
 		00DA01ED1BB1D4BB00EAF4E3 /* Niko-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Niko-Info.plist"; sourceTree = "<group>"; };
@@ -692,7 +705,6 @@
 		270DFAF419AE71BE00067072 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		270DFAF619AE71BE00067072 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		270DFAF819AE71BE00067072 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		270DFB0619AE71BE00067072 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Wink/Images.xcassets; sourceTree = "<group>"; };
 		270DFB0C19AE71BE00067072 /* uSnapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = uSnapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		270DFB0D19AE71BE00067072 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		270DFB1519AE71BE00067072 /* uSnapTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "uSnapTests-Info.plist"; sourceTree = "<group>"; };
@@ -1116,11 +1128,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0090E3161BB436AE004F4597 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0090E3171BB436EE004F4597 /* SSOOnboarding.h */,
+				0090E3181BB436EE004F4597 /* SSOOnboarding.m */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
 		270DFAE819AE71BE00067072 = {
 			isa = PBXGroup;
 			children = (
 				270DFAFA19AE71BE00067072 /* Wink */,
-				270DFB0619AE71BE00067072 /* Images.xcassets */,
+				0090E3231BB5C1BF004F4597 /* Images.xcassets */,
 				D8BD7E121B2608B30007DD36 /* Base.xcassets */,
 				D8BD7E101B26079A0007DD36 /* Neomedia.xcassets */,
 				00DA01F41BB1F09400EAF4E3 /* Niko.xcassets */,
@@ -1175,6 +1196,7 @@
 		270DFAFA19AE71BE00067072 /* Wink */ = {
 			isa = PBXGroup;
 			children = (
+				0090E3161BB436AE004F4597 /* Onboarding */,
 				D8849AC31B66838000382D13 /* SSFacebookHelper */,
 				D8849AC81B66838000382D13 /* SSOBaseProvider */,
 				D86E08ED1AE6BDEA00711579 /* API */,
@@ -2047,6 +2069,8 @@
 			children = (
 				D8FBADA91AE933C8005D6C18 /* Controllers */,
 				D8E677E01AEED8FD006B8CD8 /* Views */,
+				0090E31D1BB49719004F4597 /* SNApplication.h */,
+				0090E31E1BB49719004F4597 /* SNApplication.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2236,6 +2260,9 @@
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Samsao;
 				TargetAttributes = {
+					00DA013A1BB1D34C00EAF4E3 = {
+						DevelopmentTeam = 6WH26365Q4;
+					};
 					270DFAF019AE71BE00067072 = {
 						DevelopmentTeam = 6WH26365Q4;
 					};
@@ -2294,6 +2321,7 @@
 				00DA01D11BB1D34C00EAF4E3 /* SSOCampaignDetailViewController.xib in Resources */,
 				00DA01D21BB1D34C00EAF4E3 /* Localizable.strings in Resources */,
 				00DA01D31BB1D34C00EAF4E3 /* SSOSnapViewController.xib in Resources */,
+				0090E3271BB5C1C0004F4597 /* Images.xcassets in Resources */,
 				00DA01D41BB1D34C00EAF4E3 /* Camera.storyboard in Resources */,
 				00DA01D51BB1D34C00EAF4E3 /* SSODrawAccessoryContainerView.xib in Resources */,
 				00DA01D61BB1D34C00EAF4E3 /* SSOMyFeedCollectionViewCell.xib in Resources */,
@@ -2310,7 +2338,6 @@
 				00DA01E21BB1D34C00EAF4E3 /* SSOFanPageViewController.xib in Resources */,
 				00DA01F51BB1F09400EAF4E3 /* Niko.xcassets in Resources */,
 				00DA01E31BB1D34C00EAF4E3 /* WKShareViewController.xib in Resources */,
-				00DA01E41BB1D34C00EAF4E3 /* Images.xcassets in Resources */,
 				00DA01E51BB1D34C00EAF4E3 /* SSOImageCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2334,6 +2361,7 @@
 				D8C83EA41AE1C74C00F187F1 /* Localizable.strings in Resources */,
 				FB0F335E1AF2A3F100F6C735 /* SSOSnapViewController.xib in Resources */,
 				335723B31ACB097C000CC846 /* Camera.storyboard in Resources */,
+				0090E3241BB5C1C0004F4597 /* Images.xcassets in Resources */,
 				D810B8F01ADF506500B3AC11 /* SSODrawAccessoryContainerView.xib in Resources */,
 				D898E1DA1AF1622500C957DC /* SSOMyFeedCollectionViewCell.xib in Resources */,
 				D898E1D81AF1622500C957DC /* SSOCampaignTableViewCell.xib in Resources */,
@@ -2350,7 +2378,6 @@
 				D8E678041AEEE5F6006B8CD8 /* SSOTopPhotosCollectionViewCell.xib in Resources */,
 				339841E91AEACC5C00605C67 /* SSOFanPageViewController.xib in Resources */,
 				335723DE1ACB097C000CC846 /* WKShareViewController.xib in Resources */,
-				270DFB0719AE71BE00067072 /* Images.xcassets in Resources */,
 				D8E678011AEEE5F6006B8CD8 /* SSOImageCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2368,6 +2395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FABF49B1B70F88C00894872 /* SSORegisterContainerView.xib in Resources */,
+				0090E3261BB5C1C0004F4597 /* Images.xcassets in Resources */,
 				3FABF49C1B70F88C00894872 /* SSOSettingsViewController.xib in Resources */,
 				3FABF49D1B70F88C00894872 /* SSOTopCampaignCollectionViewCell.xib in Resources */,
 				3FABF49E1B70F88C00894872 /* WKEditMediaViewController.xib in Resources */,
@@ -2397,7 +2425,6 @@
 				3FABF4B81B70F88C00894872 /* SSOTopPhotosCollectionViewCell.xib in Resources */,
 				3FABF4B91B70F88C00894872 /* SSOFanPageViewController.xib in Resources */,
 				3FABF4BA1B70F88C00894872 /* WKShareViewController.xib in Resources */,
-				3FABF4BB1B70F88C00894872 /* Images.xcassets in Resources */,
 				3FABF4BC1B70F88C00894872 /* SSOImageCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2427,6 +2454,7 @@
 				D8BD7DF51B25F4550007DD36 /* SSOFontCollectionViewCell.xib in Resources */,
 				D8BD7DF61B25F4550007DD36 /* SSOLoginContainerView.xib in Resources */,
 				D8BD7DF71B25F4550007DD36 /* SSOTextAccessoryContainerView.xib in Resources */,
+				0090E3251BB5C1C0004F4597 /* Images.xcassets in Resources */,
 				D8BD7DF91B25F4550007DD36 /* SSOPhotosCollectionViewCell.xib in Resources */,
 				D8BD7DFA1B25F4550007DD36 /* SSOLoginViewController.xib in Resources */,
 				D8BD7DFB1B25F4550007DD36 /* Futura.ttc in Resources */,
@@ -2434,7 +2462,6 @@
 				D8BD7DFC1B25F4550007DD36 /* SSOTopPhotosCollectionViewCell.xib in Resources */,
 				D8BD7DFD1B25F4550007DD36 /* SSOFanPageViewController.xib in Resources */,
 				D8BD7DFF1B25F4550007DD36 /* WKShareViewController.xib in Resources */,
-				D8BD7E001B25F4550007DD36 /* Images.xcassets in Resources */,
 				D8BD7E011B25F4550007DD36 /* SSOImageCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2720,6 +2747,7 @@
 				00DA01581BB1D34C00EAF4E3 /* SSFacebookHelper.m in Sources */,
 				00DA01591BB1D34C00EAF4E3 /* WKEditMediaViewController.m in Sources */,
 				00DA015A1BB1D34C00EAF4E3 /* UIAlertView+Blocks.m in Sources */,
+				0090E3201BB49819004F4597 /* SNApplication.m in Sources */,
 				00DA015B1BB1D34C00EAF4E3 /* WKShareViewController.m in Sources */,
 				00DA015C1BB1D34C00EAF4E3 /* SSOGrayBackgroundWithBorderView.m in Sources */,
 				00DA015D1BB1D34C00EAF4E3 /* SSOUser.m in Sources */,
@@ -2785,6 +2813,7 @@
 				00DA01991BB1D34C00EAF4E3 /* SSOCampaign.m in Sources */,
 				00DA019A1BB1D34C00EAF4E3 /* SSOFontCollectionViewCell.m in Sources */,
 				00DA019B1BB1D34C00EAF4E3 /* UIImage+Resizing.m in Sources */,
+				0090E31A1BB4381C004F4597 /* SSOOnboarding.m in Sources */,
 				00DA019C1BB1D34C00EAF4E3 /* SSOColorPickerContainerView.m in Sources */,
 				00DA019D1BB1D34C00EAF4E3 /* SSOCampaignProvider.m in Sources */,
 				00DA019E1BB1D34C00EAF4E3 /* SSOMyFeedCollectionViewCell.m in Sources */,
@@ -2842,6 +2871,7 @@
 				D8849AE21B66838000382D13 /* SSFacebookHelper.m in Sources */,
 				D810B8CD1ADF506500B3AC11 /* WKEditMediaViewController.m in Sources */,
 				335723E51ACB097C000CC846 /* UIAlertView+Blocks.m in Sources */,
+				0090E31F1BB49719004F4597 /* SNApplication.m in Sources */,
 				335723DD1ACB097C000CC846 /* WKShareViewController.m in Sources */,
 				D86688191AEFCBF2006B12B8 /* SSOGrayBackgroundWithBorderView.m in Sources */,
 				FBB76FE81B00E20600FFAF9A /* SSOUser.m in Sources */,
@@ -2907,6 +2937,7 @@
 				339841E81AEACC5C00605C67 /* SSOCampaign.m in Sources */,
 				D810B8DD1ADF506500B3AC11 /* SSOFontCollectionViewCell.m in Sources */,
 				D830F4211ACDDBF1002A503D /* UIImage+Resizing.m in Sources */,
+				0090E3191BB436EE004F4597 /* SSOOnboarding.m in Sources */,
 				D810B8E21ADF506500B3AC11 /* SSOColorPickerContainerView.m in Sources */,
 				339841F81AEACF4F00605C67 /* SSOCampaignProvider.m in Sources */,
 				D898E1D91AF1622500C957DC /* SSOMyFeedCollectionViewCell.m in Sources */,
@@ -2972,6 +3003,7 @@
 				3FABF42B1B70F88C00894872 /* SSOSubtoolContainerView.m in Sources */,
 				3FABF42C1B70F88C00894872 /* SSFacebookHelper.m in Sources */,
 				3FABF42D1B70F88C00894872 /* WKEditMediaViewController.m in Sources */,
+				0090E3211BB4981A004F4597 /* SNApplication.m in Sources */,
 				3FABF42E1B70F88C00894872 /* UIAlertView+Blocks.m in Sources */,
 				3FABF42F1B70F88C00894872 /* WKShareViewController.m in Sources */,
 				3FABF4301B70F88C00894872 /* SSOGrayBackgroundWithBorderView.m in Sources */,
@@ -3037,6 +3069,7 @@
 				3FABF46E1B70F88C00894872 /* SSOCampaign.m in Sources */,
 				3FABF46F1B70F88C00894872 /* SSOFontCollectionViewCell.m in Sources */,
 				3FABF4701B70F88C00894872 /* UIImage+Resizing.m in Sources */,
+				0090E31B1BB4381E004F4597 /* SSOOnboarding.m in Sources */,
 				3FABF4711B70F88C00894872 /* SSOColorPickerContainerView.m in Sources */,
 				3FABF4721B70F88C00894872 /* SSOCampaignProvider.m in Sources */,
 				3FABF4731B70F88C00894872 /* SSOMyFeedCollectionViewCell.m in Sources */,
@@ -3076,6 +3109,7 @@
 				D8BD7D6A1B25F4550007DD36 /* SSOCampaignTableViewCell.m in Sources */,
 				D8BD7D6B1B25F4550007DD36 /* WKMoviePlayerView.m in Sources */,
 				D8BD7D6C1B25F4550007DD36 /* UIView+WKAdditions.m in Sources */,
+				0090E3221BB4981A004F4597 /* SNApplication.m in Sources */,
 				D8BD7D6D1B25F4550007DD36 /* SSOFeedViewController.m in Sources */,
 				D8BD7D6E1B25F4550007DD36 /* SSOFanPageViewController.m in Sources */,
 				D8BD7D6F1B25F4550007DD36 /* SSOUSnapButton.m in Sources */,
@@ -3161,6 +3195,7 @@
 				D8BD7DBF1B25F4550007DD36 /* SSOCampaignViewController.m in Sources */,
 				D8BD7DC01B25F4550007DD36 /* SSOTextFieldWithUnderline.m in Sources */,
 				D8BD7DC11B25F4550007DD36 /* SSBaseCollectionView.m in Sources */,
+				0090E31C1BB4381E004F4597 /* SSOOnboarding.m in Sources */,
 				D8BD7DC21B25F4550007DD36 /* SSOSettingsViewController.m in Sources */,
 				D8BD7DC31B25F4550007DD36 /* SSOGooglePlusHelper.m in Sources */,
 				D8BD7DC41B25F4550007DD36 /* SSOCampaignTopViewControllerContainer.m in Sources */,
@@ -3242,7 +3277,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.usnap.niko;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "20800b4b-56c5-42ef-8390-23ccef7558ad";
 				SWIFT_OBJC_BRIDGING_HEADER = "Wink/Camera/Capture/uSnap-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3280,7 +3315,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.usnap.niko;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "20800b4b-56c5-42ef-8390-23ccef7558ad";
 				SWIFT_OBJC_BRIDGING_HEADER = "Wink/Camera/Capture/uSnap-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";

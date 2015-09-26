@@ -27,6 +27,7 @@
 #import <SZTextView.h>
 #import "SSORectangleSocialButton.h"
 #import "SSOThemeHelper.h"
+#import "SEGAnalytics.h"
 
 #define kOverlayViewAlpha 0.75
 NSInteger const kMaxNumberOfCharacters = 140;
@@ -507,6 +508,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
               // @FIXME
+                
+              [[SEGAnalytics sharedAnalytics] track:@"Share"];
               [SVProgressHUD showSuccessWithStatus:@"Image posted" maskType:SVProgressHUDMaskTypeClear];
               [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
              [self dismissViewControllerAnimated:YES completion:^{
@@ -527,6 +530,8 @@ typedef enum { WKShareViewControllerModeShare, WKShareViewControllerModeSharing,
             overlayImage:overlayForVideo
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
               // @FIXME
+                
+              [[SEGAnalytics sharedAnalytics] track:@"Share"];                
               [SVProgressHUD showSuccessWithStatus:@"Video posted" maskType:SVProgressHUDMaskTypeClear];
               [[NSNotificationCenter defaultCenter] postNotificationName:kReturnToFanPageVC object:nil userInfo:nil];
                 [self dismissViewControllerAnimated:YES completion:^{

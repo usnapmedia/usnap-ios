@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SNApplication.h"
 #import "WKAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([WKAppDelegate class]));
+        return UIApplicationMain(argc, argv, NSStringFromClass([SNApplication class]), NSStringFromClass([WKAppDelegate class]));
     }
 }

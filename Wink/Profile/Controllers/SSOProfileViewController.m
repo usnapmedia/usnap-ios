@@ -18,6 +18,7 @@
 #import "SSOUserConnect.h"
 #import "SSOUser.h"
 #import "SSOMyFeedViewController.h"
+#import "SEGAnalytics.h"
 
 @interface SSOProfileViewController ()
 
@@ -71,6 +72,14 @@
         self.userFirstLetterLabel.text = @"?";
     }
 }
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[SEGAnalytics sharedAnalytics] track:@"Screen Viewed" properties:@{@"Type":@"screen", @"Title":@"Profile"}];
+    
+}
+
 
 #pragma mark - Initialization
 

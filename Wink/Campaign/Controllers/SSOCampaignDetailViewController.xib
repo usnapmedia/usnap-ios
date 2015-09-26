@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -30,6 +30,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ljp-uJ-bEN">
                             <rect key="frame" x="5" y="5" width="30" height="30"/>
+                            <accessibility key="accessibilityConfiguration" identifier="Campaign" label="Back"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Ljp-uJ-bEN" secondAttribute="height" multiplier="1:1" id="5Eu-1q-yRn"/>
                             </constraints>
@@ -135,6 +136,7 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HD3-Yk-Css" customClass="SSOUSnapLightButton">
                                             <rect key="frame" x="-5" y="401" width="385" height="45"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="Campaign" label="ContestRules"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="VNv-jp-v0t"/>
                                             </constraints>

@@ -18,6 +18,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import <SVProgressHUD.h>
 #import <TOWebViewController/TOWebViewController.h>
+#import "SEGAnalytics.h"
 
 @interface SSOSettingsViewController () <MFMailComposeViewControllerDelegate>
 
@@ -66,6 +67,15 @@
     [super viewWillAppear:animated];
     [self initializeData];
 }
+
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[SEGAnalytics sharedAnalytics] track:@"Screen Viewed" properties:@{@"Type":@"screen", @"Title":@"Settings"}];
+    
+}
+
 
 #pragma mark - Initialization
 
@@ -378,6 +388,7 @@
     navVC.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
 
     [self presentViewController:navVC animated:YES completion:NULL];
+    [[SEGAnalytics sharedAnalytics] track:@"Screen Viewed" properties:@{@"Type":@"screen", @"Title":@"TermsOfService"}];
 }
 
 @end

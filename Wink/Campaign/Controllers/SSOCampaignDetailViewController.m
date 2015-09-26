@@ -14,6 +14,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Masonry.h>
 #import <TOWebViewController/TOWebViewController.h>
+#import "SEGAnalytics.h"
 
 @interface SSOCampaignDetailViewController ()
 
@@ -48,6 +49,13 @@
     [super viewWillAppear:animated];
     // This might cause a problem if the user goes back to the fan page VC
     [[SSSessionManager sharedInstance] setCampaign:self.campaign];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[SEGAnalytics sharedAnalytics] track:@"Screen Viewed" properties:@{@"Type":@"screen", @"Title":@"CampaignDetail"}];
+    
 }
 
 - (instancetype)initWithCampaign:(SSOCampaign *)campaign {
@@ -150,6 +158,8 @@
     navVC.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
 
     [self presentViewController:navVC animated:YES completion:NULL];
+    [[SEGAnalytics sharedAnalytics] track:@"Screen Viewed" properties:@{@"Type":@"screen", @"Title":@"ContestRules"}];
+
 }
 
 @end

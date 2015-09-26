@@ -18,6 +18,7 @@
 #import "UINavigationController+SSOLockedNavigationController.h"
 #import <SVProgressHUD.h>
 #import "SSOThemeHelper.h"
+#import "SEGAnalytics.h"
 
 @interface SSOLoginViewController ()
 @property(weak, nonatomic) IBOutlet UIView *loginContainerView;
@@ -210,6 +211,9 @@
 
 - (void)didLoginWithInfo:(NSDictionary *)info {
 
+    [[SEGAnalytics sharedAnalytics] identify:[info valueForKey:@"username"]
+                                      traits:nil];
+    
     // Login the user
     [[SSSessionManager sharedInstance] loginUserWithUsername:[info valueForKey:@"username"] andPassword:[info valueForKey:@"password"]];
 
@@ -225,11 +229,12 @@
                                      [self.delegate didFinishAuthProcess];
 
                                    }];
-
+          [[SEGAnalytics sharedAnalytics] track:@"Login" properties:@{@"Status":@"Succesful"}];
           NSLog(@"Login success");
 
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          [[SEGAnalytics sharedAnalytics] track:@"Login" properties:@{@"Status":@"Error", @"Error":error}];
           NSLog(@"Login failed");
           //@FIXME Should be handled generally
           [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"login.error.alert.message", @"Error when the login is wrong") maskType:SVProgressHUDMaskTypeClear];
@@ -258,12 +263,12 @@
                                      [self.delegate didFinishAuthProcess];
 
                                    }];
-
+          [[SEGAnalytics sharedAnalytics] track:@"Signup" properties:@{@"Status":@"Succesful"}];
           NSLog(@"Register success");
 
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
+          [[SEGAnalytics sharedAnalytics] track:@"Signup" properties:@{@"Status":@"Error", @"Error":error}];
           NSLog(@"Register failure");
           //@FIXME Should be handled generally
           [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"register.error.alert.title", @"Error when the login is wrong") maskType:SVProgressHUDMaskTypeClear];

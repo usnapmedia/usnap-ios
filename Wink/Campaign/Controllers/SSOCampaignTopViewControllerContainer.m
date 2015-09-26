@@ -11,6 +11,7 @@
 #import "SSOCampaignProvider.h"
 #import "SSOCampaignDetailViewController.h"
 #import <Masonry.h>
+#import "SEGAnalytics.h"
 
 #define kTabCollectionViewCellNib @"SSOTopCampaignCollectionViewCell"
 #define kCollectionViewCellID @"campaignCell"
@@ -111,6 +112,8 @@
                                            atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
                                                    animated:NO];
             self.pageControl.currentPage = [self.arrayOfCampaigns indexOfObject:campaign];
+            [[SEGAnalytics sharedAnalytics] track:@"Campaign Swiped"];
+            
             return campaign;
         }
     }

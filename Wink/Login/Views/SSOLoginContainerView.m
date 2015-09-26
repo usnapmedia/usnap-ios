@@ -9,6 +9,7 @@
 #import "SSOLoginContainerView.h"
 #import "SSOThemeHelper.h"
 #import "SSOScreenSizeHelper.h"
+#import "SEGAnalytics.h"
 @interface SSOLoginContainerView () <UITextFieldDelegate>
 
 // Outlets
@@ -28,6 +29,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self setupUI];
+    [[SEGAnalytics sharedAnalytics] track:@"Screen Viewed" properties:@{@"Type":@"screen", @"Title":@"Login"}];
 }
 
 #pragma mark - Initialization

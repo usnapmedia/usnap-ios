@@ -14,6 +14,7 @@
 #import "SSSessionManager.h"
 #import <Masonry.h>
 #import "SSOThemeHelper.h"
+#import "SEGAnalytics.h"
 
 @interface SSOSnapViewController ()
 
@@ -38,6 +39,14 @@
     [self refreshData];
     // Do any additional setup after loading the view from its nib.
 }
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[SEGAnalytics sharedAnalytics] track:@"Screen Viewed" properties:@{@"Type":@"screen", @"Title":@"Snap"}];
+    
+}
+
 
 #pragma mark - Initialization
 

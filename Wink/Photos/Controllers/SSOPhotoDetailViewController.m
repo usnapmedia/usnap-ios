@@ -16,6 +16,7 @@
 #import "SSOThemeHelper.h"
 #import <Masonry.h>
 #import <AFNetworking.h>
+#import "SEGAnalytics.h"
 
 @interface SSOPhotoDetailViewController () <WKMoviePlayerDelegate>
 
@@ -51,6 +52,14 @@
 
     self.dateLabel.hidden = YES; //@FIXME
 }
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[SEGAnalytics sharedAnalytics] track:@"Screen Viewed" properties:@{@"Type":@"screen", @"Title":@"PhotoDetail"}];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

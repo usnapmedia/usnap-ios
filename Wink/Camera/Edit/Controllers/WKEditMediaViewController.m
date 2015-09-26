@@ -28,6 +28,7 @@
 #import "SSSessionManager.h"
 #import "SSOOrientationHelper.h"
 #import <RSKImageCropViewController.h>
+#import "SEGAnalytics.h"
 
 @interface WKEditMediaViewController () <UITextViewDelegate, WKMoviePlayerDelegate, SSOLoginRegisterDelegate, SSOEditToolDelegate,
                                          RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource>
@@ -76,6 +77,7 @@
 
     // Play the movie player
     [self.moviePlayerView.player play];
+    [[SEGAnalytics sharedAnalytics] track:@"Screen Viewed" properties:@{@"Type":@"screen", @"Title":@"EditMedia"}];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

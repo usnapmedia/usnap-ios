@@ -16,6 +16,7 @@
 #import "SSFacebookHelper.h"
 #import "FBSDKProfile.h"
 #import "FBSDKAccessToken.h"
+#import "SEGAnalytics.h"
 
 @implementation SSOSocialNetworkAPI
 
@@ -40,7 +41,7 @@
         [SSFacebookHelper loginWithPermissions:self.facebookPermissions
             onSuccess:^(FBSDKLoginManagerLoginResult *result) {
               [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:nil];
-
+              [[SEGAnalytics sharedAnalytics] track:@"Social Connect" properties:@{@"Network":@"facebook"}];
             }
             onFailure:^(NSError *error) {
               [self.delegate socialNetwork:facebookSocialNetwork DidFinishLoginWithError:error];
@@ -58,6 +59,7 @@
 
           if (session) {
               [self.delegate socialNetwork:twitterSocialNetwork DidFinishLoginWithError:error];
+              [[SEGAnalytics sharedAnalytics] track:@"Social Connect" properties:@{@"Network":@"twitter"}];              
               // Saving the account name in case we want to post directly to Twitter
               [[NSUserDefaults standardUserDefaults] setObject:[session userName] forKey:kTwitterAccountName];
               [[NSUserDefaults standardUserDefaults] synchronize];

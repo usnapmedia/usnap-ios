@@ -25,6 +25,7 @@
 #import "SSCellViewSection.h"
 #import "SSOThemeHelper.h"
 #import "UIImage+Tools.h"
+#import "SEGAnalytics.h"
 
 @interface SSOCameraViewController () <UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SSORoundedAnimatedButtonProtocol,
                                        SSOCameraDelegate>
@@ -86,7 +87,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
+   [[SEGAnalytics sharedAnalytics] track:@"Screen Viewed" properties:@{@"Type":@"screen", @"Title":@"Camera"}];
     self.animatedCaptureButton.userInteractionEnabled = YES;
     // When recording video and taking a photo, you need to disable interactions with the view. After the recording is finished, you need to re-enable
     // interaction
@@ -95,6 +96,8 @@
     self.cameraRotationButton.userInteractionEnabled = YES;
     self.mediaButton.userInteractionEnabled = YES;
 }
+
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -491,8 +494,11 @@
 
 - (void)didFinishLongPressGesture:(SSORoundedAnimatedButton *)button {
     [button setUserInteractionEnabled:NO];
+    [[SEGAnalytics sharedAnalytics] track:@"Button Long Tapped"];
+
     // Make sure to do it once, we check if VC is visible.
     if (self.isViewLoaded && self.view.window) {
+        
         [SSOCameraCaptureHelper setTorchMode:AVCaptureTorchModeOff forDevice:[[self.cameraCaptureHelper videoDeviceInput] device]];
 
         [button pauseAnimation];

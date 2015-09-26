@@ -288,7 +288,7 @@
 /**
  *  Called when the loginVC is dismissed
  */
-- (void)didFinishAuthProcess {
+- (void)didFinishAuthProcess {    
     [self profileButtonPressed:self.profileButton];
 }
 

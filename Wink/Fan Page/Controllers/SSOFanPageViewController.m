@@ -72,6 +72,13 @@
     }
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[SEGAnalytics sharedAnalytics] track:@"Screen Viewed" properties:@{@"Type":@"screen", @"Title":@"FanPage"}];
+
+}
+
 #pragma mark - Initialization
 
 - (void)initializeUI {

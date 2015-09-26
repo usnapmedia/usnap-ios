@@ -18,7 +18,7 @@ NSString *const kTwitterMediaUploadURL = @"https://upload.twitter.com/1.1/media/
 NSString *const kTwitterTweetUploadURL = @"https://api.twitter.com/1.1/statuses/update.json";
 NSString *const kGoogleClientId = @"705787939641-q7u2cb9tbrd04ku4jc99h4bd5c1cs7bk.apps.googleusercontent.com";
 NSString *const kAPIValue = @"Ta2171rjHQf18eG0d8y0QziRVya92dXk";
-NSString *const kSegmentIoKey = @"MgcETJgB11r5NWKO2G5svEbjzN0VxIz1  ";
+NSString *const kSegmentIoKey = @"MgcETJgB11r5NWKO2G5svEbjzN0VxIz1";
 
 #elif NEOMEDIA
 
