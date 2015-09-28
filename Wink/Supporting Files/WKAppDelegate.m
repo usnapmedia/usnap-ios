@@ -60,13 +60,13 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-//    BOOL userHasOnboarded = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasOnboardedKey"];
-//    if (userHasOnboarded==YES) {
-//        [self setupNormalRootViewController];
-//    }
-//    else {
+    BOOL userHasOnboarded = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasOnboardedKey"];
+    if (userHasOnboarded==YES) {
+        [self setupNormalRootViewController];
+    }
+    else {
         self.window.rootViewController = [self showOnboarding];
-//    }
+    }
     
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[WKShareViewController class]];
     [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[WKShareViewController class]];
