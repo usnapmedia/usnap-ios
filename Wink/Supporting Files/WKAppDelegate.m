@@ -22,6 +22,7 @@
 #import "SSSessionManager.h"
 #import "OnboardingContentViewController.h"
 #import "SSOOnboarding.h"
+#import "SDiPhoneVersion.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
@@ -59,13 +60,13 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    //    BOOL userHasOnboarded = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasOnboardedKey"];
-    //    if (userHasOnboarded==YES) {
-    //        [self setupNormalRootViewController];
-    //    }
-    //    else {
-    self.window.rootViewController = [self showOnboarding];
-    //    }
+//    BOOL userHasOnboarded = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasOnboardedKey"];
+//    if (userHasOnboarded==YES) {
+//        [self setupNormalRootViewController];
+//    }
+//    else {
+        self.window.rootViewController = [self showOnboarding];
+//    }
     
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[WKShareViewController class]];
     [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[WKShareViewController class]];
@@ -88,13 +89,31 @@
 
 - (SSOOnboarding*) showOnboarding {
     
-    OnboardingContentViewController *firstPage = [OnboardingContentViewController contentWithTitle:NSLocalizedString(@"onboarding.page1.title", @"WELCOME") body:NSLocalizedString(@"onboarding.page1.body",@"Bacon ipsum dolor amet hamburger filet mignon tenderloin shankle, meatloaf pork chop sirloin tail kevin. Kielbasa turducken drumstick ribeye. Pastrami tenderloin short loin pancetta ham, pork loin cupim drumstick porchetta.") image:[UIImage imageNamed:@"1"] buttonText:@"" action:^{}];
+    UIImage *image1 = [UIImage imageNamed:@"1"];
+    UIImage *image2 = [UIImage imageNamed:@"2"];
+    UIImage *image3 = [UIImage imageNamed:@"3"];
+    UIImage *image4 = [UIImage imageNamed:@"4"];
     
-    OnboardingContentViewController *secondPage = [OnboardingContentViewController contentWithTitle:NSLocalizedString(@"onboarding.page2.title", @"INTERACT") body:NSLocalizedString(@"onboarding.page2.body",@"Bacon ipsum dolor amet hamburger filet mignon tenderloin shankle, meatloaf pork chop sirloin tail kevin. Kielbasa turducken drumstick ribeye. Pastrami tenderloin short loin pancetta ham, pork loin cupim drumstick porchetta.") image:[UIImage imageNamed:@"2"] buttonText:@"" action:^{}];
     
-    OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:NSLocalizedString(@"onboarding.page3.title", @"CAPTURE") body:NSLocalizedString(@"onboarding.page3.body",@"Bacon ipsum dolor amet hamburger filet mignon tenderloin shankle, meatloaf pork chop sirloin tail kevin. Kielbasa turducken drumstick ribeye. Pastrami tenderloin short loin pancetta ham, pork loin cupim drumstick porchetta.") image:[UIImage imageNamed:@"3"] buttonText:@"" action:^{}];
+    if ([SDiPhoneVersion deviceSize] == iPhone35inch) {
+        image1 = [self imageWithImage:image1 convertToSize:CGSizeMake(image1.size.width-60.0f, image1.size.width-60.0f)];
+        image2 = [self imageWithImage:image2 convertToSize:CGSizeMake(image2.size.width-60.0f, image2.size.width-60.0f)];
+        image3 = [self imageWithImage:image3 convertToSize:CGSizeMake(image3.size.width-60.0f, image3.size.width-60.0f)];
+        image4 = [self imageWithImage:image4 convertToSize:CGSizeMake(image4.size.width-60.0f, image4.size.width-60.0f)];
+    } else if ([SDiPhoneVersion deviceSize] == iPhone4inch) {
+        image1 = [self imageWithImage:image1 convertToSize:CGSizeMake(image1.size.width, image1.size.width)];
+        image2 = [self imageWithImage:image2 convertToSize:CGSizeMake(image2.size.width, image2.size.width)];
+        image3 = [self imageWithImage:image3 convertToSize:CGSizeMake(image3.size.width, image3.size.width)];
+        image4 = [self imageWithImage:image4 convertToSize:CGSizeMake(image4.size.width, image4.size.width)];
+    }
     
-    OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:NSLocalizedString(@"onboarding.page4.title", @"PERSONALIZE") body:NSLocalizedString(@"onboarding.page4.body",@"Bacon ipsum dolor amet hamburger filet mignon tenderloin shankle, meatloaf pork chop sirloin tail kevin. Kielbasa turducken drumstick ribeye. Pastrami tenderloin short loin pancetta ham, pork loin cupim drumstick porchetta.") image:[UIImage imageNamed:@"4"] buttonText:@"Got it!" action:^{
+    OnboardingContentViewController *firstPage = [OnboardingContentViewController contentWithTitle:NSLocalizedString(@"onboarding.page1.title", @"WELCOME") body:NSLocalizedString(@"onboarding.page1.body",@"Bacon ipsum dolor amet hamburger filet mignon tenderloin shankle, meatloaf pork chop sirloin tail kevin. Kielbasa turducken drumstick ribeye. Pastrami tenderloin short loin pancetta ham, pork loin cupim drumstick porchetta.") image:image1 buttonText:@"" action:^{}];
+    
+    OnboardingContentViewController *secondPage = [OnboardingContentViewController contentWithTitle:NSLocalizedString(@"onboarding.page2.title", @"INTERACT") body:NSLocalizedString(@"onboarding.page2.body",@"Bacon ipsum dolor amet hamburger filet mignon tenderloin shankle, meatloaf pork chop sirloin tail kevin. Kielbasa turducken drumstick ribeye. Pastrami tenderloin short loin pancetta ham, pork loin cupim drumstick porchetta.") image:image2 buttonText:@"" action:^{}];
+    
+    OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:NSLocalizedString(@"onboarding.page3.title", @"CAPTURE") body:NSLocalizedString(@"onboarding.page3.body",@"Bacon ipsum dolor amet hamburger filet mignon tenderloin shankle, meatloaf pork chop sirloin tail kevin. Kielbasa turducken drumstick ribeye. Pastrami tenderloin short loin pancetta ham, pork loin cupim drumstick porchetta.") image:image3 buttonText:@"" action:^{}];
+    
+    OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:NSLocalizedString(@"onboarding.page4.title", @"PERSONALIZE") body:NSLocalizedString(@"onboarding.page4.body",@"Bacon ipsum dolor amet hamburger filet mignon tenderloin shankle, meatloaf pork chop sirloin tail kevin. Kielbasa turducken drumstick ribeye. Pastrami tenderloin short loin pancetta ham, pork loin cupim drumstick porchetta.") image:image4 buttonText:@"Got it!" action:^{
         [self handleOnboardingCompletion];
     }];
     
@@ -104,9 +123,38 @@
     SSOOnboarding *onboardingVC = [SSOOnboarding onboardWithBackgroundImage:[self imageWithImage:bgImage convertToSize:[UIScreen mainScreen].bounds.size] contents:@[firstPage, secondPage, thirdPage, fourthPage]];
 
     onboardingVC.fontName = @"Avenir-Light";
-    onboardingVC.titleFontSize = 20;
-    onboardingVC.bodyFontSize = 14;
-
+    float skipButtonAdjustment = 0.0f;
+    float pagerAdjustment = 0.0f;
+    
+    switch ([SDiPhoneVersion deviceSize]) {
+        case iPhone35inch:
+            onboardingVC.titleFontSize = 14;
+            onboardingVC.bodyFontSize = 10;
+            skipButtonAdjustment = 0.0f;
+            pagerAdjustment = 2.0f;
+            break;
+        case iPhone4inch:
+            onboardingVC.titleFontSize = 16;
+            onboardingVC.bodyFontSize = 12;
+            skipButtonAdjustment = 2.0f;
+            pagerAdjustment = 4.0f;
+            break;
+        case iPhone47inch:
+            onboardingVC.titleFontSize = 18;
+            onboardingVC.bodyFontSize = 14;
+            skipButtonAdjustment = 8.0f;
+            pagerAdjustment = 10.0f;
+            break;
+        case iPhone55inch:
+            onboardingVC.titleFontSize = 20;
+            onboardingVC.bodyFontSize = 14;
+            skipButtonAdjustment = 8.0f;
+            pagerAdjustment = 10.0f;
+            break;
+        default:
+            break;
+    }
+    
     onboardingVC.shouldMaskBackground = NO;
     onboardingVC.shouldFadeTransitions = YES;
     onboardingVC.swipingEnabled = YES;
@@ -125,12 +173,12 @@
     
     firstPage.viewWillAppearBlock = ^{
         CGRect framePager = onboardingVC.pageControl.frame;
-        framePager.origin.y = [UIScreen mainScreen].bounds.size.height - framePager.size.height - 10.0f;
+        framePager.origin.y = [UIScreen mainScreen].bounds.size.height - framePager.size.height - pagerAdjustment;
         onboardingVC.pageControl.frame = framePager;
         
         CGRect frame = onboardingVC.skipButton.frame;
         frame.origin.x = 0.0f;
-        frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height - 8.0f;
+        frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height - skipButtonAdjustment;
         onboardingVC.skipButton.frame = frame;
         
         [UIView beginAnimations:nil context:nil];
@@ -161,14 +209,36 @@
 }
 
 - (void) stylePage: (OnboardingContentViewController *)page {
-    page.topPadding = 0.0f;
-    page.underIconPadding = 24.0f;
-    page.underTitlePadding = 18.0f;
-    page.bottomPadding = -30.0f;
-
+    switch ([SDiPhoneVersion deviceSize]) {
+        case iPhone35inch:
+            page.topPadding = 4.0f;
+            page.underIconPadding = 12.0f;
+            page.underTitlePadding = 4.0f;
+            page.bottomPadding = -40.0f;
+            break;
+        case iPhone4inch:
+            page.topPadding = 4.0f;
+            page.underIconPadding = 12.0f;
+            page.underTitlePadding = 4.0f;
+            page.bottomPadding = -36.0f;
+            break;
+        case iPhone47inch:
+            page.topPadding = 0.0f;
+            page.underIconPadding = 12.0f;
+            page.underTitlePadding = 4.0f;
+            page.bottomPadding = -34.0f;
+            break;
+        case iPhone55inch:
+            page.topPadding = 0.0f;
+            page.underIconPadding = 24.0f;
+            page.underTitlePadding = 18.0f;
+            page.bottomPadding = -30.0f;
+            break;
+        default:
+            break;
+    }
     
     page.accessibilityLabel = @"OnboardingPage";
-    
     page.viewDidAppearBlock = ^{
         [[SEGAnalytics sharedAnalytics] track:@"Slide Swiped"];
     };
