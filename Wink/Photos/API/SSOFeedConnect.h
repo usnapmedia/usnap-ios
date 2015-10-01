@@ -66,4 +66,16 @@
                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
++ (void)socialActionWithMediaID:(NSString *)mediaID
+                     actionType:(NSString *)type
+                        content:(NSString *)content
+                       userName:(NSString *)userName
+                         apiKey:(NSString *)apiKey
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
++ (void)getSocialWithMediaID:(NSString *)mediaID
+                 withSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end

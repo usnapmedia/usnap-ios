@@ -62,7 +62,9 @@
     
     BOOL userHasOnboarded = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasOnboardedKey"];
     if (userHasOnboarded==YES) {
+
         [self setupNormalRootViewController];
+
     }
     else {
         self.window.rootViewController = [self showOnboarding];
@@ -72,9 +74,26 @@
     [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[WKShareViewController class]];
     
     [self.window makeKeyAndVisible];
-    
+
+    // determine whether we've launched from a shortcut item or not
+    UIApplicationShortcutItem *item = [launchOptions valueForKey:UIApplicationLaunchOptionsShortcutItemKey];
+    if ([item.type isEqualToString:@"com.usnap.quickshoot"]) {
+        NSLog(@"We've launched from shortcut item: %@", item.type);
+        SSOViewControllerWithTabBar* VC = (SSOViewControllerWithTabBar*)self.window.rootViewController;
+        [VC cameraButtonPressed:nil];
+    }
+
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+}
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+    
+    if ([shortcutItem.type isEqualToString:@"com.usnap.quickshoot"]) {
+        NSLog(@"We've launched from shortcut item: %@", shortcutItem.type);
+        SSOViewControllerWithTabBar* VC = (SSOViewControllerWithTabBar*)self.window.rootViewController;
+        [VC cameraButtonPressed:nil];
+    }
 }
 
 - (void) setupNormalRootViewController {

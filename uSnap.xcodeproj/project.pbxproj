@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		007E3D6D1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 007E3D6B1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		007E3D6E1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 007E3D6B1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		007E3D6F1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 007E3D6B1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		007E3D701BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 007E3D6B1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		007E3D711BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007E3D6C1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		007E3D721BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007E3D6C1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		007E3D731BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007E3D6C1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		007E3D741BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007E3D6C1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		0090E3191BB436EE004F4597 /* SSOOnboarding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0090E3181BB436EE004F4597 /* SSOOnboarding.m */; settings = {ASSET_TAGS = (); }; };
 		0090E31A1BB4381C004F4597 /* SSOOnboarding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0090E3181BB436EE004F4597 /* SSOOnboarding.m */; settings = {ASSET_TAGS = (); }; };
 		0090E31B1BB4381E004F4597 /* SSOOnboarding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0090E3181BB436EE004F4597 /* SSOOnboarding.m */; settings = {ASSET_TAGS = (); }; };
@@ -686,6 +694,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		007E3D6A1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOPhotoDetailCommentsViewController.h; sourceTree = "<group>"; };
+		007E3D6B1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOPhotoDetailCommentsViewController.m; sourceTree = "<group>"; };
+		007E3D6C1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOPhotoDetailCommentsViewController.xib; sourceTree = "<group>"; };
 		0090E3171BB436EE004F4597 /* SSOOnboarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOOnboarding.h; sourceTree = "<group>"; };
 		0090E3181BB436EE004F4597 /* SSOOnboarding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOOnboarding.m; sourceTree = "<group>"; };
 		0090E31D1BB49719004F4597 /* SNApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNApplication.h; sourceTree = "<group>"; };
@@ -1958,6 +1969,9 @@
 				D85B35361AF29F640011B26D /* SSOPhotoDetailViewController.h */,
 				D85B35371AF29F640011B26D /* SSOPhotoDetailViewController.m */,
 				D85B35381AF29F640011B26D /* SSOPhotoDetailViewController.xib */,
+				007E3D6A1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.h */,
+				007E3D6B1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m */,
+				007E3D6C1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2308,6 +2322,7 @@
 			files = (
 				00DA01C61BB1D34C00EAF4E3 /* SSORegisterContainerView.xib in Resources */,
 				00DA01F31BB1D68400EAF4E3 /* Launch Screen Niko.xib in Resources */,
+				007E3D741BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib in Resources */,
 				00DA01C71BB1D34C00EAF4E3 /* SSOSettingsViewController.xib in Resources */,
 				00DA01C81BB1D34C00EAF4E3 /* SSOTopCampaignCollectionViewCell.xib in Resources */,
 				00DA01C91BB1D34C00EAF4E3 /* WKEditMediaViewController.xib in Resources */,
@@ -2348,6 +2363,7 @@
 			files = (
 				3303DDCE1AD83E42002B74F9 /* SSORegisterContainerView.xib in Resources */,
 				FBBC950F1AF9238000203E48 /* SSOSettingsViewController.xib in Resources */,
+				007E3D711BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib in Resources */,
 				3398420D1AEAD60F00605C67 /* SSOTopCampaignCollectionViewCell.xib in Resources */,
 				D810B8F31ADF506500B3AC11 /* WKEditMediaViewController.xib in Resources */,
 				D85B353A1AF29F640011B26D /* SSOPhotoDetailViewController.xib in Resources */,
@@ -2425,6 +2441,7 @@
 				3FABF4B81B70F88C00894872 /* SSOTopPhotosCollectionViewCell.xib in Resources */,
 				3FABF4B91B70F88C00894872 /* SSOFanPageViewController.xib in Resources */,
 				3FABF4BA1B70F88C00894872 /* WKShareViewController.xib in Resources */,
+				007E3D731BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib in Resources */,
 				3FABF4BC1B70F88C00894872 /* SSOImageCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2436,6 +2453,7 @@
 				D8BD7DE11B25F4550007DD36 /* SSORegisterContainerView.xib in Resources */,
 				D8BD7DE21B25F4550007DD36 /* SSOSettingsViewController.xib in Resources */,
 				D8BD7DE31B25F4550007DD36 /* SSOTopCampaignCollectionViewCell.xib in Resources */,
+				007E3D721BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.xib in Resources */,
 				D8BD7DE41B25F4550007DD36 /* WKEditMediaViewController.xib in Resources */,
 				D8BD7DE61B25F4550007DD36 /* SSOPhotoDetailViewController.xib in Resources */,
 				D8BD7DE81B25F4550007DD36 /* SSOAdjustmentAccessoryContainerView.xib in Resources */,
@@ -2786,6 +2804,7 @@
 				00DA017E1BB1D34C00EAF4E3 /* SSOTextAccessoryContainerView.m in Sources */,
 				00DA017F1BB1D34C00EAF4E3 /* SSOTopPhotosViewController.m in Sources */,
 				00DA01801BB1D34C00EAF4E3 /* SSOUSnapLightButton.m in Sources */,
+				007E3D701BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m in Sources */,
 				00DA01811BB1D34C00EAF4E3 /* SSOCameraViewController.m in Sources */,
 				00DA01821BB1D34C00EAF4E3 /* UIStoryboard+USnap.m in Sources */,
 				00DA01831BB1D34C00EAF4E3 /* SSORoundedAnimatedButton.m in Sources */,
@@ -2910,6 +2929,7 @@
 				D810B8E71ADF506500B3AC11 /* SSOTextAccessoryContainerView.m in Sources */,
 				D8E677FE1AEEE5F6006B8CD8 /* SSOTopPhotosViewController.m in Sources */,
 				FBB76FEF1B02455300FFAF9A /* SSOUSnapLightButton.m in Sources */,
+				007E3D6D1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m in Sources */,
 				335723B51ACB097C000CC846 /* SSOCameraViewController.m in Sources */,
 				D830F4231ACDDBF1002A503D /* UIStoryboard+USnap.m in Sources */,
 				336F91401ACD963D003B0AA4 /* SSORoundedAnimatedButton.m in Sources */,
@@ -3042,6 +3062,7 @@
 				3FABF4531B70F88C00894872 /* SSOTextAccessoryContainerView.m in Sources */,
 				3FABF4541B70F88C00894872 /* SSOTopPhotosViewController.m in Sources */,
 				3FABF4551B70F88C00894872 /* SSOUSnapLightButton.m in Sources */,
+				007E3D6F1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m in Sources */,
 				3FABF4561B70F88C00894872 /* SSOCameraViewController.m in Sources */,
 				3FABF4571B70F88C00894872 /* UIStoryboard+USnap.m in Sources */,
 				3FABF4581B70F88C00894872 /* SSORoundedAnimatedButton.m in Sources */,
@@ -3154,6 +3175,7 @@
 				D8BD7D961B25F4550007DD36 /* SSOImageCollectionViewCell.m in Sources */,
 				D8BD7D971B25F4550007DD36 /* SSOAdjustementsHelper.m in Sources */,
 				D8BD7D981B25F4550007DD36 /* SSOTopPhotosCollectionViewCell.m in Sources */,
+				007E3D6E1BBB026F00F168BF /* SSOPhotoDetailCommentsViewController.m in Sources */,
 				D8BD7D991B25F4550007DD36 /* SSORoundedBackgroundLabel.m in Sources */,
 				D8BD7D9A1B25F4550007DD36 /* SSOThemeHelper.m in Sources */,
 				D8BD7D9B1B25F4550007DD36 /* SSOTextAccessoryContainerView.m in Sources */,

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SSOViewControllerWithTabBar : UIViewController
-
+- (void)cameraButtonPressed:(id)sender;
 @end

@@ -105,5 +105,18 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Quick Snap</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>take a picture</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.usnap.quickshoot</string>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>tab_bar_camera_icon</string>
+		</dict>
+	</array>
 </dict>
 </plist>

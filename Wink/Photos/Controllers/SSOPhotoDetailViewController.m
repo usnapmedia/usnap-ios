@@ -17,6 +17,9 @@
 #import <Masonry.h>
 #import <AFNetworking.h>
 #import "SEGAnalytics.h"
+#import "SSOPhotoDetailCommentsViewController.h"
+#import <Social/Social.h>
+#import "SDiPhoneVersion.h"
 
 @interface SSOPhotoDetailViewController () <WKMoviePlayerDelegate>
 
@@ -36,6 +39,13 @@
 @property(weak, nonatomic) IBOutlet UIView *reportImageView;
 @property(weak, nonatomic) IBOutlet UIButton *confirmReportButton;
 @property(weak, nonatomic) IBOutlet UIButton *reportButton;
+@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
+@property (strong, nonatomic) NSArray *loveArray;
+@property (strong, nonatomic) NSArray *commentsArray;
+@property (weak, nonatomic) IBOutlet UIButton *loveButton;
+@property (weak, nonatomic) IBOutlet UIButton *commentButton;
+
+@property (strong, nonatomic) UIImageView *hearthImageView;
 
 @end
 
@@ -51,6 +61,120 @@
     // Do any additional setup after loading the view from its nib.
 
     self.dateLabel.hidden = YES; //@FIXME
+    self.hearthImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Heart - Active"]];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+    tapGesture.numberOfTapsRequired = 2;
+    [self.contentView addGestureRecognizer:tapGesture];
+
+}
+
+- (void)handleTapGesture:(UITapGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateRecognized) {
+        if (self.loveButton.selected == NO) {
+            [self likeButtonAction:self.loveButton];
+        }
+        [self animateHearth];
+    }
+}
+
+- (void)animateHearth {
+    self.contentView.userInteractionEnabled = NO;
+    //anim a hearth just like instagram.
+    
+    self.hearthImageView.image = [self.hearthImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.hearthImageView setTintColor:[UIColor whiteColor]];
+    self.hearthImageView.alpha = 0.85f;
+    
+    self.hearthImageView.layer.shadowOffset = CGSizeMake(2, 2);
+    self.hearthImageView.layer.shadowRadius = 2.0;
+    self.hearthImageView.layer.shadowOpacity = 0.4;
+    
+    self.hearthImageView.layer.masksToBounds = NO;
+    
+    
+    CGRect f = self.hearthImageView.frame;
+    f.size.height = 0;
+    f.size.width = 0;
+    self.hearthImageView.frame = f;
+    self.hearthImageView.center = self.view.center;
+    
+    if (![self.view.subviews containsObject:self.hearthImageView]) {
+        [self.view addSubview:self.hearthImageView];
+    }
+    
+    
+    
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationCurveEaseIn | UIViewAnimationOptionAllowAnimatedContent animations:^{
+        CGRect f = self.hearthImageView.frame;
+        f.size.height = 170;
+        f.size.width = 170;
+        self.hearthImageView.frame = f;
+        self.hearthImageView.center = self.view.center;
+    }
+                     completion:^(BOOL finished) {
+                         if(finished){
+                             [UIView animateWithDuration:0.075f delay:0 options:UIViewAnimationCurveLinear | UIViewAnimationOptionAllowAnimatedContent animations:^{
+                                 CGRect f = self.hearthImageView.frame;
+                                 f.size.height = 150;
+                                 f.size.width = 150;
+                                 self.hearthImageView.frame = f;
+                                 self.hearthImageView.center = self.view.center;
+                             }
+                                              completion:^(BOOL finished) {
+                                                  if(finished){
+                                                      [UIView animateWithDuration:0.2 delay:1 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionAllowAnimatedContent animations:^{
+                                                          CGRect f = self.hearthImageView.frame;
+                                                          f.size.height = 0;
+                                                          f.size.width = 0;
+                                                          self.hearthImageView.frame = f;
+                                                          self.hearthImageView.center = self.view.center;
+                                                      }
+                                                                       completion:^(BOOL finished) {
+                                                                           NSLog(@"animations complete");
+                                                                           self.contentView.userInteractionEnabled = YES;                          }];
+                                                  }
+                                                  
+                                              }];
+                         }
+                         
+                     }];
+
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    NSString *user = [[SSSessionManager sharedInstance] username];
+    if (!user) {
+        user = @"Not Logged In";
+    }
+
+    
+    [SSOFeedConnect getSocialWithMediaID:self.snap.id
+                             withSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 NSLog(@"reponseObject %@", responseObject);
+                                 self.loveArray = [[responseObject objectForKey:@"love"] objectForKey:@"users"];
+                                 self.commentsArray = [[responseObject objectForKey:@"comments"] objectForKey:@"content"];
+                                 
+                                 
+                                 NSUInteger matchingIndex = [self.loveArray indexOfObjectPassingTest:^BOOL(NSDictionary *item, NSUInteger idx, BOOL *stop) {
+                                     BOOL found = [[item objectForKey:@"username"] isEqualToString:[[SSSessionManager sharedInstance] currentUsername]];
+                                     return found;
+                                 }];
+                                 
+                                 if (matchingIndex != NSNotFound) {
+                                     self.loveButton.selected = YES;
+                                 } else {
+                                     self.loveButton.selected = NO;
+                                 }
+                                 
+                                 self.commentButton.selected = self.commentsArray.count>0 ? YES : NO;
+                                 
+                            }
+                                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"error");
+                            }];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -87,7 +211,7 @@
         [self displayImage];
     } else {
         [self.confirmReportButton setTitle:@"Report this Video?" forState:UIControlStateNormal];
-        [self.reportButton setTitle:@"Report Video" forState:UIControlStateNormal];
+//        [self.reportButton setTitle:@"Report Video" forState:UIControlStateNormal];
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
 
@@ -131,7 +255,7 @@
 
 - (void)displayImage {
     [self.confirmReportButton setTitle:@"Report this Image?" forState:UIControlStateNormal];
-    [self.reportButton setTitle:@"Report Image" forState:UIControlStateNormal];
+//    [self.reportButton setTitle:@"Report Image" forState:UIControlStateNormal];
     self.imageView = [UIImageView new];
     [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [self.contentView addSubview:self.imageView];
@@ -178,6 +302,13 @@
         }
 
         self.textLabel.text = (NSString *)self.snap.text;
+        
+        int points = [(NSString *)self.snap.usnapScore intValue];
+        
+        self.pointsLabel.text = [NSString stringWithFormat:@"%d %@", points, points>1?@"points":@"point"];
+        [self.pointsLabel setTextColor:[SSOThemeHelper firstColor]];
+        self.pointsLabel.font = [SSOThemeHelper avenirLightFontWithSize:18];
+
     }
 }
 
@@ -191,7 +322,7 @@
     self.circledLetter.font = [SSOThemeHelper avenirHeavyFontWithSize:21];
     self.backButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:18];
     self.textLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
-    self.reportButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
+//    self.reportButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
     self.confirmReportButton.titleLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:15];
 }
 
@@ -206,16 +337,247 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)reportImageAction:(UIButton *)sender {
-    self.reportImageView.hidden = NO;
-    self.confirmReportButton.hidden = NO;
+- (IBAction)moreAction:(UIButton *)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Report Image"
+                                                          style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+                                                              [self showConfirmationActionSheet];
+                                                              NSLog(@"Report Image");
+                                                          }];
+    UIAlertAction *secondAction = [UIAlertAction actionWithTitle:@"Share to Facebook"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                               NSLog(@"fb");
+                                                               [self sharefacebook];
+                                                               
+                                                           }];
+
+    UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"Share to Twitter"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                               NSLog(@"twitter");
+                                                               [self sharetwitter];
+                                                           }];
+
+    UIAlertAction *fourthAction = [UIAlertAction actionWithTitle:@"Delete"
+                                                          style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+
+                                                              NSLog(@"delete");
+                                                          }];
+
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                                                               NSLog(@"cancel");
+                                                           }];
+
+    
+    [alert addAction:firstAction];
+    [alert addAction:secondAction];
+    [alert addAction:thirdAction];
+    if ([self.snap.username isEqualToString:[[SSSessionManager sharedInstance] currentUsername]])
+        [alert addAction:fourthAction];
+    [alert addAction:cancelAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
+
+- (void) sharetwitter {
+    SLComposeViewController *twitterController=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    {
+        SLComposeViewControllerCompletionHandler __block completionHandler=^(SLComposeViewControllerResult result){
+            
+            [twitterController dismissViewControllerAnimated:YES completion:nil];
+            
+            switch(result){
+                case SLComposeViewControllerResultCancelled:
+                default:
+                {
+                    NSLog(@"Cancelled.....");
+                    // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs://"]];
+                    
+                }
+                    break;
+                case SLComposeViewControllerResultDone:
+                {
+                    NSLog(@"Posted....");
+                }
+                    break;
+            }};
+        
+        
+        if ([self.snap.videoUrl length]>0) {
+            [twitterController addURL:[NSURL URLWithString:self.snap.videoUrl]];
+        } else {
+            [twitterController addImage:self.imageView.image];
+        }
+        
+        [twitterController setCompletionHandler:completionHandler];
+        [self presentViewController:twitterController animated:YES completion:nil];
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sign in!" message:@"Please first Sign In!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+}
+
+- (void) sharefacebook {
+        SLComposeViewController *fbController=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+        {
+            SLComposeViewControllerCompletionHandler __block completionHandler=^(SLComposeViewControllerResult result){
+                
+                [fbController dismissViewControllerAnimated:YES completion:nil];
+                
+                switch(result){
+                    case SLComposeViewControllerResultCancelled:
+                    default:
+                    {
+                        NSLog(@"Cancelled.....");
+                        // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs://"]];
+                        
+                    }
+                        break;
+                    case SLComposeViewControllerResultDone:
+                    {
+                        NSLog(@"Posted....");
+                    }
+                        break;
+                }};
+            
+            
+            if ([self.snap.videoUrl length]>0) {
+                [fbController addURL:[NSURL URLWithString:self.snap.videoUrl]];
+            } else {
+                [fbController addImage:self.imageView.image];
+            }
+
+            [fbController setCompletionHandler:completionHandler];
+            [self presentViewController:fbController animated:YES completion:nil];
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sign in!" message:@"Please first Sign In!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+}
+
+
+- (void) showConfirmationActionSheet {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Confirm"
+                                                          style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+                                                              [self confirmReportImageAction:nil];
+                                                          
+                                                          }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                                                               NSLog(@"cancel");
+                                                           }];
+    
+    
+    [alert addAction:firstAction];
+    [alert addAction:cancelAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
+
+- (IBAction)likeButtonAction:(UIButton*)sender {
+    sender.selected = !sender.selected;
+    
+    if (sender.selected==YES) {
+        [self animateHearth];
+    }
+    
+    //TODO: send the call to the backend
+    NSString *user = [[SSSessionManager sharedInstance] username];
+    if (!user) {
+        user = @"Not Logged In";
+    }
+    
+    [SSOFeedConnect socialActionWithMediaID:self.snap.id
+                                 actionType:@"love"
+                                    content:@""
+                                  userName:user
+                                    apiKey:@""
+                                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                       
+                                   }
+                                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                       UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                                            message:[NSString stringWithFormat:@"%ld", (long)error.code]
+                                                                                           delegate:nil
+                                                                                  cancelButtonTitle:@"Ok"
+                                                                                  otherButtonTitles:nil, nil];
+                                       [errorAlert show];
+                                   }];
+
+}
+
+- (IBAction)commentButtonAction:(UIButton*)sender {
+    //TODO: send the call to the backend
+    
+    NSString *user = [[SSSessionManager sharedInstance] username];
+    if (!user) {
+        user = @"Not Logged In";
+    }
+    
+    
+    
+    SSOPhotoDetailCommentsViewController *commentsVC = [[SSOPhotoDetailCommentsViewController alloc] initWithNibName:@"SSOPhotoDetailCommentsViewController" bundle:nil];
+
+    CGRect f = commentsVC.view.frame;
+    CGFloat adjustedTableViewH = 0;
+    CGFloat adjustedBottomConstraint = 0;
+    
+    switch ([SDiPhoneVersion deviceSize]) {
+        case iPhone35inch:
+            adjustedTableViewH = 244;
+            adjustedBottomConstraint = 114;
+            break;
+        case iPhone4inch:
+            adjustedTableViewH = 332;
+            adjustedBottomConstraint = 202;
+            break;
+        case iPhone47inch:
+            adjustedTableViewH = 421;
+            adjustedBottomConstraint = 301;
+            break;
+        case iPhone55inch:
+            adjustedTableViewH = 481;
+            adjustedBottomConstraint = 360;
+            break;
+            
+        default:
+            break;
+    }
+    
+    f.size.height = adjustedTableViewH;
+    commentsVC.view.frame = f;
+    commentsVC.commentsTableHeightConstraint.constant =  adjustedBottomConstraint;
+    
+    commentsVC.items = [NSMutableArray arrayWithArray:self.commentsArray];
+    commentsVC.snap = self.snap;
+    commentsVC.loved = self.loveButton.selected;
+    [self.navigationController pushViewController:commentsVC animated:YES];
+
+    
+}
+
 
 - (IBAction)confirmReportImageAction:(UIButton *)sender {
     NSString *user = [[SSSessionManager sharedInstance] username];
     if (!user) {
         user = @"Not Logged In";
     }
+    
     [SSOFeedConnect reportImageWithImageID:self.snap.url
         userName:user
         apiKey:@""

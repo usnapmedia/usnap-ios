@@ -70,4 +70,35 @@
     [manager POST:url parameters:@{ @"image_id" : imageID, @"username" : userName, @"api_key" : apiKey } success:success failure:failure];
 }
 
++ (void)socialActionWithMediaID:(NSString *)mediaID
+                     actionType:(NSString *)type
+                        content:(NSString *)content
+                      userName:(NSString *)userName
+                        apiKey:(NSString *)apiKey
+                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSString *url = [NSString stringWithFormat:@"social/save"];
+    SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
+    
+    
+    if ([type isEqualToString:@"comment"]) {
+        [manager POST:url parameters:@{ @"media_id" : mediaID, @"username" : userName, @"type" : type, @"content" : content, @"api_key" : apiKey } success:success failure:failure];
+        
+    } else {
+        [manager POST:url parameters:@{ @"media_id" : mediaID, @"username" : userName, @"type" : type, @"api_key" : apiKey } success:success failure:failure];
+        
+    }
+    
+}
+
++ (void)getSocialWithMediaID:(NSString *)mediaID
+                 withSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSString *url = [NSString stringWithFormat:@"social/data/%@", mediaID];
+    SSOHTTPRequestOperationManager *manager = [[SSOHTTPRequestOperationManager alloc] init];
+    [manager GET:url parameters:nil success:success failure:failure];
+
+}
+
+
 @end

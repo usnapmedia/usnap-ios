@@ -25,7 +25,7 @@
     if ([cellData isKindOfClass:[SSOSnap class]]) {
         self.data = (SSOSnap *)cellData;
 
-        if ([self.data.fbLikes integerValue] >= 1) {
+        if ([(NSString*)self.data.usnapScore integerValue] >= 1) {
             [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
               make.width.height.equalTo(@106);
             }];
