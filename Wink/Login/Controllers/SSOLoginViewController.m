@@ -234,10 +234,10 @@
 
         }
         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          [[SEGAnalytics sharedAnalytics] track:@"Login" properties:@{@"Status":@"Error", @"Error":error}];
+          [[SEGAnalytics sharedAnalytics] track:@"Login" properties:@{@"Status":@"Error", @"Error":error.description}];
           NSLog(@"Login failed");
           //@FIXME Should be handled generally
-          [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"login.error.alert.message", @"Error when the login is wrong") maskType:SVProgressHUDMaskTypeClear];
+          [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"login.error.alert.message", @"Error when the login is wrong") maskType:SVProgressHUDMaskTypeNone];
 
           // Logout when errors
           [[SSSessionManager sharedInstance] logoutCurrentUser];

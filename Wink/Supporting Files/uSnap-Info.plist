@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>70</string>
+	<string>78</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -82,6 +82,19 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>tab_bar_camera_icon</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>take a picture</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Quick Snap</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.usnap.quickshoot</string>
+		</dict>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -105,18 +118,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIApplicationShortcutItems</key>
-	<array>
-		<dict>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Quick Snap</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>take a picture</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>com.usnap.quickshoot</string>
-			<key>UIApplicationShortcutItemIconFile</key>
-			<string>tab_bar_camera_icon</string>
-		</dict>
-	</array>
 </dict>
 </plist>
