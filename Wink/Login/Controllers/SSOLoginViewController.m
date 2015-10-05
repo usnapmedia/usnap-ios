@@ -280,7 +280,7 @@
 }
 
 - (void)didNotFillAllFields {
-    [SVProgressHUD showErrorWithStatus:@"Missing fields. Check the fields" maskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showErrorWithStatus:@"Missing fields. Check the fields" maskType:SVProgressHUDMaskTypeNone];
 }
 
 @end

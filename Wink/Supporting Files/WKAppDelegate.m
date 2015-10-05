@@ -76,11 +76,14 @@
     [self.window makeKeyAndVisible];
 
     // determine whether we've launched from a shortcut item or not
-    UIApplicationShortcutItem *item = [launchOptions valueForKey:UIApplicationLaunchOptionsShortcutItemKey];
-    if ([item.type isEqualToString:@"com.usnap.quickshoot"]) {
-        NSLog(@"We've launched from shortcut item: %@", item.type);
-        SSOViewControllerWithTabBar* VC = (SSOViewControllerWithTabBar*)self.window.rootViewController;
-        [VC cameraButtonPressed:nil];
+    float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if (ver >= 9.0) {
+        UIApplicationShortcutItem *item = [launchOptions valueForKey:UIApplicationLaunchOptionsShortcutItemKey];
+        if ([item.type isEqualToString:@"com.usnap.quickshoot"]) {
+            NSLog(@"We've launched from shortcut item: %@", item.type);
+            SSOViewControllerWithTabBar* VC = (SSOViewControllerWithTabBar*)self.window.rootViewController;
+            [VC cameraButtonPressed:nil];
+        }
     }
 
     

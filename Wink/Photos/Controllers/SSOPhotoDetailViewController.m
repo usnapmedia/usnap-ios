@@ -45,7 +45,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *loveButton;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
 
-@property (strong, nonatomic) UIImageView *hearthImageView;
+//@property (strong, nonatomic) UIImageView *hearthImageView;
 
 @end
 
@@ -61,7 +61,6 @@
     // Do any additional setup after loading the view from its nib.
 
     self.dateLabel.hidden = YES; //@FIXME
-    self.hearthImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Heart - Active"]];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGesture.numberOfTapsRequired = 2;
@@ -71,6 +70,8 @@
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateRecognized) {
+        self.contentView.userInteractionEnabled = NO;
+        self.loveButton.userInteractionEnabled = NO;
         if (self.loveButton.selected == NO) {
             [self likeButtonAction:self.loveButton];
         }
@@ -79,60 +80,61 @@
 }
 
 - (void)animateHearth {
-    self.contentView.userInteractionEnabled = NO;
     //anim a hearth just like instagram.
+    UIImageView *hearthImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Heart - Active"]];
+    hearthImageView.image = [hearthImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [hearthImageView setTintColor:[UIColor whiteColor]];
+    hearthImageView.alpha = 0.85f;
     
-    self.hearthImageView.image = [self.hearthImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.hearthImageView setTintColor:[UIColor whiteColor]];
-    self.hearthImageView.alpha = 0.85f;
+    hearthImageView.layer.shadowOffset = CGSizeMake(2, 2);
+    hearthImageView.layer.shadowRadius = 2.0;
+    hearthImageView.layer.shadowOpacity = 0.4;
     
-    self.hearthImageView.layer.shadowOffset = CGSizeMake(2, 2);
-    self.hearthImageView.layer.shadowRadius = 2.0;
-    self.hearthImageView.layer.shadowOpacity = 0.4;
-    
-    self.hearthImageView.layer.masksToBounds = NO;
+    hearthImageView.layer.masksToBounds = NO;
     
     
-    CGRect f = self.hearthImageView.frame;
+    CGRect f = hearthImageView.frame;
     f.size.height = 0;
     f.size.width = 0;
-    self.hearthImageView.frame = f;
-    self.hearthImageView.center = self.view.center;
+    hearthImageView.frame = f;
+    hearthImageView.center = self.view.center;
     
-    if (![self.view.subviews containsObject:self.hearthImageView]) {
-        [self.view addSubview:self.hearthImageView];
+    if (![self.view.subviews containsObject:hearthImageView]) {
+        [self.view addSubview:hearthImageView];
     }
     
     
     
     [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationCurveEaseIn | UIViewAnimationOptionAllowAnimatedContent animations:^{
-        CGRect f = self.hearthImageView.frame;
+        CGRect f = hearthImageView.frame;
         f.size.height = 170;
         f.size.width = 170;
-        self.hearthImageView.frame = f;
-        self.hearthImageView.center = self.view.center;
+        hearthImageView.frame = f;
+        hearthImageView.center = self.view.center;
     }
                      completion:^(BOOL finished) {
                          if(finished){
                              [UIView animateWithDuration:0.075f delay:0 options:UIViewAnimationCurveLinear | UIViewAnimationOptionAllowAnimatedContent animations:^{
-                                 CGRect f = self.hearthImageView.frame;
+                                 CGRect f = hearthImageView.frame;
                                  f.size.height = 150;
                                  f.size.width = 150;
-                                 self.hearthImageView.frame = f;
-                                 self.hearthImageView.center = self.view.center;
+                                 hearthImageView.frame = f;
+                                 hearthImageView.center = self.view.center;
                              }
                                               completion:^(BOOL finished) {
                                                   if(finished){
                                                       [UIView animateWithDuration:0.2 delay:1 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionAllowAnimatedContent animations:^{
-                                                          CGRect f = self.hearthImageView.frame;
+                                                          CGRect f = hearthImageView.frame;
                                                           f.size.height = 0;
                                                           f.size.width = 0;
-                                                          self.hearthImageView.frame = f;
-                                                          self.hearthImageView.center = self.view.center;
+                                                          hearthImageView.frame = f;
+                                                          hearthImageView.center = self.view.center;
                                                       }
                                                                        completion:^(BOOL finished) {
                                                                            NSLog(@"animations complete");
-                                                                           self.contentView.userInteractionEnabled = YES;                          }];
+                                                                           self.contentView.userInteractionEnabled = YES;
+                                                                           self.loveButton.userInteractionEnabled = YES;
+                                                                       }];
                                                   }
                                                   
                                               }];
@@ -188,9 +190,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 
--(NSUInteger)supportedInterfaceOrientations {
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }
 - (BOOL)shouldAutorotate {
@@ -490,13 +493,26 @@
 }
 
 - (IBAction)likeButtonAction:(UIButton*)sender {
+
     sender.selected = !sender.selected;
+    CGAffineTransform t = CGAffineTransformMakeScale(1.0, 1.0);
+    CGPoint center = self.loveButton.center; // or any point you want
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         self.loveButton.transform = t;
+                         self.loveButton.center = center;
+                     }
+                     completion:^(BOOL finished) {
+                         /* do something next */
+                     }];
+
     
     if (sender.selected==YES) {
+        self.contentView.userInteractionEnabled = NO;
+        self.loveButton.userInteractionEnabled = NO;
         [self animateHearth];
     }
     
-    //TODO: send the call to the backend
     NSString *user = [[SSSessionManager sharedInstance] username];
     if (!user) {
         user = @"Not Logged In";
@@ -508,7 +524,7 @@
                                   userName:user
                                     apiKey:@""
                                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                       
+
                                    }
                                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                        UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -517,19 +533,84 @@
                                                                                   cancelButtonTitle:@"Ok"
                                                                                   otherButtonTitles:nil, nil];
                                        [errorAlert show];
+
                                    }];
 
 }
+- (IBAction)loveButtonDown:(id)sender {
+    CGAffineTransform t = CGAffineTransformMakeScale(1.25, 1.25);
+    CGPoint center = self.loveButton.center; // or any point you want
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         self.loveButton.transform = t;
+                         self.loveButton.center = center;
+                     }
+                     completion:^(BOOL finished) {
+                         /* do something next */
+                     }];
+
+}
+
+- (IBAction)loveButtonUpOutside:(id)sender {
+    CGAffineTransform t = CGAffineTransformMakeScale(1.0, 1.0);
+    CGPoint center = self.loveButton.center; // or any point you want
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         self.loveButton.transform = t;
+                         self.loveButton.center = center;
+                     }
+                     completion:^(BOOL finished) {
+                         /* do something next */
+                     }];
+}
+
+- (IBAction)commentButtonDown:(id)sender {
+
+    CGAffineTransform t = CGAffineTransformMakeScale(1.25, 1.25);
+    CGPoint center = self.commentButton.center; // or any point you want
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         self.commentButton.transform = t;
+                         self.commentButton.center = center;
+                     }
+                     completion:^(BOOL finished) {
+                         /* do something next */
+                     }];
+
+}
+
+- (IBAction)commentButtonTouchUpOutside:(id)sender {
+    CGAffineTransform t = CGAffineTransformMakeScale(1.0, 1.0);
+    CGPoint center = self.commentButton.center; // or any point you want
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         self.commentButton.transform = t;
+                         self.commentButton.center = center;
+                     }
+                     completion:^(BOOL finished) {
+                         /* do something next */
+                     }];
+}
 
 - (IBAction)commentButtonAction:(UIButton*)sender {
-    //TODO: send the call to the backend
+
+    CGAffineTransform t = CGAffineTransformMakeScale(1.0, 1.0);
+    CGPoint center = self.commentButton.center; // or any point you want
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         self.commentButton.transform = t;
+                         self.commentButton.center = center;
+                     }
+                     completion:^(BOOL finished) {
+                         /* do something next */
+                     }];
+
+    
     
     NSString *user = [[SSSessionManager sharedInstance] username];
     if (!user) {
         user = @"Not Logged In";
     }
-    
-    
     
     SSOPhotoDetailCommentsViewController *commentsVC = [[SSOPhotoDetailCommentsViewController alloc] initWithNibName:@"SSOPhotoDetailCommentsViewController" bundle:nil];
 
@@ -539,20 +620,20 @@
     
     switch ([SDiPhoneVersion deviceSize]) {
         case iPhone35inch:
-            adjustedTableViewH = 244;
-            adjustedBottomConstraint = 114;
+            adjustedTableViewH = 290;
+            adjustedBottomConstraint = 160;
             break;
         case iPhone4inch:
-            adjustedTableViewH = 332;
-            adjustedBottomConstraint = 202;
+            adjustedTableViewH = 378;
+            adjustedBottomConstraint = 248;
             break;
         case iPhone47inch:
-            adjustedTableViewH = 421;
-            adjustedBottomConstraint = 301;
+            adjustedTableViewH = 487;
+            adjustedBottomConstraint = 347;
             break;
         case iPhone55inch:
-            adjustedTableViewH = 481;
-            adjustedBottomConstraint = 360;
+            adjustedTableViewH = 527;
+            adjustedBottomConstraint = 406;
             break;
             
         default:

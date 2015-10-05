@@ -12,6 +12,7 @@
 #import "SSCellViewItem.h"
 #import "SSSessionManager.h"
 #import "SSOFeedConnect.h"
+#import "SDiPhoneVersion.h"
 
 @interface SSOPhotoDetailCommentsViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *sendCommentButton;
@@ -24,7 +25,8 @@
 @property (assign) CGFloat keyboardOverlap;
 @property (weak, nonatomic) IBOutlet UIView *commentBar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentBarBottomConstraint;
-
+@property (weak, nonatomic) IBOutlet UIView *fakeNavBar;
+@property (nonatomic) UIKeyboardType currentKBType;
 @end
 
 @implementation SSOPhotoDetailCommentsViewController
@@ -40,6 +42,15 @@
     self.addCommentTextField.inputAccessoryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1.0f)];
     self.addCommentTextField.autocorrectionType = UITextAutocorrectionTypeNo;
 
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWasShown:)
+//                                                 name:UIKeyboardWillShowNotification object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillBeHidden:)
+//                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+
 }
 
 -(void) viewWillLayoutSubviews {
@@ -50,6 +61,9 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+
+//    [self adjustDisplayForKeyboardShownForHeight:-1];
+    
     self.loveButton.selected = self.loved;
     self.commentButton.selected = self.items.count>0?YES:NO;
     
@@ -63,6 +77,45 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) adjustDisplayForKeyboardShownForHeight:(CGFloat)keyboardHeight {
+    CGRect f = self.view.frame;
+    CGFloat adjustedTableViewH = 0;
+    CGFloat statusBarHeight = 20.0f;
+    
+    
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGFloat navBarHeight = self.fakeNavBar.frame.size.height;
+    CGFloat commentBarHeight = self.commentBar.frame.size.height;
+    CGFloat adjustedBottomConstraint = screenHeight-statusBarHeight-navBarHeight-commentBarHeight-keyboardHeight;
+    
+    switch ([SDiPhoneVersion deviceSize]) {
+        case iPhone35inch:
+            adjustedTableViewH = 290;
+//            adjustedBottomConstraint = 160;
+            break;
+        case iPhone4inch:
+            adjustedTableViewH = 378;
+//            adjustedBottomConstraint = 248;
+            break;
+        case iPhone47inch:
+            adjustedTableViewH = 487;
+//            adjustedBottomConstraint = 347;
+            break;
+        case iPhone55inch:
+            adjustedTableViewH = 527;
+//            adjustedBottomConstraint = 406;
+            break;
+            
+        default:
+            break;
+    }
+    
+    f.size.height = adjustedTableViewH;
+    self.view.frame = f;
+    self.commentsTableHeightConstraint.constant =  adjustedBottomConstraint;
+    
+}
+
 
 #pragma mark - actions
 
@@ -70,34 +123,38 @@
     [self.addCommentTextField resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
 - (IBAction)sendCommentAction:(UIButton*)sender {
-    NSString *user = [[SSSessionManager sharedInstance] username];
-    if (!user) {
-        user = @"Not Logged In";
+    if(self.addCommentTextField.text.length>0 && [SSSessionManager sharedInstance].username.length>0 && [self.addCommentTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length>0 ) {
+        NSString *user = [[SSSessionManager sharedInstance] username];
+        if (!user) {
+            user = @"Not Logged In";
+        }
+
+        [SSOFeedConnect socialActionWithMediaID:self.snap.id
+                                     actionType:@"comment"
+                                        content:self.addCommentTextField.text
+                                       userName:user
+                                         apiKey:@""
+                                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                            [self.items addObject:@{@"content":self.addCommentTextField.text, @"username":[SSSessionManager sharedInstance].username}];
+                                            
+                                            self.addCommentTextField.text = @"";
+                                            [self.commentsTableView reloadData];
+                                            self.commentButton.selected = self.items.count>0?YES:NO;
+                                            [self.commentsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.items.count-1 inSection:0]  atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+
+                                        }
+                                        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                            UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                                                 message:[NSString stringWithFormat:@"%ld", (long)error.code]
+                                                                                                delegate:nil
+                                                                                       cancelButtonTitle:@"Ok"
+                                                                                       otherButtonTitles:nil, nil];
+                                            [errorAlert show];
+                                        }];
     }
-
-    [SSOFeedConnect socialActionWithMediaID:self.snap.id
-                                 actionType:@"comment"
-                                    content:self.addCommentTextField.text
-                                   userName:user
-                                     apiKey:@""
-                                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                        [self.items addObject:@{@"content":self.addCommentTextField.text, @"username":[SSSessionManager sharedInstance].username}];
-                                        
-                                        self.addCommentTextField.text = @"";
-                                        [self.commentsTableView reloadData];
-                                        self.commentButton.selected = self.items.count>0?YES:NO;
-                                        [self.commentsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.items.count-1 inSection:0]  atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-
-                                    }
-                                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                        UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                             message:[NSString stringWithFormat:@"%ld", (long)error.code]
-                                                                                            delegate:nil
-                                                                                   cancelButtonTitle:@"Ok"
-                                                                                   otherButtonTitles:nil, nil];
-                                        [errorAlert show];
-                                    }];
 }
 - (IBAction)loveAction:(UIButton*)sender {
     sender.selected = !sender.selected;
@@ -180,7 +237,18 @@
 #pragma mark - TableView delegate & dataSource
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60.0f;
+    CGFloat textSize = 0;
+    
+    NSAttributedString *attributedText =
+    [[NSAttributedString alloc] initWithString:self.items[indexPath.row][@"content"]
+                                    attributes:@{NSFontAttributeName: [SSOThemeHelper avenirLightFontWithSize:16]}];
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){[UIScreen mainScreen].bounds.size.width, CGFLOAT_MAX}
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    
+    textSize = rect.size.height + 40.0f;
+    
+    return textSize > 60.0f ? textSize : 60.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -210,8 +278,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    
+    cell.textLabel.numberOfLines = 0;
     cell.textLabel.font = [SSOThemeHelper avenirLightFontWithSize:16];
     cell.detailTextLabel.font = [SSOThemeHelper avenirHeavyFontWithSize:14];
     cell.textLabel.text = self.items[indexPath.row][@"content"];
@@ -229,5 +296,49 @@
 }
 */
 
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    self.currentKBType = textField.keyboardType;
+    NSLog(@"%ld", (long)self.currentKBType);
+    if (textField.keyboardType == 4 || textField.keyboardType == 5) {
+    } else {
+    }
+
+    return YES;
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    self.currentKBType = textField.keyboardType;
+    NSLog(@"%ld", (long)self.currentKBType);
+    if (textField.keyboardType == 4 || textField.keyboardType == 5) {
+    } else {
+    }
+    
+    return YES;
+ 
+}
+
+
+# pragma mark - keyboard management
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    [self adjustDisplayForKeyboardShownForHeight:kbSize.height];
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+
+}
 
 @end
