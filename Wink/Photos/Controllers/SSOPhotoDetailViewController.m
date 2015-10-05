@@ -21,9 +21,11 @@
 #import <Social/Social.h>
 #import "SDiPhoneVersion.h"
 
+
 @interface SSOPhotoDetailViewController () <WKMoviePlayerDelegate>
 
 @property(strong, nonatomic) SSOSnap *snap;
+@property(strong, nonatomic) NSMutableArray *inputData;
 
 @property(strong, nonatomic) UIImageView *imageView;
 @property(strong, nonatomic) WKMoviePlayerView *moviePlayerView;
@@ -65,7 +67,7 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGesture.numberOfTapsRequired = 2;
     [self.contentView addGestureRecognizer:tapGesture];
-
+    
 }
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)sender {
@@ -200,10 +202,11 @@
     return NO;
 }
 
-- (instancetype)initWithSnap:(SSOSnap *)snap {
+- (instancetype)initWithSnap:(SSOSnap *)snap andInputData:(NSMutableArray*)inputData {
 
     if (self = [super init]) {
         self.snap = snap;
+        self.inputData = inputData;
     }
     return self;
 }

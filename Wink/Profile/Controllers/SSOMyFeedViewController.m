@@ -97,7 +97,7 @@ CGFloat const kPercentageHeightWitdhCell = 1.15;
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
         //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
-        SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc] initWithSnap:[self.provider.inputData objectAtIndex:indexPath.row]];
+        SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc] initWithSnap:[self.provider.inputData objectAtIndex:indexPath.row] andInputData:self.provider.inputData];
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }

@@ -153,7 +153,7 @@
     SSOCustomCellSizeCollectionViewProvider *prov = provider;
     if ([[prov.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
         //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
-        SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc] initWithSnap:[prov.inputData objectAtIndex:indexPath.row]];
+        SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc] initWithSnap:[prov.inputData objectAtIndex:indexPath.row] andInputData:prov.inputData];
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }

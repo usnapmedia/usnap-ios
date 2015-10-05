@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "SSOSnap.h"
+#import "SSODynamicCellSizeCollectionViewProvider.h"
 
-@interface SSOPhotoDetailViewController : UIViewController
+@interface SSOPhotoDetailViewController : UIViewController <UIScrollViewDelegate>
 
-- (instancetype)initWithSnap:(SSOSnap *)snap;
+- (instancetype)initWithSnap:(SSOSnap *)snap andInputData:(NSMutableArray*)inputData;
 
 @end
