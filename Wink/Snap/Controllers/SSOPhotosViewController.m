@@ -10,6 +10,8 @@
 #import "SSOSimpleCollectionViewProvider.h"
 #import <Masonry.h>
 #import "SSOPhotoDetailViewController.h"
+#import "SSOPhotoDetailPageViewController.h"
+
 
 NSInteger const kPhotosCollectionViewMinimumInteritemSpacing = -1;
 NSInteger const kPhotosCollectionViewMinimumLineSpacing = 5;
@@ -86,7 +88,8 @@ CGFloat const kPhotosPercentageHeightWitdhCell = 1;
     
     if ([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
         //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
-        SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc] initWithSnap:[self.provider.inputData objectAtIndex:indexPath.row] andInputData:self.provider];
+        SSOPhotoDetailPageViewController *detailVC =[[SSOPhotoDetailPageViewController alloc] initWithSnap:self.provider.inputData[indexPath.row] andInputData:self.provider.inputData];
+        
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }

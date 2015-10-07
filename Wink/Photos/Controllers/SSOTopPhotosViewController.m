@@ -14,6 +14,7 @@
 #import "SSOFanPageViewController.h"
 #import <Masonry.h>
 #import "SSOPhotoDetailViewController.h"
+#import "SSOPhotoDetailPageViewController.h"
 #import "SSOThemeHelper.h"
 
 NSInteger const kTopPhotosCellTextHeight = 40;
@@ -129,8 +130,7 @@ NSInteger const kTopPhotosCellTextHeight = 40;
 - (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self.provider.inputData objectAtIndex:indexPath.row] isKindOfClass:[SSOSnap class]]) {
         //  detailVC.snap = [self.provider.inputData objectAtIndex:indexPath.row];
-        SSOPhotoDetailViewController *detailVC = [[SSOPhotoDetailViewController alloc] initWithSnap:[self.provider.inputData objectAtIndex:indexPath.row] andInputData:self.provider.inputData];
-        [self.navigationController pushViewController:detailVC animated:YES];
+        SSOPhotoDetailPageViewController *detailVC =[[SSOPhotoDetailPageViewController alloc] initWithSnap:self.provider.inputData[indexPath.row] andInputData:self.provider.inputData];        [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
 

@@ -12,6 +12,8 @@
 
 @interface SSOPhotoDetailViewController : UIViewController <UIScrollViewDelegate>
 
+@property (assign, nonatomic) NSInteger indexNumber;
+
 - (instancetype)initWithSnap:(SSOSnap *)snap andInputData:(NSMutableArray*)inputData;
 
 @end
